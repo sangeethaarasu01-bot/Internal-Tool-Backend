@@ -28,6 +28,7 @@ def uses_local_mongo() -> bool:
 
 
 def mongo_connect_error(exc: Exception | None = None) -> str:
+    kind = f" ({type(exc).__name__})" if exc else ""
     if uses_local_mongo():
         return (
             "MongoDB URI is pointing at localhost:27017. "
@@ -35,9 +36,9 @@ def mongo_connect_error(exc: Exception | None = None) -> str:
             "mongodb+srv:// connection string, then redeploy."
         )
     return (
-        "Could not connect to MongoDB Atlas. "
-        "Confirm MONGODB_URI on Render, the database user password, "
-        "and Network Access allowlist 0.0.0.0/0."
+        f"Could not connect to MongoDB Atlas{kind}. "
+        "In Atlas Network Access add 0.0.0.0/0 (Allow access from anywhere), "
+        "wait 1-2 minutes, then retry. Local IP-only allowlists block Render."
     )
 
 
@@ -49,9 +50,10 @@ def get_client() -> MongoClient:
             "connectTimeoutMS": 20000,
             "retryWrites": True,
         }
-        # mongodb+srv already enables TLS; only attach CA bundle for Atlas.
         if "mongodb.net" in MONGODB_URI or MONGODB_URI.startswith("mongodb+srv://"):
             options["tlsCAFile"] = certifi.where()
+            # Render/some hosts block OCSP; Atlas TLS handshake then fails.
+            options["tlsDisableOCSPEndpointCheck"] = True
         _client = MongoClient(MONGODB_URI, **options)
     return _client
 

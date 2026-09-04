@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.database import MONGODB_DB, ensure_indexes, uses_local_mongo
+from app.database import MONGODB_DB, ensure_indexes, get_client, uses_local_mongo
 from app.routes import conversions, upload
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
@@ -58,4 +58,13 @@ async def root():
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy"}
+    try:
+        get_client().admin.command("ping")
+        return {"status": "healthy", "mongo": "connected", "db": MONGODB_DB}
+    except Exception as exc:
+        return {
+            "status": "degraded",
+            "mongo": "disconnected",
+            "error": type(exc).__name__,
+            "local_uri": uses_local_mongo(),
+        }

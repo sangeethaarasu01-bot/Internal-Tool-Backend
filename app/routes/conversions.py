@@ -86,10 +86,10 @@ async def start_conversion(
     }
     try:
         result = conversions_col().insert_one(doc)
-    except PyMongoError:
+    except PyMongoError as exc:
         if os.path.exists(file_path):
             os.remove(file_path)
-        raise HTTPException(status_code=503, detail=mongo_connect_error())
+        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
     conversion_id = str(result.inserted_id)
 
     background_tasks.add_task(process_pdf, conversion_id, file_path)
@@ -139,8 +139,8 @@ async def get_conversions(
             .limit(limit)
         )
         return [_serialize(doc, include_xml=False) for doc in cursor]
-    except PyMongoError:
-        raise HTTPException(status_code=503, detail=mongo_connect_error())
+    except PyMongoError as exc:
+        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
 
 
 @router.get("/{conversion_id}")
