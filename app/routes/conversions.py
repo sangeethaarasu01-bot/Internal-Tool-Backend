@@ -7,9 +7,9 @@ from bson import ObjectId
 from bson.errors import InvalidId
 from fastapi import APIRouter, BackgroundTasks, File, HTTPException, Query, UploadFile
 from fastapi.responses import Response
-from pymongo.errors import ServerSelectionTimeoutError
+from pymongo.errors import PyMongoError
 
-from app.database import conversions_col, utcnow
+from app.database import conversions_col, mongo_connect_error, utcnow
 from app.services.pdf_processor import process_pdf
 
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
@@ -86,13 +86,10 @@ async def start_conversion(
     }
     try:
         result = conversions_col().insert_one(doc)
-    except ServerSelectionTimeoutError:
+    except PyMongoError:
         if os.path.exists(file_path):
             os.remove(file_path)
-        raise HTTPException(
-            status_code=503,
-            detail="MongoDB is not running. Start MongoDB on localhost:27017 (database: ieee_converter).",
-        )
+        raise HTTPException(status_code=503, detail=mongo_connect_error())
     conversion_id = str(result.inserted_id)
 
     background_tasks.add_task(process_pdf, conversion_id, file_path)
@@ -142,11 +139,8 @@ async def get_conversions(
             .limit(limit)
         )
         return [_serialize(doc, include_xml=False) for doc in cursor]
-    except ServerSelectionTimeoutError:
-        raise HTTPException(
-            status_code=503,
-            detail="MongoDB is not running. Start MongoDB on localhost:27017.",
-        )
+    except PyMongoError:
+        raise HTTPException(status_code=503, detail=mongo_connect_error())
 
 
 @router.get("/{conversion_id}")

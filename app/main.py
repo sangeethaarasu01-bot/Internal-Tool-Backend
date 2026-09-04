@@ -1,14 +1,15 @@
 import logging
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.database import ensure_indexes
+from app.database import MONGODB_DB, ensure_indexes, uses_local_mongo
 from app.routes import conversions, upload
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(title="IEEE XML Converter API")
@@ -33,8 +34,12 @@ os.makedirs(os.getenv("UPLOAD_DIR", "./uploads"), exist_ok=True)
 def startup() -> None:
     try:
         ensure_indexes()
-        logging.info("MongoDB connected: ieee_converter")
+        logging.info("MongoDB connected: %s", MONGODB_DB)
     except Exception:
+        if uses_local_mongo():
+            logging.error(
+                "MongoDB URI is localhost. Set MONGODB_URI on Render to your Atlas mongodb+srv:// string."
+            )
         logging.exception("MongoDB connection failed on startup")
 
 app.include_router(upload.router, prefix="/api/upload", tags=["Upload"])

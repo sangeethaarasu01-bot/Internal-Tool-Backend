@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from datetime import datetime, timezone
+from pathlib import Path
 
 import certifi
 from dotenv import load_dotenv
@@ -9,12 +10,30 @@ from pymongo import ASCENDING, DESCENDING, MongoClient
 from pymongo.collection import Collection
 from pymongo.database import Database
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
 MONGODB_DB = os.getenv("MONGODB_DB", "ieee_converter")
 
 _client: MongoClient | None = None
+
+
+def uses_local_mongo() -> bool:
+    return "localhost" in MONGODB_URI or "127.0.0.1" in MONGODB_URI
+
+
+def mongo_connect_error(exc: Exception | None = None) -> str:
+    if uses_local_mongo():
+        return (
+            "MongoDB URI is pointing at localhost:27017. "
+            "On Render, add Environment variable MONGODB_URI with your Atlas "
+            "mongodb+srv:// connection string, then redeploy."
+        )
+    return (
+        "Could not connect to MongoDB Atlas. "
+        "Confirm MONGODB_URI on Render, the database user password, "
+        "and Network Access allowlist 0.0.0.0/0."
+    )
 
 
 def get_client() -> MongoClient:
