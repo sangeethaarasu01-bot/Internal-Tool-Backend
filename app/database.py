@@ -10,10 +10,15 @@ from pymongo import ASCENDING, DESCENDING, MongoClient
 from pymongo.collection import Collection
 from pymongo.database import Database
 
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=False)
 
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-MONGODB_DB = os.getenv("MONGODB_DB", "ieee_converter")
+MONGODB_URI = (
+    (os.getenv("MONGODB_URI") or "mongodb://localhost:27017")
+    .strip()
+    .strip('"')
+    .strip("'")
+)
+MONGODB_DB = (os.getenv("MONGODB_DB") or "ieee_converter").strip()
 
 _client: MongoClient | None = None
 
@@ -42,9 +47,10 @@ def get_client() -> MongoClient:
         options: dict = {
             "serverSelectionTimeoutMS": 30000,
             "connectTimeoutMS": 20000,
+            "retryWrites": True,
         }
+        # mongodb+srv already enables TLS; only attach CA bundle for Atlas.
         if "mongodb.net" in MONGODB_URI or MONGODB_URI.startswith("mongodb+srv://"):
-            options["tls"] = True
             options["tlsCAFile"] = certifi.where()
         _client = MongoClient(MONGODB_URI, **options)
     return _client

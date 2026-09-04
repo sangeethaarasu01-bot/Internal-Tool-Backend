@@ -40,6 +40,11 @@ def startup() -> None:
             logging.error(
                 "MongoDB URI is localhost. Set MONGODB_URI on Render to your Atlas mongodb+srv:// string."
             )
+        else:
+            logging.error(
+                "Atlas URI is set but connection failed. Allow 0.0.0.0/0 in Atlas Network Access "
+                "and set PYTHON_VERSION=3.12.8 on Render."
+            )
         logging.exception("MongoDB connection failed on startup")
 
 app.include_router(upload.router, prefix="/api/upload", tags=["Upload"])
