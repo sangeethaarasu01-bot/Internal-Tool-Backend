@@ -1,23 +1,41 @@
-# app/database.py
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from __future__ import annotations
+
 import os
+from datetime import datetime, timezone
+
 from dotenv import load_dotenv
+from pymongo import ASCENDING, DESCENDING, MongoClient
+from pymongo.collection import Collection
+from pymongo.database import Database
 
 load_dotenv()
 
-# Using SQLite for simplicity (no MySQL setup needed)
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./ieee_converter.db")
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
+MONGODB_DB = os.getenv("MONGODB_DB", "ieee_converter")
 
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+_client: MongoClient | None = None
 
-Base = declarative_base()
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+def get_client() -> MongoClient:
+    global _client
+    if _client is None:
+        _client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+    return _client
+
+
+def get_db() -> Database:
+    return get_client()[MONGODB_DB]
+
+
+def conversions_col() -> Collection:
+    return get_db()["conversions"]
+
+
+def ensure_indexes() -> None:
+    conversions_col().create_index([("created_at", DESCENDING)])
+    conversions_col().create_index([("status", ASCENDING)])
+    conversions_col().create_index([("original_filename", ASCENDING)])
+
+
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc)
