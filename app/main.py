@@ -9,7 +9,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import MONGODB_DB, ensure_indexes, get_client, uses_local_mongo
 from app.routes import conversions, upload
 
-load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+_root = Path(__file__).resolve().parent.parent
+load_dotenv(_root / ".env", override=False)
+if os.getenv("USE_LOCAL_MONGO", "").strip().lower() in {"1", "true", "yes"}:
+    load_dotenv(_root / ".env.local", override=True)
 logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(title="IEEE XML Converter API")
@@ -42,8 +45,9 @@ def startup() -> None:
             )
         else:
             logging.error(
-                "Atlas URI is set but connection failed. Allow 0.0.0.0/0 in Atlas Network Access "
-                "and set PYTHON_VERSION=3.12.8 on Render."
+                "Atlas URI is set but connection failed. In Atlas: Network Access → "
+                "Add IP Address (your IP or 0.0.0.0/0 for dev), wait 1-2 min, restart. "
+                "Local dev: use Python 3.12 (py -3.12 -m venv venv). Render: PYTHON_VERSION=3.12.8."
             )
         logging.exception("MongoDB connection failed on startup")
 

@@ -1,3 +1,4 @@
+import logging
 import os
 from datetime import datetime
 from typing import Optional
@@ -9,7 +10,7 @@ from fastapi import APIRouter, BackgroundTasks, File, HTTPException, Query, Uplo
 from fastapi.responses import Response
 from pymongo.errors import PyMongoError
 
-from app.database import conversions_col, mongo_connect_error, utcnow
+from app.database import MONGODB_DB, conversions_col, mongo_connect_error, utcnow
 from app.services.pdf_processor import process_pdf
 
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
@@ -17,6 +18,7 @@ MAX_FILE_SIZE = int(os.getenv("MAX_FILE_SIZE", 20 * 1024 * 1024))
 DONE_STATUSES = ["completed", "success"]
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 def _serialize(doc: dict, include_xml: bool = True) -> dict:
@@ -131,14 +133,25 @@ async def get_conversions(
             query["status"] = status
 
     try:
+        col = conversions_col()
+        total = col.count_documents(query)
         cursor = (
-            conversions_col()
-            .find(query, {"xml_content": 0})
+            col.find(query, {"xml_content": 0})
             .sort("created_at", -1)
             .skip(skip)
             .limit(limit)
         )
-        return [_serialize(doc, include_xml=False) for doc in cursor]
+        items = [_serialize(doc, include_xml=False) for doc in cursor]
+        logger.info(
+            "list conversions db=%s collection=conversions filter=%s total=%s returned=%s skip=%s limit=%s",
+            MONGODB_DB,
+            query or {},
+            total,
+            len(items),
+            skip,
+            limit,
+        )
+        return items
     except PyMongoError as exc:
         raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
 

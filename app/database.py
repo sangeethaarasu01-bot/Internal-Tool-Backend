@@ -10,7 +10,10 @@ from pymongo import ASCENDING, DESCENDING, MongoClient
 from pymongo.collection import Collection
 from pymongo.database import Database
 
-load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=False)
+_root = Path(__file__).resolve().parent.parent
+load_dotenv(_root / ".env", override=False)
+if os.getenv("USE_LOCAL_MONGO", "").strip().lower() in {"1", "true", "yes"}:
+    load_dotenv(_root / ".env.local", override=True)
 
 MONGODB_URI = (
     (os.getenv("MONGODB_URI") or "mongodb://localhost:27017")
@@ -29,16 +32,25 @@ def uses_local_mongo() -> bool:
 
 def mongo_connect_error(exc: Exception | None = None) -> str:
     kind = f" ({type(exc).__name__})" if exc else ""
+    detail = str(exc) if exc else ""
     if uses_local_mongo():
         return (
             "MongoDB URI is pointing at localhost:27017. "
-            "On Render, add Environment variable MONGODB_URI with your Atlas "
-            "mongodb+srv:// connection string, then redeploy."
+            "Start a local MongoDB service, or set MONGODB_URI in .env to your "
+            "Atlas mongodb+srv:// connection string."
+        )
+    if "SSL" in detail or "TLS" in detail:
+        return (
+            f"Could not connect to MongoDB Atlas{kind}. "
+            "SSL handshake failed — your current IP is usually not on the Atlas "
+            "allowlist. In MongoDB Atlas: Network Access → Add IP Address → "
+            "add your IP (or 0.0.0.0/0 for dev), wait 1-2 minutes, restart. "
+            "Also use Python 3.12 (not 3.13/3.14) for local dev."
         )
     return (
         f"Could not connect to MongoDB Atlas{kind}. "
         "In Atlas Network Access add 0.0.0.0/0 (Allow access from anywhere), "
-        "wait 1-2 minutes, then retry. Local IP-only allowlists block Render."
+        "wait 1-2 minutes, then retry."
     )
 
 
