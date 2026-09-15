@@ -1,0 +1,267 @@
+{
+  "document": {
+    "filename": "digital_ieee_sample.pdf",
+    "page_count": 2,
+    "requires_ocr": false,
+    "ocr_applied": false,
+    "extraction_engine": "pymupdf",
+    "extraction_version": "1.0.0",
+    "metadata": {
+      "title": "A Customized Electronic Tongue for Tea Quality Evaluation",
+      "author": "Madhurima Moulick",
+      "creator": "Stage1Fixture",
+      "producer": "pymupdf",
+      "creation_date": null,
+      "modification_date": null
+    }
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "width": 595.0,
+      "height": 842.0,
+      "text_char_count": 236,
+      "requires_ocr": false,
+      "blocks": [
+        {
+          "block_id": "p1_b0",
+          "type": "text",
+          "bbox": [
+            72.0,
+            60.17499923706055,
+            179.60195922851562,
+            75.28900146484375
+          ],
+          "text": "IEEE Sensors Journal",
+          "lines": [
+            {
+              "line_id": "p1_b0_l0",
+              "bbox": [
+                72.0,
+                60.17499923706055,
+                179.60195922851562,
+                75.28900146484375
+              ],
+              "text": "IEEE Sensors Journal",
+              "spans": [
+                {
+                  "text": "IEEE Sensors Journal",
+                  "bbox": [
+                    72.0,
+                    60.17499923706055,
+                    179.60195922851562,
+                    75.28900146484375
+                  ],
+                  "font": "Helvetica",
+                  "size": 11.0,
+                  "flags": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "block_id": "p1_b1",
+          "type": "text",
+          "bbox": [
+            72.0,
+            92.80000305175781,
+            493.50390625,
+            114.78399658203125
+          ],
+          "text": "A Customized Electronic Tongue for Tea Quality Evaluation",
+          "lines": [
+            {
+              "line_id": "p1_b1_l0",
+              "bbox": [
+                72.0,
+                92.80000305175781,
+                493.50390625,
+                114.78399658203125
+              ],
+              "text": "A Customized Electronic Tongue for Tea Quality Evaluation",
+              "spans": [
+                {
+                  "text": "A Customized Electronic Tongue for Tea Quality Evaluation",
+                  "bbox": [
+                    72.0,
+                    92.80000305175781,
+                    493.50390625,
+                    114.78399658203125
+                  ],
+                  "font": "Helvetica",
+                  "size": 16.0,
+                  "flags": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "block_id": "p1_b2",
+          "type": "text",
+          "bbox": [
+            72.0,
+            128.1750030517578,
+            287.7979736328125,
+            143.28900146484375
+          ],
+          "text": "Madhurima Moulick and Runu Banerjee Roy",
+          "lines": [
+            {
+              "line_id": "p1_b2_l0",
+              "bbox": [
+                72.0,
+                128.1750030517578,
+                287.7979736328125,
+                143.28900146484375
+              ],
+              "text": "Madhurima Moulick and Runu Banerjee Roy",
+              "spans": [
+                {
+                  "text": "Madhurima Moulick and Runu Banerjee Roy",
+                  "bbox": [
+                    72.0,
+                    128.1750030517578,
+                    287.7979736328125,
+                    143.28900146484375
+                  ],
+                  "font": "Helvetica",
+                  "size": 11.0,
+                  "flags": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "block_id": "p1_b3",
+          "type": "text",
+          "bbox": [
+            72.0,
+            169.25,
+            595.0099487304688,
+            182.99000549316406
+          ],
+          "text": "Abstract - A voltammetric electronic tongue consisting of MIP electrodes detects theophylline, tannic acid, and theaflav",
+          "lines": [
+            {
+              "line_id": "p1_b3_l0",
+              "bbox": [
+                72.0,
+                169.25,
+                595.0099487304688,
+                182.99000549316406
+              ],
+              "text": "Abstract - A voltammetric electronic tongue consisting of MIP electrodes detects theophylline, tannic acid, and theaflav",
+              "spans": [
+                {
+                  "text": "Abstract - A voltammetric electronic tongue consisting of MIP electrodes detects theophylline, tannic acid, and theaflav",
+                  "bbox": [
+                    72.0,
+                    169.25,
+                    595.0099487304688,
+                    182.99000549316406
+                  ],
+                  "font": "Helvetica",
+                  "size": 10.0,
+                  "flags": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "width": 595.0,
+      "height": 842.0,
+      "text_char_count": 133,
+      "requires_ocr": false,
+      "blocks": [
+        {
+          "block_id": "p2_b0",
+          "type": "text",
+          "bbox": [
+            72.0,
+            56.94999694824219,
+            156.8260040283203,
+            76.18599700927734
+          ],
+          "text": "I. Introduction",
+          "lines": [
+            {
+              "line_id": "p2_b0_l0",
+              "bbox": [
+                72.0,
+                56.94999694824219,
+                156.8260040283203,
+                76.18599700927734
+              ],
+              "text": "I. Introduction",
+              "spans": [
+                {
+                  "text": "I. Introduction",
+                  "bbox": [
+                    72.0,
+                    56.94999694824219,
+                    156.8260040283203,
+                    76.18599700927734
+                  ],
+                  "font": "Helvetica",
+                  "size": 14.0,
+                  "flags": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "block_id": "p2_b1",
+          "type": "text",
+          "bbox": [
+            72.0,
+            99.25,
+            597.2099609375,
+            112.98999786376953
+          ],
+          "text": "Tea quality assessment is often subjective. This paper describes a sensor array and switching circuit under the same e",
+          "lines": [
+            {
+              "line_id": "p2_b1_l0",
+              "bbox": [
+                72.0,
+                99.25,
+                597.2099609375,
+                112.98999786376953
+              ],
+              "text": "Tea quality assessment is often subjective. This paper describes a sensor array and switching circuit under the same e",
+              "spans": [
+                {
+                  "text": "Tea quality assessment is often subjective. This paper describes a sensor array and switching circuit under the same e",
+                  "bbox": [
+                    72.0,
+                    99.25,
+                    597.2099609375,
+                    112.98999786376953
+                  ],
+                  "font": "Helvetica",
+                  "size": 10.0,
+                  "flags": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "total_blocks": 6,
+    "total_lines": 6,
+    "total_chars": 369,
+    "pages_with_low_text": [],
+    "pages_with_no_text": []
+  }
+}

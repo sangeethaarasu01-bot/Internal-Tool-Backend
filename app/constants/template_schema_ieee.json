@@ -1,0 +1,1304 @@
+{
+  "template_name": "IEEE_JATS_2.0",
+  "template_source": "tests\\fixtures\\1458242.xml",
+  "root_tag": "article",
+  "root_attributes": {
+    "article-type": {
+      "required": false,
+      "values": [
+        "research",
+        "review",
+        "letter",
+        "correction"
+      ],
+      "default": null
+    },
+    "dtd-version": {
+      "required": true,
+      "values": [
+        "2.0"
+      ],
+      "default": null
+    },
+    "xml:lang": {
+      "required": true,
+      "values": [
+        "eng"
+      ],
+      "default": "eng"
+    }
+  },
+  "tags": {
+    "abstract": {
+      "allowed_children": [
+        "p",
+        "title"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "p": "0..*",
+        "title": "0..1"
+      },
+      "text_content": false
+    },
+    "ack": {
+      "allowed_children": [
+        "title",
+        "p"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "title": "0..1",
+        "p": "0..*"
+      },
+      "text_content": false
+    },
+    "aff": {
+      "allowed_children": [
+        "institution-wrap",
+        "city",
+        "country",
+        "post-code"
+      ],
+      "allowed_attributes": [
+        "id"
+      ],
+      "cardinality": {
+        "institution-wrap": "0..1",
+        "city": "0..1",
+        "country": "0..1",
+        "post-code": "0..1"
+      },
+      "text_content": false
+    },
+    "article": {
+      "allowed_children": [
+        "front",
+        "body",
+        "back"
+      ],
+      "allowed_attributes": [
+        "article-type",
+        "content-type",
+        "dtd-version",
+        "lifecycle",
+        "open-access",
+        "peer-reviewed",
+        "xml:lang"
+      ],
+      "cardinality": {
+        "front": "1",
+        "body": "1",
+        "back": "1"
+      },
+      "text_content": false
+    },
+    "article-id": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "pub-id-type"
+      ],
+      "cardinality": {},
+      "text_content": true
+    },
+    "article-meta": {
+      "allowed_children": [
+        "article-id",
+        "title-group",
+        "contrib-group",
+        "aff",
+        "pub-date",
+        "abstract",
+        "kwd-group",
+        "counts",
+        "history",
+        "self-uri",
+        "volume",
+        "issue"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "article-id": "1..*",
+        "title-group": "1",
+        "contrib-group": "1",
+        "aff": "0..*",
+        "pub-date": "0..1",
+        "abstract": "0..1",
+        "kwd-group": "0..1",
+        "counts": "0..1",
+        "history": "0..1",
+        "self-uri": "0..1",
+        "volume": "0..1",
+        "issue": "0..1"
+      },
+      "text_content": false
+    },
+    "article-title": {
+      "allowed_children": [
+        "text",
+        "italic",
+        "sub",
+        "sup",
+        "inline-formula",
+        "bold",
+        "xref"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "text": "0..*",
+        "italic": "0..*",
+        "sub": "0..*",
+        "sup": "0..*",
+        "inline-formula": "0..*",
+        "bold": "0..*",
+        "xref": "0..*"
+      },
+      "text_content": true
+    },
+    "author-comment": {
+      "allowed_children": [
+        "p"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "p": "1"
+      },
+      "text_content": false
+    },
+    "back": {
+      "allowed_children": [
+        "ack",
+        "ref-list",
+        "bio-group"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "ack": "0..1",
+        "ref-list": "1",
+        "bio-group": "0..1"
+      },
+      "text_content": false
+    },
+    "bio": {
+      "allowed_children": [
+        "p"
+      ],
+      "allowed_attributes": [
+        "id"
+      ],
+      "cardinality": {
+        "p": "0..*"
+      },
+      "text_content": false
+    },
+    "bio-group": {
+      "allowed_children": [
+        "bio"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "bio": "0..*"
+      },
+      "text_content": false
+    },
+    "body": {
+      "allowed_children": [
+        "sec",
+        "p",
+        "disp-formula",
+        "fig",
+        "table-wrap",
+        "supplementary-material"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "sec": "0..*",
+        "supplementary-material": "0..*",
+        "p": "0..*",
+        "disp-formula": "0..*",
+        "fig": "0..*",
+        "table-wrap": "0..*"
+      },
+      "text_content": false
+    },
+    "bold": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "caption": {
+      "allowed_children": [
+        "p",
+        "title"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "p": "0..1",
+        "title": "0..1"
+      },
+      "text_content": false
+    },
+    "city": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": false
+    },
+    "col": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "span"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "colgroup": {
+      "allowed_children": [
+        "col"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "col": "1..*"
+      },
+      "text_content": false
+    },
+    "contrib": {
+      "allowed_children": [
+        "contrib-id",
+        "name-alternatives",
+        "email",
+        "xref"
+      ],
+      "allowed_attributes": [
+        "contrib-type",
+        "corresp",
+        "primary",
+        "id"
+      ],
+      "cardinality": {
+        "name-alternatives": "1",
+        "email": "0..1",
+        "xref": "0..*",
+        "contrib-id": "0..1"
+      },
+      "text_content": false
+    },
+    "contrib-group": {
+      "allowed_children": [
+        "contrib",
+        "author-comment"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "contrib": "0..*",
+        "author-comment": "0..1"
+      },
+      "text_content": false
+    },
+    "contrib-id": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "contrib-id-type"
+      ],
+      "cardinality": {},
+      "text_content": true
+    },
+    "country": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": false
+    },
+    "counts": {
+      "allowed_children": [
+        "fig-count",
+        "table-count",
+        "equation-count",
+        "ref-count",
+        "page-count"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "fig-count": "0..1",
+        "table-count": "0..1",
+        "ref-count": "0..1",
+        "equation-count": "0..1",
+        "page-count": "0..1"
+      },
+      "text_content": false
+    },
+    "date": {
+      "allowed_children": [
+        "day",
+        "month",
+        "year",
+        "string-date"
+      ],
+      "allowed_attributes": [
+        "date-type",
+        "iso-8601-date"
+      ],
+      "cardinality": {
+        "year": "0..1",
+        "day": "0..1",
+        "month": "0..1",
+        "string-date": "0..1"
+      },
+      "text_content": false
+    },
+    "disp-formula": {
+      "allowed_children": [
+        "tex-math",
+        "label"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "tex-math": "1",
+        "label": "0..1"
+      },
+      "text_content": false
+    },
+    "element-citation": {
+      "allowed_children": [
+        "person-group",
+        "article-title",
+        "source",
+        "volume",
+        "issue",
+        "fpage",
+        "lpage",
+        "year",
+        "pub-id"
+      ],
+      "allowed_attributes": [
+        "publication-type"
+      ],
+      "cardinality": {
+        "person-group": "0..1",
+        "article-title": "0..1",
+        "source": "0..1",
+        "volume": "0..1",
+        "issue": "0..1",
+        "fpage": "0..1",
+        "lpage": "0..1",
+        "year": "0..1",
+        "pub-id": "0..1"
+      },
+      "text_content": false
+    },
+    "email": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "equation-count": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "count"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "fig": {
+      "allowed_children": [
+        "label",
+        "caption",
+        "graphic"
+      ],
+      "allowed_attributes": [
+        "id"
+      ],
+      "cardinality": {
+        "label": "0..1",
+        "caption": "1",
+        "graphic": "1"
+      },
+      "text_content": false
+    },
+    "fig-count": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "count"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "fn": {
+      "allowed_children": [
+        "p",
+        "label"
+      ],
+      "allowed_attributes": [
+        "id"
+      ],
+      "cardinality": {
+        "p": "1",
+        "label": "0..1"
+      },
+      "text_content": false
+    },
+    "fn-group": {
+      "allowed_children": [
+        "fn"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "fn": "1..*"
+      },
+      "text_content": false
+    },
+    "fpage": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "front": {
+      "allowed_children": [
+        "journal-meta",
+        "article-meta"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "journal-meta": "1",
+        "article-meta": "1"
+      },
+      "text_content": false
+    },
+    "given-names": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "graphic": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "xlink:href"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "history": {
+      "allowed_children": [
+        "date"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "date": "0..*"
+      },
+      "text_content": false
+    },
+    "inline-formula": {
+      "allowed_children": [
+        "tex-math"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "tex-math": "1"
+      },
+      "text_content": false
+    },
+    "institution": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "content-type"
+      ],
+      "cardinality": {},
+      "text_content": true
+    },
+    "institution-wrap": {
+      "allowed_children": [
+        "institution"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "institution": "1..*"
+      },
+      "text_content": false
+    },
+    "issn": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "publication-format"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "issue": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "italic": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "journal-id": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "journal-id-type"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "journal-meta": {
+      "allowed_children": [
+        "journal-id",
+        "journal-title-group",
+        "issn",
+        "publisher"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "journal-id": "1..*",
+        "journal-title-group": "1",
+        "issn": "1..*",
+        "publisher": "0..1"
+      },
+      "text_content": false
+    },
+    "journal-title": {
+      "allowed_children": [
+        "text",
+        "italic",
+        "sub",
+        "sup"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "text": "0..*",
+        "italic": "0..*",
+        "sub": "0..*",
+        "sup": "0..*"
+      },
+      "text_content": true
+    },
+    "journal-title-group": {
+      "allowed_children": [
+        "journal-title"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "journal-title": "1"
+      },
+      "text_content": false
+    },
+    "kwd": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "kwd-group": {
+      "allowed_children": [
+        "kwd"
+      ],
+      "allowed_attributes": [
+        "kwd-group-type"
+      ],
+      "cardinality": {
+        "kwd": "1..*"
+      },
+      "text_content": false
+    },
+    "label": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "list": {
+      "allowed_children": [
+        "list-item"
+      ],
+      "allowed_attributes": [
+        "list-type"
+      ],
+      "cardinality": {
+        "list-item": "1..*"
+      },
+      "text_content": false
+    },
+    "list-item": {
+      "allowed_children": [
+        "p",
+        "label"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "p": "1",
+        "label": "0..1"
+      },
+      "text_content": false
+    },
+    "lpage": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "media": {
+      "allowed_children": [
+        "caption",
+        "graphic"
+      ],
+      "allowed_attributes": [
+        "content-type",
+        "xlink:href"
+      ],
+      "cardinality": {
+        "graphic": "0..1",
+        "caption": "0..1"
+      },
+      "text_content": false
+    },
+    "mixed-citation": {
+      "allowed_children": [
+        "person-group",
+        "article-title",
+        "source",
+        "volume",
+        "issue",
+        "fpage",
+        "lpage",
+        "year",
+        "pub-id"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "article-title": "1",
+        "fpage": "1",
+        "issue": "1",
+        "lpage": "1",
+        "person-group": "1",
+        "source": "1",
+        "volume": "1",
+        "year": "1",
+        "pub-id": "0..1"
+      },
+      "text_content": true
+    },
+    "name-alternatives": {
+      "allowed_children": [
+        "string-name"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "string-name": "1..*"
+      },
+      "text_content": false
+    },
+    "p": {
+      "allowed_children": [
+        "text",
+        "italic",
+        "sub",
+        "sup",
+        "inline-formula",
+        "xref",
+        "bold"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "inline-formula": "0..1",
+        "xref": "0..1",
+        "text": "0..*",
+        "italic": "0..*",
+        "sub": "0..*",
+        "sup": "0..*",
+        "bold": "0..*"
+      },
+      "text_content": true
+    },
+    "page-count": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "count"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "person-group": {
+      "allowed_children": [
+        "string-name",
+        "name"
+      ],
+      "allowed_attributes": [
+        "person-group-type"
+      ],
+      "cardinality": {
+        "string-name": "1..*",
+        "name": "0..1"
+      },
+      "text_content": false
+    },
+    "pub-date": {
+      "allowed_children": [
+        "year",
+        "month",
+        "day"
+      ],
+      "allowed_attributes": [
+        "date-type",
+        "pub-type",
+        "iso-8601-date"
+      ],
+      "cardinality": {
+        "year": "1",
+        "month": "0..1",
+        "day": "0..1"
+      },
+      "text_content": false
+    },
+    "pub-id": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "pub-id-type"
+      ],
+      "cardinality": {},
+      "text_content": true
+    },
+    "publisher": {
+      "allowed_children": [
+        "publisher-name"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "publisher-name": "1"
+      },
+      "text_content": false
+    },
+    "publisher-name": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "ref": {
+      "allowed_children": [
+        "label",
+        "mixed-citation",
+        "element-citation"
+      ],
+      "allowed_attributes": [
+        "id"
+      ],
+      "cardinality": {
+        "mixed-citation": "0..1",
+        "label": "1",
+        "element-citation": "0..1"
+      },
+      "text_content": false
+    },
+    "ref-count": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "count"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "ref-list": {
+      "allowed_children": [
+        "title",
+        "ref"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "ref": "0..*",
+        "title": "1"
+      },
+      "text_content": false
+    },
+    "sec": {
+      "allowed_children": [
+        "label",
+        "title",
+        "p",
+        "sec",
+        "disp-formula",
+        "inline-formula",
+        "fig",
+        "table-wrap",
+        "list",
+        "supplementary-material"
+      ],
+      "allowed_attributes": [
+        "id"
+      ],
+      "cardinality": {
+        "label": "0..1",
+        "title": "0..1",
+        "p": "0..*",
+        "sec": "0..*",
+        "disp-formula": "0..*",
+        "fig": "0..*",
+        "table-wrap": "0..*",
+        "inline-formula": "0..*",
+        "list": "0..*",
+        "supplementary-material": "0..*"
+      },
+      "text_content": false
+    },
+    "self-uri": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "content-type",
+        "xlink:href"
+      ],
+      "cardinality": {},
+      "text_content": true
+    },
+    "source": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "string-name": {
+      "allowed_children": [
+        "given-names",
+        "surname"
+      ],
+      "allowed_attributes": [
+        "specific-use"
+      ],
+      "cardinality": {
+        "given-names": "0..1",
+        "surname": "1"
+      },
+      "text_content": false
+    },
+    "sub": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "sup": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "supplementary-material": {
+      "allowed_children": [
+        "caption",
+        "media",
+        "graphic"
+      ],
+      "allowed_attributes": [
+        "id",
+        "content-type"
+      ],
+      "cardinality": {
+        "caption": "0..1",
+        "media": "0..1",
+        "graphic": "0..*"
+      },
+      "text_content": false
+    },
+    "surname": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "table": {
+      "allowed_children": [
+        "colgroup",
+        "thead",
+        "tbody",
+        "tr"
+      ],
+      "allowed_attributes": [
+        "rules",
+        "frame",
+        "cellpadding"
+      ],
+      "cardinality": {
+        "thead": "0..1",
+        "tbody": "0..1",
+        "colgroup": "0..1",
+        "tr": "0..*"
+      },
+      "text_content": false
+    },
+    "table-count": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "count"
+      ],
+      "cardinality": {},
+      "text_content": false
+    },
+    "table-wrap": {
+      "allowed_children": [
+        "label",
+        "caption",
+        "table"
+      ],
+      "allowed_attributes": [
+        "id"
+      ],
+      "cardinality": {
+        "table": "1",
+        "caption": "1",
+        "label": "1"
+      },
+      "text_content": false
+    },
+    "tbody": {
+      "allowed_children": [
+        "tr"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "tr": "0..*"
+      },
+      "text_content": false
+    },
+    "td": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "tex-math": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "notation"
+      ],
+      "cardinality": {},
+      "text_content": true
+    },
+    "th": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "thead": {
+      "allowed_children": [
+        "tr"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "tr": "0..*"
+      },
+      "text_content": false
+    },
+    "title": {
+      "allowed_children": [
+        "text",
+        "italic",
+        "sub",
+        "sup",
+        "bold",
+        "inline-formula",
+        "xref"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "text": "0..*",
+        "italic": "0..*",
+        "sub": "0..*",
+        "sup": "0..*",
+        "bold": "0..*",
+        "inline-formula": "0..*",
+        "xref": "0..*"
+      },
+      "text_content": true
+    },
+    "title-group": {
+      "allowed_children": [
+        "article-title"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "article-title": "1"
+      },
+      "text_content": false
+    },
+    "tr": {
+      "allowed_children": [
+        "th",
+        "td"
+      ],
+      "allowed_attributes": [],
+      "cardinality": {
+        "th": "0..*",
+        "td": "0..*"
+      },
+      "text_content": false
+    },
+    "volume": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    },
+    "xref": {
+      "allowed_children": [],
+      "allowed_attributes": [
+        "ref-type",
+        "rid"
+      ],
+      "cardinality": {},
+      "text_content": true
+    },
+    "year": {
+      "allowed_children": [],
+      "allowed_attributes": [],
+      "cardinality": {},
+      "text_content": true
+    }
+  },
+  "section_boundaries": {
+    "front": {
+      "direct_children": [
+        "journal-meta",
+        "article-meta"
+      ],
+      "descendants": [
+        "abstract",
+        "aff",
+        "article-id",
+        "article-meta",
+        "article-title",
+        "city",
+        "contrib",
+        "contrib-group",
+        "country",
+        "counts",
+        "email",
+        "fig-count",
+        "given-names",
+        "institution",
+        "institution-wrap",
+        "issn",
+        "journal-id",
+        "journal-meta",
+        "journal-title",
+        "journal-title-group",
+        "kwd",
+        "kwd-group",
+        "name-alternatives",
+        "p",
+        "pub-date",
+        "publisher",
+        "publisher-name",
+        "ref-count",
+        "string-name",
+        "surname",
+        "table-count",
+        "title-group",
+        "xref",
+        "year"
+      ]
+    },
+    "body": {
+      "direct_children": [
+        "sec"
+      ],
+      "descendants": [
+        "caption",
+        "disp-formula",
+        "fig",
+        "graphic",
+        "inline-formula",
+        "label",
+        "p",
+        "sec",
+        "table",
+        "table-wrap",
+        "tbody",
+        "td",
+        "tex-math",
+        "th",
+        "thead",
+        "title",
+        "tr",
+        "xref"
+      ]
+    },
+    "back": {
+      "direct_children": [
+        "ack",
+        "ref-list",
+        "bio-group"
+      ],
+      "descendants": [
+        "ack",
+        "article-title",
+        "bio",
+        "bio-group",
+        "fpage",
+        "given-names",
+        "issue",
+        "label",
+        "lpage",
+        "mixed-citation",
+        "p",
+        "person-group",
+        "ref",
+        "ref-list",
+        "source",
+        "string-name",
+        "surname",
+        "title",
+        "volume",
+        "xref",
+        "year"
+      ]
+    }
+  },
+  "scope_markers": {
+    "front": [
+      "front"
+    ],
+    "back": [
+      "back"
+    ],
+    "full": [
+      "front",
+      "body",
+      "back"
+    ]
+  },
+  "required_paths": [
+    "front/journal-meta/journal-id",
+    "front/article-meta/title-group/article-title",
+    "front/article-meta/contrib-group/contrib",
+    "front/article-meta/abstract",
+    "body/sec",
+    "back/ref-list",
+    "back/ref-list/ref/label",
+    "back/ref-list/ref/mixed-citation/article-title",
+    "back/ref-list/ref/mixed-citation/fpage",
+    "back/ref-list/ref/mixed-citation/issue",
+    "back/ref-list/ref/mixed-citation/lpage",
+    "back/ref-list/ref/mixed-citation/person-group",
+    "back/ref-list/ref/mixed-citation/person-group/string-name",
+    "back/ref-list/ref/mixed-citation/person-group/string-name/surname",
+    "back/ref-list/ref/mixed-citation/source",
+    "back/ref-list/ref/mixed-citation/volume",
+    "back/ref-list/ref/mixed-citation/year",
+    "back/ref-list/title",
+    "body/sec/disp-formula/tex-math",
+    "body/sec/fig/caption",
+    "body/sec/fig/graphic",
+    "body/sec/p/inline-formula/tex-math",
+    "body/sec/table-wrap/caption",
+    "body/sec/table-wrap/label",
+    "body/sec/table-wrap/table",
+    "front/article-meta",
+    "front/article-meta/article-id",
+    "front/article-meta/contrib-group",
+    "front/article-meta/contrib-group/contrib/name-alternatives",
+    "front/article-meta/contrib-group/contrib/name-alternatives/string-name",
+    "front/article-meta/contrib-group/contrib/name-alternatives/string-name/surname",
+    "front/article-meta/pub-date/year",
+    "front/article-meta/title-group",
+    "front/journal-meta",
+    "front/journal-meta/issn",
+    "front/journal-meta/journal-title-group",
+    "front/journal-meta/journal-title-group/journal-title",
+    "front/journal-meta/publisher/publisher-name"
+  ],
+  "known_attributes": {
+    "article": [
+      "article-type",
+      "content-type",
+      "dtd-version",
+      "lifecycle",
+      "open-access",
+      "peer-reviewed",
+      "xml:lang"
+    ],
+    "article-id": [
+      "pub-id-type"
+    ],
+    "contrib": [
+      "contrib-type",
+      "corresp",
+      "primary",
+      "id"
+    ],
+    "xref": [
+      "ref-type",
+      "rid"
+    ],
+    "graphic": [
+      "xlink:href"
+    ],
+    "tex-math": [
+      "notation"
+    ],
+    "journal-id": [
+      "journal-id-type"
+    ],
+    "issn": [
+      "publication-format"
+    ],
+    "pub-date": [
+      "date-type",
+      "pub-type",
+      "iso-8601-date"
+    ],
+    "kwd-group": [
+      "kwd-group-type"
+    ],
+    "fig-count": [
+      "count"
+    ],
+    "table-count": [
+      "count"
+    ],
+    "ref-count": [
+      "count"
+    ],
+    "sec": [
+      "id"
+    ],
+    "fig": [
+      "id"
+    ],
+    "table-wrap": [
+      "id"
+    ],
+    "ref": [
+      "id"
+    ],
+    "bio": [
+      "id"
+    ],
+    "aff": [
+      "id"
+    ],
+    "string-name": [
+      "specific-use"
+    ],
+    "person-group": [
+      "person-group-type"
+    ],
+    "institution": [
+      "content-type"
+    ]
+  },
+  "llm_hints": {
+    "must_not_hallucinate": [
+      "title",
+      "authors",
+      "doi",
+      "abstract"
+    ],
+    "prefer_extract_over_generate": true
+  }
+}

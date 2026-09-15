@@ -1,4 +1,4 @@
-"""Extract structured IEEE-paper fields from a PDF for JATS mapping."""
+"""DEPRECATED — reference-only regex PDF extractor (see legacy/README.md)."""
 
 from __future__ import annotations
 

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//IEEE//IEEE Periodicals JATS-based DTD v2.0//EN" "periodicals.dtd">
+<article article-type="research" dtd-version="2.0" xml:lang="eng"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <front>
+    <journal-meta>
+      <journal-id journal-id-type="ieee">0055400</journal-id>
+      <journal-title-group>
+        <journal-title>IEEE Sensors Journal</journal-title>
+      </journal-title-group>
+      <issn publication-format="print">1530-437X</issn>
+      <publisher>
+        <publisher-name>IEEE</publisher-name>
+      </publisher>
+    </journal-meta>
+    <article-meta>
+      <article-id pub-id-type="doi">10.1109/JSEN.2024.1458242</article-id>
+      <title-group>
+        <article-title>A Customized Electronic Tongue for Tea Quality Evaluation</article-title>
+      </title-group>
+      <contrib-group>
+        <contrib contrib-type="author" corresp="yes" id="contrib1">
+          <name-alternatives>
+            <string-name>
+              <given-names>Madhurima</given-names>
+              <surname>Moulick</surname>
+            </string-name>
+          </name-alternatives>
+          <email>madhurima@example.edu</email>
+          <xref ref-type="aff" rid="aff1"/>
+        </contrib>
+      </contrib-group>
+      <aff id="aff1">
+        <institution-wrap>
+          <institution content-type="department">Department of Instrumentation and Electronics Engineering</institution>
+          <institution content-type="institution">Jadavpur University</institution>
+        </institution-wrap>
+        <city>Kolkata</city>
+        <country>India</country>
+      </aff>
+      <pub-date date-type="cover" pub-type="print">
+        <year>2024</year>
+      </pub-date>
+      <abstract>
+        <p>In this facile approach, a well-developed voltammetric electronic tongue is presented.</p>
+      </abstract>
+      <kwd-group kwd-group-type="AuthorFree">
+        <kwd>Electronic tongue</kwd>
+        <kwd>tea quality</kwd>
+      </kwd-group>
+      <counts>
+        <fig-count count="2"/>
+        <table-count count="1"/>
+        <ref-count count="15"/>
+      </counts>
+    </article-meta>
+  </front>
+  <body>
+    <sec id="sec1">
+      <label>I.</label>
+      <title>Introduction</title>
+      <p>Researchers have been seeking alternative instrumental means <xref ref-type="bibr" rid="ref1">[1]</xref>.</p>
+      <p>The coefficient of determination <inline-formula><tex-math notation="LaTeX">R^2</tex-math></inline-formula> was high.</p>
+      <disp-formula>
+        <label>(1)</label>
+        <tex-math notation="LaTeX">TAN = fTAN(XTAN)</tex-math>
+      </disp-formula>
+      <fig id="fig1">
+        <label>Fig. 1.</label>
+        <caption><p>Schematic of the e-tongue setup.</p></caption>
+        <graphic xlink:href="fig1.eps"/>
+      </fig>
+      <table-wrap id="table1">
+        <label>TABLE I</label>
+        <caption><title>Operational statistics</title></caption>
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Samples</td><td>50</td></tr>
+          </tbody>
+        </table>
+      </table-wrap>
+    </sec>
+  </body>
+  <back>
+    <ack>
+      <title>Acknowledgment</title>
+      <p>The authors thank the reviewers for their comments.</p>
+    </ack>
+    <ref-list>
+      <title>References</title>
+      <ref id="ref1">
+        <label>[1]</label>
+        <mixed-citation>
+          <person-group person-group-type="author">
+            <string-name><surname>Smith</surname>, <given-names>J.</given-names></string-name>
+          </person-group>
+          <article-title>Sensor arrays for food quality</article-title>
+          <source>IEEE Sensors J.</source>
+          <volume>10</volume>
+          <issue>3</issue>
+          <fpage>1</fpage>
+          <lpage>10</lpage>
+          <year>2020</year>
+        </mixed-citation>
+      </ref>
+    </ref-list>
+    <bio-group>
+      <bio id="bio1">
+        <p><xref ref-type="contrib" rid="contrib1">Madhurima Moulick</xref> is with Jadavpur University.</p>
+      </bio>
+    </bio-group>
+  </back>
+</article>

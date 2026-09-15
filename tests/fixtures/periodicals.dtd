@@ -1,0 +1,94 @@
+<!-- PLACEHOLDER FIXTURE — NOT the client's official IEEE periodicals.dtd v2.0.
+     Replace with the real DTD from the client before building validator.py (module 9).
+     This minimal stand-in matches the front/body/back structure in 1458242.xml
+     so lxml can load and parse a DTD document for smoke tests. -->
+<!ELEMENT article (front, body, back)>
+<!ATTLIST article
+  article-type CDATA #IMPLIED
+  dtd-version CDATA #IMPLIED
+  xml:lang CDATA #IMPLIED>
+
+<!ELEMENT front (journal-meta, article-meta)>
+<!ELEMENT journal-meta (journal-id, journal-title-group, issn?, publisher?)>
+<!ELEMENT journal-id (#PCDATA)>
+<!ATTLIST journal-id journal-id-type CDATA #IMPLIED>
+<!ELEMENT journal-title-group (journal-title)>
+<!ELEMENT journal-title (#PCDATA)>
+<!ELEMENT issn (#PCDATA)>
+<!ELEMENT publisher (publisher-name)>
+<!ELEMENT publisher-name (#PCDATA)>
+
+<!ELEMENT article-meta (article-id*, title-group, contrib-group, aff*, pub-date?, abstract?, kwd-group?, counts?)>
+<!ELEMENT article-id (#PCDATA)>
+<!ATTLIST article-id pub-id-type CDATA #IMPLIED>
+<!ELEMENT title-group (article-title)>
+<!ELEMENT article-title (#PCDATA | inline-formula)*>
+<!ELEMENT contrib-group (contrib+)>
+<!ELEMENT contrib (name-alternatives, email?, xref*)>
+<!ATTLIST contrib contrib-type CDATA #IMPLIED id ID #IMPLIED>
+<!ELEMENT name-alternatives (string-name+)>
+<!ELEMENT string-name (given-names?, surname)>
+<!ELEMENT given-names (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT xref (#PCDATA)>
+<!ATTLIST xref ref-type CDATA #IMPLIED rid IDREF #IMPLIED>
+<!ELEMENT aff (#PCDATA | institution-wrap)*>
+<!ELEMENT institution-wrap (institution+)>
+<!ELEMENT institution (#PCDATA)>
+<!ELEMENT pub-date (year?, month?, day?)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT month (#PCDATA)>
+<!ELEMENT day (#PCDATA)>
+<!ELEMENT abstract (p | title)*>
+<!ELEMENT kwd-group (kwd+)>
+<!ELEMENT kwd (#PCDATA)>
+<!ELEMENT counts (fig-count?, table-count?, ref-count?)>
+<!ELEMENT fig-count EMPTY>
+<!ATTLIST fig-count count CDATA #IMPLIED>
+<!ELEMENT table-count EMPTY>
+<!ATTLIST table-count count CDATA #IMPLIED>
+<!ELEMENT ref-count EMPTY>
+<!ATTLIST ref-count count CDATA #IMPLIED>
+
+<!ELEMENT body (sec | p | disp-formula | fig | table-wrap | supplementary-material)*>
+<!ELEMENT sec (label?, title?, p*, sec*, disp-formula*, fig*, table-wrap*)>
+<!ATTLIST sec id ID #IMPLIED>
+<!ELEMENT label (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT p (#PCDATA | inline-formula | xref)*>
+<!ELEMENT inline-formula (tex-math)>
+<!ELEMENT disp-formula (tex-math, label?)>
+<!ELEMENT tex-math (#PCDATA)>
+<!ATTLIST tex-math notation CDATA #IMPLIED>
+<!ELEMENT fig (label?, caption, graphic?)>
+<!ATTLIST fig id ID #IMPLIED>
+<!ELEMENT caption (p | title)*>
+<!ELEMENT graphic EMPTY>
+<!ATTLIST graphic xlink:href CDATA #IMPLIED>
+<!ELEMENT table-wrap (label?, caption?, table)>
+<!ATTLIST table-wrap id ID #IMPLIED>
+<!ELEMENT table (thead?, tbody?, tr*)>
+<!ELEMENT thead (tr+)>
+<!ELEMENT tbody (tr+)>
+<!ELEMENT tr (th | td)+>
+<!ELEMENT th (#PCDATA)>
+<!ELEMENT td (#PCDATA)>
+<!ELEMENT supplementary-material (caption?, graphic?)>
+
+<!ELEMENT back (ack?, ref-list?, bio-group?)>
+<!ELEMENT ack (title?, p+)>
+<!ELEMENT ref-list (title?, ref+)>
+<!ELEMENT ref (label?, (mixed-citation | element-citation))>
+<!ATTLIST ref id ID #IMPLIED>
+<!ELEMENT mixed-citation (#PCDATA | person-group | article-title | source | volume | issue | fpage | lpage | year)*>
+<!ELEMENT element-citation (#PCDATA | person-group | article-title | source | volume | issue | fpage | lpage | year)*>
+<!ELEMENT person-group (string-name+)>
+<!ELEMENT source (#PCDATA)>
+<!ELEMENT volume (#PCDATA)>
+<!ELEMENT issue (#PCDATA)>
+<!ELEMENT fpage (#PCDATA)>
+<!ELEMENT lpage (#PCDATA)>
+<!ELEMENT bio-group (bio+)>
+<!ELEMENT bio (p+)>
+<!ATTLIST bio id ID #IMPLIED>

@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import MONGODB_DB, ensure_indexes, get_client, uses_local_mongo
-from app.routes import conversions, upload
+from app.routes import conversions, extractions, upload
 
 _root = Path(__file__).resolve().parent.parent
 load_dotenv(_root / ".env", override=False)
@@ -53,6 +53,7 @@ def startup() -> None:
 
 app.include_router(upload.router, prefix="/api/upload", tags=["Upload"])
 app.include_router(conversions.router, prefix="/api/conversions", tags=["Conversions"])
+app.include_router(extractions.router, prefix="/api/extractions", tags=["Extractions"])
 
 
 @app.get("/")

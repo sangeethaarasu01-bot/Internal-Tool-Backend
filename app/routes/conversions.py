@@ -11,7 +11,7 @@ from fastapi.responses import Response
 from pymongo.errors import PyMongoError
 
 from app.database import MONGODB_DB, conversions_col, mongo_connect_error, utcnow
-from app.services.pdf_processor import process_pdf
+from app.services.conversion_stub import reject_legacy_conversion
 
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
 MAX_FILE_SIZE = int(os.getenv("MAX_FILE_SIZE", 20 * 1024 * 1024))
@@ -94,7 +94,7 @@ async def start_conversion(
         raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
     conversion_id = str(result.inserted_id)
 
-    background_tasks.add_task(process_pdf, conversion_id, file_path)
+    background_tasks.add_task(reject_legacy_conversion, conversion_id, file_path)
 
     return {
         "message": "Conversion started",
@@ -199,5 +199,5 @@ async def retry_conversion(conversion_id: str, background_tasks: BackgroundTasks
             }
         },
     )
-    background_tasks.add_task(process_pdf, conversion_id, file_path)
+    background_tasks.add_task(reject_legacy_conversion, conversion_id, file_path)
     return {"message": "Retry started", "conversion_id": conversion_id, "status": "processing"}

@@ -1,4 +1,4 @@
-"""Build IEEE JATS 2.0 article XML matching vendor IEEE XML structure."""
+"""DEPRECATED — reference-only hardcoded IEEE JATS 2.0 XML builder (see legacy/README.md)."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from xml.sax.saxutils import escape
 
 from lxml import etree
 
-from app.services.pdf_extractor import Author, ExtractedPaper, PaperSection
+from app.legacy.pdf_extractor import Author, ExtractedPaper, PaperSection
 
 NSMAP = {
     "ali": "http://www.niso.org/schemas/ali/1.0/",

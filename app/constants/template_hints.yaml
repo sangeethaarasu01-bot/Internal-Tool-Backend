@@ -1,0 +1,15 @@
+# Optional hints merged into template_schema.json by TemplateParser.
+# Pass with: --hints app/constants/template_hints.yaml
+
+required_paths:
+  - front/journal-meta/journal-id
+  - front/article-meta/contrib-group/contrib
+  - back/ref-list
+
+llm_hints:
+  must_not_hallucinate:
+    - title
+    - authors
+    - doi
+    - abstract
+  prefer_extract_over_generate: true

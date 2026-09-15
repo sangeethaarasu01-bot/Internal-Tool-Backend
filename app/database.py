@@ -78,10 +78,20 @@ def conversions_col() -> Collection:
     return get_db()["conversions"]
 
 
+def extractions_col() -> Collection:
+    return get_db()["extractions"]
+
+
 def ensure_indexes() -> None:
     conversions_col().create_index([("created_at", DESCENDING)])
     conversions_col().create_index([("status", ASCENDING)])
     conversions_col().create_index([("original_filename", ASCENDING)])
+    extractions_col().create_index([("created_at", DESCENDING)])
+    extractions_col().create_index([("status", ASCENDING)])
+    extractions_col().create_index([("filename", ASCENDING)])
+    extractions_col().create_index([("original_filename", ASCENDING)])
+    get_db()["llm_calls"].create_index([("document_id", ASCENDING)])
+    get_db()["llm_calls"].create_index([("timestamp", DESCENDING)])
 
 
 def utcnow() -> datetime:

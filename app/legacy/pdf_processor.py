@@ -1,9 +1,11 @@
+"""DEPRECATED — legacy MongoDB conversion worker (see legacy/README.md)."""
+
 import logging
 from datetime import datetime, timezone
 
 from app.database import conversions_col
-from app.services.ieee_jats import generate_ieee_jats
-from app.services.pdf_extractor import extract_paper
+from app.legacy.ieee_jats import generate_ieee_jats
+from app.legacy.pdf_extractor import extract_paper
 from bson import ObjectId
 
 logger = logging.getLogger(__name__)
