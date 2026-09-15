@@ -96,9 +96,11 @@ def test_authors_not_paragraph_tags() -> None:
     )
     structure = process_document_structure(raw)
     assert structure.semantic is not None
-    assert len(structure.semantic.front.authors) >= 1
-    assert structure.semantic.front.authors[0].tag == "contrib"
-    assert "Runu Banerjee Roy" in structure.semantic.front.authors[0].text
+    assert len(structure.semantic.front.authors) >= 3
+    assert all(author.tag == "contrib" for author in structure.semantic.front.authors)
+    author_text = " ".join(author.text for author in structure.semantic.front.authors)
+    assert "Runu Banerjee Roy" in author_text
+    assert "Madhurima Moulick" in author_text
 
 
 def test_abstract_and_keywords_semantic_tags() -> None:
@@ -169,9 +171,13 @@ def test_section_heading_not_generic_paragraph() -> None:
     sem = structure.semantic
     assert sem is not None
     assert len(sem.body.sections) >= 1
-    assert sem.body.sections[0].heading == "I. INTRODUCTION"
+    assert sem.body.sections[0].heading == "INTRODUCTION"
+    assert sem.body.sections[0].heading_element.label == "I."
     assert "<sec" in sem.tagged_output
+    assert "<label" in sem.tagged_output
+    assert ">I.</label>" in sem.tagged_output
     assert "<title" in sem.tagged_output
+    assert ">INTRODUCTION</title>" in sem.tagged_output
 
 
 def test_no_page_section_tags() -> None:
@@ -198,10 +204,10 @@ def test_subsection_headings_detected() -> None:
     sem = structure.semantic
     assert sem is not None
     assert any(
-        sub.heading == "E. e-Tongue Setup"
+        sub.heading == "e-Tongue Setup" and sub.heading_element.label == "E."
         for sec in sem.body.sections
         for sub in sec.subsections
-    ) or any(sec.heading == "E. e-Tongue Setup" for sec in sem.body.sections)
+    ) or any(sec.heading == "e-Tongue Setup" and sec.heading_element.label == "E." for sec in sem.body.sections)
 
 
 def test_list_item_not_section() -> None:
@@ -380,7 +386,7 @@ def test_heading_not_list_for_section() -> None:
     sem = structure.semantic
     lists = _find_lists(sem)
     assert lists == []
-    assert any(sec.heading.startswith("III.") for sec in sem.body.sections)
+    assert any(sec.heading == "RESULTS AND DISCUSSIONS" and sec.heading_element.label == "III." for sec in sem.body.sections)
 
 
 def test_subsection_not_list() -> None:
@@ -399,7 +405,8 @@ def test_subsection_not_list() -> None:
     lists = _find_lists(sem)
     assert lists == []
     tagged = sem.tagged_output
-    assert "F. Response Recording From e-Tongue" in tagged
+    assert ">F.</label>" in tagged
+    assert "Response Recording From e-Tongue" in tagged
 
 
 def test_multiline_block_splits_into_multiple_items() -> None:
@@ -644,8 +651,10 @@ def test_equation_grouping() -> None:
     structure = process_document_structure(raw)
     sem = structure.semantic
     assert sem is not None
-    assert "disp-formula" in sem.tagged_output or "EQUATION" in sem.tagged_output
+    assert "disp-formula" in sem.tagged_output
     assert "fTAN" in sem.tagged_output
+    assert "<label" in sem.tagged_output
+    assert ">(1)</label>" in sem.tagged_output
 
 
 def test_thin_line_not_figure() -> None:
@@ -693,9 +702,9 @@ def test_section_hierarchy_roman_and_letter() -> None:
     structure = process_document_structure(raw)
     sem = structure.semantic
     assert sem is not None
-    roman = [s for s in sem.body.sections if s.heading.startswith("III.")]
+    roman = [s for s in sem.body.sections if s.heading_element.label == "III."]
     assert len(roman) == 1
-    assert any(sub.heading.startswith("B.") for sub in roman[0].subsections)
+    assert any(sub.heading == "Clustering Using t-SNE" and sub.heading_element.label == "B." for sub in roman[0].subsections)
 
 
 @pytest.mark.skipif(not IEEE_PDF.exists(), reason="IEEE proof PDF not in uploads")
@@ -709,7 +718,7 @@ def test_ieee_page1_semantic_elements() -> None:
     assert len(sem.front.authors) >= 1
     assert sem.front.abstract is not None
     assert sem.front.keywords is not None
-    assert any(sec.heading.startswith("I.") for sec in sem.body.sections)
+    assert any(sec.heading_element.label == "I." for sec in sem.body.sections)
     assert "<article-title" in sem.tagged_output
     assert sem.completeness.structured_character_count > 0
     assert sem.completeness.raw_character_count > sem.completeness.excluded_character_count
@@ -848,9 +857,11 @@ def test_ieee_semantic_classification_quality() -> None:
     tagged = sem.tagged_output
 
     assert sem.completeness.unknown_element_count == 0
-    assert "B. Clustering Using t-SNE" in tagged
-    assert "F. Response Recording From e-Tongue" in tagged
+    assert "Clustering Using t-SNE" in tagged
+    assert ">B.</label>" in tagged
+    assert "Response Recording From e-Tongue" in tagged
     assert "SUBSECTION_HEADING" in tagged or 'data-type="SUBSECTION"' in tagged
-    assert "III. RESULTS AND DISCUSSIONS" in tagged
+    assert ">III.</label>" in tagged
+    assert "RESULTS AND DISCUSSIONS" in tagged
     assert "fTAN" in tagged or "disp-formula" in tagged
     assert sem.completeness.unmapped_block_ids == []

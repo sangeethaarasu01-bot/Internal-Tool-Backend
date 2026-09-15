@@ -15,20 +15,31 @@ from app.models.semantic_document import (
     SemanticFrontMatter,
     SemanticSection,
 )
-from app.services.ir_builder import build_abstract, build_ir_node, build_table
+from app.services.ir_builder import build_abstract, build_display_math, build_ir_node, build_table
+from app.utils.math_latex import (
+    is_equation_group_boundary,
+    is_plausible_display_equation,
+    normalize_display_latex,
+    split_equation_label,
+)
 from app.services.layout.semantic_patterns import (
     KEYWORDS_RE,
     REFERENCE_HEADING_RE,
+    _CORRESPONDING_AUTHOR_NAME_RE,
     clean_section_heading,
+    extract_leading_roman_section_heading,
     extract_reference_label,
     extract_table_label,
     first_line,
     is_valid_figure_block,
     normalize_text,
+    order_authors_with_corresponding,
+    parse_author_names,
     split_acknowledgment,
     split_merged_headings,
     split_reference_entries,
     split_section_and_body,
+    split_section_label_and_title,
 )
 from app.services.layout.list_detection import (
     ListMarkerInfo,
@@ -50,6 +61,8 @@ from app.services.layout.table_grid_builder import (
 LIST_NEST_INDENT = 24.0
 
 MATH_GROUP_GAP = 24.0
+MATH_ROW_Y_TOLERANCE = 8.0
+MATH_ROW_X_GAP = 45.0
 FIGURE_GROUP_GAP = 35.0
 LIST_GROUP_GAP = 30.0
 
@@ -206,6 +219,8 @@ def _can_merge_author(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
 
 
 def _can_merge_paragraph(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
+    if extract_leading_roman_section_heading(current.text):
+        return False
     if prev.column != current.column:
         return False
     if prev.page_number != current.page_number and prev.page_number + 1 != current.page_number:
@@ -224,6 +239,61 @@ def _vertical_gap(prev: ProcessedBlock, current: ProcessedBlock) -> float:
     if prev.page_number != current.page_number:
         return 0.0
     return current.bbox[1] - prev.bbox[3]
+
+
+def _math_row_center(block: ProcessedBlock) -> float:
+    return (block.bbox[1] + block.bbox[3]) / 2.0
+
+
+def _same_math_row(left: ProcessedBlock, right: ProcessedBlock) -> bool:
+    if left.page_number != right.page_number:
+        return False
+    return abs(_math_row_center(left) - _math_row_center(right)) <= MATH_ROW_Y_TOLERANCE
+
+
+def _is_math_semantic_type(sem_type: str) -> bool:
+    return sem_type in {"EQUATION", "EQUATION_FRAGMENT"}
+
+
+def _merge_horizontal_math_rows(
+    typed: list[tuple[ProcessedBlock, str, float, str | None]],
+) -> list[tuple[ProcessedBlock, str, float, str | None]]:
+    """Merge equation fragments that sit on the same visual row (multi-column math)."""
+    result: list[tuple[ProcessedBlock, str, float, str | None]] = []
+    i = 0
+    while i < len(typed):
+        block, sem_type, confidence, reason = typed[i]
+        if not _is_math_semantic_type(sem_type):
+            result.append((block, sem_type, confidence, reason))
+            i += 1
+            continue
+
+        row: list[tuple[ProcessedBlock, str, float, str | None]] = [
+            (block, sem_type, confidence, reason)
+        ]
+        j = i + 1
+        while j < len(typed):
+            nxt, nxt_type, nxt_conf, nxt_reason = typed[j]
+            if not _same_math_row(block, nxt) or not _is_math_semantic_type(nxt_type):
+                break
+            prev_block = row[-1][0]
+            if nxt.bbox[0] - prev_block.bbox[2] > MATH_ROW_X_GAP:
+                break
+            row.append((nxt, nxt_type, nxt_conf, nxt_reason))
+            j += 1
+
+        if len(row) == 1:
+            result.append((block, sem_type, confidence, reason))
+            i += 1
+            continue
+
+        blocks = sorted((item[0] for item in row), key=lambda candidate: candidate.bbox[0])
+        merged = _make_merged_block(blocks)
+        avg_conf = sum(item[2] for item in row) / len(row)
+        result.append((merged, "EQUATION_FRAGMENT", avg_conf, "horizontal_math_row"))
+        i = j
+
+    return result
 
 
 def _group_equation_fragments(
@@ -248,6 +318,8 @@ def _group_equation_fragments(
                 break
             gap = _vertical_gap(group[-1], nxt)
             if nxt_type != "EQUATION_FRAGMENT":
+                break
+            if is_equation_group_boundary(group[-1].text, nxt.text):
                 break
             if gap > MATH_GROUP_GAP:
                 break
@@ -386,10 +458,18 @@ def build_semantic_document(
     title_ids = {b.block_id for b, t, _, _ in typed if t == "TITLE"}
     title_bottom = _title_bottom_y(processed, title_ids)
 
+    typed = _merge_horizontal_math_rows(typed)
     typed = _group_equation_fragments(typed)
     typed = _group_figures(typed)
     enriched = reclassify_list_sequences(typed, in_references=in_references)
     enriched = expand_multi_marker_list_blocks(enriched, in_references=in_references)
+
+    corresponding_author_name: str | None = None
+    for block in processed:
+        match = _CORRESPONDING_AUTHOR_NAME_RE.search(normalize_text(block.text))
+        if match:
+            corresponding_author_name = match.group(1).strip()
+            break
 
     front = SemanticFrontMatter()
     body = SemanticBody()
@@ -402,6 +482,7 @@ def build_semantic_document(
     current_section: SemanticSection | None = None
     paragraph_group: list[ProcessedBlock] = []
     pending_reference: IRNode | None = None
+    equation_label_counter = 0
 
     table_pool: dict[int, list[list[list[str]]]] = {}
     for page in raw.pages:
@@ -458,16 +539,19 @@ def build_semantic_document(
         nonlocal current_section
         flush_paragraph()
         flush_list()
+        cleaned_heading = clean_section_heading(heading)
+        section_label, section_title = split_section_label_and_title(cleaned_heading)
         heading_el = _element(
             "SUBSECTION" if level > 1 else "SECTION",
-            heading,
+            section_title,
             [block],
             confidence,
-            heading=heading,
+            heading=section_title,
             level=level,
+            label=section_label,
         )
         section = SemanticSection(
-            heading=heading,
+            heading=section_title,
             heading_element=heading_el,
             level=level,
             content_source_block_ids=_expand_block_ids(block),
@@ -552,9 +636,17 @@ def build_semantic_document(
                     group.append(nxt)
                 else:
                     break
-            element = _element("AUTHOR", _merge_text(group), group, confidence)
-            front.authors.append(element)
-            mapped_ids.update(element.source_block_ids)
+            author_blob = _merge_text(group)
+            author_names = order_authors_with_corresponding(
+                parse_author_names(author_blob),
+                corresponding_author_name,
+            )
+            if not author_names:
+                author_names = [author_blob]
+            for author_name in author_names:
+                element = _element("AUTHOR", author_name, group, confidence)
+                front.authors.append(element)
+                mapped_ids.update(element.source_block_ids)
             i += 1
             continue
 
@@ -718,7 +810,23 @@ def build_semantic_document(
         if sem_type == "EQUATION":
             flush_paragraph()
             flush_list()
-            element = _element("EQUATION", normalize_text(block.text), [block], confidence)
+            raw_equation = normalize_text(block.text)
+            if not is_plausible_display_equation(raw_equation):
+                element = _element("PARAGRAPH", raw_equation, [block], confidence)
+                add_content(element, [block])
+                i += 1
+                continue
+            explicit_label, equation_body = split_equation_label(raw_equation)
+            equation_label_counter += 1
+            label = explicit_label or f"({equation_label_counter})"
+            element = build_display_math(
+                equation_body,
+                source_block_ids=_expand_block_ids(block),
+                page_numbers=[block.page_number],
+                bbox=block.bbox,
+                confidence=confidence,
+                label=label,
+            )
             add_content(element, [block])
             i += 1
             continue
@@ -797,6 +905,14 @@ def build_semantic_document(
                     front.page_number = _element("PAGE_NUMBER", "1", [candidate], 0.8)
                 mapped_ids.add(candidate.block_id)
                 break
+
+    if front.authors and corresponding_author_name:
+        ordered_names = order_authors_with_corresponding(
+            [author.text for author in front.authors],
+            corresponding_author_name,
+        )
+        by_text = {author.text: author for author in front.authors}
+        front.authors = [by_text[name] for name in ordered_names if name in by_text]
 
     completeness = _semantic_completeness(raw, processed, mapped_ids, unknown, layout_objects)
     document = SemanticDocument(

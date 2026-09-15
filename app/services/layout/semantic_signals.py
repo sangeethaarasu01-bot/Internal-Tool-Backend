@@ -162,6 +162,8 @@ def classify_semantic_type(
     if text and len(text) <= 25 and block_height(block) < 15:
         if is_math_fragment(text):
             return "EQUATION_FRAGMENT", 0.72, None
+        if re.fullmatch(r"[A-Z]", text):
+            return "LAYOUT_OBJECT", 0.85, "stray_glyph"
         return "UNKNOWN_TEXT", 0.4, "short_unclassified_fragment"
 
     if text:

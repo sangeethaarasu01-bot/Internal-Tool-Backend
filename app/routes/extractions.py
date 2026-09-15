@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import os
 from datetime import datetime
 
@@ -12,7 +13,13 @@ from fastapi import APIRouter, BackgroundTasks, File, HTTPException, UploadFile
 from pymongo.errors import PyMongoError
 
 from app.database import extractions_col, mongo_connect_error, utcnow
-from app.models.extraction_workflow import ScopeRequest, ScopeResponse, TemplateUploadResponse
+from app.models.extraction_workflow import (
+    GenerateXmlRequest,
+    GenerateXmlResponse,
+    ScopeRequest,
+    ScopeResponse,
+    TemplateUploadResponse,
+)
 from app.models.semantic_mapping import SemanticMapRequest, SemanticMapResponse
 from app.services.extraction_processor import process_extraction
 from app.services.extraction_workflow import (
@@ -23,9 +30,13 @@ from app.services.extraction_workflow import (
     template_storage_dir,
     validate_extraction_object_id,
 )
+from app.services.ir_semantic_adapter import ir_to_semantic_mapping
 from app.services.llm.providers.base import LLMConfigurationError
 from app.services.llm_semantic_mapper import SemanticMappingError, map_semantic_content
 from app.services.scope_resolver import InvalidScopeError
+from app.services.xml_generator import XmlGenerationError, generate_jats_xml
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -315,4 +326,157 @@ async def semantic_map_extraction(extraction_id: str, body: SemanticMapRequest):
         mapping=mapping_result.mapping,
         unmapped_content=mapping_result.unmapped_content,
         warnings=mapping_result.warnings,
+    )
+
+
+@router.post("/{extraction_id}/generate-xml", response_model=GenerateXmlResponse)
+async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
+    """Generate IEEE JATS XML from scoped IR + uploaded template (optional LLM mapping)."""
+    logger.info(
+        "generate-xml started for %s (use_llm=%s, llm_fallback=%s, scope=%s)",
+        extraction_id,
+        body.use_llm,
+        body.llm_fallback,
+        body.scope,
+    )
+    doc = extractions_col().find_one({"_id": _oid(extraction_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Extraction not found")
+    _require_completed_extraction(doc)
+
+    template = doc.get("template") or {}
+    template_schema = template.get("template_schema")
+    template_path = template.get("file_path")
+    if not template_schema or not template_path:
+        raise HTTPException(
+            status_code=400,
+            detail="No template uploaded for this document. Upload a template via POST /template first.",
+        )
+    if not os.path.exists(template_path):
+        raise HTTPException(status_code=400, detail="Template file is missing on disk. Re-upload the template.")
+
+    try:
+        scope_result = apply_scope_to_extraction(
+            scope=body.scope,
+            result=doc["result"],
+            template_schema=template_schema,
+        )
+    except InvalidScopeError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except ExtractionWorkflowError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    resolved_scope = scope_result["resolved_scope"]
+    filtered_ir = scope_result["filtered_ir"]
+    warnings: list[str] = []
+    mapping_source = "ir_adapter"
+    prompt_version: str | None = None
+    unmapped_count = 0
+
+    if body.use_llm:
+        try:
+            mapping_result = map_semantic_content(
+                document_id=extraction_id,
+                scope=resolved_scope,
+                ir=filtered_ir,
+                template_schema=scope_result["filtered_template_schema"],
+                max_retries=1 if body.llm_fallback else 2,
+            )
+            semantic_record = mapping_result.model_dump(mode="json")
+            mapping_body = mapping_result.mapping
+            mapping_source = "llm"
+            prompt_version = mapping_result.prompt_version
+            warnings.extend(mapping_result.warnings)
+            unmapped_count = len(mapping_result.unmapped_content)
+            try:
+                extractions_col().update_one(
+                    {"_id": doc["_id"]},
+                    {"$set": {"scope": resolved_scope, "semantic_mapping": semantic_record}},
+                )
+            except PyMongoError as exc:
+                raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+        except LLMConfigurationError as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        except SemanticMappingError as exc:
+            if not body.llm_fallback:
+                raise HTTPException(status_code=502, detail=str(exc)) from exc
+            logger.info(
+                "LLM mapping failed for %s; falling back to IR adapter: %s",
+                extraction_id,
+                exc,
+            )
+            mapping_body = ir_to_semantic_mapping(filtered_ir)
+            mapping_source = "ir_adapter_fallback"
+            warnings.append(
+                "LLM mapping failed (Gemini timeout or API error). "
+                "XML was generated using deterministic extraction instead."
+            )
+    else:
+        cached = doc.get("semantic_mapping")
+        if cached and cached.get("mapping"):
+            mapping_body = cached["mapping"]
+            mapping_source = "cached_llm" if cached.get("prompt_version") else "cached"
+            prompt_version = cached.get("prompt_version")
+            warnings.extend(cached.get("warnings") or [])
+            unmapped_count = len(cached.get("unmapped_content") or [])
+        else:
+            mapping_body = ir_to_semantic_mapping(filtered_ir)
+            warnings.append("Generated using deterministic IR adapter (no LLM). Set use_llm=true for template-aware LLM mapping.")
+
+    try:
+        xml_content = generate_jats_xml(template_path, mapping_body)
+    except XmlGenerationError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+    generated_record = {
+        "scope": resolved_scope,
+        "mapping_source": mapping_source,
+        "prompt_version": prompt_version,
+        "xml_content": xml_content,
+        "warnings": warnings,
+        "generated_at": utcnow(),
+    }
+    try:
+        extractions_col().update_one(
+            {"_id": doc["_id"]},
+            {"$set": {"scope": resolved_scope, "generated_xml": generated_record}},
+        )
+    except PyMongoError as exc:
+        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+
+    return GenerateXmlResponse(
+        document_id=extraction_id,
+        scope=resolved_scope,
+        mapping_source=mapping_source,
+        prompt_version=prompt_version,
+        xml_content=xml_content,
+        warnings=warnings,
+        unmapped_content_count=unmapped_count,
+    )
+
+
+@router.get("/{extraction_id}/download-xml")
+async def download_extraction_xml(extraction_id: str):
+    """Download the last generated JATS XML for an extraction."""
+    doc = extractions_col().find_one({"_id": _oid(extraction_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Extraction not found")
+
+    generated = doc.get("generated_xml") or {}
+    xml_content = generated.get("xml_content")
+    if not xml_content:
+        raise HTTPException(
+            status_code=404,
+            detail="No generated XML found. Call POST /generate-xml first.",
+        )
+
+    filename = (doc.get("original_filename") or doc.get("filename") or "document.pdf").replace(
+        ".pdf", ".xml"
+    )
+    from fastapi.responses import Response
+
+    return Response(
+        content=xml_content,
+        media_type="application/xml",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )

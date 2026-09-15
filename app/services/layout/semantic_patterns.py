@@ -87,19 +87,46 @@ def block_area(block: ProcessedBlock) -> float:
     return (block.bbox[2] - block.bbox[0]) * (block.bbox[3] - block.bbox[1])
 
 
-def is_roman_section_heading(text: str) -> bool:
-    line = first_line(text)
-    if not ROMAN_SECTION_RE.match(line):
-        return False
-    words = line.split()
-    if len(words) > MAX_HEADING_WORDS:
-        return False
-    rest = re.sub(r"^(?:I{1,3}|IV|VI{0,3}|IX|X{0,3})\.\s+", "", line, flags=re.I)
+_ROMAN_HEADING_BODY_RE = re.compile(
+    r"^((?:I{1,3}|IV|VI{0,3}|IX|X{0,3})\.\s+[A-Z][A-Z0-9 \-/&]+?)\s+([A-Z][a-z].+)$"
+)
+_CORRESPONDING_AUTHOR_NAME_RE = re.compile(r"Corresponding author:\s*([^.)]+)", re.I)
+_IEEE_ET_AL_HEADER_RE = re.compile(
+    r"^(?:\d+\s+)?(?P<prefix>[A-Z]{3,8})\s+et\s+al\.:\s+.+",
+    re.I,
+)
+
+
+def _roman_heading_is_valid(heading: str) -> bool:
+    rest = re.sub(r"^(?:I{1,3}|IV|VI{0,3}|IX|X{0,3})\.\s+", "", heading, flags=re.I)
     heading_words = rest.split()[:6]
     if not heading_words:
         return False
-    upper_count = sum(1 for w in heading_words if w.isupper() or w.isdigit())
+    upper_count = sum(1 for word in heading_words if word.isupper() or word.isdigit())
     return upper_count / len(heading_words) >= 0.6
+
+
+def extract_leading_roman_section_heading(text: str) -> str | None:
+    """Return a Roman section heading at the start of ``text`` (even when merged with body)."""
+    normalized = normalize_text(text)
+    split_match = _ROMAN_HEADING_BODY_RE.match(normalized)
+    if split_match:
+        heading = split_match.group(1).strip()
+        if len(heading.split()) <= MAX_HEADING_WORDS and _roman_heading_is_valid(heading):
+            return heading
+
+    for candidate in (first_line(text), normalized):
+        if not ROMAN_SECTION_RE.match(candidate):
+            continue
+        if len(candidate.split()) > MAX_HEADING_WORDS:
+            continue
+        if _roman_heading_is_valid(candidate):
+            return candidate.strip()
+    return None
+
+
+def is_roman_section_heading(text: str) -> bool:
+    return extract_leading_roman_section_heading(text) is not None
 
 
 def is_letter_subsection_heading(text: str, block: ProcessedBlock | None = None) -> bool:
@@ -145,11 +172,6 @@ def is_math_fragment(text: str) -> bool:
             return False
 
     if MATH_FRAGMENT_RE.search(t) or MATH_FRAGMENT_RE.search(raw):
-        return True
-    if len(t) <= 4 and re.match(r"^[A-Z]\d*$", t):
-        return True
-    # Short IEEE variable tokens (e.g. XTAN) used as display-math labels.
-    if len(t) <= 4 and re.match(r"^X[A-Z]{1,3}$", t):
         return True
 
     # Strip standalone R^2 before symbol scan so ^ does not false-positive.
@@ -220,6 +242,27 @@ def clean_section_heading(text: str) -> str:
     return line.strip()
 
 
+_ROMAN_SECTION_LABEL_RE = re.compile(
+    r"^((?:I{1,3}|IV|VI{0,3}|IX|X{0,3})\.)\s+(.+)$",
+    re.IGNORECASE,
+)
+_LETTER_SECTION_LABEL_RE = re.compile(r"^([A-Z]\.)\s+(.+)$")
+
+
+def split_section_label_and_title(heading: str) -> tuple[str | None, str]:
+    """Split ``I. INTRODUCTION`` into label ``I.`` and title ``INTRODUCTION``."""
+    cleaned = clean_section_heading(heading)
+    if not cleaned:
+        return None, heading
+    roman_match = _ROMAN_SECTION_LABEL_RE.match(cleaned)
+    if roman_match:
+        return roman_match.group(1), roman_match.group(2).strip()
+    letter_match = _LETTER_SECTION_LABEL_RE.match(cleaned)
+    if letter_match:
+        return letter_match.group(1), letter_match.group(2).strip()
+    return None, cleaned
+
+
 def split_acknowledgment(text: str) -> tuple[str, str | None]:
     match = re.match(r"^(ACKNOWLEDGMENT)\s+(.+)$", first_line(text), re.I)
     if match:
@@ -229,14 +272,87 @@ def split_acknowledgment(text: str) -> tuple[str, str | None]:
 
 def split_section_and_body(text: str) -> tuple[str | None, str | None]:
     """Split e.g. 'IV. CONCLUSION The current approach...' into heading + body."""
-    line = first_line(text)
-    match = re.match(
-        r"^((?:I{1,3}|IV|VI{0,3}|IX|X{0,3})\.\s+[A-Z][A-Z0-9 \-/&]+?)\s+([A-Z][a-z].+)$",
-        line,
-    )
+    normalized = normalize_text(text)
+    match = _ROMAN_HEADING_BODY_RE.match(normalized)
     if match and len(match.group(1).split()) <= MAX_HEADING_WORDS:
         return match.group(1).strip(), match.group(2).strip()
     return None, None
+
+
+def author_running_header_prefix(surname: str) -> str:
+    """IEEE running headers use up to 5 surname characters (fewer when the surname is shorter)."""
+    clean = re.sub(r"[^A-Za-z]", "", surname or "")
+    if not clean:
+        return ""
+    return clean[:5].upper() if len(clean) > 5 else clean.upper()
+
+
+def parse_author_names(text: str) -> list[str]:
+    """Split a front-matter author line into individual author names."""
+    cleaned = re.sub(r",?\s*Member,\s*IEEE", "", text or "", flags=re.I)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip(" ,;")
+    if not cleaned:
+        return []
+    parts = re.split(r",|\band\b", cleaned, flags=re.I)
+    names = [part.strip(" ,") for part in parts if part.strip(" ,")]
+    return [name for name in names if len(name) > 2]
+
+
+def order_authors_with_corresponding(
+    authors: list[str],
+    corresponding_name: str | None,
+) -> list[str]:
+    """Place the corresponding author first, then preserve the original sequence."""
+    if not authors or not corresponding_name:
+        return authors
+    corresp_key = corresponding_name.strip().lower()
+    match_index = next(
+        (index for index, name in enumerate(authors) if corresp_key in name.lower()),
+        None,
+    )
+    if match_index is None:
+        return [corresponding_name] + authors
+    ordered = [authors[match_index]]
+    ordered.extend(name for index, name in enumerate(authors) if index != match_index)
+    return ordered
+
+
+def build_author_running_header_prefixes(
+    pages: list,
+    *,
+    corresponding_name: str | None = None,
+    author_lines: list[str] | None = None,
+) -> list[str]:
+    """Build ordered surname prefixes for IEEE ``SURNAME et al.:`` running headers."""
+    names: list[str] = []
+    if corresponding_name:
+        names.append(corresponding_name.strip())
+    for line in author_lines or []:
+        names.extend(parse_author_names(line))
+
+    prefixes: list[str] = []
+    seen: set[str] = set()
+    for name in names:
+        surname = name.split()[-1] if name.split() else name
+        prefix = author_running_header_prefix(surname)
+        if prefix and prefix not in seen:
+            seen.add(prefix)
+            prefixes.append(prefix)
+    return prefixes
+
+
+def matches_author_running_header_prefix(detected_prefix: str, candidate_prefixes: list[str]) -> bool:
+    detected = detected_prefix.upper()
+    for prefix in candidate_prefixes:
+        if detected.startswith(prefix) or prefix.startswith(detected[: min(5, len(detected))]):
+            return True
+    return False
+
+
+def extract_ieee_et_al_header_prefix(text: str) -> str | None:
+    flat = normalize_text(text)
+    match = _IEEE_ET_AL_HEADER_RE.match(flat)
+    return match.group("prefix").upper() if match else None
 
 
 def split_reference_entries(text: str) -> list[tuple[str | None, str]]:
@@ -275,6 +391,8 @@ def is_table_continuation_heading(text: str) -> bool:
     if is_roman_section_heading(text) or ROMAN_SECTION_RE.match(line):
         return False
     if LETTER_SUBSECTION_RE.match(line) or NUMBERED_SUBSECTION_RE.match(line):
+        return False
+    if MATH_SYMBOL_RE.search(line) or is_math_fragment(text):
         return False
     if TABLE_CONTINUATION_KNOWN_RE.match(line):
         return True

@@ -5,7 +5,12 @@ from __future__ import annotations
 from app.constants.ir_types import IR_DISPLAY_MATH, IR_PARAGRAPH
 from app.models.ir_schema import IRInlineMathElement
 from app.services.ir_builder import build_ir_node
-from app.services.layout.semantic_patterns import is_math_fragment, is_standalone_equation_text, split_reference_entries
+from app.services.layout.semantic_patterns import (
+    is_math_fragment,
+    is_standalone_equation_text,
+    is_table_continuation_heading,
+    split_reference_entries,
+)
 
 
 def test_is_math_fragment_rejects_r_squared_prose() -> None:
@@ -23,8 +28,12 @@ def test_is_math_fragment_accepts_display_math_lines() -> None:
 
 
 def test_is_math_fragment_accepts_short_variables() -> None:
+    from app.utils.math_latex import is_plausible_display_equation
+
     assert is_math_fragment("X1") is True
-    assert is_math_fragment("XTAN") is True
+    assert is_math_fragment("XTAN") is False
+    assert is_math_fragment("TAN = fTAN(XTAN)") is True
+    assert is_plausible_display_equation("X1") is False
 
 
 def test_build_ir_node_r_squared_prose_is_paragraph_with_inline_math() -> None:
@@ -74,3 +83,9 @@ def test_is_standalone_equation_text_detects_short_formulas() -> None:
     assert is_standalone_equation_text(
         "The model achieved R^2 of 0.967 and performed well on validation data."
     ) is False
+
+
+def test_is_table_continuation_heading_rejects_math_fragments() -> None:
+    assert is_table_continuation_heading("XTAN ∈{X1") is False
+    assert is_table_continuation_heading("TAN, X2") is False
+    assert is_table_continuation_heading("HPLC VALUES") is True

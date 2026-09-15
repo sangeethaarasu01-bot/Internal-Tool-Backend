@@ -22,6 +22,7 @@ from app.services.layout.text_filter import (
     build_page_number_candidates,
     build_running_header_candidates,
     classify_content_block,
+    collect_author_running_header_prefixes,
 )
 
 PIPELINE_VERSION = "2.0.0"
@@ -31,6 +32,7 @@ REFS_HEADING = re.compile(r"^\s*REFERENCES\s*$", re.IGNORECASE | re.MULTILINE)
 def process_document_structure(raw: ExtractionResult) -> DocumentStructureResult:
     running_headers = build_running_header_candidates(raw)
     page_numbers = build_page_number_candidates(raw)
+    author_header_prefixes = collect_author_running_header_prefixes(raw)
 
     ordered_pairs = order_document_blocks(raw.pages)
     page_by_number = {page.page_number: page for page in raw.pages}
@@ -58,6 +60,7 @@ def process_document_structure(raw: ExtractionResult) -> DocumentStructureResult
             running_headers,
             page_numbers,
             body_font_size,
+            author_header_prefixes,
         )
 
         if decision.classification in {"BODY_TEXT", "UNKNOWN_TEXT"} and len(text) > 20:

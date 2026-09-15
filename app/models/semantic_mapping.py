@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field, field_validator
 ALLOWED_SEMANTIC_TYPES = frozenset(
     {
         "paragraph",
+        "section",
         "heading",
         "subsection",
         "inline_math",

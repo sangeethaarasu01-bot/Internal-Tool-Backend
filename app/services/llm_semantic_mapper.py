@@ -17,6 +17,7 @@ from app.config.llm_config import (
 )
 from app.models.semantic_mapping import SemanticMappingResult
 from app.services.llm.call_logger import log_llm_call
+from app.services.llm.payload_compact import compact_ir_for_llm, compact_template_schema_for_llm
 from app.services.llm.providers.base import LLMConfigurationError, LLMProvider, LLMProviderError
 from app.services.llm.providers.factory import get_llm_provider
 from app.services.llm.response_parser import LLMResponseParseError, parse_llm_mapping_response
@@ -27,6 +28,11 @@ STRICT_JSON_RETRY_SUFFIX = (
     "\n\nSTRICT REMINDER: Your previous response was rejected. "
     "Return ONLY a raw JSON object. No XML tags. No Markdown fences. No commentary."
 )
+
+
+def _is_timeout_error(exc: Exception) -> bool:
+    message = str(exc).lower()
+    return "timed out" in message or "timeout" in message
 
 
 class SemanticMappingError(RuntimeError):
@@ -44,8 +50,8 @@ def build_user_payload(
     return {
         "document_id": document_id,
         "scope": scope,
-        "ir": ir,
-        "template_schema": template_schema,
+        "ir": compact_ir_for_llm(ir),
+        "template_schema": compact_template_schema_for_llm(template_schema),
     }
 
 
@@ -57,9 +63,10 @@ def map_semantic_content(
     template_schema: dict[str, Any],
     provider: LLMProvider | None = None,
     prompt_version: str = SEMANTIC_MAPPING_PROMPT_VERSION,
-    max_retries: int = LLM_MAX_RETRIES,
+    max_retries: int | None = None,
 ) -> SemanticMappingResult:
     """Map scoped IR + template schema to structured semantic JSON via LLM."""
+    retry_limit = max_retries if max_retries is not None else LLM_MAX_RETRIES
     llm = provider or get_llm_provider()
     system_prompt = load_semantic_mapping_system_prompt(prompt_version)
     user_payload = build_user_payload(
@@ -69,12 +76,19 @@ def map_semantic_content(
         template_schema=template_schema,
     )
     user_message = json.dumps(user_payload, ensure_ascii=False, default=str)
+    logger.info(
+        "Semantic mapping payload for %s: %s chars (provider=%s, retries=%s)",
+        document_id,
+        len(user_message),
+        llm.provider_name,
+        retry_limit,
+    )
 
     last_error: Exception | None = None
     raw_response: str | None = None
     start = time.perf_counter()
 
-    for attempt in range(max_retries):
+    for attempt in range(retry_limit):
         attempt_prompt = system_prompt
         if attempt > 0:
             attempt_prompt = system_prompt + STRICT_JSON_RETRY_SUFFIX
@@ -106,11 +120,16 @@ def map_semantic_content(
             logger.warning(
                 "Semantic mapping attempt %s/%s failed for %s: %s",
                 attempt + 1,
-                max_retries,
+                retry_limit,
                 document_id,
                 exc,
             )
-            if attempt + 1 >= max_retries:
+            if _is_timeout_error(exc):
+                logger.warning(
+                    "Skipping further LLM retries for %s after timeout",
+                    document_id,
+                )
+            if _is_timeout_error(exc) or attempt + 1 >= retry_limit:
                 latency_ms = (time.perf_counter() - start) * 1000
                 log_llm_call(
                     document_id=document_id,

@@ -35,6 +35,15 @@ os.makedirs(os.getenv("UPLOAD_DIR", "./uploads"), exist_ok=True)
 
 @app.on_event("startup")
 def startup() -> None:
+    from app.config import llm_config
+
+    logging.info(
+        "LLM config: provider=%s model=%s max_retries=%s gemini_timeout=%ss",
+        llm_config.LLM_PROVIDER,
+        llm_config.LLM_MODEL,
+        llm_config.LLM_MAX_RETRIES,
+        llm_config.GEMINI_REQUEST_TIMEOUT,
+    )
     try:
         ensure_indexes()
         logging.info("MongoDB connected: %s", MONGODB_DB)

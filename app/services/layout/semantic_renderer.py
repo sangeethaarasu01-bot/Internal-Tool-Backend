@@ -69,11 +69,12 @@ def _render_element(element: IRNode, indent: int = 2) -> str:
         return f"{pad}{open_tag}\n{inner}\n{pad}{close_tag}"
 
     if element.type == IR_DISPLAY_MATH and element.latex is not None:
-        return (
-            f"{pad}{open_tag}\n"
-            f'{pad}  <tex-math notation="LaTeX">{_esc(element.latex)}</tex-math>\n'
-            f"{pad}{close_tag}"
-        )
+        lines = [f"{pad}{open_tag}"]
+        if element.label:
+            lines.append(f"{pad}  <label {_attrs(element)}>{_esc(element.label)}</label>")
+        lines.append(f'{pad}  <tex-math notation="LaTeX">{_esc(element.latex)}</tex-math>')
+        lines.append(f"{pad}{close_tag}")
+        return "\n".join(lines)
 
     if element.type == IR_TABLE and element.rows:
         lines = [f"{pad}{open_tag}"]
@@ -160,8 +161,10 @@ def _render_section(section: SemanticSection, indent: int = 2) -> str:
     )
     lines = [
         f'{pad}<sec{level_attr} data-heading-source="{",".join(section.heading_element.source_block_ids)}">',
-        f'{pad}  <title {heading_attrs}>{_esc(section.heading)}</title>',
     ]
+    if section.heading_element.label:
+        lines.append(f'{pad}  <label {heading_attrs}>{_esc(section.heading_element.label)}</label>')
+    lines.append(f'{pad}  <title {heading_attrs}>{_esc(section.heading)}</title>')
     for item in section.content:
         lines.append(_render_element(item, indent + 2))
     for paragraph in section.paragraphs:

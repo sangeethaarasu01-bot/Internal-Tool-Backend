@@ -10,6 +10,15 @@ from app.models.document_structure import BlockClassification
 from app.models.extraction import ExtractionResult, TextBlock
 from app.services.layout.block_metrics import block_font_metrics
 from app.services.layout.column_classifier import classify_block_column
+from app.services.layout.semantic_patterns import (
+    _CORRESPONDING_AUTHOR_NAME_RE,
+    _IEEE_ET_AL_HEADER_RE,
+    build_author_running_header_prefixes as derive_author_running_header_prefixes,
+    extract_ieee_et_al_header_prefix,
+    extract_leading_roman_section_heading,
+    matches_author_running_header_prefix,
+    parse_author_names,
+)
 
 HEADER_Y_MAX = 50.0
 FOOTER_Y_MARGIN = 40.0
@@ -25,10 +34,6 @@ CITATION_PATTERN = re.compile(
 )
 RUNNING_HEADER_JOURNAL = re.compile(
     r"^(?:\d+\s+)?IEEE\s+SENSORS\s+JOURNAL(?:\s+\d+)?$",
-    re.IGNORECASE,
-)
-AUTHOR_RUNNING_HEADER = re.compile(
-    r"MOULICK\s+et\s+al\.:.*CUSTOMIZED\s+e-TONGUE",
     re.IGNORECASE,
 )
 PAGE_NUMBER_ONLY = re.compile(r"^\d{1,3}$")
@@ -78,6 +83,29 @@ def build_running_header_candidates(
     return hits
 
 
+def collect_author_running_header_prefixes(result: ExtractionResult) -> list[str]:
+    """Derive ordered IEEE running-header surname prefixes from page-1 metadata."""
+    corresponding_name: str | None = None
+    author_lines: list[str] = []
+    for page in result.pages:
+        if page.page_number != 1:
+            continue
+        for block in page.blocks:
+            text = block.text or ""
+            match = _CORRESPONDING_AUTHOR_NAME_RE.search(text)
+            if match:
+                corresponding_name = match.group(1).strip()
+            y0 = block.bbox[1]
+            if y0 < 260 and "," in text and "abstract" not in text.lower()[:12]:
+                if parse_author_names(text):
+                    author_lines.append(text)
+    return derive_author_running_header_prefixes(
+        result.pages,
+        corresponding_name=corresponding_name,
+        author_lines=author_lines,
+    )
+
+
 def build_page_number_candidates(result: ExtractionResult) -> dict[str, set[int]]:
     """Map isolated page-number strings to pages where they appear near top/bottom."""
     hits: dict[str, set[int]] = defaultdict(set)
@@ -117,11 +145,12 @@ def is_running_header_block(
     near_top: bool,
     running_header_pages: dict[str, set[int]],
     page_number: int,
+    author_header_prefixes: list[str] | None = None,
 ) -> FilterDecision | None:
     if not near_top:
         return None
     flat = _normalize_header_text(text)
-    if RUNNING_HEADER_JOURNAL.match(flat) or AUTHOR_RUNNING_HEADER.search(flat):
+    if RUNNING_HEADER_JOURNAL.match(flat):
         pages = running_header_pages.get(flat, set())
         if len(pages) >= 2 or page_number > 1:
             return FilterDecision(
@@ -129,6 +158,24 @@ def is_running_header_block(
                 exclude_from_content=True,
                 exclusion_reason="repeated_top_journal_header",
                 confidence=0.9,
+            )
+    et_al_prefix = extract_ieee_et_al_header_prefix(flat)
+    if et_al_prefix and _IEEE_ET_AL_HEADER_RE.match(flat):
+        if author_header_prefixes and matches_author_running_header_prefix(
+            et_al_prefix, author_header_prefixes
+        ):
+            return FilterDecision(
+                classification="RUNNING_HEADER",
+                exclude_from_content=True,
+                exclusion_reason="ieee_author_running_header",
+                confidence=0.92,
+            )
+        if page_number > 1:
+            return FilterDecision(
+                classification="RUNNING_HEADER",
+                exclude_from_content=True,
+                exclusion_reason="ieee_author_running_header",
+                confidence=0.88,
             )
     pages = running_header_pages.get(flat, set())
     if len(pages) >= 3 and len(flat) < 80:
@@ -171,6 +218,7 @@ def classify_content_block(
     running_header_pages: dict[str, set[int]],
     page_number_candidates: dict[str, set[int]],
     body_font_size: float,
+    author_header_prefixes: list[str] | None = None,
 ) -> FilterDecision:
     text = (block.text or "").strip()
     if not text:
@@ -184,10 +232,24 @@ def classify_content_block(
     if footer and not CITATION_PATTERN.search(text):
         return footer
 
+    if near_bottom and re.fullmatch(r"[A-Z]", text):
+        return FilterDecision(
+            classification="FOOTER",
+            exclude_from_content=True,
+            exclusion_reason="stray_page_glyph",
+            confidence=0.9,
+        )
+
     if in_references or CITATION_PATTERN.search(text):
         return FilterDecision("REFERENCE_TEXT", False, None, 0.85)
 
-    running = is_running_header_block(text, near_top, running_header_pages, page_number)
+    running = is_running_header_block(
+        text,
+        near_top,
+        running_header_pages,
+        page_number,
+        author_header_prefixes,
+    )
     if running:
         return running
 
@@ -225,6 +287,9 @@ def _classify_heading(
     body_font_size: float,
     column: str,
 ) -> str | None:
+    if extract_leading_roman_section_heading(text):
+        return "SECTION"
+
     first = flat.split("\n", 1)[0].strip()
     if len(first) > 120 or len(first) < 4:
         return None

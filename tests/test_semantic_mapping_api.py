@@ -213,7 +213,7 @@ def test_semantic_map_invalid_scope(mock_col: MagicMock) -> None:
 
 
 @patch("app.routes.extractions.extractions_col")
-@patch("app.services.llm_semantic_mapper.map_semantic_content")
+@patch("app.routes.extractions.map_semantic_content")
 def test_semantic_map_llm_failure(mock_map, mock_col: MagicMock) -> None:
     from app.services.llm_semantic_mapper import SemanticMappingError
 

@@ -42,6 +42,12 @@ from app.constants.ir_types import (
     SEMANTIC_TO_IR_TYPE,
 )
 from app.models.ir_schema import IRInlineMathElement, IRNode, IRTextElement
+from app.utils.math_latex import (
+    greek_to_latex,
+    is_greek_character,
+    is_plausible_display_equation,
+    normalize_display_latex,
+)
 from app.utils.text_utils import normalize_text
 
 # Inline math detection — conservative by design (false negative > false positive).
@@ -57,7 +63,8 @@ from app.utils.text_utils import normalize_text
 #   - Chemistry formulas (NiCo2O4, Gd2O3, CO2) — chemical notation, not LaTeX.
 _INLINE_MATH_PATTERN = re.compile(
     r"(\$[^$]+\$|"  # explicit $...$ LaTeX delimiters
-    r"\bR\^2\b)",  # standalone R^2 with word boundaries
+    r"\bR\^2\b|"  # standalone R^2 with word boundaries
+    r"[\u03B1-\u03C9\u0391-\u03A9])",  # Greek letters → inline LaTeX
     re.IGNORECASE,
 )
 
@@ -104,11 +111,13 @@ def parse_inline_elements(text: str) -> list[IRTextElement | IRInlineMathElement
             elements.append(IRTextElement(value=text[position : match.start()]))
         token = match.group(0)
         if token.startswith("$") and token.endswith("$"):
-            elements.append(IRInlineMathElement(latex=token[1:-1]))
+            elements.append(IRInlineMathElement(latex=greek_to_latex(token[1:-1])))
         elif token.lower() == "r^2":
             elements.append(IRInlineMathElement(latex="R^2"))
+        elif is_greek_character(token):
+            elements.append(IRInlineMathElement(latex=greek_to_latex(token)))
         else:
-            elements.append(IRInlineMathElement(latex=token))
+            elements.append(IRInlineMathElement(latex=greek_to_latex(token)))
         position = match.end()
 
     if position < len(text):
@@ -179,10 +188,12 @@ def build_ir_node(
     block_ids = list(source_block_ids or [])
     pages = sorted(set(page_numbers or []))
 
-    if _should_use_display_math(normalized, ir_type):
+    if _should_use_display_math(normalized, ir_type) and (
+        ir_type == IR_DISPLAY_MATH or is_plausible_display_equation(normalized)
+    ):
         return IRNode(
             type=IR_DISPLAY_MATH,
-            latex=normalized,
+            latex=normalize_display_latex(normalized),
             source_block_ids=block_ids,
             page_numbers=pages,
             bbox=bbox,
@@ -275,6 +286,7 @@ def build_display_math(
     page_numbers: Sequence[int] | None = None,
     bbox: list[float] | None = None,
     confidence: float = 1.0,
+    label: str | None = None,
 ) -> IRNode:
     """Build a display-math IR node.
 
@@ -288,11 +300,12 @@ def build_display_math(
     """
     return IRNode(
         type=IR_DISPLAY_MATH,
-        latex=normalize_text(latex),
+        latex=normalize_display_latex(latex),
         source_block_ids=list(source_block_ids or []),
         page_numbers=sorted(set(page_numbers or [])),
         bbox=bbox,
         confidence=confidence,
+        label=label,
     )
 
 
