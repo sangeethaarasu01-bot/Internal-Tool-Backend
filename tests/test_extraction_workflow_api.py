@@ -217,3 +217,4 @@ def test_template_upload_invalid_xml(
 
     assert response.status_code == 400
     assert "Invalid XML" in response.json()["detail"]
+

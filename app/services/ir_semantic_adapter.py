@@ -61,6 +61,13 @@ def _ir_node_to_mapped(node: dict[str, Any] | None) -> MappedSemanticNode | None
     semantic_type = _IR_TYPE_TO_SEMANTIC.get(ir_type, "paragraph")
     children = [_ir_node_to_mapped(child) for child in node.get("children") or []]
     children = [child for child in children if child is not None]
+    metadata: dict[str, Any] = {}
+    detection_reason = node.get("detection_reason")
+    if isinstance(detection_reason, str) and detection_reason.startswith("drop_cap:"):
+        metadata["drop_cap_letter"] = detection_reason.split(":", 1)[1]
+    if node.get("list_type"):
+        metadata["list_type"] = node.get("list_type")
+
     return MappedSemanticNode(
         semantic_type=semantic_type,
         source_block_ids=list(node.get("source_block_ids") or []),
@@ -72,6 +79,7 @@ def _ir_node_to_mapped(node: dict[str, Any] | None) -> MappedSemanticNode | None
         rows=node.get("rows"),
         children=children,
         confidence=node.get("confidence"),
+        metadata=metadata or None,
     )
 
 
@@ -79,7 +87,7 @@ def _section_to_mapped(section: dict[str, Any]) -> MappedSemanticNode:
     heading_el = section.get("heading_element") or {}
     content_nodes = [
         mapped
-        for item in (section.get("content") or []) + (section.get("paragraphs") or [])
+        for item in (section.get("content") or [])
         if (mapped := _ir_node_to_mapped(item)) is not None
     ]
     for subsection in section.get("subsections") or []:
@@ -150,3 +158,39 @@ def ir_to_semantic_mapping(ir: dict[str, Any]) -> SemanticMappingBody:
         back["references"] = references
 
     return SemanticMappingBody(front=front, body=body, back=back)
+
+
+def fill_back_references_from_ir(
+    mapping: SemanticMappingBody,
+    ir: dict[str, Any],
+) -> SemanticMappingBody:
+    """Preserve extracted bibliography when LLM/cached mapping omits ``back.references``."""
+    existing = mapping.back.get("references") or []
+    if existing:
+        return mapping
+
+    ir_refs = (ir.get("back") or {}).get("references") or []
+    if not ir_refs:
+        return mapping
+
+    references = [
+        mapped.model_dump(mode="json")
+        for ref in ir_refs
+        if (mapped := _ir_node_to_mapped(ref)) is not None
+    ]
+    if not references:
+        return mapping
+
+    updated_back = dict(mapping.back)
+    updated_back["references"] = references
+    return mapping.model_copy(update={"back": updated_back})
+
+
+def ensure_semantic_mapping_body(
+    mapping: SemanticMappingBody | dict[str, Any],
+) -> SemanticMappingBody:
+    if isinstance(mapping, SemanticMappingBody):
+        return mapping
+    if isinstance(mapping, dict) and "front" in mapping:
+        return SemanticMappingBody.model_validate(mapping)
+    raise ValueError("Invalid semantic mapping payload")

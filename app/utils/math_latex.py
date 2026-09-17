@@ -54,6 +54,12 @@ _PROSE_IN_EQUATION_RE = re.compile(
 _DISPLAY_EQUATION_RE = re.compile(
     r"(=|∈|∑|∫|±|≤|≥|×|÷|√|\^|\{|\}|\\[a-zA-Z]+|f[A-Z]{2,}\()",
 )
+_GREEK_COMMAND_SUBSCRIPT_RE = re.compile(
+    r"(\\(?:alpha|beta|gamma|delta|epsilon|theta|lambda|mu|omega|phi|psi|sigma|chi|upsilon))([a-zA-Z0-9])"
+)
+_SINGLE_BRACE_SUBSCRIPT_RE = re.compile(r"([A-Za-z])\{([a-zA-Z0-9])\}")
+_UNBRACED_SUBSCRIPT_RE = re.compile(r"([A-Za-z])_([a-zA-Z0-9])")
+_UNBRACED_SUPERSCRIPT_RE = re.compile(r"\^(\d+|[a-zA-Z])")
 
 
 def is_greek_character(char: str) -> bool:
@@ -74,7 +80,57 @@ def normalize_display_latex(text: str) -> str:
     cleaned = normalize_text(text)
     cleaned = cleaned.replace(" . . . ", " \\ldots ")
     cleaned = re.sub(r"\s*∈\s*", r" \\in ", cleaned)
-    return greek_to_latex(cleaned)
+    return apply_latex_subscripts_superscripts(greek_to_latex(cleaned))
+
+
+def equation_number_from_label(label: str | None) -> str | None:
+    if not label:
+        return None
+    match = re.search(r"(\d+)", label)
+    return match.group(1) if match else None
+
+
+def display_formula_id(label: str | None, template_ids: dict[str, str] | None = None) -> str | None:
+    """Return IEEE ``deqn`` id for a numbered display equation."""
+    eq_num = equation_number_from_label(label)
+    if not eq_num:
+        return None
+    if template_ids and eq_num in template_ids:
+        return template_ids[eq_num]
+    return f"deqn{eq_num}"
+
+
+def apply_latex_subscripts_superscripts(text: str) -> str:
+    """Add LaTeX ``_{}`` / ``^{}`` where PDF text omits braces."""
+    if not text or "\\begin{" in text:
+        return text
+
+    converted = text
+    converted = _UNBRACED_SUPERSCRIPT_RE.sub(r"^{\1}", converted)
+    converted = _UNBRACED_SUBSCRIPT_RE.sub(r"\1_{\2}", converted)
+    converted = _SINGLE_BRACE_SUBSCRIPT_RE.sub(r"\1_{\2}", converted)
+    converted = _GREEK_COMMAND_SUBSCRIPT_RE.sub(r"\1 _{\2}", converted)
+    return converted
+
+
+def format_display_math_for_ieee(latex: str, label: str | None = None) -> str:
+    """Wrap display math in ``equation*`` and add ``\\tag {n}`` when numbered."""
+    body = apply_latex_subscripts_superscripts(latex)
+    if "\\begin{equation" in body or "\\begin{align" in body:
+        return body
+
+    eq_num = equation_number_from_label(label)
+    if eq_num:
+        return f"\\begin{{equation*}} {body} \\tag {{{eq_num}}}\\end{{equation*}}"
+    return f"\\begin{{equation*}} {body} \\end{{equation*}}"
+
+
+def format_inline_math_for_ieee(latex: str) -> str:
+    """Format inline math for IEEE ``<tex-math>`` (``$...$`` delimiters)."""
+    body = apply_latex_subscripts_superscripts(latex).strip()
+    if body.startswith("$") and body.endswith("$"):
+        return body
+    return f"${body}$"
 
 
 def split_equation_label(text: str) -> tuple[str | None, str]:

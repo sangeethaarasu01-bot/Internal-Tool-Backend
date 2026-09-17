@@ -46,6 +46,15 @@ def test_parse_inline_elements_r_squared() -> None:
     assert math_elements[0].latex == "R^2"
 
 
+def test_parse_inline_elements_r2_without_caret() -> None:
+    elements = parse_inline_elements(
+        "a coefficient of determination (R2) of 0.967 and the R2 value was high."
+    )
+    math_elements = [e for e in elements if isinstance(e, IRInlineMathElement)]
+    assert len(math_elements) == 2
+    assert all(element.latex == "R^2" for element in math_elements)
+
+
 def test_parse_inline_elements_multiple_r_squared() -> None:
     elements = parse_inline_elements("values R^2, R^2")
     math_elements = [e for e in elements if isinstance(e, IRInlineMathElement)]

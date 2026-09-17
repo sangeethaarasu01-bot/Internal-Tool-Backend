@@ -5,33 +5,37 @@ from __future__ import annotations
 from app.constants.ir_types import IR_DISPLAY_MATH, IR_INLINE_MATH, IR_LIST, IR_LIST_ITEM, IR_TABLE
 from app.models.ir_schema import IRInlineMathElement, IRNode, IRTextElement
 from app.models.semantic_document import SemanticDocument, SemanticSection
-from app.utils.xml_text import escape_xml_text
+from app.utils.xml_text import escape_xml_attribute, escape_xml_text
 
 
 def _esc(text: str) -> str:
     return escape_xml_text(text)
 
 
+def _esc_attr(text: str) -> str:
+    return escape_xml_attribute(text)
+
+
 def _attrs(element: IRNode) -> str:
     parts = [
-        f'data-type="{_esc(element.type)}"',
-        f'data-source="{",".join(element.source_block_ids)}"',
-        f'data-pages="{",".join(str(p) for p in element.page_numbers)}"',
+        f'data-type="{_esc_attr(element.type)}"',
+        f'data-source="{_esc_attr(",".join(element.source_block_ids))}"',
+        f'data-pages="{_esc_attr(",".join(str(p) for p in element.page_numbers))}"',
         f'data-confidence="{element.confidence:.2f}"',
     ]
     if element.level is not None:
         parts.append(f'data-level="{element.level}"')
     if element.unknown_reason:
-        parts.append(f'data-reason="{_esc(element.unknown_reason)}"')
+        parts.append(f'data-reason="{_esc_attr(element.unknown_reason)}"')
     if element.label:
-        parts.append(f'data-label="{_esc(element.label)}"')
+        parts.append(f'data-label="{_esc_attr(element.label)}"')
     if element.list_type:
-        parts.append(f'list-type="{_esc(element.list_type)}"')
-        parts.append(f'data-list-type="{_esc(element.list_type)}"')
+        parts.append(f'list-type="{_esc_attr(element.list_type)}"')
+        parts.append(f'data-list-type="{_esc_attr(element.list_type)}"')
     if element.list_marker:
-        parts.append(f'data-list-marker="{_esc(element.list_marker)}"')
+        parts.append(f'data-list-marker="{_esc_attr(element.list_marker)}"')
     if element.detection_reason:
-        parts.append(f'data-detection-reason="{_esc(element.detection_reason)}"')
+        parts.append(f'data-detection-reason="{_esc_attr(element.detection_reason)}"')
     if element.bbox:
         bbox = ", ".join(f"{v:.2f}" for v in element.bbox)
         parts.append(f'data-bbox="[{bbox}]"')
@@ -63,7 +67,7 @@ def _render_element(element: IRNode, indent: int = 2) -> str:
 
     if element.keywords:
         inner = "\n".join(
-            f'{pad}  <kwd data-source="{_esc(",".join(element.source_block_ids))}">{_esc(kw)}</kwd>'
+            f'{pad}  <kwd data-source="{_esc_attr(",".join(element.source_block_ids))}">{_esc(kw)}</kwd>'
             for kw in element.keywords
         )
         return f"{pad}{open_tag}\n{inner}\n{pad}{close_tag}"

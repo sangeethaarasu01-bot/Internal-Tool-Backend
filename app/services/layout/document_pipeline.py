@@ -18,6 +18,7 @@ from app.services.layout.block_metrics import block_font_metrics, median_body_fo
 from app.services.layout.column_classifier import classify_block_column
 from app.services.layout.reading_order import order_document_blocks
 from app.services.layout.semantic_builder import build_semantic_document
+from app.services.layout.semantic_patterns import REFERENCE_HEADING_RE, first_line, normalize_text
 from app.services.layout.text_filter import (
     build_page_number_candidates,
     build_running_header_candidates,
@@ -48,7 +49,7 @@ def process_document_structure(raw: ExtractionResult) -> DocumentStructureResult
         page = page_by_number[page_number]
         column = classify_block_column(block, page.width)
         text = (block.text or "").strip()
-        if text.upper() == "REFERENCES":
+        if REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(first_line(text)):
             in_references = True
 
         decision = classify_content_block(

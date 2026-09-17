@@ -37,6 +37,15 @@ def _compact_node(node: dict[str, Any] | None) -> dict[str, Any] | None:
     if not node:
         return None
     compact = {key: node[key] for key in _IR_NODE_KEYS if key in node and node[key] not in (None, [], "")}
+    if not compact.get("text"):
+        parts: list[str] = []
+        for item in node.get("elements") or []:
+            if item.get("value"):
+                parts.append(str(item["value"]))
+            elif item.get("latex"):
+                parts.append(str(item["latex"]))
+        if parts:
+            compact["text"] = _truncate("".join(parts))
     if compact.get("text"):
         compact["text"] = _truncate(str(compact["text"]))
     if compact.get("latex"):

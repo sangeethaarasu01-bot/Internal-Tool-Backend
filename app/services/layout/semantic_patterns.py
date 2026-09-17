@@ -18,7 +18,12 @@ LIST_ITEM_ROMAN_RE = re.compile(r"^[ivxIVX]+\)\s+")
 LIST_ITEM_DOT_NUMERIC_RE = re.compile(r"^\d+\.\s+")
 LIST_ITEM_BULLET_RE = re.compile(r"^[•▪▫◦○●■□\-–—\*]\s+")
 REFERENCE_LABEL_RE = re.compile(r"^\[\d+\]")
-FIGURE_CAPTION_RE = re.compile(r"^fig\.\s*\d+", re.IGNORECASE)
+FIGURE_CAPTION_RE = re.compile(r"^fig(?:ure)?\.?\s*\d+", re.IGNORECASE)
+FIGURE_CAPTION_SPLIT_RE = re.compile(
+    r"^(fig(?:ure)?\.?\s*(\d+))[\.\:\s]*(.*)$",
+    re.IGNORECASE,
+)
+FIGURE_REFERENCE_RE = re.compile(r"\bfig(?:ure)?\.?\s*(\d+)\b", re.IGNORECASE)
 TABLE_CAPTION_RE = re.compile(r"^table\s+[IVX\d]+", re.IGNORECASE)
 TABLE_CONTINUATION_KNOWN_RE = re.compile(
     r"^(?:OPERATIONAL STATISTICS|COMPARATIVE PERFORMANCE|HPLC VALUES|PRECURSORS FOR)$",
@@ -28,7 +33,7 @@ ABSTRACT_RE = re.compile(r"^abstract[\s—\-–]", re.IGNORECASE)
 KEYWORDS_RE = re.compile(r"^index terms[\s—\-–]", re.IGNORECASE)
 DATE_HISTORY_RE = re.compile(r"^received\s+\d", re.IGNORECASE)
 CORRESPONDING_RE = re.compile(r"corresponding author", re.IGNORECASE)
-REFERENCE_HEADING_RE = re.compile(r"^references$", re.IGNORECASE)
+REFERENCE_HEADING_RE = re.compile(r"^references(?:\s*[:\-–—])?\s*$", re.IGNORECASE)
 ACKNOWLEDGMENT_RE = re.compile(r"^acknowledgment", re.IGNORECASE)
 JOURNAL_HEADER_RE = re.compile(r"IEEE\s+SENSORS\s+JOURNAL", re.IGNORECASE)
 CITATION_RE = re.compile(r"(?:\[\d+\]|doi:\s*10\.|vol\.\s*\d+)", re.IGNORECASE)
@@ -205,6 +210,18 @@ def is_explanatory_math_context(text: str) -> bool:
         return False
     if re.match(r"^(?:TAN|TF|TH)\s*,\s*yHPLC", t, re.I):
         return False
+    if re.match(r"^TF,\s*TAN,\s*and\s+TH\s+belong\b", t, re.I):
+        return True
+    if re.match(
+        r"^(?:TF|TAN|TH)(?:,\s*(?:TF|TAN|TH))+\s+(?:and|belong|are|were|in|have|contribute)\b",
+        t,
+        re.I,
+    ):
+        return True
+    if re.match(r"^The novelty of this approach\b", t, re.I):
+        return True
+    if re.match(r"^It was observed that\b", t, re.I):
+        return True
     if len(t) > 80 and not MATH_SYMBOL_RE.search(t[:30]):
         return True
     if re.match(r"^(?:where|The model|There are|From the)", t, re.I) and not is_math_fragment(t):
@@ -409,6 +426,38 @@ def extract_table_label(text: str) -> str | None:
     if not match:
         return None
     return match.group(0).strip()
+
+
+def extract_figure_label(text: str) -> str | None:
+    match = FIGURE_CAPTION_RE.match(first_line(text))
+    if not match:
+        return None
+    num_match = re.search(r"(\d+)", match.group(0))
+    if num_match:
+        return f"Fig. {num_match.group(1)}."
+    return match.group(0).strip()
+
+
+def parse_figure_caption(text: str) -> tuple[str | None, str]:
+    """Split ``Fig. 1. Caption text`` into label and caption body."""
+    normalized = normalize_text(text)
+    match = FIGURE_CAPTION_SPLIT_RE.match(normalized)
+    if not match:
+        return extract_figure_label(normalized), normalized
+    fig_num = match.group(2)
+    caption = match.group(3).strip()
+    return f"Fig. {fig_num}.", caption or normalized
+
+
+def figure_number_from_label(label: str | None) -> str | None:
+    if not label:
+        return None
+    match = re.search(r"(\d+)", label)
+    return match.group(1) if match else None
+
+
+def paragraph_references_figure(text: str, fig_num: str) -> bool:
+    return any(match.group(1) == fig_num for match in FIGURE_REFERENCE_RE.finditer(text))
 
 
 def is_standalone_equation_text(text: str) -> bool:

@@ -5,8 +5,11 @@ from __future__ import annotations
 from lxml import etree
 
 from app.utils.xml_text import (
+    escape_xml_attribute,
     escape_xml_text,
     find_invalid_xml_char_codes,
+    normalize_person_name_text,
+    normalize_typographic_quotes,
     sanitize_xml_text,
     set_lxml_text,
 )
@@ -30,9 +33,20 @@ def test_find_invalid_xml_char_codes() -> None:
     assert find_invalid_xml_char_codes("line\nbreak") == []
 
 
-def test_escape_xml_text_strips_and_escapes() -> None:
+def test_escape_xml_text_strips_and_escapes_core_entities_only() -> None:
     assert escape_xml_text("a\x02<b>") == "a&lt;b&gt;"
-    assert escape_xml_text('say "hi"') == "say &quot;hi&quot;"
+    assert escape_xml_text('say "hi"') == 'say "hi"'
+    assert escape_xml_text("don't stop") == "don't stop"
+    assert escape_xml_text("a & b") == "a &amp; b"
+
+
+def test_normalize_typographic_quotes() -> None:
+    assert normalize_typographic_quotes("it\u2019s a \u201ctest\u201d") == 'it\'s a "test"'
+
+
+def test_escape_xml_attribute_escapes_double_quotes_for_intermediate_output() -> None:
+    assert escape_xml_attribute('value with "quotes"') == "value with &quot;quotes&quot;"
+    assert escape_xml_attribute("value with 'apostrophe'") == "value with 'apostrophe'"
 
 
 def test_set_lxml_text_accepts_sanitized_content() -> None:
@@ -40,6 +54,13 @@ def test_set_lxml_text_accepts_sanitized_content() -> None:
     set_lxml_text(element, "safe\x00text\x08here")
     assert element.text == "safetexthere"
     etree.tostring(element, encoding="unicode")
+
+
+def test_normalize_person_name_text_strips_surrounding_whitespace() -> None:
+    assert normalize_person_name_text(" Madhurima ") == "Madhurima"
+    assert normalize_person_name_text("\nMoulick\n") == "Moulick"
+    assert normalize_person_name_text("\nMary\nJane\n") == "Mary Jane"
+    assert normalize_person_name_text(None) == ""
 
 
 def test_set_lxml_text_serializes_supplementary_unicode() -> None:

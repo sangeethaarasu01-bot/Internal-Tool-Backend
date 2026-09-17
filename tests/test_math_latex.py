@@ -3,6 +3,9 @@
 from app.services.ir_builder import build_display_math, parse_inline_elements
 from app.models.ir_schema import IRInlineMathElement
 from app.utils.math_latex import (
+    apply_latex_subscripts_superscripts,
+    format_display_math_for_ieee,
+    format_inline_math_for_ieee,
     is_equation_group_boundary,
     is_plausible_display_equation,
     normalize_display_latex,
@@ -47,6 +50,29 @@ def test_parse_inline_elements_greek_alpha() -> None:
     math = [element for element in elements if isinstance(element, IRInlineMathElement)]
     assert len(math) == 1
     assert math[0].latex == r"\alpha"
+
+
+def test_apply_latex_subscripts_superscripts_converts_braced_subscripts() -> None:
+    from app.utils.math_latex import greek_to_latex
+
+    assert apply_latex_subscripts_superscripts("R{s}") == "R_{s}"
+    assert apply_latex_subscripts_superscripts("R_s i_q") == "R_{s} i_{q}"
+    assert r"\omega _{e}" in apply_latex_subscripts_superscripts(greek_to_latex("ωe"))
+
+
+def test_apply_latex_subscripts_superscripts_converts_superscripts() -> None:
+    assert apply_latex_subscripts_superscripts("omega_e^2") == "omega_{e}^{2}"
+
+
+def test_format_display_math_for_ieee_wraps_equation_with_tag() -> None:
+    formatted = format_display_math_for_ieee("R_{s} i_{q}", "(1)")
+    assert r"\begin{equation*}" in formatted
+    assert r"\tag {1}" in formatted
+    assert r"\end{equation*}" in formatted
+
+
+def test_format_inline_math_for_ieee_wraps_dollar_delimiters() -> None:
+    assert format_inline_math_for_ieee(r"\chi _{0}") == r"$\chi _{0}$"
 
 
 def test_build_display_math_renders_label() -> None:

@@ -30,7 +30,11 @@ from app.services.extraction_workflow import (
     template_storage_dir,
     validate_extraction_object_id,
 )
-from app.services.ir_semantic_adapter import ir_to_semantic_mapping
+from app.services.ir_semantic_adapter import (
+    ensure_semantic_mapping_body,
+    fill_back_references_from_ir,
+    ir_to_semantic_mapping,
+)
 from app.services.llm.providers.base import LLMConfigurationError
 from app.services.llm_semantic_mapper import SemanticMappingError, map_semantic_content
 from app.services.scope_resolver import InvalidScopeError
@@ -422,6 +426,9 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
         else:
             mapping_body = ir_to_semantic_mapping(filtered_ir)
             warnings.append("Generated using deterministic IR adapter (no LLM). Set use_llm=true for template-aware LLM mapping.")
+
+    mapping_body = ensure_semantic_mapping_body(mapping_body)
+    mapping_body = fill_back_references_from_ir(mapping_body, filtered_ir)
 
     try:
         xml_content = generate_jats_xml(template_path, mapping_body)

@@ -54,16 +54,17 @@ from app.utils.text_utils import normalize_text
 #
 # Only two patterns are accepted:
 #   1. $...$  — explicit LaTeX delimiters used by authors/vendors.
-#   2. \bR\^2\b — coefficient of determination; word boundaries prevent
-#      substring matches inside tokens like AIR^2PLANE or PAIR^2ING.
+#   2. R^2 / R2 / R² — coefficient of determination; lookarounds prevent
+#      substring matches inside tokens like AIR^2PLANE, PAIR^2ING, or R20.
 #
 # NOT treated as math (plain text):
 #   - t-SNE, mse — algorithm names / abbreviations (IEEE uses <italic>, not
 #     <inline-formula> for these).
 #   - Chemistry formulas (NiCo2O4, Gd2O3, CO2) — chemical notation, not LaTeX.
+_R_SQUARED_TOKEN = r"(?<![A-Za-z])R(?:\^2|2|\u00B2)(?![0-9])"
 _INLINE_MATH_PATTERN = re.compile(
     r"(\$[^$]+\$|"  # explicit $...$ LaTeX delimiters
-    r"\bR\^2\b|"  # standalone R^2 with word boundaries
+    rf"{_R_SQUARED_TOKEN}|"  # coefficient of determination
     r"[\u03B1-\u03C9\u0391-\u03A9])",  # Greek letters → inline LaTeX
     re.IGNORECASE,
 )
@@ -112,7 +113,7 @@ def parse_inline_elements(text: str) -> list[IRTextElement | IRInlineMathElement
         token = match.group(0)
         if token.startswith("$") and token.endswith("$"):
             elements.append(IRInlineMathElement(latex=greek_to_latex(token[1:-1])))
-        elif token.lower() == "r^2":
+        elif re.fullmatch(r"R(?:\^2|2|\u00B2)", token, flags=re.IGNORECASE):
             elements.append(IRInlineMathElement(latex="R^2"))
         elif is_greek_character(token):
             elements.append(IRInlineMathElement(latex=greek_to_latex(token)))
@@ -142,7 +143,7 @@ def _should_use_display_math(text: str, ir_type: str) -> bool:
     if is_math_fragment(normalized):
         return True
     # Standalone R^2 in non-fragment text → inline math only, never display.
-    if re.search(r"\bR\^2\b", normalized, flags=re.IGNORECASE):
+    if re.search(_R_SQUARED_TOKEN, normalized, flags=re.IGNORECASE):
         return False
     if len(normalized) < 80 and _DISPLAY_MATH_WHOLE_BLOCK.search(normalized):
         return True

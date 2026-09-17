@@ -27,14 +27,20 @@ from app.services.layout.semantic_patterns import (
     REFERENCE_HEADING_RE,
     _CORRESPONDING_AUTHOR_NAME_RE,
     clean_section_heading,
+    extract_figure_label,
     extract_leading_roman_section_heading,
     extract_reference_label,
     extract_table_label,
+    figure_number_from_label,
     first_line,
+    is_explanatory_math_context,
+    is_roman_section_heading,
     is_valid_figure_block,
     normalize_text,
     order_authors_with_corresponding,
     parse_author_names,
+    parse_figure_caption,
+    paragraph_references_figure,
     split_acknowledgment,
     split_merged_headings,
     split_reference_entries,
@@ -57,6 +63,7 @@ from app.services.layout.table_grid_builder import (
     collect_table_blocks_after_caption,
     reconstruct_table_grid_from_blocks,
 )
+from app.utils.text_utils import infer_drop_cap_letter, merge_block_texts
 
 LIST_NEST_INDENT = 24.0
 
@@ -101,6 +108,7 @@ def _element(
     list_marker: str | None = None,
     detection_reason: str | None = None,
     rows: list[list[str]] | None = None,
+    drop_cap_letter: str | None = None,
 ) -> IRNode:
     pages = sorted({b.page_number for b in blocks})
     bbox = union_bbox(blocks) if blocks else None
@@ -114,6 +122,9 @@ def _element(
             confidence=confidence,
             label=label,
         )
+    resolved_detection_reason = detection_reason
+    if drop_cap_letter:
+        resolved_detection_reason = f"drop_cap:{drop_cap_letter}"
     return build_ir_node(
         semantic_type,
         text,
@@ -129,13 +140,25 @@ def _element(
         label=label,
         list_type=list_type,
         list_marker=list_marker,
-        detection_reason=detection_reason,
+        detection_reason=resolved_detection_reason,
         rows=rows,
     )
 
 
 def _merge_text(blocks: list[ProcessedBlock]) -> str:
-    return " ".join(normalize_text(b.text) for b in blocks if normalize_text(b.text))
+    return merge_block_texts([block.text for block in blocks])
+
+
+def _paragraph_text_and_drop_cap(blocks: list[ProcessedBlock]) -> tuple[str, str | None]:
+    text = _merge_text(blocks)
+    drop_cap_letter = None
+    if blocks and len(normalize_text(blocks[0].text)) == 1 and re.fullmatch(r"[A-Z]", normalize_text(blocks[0].text)):
+        drop_cap_letter = normalize_text(blocks[0].text)
+    if not drop_cap_letter:
+        drop_cap_letter = infer_drop_cap_letter(text)
+        if drop_cap_letter and not text.startswith(drop_cap_letter):
+            text = f"{drop_cap_letter}{text}"
+    return text, drop_cap_letter
 
 
 def _build_list_item_element(
@@ -218,21 +241,81 @@ def _can_merge_author(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
     return vertical_gap < 25
 
 
+def _paragraph_ends_sentence(text: str) -> bool:
+    normalized = normalize_text(text)
+    if not normalized:
+        return True
+    return bool(re.search(r"(?:[.!?]|\[\d+\])\s*$", normalized))
+
+
 def _can_merge_paragraph(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
     if extract_leading_roman_section_heading(current.text):
         return False
-    if prev.column != current.column:
+    if _paragraph_ends_sentence(prev.text):
         return False
     if prev.page_number != current.page_number and prev.page_number + 1 != current.page_number:
+        return False
+    cross_column = (
+        prev.page_number == current.page_number
+        and prev.column == "LEFT"
+        and current.column == "RIGHT"
+    )
+    if prev.column != current.column and not cross_column:
         return False
     gap = current.bbox[1] - prev.bbox[3]
     if prev.page_number != current.page_number:
         gap = 0
-    if gap > 28:
+    if not cross_column and gap > 28:
         return False
     prev_size = prev.dominant_font_size or 10
     cur_size = current.dominant_font_size or 10
     return abs(prev_size - cur_size) <= 1.5
+
+
+def _merge_drop_cap_blocks(
+    enriched: list[tuple[ProcessedBlock, str, float, str | None, ListMarkerInfo | None]],
+) -> list[tuple[ProcessedBlock, str, float, str | None, ListMarkerInfo | None]]:
+    """Attach decorative drop-cap letters to the following paragraph block."""
+    merged: list[tuple[ProcessedBlock, str, float, str | None, ListMarkerInfo | None]] = []
+    index = 0
+    while index < len(enriched):
+        block, sem_type, confidence, reason, marker = enriched[index]
+        letter = normalize_text(block.text)
+        is_drop_cap_candidate = (
+            re.fullmatch(r"[A-Z]", letter)
+            and (
+                (sem_type == "LAYOUT_OBJECT" and reason == "stray_glyph")
+                or sem_type == "UNKNOWN_TEXT"
+                or reason == "drop_cap_glyph"
+                or (sem_type == "PARAGRAPH" and len(letter) == 1)
+                or block.is_bold
+            )
+        )
+        if is_drop_cap_candidate and index + 1 < len(enriched):
+            next_block, next_type, next_confidence, _, next_marker = enriched[index + 1]
+            if next_type == "PARAGRAPH":
+                combined = ProcessedBlock(
+                    block_id=f"{block.block_id},{next_block.block_id}",
+                    page_number=next_block.page_number,
+                    reading_order_index=next_block.reading_order_index,
+                    column=next_block.column,
+                    classification=next_block.classification,
+                    confidence=min(confidence, next_confidence),
+                    exclude_from_content=next_block.exclude_from_content,
+                    exclusion_reason=next_block.exclusion_reason,
+                    bbox=union_bbox([block, next_block]),
+                    text=f"{letter}{normalize_text(next_block.text)}",
+                    block_type=next_block.block_type,
+                    dominant_font=next_block.dominant_font,
+                    dominant_font_size=next_block.dominant_font_size,
+                    is_bold=block.is_bold or next_block.is_bold,
+                )
+                merged.append((combined, "PARAGRAPH", combined.confidence, f"drop_cap:{letter}", next_marker))
+                index += 2
+                continue
+        merged.append((block, sem_type, confidence, reason, marker))
+        index += 1
+    return merged
 
 
 def _vertical_gap(prev: ProcessedBlock, current: ProcessedBlock) -> float:
@@ -394,6 +477,63 @@ def _group_figures(
     return result
 
 
+def _build_figure_element(
+    blocks: list[ProcessedBlock],
+    caption_text: str,
+    label: str | None,
+    confidence: float,
+) -> IRNode:
+    caption_child = _element("FIGURE_CAPTION", caption_text, blocks, confidence)
+    return _element(
+        "FIGURE",
+        caption_text,
+        blocks,
+        confidence,
+        label=label,
+        children=[caption_child],
+    )
+
+
+def _reposition_figures_in_content(content: list[IRNode]) -> list[IRNode]:
+    """Place each figure immediately after the paragraph that references it."""
+    figures = [node for node in content if node.type == "figure"]
+    if not figures:
+        return content
+
+    result = list(content)
+    for fig in figures:
+        fig_num = figure_number_from_label(fig.label)
+        if not fig_num:
+            continue
+        current_pos = result.index(fig)
+        target_idx: int | None = None
+        for j in range(current_pos - 1, -1, -1):
+            if result[j].type == "paragraph" and paragraph_references_figure(result[j].text or "", fig_num):
+                target_idx = j
+                break
+        if target_idx is None:
+            for j in range(current_pos + 1, len(result)):
+                if result[j].type == "paragraph" and paragraph_references_figure(result[j].text or "", fig_num):
+                    target_idx = j
+                    break
+        if target_idx is None:
+            continue
+        result.remove(fig)
+        result.insert(target_idx + 1, fig)
+    return result
+
+
+def _reposition_figures_in_section(section: SemanticSection) -> None:
+    section.content = _reposition_figures_in_content(section.content)
+    for subsection in section.subsections:
+        _reposition_figures_in_section(subsection)
+
+
+def _reposition_figures_in_body(body: SemanticBody) -> None:
+    for section in body.sections:
+        _reposition_figures_in_section(section)
+
+
 def _attach_figure_captions(
     elements: list[tuple[IRNode, list[ProcessedBlock]]],
 ) -> list[tuple[IRNode, list[ProcessedBlock]]]:
@@ -463,6 +603,7 @@ def build_semantic_document(
     typed = _group_figures(typed)
     enriched = reclassify_list_sequences(typed, in_references=in_references)
     enriched = expand_multi_marker_list_blocks(enriched, in_references=in_references)
+    enriched = _merge_drop_cap_blocks(enriched)
 
     corresponding_author_name: str | None = None
     for block in processed:
@@ -482,6 +623,7 @@ def build_semantic_document(
     current_section: SemanticSection | None = None
     paragraph_group: list[ProcessedBlock] = []
     pending_reference: IRNode | None = None
+    pending_figure_image: ProcessedBlock | None = None
     equation_label_counter = 0
 
     table_pool: dict[int, list[list[list[str]]]] = {}
@@ -519,7 +661,14 @@ def build_semantic_document(
         nonlocal paragraph_group
         if not paragraph_group:
             return
-        element = _element("PARAGRAPH", _merge_text(paragraph_group), paragraph_group, 0.82)
+        paragraph_text, drop_cap_letter = _paragraph_text_and_drop_cap(paragraph_group)
+        element = _element(
+            "PARAGRAPH",
+            paragraph_text,
+            paragraph_group,
+            0.82,
+            drop_cap_letter=drop_cap_letter,
+        )
         container = current_container()
         if isinstance(container, SemanticSection):
             container.paragraphs.append(element)
@@ -831,33 +980,56 @@ def build_semantic_document(
             i += 1
             continue
 
-        if sem_type in {"FIGURE", "FIGURE_CAPTION", "TABLE_CAPTION"}:
+        if sem_type == "FIGURE":
+            flush_paragraph()
+            flush_list()
+            pending_figure_image = block
+            _mark_mapped(mapped_ids, block)
+            i += 1
+            continue
+
+        if sem_type == "FIGURE_CAPTION":
+            flush_paragraph()
+            flush_list()
+            text = normalize_text(block.text)
+            label, caption_text = parse_figure_caption(text)
+            if not label:
+                label = extract_figure_label(text)
+            figure_blocks = [block]
+            if pending_figure_image is not None:
+                figure_blocks.insert(0, pending_figure_image)
+                pending_figure_image = None
+            element = _build_figure_element(figure_blocks, caption_text or text, label, confidence)
+            add_content(element, figure_blocks)
+            for figure_block in figure_blocks:
+                _mark_mapped(mapped_ids, figure_block)
+            i += 1
+            continue
+
+        if sem_type == "TABLE_CAPTION":
             flush_paragraph()
             flush_list()
             text = normalize_text(block.text)
             table_blocks = [block]
             consumed = 0
-            if sem_type == "TABLE_CAPTION":
-                rows = _next_table_rows(block.page_number)
-                if not rows:
-                    candidate_blocks, consumed = collect_table_blocks_after_caption(block, enriched, i)
-                    candidate_rows = reconstruct_table_grid_from_blocks(candidate_blocks)
-                    if candidate_rows:
-                        rows = candidate_rows
-                        table_blocks.extend(candidate_blocks)
-                    else:
-                        consumed = 0
-                if rows:
-                    element = _element(
-                        "TABLE",
-                        text,
-                        table_blocks,
-                        confidence,
-                        label=extract_table_label(text),
-                        rows=rows,
-                    )
+            rows = _next_table_rows(block.page_number)
+            if not rows:
+                candidate_blocks, consumed = collect_table_blocks_after_caption(block, enriched, i)
+                candidate_rows = reconstruct_table_grid_from_blocks(candidate_blocks)
+                if candidate_rows:
+                    rows = candidate_rows
+                    table_blocks.extend(candidate_blocks)
                 else:
-                    element = _element(sem_type, text, [block], confidence)
+                    consumed = 0
+            if rows:
+                element = _element(
+                    "TABLE",
+                    text,
+                    table_blocks,
+                    confidence,
+                    label=extract_table_label(text),
+                    rows=rows,
+                )
             else:
                 element = _element(sem_type, text, [block], confidence)
             add_content(element, table_blocks)
@@ -866,8 +1038,42 @@ def build_semantic_document(
             i += 1 + consumed
             continue
 
+        if sem_type == "EQUATION_FRAGMENT":
+            text = normalize_text(block.text)
+            if is_explanatory_math_context(text) or (len(text) > 60 and not is_plausible_display_equation(text)):
+                sem_type = "PARAGRAPH"
+
+        if (
+            sem_type == "UNKNOWN_TEXT"
+            and current_section is not None
+            and not in_references
+            and normalize_text(block.text)
+            and reason not in {"excluded_layout_metadata", "decorative_layout_object"}
+        ):
+            sem_type = "PARAGRAPH"
+
         if sem_type == "PARAGRAPH":
             flush_list()
+            if reason and reason.startswith("drop_cap:"):
+                flush_paragraph()
+                drop_cap_letter = reason.split(":", 1)[1]
+                element = _element(
+                    "PARAGRAPH",
+                    normalize_text(block.text),
+                    [block],
+                    confidence,
+                    drop_cap_letter=drop_cap_letter,
+                )
+                container = current_container()
+                if isinstance(container, SemanticSection):
+                    container.paragraphs.append(element)
+                    container.content.append(element)
+                    container.content_source_block_ids.extend(element.source_block_ids)
+                else:
+                    body.loose_paragraphs.append(element)
+                mapped_ids.update(element.source_block_ids)
+                i += 1
+                continue
             if paragraph_group and _can_merge_paragraph(paragraph_group[-1], block):
                 paragraph_group.append(block)
             else:
@@ -893,6 +1099,37 @@ def build_semantic_document(
     flush_paragraph()
     flush_list()
     flush_reference()
+    if pending_figure_image is not None:
+        _mark_mapped(mapped_ids, pending_figure_image)
+        pending_figure_image = None
+
+    _reposition_figures_in_body(body)
+
+    recovery_blocks: list[ProcessedBlock] = []
+    for block in processed:
+        if block.exclude_from_content or block.block_id in mapped_ids:
+            continue
+        text = normalize_text(block.text)
+        if not text:
+            continue
+        if REFERENCE_HEADING_RE.match(first_line(text)):
+            break
+        if is_roman_section_heading(text) and current_section is not None:
+            continue
+        recovery_blocks.append(block)
+
+    if recovery_blocks and current_section is not None:
+        recovery_group: list[ProcessedBlock] = []
+        for block in recovery_blocks:
+            if recovery_group and not _can_merge_paragraph(recovery_group[-1], block):
+                paragraph_group = recovery_group
+                flush_paragraph()
+                recovery_group = [block]
+            else:
+                recovery_group.append(block)
+        if recovery_group:
+            paragraph_group = recovery_group
+            flush_paragraph()
 
     if not front.journal_header:
         for candidate in processed:

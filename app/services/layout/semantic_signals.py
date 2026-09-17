@@ -150,6 +150,19 @@ def classify_semantic_type(
     if block.classification == "REFERENCE_TEXT" and not _is_author_bio(text):
         return "REFERENCE", 0.84, None
 
+    if (
+        in_body
+        and not in_references
+        and text
+        and block.classification in {"PARAGRAPH", "BODY_TEXT", "UNKNOWN_TEXT"}
+        and not is_roman_section_heading(text)
+        and not is_letter_subsection_heading(text, block)
+        and not is_numbered_subsection_heading(text)
+        and not is_math_fragment(text)
+        and not is_standalone_equation_text(text)
+    ):
+        return "PARAGRAPH", 0.8, "body_prose"
+
     if is_standalone_equation_text(text) and not is_explanatory_math_context(text):
         return "EQUATION_FRAGMENT", 0.8, "standalone_equation"
 
@@ -159,12 +172,16 @@ def classify_semantic_type(
     if len(text) > 25 and block.classification in {"PARAGRAPH", "BODY_TEXT"}:
         return "PARAGRAPH", 0.82, None
 
-    if text and len(text) <= 25 and block_height(block) < 15:
+    if text and len(text) <= 25:
         if is_math_fragment(text):
             return "EQUATION_FRAGMENT", 0.72, None
-        if re.fullmatch(r"[A-Z]", text):
-            return "LAYOUT_OBJECT", 0.85, "stray_glyph"
-        return "UNKNOWN_TEXT", 0.4, "short_unclassified_fragment"
+        if re.fullmatch(r"[A-Z]", normalize_text(text)):
+            if block.is_bold or block_height(block) >= 15:
+                return "PARAGRAPH", 0.86, "drop_cap_glyph"
+            if block_height(block) < 15:
+                return "LAYOUT_OBJECT", 0.85, "stray_glyph"
+        if block_height(block) < 15:
+            return "UNKNOWN_TEXT", 0.4, "short_unclassified_fragment"
 
     if text:
         return "UNKNOWN_TEXT", 0.38, "low_confidence_classification"

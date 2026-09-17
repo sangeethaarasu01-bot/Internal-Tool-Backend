@@ -215,8 +215,8 @@ def _write_contrib(parent, author: Author, index: int, primary: bool) -> None:
     for use in ("display", "index"):
         sn = etree.SubElement(alts, "string-name", {"specific-use": use})
         if author.given:
-            _el(sn, "given-names", f" {author.given} ")
-        _el(sn, "surname", f" {author.surname} ")
+            _el(sn, "given-names", author.given.strip())
+        _el(sn, "surname", author.surname.strip())
     if author.email:
         _el(contrib, "email", author.email)
     for aff_id in author.aff_ids or ["aff1"]:
@@ -326,8 +326,8 @@ def _write_ref(parent, ref: dict) -> None:
         for i, (given, surname) in enumerate(trimmed):
             sn = etree.SubElement(pg, "string-name")
             if given:
-                _el(sn, "given-names", f" {given} ")
-            _el(sn, "surname", f" {surname} ")
+                _el(sn, "given-names", given.strip())
+            _el(sn, "surname", surname.strip())
             if i < len(trimmed) - 1:
                 sn.tail = ", "
         if "et al" in authors_part.lower():

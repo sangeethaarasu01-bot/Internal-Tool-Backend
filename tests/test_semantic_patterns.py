@@ -6,11 +6,28 @@ from app.constants.ir_types import IR_DISPLAY_MATH, IR_PARAGRAPH
 from app.models.ir_schema import IRInlineMathElement
 from app.services.ir_builder import build_ir_node
 from app.services.layout.semantic_patterns import (
+    is_explanatory_math_context,
     is_math_fragment,
     is_standalone_equation_text,
     is_table_continuation_heading,
+    parse_figure_caption,
+    paragraph_references_figure,
     split_reference_entries,
 )
+
+
+def test_is_explanatory_math_context_accepts_tf_intro_paragraph() -> None:
+    text = (
+        "TF, TAN, and TH belong to the group of flavonoids, polyphenols, "
+        "and methylxanthines, respectively."
+    )
+    assert is_explanatory_math_context(text) is True
+
+
+def test_is_explanatory_math_context_accepts_it_was_observed_paragraph() -> None:
+    assert is_explanatory_math_context(
+        "It was observed that multimolecular sensing using a single sensor was not enough."
+    ) is True
 
 
 def test_is_math_fragment_rejects_r_squared_prose() -> None:
@@ -89,3 +106,14 @@ def test_is_table_continuation_heading_rejects_math_fragments() -> None:
     assert is_table_continuation_heading("XTAN ∈{X1") is False
     assert is_table_continuation_heading("TAN, X2") is False
     assert is_table_continuation_heading("HPLC VALUES") is True
+
+
+def test_parse_figure_caption_splits_label_and_body() -> None:
+    label, caption = parse_figure_caption("Fig. 1. Reference frames of sensorless controlled SPMSM.")
+    assert label == "Fig. 1."
+    assert caption == "Reference frames of sensorless controlled SPMSM."
+
+
+def test_paragraph_references_figure_detects_inline_reference() -> None:
+    assert paragraph_references_figure("The setup is shown in Fig. 1 for clarity.", "1") is True
+    assert paragraph_references_figure("The setup is shown in Figure 2.", "1") is False
