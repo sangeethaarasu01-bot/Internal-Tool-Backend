@@ -433,8 +433,6 @@ def split_reference_entries(text: str) -> list[tuple[str | None, str]]:
         elif entries:
             label, body = entries[-1]
             entries[-1] = (label, f"{body} {chunk}".strip())
-        else:
-            entries.append((None, chunk))
     return entries
 
 

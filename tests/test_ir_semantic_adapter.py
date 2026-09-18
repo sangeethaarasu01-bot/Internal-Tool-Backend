@@ -47,6 +47,47 @@ def test_section_mapping_uses_content_only_not_duplicate_paragraphs() -> None:
     assert len(paragraphs) == 1
 
 
+def test_fill_back_references_from_ir_overrides_incorrect_llm_back_section() -> None:
+    ir = {
+        "front": {},
+        "body": {"sections": [], "loose_paragraphs": []},
+        "back": {
+            "references": [
+                {
+                    "type": "reference",
+                    "label": "[1]",
+                    "elements": [{"type": "text", "value": "[1] World Health Organization. Breast Cancer."}],
+                    "source_block_ids": ["p8_b2"],
+                },
+                {
+                    "type": "reference",
+                    "label": "[2]",
+                    "elements": [{"type": "text", "value": "[2] H. Sung et al., Journal, vol. 1, 2020."}],
+                    "source_block_ids": ["p8_b3"],
+                },
+            ]
+        },
+    }
+    llm_mapping = SemanticMappingBody(
+        front={},
+        body=[],
+        back={
+            "references": [
+                {
+                    "semantic_type": "reference",
+                    "label": "[2]",
+                    "text": "[2] H. Sung et al., Journal, vol. 1, 2020.",
+                    "source_block_ids": ["p8_b3"],
+                }
+            ]
+        },
+    )
+    filled = fill_back_references_from_ir(llm_mapping, ir)
+    assert len(filled.back["references"]) == 2
+    assert filled.back["references"][0]["label"] == "[1]"
+    assert "World Health Organization" in filled.back["references"][0]["text"]
+
+
 def test_fill_back_references_from_ir_restores_missing_llm_back_section() -> None:
     ir = {
         "front": {},

@@ -164,11 +164,11 @@ def fill_back_references_from_ir(
     mapping: SemanticMappingBody,
     ir: dict[str, Any],
 ) -> SemanticMappingBody:
-    """Preserve extracted bibliography when LLM/cached mapping omits ``back.references``."""
-    existing = mapping.back.get("references") or []
-    if existing:
-        return mapping
+    """Use Stage 1 extracted bibliography for back-matter references.
 
+    Deterministic extraction is preferred over LLM/cached mappings so labels and
+    ordering stay aligned with the PDF reference list.
+    """
     ir_refs = (ir.get("back") or {}).get("references") or []
     if not ir_refs:
         return mapping

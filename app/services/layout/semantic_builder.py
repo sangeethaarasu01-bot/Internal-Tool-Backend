@@ -47,6 +47,11 @@ from app.services.layout.semantic_patterns import (
     split_section_and_body,
     split_section_label_and_title,
 )
+from app.services.layout.semantic_signals import _is_author_bio
+from app.utils.reference_assembler import (
+    assemble_references_from_blocks,
+    collect_reference_section_blocks,
+)
 from app.services.layout.list_detection import (
     ListMarkerInfo,
     collect_list_items,
@@ -623,6 +628,11 @@ def build_semantic_document(
     current_section: SemanticSection | None = None
     paragraph_group: list[ProcessedBlock] = []
     pending_reference: IRNode | None = None
+    reference_buffer: list[tuple[ProcessedBlock, str, float]] = []
+    reference_section_active = False
+    _REFERENCE_BUFFER_TYPES = frozenset(
+        {"REFERENCE", "PARAGRAPH", "UNKNOWN_TEXT", "BODY_TEXT", "LIST_ITEM"}
+    )
     pending_figure_image: ProcessedBlock | None = None
     equation_label_counter = 0
 
@@ -860,6 +870,24 @@ def build_semantic_document(
             back.reference_list = _element("REFERENCE_LIST", normalize_text(block.text), [block], confidence)
             _mark_mapped(mapped_ids, block)
             in_references = True
+            reference_section_active = True
+            i += 1
+            continue
+
+        if reference_section_active and sem_type == "AUTHOR":
+            reference_section_active = False
+
+        if (
+            reference_section_active
+            and sem_type in _REFERENCE_BUFFER_TYPES
+            and not block.exclude_from_content
+            and not _is_author_bio(normalize_text(block.text))
+            and not REFERENCE_HEADING_RE.match(first_line(block.text))
+        ):
+            flush_paragraph()
+            flush_list()
+            reference_buffer.append((block, normalize_text(block.text), confidence))
+            _mark_mapped(mapped_ids, block)
             i += 1
             continue
 
@@ -1097,6 +1125,19 @@ def build_semantic_document(
     flush_paragraph()
     flush_list()
     flush_reference()
+    if back.reference_list is not None:
+        block_sem_types = {
+            block.block_id: sem_type for block, sem_type, _, _, _ in enriched
+        }
+        section_blocks = collect_reference_section_blocks(
+            processed,
+            block_sem_types,
+            is_author_bio=_is_author_bio,
+        )
+        if section_blocks:
+            back.references = assemble_references_from_blocks(section_blocks, validate=False)
+            for ref in back.references:
+                mapped_ids.update(ref.source_block_ids)
     if pending_figure_image is not None:
         _mark_mapped(mapped_ids, pending_figure_image)
         pending_figure_image = None

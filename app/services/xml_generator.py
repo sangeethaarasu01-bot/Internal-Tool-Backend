@@ -19,6 +19,12 @@ from app.utils.math_latex import (
     format_inline_math_for_ieee,
 )
 from app.utils.text_utils import dehyphenate_line_breaks, infer_drop_cap_letter
+from app.utils.reference_assembler import (
+    AssembledReference,
+    ReferenceParsingError,
+    reference_number_from_mapping_node,
+    validate_reference_sequence,
+)
 from app.utils.reference_citation_builder import populate_structured_mixed_citation
 from app.utils.xml_serializer import serialize_lxml_tree
 from app.utils.xml_text import normalize_person_name_text, sanitize_xml_text, set_lxml_attr, set_lxml_text
@@ -512,11 +518,47 @@ def _reference_citation_text(mapped: MappedSemanticNode) -> str:
     return citation
 
 
+def _assembled_references_from_mapping(
+    references: list[MappedSemanticNode | dict[str, Any]],
+) -> list[AssembledReference]:
+    assembled: list[AssembledReference] = []
+    for index, reference in enumerate(references, start=1):
+        mapped = _as_mapped(reference)
+        number = reference_number_from_mapping_node(
+            mapped,
+            text=_text_of(mapped),
+            label=mapped.label,
+            fallback=index,
+        )
+        assembled.append(
+            AssembledReference(
+                reference_number=number,
+                label=f"[{number}]",
+                raw_text=_text_of(mapped),
+                source_block_ids=list(mapped.source_block_ids),
+                page_numbers=[],
+                bbox=None,
+                confidence=mapped.confidence or 1.0,
+            )
+        )
+    return assembled
+
+
+def _validate_mapping_references(references: list[MappedSemanticNode | dict[str, Any]]) -> None:
+    validate_reference_sequence(_assembled_references_from_mapping(references))
+
+
 def _append_reference(parent: etree._Element, node: MappedSemanticNode | dict[str, Any], index: int) -> None:
     mapped = _as_mapped(node)
     ctx = _log_context_for(mapped, "reference")
-    ref = etree.SubElement(parent, "ref", id=f"ref{index}")
-    label_text = mapped.label or f"[{index}]"
+    reference_number = reference_number_from_mapping_node(
+        mapped,
+        text=_text_of(mapped),
+        label=mapped.label,
+        fallback=index,
+    )
+    ref = etree.SubElement(parent, "ref", id=f"ref{reference_number}")
+    label_text = f"[{reference_number}]"
     label = etree.SubElement(ref, "label")
     set_lxml_text(label, label_text, log_context={**ctx, "field": "label"})
     citation = etree.SubElement(ref, "mixed-citation")
@@ -753,10 +795,15 @@ def _apply_back_matter(article: etree._Element, back: dict[str, Any]) -> None:
     for child in list(ref_list):
         if child.tag == "ref":
             ref_list.remove(child)
-    ref_index = 1
-    for reference in references:
-        _append_reference(ref_list, reference, ref_index)
-        ref_index += 1
+    try:
+        _validate_mapping_references(references)
+    except ReferenceParsingError as exc:
+        raise XmlGenerationError(
+            f"Bibliography validation failed: {exc}. "
+            "Re-run extraction after fixing reference-section detection."
+        ) from exc
+    for index, reference in enumerate(references, start=1):
+        _append_reference(ref_list, reference, index)
 
 
 def generate_jats_xml(

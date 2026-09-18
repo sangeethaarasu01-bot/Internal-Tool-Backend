@@ -32,6 +32,25 @@ def _citation_xml(text: str) -> etree._Element:
     return citation
 
 
+def test_online_reference_handles_pdf_spacing_and_broken_url() -> None:
+    pdf_style = (
+        "World Health Organization. Breast Cancer: Prevention and Control. "
+        "Accessed:Mar.16,2024.[Online].Available:https://www.who.int/news "
+        "room/fact-sheets/detail/breast-cancer"
+    )
+    citation = _citation_xml(pdf_style)
+    assert citation.findtext("collab") == "World Health Organization"
+    assert "Breast Cancer" in (citation.findtext("source") or "")
+    assert citation.findtext("month") == "Mar."
+    assert citation.findtext("day") == "16"
+    assert citation.findtext("year") == "2024"
+    assert citation.findtext("uri") == (
+        "https://www.who.int/news-room/fact-sheets/detail/breast-cancer"
+    )
+    assert citation.findtext("source") == "Breast Cancer: Prevention and Control"
+    assert "Accessed:" in (citation.find("source").tail or "")
+
+
 def test_online_reference_uses_collab_source_uri() -> None:
     citation = _citation_xml(WHO_REF)
     assert citation.get("publication-type") == "book"
@@ -42,6 +61,31 @@ def test_online_reference_uses_collab_source_uri() -> None:
     assert citation.findtext("day") == "16"
     assert citation.findtext("year") == "2024"
     assert citation.findtext("uri", "").startswith("https://www.who.int/")
+
+
+def test_periodical_reference_does_not_put_title_text_in_author_names() -> None:
+    corrupted = (
+        "A. P. King, ''An investigation into the use of machine learning,'' "
+        "IEEE Sensors J., vol. 21, no. 5, pp. 209-249, May 2021."
+    )
+    citation = _citation_xml(corrupted)
+    group = citation.find("person-group")
+    assert group is not None
+    given_names = [name.findtext("given-names") or "" for name in group.findall("string-name")]
+    assert all("investigation" not in given for given in given_names)
+    assert "investigation" in (citation.findtext("article-title") or "")
+
+
+def test_periodical_reference_preserves_spaced_initials() -> None:
+    citation = _citation_xml(JOURNAL_REF)
+    group = citation.find("person-group")
+    assert group is not None
+    sung = group.findall("string-name")[0]
+    assert sung.findtext("given-names") == "H."
+    siegel = next(
+        name for name in group.findall("string-name") if name.findtext("surname") == "Siegel"
+    )
+    assert siegel.findtext("given-names") == "R. L."
 
 
 def test_periodical_reference_uses_person_group_and_article_title() -> None:

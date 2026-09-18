@@ -32,8 +32,8 @@ from app.services.layout.semantic_patterns import (
     is_roman_section_heading,
     is_title_candidate,
     is_valid_figure_block,
-    looks_like_reference_entry,
     normalize_text,
+    REFERENCE_LABEL_RE,
 )
 
 AUTHOR_BIO_RE = re.compile(
@@ -53,13 +53,22 @@ def _should_treat_as_reference(
     *,
     in_references: bool,
 ) -> bool:
-    if in_references:
-        return True
-    if block.classification != "REFERENCE_TEXT":
-        return False
     if _is_author_bio(text):
         return False
-    return looks_like_reference_entry(text)
+
+    normalized = normalize_text(text)
+    if REFERENCE_LABEL_RE.match(normalized):
+        return True
+
+    if in_references:
+        line = first_line(text)
+        if REFERENCE_HEADING_RE.match(line):
+            return False
+        if is_roman_section_heading(text) or ACKNOWLEDGMENT_RE.match(line):
+            return False
+        return True
+
+    return False
 
 
 def classify_semantic_type(
