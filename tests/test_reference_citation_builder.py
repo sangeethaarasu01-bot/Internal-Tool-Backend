@@ -20,8 +20,8 @@ WHO_REF = (
 
 JOURNAL_REF = (
     "H. Sung, J. Ferlay, R. L. Siegel, M. Laversanne, I. Soerjomataram, A. Jemal, and F. Bray, "
-    '"Global cancer statistics 2020: GLOBOCAN estimates of incidence and mortality worldwide '
-    'for 36 cancers in 185 countries," CA: Cancer J. Clinicians, vol. 71, no. 3, pp. 209-249, '
+    "\u201cGlobal cancer statistics 2020: GLOBOCAN estimates of incidence and mortality worldwide "
+    "for 36 cancers in 185 countries,\u201d CA: Cancer J. Clinicians, vol. 71, no. 3, pp. 209\u2013249, "
     "May 2021."
 )
 

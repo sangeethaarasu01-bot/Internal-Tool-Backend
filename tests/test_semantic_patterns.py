@@ -10,6 +10,7 @@ from app.services.layout.semantic_patterns import (
     is_math_fragment,
     is_standalone_equation_text,
     is_table_continuation_heading,
+    looks_like_reference_entry,
     parse_figure_caption,
     paragraph_references_figure,
     split_reference_entries,
@@ -79,6 +80,38 @@ def test_build_ir_node_short_sum_line_is_display_math() -> None:
     node = build_ir_node("PARAGRAPH", "∑xi = 0")
     assert node.type == IR_DISPLAY_MATH
     assert node.latex == "∑xi = 0"
+
+
+def test_looks_like_reference_entry_accepts_bibliography_items() -> None:
+    who_ref = (
+        "[1] World Health Organization. Breast Cancer: Prevention and Control. "
+        "Accessed: Mar. 16, 2024. [Online]. Available: "
+        "https://www.who.int/news-room/fact-sheets/detail/breast-cancer"
+    )
+    journal_ref = (
+        "[2] H. Sung, J. Ferlay, R. L. Siegel, M. Laversanne, I. Soerjomataram, "
+        "A. Jemal, and F. Bray, "
+        "\u201cGlobal cancer statistics 2020: GLOBOCAN estimates of incidence and mortality worldwide "
+        "for 36 cancers in 185 countries,\u201d CA: Cancer J. Clinicians, vol. 71, no. 3, pp. 209\u2013249, "
+        "May 2021."
+    )
+    assert looks_like_reference_entry(who_ref) is True
+    assert looks_like_reference_entry(journal_ref) is True
+
+
+def test_looks_like_reference_entry_rejects_body_prose() -> None:
+    intro = (
+        "I. INTRODUCTION Breast cancer (BC) ranks as the predominant form of cancer in adults worldwide, "
+        "with an alarming rate of over 2.3 million new cases each year, as reported by the "
+        "World Health Organization (WHO) 2022."
+    )
+    survival = (
+        "Breast cancer survival rates vary significantly across the globe, with a majority of deaths "
+        "occurring in lowand middle-income countries. Early detection is crucial as it leads to a "
+        "clinical cure rate of over 90%, but this decreases significantly as the cancer progresses."
+    )
+    assert looks_like_reference_entry(intro) is False
+    assert looks_like_reference_entry(survival) is False
 
 
 def test_split_reference_entries_splits_bracketed_items() -> None:

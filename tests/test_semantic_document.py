@@ -724,6 +724,71 @@ def test_ieee_page1_semantic_elements() -> None:
     assert sem.completeness.raw_character_count > sem.completeness.excluded_character_count
 
 
+def test_body_prose_with_who_mention_not_treated_as_reference() -> None:
+    raw = _raw(
+        [
+            _page(
+                1,
+                [
+                    _block(
+                        "p1_b1",
+                        "Breast cancer (BC) ranks as the predominant form of cancer in adults worldwide, "
+                        "with an alarming rate of over 2.3 million new cases each year, as reported by the "
+                        "World Health Organization (WHO) 2022.",
+                        [50, 200, 550, 260],
+                    ),
+                    _block(
+                        "p1_b2",
+                        "Breast cancer survival rates vary significantly across the globe, with a majority "
+                        "of deaths occurring in lowand middle-income countries. Early detection is crucial "
+                        "as it leads to a clinical cure rate of over 90%.",
+                        [50, 270, 550, 330],
+                    ),
+                ],
+            )
+        ]
+    )
+    structure = process_document_structure(raw)
+    sem = structure.semantic
+    assert sem is not None
+    assert len(sem.back.references) == 0
+    assert all(block.classification != "REFERENCE_TEXT" for block in structure.blocks)
+
+
+def test_breast_cancer_references_section_parsed_correctly() -> None:
+    who_ref = (
+        "[1] World Health Organization. Breast Cancer: Prevention and Control. "
+        "Accessed: Mar. 16, 2024. [Online]. Available: "
+        "https://www.who.int/news-room/fact-sheets/detail/breast-cancer"
+    )
+    journal_ref = (
+        "[2] H. Sung, J. Ferlay, R. L. Siegel, M. Laversanne, I. Soerjomataram, A. Jemal, and F. Bray, "
+        "\u201cGlobal cancer statistics 2020: GLOBOCAN estimates of incidence and mortality worldwide "
+        "for 36 cancers in 185 countries,\u201d CA: Cancer J. Clinicians, vol. 71, no. 3, pp. 209\u2013249, "
+        "May 2021."
+    )
+    raw = _raw(
+        [
+            _page(
+                8,
+                [
+                    _block("p8_b1", "REFERENCES", [50, 100, 150, 115], bold=True),
+                    _block("p8_b2", who_ref, [50, 130, 550, 170]),
+                    _block("p8_b3", journal_ref, [50, 180, 550, 240]),
+                ],
+            )
+        ]
+    )
+    structure = process_document_structure(raw)
+    sem = structure.semantic
+    assert sem is not None
+    assert len(sem.back.references) == 2
+    assert sem.back.references[0].label == "[1]"
+    assert "World Health Organization" in sem.back.references[0].text
+    assert sem.back.references[1].label == "[2]"
+    assert "Global cancer statistics 2020" in sem.back.references[1].text
+
+
 def test_reference_block_splits_into_multiple_entries() -> None:
     raw = _raw(
         [

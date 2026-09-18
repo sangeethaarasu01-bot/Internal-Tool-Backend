@@ -372,6 +372,46 @@ def extract_ieee_et_al_header_prefix(text: str) -> str | None:
     return match.group("prefix").upper() if match else None
 
 
+_REFERENCE_AUTHOR_INITIALS_RE = re.compile(r"^(?:\[?\d+\]?\s*)?[A-Z]\.\s+[A-Za-z'\-]+")
+
+
+def looks_like_reference_entry(text: str) -> bool:
+    """Return True when text resembles a bibliography item rather than body prose."""
+    normalized = normalize_text(text)
+    if not normalized:
+        return False
+
+    if is_roman_section_heading(text) or ROMAN_SECTION_RE.match(first_line(text)):
+        return False
+
+    if REFERENCE_LABEL_RE.match(normalized):
+        return True
+
+    if re.search(
+        r"(?:Accessed:\s*|(?:\[Online\]|Available:)\s*https?://)",
+        normalized,
+        re.IGNORECASE,
+    ):
+        return True
+
+    if _REFERENCE_AUTHOR_INITIALS_RE.match(normalized):
+        if re.search(r"\bvol\.\s*\d+", normalized, re.IGNORECASE):
+            return True
+        if re.search(r"\bpp\.\s*\d+", normalized, re.IGNORECASE):
+            return True
+        if re.search(r"doi:\s*10\.", normalized, re.IGNORECASE):
+            return True
+
+    if re.match(
+        r"^[A-Z][A-Za-z]+(?:\s+[A-Za-z]+)*(?:\s+(?:Organization|Institute|Association|Foundation))?\.",
+        normalized,
+    ):
+        if re.search(r"Accessed:|Available:|https?://", normalized, re.IGNORECASE):
+            return True
+
+    return False
+
+
 def split_reference_entries(text: str) -> list[tuple[str | None, str]]:
     """Split a block containing multiple ``[n]`` bibliography items."""
     normalized = normalize_text(text)

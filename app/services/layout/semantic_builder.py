@@ -674,8 +674,6 @@ def build_semantic_document(
             container.paragraphs.append(element)
             container.content.append(element)
             container.content_source_block_ids.extend(element.source_block_ids)
-        elif back.reference_list is not None:
-            back.references.append(element)
         else:
             body.loose_paragraphs.append(element)
         mapped_ids.update(element.source_block_ids)

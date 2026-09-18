@@ -11,7 +11,6 @@ from app.services.layout.semantic_patterns import (
     ABSTRACT_RE,
     ACKNOWLEDGMENT_RE,
     AFFILIATION_RE,
-    CITATION_RE,
     CORRESPONDING_RE,
     DATE_HISTORY_RE,
     FIGURE_CAPTION_RE,
@@ -33,6 +32,7 @@ from app.services.layout.semantic_patterns import (
     is_roman_section_heading,
     is_title_candidate,
     is_valid_figure_block,
+    looks_like_reference_entry,
     normalize_text,
 )
 
@@ -45,6 +45,21 @@ AUTHOR_BIO_RE = re.compile(
 
 def _is_author_bio(text: str) -> bool:
     return bool(AUTHOR_BIO_RE.search(text))
+
+
+def _should_treat_as_reference(
+    block: ProcessedBlock,
+    text: str,
+    *,
+    in_references: bool,
+) -> bool:
+    if in_references:
+        return True
+    if block.classification != "REFERENCE_TEXT":
+        return False
+    if _is_author_bio(text):
+        return False
+    return looks_like_reference_entry(text)
 
 
 def classify_semantic_type(
@@ -90,11 +105,8 @@ def classify_semantic_type(
     if _is_author_bio(text):
         return "PARAGRAPH", 0.76, "author_bio"
 
-    if in_references:
-        return "REFERENCE", 0.86, None
-
-    if block.classification == "REFERENCE_TEXT" and CITATION_RE.search(text):
-        return "REFERENCE", 0.84, None
+    if _should_treat_as_reference(block, text, in_references=in_references):
+        return "REFERENCE", 0.86 if in_references else 0.84, None
 
     if ABSTRACT_RE.match(text):
         return "ABSTRACT", 0.95, None
@@ -146,9 +158,6 @@ def classify_semantic_type(
         text, block, in_body=in_body
     ):
         return "LIST_ITEM", 0.84, None
-
-    if block.classification == "REFERENCE_TEXT" and not _is_author_bio(text):
-        return "REFERENCE", 0.84, None
 
     if (
         in_body

@@ -16,6 +16,7 @@ from app.services.layout.semantic_patterns import (
     build_author_running_header_prefixes as derive_author_running_header_prefixes,
     extract_ieee_et_al_header_prefix,
     extract_leading_roman_section_heading,
+    looks_like_reference_entry,
     matches_author_running_header_prefix,
     parse_author_names,
 )
@@ -240,7 +241,7 @@ def classify_content_block(
             confidence=0.9,
         )
 
-    if in_references or CITATION_PATTERN.search(text):
+    if in_references or looks_like_reference_entry(text):
         return FilterDecision("REFERENCE_TEXT", False, None, 0.85)
 
     running = is_running_header_block(

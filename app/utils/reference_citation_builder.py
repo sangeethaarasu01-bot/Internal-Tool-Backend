@@ -14,7 +14,7 @@ _ACCESS_DATE_RE = re.compile(
     r"Accessed:\s*(?P<month>[A-Za-z]+\.?)\s*(?P<day>\d{1,2}),\s*(?P<year>\d{4})",
     re.IGNORECASE,
 )
-_QUOTED_TITLE_RE = re.compile(r"[“\"](.+?)[”\"]", re.DOTALL)
+_QUOTED_TITLE_RE = re.compile(r"[“\"‘'](.+?)[”\"’']", re.DOTALL)
 _VOLUME_RE = re.compile(r"\bvol\.\s*(\d+)", re.IGNORECASE)
 _ISSUE_RE = re.compile(r"\bno\.\s*(\d+)", re.IGNORECASE)
 _PAGES_RE = re.compile(r"\bpp\.\s*(\d+)\s*[–\-]\s*(\d+)", re.IGNORECASE)
