@@ -7,7 +7,7 @@ from typing import Any
 
 from lxml import etree
 
-from app.utils.xml_text import set_lxml_text
+from app.utils.xml_text import format_ieee_person_name_field, set_lxml_text
 
 _ACCESS_DATE_RE = re.compile(
     r"Accessed:\s*(?P<month>[A-Za-z]+\.?)\s*(?P<day>\d{1,2}),\s*(?P<year>\d{4})",
@@ -152,10 +152,18 @@ def _append_person_group(citation: etree._Element, authors: list[tuple[str, str]
         name = etree.SubElement(group, "string-name")
         if given:
             given_el = etree.SubElement(name, "given-names")
-            set_lxml_text(given_el, given, log_context=_ctx(ctx, "given-names"))
+            set_lxml_text(
+                given_el,
+                format_ieee_person_name_field(given),
+                log_context=_ctx(ctx, "given-names"),
+            )
             _set_tail(given_el, " ")
         surname_el = etree.SubElement(name, "surname")
-        set_lxml_text(surname_el, surname, log_context=_ctx(ctx, "surname"))
+        set_lxml_text(
+            surname_el,
+            format_ieee_person_name_field(surname),
+            log_context=_ctx(ctx, "surname"),
+        )
         if index < len(authors) - 1:
             _set_tail(name, ", ")
         elif len(authors) > 1:

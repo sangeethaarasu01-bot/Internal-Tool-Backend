@@ -141,6 +141,12 @@ def normalize_person_name_text(value: str | None) -> str:
     return " ".join(cleaned.split())
 
 
+def format_ieee_person_name_field(value: str | None) -> str:
+    """Format IEEE-style padded person-name text: `` H. `` inside the element."""
+    normalized = normalize_person_name_text(value)
+    return f" {normalized} " if normalized else ""
+
+
 def set_lxml_attr(
     element: etree._Element,
     name: str,

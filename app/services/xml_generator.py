@@ -759,8 +759,11 @@ def _apply_front_matter(article: etree._Element, front: dict[str, Any]) -> None:
 
 
 def _normalize_person_name_elements(article: etree._Element) -> None:
-    """Strip surrounding whitespace from author name fields preserved from the template."""
-    for element in article.iter():
+    """Strip surrounding whitespace from front-matter author name fields in the template."""
+    front = article.find("front")
+    if front is None:
+        return
+    for element in front.iter():
         if element.tag not in _PERSON_NAME_TAGS:
             continue
         if element.text is None:

@@ -81,11 +81,12 @@ def test_periodical_reference_preserves_spaced_initials() -> None:
     group = citation.find("person-group")
     assert group is not None
     sung = group.findall("string-name")[0]
-    assert sung.findtext("given-names") == "H."
+    assert sung.find("given-names").text == " H. "
+    assert sung.find("surname").text == " Sung "
     siegel = next(
-        name for name in group.findall("string-name") if name.findtext("surname") == "Siegel"
+        name for name in group.findall("string-name") if name.find("surname").text == " Siegel "
     )
-    assert siegel.findtext("given-names") == "R. L."
+    assert siegel.find("given-names").text == " R. L. "
 
 
 def test_periodical_reference_uses_person_group_and_article_title() -> None:
@@ -95,7 +96,7 @@ def test_periodical_reference_uses_person_group_and_article_title() -> None:
     assert group is not None
     names = group.findall("string-name")
     assert len(names) >= 2
-    assert names[0].findtext("surname") == "Sung"
+    assert names[0].find("surname").text == " Sung "
     assert "Global cancer statistics 2020" in (citation.findtext("article-title") or "")
     assert citation.findtext("volume") == "71"
     assert citation.findtext("issue") == "3"

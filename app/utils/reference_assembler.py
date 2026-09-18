@@ -9,7 +9,6 @@ from dataclasses import dataclass
 from app.models.document_structure import ProcessedBlock
 from app.models.ir_schema import IRNode
 from app.services.ir_builder import build_ir_node
-from app.services.layout.list_detection import union_bbox
 from app.services.layout.semantic_patterns import (
     REFERENCE_HEADING_RE,
     first_line,
@@ -199,6 +198,17 @@ def validate_reference_sequence(references: list[AssembledReference]) -> None:
             )
 
 
+def _union_bbox(blocks: list[ProcessedBlock]) -> list[float] | None:
+    if not blocks:
+        return None
+    return [
+        min(block.bbox[0] for block in blocks),
+        min(block.bbox[1] for block in blocks),
+        max(block.bbox[2] for block in blocks),
+        max(block.bbox[3] for block in blocks),
+    ]
+
+
 def _source_ids(blocks: list[ProcessedBlock]) -> list[str]:
     ids: list[str] = []
     seen: set[str] = set()
@@ -385,7 +395,7 @@ def _finalize_reference(
         raw_text=raw_text,
         source_block_ids=_source_ids(blocks),
         page_numbers=sorted({block.page_number for block in blocks}),
-        bbox=union_bbox(blocks),
+        bbox=_union_bbox(blocks),
         confidence=confidence,
     )
 
