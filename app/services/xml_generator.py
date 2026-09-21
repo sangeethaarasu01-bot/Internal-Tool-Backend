@@ -824,7 +824,8 @@ def generate_jats_xml(
         body = SemanticMappingBody.model_validate(mapping.get("mapping", mapping))
 
     try:
-        tree = etree.parse(str(path))
+        parser = etree.XMLParser(remove_blank_text=True)
+        tree = etree.parse(str(path), parser)
     except etree.XMLSyntaxError as exc:
         raise XmlGenerationError(f"Invalid template XML: {exc}") from exc
 

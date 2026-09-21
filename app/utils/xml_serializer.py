@@ -80,30 +80,46 @@ def _normalize_nsmap(nsmap: dict[str | None, str] | None) -> dict[str | None, st
     return normalized
 
 
+def _format_hex_char_entity(code: int) -> str:
+    """IEEE-style uppercase hex character reference (minimum 4 digits for BMP)."""
+    if code <= 0xFFFF:
+        return f"&#x{code:04X};"
+    return f"&#x{code:X};"
+
+
+def _escape_xml_char(char: str) -> str:
+    """Escape a single character for final IEEE JATS XML serialization."""
+    if char == "&":
+        return "&amp;"
+    if char == "<":
+        return "&lt;"
+    if char == ">":
+        return "&gt;"
+    if char == '"':
+        return HEX_QUOTE_DOUBLE
+    if char == "'":
+        return HEX_QUOTE_SINGLE
+    code = ord(char)
+    if code > 0x7F:
+        return _format_hex_char_entity(code)
+    return char
+
+
+def _is_insignificant_whitespace(value: str | None) -> bool:
+    """True when text/tail is empty or only formatting whitespace between elements."""
+    return not value or not value.strip()
+
+
 def escape_for_xml_serialization(value: str | None) -> str:
     """Escape text/attribute content at XML write time only.
 
     Produces literal entity references in the serialized output:
-    ``&#x27;`` and ``&#x22;`` — never ``&amp;#x27;``.
+    ``&#x27;``, ``&#x22;``, and ``&#x00E1;``-style hex entities for non-ASCII text.
     """
     if not value:
         return ""
     normalized = normalize_typographic_quotes(value)
-    parts: list[str] = []
-    for char in normalized:
-        if char == "&":
-            parts.append("&amp;")
-        elif char == "<":
-            parts.append("&lt;")
-        elif char == ">":
-            parts.append("&gt;")
-        elif char == '"':
-            parts.append(HEX_QUOTE_DOUBLE)
-        elif char == "'":
-            parts.append(HEX_QUOTE_SINGLE)
-        else:
-            parts.append(char)
-    return "".join(parts)
+    return "".join(_escape_xml_char(char) for char in normalized)
 
 
 def _node_kind(node: etree._Element) -> NodeKind:
@@ -252,9 +268,14 @@ def _append_node_tail(
     node: etree._Element,
     lines: list[str],
     indent: str,
+    *,
+    pretty_print: bool,
 ) -> None:
-    if node.tail:
-        lines.append(f"{indent}{escape_for_xml_serialization(node.tail)}")
+    if not node.tail:
+        return
+    if pretty_print and _is_insignificant_whitespace(node.tail):
+        return
+    lines.append(f"{indent}{escape_for_xml_serialization(node.tail)}")
 
 
 def _serialize_tree_node(
@@ -300,7 +321,7 @@ def _serialize_inline_children(elem: etree._Element, parts: list[str], ctx: _NsC
             parts.append(_serialize_processing_instruction(child, ""))
         else:
             raise _unsupported_node_error(child, elem)
-        if child.tail:
+        if child.tail and not _is_insignificant_whitespace(child.tail):
             parts.append(escape_for_xml_serialization(child.tail))
 
 
@@ -359,11 +380,11 @@ def _serialize_element(
         return
 
     lines.append(f"{indent}<{tag}{attrs}>")
-    if elem.text:
+    if elem.text and not (pretty_print and _is_insignificant_whitespace(elem.text)):
         lines.append(f"{child_indent}{escape_for_xml_serialization(elem.text)}")
     for child in children:
         _serialize_tree_node(child, lines, depth + 1, pretty_print, ctx, parent=elem)
-        _append_node_tail(child, lines, child_indent)
+        _append_node_tail(child, lines, child_indent, pretty_print=pretty_print)
     lines.append(f"{indent}</{tag}>")
 
 
@@ -389,9 +410,15 @@ def serialize_lxml_tree(
     return "\n".join(lines)
 
 
+def parse_xml_for_serialization(xml: str) -> etree._Element:
+    """Parse XML and drop template formatting whitespace between elements."""
+    parser = etree.XMLParser(remove_blank_text=True)
+    return etree.fromstring(xml.encode("utf-8"), parser)
+
+
 def serialize_xml_text_nodes_with_hex_quotes(xml: str) -> str:
     """Serialize already-formed XML by re-parsing and re-emitting with hex quote entities."""
-    root = etree.fromstring(xml.encode("utf-8"))
+    root = parse_xml_for_serialization(xml)
     return serialize_lxml_tree(root, xml_declaration=False, pretty_print=True)
 
 

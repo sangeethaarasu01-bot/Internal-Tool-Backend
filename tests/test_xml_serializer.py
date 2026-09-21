@@ -239,6 +239,37 @@ def test_xlink_graphic_declares_namespace_and_parses(tmp_path: Path) -> None:
     assert reparsed.find("graphic").get("{http://www.w3.org/1999/xlink}href") == "figure1.png"
 
 
+def test_serialize_does_not_emit_whitespace_only_lines() -> None:
+    """Template formatting whitespace must not become blank lines in output."""
+    xml = b"""<article>
+  <front>
+
+    <journal-meta>
+
+      <journal-title>Test</journal-title>
+
+    </journal-meta>
+
+  </front>
+</article>"""
+    root = etree.fromstring(xml, etree.XMLParser(remove_blank_text=True))
+    serialized = serialize_lxml_tree(root, xml_declaration=False, pretty_print=True)
+    for line in serialized.splitlines():
+        assert line.strip(), f"whitespace-only line in output: {line!r}"
+    assert "<front>" in serialized
+    assert "  <journal-meta>" in serialized
+
+
+def test_escape_non_ascii_characters_as_hex_entities() -> None:
+    assert escape_for_xml_serialization("café") == "caf&#x00E9;"
+    assert escape_for_xml_serialization("José García") == "Jos&#x00E9; Garc&#x00ED;a"
+    assert escape_for_xml_serialization("μ") == "&#x03BC;"
+    assert (
+        escape_for_xml_serialization("Universit\u00e1 di Verona")
+        == "Universit&#x00E1; di Verona"
+    )
+
+
 def test_escape_ampersand_only() -> None:
     """Test D."""
     assert escape_for_xml_serialization("A & B") == "A &amp; B"

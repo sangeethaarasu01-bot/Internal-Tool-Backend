@@ -22,6 +22,7 @@ def test_sanitize_xml_text_removes_control_characters() -> None:
 
 
 def test_sanitize_xml_text_preserves_unicode_and_emoji() -> None:
+    """Sanitization keeps Unicode; final serialization encodes non-ASCII as entities."""
     assert sanitize_xml_text("μ alpha β") == "μ alpha β"
     assert sanitize_xml_text("hello 👋") == "hello 👋"
 

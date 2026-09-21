@@ -412,7 +412,7 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
             mapping_body = ir_to_semantic_mapping(filtered_ir)
             mapping_source = "ir_adapter_fallback"
             warnings.append(
-                "LLM mapping failed (Gemini timeout or API error). "
+                "LLM mapping failed (Claude timeout or API error). "
                 "XML was generated using deterministic extraction instead."
             )
     else:
@@ -482,8 +482,9 @@ async def download_extraction_xml(extraction_id: str):
     )
     from fastapi.responses import Response
 
+    xml_bytes = xml_content.lstrip("\ufeff").encode("utf-8")
     return Response(
-        content=xml_content,
-        media_type="application/xml",
+        content=xml_bytes,
+        media_type="application/xml; charset=utf-8",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
