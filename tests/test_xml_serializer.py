@@ -270,6 +270,14 @@ def test_escape_non_ascii_characters_as_hex_entities() -> None:
     )
 
 
+def test_pdf_ligatures_expand_to_ascii_not_hex_entities() -> None:
+    assert escape_for_xml_serialization("dif\ufb01culty") == "difficulty"
+    assert escape_for_xml_serialization("speci\ufb01c") == "specific"
+    assert escape_for_xml_serialization("de\ufb01ning") == "defining"
+    assert escape_for_xml_serialization("af\ufb00licting") == "afflicting"
+    assert "&#xFB" not in escape_for_xml_serialization("dif\ufb01culty and speci\ufb01c")
+
+
 def test_escape_ampersand_only() -> None:
     """Test D."""
     assert escape_for_xml_serialization("A & B") == "A &amp; B"

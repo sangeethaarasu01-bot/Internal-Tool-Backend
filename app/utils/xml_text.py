@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
+import unicodedata
 from typing import Any
 
 from lxml import etree
@@ -90,9 +91,46 @@ def _log_removed_chars(original: str, cleaned: str, log_context: dict[str, Any] 
     )
 
 
+# PDF/PostScript compatibility ligatures — expand to ASCII, never emit as &#xFB01; entities.
+_LIGATURE_MAP = str.maketrans(
+    {
+        "\ufb00": "ff",
+        "\ufb01": "fi",
+        "\ufb02": "fl",
+        "\ufb03": "ffi",
+        "\ufb04": "ffl",
+        "\ufb05": "ft",
+        "\ufb06": "st",
+    }
+)
+
+
 def normalize_typographic_quotes(value: str) -> str:
     """Map PDF smart quotes to ASCII straight quotes (serialization boundary helper)."""
     return value.translate(_TYPOGRAPHIC_QUOTE_MAP)
+
+
+def normalize_typographic_ligatures(value: str) -> str:
+    """Expand PDF ligatures (fi, fl, ff, …) to plain ASCII letters."""
+    return value.translate(_LIGATURE_MAP)
+
+
+def normalize_for_xml_serialization(value: str) -> str:
+    """Normalize PDF typography before IEEE hex-entity serialization."""
+    cleaned = normalize_typographic_quotes(value)
+    cleaned = normalize_typographic_ligatures(cleaned)
+    cleaned = cleaned.replace("\u00a0", " ")
+    cleaned = cleaned.replace("\u00ad", "")
+    return cleaned
+
+
+def should_encode_as_hex_entity(char: str) -> bool:
+    """True for accented/Greek letters; false for ASCII and PDF compatibility glyphs."""
+    code = ord(char)
+    if code <= 0x7F:
+        return False
+    category = unicodedata.category(char)
+    return category.startswith("L")
 
 
 def sanitize_xml_text(value: str | None, *, log_context: dict[str, Any] | None = None) -> str:

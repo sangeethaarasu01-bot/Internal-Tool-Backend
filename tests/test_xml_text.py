@@ -8,10 +8,13 @@ from app.utils.xml_text import (
     escape_xml_attribute,
     escape_xml_text,
     find_invalid_xml_char_codes,
+    normalize_for_xml_serialization,
     normalize_person_name_text,
+    normalize_typographic_ligatures,
     normalize_typographic_quotes,
     sanitize_xml_text,
     set_lxml_text,
+    should_encode_as_hex_entity,
 )
 
 
@@ -43,6 +46,21 @@ def test_escape_xml_text_strips_and_escapes_core_entities_only() -> None:
 
 def test_normalize_typographic_quotes() -> None:
     assert normalize_typographic_quotes("it\u2019s a \u201ctest\u201d") == 'it\'s a "test"'
+
+
+def test_normalize_typographic_ligatures() -> None:
+    assert normalize_typographic_ligatures("dif\ufb01culty") == "difficulty"
+    assert normalize_typographic_ligatures("af\ufb00licting") == "afflicting"
+
+
+def test_should_encode_as_hex_entity_only_for_letters() -> None:
+    assert should_encode_as_hex_entity("é") is True
+    assert should_encode_as_hex_entity("f") is False
+    assert should_encode_as_hex_entity("\ufb01") is False
+
+
+def test_normalize_for_xml_serialization_expands_ligatures() -> None:
+    assert normalize_for_xml_serialization("speci\ufb01c") == "specific"
 
 
 def test_escape_xml_attribute_escapes_double_quotes_for_intermediate_output() -> None:

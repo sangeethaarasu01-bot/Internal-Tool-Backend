@@ -7,7 +7,7 @@ from typing import Literal
 
 from lxml import etree
 
-from app.utils.xml_text import normalize_typographic_quotes
+from app.utils.xml_text import normalize_for_xml_serialization, should_encode_as_hex_entity
 
 logger = logging.getLogger(__name__)
 
@@ -99,9 +99,8 @@ def _escape_xml_char(char: str) -> str:
         return HEX_QUOTE_DOUBLE
     if char == "'":
         return HEX_QUOTE_SINGLE
-    code = ord(char)
-    if code > 0x7F:
-        return _format_hex_char_entity(code)
+    if should_encode_as_hex_entity(char):
+        return _format_hex_char_entity(ord(char))
     return char
 
 
@@ -114,11 +113,11 @@ def escape_for_xml_serialization(value: str | None) -> str:
     """Escape text/attribute content at XML write time only.
 
     Produces literal entity references in the serialized output:
-    ``&#x27;``, ``&#x22;``, and ``&#x00E1;``-style hex entities for non-ASCII text.
+    ``&#x27;``, ``&#x22;``, and ``&#x00E1;``-style hex entities for accented letters.
     """
     if not value:
         return ""
-    normalized = normalize_typographic_quotes(value)
+    normalized = normalize_for_xml_serialization(value)
     return "".join(_escape_xml_char(char) for char in normalized)
 
 
