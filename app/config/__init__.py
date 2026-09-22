@@ -18,7 +18,11 @@ class Settings(BaseSettings):
     MAX_RETRIES: int = 3
     DATA_DIR: Path = Path("./data")
     DB_URL: str = "sqlite:///./jobs.db"
-    CORS_ORIGINS: list[str] = ["http://localhost:5173", "http://localhost:3000"]
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://internal-tool-sepia.vercel.app",
+    ]
     SCHEMA_CACHE_TTL_DAYS: int = 30
     MAX_PDF_PAGES: int = 100
     LOG_LEVEL: str = "INFO"
