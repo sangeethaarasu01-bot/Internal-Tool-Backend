@@ -1,0 +1,2311 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE article PUBLIC "-//IEEE//IEEE Periodicals JATS-based DTD v2.0//EN" "C:\IEEE\dtd\periodicals-2-0-DTD\periodicals.dtd">
+<article xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" article-type="research" content-type="orig-research" dtd-version="2.0" lifecycle="final" open-access="no" peer-reviewed="yes" xml:lang="eng">
+<!--Article Processing Date: 12/03/2025-->
+<!--Vendor Name: DCL-->
+<!--IEEE XML JATS Tagging Guidelines version: v20241024-->
+<!--IEEE Math Coding Requirements and Guidelines for Vendors version: v2.4-->
+<!--new_sw_ran-->
+<front>
+<journal-meta>
+<journal-id journal-id-type="ieee">0055400</journal-id>
+<journal-id journal-id-type="acronym">JSEN</journal-id>
+<journal-id journal-id-type="coden">ISJEAZ</journal-id>
+<journal-title-group>
+<journal-title>IEEE Sensors Journal</journal-title>
+</journal-title-group>
+<issn publication-format="print">1530-437X</issn>
+<issn publication-format="online">1558-1748</issn>
+<publisher>
+<publisher-name>IEEE</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1109/JSEN.2025.3639180</article-id>
+<article-id pub-id-type="manuscript">SENSORS-97233-2025</article-id>
+<xplore-article-id/>
+<xplore-issue/>
+<xplore-pub-id/>
+<article-categories>
+<assembly-group sequence="0"/>
+</article-categories>
+<title-group>
+<article-title>A Customized Electronic Tongue by Developing an Array of Molecular Imprinted Polymer-Based Voltammetric Electrodes for Tea Quality Evaluation</article-title>
+</title-group>
+<contrib-group>
+<author-comment>
+<p>
+The associate editor coordinating the review of this article and approving it for publication was Prof. Li-Chia J. Tai. <italic>(Corresponding author: Runu Banerjee Roy.)</italic>
+</p>
+</author-comment>
+<contrib id="contrib1" primary="yes" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4775-8383</contrib-id>
+<name-alternatives>
+<string-name specific-use="display">Madhurima Moulick<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+<string-name specific-use="index">
+<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+</name-alternatives>
+<email>madhurimamoulick92@gmail.com</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib><contrib id="contrib2" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4775-8383</contrib-id>
+<name-alternatives>
+<string-name specific-use="display">Sagar Chowdhury<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+<string-name specific-use="index">
+<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+</name-alternatives>
+<email>madhurimamoulick92@gmail.com</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib><contrib id="contrib3" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4775-8383</contrib-id>
+<name-alternatives>
+<string-name specific-use="display">Mainak Das<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+<string-name specific-use="index">
+<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+</name-alternatives>
+<email>madhurimamoulick92@gmail.com</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib><contrib id="contrib4" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4775-8383</contrib-id>
+<name-alternatives>
+<string-name specific-use="display">Sangram Saha<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+<string-name specific-use="index">
+<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+</name-alternatives>
+<email>madhurimamoulick92@gmail.com</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib><contrib id="contrib5" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4775-8383</contrib-id>
+<name-alternatives>
+<string-name specific-use="display">Shreya Nag<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+<string-name specific-use="index">
+<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+</name-alternatives>
+<email>madhurimamoulick92@gmail.com</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib><contrib id="contrib6" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4775-8383</contrib-id>
+<name-alternatives>
+<string-name specific-use="display">Jeet Naskar<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+<string-name specific-use="index">
+<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+</name-alternatives>
+<email>madhurimamoulick92@gmail.com</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib><contrib id="contrib7" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4775-8383</contrib-id>
+<name-alternatives>
+<string-name specific-use="display">Angiras Modak<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+<string-name specific-use="index">
+<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+</name-alternatives>
+<email>madhurimamoulick92@gmail.com</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib><contrib id="contrib8" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4775-8383</contrib-id>
+<name-alternatives>
+<string-name specific-use="display">Runu Banerjee<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+<string-name specific-use="index">
+<given-names>
+Madhurima
+</given-names>
+<surname>
+Moulick
+</surname>
+</string-name>
+</name-alternatives>
+<email>madhurimamoulick92@gmail.com</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib></contrib-group>
+<aff id="aff1">
+<institution-wrap>
+<institution content-type="department">Department of Instrumentation and Electronics Engineering</institution>
+<institution content-type="institution">Jadavpur University</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">30167</institution-id>
+</institution-wrap>
+<city>Kolkata</city>
+<post-code>700106</post-code>
+<country>India</country>
+</aff>
+<aff id="aff2">
+<institution-wrap>
+<institution content-type="department">Department of Electronics and Communication Engineering</institution>
+<institution content-type="division">Institute of Engineering and Management</institution>
+<institution content-type="institution">University of Engineering and Management</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">121690</institution-id>
+</institution-wrap>
+<city>Kolkata</city>
+<post-code>700160</post-code>
+<country>India</country>
+</aff>
+<pub-date date-type="cover" iso-8601-date="2024" pub-type="print" publication-format="pdf">
+<year>2024</year>
+</pub-date>
+<volume/>
+<issue/>
+<issue-part>0</issue-part>
+<fpage>0</fpage>
+<lpage>6</lpage>
+<history>
+<date date-type="receiveddate" iso-8601-date="2025-09-25">
+<day>25</day>
+<month>09</month>
+<year>2025</year>
+</date>
+<date date-type="reviseddate1" iso-8601-date="2025-11-19">
+<day>19</day>
+<month>11</month>
+<year>2025</year>
+</date>
+<date date-type="accepteddate" iso-8601-date="2025-11-24">
+<day>24</day>
+<month>11</month>
+<year>2025</year>
+</date>
+</history>
+<self-uri content-type="xml">jsen-banerjeeroy-3639180.xml</self-uri>
+<self-uri content-type="print">jsen-banerjeeroy-3639180.pdf</self-uri>
+<self-uri content-type="online">jsen-banerjeeroy-3639180-x.pdf</self-uri>
+<abstract>&amp;#x2014;In this facile approach, a well-developed voltam- metric electronic tongue (e-tongue) consisting of an array of molecular-imprinted polymer (MIP) electrodes has been designed for the detection of theophylline (TH), tannic acid (TAN), and total theaflavins (TFs) in real samples of black tea. These compounds are responsible for having a high impact on the taste of tea in terms of astringency, thus contributing to the taste of tea infusion. The developed e-tongue has been found to detect the signatures of these analytes from different tea samples under the same conditions. Thus, this e-tongue, in conjunction with a switching circuit, has been able to extract current responses from the working electrodes (WEs), giving an overall signature of the tea quality. The differential pulse voltammograms (DPVs) responses were obtained to assess the performance on introducing MIP electrodes into the black tea samples. The obtained dataset was subject to the gradient boosting method. The prediction model was designed based on the responses of the e-tongue and yielded a mean-squared error (mse) of 0.00003 and a coefficient of determination (R2) of 0.967 for the fused data responses. From the explained variance score and R2 value, it is clear that the overall quality of tea has been predicted better for the sensor array when considering the individual dataset from each sensor. On application of t-distributed stochastic neighbor embedding (t-SNE) on the fused dataset, successful discrimination among the different black tea samples was obtained. The results point toward the possibility of an e-tongue based on an array of MIP electrodes to detect the quality of black tea liquor.<p>&amp;#x2014;In this facile approach, a well-developed voltam- metric electronic tongue (e-tongue) consisting of an array of molecular-imprinted polymer (MIP) electrodes has been designed for the detection of theophylline (TH), tannic acid (TAN), and total theaflavins (TFs) in real samples of black tea. These compounds are responsible for having a high impact on the taste of tea in terms of astringency, thus contributing to the taste of tea infusion. The developed e-tongue has been found to detect the signatures of these analytes from different tea samples under the same conditions. Thus, this e-tongue, in conjunction with a switching circuit, has been able to extract current responses from the working electrodes (WEs), giving an overall signature of the tea quality. The differential pulse voltammograms (DPVs) responses were obtained to assess the performance on introducing MIP electrodes into the black tea samples. The obtained dataset was subject to the gradient boosting method. The prediction model was designed based on the responses of the e-tongue and yielded a mean-squared error (mse) of 0.00003 and a coefficient of determination (R2) of 0.967 for the fused data responses. From the explained variance score and R2 value, it is clear that the overall quality of tea has been predicted better for the sensor array when considering the individual dataset from each sensor. On application of t-distributed stochastic neighbor embedding (t-SNE) on the fused dataset, successful discrimination among the different black tea samples was obtained. The results point toward the possibility of an e-tongue based on an array of MIP electrodes to detect the quality of black tea liquor.<italic>R</italic><sup>2</sup>) of 0.967 for the fused data responses. From the explained variance score and <italic>R</italic><sup>2</sup> value, it is clear that the overall quality of tea has been predicted better for the sensor array when considering the individual dataset from each sensor. On application of t-distributed stochastic neighbor embedding (t-SNE) on the fused dataset, successful discrimination among the different black tea samples was obtained. The results point toward the possibility of an e-tongue based on an array of MIP electrodes to detect the quality of black tea liquor.
+</p>
+</abstract>
+<kwd-group kwd-group-type="AuthorFree">
+<kwd>Electronic tongue (e-tongue)</kwd>
+<kwd>t-Distributed stochastic neighbor embedding (t-SNE)</kwd>
+<kwd>total theaflavins (TFs)</kwd>
+<kwd>voltammograms</kwd>
+</kwd-group>
+<counts>
+<fig-count count="8"/>
+<table-count count="3"/>
+<equation-count count="30"/>
+<ref-count count="24"/>
+<page-count count="7"/>
+</counts>
+</article-meta>
+</front>
+<body>
+<sec id="sec1"><label>I.</label><title>Introduction</title>
+<p>Researchers have been seeking alternative instrumental means for a long time to detect the quality of tea in a nonsubjective way, replacing the dependency on organoleptic sensing. Evaluation of black tea is a complex procedure and is, performed by experienced tea tasters, who grade the tea on a scale of 1&amp;#x2013;10 separately for taste, aroma, and flavor of the tea sample <xref ref-type="bibr" rid="ref1">[1]</xref>.</p>
+<p>Human tea tasting is completely subjective and suffers from inconsistency. Black tea contains innumerable analytes and their multidimensional contribution makes the quality assessment of tea extremely difficult. Tea mainly consists of two different types of compounds&amp;#x2014;polyphenols and methylxanthines. The presence of the TAN (polyphenol) determines tea astringency and theophylline (TH) (a methylxanthine derivative) is responsible for its bitterness. However, the interaction of TH with flavonols and polyphenols influences the perception of bitterness and astringency in a tea infusion. The total theaflavins (TFs) in black tea can be attributed to the flavor of tea.</p>
+<p>TF, TAN, and TH belong to the group of flavonoids, polyphenols, and methylxanthines, respectively, and each of these groups and their derivatives is known to influence the taste and astringency of tea significantly. These compounds have been marked to control gastric diseases, cardiovascular issues, and premenstrual problems <xref ref-type="bibr" rid="ref2">[2]</xref>, <xref ref-type="bibr" rid="ref3">[3]</xref>, <xref ref-type="bibr" rid="ref4">[4]</xref>, <xref ref-type="bibr" rid="ref5">[5]</xref>, hence, inferred as important biomarkers for the quality profiling of tea. Traditionally, very conventional techniques such as high-performance liquid chromatography (HPLC) <xref ref-type="bibr" rid="ref5">[5]</xref>, and spectrophotometry <xref ref-type="bibr" rid="ref6">[6]</xref> had been deployed for the detection of important biomarkers of tea; however, the reduced cost-effectiveness, nonportable nature of the device, requirement of highly skilled labor necessitated the development of instruments like electronic tongue (e-tongue) that can give quick, reliable, and repeatable results. The quality of tea depends on a wide range of compounds and their intricately woven multidimensional influence on the taste of the tea infusion gave a clear insight toward the development of the e-tongue. An e-tongue was reported as developed at Jadavpur University <xref ref-type="bibr" rid="ref7">[7]</xref>, consisting of an array of nonspecific noble metals that provided a collective estimation of the taste index. Significant research has been reported in <xref ref-type="bibr" rid="ref8">[8]</xref>, where discrimination of tea by means of a voltammetric e-tongue using different applied waveforms was established. An amperometric e-tongue has been reported to be used to quantify tea astringency <xref ref-type="bibr" rid="ref9">[9]</xref>. An interesting work reported the use of a potentiometric e-tongue for determining the taste of Korean green tea <xref ref-type="bibr" rid="ref10">[10]</xref>. The aforementioned methods reported in the above literature, produce good qualitative discriminations among different tea grades; however, the sensors used in the e-tongues were not selective in their approach, hence the quantitative discrimination was not ensured. In this work, a customized e-tongue consisting of an array of selective electrodes has been attempted to design with a switching circuit using the principles of cyclic and differential voltammetry. Voltammetry has been the choice as the electrochemical sensing technology due to its high sensitivity and robustness <xref ref-type="bibr" rid="ref11">[11]</xref>. An attempt was made to fabricate a CuO nanoparticle-modified graphite electrode for the detection of both analytes epicatechin (EC) and TH from the same tea sample simultaneously <xref ref-type="bibr" rid="ref12">[12]</xref>. As an extension of this work, molecular imprinted polymer (MIP) based multimolecular crafted sensors for the detection of EC and TH were attempted. However, the complex and comparatively larger structure of EC in comparison to TH, led to the adsorption of both the analyte molecules in the sample into the cavities created for EC. Thus, it can be seen that during the experimentation with MIP-based sensor, the size selectivity factor of EC suppressed that of TH.</p>
+<p>It was observed that multimolecular sensing using a single sensor was hazardous, so a hardware-level multisensor e-tongue was attempted. To develop a highly selective array of working electrodes (WEs), MIP technology was employed. It involves the development of a polymer matrix with the help of a crosslinker, monomer and initiator. Further, cavities structurally similar to the targeted analytes were leached out on the polymer bed by continuous washing with an appropriate solvent <xref ref-type="bibr" rid="ref13">[13]</xref>. The three WEs used here are highly selective to TAN (MIP_TAN), TF (MIP_TF), and TH (MIP_TH). The MIP technology has been reported to detect other biomarkers in tea, such as caffeine <xref ref-type="bibr" rid="ref14">[14]</xref>, gallic acid <xref ref-type="bibr" rid="ref15">[15]</xref>, and epigallocatechin-3-gallate <xref ref-type="bibr" rid="ref16">[16]</xref> by the same group of researchers. The MIP-based sensors are an upcoming alternative to bare graphite electrodes as they offer higher stability under optimum environmental conditions. MIP-based sensors are advantageous due to selectivity and cost-effectiveness, ease of preparation and wide compatibility in various scientific areas <xref ref-type="bibr" rid="ref17">[17]</xref>, <xref ref-type="bibr" rid="ref18">[18]</xref>, <xref ref-type="bibr" rid="ref19">[19]</xref>, <xref ref-type="bibr" rid="ref20">[20]</xref>. The ever-increasing demand for the consumption of black tea provides a strong foundation for the development of an array of MIP electrodes to improve the overall quality profiling of tea. Although individual sensors for the detection of analytes such as TAN, TH, and TF have been reported <xref ref-type="bibr" rid="ref21">[21]</xref>, <xref ref-type="bibr" rid="ref22">[22]</xref>, <xref ref-type="bibr" rid="ref23">[23]</xref>, an array of sensors that can detect the major biomarkers in black tea in a single measurement setup would give a major insight into the proper judgment of the quality of tea. Using the responses from the MIP electrodes, the prediction of any specific analyte in tea is possible due to the enhanced specificity of the fabricated electrodes.</p>
+<p>The novelty of this approach lies in the development of a customized e-tongue coupled with an automatic switching circuit for the detection of individual compounds of tea from the same tea sample under the same operating conditions. The working principle of the device employs three-electrode voltammetric measurement method which consists of an array of three WEs (MIP_TAN, MIP_TH, and MIP_TF), a Pt counter electrode and a reference electrode. A switching circuit has been incorporated for effective selection of the WE one at a time, keeping the measurement conditions unaltered. In this treatise, it is clearly observed that the overall quality discrimination of different black teas has been improved satisfactorily when t-distributed stochastic neighbor embedding (t-SNE) algorithm was applied over the sensor array responses in comparison to individual sensor response. Moreover, the response from the sensor array set was subjected to gradient booster regressor algorithm which shows a <inline-formula><tex-math notation="LaTeX">$R^{2}$</tex-math></inline-formula> value of 0.967, indicating the improved performance of an array in quality discrimination over individual sensors.</p>
+</sec>
+<sec id="sec2"><label>II.</label><title>Materials and Methodology</title>
+<sec id="sec2a"><label>A.</label><title>Chemical Reagents and Standards</title>
+<p>Pure graphite (98%) purity was obtained from Loba Chemie Pvt. Ltd., ethylene glycol dimethyl acrylate (EGDMA), benzoyl peroxide, and TH were obtained from Sigma Aldrich. The monomers acrylic acid (AA) and methyl methacrylic acid (MAA) were obtained from Sigma Aldrich and E-Merck, respectively. TAN was purchased from Nice Chemicals Pvt. TF extract was obtained from Tocklai Tea Research Institute, Jorhat, Assam. In the process of developing and testing the electrodes, ethanol and paraffin oil from Merck &amp; Company were employed as binders and solvents, respectively. During experiments, distilled water [resistance (<inline-formula><tex-math notation="LaTeX">$R$</tex-math></inline-formula>) approximately 18 M<inline-formula><tex-math notation="LaTeX">$\Omega $</tex-math></inline-formula>] from the Millipore water purification system was used for washing electrode materials.</p>
+</sec>
+<sec id="sec2b"><label>B.</label><title>Equipment Specifications</title>
+<p>PGSTAT101, a potentiostat system, employs a three-electrode configuration. This setup includes a platinum counter electrode (Pt), MIP_TAN, MIP_TF, and MIP_TH as the WEs in the sensor array and an Ag/AgCl reference electrode. HPLC was used for precise quantitative measurement of TAN, TF, and TH in real tea samples.</p>
+</sec>
+<sec id="sec2c"><label>C.</label><title>Synthesis of MIP Electrodes</title>
+<p>For the preparation of MIP electrodes, graphite powder (0.95 g) was suspended in ethyl alcohol (20 mL) using ultrasonication for 45 min. Following this, the optimized monomer (0.05 g) and the target molecule (0.05 g), were successively added and sonicated for 35 min. Next, <inline-formula><tex-math notation="LaTeX">$400~\mu $</tex-math></inline-formula>L of EGDMA (cross-linker) was put into the above solution in addition to 1 mg of benzoyl peroxide followed by sonication for another 35 min. The solution was next polymerized by constantly heating in a water bath at an optimized temperature of <inline-formula><tex-math notation="LaTeX">$30~^{\circ }$</tex-math></inline-formula>C for half an hour. After the preparation of the polymer, it was rinsed with distilled water. The target molecules were washed out for 24 h to leach them, producing the MIP substance. The prepared material was dried and collected for the fabrication of MIP sensors. The detailed synthesis of the MIP materials is similar to that followed in <xref ref-type="bibr" rid="ref13">[13]</xref>, <xref ref-type="bibr" rid="ref21">[21]</xref>, and <xref ref-type="bibr" rid="ref22">[22]</xref>. The material was then packed into a capillary tube with an inner radius of 1.25 mm, resulting in the fabrication of the respective MIP electrodes. Copper wires were used to establish electrical contact. <xref ref-type="table" rid="table1">Table I</xref> shows the precursors used in the individual sensor development.
+<table-wrap id="table1"><label>TABLE I</label>
+<caption><title>Precursors for Sensor Development and Operational Statistics</title></caption>
+<graphic xlink:href="baner.t1-3639180.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="6"/>
+</colgroup>
+<thead>
+<tr>
+<th>Sl. No</th>
+<th>Electrode</th>
+<th>Precursors<xref ref-type="table-fn" rid="table1-fn1">*</xref></th>
+<th>Linear Range (<inline-formula><tex-math notation="LaTeX">$\mu $</tex-math></inline-formula>M)</th>
+<th>LOD (<inline-formula><tex-math notation="LaTeX">$\mu $</tex-math></inline-formula>M)</th>
+<th>Ref No</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>MIP_TAN</td>
+<td>Monomer: Acrylic acid (0.05g); Crosslinker: EGDMA; Nanoparticles: none; cleaning reagent: ethanol and water (70:30 v/v)</td>
+<td>0.1&amp;#x2013;500</td>
+<td>0.037</td>
+<td>13</td>
+</tr>
+<tr>
+<td>2</td>
+<td>MIP_TF</td>
+<td>Monomer: Acrylic acid and methacrylic acid; Crosslinker: EGDMA; Nanoparticles: NiCo2O4 Cleaning reagent: ethanol and water (70:30 v/v)</td>
+<td>40&amp;#x2013;1000</td>
+<td>13.89</td>
+<td>21</td>
+</tr>
+<tr>
+<td>3</td>
+<td>MIP_TH</td>
+<td>Monomer: Acrylic acid (0.05g); Crosslinker: EGDMA; Nanoparticles: Gd2O3 Cleaning reagent: ethanol and water (70:30 v/v)</td>
+<td>50&amp;#x2013;900</td>
+<td>2.004</td>
+<td>22</td>
+</tr>
+</tbody>
+</table>
+<table-wrap-foot>
+<fn id="table1-fn1">
+<label><sup>*</sup></label>
+<p>
+For the preparation of 300 mg of an electrode, the nanoparticle to monomer ratio used is 1:9
+</p>
+</fn>
+</table-wrap-foot>
+</table-wrap>
+</p>
+</sec>
+<sec id="sec2d"><label>D.</label><title>Template Removal Procedure</title>
+<p>To ensure accurate and reproducible measurements while using MIP electrodes across multiple tea samples, a standard cleaning protocol has been followed between the measurements. The electrode was removed from the analyte solution and rinsed under a continuous stream of ultrapure deionised water (18.2 M<inline-formula><tex-math notation="LaTeX">$\Omega \cdot $</tex-math></inline-formula>cm) for 30 s to remove loosely bound surface residues. Since MIP binding sites may strongly interact with polar and semipolar VOCs, the electrode was gently immersed in 10 mL of ethanol: water (70:30 v/v) and magnetically agitated at 200 r/min for 1 min. This solvent system efficiently disrupts hydrogen bonding and dipole interactions within the MIP cavities without damaging the polymer structure. The electrode was again rinsed with deionized water and dried for next record. For the molecular removal attestation, UV analysis was conducted over the electrode washed elute. At initial stage, the presence of specific target molecule will be observed which fades out gradually with repeated washes. The electrode was rinsed until the specific molecule peak is completely removed.</p>
+</sec>
+<sec id="sec2e"><label>E.</label><title>E-Tongue Setup</title>
+<p>An e-tongue set up has been designed using an array of three MIP electrodes selective to TAN, TH, and TF analytes, an Ag/AgCl counter electrode and a Pt reference electrode. The functional block diagram of the developed e-tongue is shown in <xref ref-type="fig" rid="fig1">Fig. 1</xref> and the detailed circuit used for the operation of e-tongue is shown in <xref ref-type="fig" rid="fig2">Fig. 2</xref>. The system consists of five distinct modules: 1) power supply unit; 2) switching circuit; 3) sensor array unit; 4) autolab potentiostat; and 5) recorder. The detailed components present in the switching circuit are 1) arduino Board is used as an interface for the switching process; 2) the relay unit is used to transfer the signal to the WE which is connected to the relay output through connecting wires; and 3) the Arduino and the relay are connected through wires. The complete circuit consists of two components: 1) relay module and 2) timing signal generator.
+<fig id="fig1"><label>Fig. 1.</label>
+<caption><p>Functional block diagram of e-tongue setup.</p></caption>
+<graphic xlink:href="baner1-3639180.eps"/></fig>
+<fig id="fig2"><label>Fig. 2.</label>
+<caption><p>Internal circuit diagram of the relay module and timing signal generator.</p></caption>
+<graphic xlink:href="baner2-3639180.eps"/></fig>
+</p>
+<sec id="sec2e1"><label>1)</label><title>Relay Module:</title>
+<p>Each relay in the relay module has its isolated driver made of an opto coupler (PC817D) to provide isolation between controller and driver, a pull-down NPN transistor (2N3904) to give a ground path for the coil of relay, depending on the timing signal, and a p-n junction diode (1N4148) connected in reverse bias with the coil. The diode helps to minimize the knocking current generated by the coil which may damage the transistor. The common terminal of the three relays is connected to the three MIP electrodes, respectively, as shown in <xref ref-type="fig" rid="fig2">Fig. 2</xref>. All the NO terminals of the relay are shorted together and connected to the WE port of the potentiostat device, and all NC terminals of relays are kept floating.</p>
+</sec>
+<sec id="sec2e2"><label>2)</label><title>Timing Signal Generator:</title>
+<p>An ATmega328p-based microcontroller has been utilized as a timing signal generator. The microcontroller was programmed to trigger and hold each relay repetitively, with a 180-s time cycle. Relay1, relay2, and relay3 are connected with the D3, D4, and D5 pins of microcontroller, respectively.</p>
+</sec>
+</sec>
+<sec id="sec2f"><label>F.</label><title>Response Recording From e-Tongue</title>
+<p>The tea liquor was prepared as in <xref ref-type="bibr" rid="ref21">[21]</xref> and was allowed to cool to room temperature. Typically, 20 mL of the tea infusion was used for testing. The e-tongue was subjected to this sample for the detection of the analytes-TAN, TF, and TH. After completing one set of measurements with the first MIP electrode, the switching circuit automatically shifts control to the next WE, keeping the RE and CE constant, after a period of 180 s. Ten repetitive electrochemical responses were recorded from each of the tea sample at a constant scan rate of 50 mV/s. The duration of each cycle of differential pulse voltammogram (DPV) response is 180 s. As the scan rate fixed for the entire experimentation, a uniform data size has been obtained for all three sensors for each of the tea samples and used for further analysis. The original setup used for the experimentation is shown in <xref ref-type="fig" rid="fig3">Fig. 3(a) and (b)</xref>.
+<fig id="fig3"><label>Fig. 3.</label>
+<caption><p>(a) e-tongue setup used in the experiment. (b) Top view of sensor array showing three WEs along with the reference and counter electrodes.</p></caption>
+<graphic xlink:href="baner3ab-3639180.eps"/></fig>
+</p>
+</sec>
+<sec id="sec2g"><label>G.</label><title>Correlation of DPV Responses With Standard HPLC Values</title>
+<p>Experiments were conducted on five different samples of black tea. The standard values of TAN, TF, and TH of each of the samples were obtained using HPLC method. The individual DPV responses obtained from the MIP electrodes were co-related with the HPLC data to estimate the sensors&amp;#x2019; accuracy. Further, it was observed that the correlation of the HPLC data with the fused data responses yielded higher accuracy. <xref ref-type="table" rid="table2">Table II</xref> shows the HPLC values of the different analytes in the different samples of tea.
+<table-wrap id="table2"><label>TABLE II</label>
+<caption><title>HPLC Values of Tan, Th, and Tf</title></caption>
+<graphic xlink:href="baner.t2-3639180.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="4"/>
+</colgroup>
+<thead>
+<tr>
+<th>Sample</th>
+<th>TAN (mg/mL)</th>
+<th>TF (mg/mL)</th>
+<th>TH (mg/mL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>0.638</td>
+<td>0.90</td>
+<td>0.0027</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>0.583</td>
+<td>0.90</td>
+<td>0.0011</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>0.541</td>
+<td>1.10</td>
+<td>0.0010</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>0.714</td>
+<td>1.00</td>
+<td>0.0004</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>0.642</td>
+<td>1.20</td>
+<td>0.0026</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+</sec>
+</sec>
+<sec id="sec3"><label>III.</label><title>Results and Discussions</title>
+<sec id="sec3a"><label>A.</label><title>DPV Responses Obtained From the WEs</title>
+<p>The fabricated e-tongue based on dedicated MIP sensors was immersed in a tea sample. It was able to distinctly detect the presence of the three analytes in the tea sample under the same experimental conditions. This e-tongue in conjunction, with an effective switching circuit, was able to transfer control from one WE to the next, keeping the counter, and reference electrodes unaltered. The DPV responses for each WE from a single tea sample for the first cycle are shown in <xref ref-type="fig" rid="fig4">Fig. 4</xref>. To comment on the repetitive nature of the three WEs, ten repetitive DPV responses from each of the WE were recorded from a single tea sample at a constant scan rate of 50 mV/s. The selectivity study of each of the WEs have also been shown in <xref ref-type="fig" rid="fig5">Fig. 5</xref>. <xref ref-type="fig" rid="fig5">Fig. 5(a)</xref>, shows the selective behavior of MIP_TAN, in <xref ref-type="fig" rid="fig5">Fig. 5(b)</xref>, the selective nature of MIP_TF has been analyzed using solutions of other analytes such as TAN and CAF. Lastly, <xref ref-type="fig" rid="fig5">Fig. 5(c)</xref> shows that the MIP_TH electrode responds satisfactorily in the presence of TH in comparison to the other analytes such as TAN, GA, and EC. <xref ref-type="fig" rid="fig6">Fig. 6</xref> shows a bar plot highlighting the ten repetitive cycles performed by each WE on the tea sample. All the three electrodes show satisfactory repeatability with RSD values of 6.007%, 7.73%, and 3.86% for MIP_TAN, MIP_TF, and MIP_TH, respectively. Five different samples of tea were chosen for experimental purposes.
+<fig id="fig4"><label>Fig. 4.</label>
+<caption><p>DPV responses of MIP_TAN, MIP_TF, and MIP_TH electrodes obtained from the same S<inline-formula><tex-math notation="LaTeX">$1^{{22}}$</tex-math></inline-formula>.</p></caption>
+<graphic xlink:href="baner4-3639180.eps"/></fig>
+<fig id="fig5"><label>Fig. 5.</label>
+<caption><p>Bar plot showing the selective behavior of (a) MIP_TAN, (b) MIP_TF, and (c) MIP_TH.</p></caption>
+<graphic xlink:href="baner5abc-3639180.eps"/></fig>
+<fig id="fig6"><label>Fig. 6.</label>
+<caption><p>Study of repeatability of the three electrodes MIP_TAN, MIP_TF and MIP_TH of the sensor array.</p></caption>
+<graphic xlink:href="baner6-3639180.eps"/></fig>
+</p>
+</sec>
+<sec id="sec3b"><label>B.</label><title>Clustering Using t-SNE</title>
+<p>t-SNE is a popular machine learning algorithm used to visualize high-dimensional data. It was introduced by Laurens van der Maaten and Geoffrey Hinton in 2008. Its main goal is to convert similarities between data points into probabilities and then create a low-dimensional map that represents these probabilities as accurately as possible. One of the most common applications of t-SNE is in the visualization of complex datasets. It is particularly useful for identifying patterns, clusters, and outliers in high-dimensional data such as those found in genomics, image recognition, and natural language processing. In this approach, the t-SNE algorithm was applied on the fused response from the array of sensors, and it was successfully able to discriminate among the five different samples of black tea as shown in <xref ref-type="fig" rid="fig7">Fig. 7</xref>.
+<fig id="fig7"><label>Fig. 7.</label>
+<caption><p>Efficient discrimination among different black tea samples based on fused response from the WE.</p></caption>
+<graphic xlink:href="baner7-3639180.eps"/></fig>
+</p>
+<p>The input parameters for the successful clustering are as follows.<list list-type="ordered">
+<list-item>
+<label>1)</label>
+<p>Fused data&amp;#x2014;<inline-formula><tex-math notation="LaTeX">$50\times 180.~2$</tex-math></inline-formula>) Total of samples&amp;#x2014;50 (5 Samples <inline-formula><tex-math notation="LaTeX">$\times $</tex-math></inline-formula> Runs: 10).</p></list-item>
+<list-item>
+<label>3)</label>
+<p>No. of features&amp;#x2014;180 (TAN: 60 +TF: 60 +TH: 60) (Combination of TAN [TAN_0, TAN_1,&amp;#x2026;.TAN_59], TF [TF_0, TF_1 &amp;#x2026;TF_59] and THEOTH [TH_0, TH_1, &amp;#x2026;TH_59]).</p></list-item>
+</list>
+</p>
+</sec>
+<sec id="sec3c"><label>C.</label><title>Gradient Boost Regression</title>
+<p>The gradient boost regressor <xref ref-type="bibr" rid="ref24">[24]</xref> is an ensemble boosting method that incrementally trains numerous models in a sequential and additive manner. To implement gradient boosting, the residual is identified and subsequently fit a new model to it. The new model is then integrated with the preceding model to initiate the next iteration. The approach of converging on the residues at each stage may be interpreted as a progression toward the negative gradient of the loss function. The generalization of the boosting process is facilitated by gradient descent. The default hyper parameters of gradient boost regressor function from the ensemble module of the ScikitLearn package has been considered for model training.</p>
+<p><bold>Procedure for individual and multiple input/output fusion process</bold></p>
+<p><inline-formula><tex-math notation="LaTeX">$X_{\text {TAN}}^{1}, X_{\text {TAN}}^{2}, X_{\text {TAN}}^{3}, \ldots , X_{\text {TAN}}^{64}$</tex-math></inline-formula> are the input feature sets for TAN (<inline-formula><tex-math notation="LaTeX">$X_{\text {TAN}})~X_{\text {TF}}^{1}, X_{\text {TF}}^{2}, X_{\text {TF}}^{13}, \ldots , X_{\text {TF}}^{64}$</tex-math></inline-formula> are the input feature sets for TF (<inline-formula><tex-math notation="LaTeX">$X_{\text {TF}})~X_{\text {TH}}^{1}, X_{\text {TH}}^{2}, X_{\text {TH}}^{3}, \ldots , X_{\text {TH}}^{64}$</tex-math></inline-formula> are the input feature sets for TH (<inline-formula><tex-math notation="LaTeX">$X_{\text {TH}}$</tex-math></inline-formula>)
+<disp-formula><tex-math notation="LaTeX">\begin{align*} X_{\text {TAN}}&amp; \in \{X_{\text {TAN}}^{1}, X_{\text {TAN}}^{2}, X_{\text {TAN}}^{3}, \ldots , X_{\text {TAN}}^{64}\} \\ X_{\text {TF}}&amp; \in \{X_{\text {TF}}^{1}, X_{\text {TF}}^{2}, X_{\text {TF}}^{3}, \ldots , X_{\text {TF}}^{64}\} \\ X_{\text {TH}}&amp; \in \{X_{\text {TH}}^{1}, X_{\text {TH}}^{2}, X_{\text {TH}}^{3}, \ldots , X_{\text {TH}}^{64}\}\end{align*}</tex-math></disp-formula>
+where <inline-formula><tex-math notation="LaTeX">$y_{\text {TAN}}^{\text {HPLC}},y_{\text {TF}}^{\text {HPLC}},y_{\text {TH}}^{\text {HPLC}}$</tex-math></inline-formula> are the HPLC values of TAN, TF, and TH, respectively.</p>
+<p>The model for individual TAN, TF, and TH in <xref ref-type="fig" rid="fig8">Fig. 8(a)</xref> can be represented as
+<disp-formula><tex-math notation="LaTeX">\begin{align*} y_{\text {TAN}}^{\text {HPLC}}&amp; =f_{\text {TAN}}(X_{\text {TAN}}) \\ y_{\text {TF}}^{\text {HPLC}}&amp; =f_{\text {TF}}(X_{\text {TF}}) \\ y_{\text {TH}}^{\text {HPLC}}&amp; =f_{\text {TH}}(X_{\text {TH}})\end{align*}</tex-math></disp-formula>
+where <inline-formula><tex-math notation="LaTeX">$f_{\text {TAN}}, f_{\text {TF}}, and~f_{\text {TH}}$</tex-math></inline-formula> are the regressor function for individual TAN, TF, and TH, respectively.
+<fig id="fig8"><label>Fig. 8.</label>
+<caption><p>Sensor correlation with standard HPLC analysis (a) for individual sensor and (b) for e-tongue.</p></caption>
+<graphic xlink:href="baner8ab-3639180.eps"/></fig>
+</p>
+<p>There are three different models created individually to predict the content of TAN, TF, and TH present in the tea samples. As the data generated from different chemical sensors are for the same sample; therefore, the features from different chemical sensors are also interrelated. Hence, it will be more efficient to have a joint prediction so that the overall quality of tea sample can be established in a better way.</p>
+<p>The model for the fused dataset of TAN, TF, and TH in <xref ref-type="fig" rid="fig8">Fig. 8(b)</xref> can be represented as
+<disp-formula><tex-math notation="LaTeX">\begin{equation*} y_{\text {TAN}}^{\text {HPLC}}, y_{\text {TF}}^{\text {HPLC}}, y_{\text {TH}}^{\text {HPLC}}=f_{\text {fused}}(X_{\text {TAN}}, X_{\text {TF}}, X_{\text {TH}})\end{equation*}</tex-math></disp-formula>
+where <inline-formula><tex-math notation="LaTeX">$f_{\text {fused}}$</tex-math></inline-formula> is the regressor function for the multiinput/output regressor.</p>
+<p>The average values of performance metrics obtained from the individual and fused model are further considered to identify the overall quality of the tea sample is tabulated in <xref ref-type="table" rid="table3">Table III</xref>.
+<table-wrap id="table3"><label>TABLE III</label>
+<caption><title>Comparative Performance Study of Individual Sensor and the Developed e-Tongue</title></caption>
+<graphic xlink:href="baner.t3-3639180.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="15"/>
+</colgroup>
+<thead>
+<tr>
+<th rowspan="2">Chemical</th>
+<th colspan="7">Individual</th>
+<th colspan="7">Fused</th>
+</tr>
+<tr>
+<th>Mean Absolute Error (MAE) <inline-formula><tex-math notation="LaTeX">$\ast 10^{-3}$</tex-math></inline-formula></th>
+<th>Median Absolute Error (MedAE) <inline-formula><tex-math notation="LaTeX">$\ast 10^{-3}$</tex-math></inline-formula></th>
+<th>Mean Squared Error (MSE) <inline-formula><tex-math notation="LaTeX">$\ast 10^{-3}$</tex-math></inline-formula></th>
+<th>Mean Squared Log Error (MSLE) <inline-formula><tex-math notation="LaTeX">$\ast 10^{-3}$</tex-math></inline-formula></th>
+<th>Explained Variance Score</th>
+<th>Score (R<sup>2</sup>)</th>
+<th>Prediction Accuracy (%)</th>
+<th>Mean Absolute Error (MAE) <inline-formula><tex-math notation="LaTeX">$\ast 10^{-3}$</tex-math></inline-formula></th>
+<th>Median Absolute Error (MedAE) <inline-formula><tex-math notation="LaTeX">$\ast 10^{-3}$</tex-math></inline-formula></th>
+<th>Mean Squared Error (MSE) <inline-formula><tex-math notation="LaTeX">$\ast 10^{-3}$</tex-math></inline-formula></th>
+<th>Mean Squared Log Error (MSLE) <inline-formula><tex-math notation="LaTeX">$\ast 10^{-3}$</tex-math></inline-formula></th>
+<th>Explained Variance Score</th>
+<th>Score (R<sup>2</sup>)</th>
+<th>Prediction Accuracy (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TAN</td>
+<td>3.93</td>
+<td>0.00144</td>
+<td>0.251</td>
+<td>0.0984</td>
+<td>0.925</td>
+<td>0.899</td>
+<td>89.9</td>
+<td>4.41</td>
+<td>0.0019</td>
+<td>0.188</td>
+<td>0.0728</td>
+<td>0.941</td>
+<td>0.917</td>
+<td>91.7</td>
+</tr>
+<tr>
+<td>TF</td>
+<td>10.9</td>
+<td>3.68</td>
+<td>1.76</td>
+<td>0.438</td>
+<td>0.85</td>
+<td>0.827</td>
+<td>82.7</td>
+<td>3.46</td>
+<td>0.472</td>
+<td>0.137</td>
+<td>0.0342</td>
+<td>0.988</td>
+<td>0.987</td>
+<td>98.7</td>
+</tr>
+<tr>
+<td>THEO TH</td>
+<td>0.07</td>
+<td>0.0131</td>
+<td>0.00003</td>
+<td>0.00003</td>
+<td>0.968</td>
+<td>0.96</td>
+<td>96</td>
+<td>0.000644</td>
+<td>0.000032</td>
+<td>3.91E-09</td>
+<td>3.9E-09</td>
+<td>1</td>
+<td>1</td>
+<td>1]00</td>
+</tr>
+<tr>
+<td>Overall</td>
+<td>4.97</td>
+<td>1.23</td>
+<td>0.671</td>
+<td>0.179</td>
+<td>0.915</td>
+<td>0.895</td>
+<td>89.5</td>
+<td>2.62</td>
+<td>0.158</td>
+<td>0.108</td>
+<td>0.0356</td>
+<td>0.976</td>
+<td>0.968</td>
+<td>96.8</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+<p>From the explained variance score and R-square value, it is clear that the overall quality of tea has been predicted better for the fused dataset rather than considering the individual dataset from each sensor. The prediction accuracy for the e-tongue is calculated to be 96.8%, which is quite improved as obtained using individual sensors. Also, the error metrics are also identified quite less for the sensor array with respect to the individual sensor performance.</p>
+</sec>
+</sec>
+<sec id="sec4"><label>IV.</label><title>Conclusion</title>
+<p>The current approach focuses on the development of an e-tongue comprising an array of highly specific MIP electrodes for the evaluation of tea quality with an efficient switching circuit. The switching circuit enables the selection one particular WE at a time, resulting in a higher chance of trapping that bio marker instead of others as the MIP sensors are highly selective and sensitive toward that particular molecule. Five different samples of black tea were used for the experimentation. Ten repetitive DPV signatures from each WE were recorded at a time and the control was then transferred to the next WE using the automatic switching circuit. Gradient boost algorithm has been used to develop a robust cognitive model. As can be seen from the results section the fusion of the three sensors performed better over the individual sensors as indicated by the <inline-formula><tex-math notation="LaTeX">$R^{2}$</tex-math></inline-formula> value of 0.967. Moreover, by using the t-SNE algorithm on the fused data, successful discrimination was obtained among the five different samples of black tea. The e-tongue shows an improved operational accuracy of 99.6%. Addition of a few more specific sensors, targeting other major tea biomarkers to this array may be considered for further study. The developed system has the potential to be used as a taste-profiling instrument on a day-to-day basis in the tea industries.</p>
+</sec>
+</body>
+<back>
+<ack><title>Acknowledgment</title>
+<p>The authors acknowledge the help of Tocklai Tea Research Institute, Jorhat, Assam, for providing the TF extract. They also like to acknowledge IICB Kolkata for providing them with the HPLC facility.</p>
+</ack>
+<ref-list>
+<title>
+References
+</title>
+<ref id="ref1">
+<label>
+[1]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+N.
+</given-names> 
+<surname>
+Bhattacharyya
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Bandyopadhyay
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Bhuyan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Tudu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Ghosh
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Jana
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Electronic nose for black tea classification and correlation of measurements with &amp;#x2019;tea taster&amp;#x2019; marks
+</article-title>
+,&amp;#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Instrum. Meas.
+</source>
+, vol. 
+<volume>
+57
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+1313
+</fpage>
+&amp;#x2013;
+<lpage>
+1321
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2008
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref2">
+<label>
+[2]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+V. W.
+</given-names> 
+<surname>
+Setiawan
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Protective effect of green tea on the risks of chronic gastritis and stomach cancer
+</article-title>
+,&amp;#x201D; 
+<source>
+Int. J. Cancer
+</source>
+, vol. 
+<volume>
+92
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+600
+</fpage>
+&amp;#x2013;
+<lpage>
+604
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2001
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref3">
+<label>
+[3]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+K.
+</given-names> 
+<surname>
+Shibata
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Moriyama
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Fukushima
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Kaetsu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Miyazaki
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Une
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Green tea consumption and chronic atrophic gastritis: A cross-sectional study in a green tea production village
+</article-title>
+,&amp;#x201D; 
+<source>
+J. Epidemiology
+</source>
+, vol. 
+<volume>
+10
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+310
+</fpage>
+&amp;#x2013;
+<lpage>
+316
+</lpage>
+, 
+<year>
+2000
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref4">
+<label>
+[4]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Jian
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L. P.
+</given-names> 
+<surname>
+Xie
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A. H.
+</given-names> 
+<surname>
+Lee
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C. W.
+</given-names> 
+<surname>
+Binns
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Protective effect of green tea against prostate cancer: A case-control study in Southeast China
+</article-title>
+,&amp;#x201D; 
+<source>
+Int. J. Cancer
+</source>
+, vol. 
+<volume>
+108
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+130
+</fpage>
+&amp;#x2013;
+<lpage>
+135
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2004
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref5">
+<label>
+[5]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Kuhr
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+U. H.
+</given-names> 
+<surname>
+Engelhardt
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Influence of catechins and theaflavins on astringent taste of black tea brews
+</article-title>
+,&amp;#x201D; 
+<source>
+Z Lebensm-Unters. Forsc
+</source>
+, vol. 
+<volume>
+195
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+108
+</fpage>
+&amp;#x2013;
+<lpage>
+111
+</lpage>
+, 
+<year>
+1992
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref6">
+<label>
+[6]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Cozzolino
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Near infrared spectroscopy in natural products analysis
+</article-title>
+,&amp;#x201D; 
+<source>
+Planta Medica
+</source>
+, vol. 
+<volume>
+75
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+746
+</fpage>
+&amp;#x2013;
+<lpage>
+756
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2009
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref7">
+<label>
+[7]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Palit
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Classification of black tea taste and correlation with tea taster&amp;#x2019;s mark using voltammetric electronic tongue
+</article-title>
+,&amp;#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Instrum. Meas.
+</source>
+, vol. 
+<volume>
+59
+</volume>
+, no. 
+<issue>
+8
+</issue>
+, pp. 
+<fpage>
+2230
+</fpage>
+&amp;#x2013;
+<lpage>
+2239
+</lpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2010
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref8">
+<label>
+[8]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Ivarsson
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Holmin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+N.-E.
+</given-names> 
+<surname>
+H&amp;#x00F6;jer
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Krantz-R&amp;#x00FC;lcker
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Winquist
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Discrimination of tea by means of a voltammetric electronic tongue and different applied waveforms
+</article-title>
+,&amp;#x201D; 
+<source>
+Sens. Actuators B, Chem.
+</source>
+, vol. 
+<volume>
+76
+</volume>
+, nos. 
+<issue>
+1
+</issue>
+&amp;#x2013;
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+449
+</fpage>
+&amp;#x2013;
+<lpage>
+454
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2001
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref9">
+<label>
+[9]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Scampicchio
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Benedetti
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Brunetti
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Mannino
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Amperometric electronic tongue for the evaluation of the tea astringency
+</article-title>
+,&amp;#x201D; 
+<source>
+Electroanalysis
+</source>
+, vol. 
+<volume>
+18
+</volume>
+, no. 
+<issue>
+17
+</issue>
+, pp. 
+<fpage>
+1643
+</fpage>
+&amp;#x2013;
+<lpage>
+1648
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2006
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref10">
+<label>
+[10]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Lvova
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Legin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y. G.
+</given-names> 
+<surname>
+Vlasov
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Sig
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Nam
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Multicomponent analysis of Korean green tea by means of disposable all-solid-state potentiometric electronic tongue microsystem
+</article-title>
+,&amp;#x201D; 
+<source>
+Sens. Actuators B
+</source>
+, vol. 
+<volume>
+95
+</volume>
+, nos. 
+<issue>
+1
+</issue>
+&amp;#x2013;
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+391
+</fpage>
+&amp;#x2013;
+<lpage>
+399
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2003
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref11">
+<label>
+[11]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Ivarsson
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Comparison of a voltammetric electronic tongue and a lipid membrane taste sensor
+</article-title>
+,&amp;#x201D; 
+<source>
+Analytica Chim. Acta
+</source>
+, vol. 
+<volume>
+449
+</volume>
+, nos. 
+<issue>
+1
+</issue>
+&amp;#x2013;
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+59
+</fpage>
+&amp;#x2013;
+<lpage>
+68
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2001
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref12">
+<label>
+[12]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Moulick
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Das
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Nag
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Paul
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D. K.
+</given-names> 
+<surname>
+Das
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R. B.
+</given-names> 
+<surname>
+Roy
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Simultaneous detection of epicatechin and theophylline in black tea with nano cupric oxide infused graphite electrode
+</article-title>
+,&amp;#x201D; 
+<source>
+Nano LIFE
+</source>
+, vol. 
+<volume>
+15
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2025
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+2450009
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref13">
+<label>
+[13]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Moulick
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Das
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Nag
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Tudu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Bandyopadhyay
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Banerjee Roy
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Molecularly imprinted polymer-based electrode for tannic acid detection in black tea
+</article-title>
+,&amp;#x201D; 
+<source specific-use="IEEE">
+IEEE Sensors J.
+</source>
+, vol. 
+<volume>
+23
+</volume>
+, no. 
+<issue>
+6
+</issue>
+, pp. 
+<fpage>
+5535
+</fpage>
+&amp;#x2013;
+<lpage>
+5542
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref14">
+<label>
+[14]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Das
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Titanium oxide nanocubes embedded molecularly imprinted polymer-based electrode for selective detection of caffeine in green tea
+</article-title>
+,&amp;#x201D; 
+<source specific-use="IEEE">
+IEEE Sensors J.
+</source>
+, vol. 
+<volume>
+20
+</volume>
+, no. 
+<issue>
+12
+</issue>
+, pp. 
+<fpage>
+6240
+</fpage>
+&amp;#x2013;
+<lpage>
+6247
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2020
+</year>
+, 
+doi: 
+<object-id pub-id-type="doi">
+10.1109/JSEN.2020.2972773
+</object-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref15">
+<label>
+[15]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Das
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+CuO nanoparticles decorated MIP-based electrode for sensitive determination of gallic acid in green tea
+</article-title>
+,&amp;#x201D; 
+<source specific-use="IEEE">
+IEEE Sensors J.
+</source>
+, vol. 
+<volume>
+21
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+5687
+</fpage>
+&amp;#x2013;
+<lpage>
+5694
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2021
+</year>
+, 
+doi: 
+<object-id pub-id-type="doi">
+10.1109/JSEN.2020.3036663
+</object-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref16">
+<label>
+[16]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Nandy Chatterjee
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Development of a nickel hydroxide nanopetal decorated molecular imprinted polymer based electrode for sensitive detection of epigallocatechin-3-gallate in green tea
+</article-title>
+,&amp;#x201D; 
+<source>
+Sens. Actuators B, Chem.
+</source>
+, vol. 
+<volume>
+283
+</volume>
+, pp. 
+<fpage>
+69
+</fpage>
+&amp;#x2013;
+<lpage>
+78
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref17">
+<label>
+[17]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M. L.
+</given-names> 
+<surname>
+Quint
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F. S.
+</given-names> 
+<surname>
+de Souza
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Spinelli
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+J. B.
+</given-names> 
+<surname>
+Domingos
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Low-range detection of the phosphate group by a molecularly imprinted polymer-modified carbon paste electrode
+</article-title>
+,&amp;#x201D; 
+<source specific-use="IEEE">
+IEEE Sensors J.
+</source>
+, vol. 
+<volume>
+15
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+1012
+</fpage>
+&amp;#x2013;
+<lpage>
+1019
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2015
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref18">
+<label>
+[18]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Bai
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K.
+</given-names> 
+<surname>
+Fu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Cao
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Graphene@AuNPs modified molecularly imprinted electrochemical sensor for the determination of colchicine in pharmaceuticals and serum
+</article-title>
+,&amp;#x201D; 
+<source>
+J. Electroanal. Chem.
+</source>
+, vol. 
+<volume>
+816
+</volume>
+, pp. 
+<fpage>
+7
+</fpage>
+&amp;#x2013;
+<lpage>
+13
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2018
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref19">
+<label>
+[19]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+T. N.
+</given-names> 
+<surname>
+Chatterjee
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Detection of theaflavins in black tea using a molecular imprinted polyacrylamide-graphite nanocomposite electrode
+</article-title>
+,&amp;#x201D; 
+<source>
+Sens. Actuators B
+</source>
+, vol. 
+<volume>
+246
+</volume>
+, pp. 
+<fpage>
+840
+</fpage>
+&amp;#x2013;
+<lpage>
+847
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref20">
+<label>
+[20]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Nandy Chatterjee
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Molecular imprinted polymer based electrode for sensing catechin (+C) in green tea
+</article-title>
+,&amp;#x201D; 
+<source specific-use="IEEE">
+IEEE Sensors J.
+</source>
+, vol. 
+<volume>
+18
+</volume>
+, no. 
+<issue>
+6
+</issue>
+, pp. 
+<fpage>
+2236
+</fpage>
+&amp;#x2013;
+<lpage>
+2244
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2018
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref21">
+<label>
+[21]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Moulick
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Nag
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Das
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Kumar Hazarika
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Sabhapondit
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Banerjee Roy
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+A molecular imprinted bi-polymer graphite electrode decorated with NiCo
+<sub>2</sub>O
+<sub>4</sub> nano-cubes for rapid detection of theaflavin in black tea
+</article-title>
+,&amp;#x201D; 
+<source specific-use="IEEE">
+IEEE Sensors J.
+</source>
+, vol. 
+<volume>
+25
+</volume>
+, no. 
+<issue>
+10
+</issue>
+, pp. 
+<fpage>
+16621
+</fpage>
+&amp;#x2013;
+<lpage>
+16627
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2025
+</year>
+, 
+doi: 
+<object-id pub-id-type="doi">
+10.1109/JSEN.2025.3555887
+</object-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref22">
+<label>
+[22]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Moulick
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Das
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Nag
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Pramanik
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R. B.
+</given-names> 
+<surname>
+Roy
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Gadolinium oxide modified molecular imprinted polymer electrode for the electrochemical detection of theophylline in black tea
+</article-title>
+,&amp;#x201D; 
+<source>
+J. Food Composition Anal.
+</source>
+, vol. 
+<volume>
+19
+</volume>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2024
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+106994
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref23">
+<label>
+[23]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Moulick
+</surname>
+</string-name> 
+<etal>
+</etal>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Development of an electronic tongue with MIP sensors for black tea quality evaluation
+</article-title>
+,&amp;#x201D; in 
+<source specific-use="IEEE">
+Proc. IEEE Calcutta Conf. (CALCON)
+</source>
+, 
+<conf-loc>
+Kolkata, India
+</conf-loc>
+, 
+<conf-date>
+Dec. 2024
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&amp;#x2013;
+<lpage>
+4
+</lpage>
+, 
+doi: 
+<object-id pub-id-type="doi">
+10.1109/calcon63337.2024.10914342
+</object-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref24">
+<label>
+[24]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J. H.
+</given-names> 
+<surname>
+Friedman
+</surname>
+</string-name>
+</person-group>
+, 
+&amp;#x201C;
+<article-title>
+Greedy function approximation: A gradient boosting machine
+</article-title>
+,&amp;#x201D; 
+<source>
+Ann. Statist.
+</source>
+, vol. 
+<volume>
+29
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+1189
+</fpage>
+&amp;#x2013;
+<lpage>
+1232
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2001
+</year>
+.
+</mixed-citation>
+</ref>
+</ref-list>
+<bio-group>
+<bio id="bio1"><p><xref ref-type="contrib" rid="contrib1">Madhurima Moulick</xref> is a Research Scholar with the Department of Instrumentation and Electronics Engineering, Jadavpur University, Kolkata, India. Her current research interests include electronic tongue, electrochemical sensors, and molecularly imprinted polymers.</p></bio>
+<bio id="bio2"><p><xref ref-type="contrib" rid="contrib2">Sagar Chowdhury</xref> received the B.Tech. degree from the Department of IEE, Jadavpur University, Kolkata, India, in 2024.</p></bio>
+<bio id="bio3"><p><xref ref-type="contrib" rid="contrib3">Mainak Das</xref> recevied the B.Tech. degree from the Department of IEE, Jadavpur University, Kolkata, India, in 2024.</p></bio>
+<bio id="bio4"><p><xref ref-type="contrib" rid="contrib4">Sangram Saha</xref> recevied the B.Tech. degree from the Department of IEE, Jadavpur University, Kolkata, India, in 2024.</p></bio>
+<bio id="bio5"><p><xref ref-type="contrib" rid="contrib5">Shreya Nag</xref> (Member, IEEE) received the Ph.D. degree from Jadavpur University, Kolkata, India, in 2023.</p>
+<p>She is working as an Associate Professor with the Department of Electronics and Communication Engineering, Institute of Engineering and Management, University of Engineering and Management, Kolkata. Her research interests include electronic tongue, electrochemical sensor, molecularly imprinted polymer, nanotechnology, pattern recognition, and signal processing.</p></bio>
+<bio id="bio6"><p><xref ref-type="contrib" rid="contrib6">Jeet Naskar</xref> received the degree from the Department of Electronics and Communication Engineering, Institute of Engineering and Management, University of Engineering and Management, Kolkata, India, in 2025.</p>
+<p>His key research areas include the IoT, electronic nose, and olfaction systems.</p></bio>
+<bio id="bio7"><p><xref ref-type="contrib" rid="contrib7">Angiras Modak</xref> is currently pursuing the Ph.D. degree with the Department of Instrumentation and Electronics Engineering, Jadavpur University, Kolkata, India.</p>
+<p>He is a certified Data Scientist specialized in process mining. His research interests include machine learning, data fusion, and optimization.</p></bio>
+<bio id="bio8"><p><xref ref-type="contrib" rid="contrib8">Runu Banerjee Roy</xref> received the Ph.D. degree from Jadavpur University, Kolkata, India, in 2015.</p>
+<p>She is currently a Professor with the Department of IEE, Jadavpur University. Her key research areas electronic tongue, machine olfaction, and pattern recognition.</p></bio>
+</bio-group>
+</back>
+</article>

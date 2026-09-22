@@ -7,6 +7,11 @@ from typing import Any
 
 from lxml import etree
 
+from app.utils.xml_text import (
+    normalize_typographic_ligatures,
+    should_encode_as_hex_entity,
+)
+
 
 def is_element_node(elem: etree._Element) -> bool:
     """True for real elements; comments/PIs use non-string .tag in lxml."""
@@ -78,14 +83,15 @@ _IEEE_CHAR_ENTITIES: dict[str, str] = {
 
 
 def encode_ieee_text_entities(value: str) -> str:
-    """Convert Unicode punctuation to hex XML entities for IEEE templates."""
+    """IEEE hex entities for punctuation and accented letters — not PDF ligatures."""
     if not value:
         return value
+    value = normalize_typographic_ligatures(value.replace("\u00ad", ""))
     out: list[str] = []
     for ch in value:
         if ch in _IEEE_CHAR_ENTITIES:
             out.append(_IEEE_CHAR_ENTITIES[ch])
-        elif ord(ch) > 127:
+        elif should_encode_as_hex_entity(ch):
             out.append(f"&#x{ord(ch):04X};")
         else:
             out.append(ch)
