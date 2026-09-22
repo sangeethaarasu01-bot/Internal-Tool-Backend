@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pymupdf as fitz
 import pytest
 
 from app.agent.pdf_extractor import PDFExtractor
@@ -18,6 +19,31 @@ def ensure_sample_pdf():
         from scripts.generate_sample_pdf import main
 
         main()
+
+
+def test_extract_multiline_ieee_title():
+    """IEEE Sensors-style titles span several lines at the same large font size."""
+    expected = (
+        "A Customized Electronic Tongue by Developing an Array of "
+        "Molecular Imprinted Polymer-Based Voltammetric Electrodes for "
+        "Tea Quality Evaluation"
+    )
+    title_lines = [
+        "A Customized Electronic Tongue by Developing",
+        "an Array of Molecular Imprinted Polymer-Based",
+        "Voltammetric Electrodes for Tea",
+        "Quality Evaluation",
+    ]
+    doc = fitz.open()
+    page = doc.new_page(width=595, height=842)
+    y = 120
+    for line in title_lines:
+        page.insert_text((72, y), line, fontsize=18)
+        y += 22
+    page.insert_text((72, y + 10), "Madhurima Moulick, Sagar Chowdhury", fontsize=10)
+    extractor = PDFExtractor(LLMClient(provider="anthropic", model="mock", api_key=""))
+    assert extractor._extract_title(doc) == expected
+    doc.close()
 
 
 @pytest.mark.asyncio

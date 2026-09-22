@@ -50,19 +50,90 @@ class PDFExtractor:
                         lines.extend(text.splitlines())
         return lines
 
+    def _is_title_page_noise(self, text: str) -> bool:
+        t = text.strip()
+        if not t or re.fullmatch(r"\d{1,4}", t):
+            return True
+        upper = t.upper()
+        if "IEEE" in upper and any(k in upper for k in ("JOURNAL", "SENSORS", "ACCESS", "TRANSACTIONS")):
+            return True
+        if "SENSORS COUNCIL" in upper or upper.startswith("VOL."):
+            return True
+        if upper in {"RESEARCH ARTICLE", "LETTER", "COMMUNICATION"}:
+            return True
+        return False
+
+    def _looks_like_author_line(self, text: str, font_size: float, title_size: float) -> bool:
+        if re.search(r"Member,\s*IEEE", text, re.I):
+            return True
+        if "ORCID" in text.upper():
+            return True
+        # Author lines are usually smaller than the title block
+        if font_size < title_size - 1.0 and re.search(
+            r"[A-Z][a-z\-]+\s+[A-Z][a-z\-]+", text
+        ):
+            names = re.findall(r"[A-Z][a-z]+(?:\s+[A-Z]\.)?\s+[A-Z][a-z\-]+", text)
+            if len(names) >= 2:
+                return True
+        return False
+
     def _extract_title(self, doc: fitz.Document) -> str:
+        """Merge multi-line IEEE titles (same large font on page 1)."""
         page = doc[0]
-        sizes: list[tuple[float, str]] = []
-        for block in page.get_text("dict")["blocks"]:
+        line_rows: list[tuple[float, float, float, str]] = []
+
+        for block in page.get_text("dict").get("blocks", []):
+            if block.get("type") != 0:
+                continue
             for line in block.get("lines", []):
-                for span in line.get("spans", []):
-                    t = span.get("text", "").strip()
-                    if len(t) > 5:
-                        sizes.append((span.get("size", 0), t))
-        if not sizes:
+                spans = line.get("spans", [])
+                if not spans:
+                    continue
+                text = "".join(s.get("text", "") for s in spans).strip()
+                text = re.sub(r"\s+", " ", text)
+                if len(text) < 3 or self._is_title_page_noise(text):
+                    continue
+                max_size = max(float(s.get("size", 0)) for s in spans)
+                y0 = float(line["bbox"][1])
+                x0 = float(line["bbox"][0])
+                line_rows.append((y0, max_size, x0, text))
+
+        if not line_rows:
             return ""
-        sizes.sort(key=lambda x: -x[0])
-        return sizes[0][1]
+
+        max_size = max(sz for _, sz, _, _ in line_rows)
+        size_tol = 1.75
+        page_h = float(page.rect.height)
+
+        candidates: list[tuple[float, str]] = []
+        for y0, sz, _x0, text in sorted(line_rows, key=lambda r: r[0]):
+            if y0 > page_h * 0.52:
+                break
+            if sz < max_size - size_tol:
+                if candidates:
+                    break
+                continue
+            if self._looks_like_author_line(text, sz, max_size):
+                break
+            if re.search(r"^Abstract\b", text, re.I):
+                break
+            candidates.append((y0, text))
+
+        if not candidates:
+            # Fallback: single largest line
+            line_rows.sort(key=lambda r: (-r[1], r[0]))
+            return line_rows[0][3]
+
+        parts: list[str] = []
+        prev_y = -1.0
+        for y0, text in candidates:
+            if prev_y >= 0 and y0 - prev_y > 28:
+                break
+            parts.append(text)
+            prev_y = y0
+
+        title = re.sub(r"\s+", " ", " ".join(parts)).strip()
+        return title
 
     def _extract_abstract_keywords(self, full_text: str) -> tuple[str, list[str]]:
         abstract = ""
@@ -84,6 +155,17 @@ class PDFExtractor:
             keywords = [k.strip() for k in re.split(r"[;,]", raw) if k.strip()]
         return abstract, keywords
 
+    def _line_is_title_fragment(self, line: str, title: str) -> bool:
+        line_s = re.sub(r"\s+", " ", line.strip())
+        title_s = re.sub(r"\s+", " ", title.strip())
+        if not line_s or not title_s:
+            return False
+        if line_s == title_s:
+            return True
+        if line_s in title_s:
+            return True
+        return False
+
     def _extract_authors_affiliations(
         self, lines: list[str], title: str = ""
     ) -> tuple[list[Author], list[Affiliation]]:
@@ -93,7 +175,7 @@ class PDFExtractor:
         for line in lines[:40]:
             if re.search(r"ABSTRACT", line, re.I):
                 break
-            if title and title.strip() == line.strip():
+            if title and self._line_is_title_fragment(line, title):
                 continue
             if len(line) > 160:
                 continue

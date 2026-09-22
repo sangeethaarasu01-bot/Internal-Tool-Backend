@@ -1,0 +1,36 @@
+{
+  "mappings": [
+    {
+      "xml_xpath": "front/article-meta/title-group/article-title",
+      "xml_tag": "article-title",
+      "pdf_field": "title",
+      "transform": "none",
+      "transform_arg": null,
+      "confidence": 0.85,
+      "reasoning": "Heuristic title mapping"
+    },
+    {
+      "xml_xpath": "front/article-meta/abstract",
+      "xml_tag": "abstract",
+      "pdf_field": "abstract",
+      "transform": "none",
+      "transform_arg": null,
+      "confidence": 0.85,
+      "reasoning": "Heuristic abstract mapping"
+    },
+    {
+      "xml_xpath": "front/article-meta/contrib-group/contrib",
+      "xml_tag": "contrib",
+      "pdf_field": "authors[]",
+      "transform": "loop",
+      "transform_arg": null,
+      "confidence": 0.8,
+      "reasoning": "Heuristic author loop"
+    }
+  ],
+  "unmapped_xml": [],
+  "unmapped_pdf": [],
+  "warnings": [],
+  "llm_model": "claude-3-5-haiku-20241022+offline-fallback",
+  "llm_cost_usd": 0.0
+}
