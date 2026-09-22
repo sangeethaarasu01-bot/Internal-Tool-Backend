@@ -1,0 +1,53 @@
+You are a semantic matching expert. Match extracted PDF data to 
+XML template schema.
+
+SCHEMA MAP:
+{schema_map}
+
+PAPER DATA (extracted from PDF):
+{paper_data}
+
+For each XML element in the schema, identify which PDF field(s) 
+should populate it.
+
+RULES:
+- Match by SEMANTIC MEANING, not by name similarity
+- "paper_title" matches "title" even if the XML tag is 
+  "article-title"
+- "author_name" matches "authors[].full_name" even if tag is 
+  "string-name"
+- For arrays: set transform="loop"
+- For "I. Introduction" → label + title: set 
+  transform="loop_with_label_split"
+- For math: transform="to_latex"
+- For dates: transform="to_iso_date"
+- If no match → add to unmapped_xml with reason
+- If PDF field unused → add to unmapped_pdf
+- Confidence 0.0-1.0 (be honest; <0.7 = needs human review)
+
+OUTPUT JSON ONLY:
+{
+  "mappings": [
+    {
+      "xml_xpath": "front/article-meta/title-group/article-title",
+      "xml_tag": "article-title",
+      "pdf_field": "title",
+      "transform": "none",
+      "transform_arg": null,
+      "confidence": 0.98,
+      "reasoning": "Direct semantic match"
+    },
+    {
+      "xml_xpath": "front/article-meta/contrib-group/contrib",
+      "xml_tag": "contrib",
+      "pdf_field": "authors[]",
+      "transform": "loop",
+      "transform_arg": null,
+      "confidence": 0.95,
+      "reasoning": "One contrib per author"
+    }
+  ],
+  "unmapped_xml": [],
+  "unmapped_pdf": [],
+  "warnings": []
+}

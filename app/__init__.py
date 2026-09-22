@@ -1,1 +1,1 @@
-# IEEE XML Converter API
+"""IEEE XML Converter backend."""

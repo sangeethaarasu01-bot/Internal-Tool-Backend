@@ -1,0 +1,8 @@
+Convert this equation (extracted from PDF text) to LaTeX.
+
+RAW TEXT:
+{raw}
+
+Output ONLY the LaTeX math (no $ delimiters, no equation environment 
+unless already present). Preserve subscripts, superscripts, fractions, 
+sums, integrals. If uncertain, wrap in \text{...}.

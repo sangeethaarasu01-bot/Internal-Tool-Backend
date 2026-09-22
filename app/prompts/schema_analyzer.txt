@@ -1,0 +1,38 @@
+Analyze the following XML template and produce a Schema Map.
+
+TEMPLATE XML:
+{template}
+
+STRUCTURAL SKELETON (parsed):
+{skeleton}
+
+For EVERY element (including nested), output:
+- xpath: full path from root (with [N] for repeats)
+- tag: element name
+- semantic: what real-world data does this hold?
+  Choose from (or propose better): paper_title, author_name, 
+  author_first, author_last, orcid, email, affiliation_institution, 
+  city, country, abstract, keyword, section_label, section_title, 
+  paragraph, reference, ref_authors, ref_title, ref_source, 
+  ref_volume, ref_issue, ref_fpage, ref_lpage, ref_year, 
+  ref_month, ref_doi, ref_url, figure_label, figure_caption, 
+  figure_href, table_label, table_title, table_row, table_cell, 
+  equation_latex, equation_number, bio_text, received_date, 
+  accepted_date, doi, manuscript_id, journal_title, issn, 
+  volume, issue, page_start, page_end, counts_fig, counts_table, 
+  counts_equation, counts_ref, counts_page, unknown
+- cardinality: single | repeating
+- data_type: string | number | date | url | xml_fragment | latex | empty
+- required: true if the element appears required in template
+- attributes: dict of attributes with sample values
+- sample: text content from template (or "")
+- children: nested elements
+- notes: any special instruction (e.g. "uses LaTeX notation attr")
+
+OUTPUT JSON ONLY:
+{
+  "root_tag": "...",
+  "namespaces": {"xmlns":"...","xmlns:mml":"..."},
+  "doctype": "..." or null,
+  "elements": [ {...}, {...} ]
+}

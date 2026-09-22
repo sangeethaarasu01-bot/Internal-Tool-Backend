@@ -110,6 +110,62 @@ def test_reference_near_bottom_not_footer(tmp_path: Path) -> None:
     assert decision.exclude_from_content is False
 
 
+def test_ieee_access_margin_boilerplate_excluded() -> None:
+    received = (
+        "Received 13 November 2025, accepted 24 November 2025. "
+        "Date of publication 00 xxxx 0000, date of current version 00 xxxx 0000."
+    )
+    license_line = (
+        "2025 The Authors. This work is licensed under a Creative Commons Attribution 4.0 License."
+    )
+    page = _page(
+        2,
+        [
+            _block("p2_top", "D", [50, 25, 60, 40]),
+            _block("p2_vol", "VOLUME 13, 2025", [200, 25, 400, 40]),
+            _block("p2_body", "Main article paragraph on page two.", [50, 120, 520, 200]),
+            _block("p2_num", "2", [300, 760, 320, 775]),
+            _block("p2_cc", license_line, [50, 743, 520, 770]),
+            _block("p2_hist", received, [50, 60, 520, 90]),
+        ],
+        width=612,
+        height=792,
+    )
+    for block_id, expected in (
+        ("p2_top", "RUNNING_HEADER"),
+        ("p2_vol", "RUNNING_HEADER"),
+        ("p2_num", "PAGE_NUMBER"),
+        ("p2_cc", "FOOTER"),
+        ("p2_hist", "RUNNING_HEADER"),
+    ):
+        block = next(b for b in page.blocks if b.block_id == block_id)
+        decision = classify_content_block(
+            block,
+            2,
+            page.width,
+            page.height,
+            in_references=False,
+            running_header_pages={},
+            page_number_candidates={"2": {2}},
+            body_font_size=10.0,
+        )
+        assert decision.exclude_from_content is True
+        assert decision.classification == expected
+
+    body = next(b for b in page.blocks if b.block_id == "p2_body")
+    body_decision = classify_content_block(
+        body,
+        2,
+        page.width,
+        page.height,
+        in_references=False,
+        running_header_pages={},
+        page_number_candidates={},
+        body_font_size=10.0,
+    )
+    assert body_decision.exclude_from_content is False
+
+
 def test_copyright_footer_excluded() -> None:
     page = _page(
         1,

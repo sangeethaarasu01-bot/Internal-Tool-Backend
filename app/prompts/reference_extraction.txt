@@ -1,0 +1,30 @@
+Convert this reference to XML matching the target template's citation style.
+
+TARGET TEMPLATE CITATION EXAMPLES:
+{examples}
+
+REFERENCE {number}:
+{raw_text}
+
+Detect publication-type: periodical | book | confproc | report | 
+manual | online | book.
+
+Extract into the template's citation structure (tags may differ 
+per client — mirror the examples exactly).
+
+OUTPUT JSON ONLY:
+{
+  "publication_type": "periodical",
+  "authors": [{"given":"H.","surname":"Sung"}, ...],
+  "article_title": "...",
+  "source": "...",
+  "volume": "...",
+  "issue": "...",
+  "fpage": "...",
+  "lpage": "...",
+  "month": "...",
+  "year": "...",
+  "doi": "...",
+  "url": "...",
+  "extra_xml": "<any client-specific tags>"
+}

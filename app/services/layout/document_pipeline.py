@@ -21,6 +21,7 @@ from app.services.layout.semantic_builder import build_semantic_document
 from app.services.layout.semantic_patterns import REFERENCE_HEADING_RE, first_line, normalize_text
 from app.services.layout.text_filter import (
     build_page_number_candidates,
+    build_running_footer_candidates,
     build_running_header_candidates,
     classify_content_block,
     collect_author_running_header_prefixes,
@@ -32,6 +33,7 @@ REFS_HEADING = re.compile(r"^\s*REFERENCES\s*$", re.IGNORECASE | re.MULTILINE)
 
 def process_document_structure(raw: ExtractionResult) -> DocumentStructureResult:
     running_headers = build_running_header_candidates(raw)
+    running_footers = build_running_footer_candidates(raw)
     page_numbers = build_page_number_candidates(raw)
     author_header_prefixes = collect_author_running_header_prefixes(raw)
 
@@ -62,6 +64,7 @@ def process_document_structure(raw: ExtractionResult) -> DocumentStructureResult
             page_numbers,
             body_font_size,
             author_header_prefixes,
+            running_footers,
         )
 
         if decision.classification in {"BODY_TEXT", "UNKNOWN_TEXT"} and len(text) > 20:

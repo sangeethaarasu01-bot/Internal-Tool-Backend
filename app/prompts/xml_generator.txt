@@ -1,0 +1,21 @@
+Fill this XML template with paper data per the mapping plan.
+
+TEMPLATE XML (structure must not change):
+{template}
+
+PAPER DATA:
+{paper_data}
+
+MAPPING PLAN:
+{mapping_plan}
+
+{prior_errors_block}
+
+Generate the final XML:
+- Preserve template's tags, hierarchy, namespaces, DOCTYPE, comments
+- Insert values at mapped XPaths
+- Duplicate repeating elements per array length
+- Apply transforms (loop, label_split, escape_xml, to_latex, etc.)
+- Leave unmapped elements empty (do NOT drop them)
+- Escape XML special chars
+- Return ONLY the XML. No markdown. No explanation.

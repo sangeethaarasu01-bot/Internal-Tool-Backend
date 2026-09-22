@@ -1,84 +1,57 @@
-import logging
-import os
-from pathlib import Path
+"""FastAPI application entrypoint."""
 
-from dotenv import load_dotenv
+import asyncio
+import time
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.database import MONGODB_DB, ensure_indexes, get_client, uses_local_mongo
-from app.routes import conversions, extractions, upload
+from app.api import clients, convert, jobs, schema, stream, upload
+from app.config import settings
+from app.db import create_db_and_tables
+from app.events import EVENTS, EVENT_TIMESTAMPS
+from app.utils.logger import logger
 
-_root = Path(__file__).resolve().parent.parent
-load_dotenv(_root / ".env", override=False)
-if os.getenv("USE_LOCAL_MONGO", "").strip().lower() in {"1", "true", "yes"}:
-    load_dotenv(_root / ".env.local", override=True)
-logging.basicConfig(level=logging.INFO)
 
-app = FastAPI(title="IEEE XML Converter API")
+async def _cleanup_old_events() -> None:
+    while True:
+        await asyncio.sleep(3600)
+        now = time.time()
+        for jid, ts in list(EVENT_TIMESTAMPS.items()):
+            if now - ts > 3600:
+                EVENTS.pop(jid, None)
+                EVENT_TIMESTAMPS.pop(jid, None)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db_and_tables()
+    settings.ensure_data_dirs()
+    logger.info("IEEE XML Converter API started")
+    task = asyncio.create_task(_cleanup_old_events())
+    yield
+    task.cancel()
+
+
+app = FastAPI(title="IEEE XML Converter API", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "https://internal-tool-sepia.vercel.app",
-    ],
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-os.makedirs(os.getenv("UPLOAD_DIR", "./uploads"), exist_ok=True)
-
-
-@app.on_event("startup")
-def startup() -> None:
-    from app.config import llm_config
-
-    logging.info(
-        "LLM config: provider=%s model=%s max_retries=%s anthropic_timeout=%ss",
-        llm_config.LLM_PROVIDER,
-        llm_config.LLM_MODEL,
-        llm_config.LLM_MAX_RETRIES,
-        llm_config.ANTHROPIC_REQUEST_TIMEOUT,
-    )
-    try:
-        ensure_indexes()
-        logging.info("MongoDB connected: %s", MONGODB_DB)
-    except Exception:
-        if uses_local_mongo():
-            logging.error(
-                "MongoDB URI is localhost. Set MONGODB_URI on Render to your Atlas mongodb+srv:// string."
-            )
-        else:
-            logging.error(
-                "Atlas URI is set but connection failed. In Atlas: Network Access → "
-                "Add IP Address (your IP or 0.0.0.0/0 for dev), wait 1-2 min, restart. "
-                "Local dev: use Python 3.12 (py -3.12 -m venv venv). Render: PYTHON_VERSION=3.12.8."
-            )
-        logging.exception("MongoDB connection failed on startup")
-
-app.include_router(upload.router, prefix="/api/upload", tags=["Upload"])
-app.include_router(conversions.router, prefix="/api/conversions", tags=["Conversions"])
-app.include_router(extractions.router, prefix="/api/extractions", tags=["Extractions"])
-
-
-@app.get("/")
-async def root():
-    return {"message": "IEEE XML Converter API is running", "db": "ieee_converter"}
+app.include_router(upload.router, prefix="/api")
+app.include_router(convert.router, prefix="/api")
+app.include_router(stream.router, prefix="/api")
+app.include_router(jobs.router, prefix="/api")
+app.include_router(clients.router, prefix="/api")
+app.include_router(schema.router, prefix="/api")
 
 
 @app.get("/health")
-async def health():
-    try:
-        get_client().admin.command("ping")
-        return {"status": "healthy", "mongo": "connected", "db": MONGODB_DB}
-    except Exception as exc:
-        return {
-            "status": "degraded",
-            "mongo": "disconnected",
-            "error": type(exc).__name__,
-            "local_uri": uses_local_mongo(),
-        }
+def health() -> dict:
+    return {"status": "ok", "version": "1.0.0"}

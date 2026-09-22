@@ -1,0 +1,2166 @@
+{
+  "title": "Breast Cancer Diagnosis With Explainable",
+  "authors": [
+    {
+      "first_name": "Artificial",
+      "last_name": "Intelligence",
+      "full_name": "Artificial Intelligence",
+      "orcid": null,
+      "email": "RizwanKhan@iba.edu.pk",
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": true,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Uncovering",
+      "last_name": "Strengths",
+      "full_name": "Uncovering Strengths",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Claude",
+      "last_name": "Bernard",
+      "full_name": "Claude Bernard",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Laboratoire",
+      "last_name": "Hubert",
+      "full_name": "Laboratoire Hubert",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "France",
+      "last_name": "Corresponding",
+      "full_name": "France Corresponding",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Rizwan",
+      "last_name": "Ahmed",
+      "full_name": "Rizwan Ahmed",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    }
+  ],
+  "affiliations": [
+    {
+      "id": "aff1",
+      "department": null,
+      "institution": "See PDF for affiliation details",
+      "city": null,
+      "state": null,
+      "post_code": null,
+      "country": null
+    }
+  ],
+  "abstract": "Breast cancer is one of the most common malignancies afﬂicting women globally, necessitating the use of cutting-edge AI approaches in diagnostic procedures to improve patient outcomes drastically. However, one key difﬁculty with the most recent AI models is a lack of transparency, making it difﬁcult for medical practitioners to implement these technologies to increase diagnostic accuracy. Many explainable AI (XAI) solutions have been developed to overcome this issue. This survey focuses on applying XAI approaches in breast cancer detection and diagnosis, particularly emphasizing their role in increasing model transparency and clinical decision-making. The article also provides insights into the inherent biases in the most recent machine learning models towards speciﬁc XAI approaches, such as the compatibility of Convolutional Neural Networks (CNNs) with visual explanation methods and tree-based models with feature signiﬁcance evaluations. Finally, the article covers the obstacles to using XAI technologies in clinical practice and the signiﬁcance of deﬁning standard measures for assessing their performance.",
+  "keywords": [
+    "Explainable artiﬁcial intelligence (XAI)",
+    "breast cancer detection",
+    "interpretability",
+    "transparency",
+    "medical imaging",
+    "clinical decision-making."
+  ],
+  "sections": [
+    {
+      "id": "sec1",
+      "label": "I.",
+      "title": "INTRODUCTION",
+      "level": 1,
+      "paragraphs": [
+        "Breast cancer (BC) ranks as the predominant form of cancer in adults worldwide, with an alarming rate of over 2.3 million new cases each year, as reported by the World Health Organization (WHO) 2022 [1]. Breast cancer survival rates vary signiﬁcantly across the globe, with a majority of deaths occurring in low- and middle-income countries. Early detec- tion is crucial as it leads to a clinical cure rate of over 90%, but this decreases signiﬁcantly as the cancer progresses [2]. Integrating artiﬁcial intelligence (AI) techniques into breast cancer diagnosis can improve early diagnosis and patient outcomes. AI systems’ ability to analyze large datasets, recognize patterns, and perform predictive analysis can The associate editor coordinating the review of this manuscript and approving it for publication was Juan Wang . VOLUME 13, 2025 2025 The Authors. This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/ 1 enhance decision-making and personalized care, ultimately improving the precision and effectiveness of diagnosis and treatment strategies [3]. Breast cancer is categorized into three primary groups that reﬂect the stage of the disease and the complexity of treatment. Primary breast cancer, which makes up 80% of cases, is found initially in the breast without having spread beyond the breast or the lymph nodes under the arms. Secondary breast cancer, constituting 14% of cases, involves cancer spreading to other parts of the body, such as the lungs, bones, or liver. The smallest group, which accounts for 6% of cases, includes those with both primary and secondary characteristics due to recurrence, indicating that the cancer has returned after treatment, either at the original site or elsewhere. The studies reviewed in this article are distributed according to the abovementioned categories. AI optimizes diagnostics and treatments by analyzing vast medical data, including Electronic Health Records (EHRs) and image data, to identify patterns and accurately predict outcomes. It aids in detecting diseases like cancer in medical images, enhancing diagnoses and patient outcomes. By analyzing medical history and genetic data, AI enables early disease detection and suggests preventive measures, improving patient care. Moreover, by automating routine tasks, AI reduces healthcare costs and streamlines workﬂows, allowing providers to focus on complex cases and improving patient access to care [4]. However, some limitations must be considered. One of the limitations is the inadequate diversity of the training data utilized. For instance, if the training data consists of images of breasts from only one ethnic group, it may not accurately identify cancer in breasts from other ethnic groups [5]. Moreover, the systems might lack clarity, posing a challenge for doctors to comprehend the reasoning guiding the system’s decision-making process. This lack of transparency could be troublesome in medical contexts, where human expertise and intuition are necessary for accurate diagnosis [6], [7]. To address these limitations, Explainable Artiﬁcial Intelli- gence (XAI) could be a promising approach that offers clear explanations of AI systems’ decision-making processes. This clarity increases trust in recommendations for both medical professionals and patients, aiding informed decision-making. Additionally, interpretability helps reduce false positives and negatives, enhancing accuracy and minimizing risks in diagnosis and treatment [8], [9], [10]. This article provides a comprehensive overview of XAI techniques leveraged for various state-of-the-art breast cancer detection applications. Examples of these XAI techniques include case-based rea- soning (CBR), visualization, and feature importance analysis. Additionally, the emphasis is on the main XAI methods discussed in the paper - LIME, SHAP, and GRAD CAM- rather than focusing on others. This article presents a systematic literature review (SLR) examining the use of Explainable Artiﬁcial Intelligence (XAI) strategies in breast-cancer detection and diagnosis. We evaluate how XAI methods enhance model transparency and trust in automated systems, identify prevailing gaps across existing studies, highlight promising future paths for XAI in medical imaging, and investigate the inﬂuence of XAI on clinical decision-making and patient outcomes. While prior reviews have focused on the broader appli- cation of XAI in medical imaging, this paper narrows the scope to breast-cancer diagnosis only. In doing so, our contributions are three-fold: (a) We present a novel mapping between explanation-methods, model types and bias sources (i.e., a bias/explanation-method/model-type matrix). (b) We conduct a quantitative meta-analysis of 44 selected studies, assessing patterns of explanation-method usage and model-explanation alignment. (c) We discussed about evaluation frameworks that brings together bias detection and fairness metrics, clinical workﬂow integration and usability considerations for XAI in the breast-cancer context. These 2 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases elements provide a focused and actionable overview that goes beyond general XAI surveys and directly supports the translation of XAI technologies into breast-cancer diagnostic workﬂows. The structure of the article is as follows: Section II outlines the review methodology and protocol. Section III presents the meta-analysis of selected studies, including publication sources, citation trends, geographic distribution and dataset modalities. Section IV provides an overview of XAI techniques and analyzes their frequency of application across various machine learning (ML) and deep learning (DL) models. Section V discusses the speciﬁc XAI methods utilized for explaining ML/DL models applied to primary and secondary breast-cancer detection. Section VI offers a comprehensive analysis of the most frequently employed XAI techniques and their implications, while Section VII concludes with a discussion of key implications and future research directions."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    },
+    {
+      "id": "sec2",
+      "label": "II.",
+      "title": "REVIEW METHOD",
+      "level": 1,
+      "paragraphs": [
+        "This paper uses the PRISMA (Preferred Reporting Items on Systematic Reviews and Meta-analysis) [11], [12] model. As mentioned above, this SLR aims to identify and present literature on XAI in breast cancer detection and diagnosis, with a particular emphasis on their role in increasing model transparency, thus enhancing trust in automated detec- tion systems among healthcare professionals and patients. This study will examine different XAI methods, including model-agnostic and model-speciﬁc approaches, to assess their ability to enhance breast cancer detection accuracy. In summary, the objectives of this review are: 1) To identify, collect, and synthesize existing research on the application of XAI techniques in the detection and diagnosis of breast cancer. 2) To assess various XAI approaches, including both model-agnostic and model-speciﬁc techniques, in terms of their effectiveness in improving the transparency and diagnostic accuracy of ML and DL models used for breast cancer detection."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec3",
+          "label": "3)",
+          "title": "To explore the obstacles faced in integrating XAI",
+          "level": 3,
+          "paragraphs": [
+            "technologies into clinical workﬂows for breast cancer diagnosis and to emphasize the importance of develop- ing standardized metrics for evaluating the performance and effectiveness of XAI models. The study will also investigate how XAI techniques can enhance trust in automated detection systems among healthcare professionals and patients."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec4",
+          "label": "A.",
+          "title": "REVIEW PROTOCOL",
+          "level": 2,
+          "paragraphs": [
+            "This study was initiated by developing a thorough review protocol aligned with established methodologies for com- prehensive literature surveys [13]. The protocol serves as a guide for the survey process by outlining key components such as the study’s background, the literature search strategy, S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases FIGURE 1. Complete overview of studies selection process. methods for data extraction, and criteria for assessing the quality of included studies. The review protocol separates SLRs from traditional or narrative literature reviews. It improves the uniformity of the review process. It reduces researcher bias by demanding the provision of an explicit search strategy as well as established criteria for the inclusion and removal of studies."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec5",
+          "label": "B.",
+          "title": "CRITERIA FOR INCLUSION AND EXCLUSION",
+          "level": 2,
+          "paragraphs": [
+            "Setting precise inclusion and exclusion criteria guarantees that only pertinent articles on breast cancer diagnosis using XAI are included in this study. We focused on studies published in reputable journals from January 2019 to June 2025. Our initial search based on the listed keywords resulted in 6302 research articles (refer to Figure 1 for a complete overview of the selection process). After a thorough review of the articles, we excluded articles that were unrelated to an XAI but appeared in the search because of keyword match. Additionally, articles were also excluded based on duplicity and non-availability of full text."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec6",
+          "label": "C.",
+          "title": "SEARCH STRATEGY",
+          "level": 2,
+          "paragraphs": [
+            "To conduct this survey, our search strategy aimed to gather relevant research articles addressing the application of XAI in breast cancer detection. Both automatic and manual search methods were employed to ensure comprehensive coverage of the available literature. The automatic search was conducted using reputable databases known for hosting scholarly works related to XAI and healthcare, refer to Figure 1. These databases were selected for their extensive collection of relevant research articles in the ﬁeld. While other sources such as magazines, working papers, newspapers, books, and blogs contain valuable information, they were not included in this survey due to the lack of rigorous peer-review processes, which could potentially compromise the reliability and quality of the ﬁndings. A variety of general keywords exploring different aspects of XAI in breast cancer diagnosis were used for the search. VOLUME 13, 2025 3 These keywords were derived from the research questions and study titles to ensure relevance. The selected keywords include the following: • ‘‘Explainable AI’’ AND ‘‘Breast Cancer’’ • ’’Interpretable Machine Learning’’ AND ‘‘Breast Can- cer Diagnosis’’ • ’’XAI’’ AND ‘‘Oncology’’ • ’’Explainable Deep Learning’’ AND ‘‘Breast Cancer Detection’’ • ’’Transparent AI Models’’ AND ‘‘Breast Cancer Prognosis’’ • ’’Interpretable AI’’ AND ‘‘Mammography Analysis’’ • ’’Explainable Artiﬁcial Intelligence’’ AND ‘‘Medical Imaging’’ • ’’XAI’’ AND ‘‘Breast Cancer Risk Prediction’’ • ’’Interpretable Neural Networks’’ AND ‘‘Breast Cancer Screening’’ • ’’Explainable Machine Learning’’ AND ‘‘Cancer Research’’ These keywords were designed to capture a broad range of relevant articles, ensuring a comprehensive understanding of the topic."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec7",
+          "label": "D.",
+          "title": "QUALITY ASSESSMENT CRITERIA",
+          "level": 2,
+          "paragraphs": [
+            "The quality assessment criteria (QAC) aim to determine the overall quality of a selected group of studies. The following criteria were applied to evaluate the quality of the chosen studies."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": [
+            {
+              "id": "sec8",
+              "label": "1)",
+              "title": "Are the subjects covered in the research study related to",
+              "level": 3,
+              "paragraphs": [
+                "the aims of this review article?"
+              ],
+              "equations": [],
+              "figure_refs": [],
+              "table_refs": [],
+              "subsections": [
+                {
+                  "id": "sec9",
+                  "label": "2)",
+                  "title": "Does the research publication describe the approach and",
+                  "level": 3,
+                  "paragraphs": [
+                    "methods clearly? 3) Is the data used in the study standardized? If not, is ethical approval mentioned in the study? 4) Is data analysis explained with appropriate examples? To evaluate each study’s trustworthiness, we assessed 62 chosen papers using the previously deﬁned quality rating criteria. The four QA criteria have been adapted from [13]. The quality of each study was evaluated using the score received for each QA question, with each question worth a maximum of two points. Studies scoring six or higher out of eight were considered qualiﬁed for inclusion. As a result, papers with scores below six were omitted from the study. Based on this criterion, 44 papers were eventually chosen for inclusion in this review. Figure 1 provides a thorough summary of the selection process."
+                  ],
+                  "equations": [],
+                  "figure_refs": [],
+                  "table_refs": [],
+                  "subsections": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec10",
+      "label": "III.",
+      "title": "META ANALYSIS",
+      "level": 1,
+      "paragraphs": [
+        "This section presents a comprehensive meta-analysis of the selected research studies. The analysis focuses on several essential factors, including the sources of publication, citation counts, and temporal trends. Additionally, a demographic overview is provided to highlight the geographic and institutional distribution of the studies. Lastly, we examine the various dataset modalities used in the selected research. This extensive review aims to provide insights into the effects, relevance, and spread of research on this topic."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec11",
+          "label": "A.",
+          "title": "SELECTED STUDIES",
+          "level": 2,
+          "paragraphs": [
+            "Table 1 summarizes the metadata ﬁelds extracted from the selected 44 research studies. Meanwhile, Table 2 presents the distribution of articles across different quartiles and publishing platforms related to breast cancer detection and classiﬁcation using XAI. It categorizes publications into Quartile 1 (Q1) and Quartile 2 (Q2) according to Scimago rankings. The citation data, obtained from Google Scholar, provided a detailed view of the scholarly impact of the included research articles. This combination of quartile categorization by Scimago Journal Rank (SJR) and citation analysis from Google Scholar offers valuable perspectives on the research’s distribution and inﬂuence, aiding in a thorough understanding and evaluation of the ﬁeld within the academic community."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec12",
+          "label": "B.",
+          "title": "TEMPORAL ANALYSIS",
+          "level": 2,
+          "paragraphs": [
+            "The temporal analysis of research reveals distinct patterns in annual publications, indicative of evolving scholarly interest and engagement with the subject matter. The minimal publication activity in 2019 was followed by a signiﬁcant increase in research from 2020 to 2021 and a slight decrease in 2022, with a resurgence in 2023 as shown in Figure 2, suggests that factors such as funding, academic priorities, and technological advancements might have inﬂuenced these trends. Thus, highlighting the growing importance and potential for further exploration and innovation in integrating XAI into breast cancer diagnosis."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec13",
+          "label": "C.",
+          "title": "GEOGRAPHIC DISTRIBUTION",
+          "level": 2,
+          "paragraphs": [
+            "The geographic distribution of research publications reﬂects the global commitment to advancing the ﬁeld of breast cancer detection and classiﬁcation using XAI. The map illustrated in Figure 3, highlights the number of publications from each country based on author afﬁliation in this domain. China is at the forefront with six publications, followed by Italy with four and Turkey with three publications, respectively. This 4 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases widespread participation from various countries highlights the global collaboration and concerted efforts to push forward research in this vital healthcare sector."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec14",
+          "label": "D.",
+          "title": "DATASET AND MODALITIES FOR BREAST CANCER",
+          "level": 2,
+          "paragraphs": [
+            "Early detection and accurate classiﬁcation of breast tumors as benign or malignant are crucial in preventing the progression of breast cancer and reducing associated mortality rates. The correct diagnosis enables timely and effective treatment, signiﬁcantly improving patient outcomes. Various imaging modalities play essential roles in these early detection efforts, with each technology chosen based on speciﬁc diagnostic needs. In this section, we examine the various dataset modalities used by the selected research studies. The analysis in graphically presented in Figure 4. In this ﬁgure, each bar represents a speciﬁc imaging modality (name written at the bottom), with the accompanying dataset names given at the top. The height of each bar represents the total number of studies that used that modality, giving a clear visual depiction of how frequently each dataset modality was used. This analysis illustrates the variability in data utilization among studies, providing insights into potential patterns and gaps. Among the most commonly employed imaging modalities for detecting and diagnosing breast cancer are mammograms, CT Scans, ultrasounds, and Histotpathological (Whole Side Images (WSI)). These modalities offer unique beneﬁts that are instrumental in identifying cancerous changes at an early stage. For instance, mammograms are a primary tool in breast cancer screening programs due to their effectiveness in detecting early signs of cancer through low-dose X-ray images. These images are easy to capture and are often used as the ﬁrst test in breast cancer detection. In addition to traditional imaging techniques, integrating advanced modalities like Digital Breast Tomosynthesis (DBT) and various genomic datasets enhances the depth and accuracy of breast cancer analysis. Additionally, the features dataset refers to the variables or attributes that describe each instance in a dataset. These features serve as inputs to the model, helping it to identify patterns and make predictions. They can be represented in a structured, tabular format, typically comprising numerical values (e.g., age, income) and categorical values (e.g., gender, product type), or even pixel- based values from images that capture visual information. The visual representation of each modality is depicted in Figure 5. The literature review has indicated that XAI methods have been signiﬁcantly employed across various modalities, with the features dataset emerging as a prominently utilized resource for enhancing the transparency and interpretability of models in breast cancer research, as exhibited in Figure 4. A feature dataset in breast cancer research encompasses speciﬁc attributes gathered from various diagnostic tools, including imaging, genetic tests, and biochemical analysis. Imaging features from mammograms detail tumor character- istics like shape and texture [72]. Histopathological features S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases TABLE 1. Selected studies and citations, ordered by their year of publication (Last accessed on November 2025). VOLUME 13, 2025 5 TABLE 1. (Continued.) Selected studies and citations, ordered by their year of publication (Last accessed on November 2025). 6 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases TABLE 2. The Quartile information and number of citations for XAI in breast cancer domain. involve the microscopic analysis of tissue samples [33], and genomic features highlight gene expression and muta- tions [20], [25], [40], [49]. Biochemical features such as levels of enzymes, including lactate dehydrogenase, alkaline phosphatase, and aromatase, as well as hormone assays, provide insights into biological activities associated with cancer [32], [43]. Clinical features integrate personal data such as age and family history [41], [45]. These comprehensive modalities encompass not just the screening and detection but also the segmentation and classiﬁcation of breast cancer, utilizing a broad range of datasets and imaging technologies. Each modality contributes uniquely to the complex process of cancer diagnosis, from the detailed anatomical insights provided by the genetic informa- tion revealed through genomic databases. This multi-modal strategy is critical for developing a nuanced understanding of breast cancer, leading to more personalized and effective treatment strategies. Thus, the blend of traditional and advanced imaging modalities, enriched by diverse datasets, highlights the multidisciplinary nature of contemporary breast cancer research and treatment."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec15",
+      "label": "IV.",
+      "title": "TAXONOMY AND FOUNDATIONS OF EXPLAINABLE",
+      "level": 1,
+      "paragraphs": [
+        "ARTIFICIAL INTELLIGENCE (XAI) TECHNIQUES ML and DL models have been extensively used in the healthcare domain to predict and diagnose different diseases, such as Autism Spectrum Disorder (ASD) [73], and other kinds of cancer, for instance, lung cancer [74], breast cancer [75], etc. However, the black-box aspect of these models complicates interpretability, which is crucial for clinical decision-making [76]. XAI approaches have been developed to increase transparency and trust in model predictions as explained in Figure 6. This section presents a taxonomy of XAI methodolo- gies, focusing on the three most often used approaches: SHapley Additive Explanations (SHAP), Local Interpretable Model-Agnostic Explanations (LIME), and Gradient- weighted Class Activation Mapping (Grad-CAM). The strengths and weaknesses have been discussed in Section VI. As this review article is a comprehensive examination of individual studies, aiming to pinpoint the algorithms and methodologies proposed, this section showcases the relationship between ML/DL models and XAI techniques, as outlined in Table 3. Table 5 (in Section VI) presents a per-study view and statistical analysis of the utilized XAI techniques. When VOLUME 13, 2025 7 combined with the Table 3, these insights reveal biases of different families of machine learning algorithms towards speciﬁc XAI techniques. A comprehensive taxonomy of XAI techniques is pre- sented in Figure 7. In general, XAI models can be categorized into two types, including intrinsic and post-hoc models. It is possible to explain and comprehend intrinsic models, also called transparent models. Typical examples of trans- parent models include linear regression, logistic regression, and decision trees [112]. On the other hand, post-hoc is categorized into model-speciﬁc and model-agnostic. XAI explanations can also be categorized into two main types based on their scope, which includes global and local. A global explanation offers a comprehensive overview of the entire model, while a local explanation focuses on a single prediction or output. The speciﬁcs of various XAI models are outlined in the following subsections, based on their prevalence in ML/DL applications within the breast cancer domain. The following subsections provide a detailed discussion of widely used XAI models."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec16",
+          "label": "A.",
+          "title": "EVALUATION FRAMEWORKS AND METRICS FOR",
+          "level": 2,
+          "paragraphs": [
+            "EXPLAINABLE AI XAI seeks to bridge the gap between the opaque decision-making of AI models and the need for human interpretability, fostering trust and reliability in AI-driven systems. However, measuring the effectiveness of XAI requires a multifaceted approach that addresses both technical rigor and user-centric considerations. A robust evaluation framework ensures explanations are not only accurate and reliable but also actionable and comprehensible to diverse stakeholders. Measuring Explainable Artiﬁcial Intelligence (XAI) involves a multifaceted evaluation that balances technical accuracy with user-centric effectiveness, ensuring explana- tions are both reliable and actionable. Fidelity is a critical metric, assessing how well explanations mirror the model’s decision-making process. Methods such as Correlation Metrics and Fidelity Scores, like Mean Squared Error (MSE), compare explanations with model predictions to validate their accuracy. Stability and Consistency are equally important, as they measure whether explanations remain reliable under slight input changes. This can be evaluated through Variance Analysis and Consistency Scores, ensuring trust in the system. Another vital consideration is Computational Efﬁciency, which focuses on the time and resources needed to generate explanations. Tools like Runtime Analysis and Resource Utilization are used to assess whether the system is suitable for real-time or resource-constrained applications. Beyond technical metrics, Comprehensibility and Usability are central to the user experience. These are often measured using User Surveys, Think-Aloud Protocols, and the System Usability Scale (SUS) to gather feedback on the clarity, coherence, and satisfaction users derive from explanations. FIGURE 2. The distribution of studies about breast cancer diagnosis using XAI spanning from 2019-2025. FIGURE 3. Investigating breast cancer diagnosis with XAI: Analyzing first author affiliation belonging to different countries. Task-speciﬁc effectiveness is another key area, particularly how explanations inﬂuence Decision-Making Impact and support Debugging and Model Improvement. Metrics such as Task Performance and Decision Conﬁdence evaluate whether explanations help users make faster, more accurate decisions. At the same time, Error Detection Rates and Bias Identiﬁcation measure the ability of explanations to uncover model errors and biases, enhancing both trust and model reﬁnement. Subjective metrics like Trust and Transparency focus on user perceptions, assessed through Trust Scales and surveys on Perceived Transparency, ensuring that users feel conﬁdent in the model’s reliability. Satisfaction and User 8 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases Conﬁdence are equally signiﬁcant, gauged via Satisfaction Surveys and Conﬁdence Ratings, which reﬂect the over- all success of the explanation system in engaging users effectively. To support these evaluations, various frameworks and toolkits are available. Tools like LIME (Local Interpretable Model-agnostic Explanations) and SHAP (SHapley Additive exPlanations) offer built-in metrics for assessing ﬁdelity and consistency. Additionally, Explainable AI Evaluation Frameworks (XAI-EF) provide structured methodologies for user-centric evaluation, while Benchmark Datasets ensure objective comparison of explanation quality across different models and applications. These comprehensive measures S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases FIGURE 4. Graph illustrating the distribution of selected studies based on the use of specific imaging modalities or datasets. Features Wisconsin Breast Diagonstic Dataset (WBDC) [58] and others}, Mammograms {Breast Cancer Dataset (BCD) [59], Mammographic Mass (MM) [60], MIAS, Digital Database for Screening Mammography (DDSM) [61], INbreast [62], Wisconsin Breast Cancer (WBC) [58], and Radiological Society of North America (RSNA) [63] and others}, Genes {The Cancer Genome Atlas (TCGA) and Gene Expression Omnibus (GEO) (TCG-GEO) [64], [65], and National Center for Biotechnology Information (NCBI) and Gene Expression Omnibus (NCBI-GEO) [66], [67]}, Ultrasound {Breast Ultrasound Image (PlumX) [68], Breast Ultrasound Image (BUSI) [69], and others}, Histopathological {BreakHis [70], BACH, ITU-MED-1, ITU-MED-2 [26], and others}, Digital Breast Tomosynthesis (DBT) {Two in House (TiH) [28] and others}, Computed Tomography (CT){others}, and Infrared {Mastology DRM (MDRM) [71]}. Others: Proprietary datasets. FIGURE 5. Visual representation of the modalities. ensure that XAI systems are not only technically sound but also effective in real-world applications.The explanation provided in this section is based on/conferred from the article by Sokol and Flach [113]. VOLUME 13, 2025 9 FIGURE 6. Concept of black box models focusing the essential aspect of explainability in machine learning [76]. TABLE 3. Association of machine learning/deep learning models with utilized XAI methods in reviewed studies (holistic view) CBR= Case-based Reasoning, (G)LRP= (Graph) Layer-wise Relevance Propagation, PIMP= Permutation Importance, PDP= Partial Dependence Plot, ADR= Adaptive Dimension Reduction, RF= Random Forest, LightGBM= Light Gradient Boosting Machine, SVM= Support Vector Machine, MIB-Net= Multitask Information Bottleneck Network, MaxVit= Multi-axis vision transformer, LSTM= Long Short-term Memory. B. SHapley ADDITIVE ExPlanations (SHAP): GAME-THEORETIC FRAMEWORK FOR FEATURE ATTRIBUTION AND MODEL EXPLAINABILITY Lundberg and Lee [77] presented a uniﬁed framework, SHAP for predicting interpretations. Each feature 10 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases is assigned an essential value for a particular prediction. SHAP is a post-hoc and model-agnostic, explainable model in machine learning. It can explain the output of any black box model by computing the contribution of each S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases FIGURE 7. XAI taxonomy; A detailed depiction. VOLUME 13, 2025 11 feature to the prediction. SHAP values provide a measure for the impact of each feature in a given data instance on the model’s output, offering both a global and local understanding of the model. The mathematical foundation of SHAP is rooted in game theory [114], speciﬁcally in the concept of Shapley values. Its design ensures equitable distribution of the ‘‘payout’’ (prediction) among the ‘‘players’’ (features)."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": [
+            {
+              "id": "sec17",
+              "label": "1)",
+              "title": "SHAP EQUATION",
+              "level": 3,
+              "paragraphs": [
+                "The primary SHAP equation is formulated as follows: |z′|! (M −|z′| −1)! φ(f , x) = \u0002 \u0003 fx(z′) −fx(z′ \\ i) \u0004 (1) M! z′⊆x′ where, φ(f , x) represents the SHAP value for a prediction f given the input x, z′ is a subset of the features, M is the total number of features, |z′| is the number of non-zero entries in z′ and fx(z′) is the prediction for the subset z′, and fx(z′ \\ i) is the prediction without a particular feature. For the given equation 1 the underlying properties taken into consideration are as follows; 1) Local Accuracy: This ensures that the explanation model’s output g(x′) matches the output of the original model f (x) for any input x. The relationship is given by: M \u0002 f (x) = g(x′) = φ0 + i=1 φix′ i (2) • φ0 is the base value (model’s output for the average of all inputs). • φi are the SHAP values attributing the difference from the base value to each feature. 2) Missingness: This principle asserts that if a feature is absent (or has a value of zero) in the input, it should not inﬂuence the prediction. It’s mathematically represented as: x′ i = 0 ⇒φi = 0 (3) This ensures that features not present do not impact the model’s output. 3) Consistency: The SHAP values should remain consis- tent when the inﬂuence of a feature on the model output increases or remains unchanged. If increasing or keeping a feature constant increases the output, the SHAP value for that feature should not decrease. This is crucial to ensuring that more inﬂuential features are always given higher importance. Let fx(z′) = f (hx(z′)) and z′ i denote setting z′ i = 0. For any two models, f and f ′, if f ′ x(z′) −f ′ x(z′ \\ i) ≥fx(z′) −fx(z′ \\ i) (4) ∀z′ ∈{0, 1}M, then φi(f ′, x) ≥φi(f , x) (5) SHAP values provide a mathematically rigorous, fair, and consistent method for interpreting machine learning 12 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases model predictions, making them an invaluable tool in explainable AI. C. CLASS ACTIVATION MAP AND GRADIENT-WEIGHTED CLASS ACTIVATION MAP (GRAD-CAM): VISUAL EXPLAINABILITY FOR DEEP LEARNING MODELS Zhou et al. [80] introduced class activation maps (CAM) using Global Average Pooling (GAP) in CNNs after the ﬁnal convolutional layer to decrease the size of the image and reduce the parameters to avoid overﬁtting. CAM helps to identify the discriminative regions of an image that affect the output of CNNs by performing global average pooling on the convolutional feature maps and using those as features for a fully connected layer that produces the desired output. Class activation weights are then computed based on the gradients of the predicted class score relying on the feature maps. These weights indicate the importance of each feature map for the target class. CAM generates heatmaps employing fk(x, y), the pixel-wise activation of unit k across spatial coordinates (x, y) in the last convolutional layers, weighted by wc k, the coefﬁcient corresponding to unit k for class c at pixel (x, y) is formulated as follows: Mc(x, y) = \u0002 k wc kfk(x, y) (6) 1) GRAD-CAM Grad-CAM (Gradient-weighted Class Activation Mapping) [79] is a post-hoc technique that provides visual explanations for the decisions made by convolutional neural networks (CNNs). It achieves this by utilizing the gradients and feature maps speciﬁc to a given CNN to highlight regions of an input image that are most inﬂuential in the model’s prediction. This reliance on the internal structure of CNNs, particularly the gradients ﬂowing into the ﬁnal convolutional layers, makes Grad-CAM a model-speciﬁc method tailored to convolu- tional architectures. Consequently, it is not directly applicable to non-convolutional models, such as those handling tabular data. However, Grad-CAM is also model-agnostic in the sense that it can be applied across various CNN architectures without requiring modiﬁcations to each model’s speciﬁc design. This ﬂexibility allows it to be used with a wide range of CNN-based models, making it a versatile tool for interpreting and visualizing CNN decisions [115]. The mathematical foundation of Grad-CAM is based on the gradients of the target class with respect to the feature maps. These gradients indicate the importance of each feature map for the target prediction. Grad-CAM is particularly useful for understanding and debugging CNNs in tasks such as image classiﬁcation, image captioning, and visual question answering. Grad-CAM Equation: The primary Grad-CAM equation is formulated as follows: \u0005\u0002 k αc kAk \u0006 Lc Grad−CAM = ReLU (7) S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases where Lc Grad−CAM represents the Grad-CAM localization map for class c, Ak is the k −th feature map of the convolutional layer and αc k is the importance weight of the k-th feature map for class c. For the given equation 7, the underlying properties taken into consideration are as follows: 1) Localization: Grad-CAM localizes the critical regions in the image that contribute to the prediction of a speciﬁc class. This is achieved by combining the feature maps Ak with the importance weights αc k to produce a class-speciﬁc localization map. The ReLU activation function ensures that only the positive con- tributions are highlighted in the localization map. The ReLU activation function is applied to the weighted sum of the feature maps to ensure that only the positive contributions are included in the localization map. This step helps in highlighting the regions that positively inﬂuence the prediction of the target class. 2) Class Discrimination: The importance weights αc k are computed using the gradients of the target class with respect to the feature maps. This ensures that the localization map is speciﬁc to the target class and highlights the regions that are important for predicting that class. 3) Global Average Pooling: The importance weights αc k are obtained by performing global average pooling on the gradients of the target class with respect to the feature maps: ∂yc \u0002 \u0002 αc k = 1 ∂Ak ij (8) Z i j where Z is the number of pixels in the feature map, yc is the score for class c, and ∂yc ∂Ak ij is the gradient of the score for class c with respect to the activation Ak ij at spatial location (i, j) in the feature map Ak. This aggregation step ensures that the importance of each feature map is considered across the entire spatial dimensions of the feature map. D. LOCAL INTERPRETABLE MODEL-AGNOSTIC EXPLANATIONS (LIME): MODEL-AGNOSTIC FRAMEWORK FOR LOCAL EXPLAINABILITY Ribeiro et al. [78] introduced LIME to explain predictions of complex models like deep neural networks. LIME is a post- hoc, model-agnostic technique that approximates the decision boundary of a complex model as linear in the local vicinity of the instance being explained. It generates perturbed samples around the instance, obtains predictions from the complex model, assigns weights based on proximity to the instance, and builds an interpretable model on these weighted samples. The goal is to provide a locally accurate and understandable explanation for the instance in question, enhancing model transparency. VOLUME 13, 2025 13"
+              ],
+              "equations": [],
+              "figure_refs": [],
+              "table_refs": [],
+              "subsections": [
+                {
+                  "id": "sec18",
+                  "label": "1)",
+                  "title": "LIME EQUATION",
+                  "level": 3,
+                  "paragraphs": [
+                    "The explanation is derived as: ξ(x) = arg min g∈G L(f , g, πx) + \u0007(g) (9) where, G different explanation families, ﬁdelity functions L, and complexity measures \u0007, focusing on sparse linear models. 1) Interpretable Data Representations: Explanations require a human-comprehensible representation, inde- pendent of the model’s speciﬁc features. For text classiﬁcation, an interpretable representation might be a binary vector indicating word presence or absence. For image classiﬁcation, it might indicate the presence or absence of a super-pixel. The variable x ∈{R}d represents the original instance, while x0 ∈{0, 1}d0 is its interpretable form. 2) Fidelity-Interpretability Trade-off: The explanation model g ∈ G should be simple to interpret. The complexity of g is denoted by \u0007(g). The model f : Rd →R represents the original classiﬁer, with f (x) indicating class probability. Proximity πx(z) deﬁnes the locality around x. Discrepancy between g and f within this locality is quantiﬁed by L(f , g, πx). The goal is to minimize L(f , g, πx) while keeping \u0007(g) low for interoperability."
+                  ],
+                  "equations": [],
+                  "figure_refs": [],
+                  "table_refs": [],
+                  "subsections": [
+                    {
+                      "id": "sec19",
+                      "label": "3)",
+                      "title": "Sampling",
+                      "level": 3,
+                      "paragraphs": [
+                        "for Local Exploration: To minimize locality-aware loss L(f , g, πx) without assumptions about f , a sample is drawn weighted by πx. Perturbed samples are generated by randomly selecting non-zero elements of x0, converted back to the original represen- tation, and labeled by f (z). The dataset Z comprising perturbed samples and labels is used to optimize Eq. (9). LIME samples instances near and far from x, providing resilience to sampling noise due to πx weighting. 4) Sparse Linear Explanations: Consider G as linear models, g(z0) = wg · z0, and locally weighted square loss L as: L(f , g, πx) = \u0002 z,z0∈Z πx(z)(f (z) −g(z0))2 (10) For text classiﬁcation, the interpretable representation is a bag of words, with a maximum word constraint K. For image classiﬁcation, ‘‘super-pixels’’ are used instead of words. The direct solution of Eq. (9) is impractical, so K-LASSO is used. \u0007(g) = ∞1[||wg||0 > K] (11)"
+                      ],
+                      "equations": [],
+                      "figure_refs": [],
+                      "table_refs": [],
+                      "subsections": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec20",
+      "label": "V.",
+      "title": "EMPIRICAL EVALUATION OF XAI TECHNIQUES",
+      "level": 1,
+      "paragraphs": [
+        "ACROSS SELECTED STUDIES In the ﬁeld of breast cancer research, XAI techniques have proven instrumental in improving both model interpretability and predictive accuracy. This section provides a brief review of how these techniques have been applied across 44 selected studies and various contexts. A comprehensive overview of current practices, high- lighting the alignment between speciﬁc models and their corresponding explainability methods is presented in the Table 3. This comparison provides a clearer understanding of the ﬁeld’s trends and preferences and the role these techniques play in enhancing model transparency and interoperability. In the subsequent subsections, the details of XAI models in the breast cancer domain are discussed. A. SHAP-BASED INTERPRETABILITY AND FEATURE ATTRIBUTION IN BREAST CANCER RESEARCH In survival analysis and predictive modeling, SHAP has been instrumental in clarifying the impact of key features, such as age, tumor characteristics, receptor statuses, TNM (Tumor, Node, Metastasis) staging, and lymph node involve- ment. Moncada et al. [32] applied SHAP with the Cox Proportional Hazards (CPH) model and machine learning algorithms like Extreme Gradient Boosting (XGBoost) to improve the interpretability of survival predictions. Similarly, Vrdoljak et al. [43] and Massafra et al. [45] employed SHAP to interpret models predicting lymph node metastases, demonstrating its effectiveness in making complex models more comprehensible for clinical applications. Moreover, SHAP has been used to compare traditional rule-based models with advanced techniques, offering valuable insights into diagnostic accuracy and model performance. In survival analysis and predictive modeling, SHAP has been instrumental in clarify the impact of key features such as age, tumor characteristics, receptor statuses, TNM (Tumor, Node, Metastasis) staging, and lymph node involve- ment. Moncada et al. [32] employed SHAP with the Cox Proportional Hazards (CPH) model and machine learning algorithms like XGBoost to enhance the interpretability of survival predictions. Similarly, Vrdoljak et al. [43], [45] utilized SHAP to interpret models predicting lymph node metastases, showcasing its effectiveness in making com- plex models more comprehensible for clinical applications. Additionally, SHAP has been applied to compare traditional rule-based models with advanced techniques, providing insights into diagnostic accuracy and model performance. Zhang et al. [37] utilized SHAP to demonstrate how features such as ‘‘worst parameter,’’ ‘‘worst area,’’ ‘‘worst radius,’’ ‘‘worst concave points,’’ ‘‘worst texture,’’ and ‘‘mean texture’’ inﬂuence the performance of Random Forest and XGBoost models. Their ﬁndings revealed signiﬁcant improvements in accuracy and precision compared to simpler models. Similarly, Wang et al. [36] applied SHAP to interpret radiomics models based on chest CT scans, enabling more precise differentiation between luminal and non-luminal breast cancer types. SHAP has been instrumental in identifying key features and biomarkers, serving as a valuable tool for pinpointing signiﬁcant predictors and potential biomarkers. Studies such as [36], [40], [46], [48], and [49] employed SHAP to analyze multi-omics data, highlighting critical features such as 14 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases Deoxyribonucleic Acid (DNA), Messenger Ribonucleic Acid (mRNA), and Copy Number Variation (CNV). Similarly, Yu et al. [20] and Chakraborty et al. [25] utilized SHAP for gene expression data, uncovering valuable insights into gene contributions and pathways associated with cancer. In clinical and preventive contexts, SHAP has offered valuable insights into the inﬂuence of lifestyle factors, such as diet and breastfeeding, on cancer risk. Silva et al. [41] applied SHAP to evaluate the impact of these factors on cancer classiﬁcation, contributing to the development of per- sonalized risk assessments and preventive strategies. While, Alelyani et al. [51] also employed SHAP to derive global and local importance scores for clinical and pathological features across six classiﬁers, revealing model-dependent SHAP-based rankings of key breast cancer risk factors. For down-sampled histopathology images, Murugan et al. [54] used SHAP to decompose VGG-19 predictions into feature-level contributions, helping to characterise how the network weights different tissue patterns in malignant vs. benign classiﬁcation. Table 4 provides a concise overview of the diverse features deemed crucial in various studies that employ SHAP for model explainability in medical and cancer- related research. These features encompass demographic and clinical attributes, speciﬁc biomarkers, and lifestyle factors, reﬂecting a comprehensive approach to understanding and interpreting model predictions in healthcare. B. GRAD-CAM-BASED VISUAL EXPLAINABILITY IN BREAST CANCER RESEARCH Studies focusing on breast cancer imaging using convo- lutional neural networks (CNNs) have found visualization techniques, such as class activation maps (CAM) and Grad- CAM, to be pivotal in enhancing model interpretability and diagnostic accuracy. In studies by Prodan et al. [47] and Masud et al. [17], Grad- CAM was used to visualize the regions of mammography and ultrasound images that most inﬂuenced model predictions. Prodan et al. [47] applied CAM across CNN models such as ResNet, EfﬁcientNet, and MaxVit, providing intuitive insights into the classiﬁcation process by highlighting key image areas. Similarly, Masud et al. [17] and Suh et al. [18] employed Grad-CAM to visualize the focus of various CNN models, demonstrating its effectiveness in distinguishing between benign and malignant lesions. Additionally, Dong et al. [24] introduced a novel Region of Evidence (ROE) framework to enhance interpretabil- ity and facilitate Grad-CAM explanations, achieving high accuracy and AUC scores. Similarly, Lou et al. [29] proposed the Multi-level Global-Guided Branch-Attention Network (MGBN) for mass classiﬁcation in mammography, employing Grad-CAM to visualize localization maps. This approach signiﬁcantly improved the accuracy of mass region identiﬁcation compared to traditional methods. In contrast, Wang et al. [44] used Grad-CAM to explain their proposed Multitask Information Bottleneck Network (MIB-NET). S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases TABLE 4. Key features considered in studies using SHAP for explainability Ki67= Kiel 67 (Protein), PgR= Progesterone Receptor, TNBC= Triple-Negative Breast Cancer, HER2= Human Epidermal Growth Factor Receptor 2, ERBB2= Erythroblastic Oncogene B2, Luminal A & Luminal B= Subtype classification of breast cancer. Ricciardi et al. [28] employed Grad-CAM to enhance model interpretability in digital breast tomosynthesis (DBT), evaluating the behavior of CNN models in classifying mass lesions. Their ﬁndings highlighted that central lesion regions were the most inﬂuential in model predictions. Similarly, Hussain et al. [38] utilized Grad-CAM alongside other interpretability techniques, such as LIME, t-SNE [116], and UMAP [117], achieving high classiﬁcation performance. They provided both visual and mathematical explanations to quantify model interpretability and gain peer conﬁdence. More recently, Alom et al. [57] proposed the Deep Neural Breast Cancer Detection (DNBCD) model based on DenseNet121 for histopathological and ultrasound images, using Grad-CAM to highlight the most rel- evant regions guiding benign, malignant, and normal classiﬁcations on the BreakHis-400x and BUSI datasets. Similarly, Talukder et al. [55] modiﬁed DenseNet169 for multi-magniﬁcation histopathology and employed CAM and saliency maps to visualize the discriminative tissue regions supporting their decisions. A complementary study quantitatively evaluated Grad- CAM, Grad-CAM++, and Eigen-CAM on mammograms using radiologist-annotated bounding boxes and the Pointing Game metric [53], assessing how reliably these saliency methods point to true lesion locations. In another work on down-sampled histopathology images, several CNN architectures (including ResNet, VGG-16, and VGG-19) were compared, and saliency maps were applied to the best-performing model to visualize the image regions most inﬂuencing its predictions [54]."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec21",
+          "label": "C.",
+          "title": "LOCAL EXPLAINABILITY USING LIME IN BREAST",
+          "level": 2,
+          "paragraphs": [
+            "CANCER RESEARCH Similar to SHAP and Grad-CAM, researchers have adapted LIME to explain breast cancer classiﬁcation and detection models. Lee et al. [23] used LIME to classify lymph nodes in ultrasound images, employing the Simple Linear VOLUME 13, 2025 15 Iterative Clustering (SLIC) superpixel segmentation method to segment images and identify critical regions inﬂuencing predictions. Deshmukh et al. [42] integrated LIME with an enhanced quantum k-means clustering algorithm to explain clustering outcomes for breast cancer data, achieving high clustering accuracy. Kaplun et al. [33] utilized LIME to interpret automated breast cancer cell image analysis, highlighting crucial regions in cell images that inﬂuenced classiﬁcation results. In other studies, LIME has been applied to genomic datasets and compared with explanation methods such as SHAP and PDP. For instance, Modhukur et al. [22] utilized LIME to evaluate the signiﬁcance of methylation biomarkers in cancer-type classiﬁcation. Similarly, Zhang et al. [37] used SHAP to identify inﬂuential features, such as ‘‘worst area’’ and ‘‘worst radius,’’ in breast cancer predictions, with ﬁndings that closely aligned with LIME results. Alelyani et al. [51] applied LIME to clinical and patholog- ical breast cancer data from Saudi patients to locally explain model predictions, showing that the Random Forest classiﬁer combined reasonable accuracy with clinically meaningful LIME-based feature attributions. Murugan et al. [54] also used LIME on their best-performing VGG-19 histopathology classiﬁer to generate local explanations for individual cases, which medical experts judged as the most accurate and clinically relevant among the evaluated explanations."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec22",
+          "label": "D.",
+          "title": "COMPLEMENTARY XAI METHODS IN BREAST CANCER",
+          "level": 2,
+          "paragraphs": [
+            "RESEARCH Beyond the core XAI techniques previously discussed, other methods also offer valuable insights into making complex machine-learning models more interpretable. These methods include counterfactual explanations, Permutation Importance, and various others, each contributing uniquely to the landscape of explainable AI (XAI). For instance, Althoff et al. [81] and Lamy et al. [14] introduced a visual case-based reasoning (CBR) method that integrates visual algorithms to illustrate case similarities, enhancing user interpretation of recommendations. In the context of CBR, a case refers to a problem situation. Generally, CBR consists of a (p + 1)-dimensional space case database represented as X, where xi represents each case. Each xi has components in different dimension spaces A1, . . . , Ak, . . . , Ap and Y is the solution space associated with each case. The query case can be represented as q ∈ A1 × . . . × Ak × . . . × Ap This hierarchical process involves four key steps: retrieval, reuse, revision, and retention. Such a structured approach facilitates decision-making, as demonstrated in breast cancer therapy, where CBR helps simplify complex decisions and validate results against established guidelines. However, challenges persist, including accuracy limitations and sensitivity to high-dimensional data. Gu et al. [16] addressed some of these challenges by combining CBR with ensemble learning, utilizing XGBoost for predictions while leveraging CBR for explanations. While this approach enhances XAI, it remains reliant on existing techniques and could beneﬁt from incorporating more comprehensive attribute considerations. Permutation Importance (PIMP), introduced by Altmann et al. [83], assesses feature signiﬁcance by measur- ing performance degradation after shufﬂing feature values. Khater et al. [48] integrated PIMP with SHAP and Partial Dependence Plots (PDP) to identify key features in breast cancer detection, such as bare nuclei and clump thickness. PDP extends this analysis by illustrating how individual features inﬂuence predictions, offering a contrast to methods that solely highlight the most signiﬁcant features [84]. The use of PDP revealed the correlation between changes in tissue architecture and breast cancer progression, with particular emphasis on the relationship between tissue thickness and cell stickiness, as shown in Khater et al. [48]. Similarly, Tosun et al. [15] developed HistoMapr-Breast, an XAI-enabled application designed to visualize and identify regions of interest in breast core biopsies. This tool supports pathologists’ decision-making by incorporating XAI into pathology workﬂows, effectively addressing con- cerns related to transparency and safety. Layerwise Relevance Propagation (LRP) [82] interprets deep neural networks by tracing information from the output neurons back to the input layers. Binder et al. [72] applied LRP to identify critical image regions and molecular biomarkers relevant to breast cancer prognosis. Cherada et al. [21] expanded on this approach by employing Graph LRP to explain predictions from Graph-CNNs, revealing signiﬁcant genes associated with cancer. Furthermore, Amoroso et al. [30] proposed an XAI method based on Adaptive Dimension Reduction (ADR), speciﬁcally designed for breast cancer therapies. Their framework, which integrates clustering and dimensionality reduction, effectively identiﬁed critical clinical features and contributed to the development of oncological treatment strategies. Counterfactual explanations have recently emerged as a signiﬁcant post-hoc method, offering users valuable insights 16 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases into the internal workings of AI models [118], [119], [120], [121], [122]. Hanis et al. [39] investigated the impact of various machine learning models on counterfactual generation, focusing on predicting breast cancer likelihood and accuracy based on medical history and risk factors. Their study, which employed multiple ML classiﬁers, highlighted that KNN achieved notable accuracy and F-score. The authors subsequently adopted a model-agnostic approach to further enhance explainability. Finally, Feature Importance Measures are essential for understanding ML models by identifying signiﬁcant features. Studies by Bhatt et al. [123] and Saarela et al. [31] compared classiﬁcation explanation models, including feature impor- tance metrics, highlighting their critical role in interpreting model behavior."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec23",
+          "label": "E.",
+          "title": "SPECIALIZED XAI APPROACHES FOR BREAST CANCER",
+          "level": 2,
+          "paragraphs": [
+            "ANALYSIS Beyond conventional explainable AI techniques, several specialized approaches have been proposed to enhance inter- pretability in breast cancer research, focusing on biomarker analysis, automated tissue scoring, and hybrid image-based models. Idrees et al. [35] introduced XAI algorithms to analyze potential biomarkers for breast cancer. Various classiﬁcation models were applied to anthropometric data from three studies [124], [125], [126], augmented with XAI models. The results of these analyses revealed that serum levels of HOMA, leptin, adiponectin, and resistin could serve as novel biomarkers for breast cancer. The ﬁnd- ings demonstrated sensitivity ranging from 83% to 87%, speciﬁcity ranging from 81% to 88%, and AUC values between 0.82 and 0.89 with a 95% conﬁdence interval. These promising results suggest that integrating the characteristics of HOMA, leptin, adiponectin, and resistin may facilitate the development of a cost-effective breast cancer biomarker. Kabakcci et al. [26] proposed an automated method for scoring CerbB2/HER2 receptors in breast cancer tissue images, designed to replace the manual, error-prone scor- ing traditionally performed by pathologists. This method employs histogram-based analysis to separate tissue images into color channels, segment cell nuclei and boundaries, and extract features related to membrane staining intensity and completeness. These extracted features are used to compute cell-based HER2 scores, which are then aggregated to generate a ﬁnal tissue score in accordance with ASCO/CAP guidelines. The approach was validated using two publicly available datasets, demonstrating high efﬁcacy in scoring HER2 tissue for both balanced and unbalanced datasets. A comparison of classiﬁers revealed that the Ensemble Boosted Tree achieved the highest accuracy for cell-based and tissue-based scoring on the ITU-MED datasets, while the Cosine kNN classiﬁer performed best on the contest dataset, securing 6th place out of 18 competitors. S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases FIGURE 8. Comparative visualization of XAI techniques for breast cancer detection [127]. (a) The input image (b) SHAP (c) Grad-CAM (d) LIME. AlHussen et al. [56] introduced the XAI-RACapsNet framework, which integrates explainable ROI segmentation through the XAI O-Net architecture combining transformer and ResNet modules. The model generates relevance-based heat maps from segmented mammograms, providing inter- pretable localization of malignant regions alongside high diagnostic accuracy. Similarly, Munshi et al. [52] developed a hybrid XAI approach combining U-Net for image-based feature extrac- tion with an ensemble of CNN, Random Forest, and SVM classiﬁers. Their method employed ROI segmentation as an explainability mechanism to highlight diagnostically signiﬁcant breast regions and achieved notable accuracy on the Wisconsin dataset. Section VI provides a detailed discussion on the integration of XAI techniques with various machine learning and deep learning models."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec24",
+      "label": "VI.",
+      "title": "MAPPING EXPLAINABLE AI TO MACHINE LEARNING",
+      "level": 1,
+      "paragraphs": [
+        "AND DEEP LEARNING APPROACHES This section explores the integration of XAI techniques with various machine learning and deep learning models, highlighting both their strengths and weaknesses. Addition- ally, Table 5 provides valuable insights into the frequency with which different machine learning and deep learning models are paired with various explainability techniques. The table also identiﬁes potential biases in certain deep learning models, revealing a tendency to favor speciﬁc explainability methods over others. This analysis aids in understanding the limitations and advantages of different XAI techniques across various contexts. To begin with, SHAP is model-agnostic, meaning it is not tied to any speciﬁc machine learning (ML) or deep learning (DL) model. Refer to Figure 8 for a visualization created by SHAP. This characteristic is advantageous because it allows SHAP values to be applied to any machine learning model, regardless of its architecture or underlying algorithms [128]. This ﬂexibility is particularly valuable for tasks involving model comparison, as it provides a consistent method for interpreting predictions and understanding model behavior. Furthermore, because SHAP values are independent of the speciﬁc model being used, they can be easily adapted when the model is updated or replaced. In a machine learning pipeline, where models are often reﬁned or replaced over time, SHAP’s ﬂexibility ensures that the explanations VOLUME 13, 2025 17 remain consistent and informative, requiring minimal effort to integrate with updated models [129]. The Shapley values also offer three valuable properties not found in other XAI methods [77], [131]. 1) SHAP values provide local accuracy, meaning they accurately capture the difference between the expected output of the model and the output for a speciﬁc instance of input data. This means they provide insights into how individual features contribute to each prediction. 2) If a feature is missing (i.e. not present in the input data), its attribution value in the SHAP analysis is set to zero, ensuring that the absence of a feature is appropriately accounted for in the explanation."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec25",
+          "label": "3)",
+          "title": "Changes in the model should not result in contradictory",
+          "level": 3,
+          "paragraphs": [
+            "changes to the SHAP values assigned to individual features. If increasing the importance of a feature model’s prediction also increases its corresponding SHAP value, then consistency is maintained. These properties make the SHAP model an ideal choice for different rstudies’studies’ objectives. It offers a robust and reliable method for explaining model predictions and com- paring various models, regardless of their type or complexity. For example, SHAP performed well with the XGBoost model, as witnessed in [32], [41], [43], [45], and [48]. Despite its beneﬁts, the SHAP method may have limitations."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": [
+            {
+              "id": "sec26",
+              "label": "1)",
+              "title": "The computational burden of computing SHAP values",
+              "level": 3,
+              "paragraphs": [
+                "can be signiﬁcant, potentially slowing down the analysis process. 2) SHAP values are efﬁcient for tree-based models, for example, XGBoost, but can be less effective for complex architectures like deep learning models. The same can be observed in Table 5. In scenarios with limited computational resources or when working with complex architectures such as deep learning models, the application of SHAP is generally not recommended. Grad-CAM is one of the most widely used XAI methods for medical imaging [132], as reﬂected in Table 5. It generates heatmaps that highlight the regions of an image contributing signiﬁcantly to the model’s decisions, offering insights into the features or areas the model focuses on for classiﬁcation (refer to Figure 8). This interpretability helps radiologists and clinicians understand and validate the model’s predictions. Grad-CAM’s ability to localize regions of interest in medical images can assist in pinpointing abnormalities within breast tissue, potentially improving diagnostic accuracy. Studies such as [17], [18], [24], and [29] have demonstrated that Grad-CAM is a valuable tool for corroborating the ﬁndings of deep learning models by providing visual evidence of the features driving their predictions. However, like any other method, Grad-CAM also has certain limitations: TABLE 5. Mapping machine learning and deep learning models to the applied explainability techniques in the reviewed/selected 44 articles RBIA= Rainbow boxes- Inspired Algorithm, CBR= Case-Based Reasoning, ROI= Region of Interest, WSI= Whole Slide Images, XGBoost= Extreme Gradient Boosting, RF= Random Forest, MTL= MultiTask Learning, GLRP= Graph Layer-wise Relevance Propagation, SLIC= Simple Linear Iterative Clustering, LRP= Layerwise Relevance Propagation, ADR= Adaptive Dimension Reduction, PI= Permutation importance, PDP= Partial dependence plots, DBT= Digital Breast Tomosynthesis, MGBN= Multi-level Global-guided Branch-attention Network, MIB-Net= Multitask information bottleneck network, LE= low-energy, DES= Dual-Energy Subtraction, CAM= Class Activation Maps, RSF= Random Survival Forest, QDA= Quadratic Discriminant Analysis, t-SNE= T-distributed Stochastic Neighbor Embedding and UMAP= Uniform Manifold Approximation and Projection, LSTM= long short-term memory."
+              ],
+              "equations": [],
+              "figure_refs": [],
+              "table_refs": [],
+              "subsections": [
+                {
+                  "id": "sec27",
+                  "label": "1)",
+                  "title": "It only works with convolutional neural networks",
+                  "level": 3,
+                  "paragraphs": [
+                    "(CNNs) as it relies on the gradient information com- puted during the backpropagation step. 18 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases 2) It provides coarse, class-discriminative visualizations, making it difﬁcult to understand speciﬁc pixel-level contributions. In other words, it highlights regions of S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases TABLE 5. (Continued.) Mapping machine learning and deep learning models to the applied explainability techniques in the reviewed/selected 44 articles RBIA= Rainbow boxes- Inspired Algorithm, CBR= Case-Based Reasoning, ROI= Region of Interest, WSI= Whole Slide Images, XGBoost= Extreme Gradient Boosting, RF= Random Forest, MTL= MultiTask Learning, GLRP= Graph Layer-wise Relevance Propagation, SLIC= Simple Linear Iterative Clustering, LRP= Layerwise Relevance Propagation, ADR= Adaptive Dimension Reduction, PI= Permutation importance, PDP= Partial dependence plots, DBT= Digital Breast Tomosynthesis, MGBN= Multi-level Global-guided Branch-attention Network, MIB-Net= Multitask information bottleneck network, LE= low-energy, DES= Dual-Energy Subtraction, CAM= Class Activation Maps, RSF= Random Survival Forest, QDA= Quadratic Discriminant Analysis, t-SNE= T-distributed Stochastic Neighbor Embedding and UMAP= Uniform Manifold Approximation and Projection, LSTM= long short-term memory. high importance for classiﬁcation, but it may prioritize features that are not clinically relevant or meaningful for diagnosis. The CAM technique focuses solely on broad areas within an image, often overlooking subtle nuances. In contrast, the LIME technique (discussed below) creates perturba- tions to emphasize key features, while the SHAP model precisely measures the contribution of speciﬁc regions, VOLUME 13, 2025 19 showing signiﬁcant potential for inclusion in future research endeavors. To address the limitations of conventional CAM, Raghavan et al. [50] proposed Attention-Guided Grad- CAM (AGG-CAM). This method generates enhanced visual representations by considering not only the gradient importance of individual pixels but also the signiﬁcance of various input components identiﬁed through an attention mechanism. As a result, AGG-CAM produces heatmaps that are more interpretable, resilient, and targeted compared to traditional Grad-CAM approaches. Applying this attention- guided Grad-CAM method in clinical settings holds the potential to revolutionize breast cancer detection and signiﬁcantly improve patient outcomes. Similar to SHAP, LIME is also model-agnostic, meaning it can be applied to any machine-learning model. It provides explanations at the individual prediction level, highlighting the features that contribute most to a speciﬁc prediction. This local interpretability is particularly valuable in medical diagnosis, as it enables clinicians to understand why a particular prediction was made and assess its reliability. However, while LIME explanations are locally faithful, they may not always align with global model behavior, as discussed in [42]. When applying LIME, researchers need to account for the following limitations: LIME’s explanations can be inconsistent across repeated runs due to its reliance on a random sampling of perturbed data [133]. Refer to Section IV-D to see a discussion on perturbations. 1) The choice of how data is perturbed can signiﬁ- cantly impact the explanations, leading to potential misinterpretation. 2) LIME lacks robustness as it provides a local approxima- tion of the model, which may not accurately reﬂect the global behavior of the model. The integration of Explainable AI (XAI) techniques into clinical workﬂows presents a promising opportunity to enhance the transparency and reliability of ML and DL models in breast cancer diagnosis. While speciﬁc explainability techniques provide valuable insights, they are not universally applicable to all scenarios. The choice of an explainability method depends on the speciﬁc context and application. Emerging methods may offer more tailored or complementary insights, making it essential to evaluate the unique requirements and constraints of each scenario when selecting an approach [14], [134]. The following insights, drawn from the reviewed studies, further enhance the understanding presented in Table 5. 1) Pre-trained deep learning models favor GRAD- CAM: Papers utilizing pre-trained CNN models com- monly apply GRAD-CAM as the XAI tool ([17], [28], [47]). This reveals a pattern of reliance on visualization techniques for deep learning models that handle image data. 2) Graph-based ML models use graph-speciﬁc XAI: Cherada et al. [21] demonstrates a unique application of Graph Layer-wise Relevance Propagation (GLRP) for Graph CNN models. This highlights the need for specialized XAI techniques when working with graph- structured data. 3) Sparse usage of ensemble models: Although ensemble models (e.g., Random Forest, XGBoost) are frequently mentioned ( [22], [36], [37], [49]), they are paired 20 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases with a limited set of XAI tools like SHAP and LIME. Other potentially valuable methods like Inte- grated Gradients [135] are notably absent, showing an under-explored space for explainability in ensemble learning."
+                  ],
+                  "equations": [],
+                  "figure_refs": [],
+                  "table_refs": [],
+                  "subsections": [
+                    {
+                      "id": "sec28",
+                      "label": "4)",
+                      "title": "Use",
+                      "level": 3,
+                      "paragraphs": [
+                        "of unconventional models with SHAP: Deshmukh et al. [42] apply SHAP to non-traditional models like Quantum Clustering, showcasing SHAP’s adaptability beyond mainstream ML models. 5) Specialized XAI for dimensionality reduction mod- els: Amoroso et al. apply [30], Adaptive Dimension Reduction (ADR) to cluster analysis, indicating that some studies focus on niche interpretability techniques tailored for dimensionality reduction, a less common focus compared to classiﬁcation models. 6) Limited ML models without speciﬁc XAI techniques: Tosun et al. [15] and Moreira et al. [34] did not explicitly deﬁne speciﬁc machine learning models, focusing instead on techniques such as HistoMapr for the region of interest (ROI)-based diagnosis and Counterfactual Algorithms. This highlights that not all studies prioritize the use of a deﬁned ML model when integrating XAI into clinical workﬂows."
+                      ],
+                      "equations": [],
+                      "figure_refs": [],
+                      "table_refs": [],
+                      "subsections": [
+                        {
+                          "id": "sec29",
+                          "label": "7)",
+                          "title": "Combination of traditional ML and DL in the",
+                          "level": 3,
+                          "paragraphs": [
+                            "same study: Lee et al. [23] employed both classical machine learning models (e.g., Logistic Regression, SVM, XGBoost) and deep learning architectures (e.g., Mask R-CNN, DenseNet), integrating them with XAI techniques such as LIME and SLIC. This approach high- lights a balanced strategy for achieving explainability across diverse types of models. 8) XAI for multitask learning models is underex- plored: The pairing of multitask models ( [19], [44]) with advanced XAI techniques, such as GRAD-CAM, Information Bottleneck, and Attention Mechanisms, remains relatively uncommon, indicating a growing and underexplored area in model interpretability. A. EXPLAINABILITY FOR TRANSFORMER- AND VISION-LANGUAGE CLINICAL AI As clinical AI increasingly adopts Vision Transformers (ViTs) and vision-language models (VLMs), evaluating explainability requires more than visually plausible outputs. Explanations must be decision-faithful, region-grounded, robust, and fully auditable, ensuring that model rationales can be rigorously veriﬁed and trusted. For ViTs, we advocate transformer-aware pipelines that pair LRP-style relevance propagation (to trace token→patch evidence) with attention rollout/ﬂow (to characterize cross-layer information ﬂow), and we insist that visualizations remain testable hypotheses. Concretely: validate saliency with deletion/insertion curves and sanity checks; run counterfactual/perturbation audits (blur, mask, out-paint, or clinically plausible replacements) to demonstrate necessity and sufﬁciency; and add concept-level probes to estimate causal effects of named ﬁndings. These steps directly address evidence that raw attention can mislead S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases without faithfulness tests [136] and leverage established transformer interpretability methods [137], [138]. For CLIP (Contrastive Language–Image Pretraining) - style clinical models, make text/image alignment auditable by design: expose region concept grounding during zero/few-shot inference, enforce prompt governance (template libraries, ensembles, sensitivity/ablation tests), calibrate uncertainty before thresholding, and run stratiﬁed subgroup/shift audits (site, device, demographics) to surface shortcutting and bias prior to deployment building on medical VLM work such as MedCLIP and CheXzero [139], [140]. Additionally in order to align with governance frame- works, we can employ documenting method cards, model/data cards, immutable decision logs, and a post-market monitoring plan consistent with the EU AI Act’s transparency and monitoring duties [141], the FDA/Health Canada/MHRA GMLP and Transparency principles [142], [143], ISO/IEC 23894 risk management [144], and IMDRF SaMD clinical evaluation [145]; report prospective studies under SPIRIT- AI/CONSORT-AI [146], [147]. The result is not prettier heatmaps, but a veriﬁable chain from evidence to decision that regulators, clinicians, and patients can inspect and trust."
+                          ],
+                          "equations": [],
+                          "figure_refs": [],
+                          "table_refs": [],
+                          "subsections": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sec30",
+          "label": "B.",
+          "title": "OBSTACLES TO CLINICAL ADOPTION AND",
+          "level": 2,
+          "paragraphs": [
+            "STANDARDISED EVALUATION OF XAI IN BREAST CANCER DIAGNOSIS Despite the substantial promise of explainable artiﬁcial intelligence (XAI) in breast cancer diagnostics, signiﬁcant challenges persist on the path from research prototypes to routine clinical implementation. A key challenge is the lack of standardised evaluation frameworks: while many studies report model accuracy, far fewer assess how well explanations support human decision-making, inter-operator consistency, or workﬂow integration. Reviews of XAI evaluation methods in healthcare highlight that many papers rely on anecdotal evidence or bespoke user studies, and only a minority adopt shared frameworks, thereby limiting cross study comparability and trust in explanation outputs [148], [149], [150]. In the speciﬁc domain of breast-cancer diagnosis, this evaluation gap undermines study comparability, reduces clin- ician conﬁdence in explanation tools, and limits replicability of results. Another major barrier is the limited real-world valida- tion and generalisability of current XAI systems. Many breast-cancer detection studies rely on retrospective or single centre datasets with homogeneous populations or imaging devices, raising questions about external validity across breast densities, ethnic groups, or device vendors [151], [152]. Without thorough multi centre validation and diverse cohorts, even technically advanced XAI tools may fail when transferred to real-world clinical settings. Third, there is an inherent trade-off between explainability, accuracy and bias. Complex deep-learning models (such as convolutional neural networks) may yield high diagnostic performance but require post-hoc explanation tools whose ﬁdelity is not always guaranteed; conversely, simpler models VOLUME 13, 2025 21 may be interpretable but less robust. Many tree-based models are paired with SHAP/LIME, while CNN-based image models often rely on saliency maps reﬂecting a bias in model-explanation matching that our survey also revealed. Furthermore, if training data lacks diversity, explanation methods may systematically emphasise features pertinent in one domain but not in others, thereby embedding fairness risks [153]. Even when explanations are generated, the interpretability and usability of those explanations for end-users (clinicians, pathologists) remain under-explored. For example, a heat- map produced by Grad-CAM may appear intuitive, yet unless validated to correspond to a clinically-relevant patho- logical landmark, the clinician may ignore or mistrust it. Human-centred evaluation studies show wide variation in clinician comprehension and trust of different explanation formats, emphasising the need for user centric design and training [149]. Finally, workﬂow integration, ethical and regulatory issues present additional hurdles. Deploying an XAI enabled system in radiology or pathology services requires alignment with existing PACS/EHR systems, audit trails, clinician account- ability and clear responsibility when AI recommendations (and explanations) are delivered. Reviews of AI in screening note that regulatory, ethical and governance frameworks are still emergent and must evolve to support XAI-enabled clinical care [154], [155]. The deployment of such AI systems raises questions about liability, informed consent, transparency, and data-fairness especially in high-stakes domains such as breast-cancer diagnosis. In light of these gaps, recent literature suggests several strategic directions: • Develop and adopt clinically-oriented, standardised evaluation metrics and benchmark frameworks for XAI in breast-cancer diagnostics. The literature strongly emphasises that without such metrics—covering ﬁdelity, stability, usability and domain relevance XAI explanations cannot be reliably compared or trusted across studies [148]. • Expand multi centre, multi-modality and population- diverse validation studies to establish generalisability and fairness. Many XAI systems to date rely on single centre or homogeneous datasets; broad validation is required to ensure robustness across devices, modalities and patient populations [153]. • Design human-in-the-loop, workﬂow-embedded eval- uations, where clinicians interact with the AI + XAI system and their decision-making, trust and outcomes are formally measured. Human AI collaboration is now identiﬁed as a key element of trustworthy implementation [156]. • Tailor explanation methods to match the user group (radiologist, pathologist, oncologist) and the model type (tree-based, CNN, multimodal). Explanation formats that are technically accurate but misaligned to the FIGURE 9. Comprehensive evaluation framework for XAI. clinician’s context or model architecture risk being ignored or mis-interpreted [154]. • Address bias, fairness, ethics and regulatory readiness early in the design and deployment of XAI systems. Without careful attention to fairness of explanations, lia- bility, informed consent and auditability, XAI-enabled tools may fail regulatory or ethical acceptability even if technically accurate [157]."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec31",
+          "label": "C.",
+          "title": "BRIDGING BIAS DISCOVERY TO CLINICAL IMPACT AND",
+          "level": 2,
+          "paragraphs": [
+            "MITIGATION Beyond identifying methodological and data-centric biases, it is crucial to understand how these biases manifest in clinical workﬂows. For instance, spurious correlations in imaging datasets such as scanner artefacts, skin markers or acquisition metadata inadvertently correlated with malignancy labels can lead XAI models to focus on non-pathological cues. Clinically, such biases may distort malignancy estimation and inﬂuence biopsy decisions, thereby impacting patient safety and diagnostic conﬁdence. Recent work emphasises that bias is a systemic concern at every stage of AI for medical imaging, from data sampling to deployment, making proactive detection and correction essential [158]. Moreover, frameworks like the ‘‘Reveal to Revise’’ life-cycle explicitly combine explanation-based bias identiﬁcation with model revision and re-evaluation, demonstrating how counterfactual testing, feature sensitivity analysis or domain-adversarial methods can attenuate spurious dependencies [159]. Embed- ding such mitigation mechanisms into model development and explanation evaluation therefore closes the translational loop from bias discovery to clinical practice, improving diagnostic robustness and enhancing clinician trust in XAI systems. Future work should extend these strategies through clinician-in-the-loop bias audits and post-deployment mon- 22 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases itoring to ensure sustained fairness and reliability across diverse patient populations. To support the translation of XAI into breast-cancer diagnostics, we propose an evaluation framework (shown in Figure 9 composed of four inter-linked domains: • Technical & Fidelity: Assess how well explanations mirror the model’s internal reasoning (e.g., ﬁdelity, stability, runtime) and whether explanation methods reveal model errors or biases. • Fairness & Bias-Detection: Quantify and mitigate bias sources (e.g., dataset imbalance, device shift, spurious correlations), evaluate cross-population robustness, and measure fairness of explanations across sub-groups. • Usability & Clinician Trust: Capture human centred metrics of how easily clinicians understand and act on explanations (e.g., usability scales, think-aloud proto- cols, decision-error reduction, trust/conﬁdence metrics). • Workﬂow & Clinical Integration: Evaluate how the XAI system embeds into real-world clinical workﬂows: interoperability with PACS/EHR, audit-trail readi- ness, clinician AI collaboration, and regulatory/ethical readiness. If these pathways are followed, the transition of XAI from promising research prototypes into trustworthy clinical tools for breast cancer diagnosis becomes far more likely."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec32",
+      "label": "VII.",
+      "title": "CONCLUSION",
+      "level": 1,
+      "paragraphs": [
+        "XAI plays a crucial role in evaluating model performance, which is essential for optimizing accuracy and reliability in practical applications. Beyond performance, it is imperative to assess the impact of XAI on user trust and comprehension. As AI technologies become increasingly integrated into healthcare, ensuring their transparency and interpretability S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases is vital for fostering trust among medical practitioners and patients. Integrating various XAI approaches, however, presents signiﬁcant challenges, particularly in comparative analysis and generalization across diverse scenarios. This complexity highlights the need for a robust framework to evaluate these models comprehensively. Establishing standardized evaluation metrics is critical, as they provide consistent and reliable measures of effectiveness in clinical settings. These metrics should not only assess the accuracy and efﬁciency of XAI applications but also evaluate the quality of the explanations in terms of relevance, complete- ness, and consistency. Moreover, the integration of XAI into clinical workﬂows can advance personalized medicine. By offering tailored explanations, XAI can help clinicians understand the reasoning behind speciﬁc diagnostic or treatment decisions, which is particularly important in com- plex cases like breast cancer, where patient-speciﬁc factors signiﬁcantly inﬂuence outcomes. In addition to technical advancements, addressing the ethical implications of using AI in breast cancer diagnosis is imperative. The deployment of AI models in clinical settings must be guided by rigorous ethical standards to ensure patient privacy, data security, and equitable access to healthcare beneﬁts. Transparency in AI decision-making, achieved through XAI techniques, not only enhances trust among healthcare professionals and patients but also mitigates biases that may stem from non-representative training data. AUTHOR CONTRIBUTIONS STATEMENT Conceptualization: Samita Bai and Rizwan Ahmed Khan. Methodology: Samita Bai and Sidra Nasir. Software: Not applicable. Validation: Sidra Nasir. Formal Analysis: Sidra Nasir, Rizwan Ahmed Khan, and Hubert Konik. Investigation: Samita Bai, Sidra Nasir, and Rizwan Ahmed Khan. Resources: Samita Bai. Data Curation: Sidra Nasir. Writing–Original Draft: Samita Bai, Sidra Nasir, and Rizwan Ahmed Khan. Writing–Review and Editing: Alexandre Meyer. Supervision: Rizwan Ahmed Khan, Alexandre Meyer, and Hubert Konik. Project Administration: Rizwan Ahmed Khan, Alexandre Meyer, and Hubert Konik. Funding Acqui- sition: Not applicable. CONFLICT OF INTEREST STATEMENT The authors certify that they have NO afﬁliations with or involvement in any organization or entity with any ﬁnancial interest (such as honoraria; educational grants; par- ticipaspeakers’peakers’ bureaus; membership, employment, consultancies, stock ownership, or other equity interest; and expert testimony or patent-licensing arrangements), or non-ﬁnancial interest (such as personal or professional relationships, afﬁliations, knowledge or beliefs) in the subject matter or materials discussed in this manuscript."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    }
+  ],
+  "references": [
+    {
+      "id": "ref1",
+      "number": 1,
+      "raw_text": "World Health Organization. Breast Cancer: Prevention and Control. Accessed: Mar. 16, 2024. [Online]. Available: https://www.who.int/news- room/fact-sheets/detail/breast-cancer VOLUME 13, 2025 23",
+      "parsed": null
+    },
+    {
+      "id": "ref2",
+      "number": 2,
+      "raw_text": "H. Sung, J. Ferlay, R. L. Siegel, M. Laversanne, I. Soerjomataram, A. Jemal, and F. Bray, ‘‘Global cancer statistics 2020: GLOBOCAN estimates of incidence and mortality worldwide for 36 cancers in 185 countries,’’ CA: Cancer J. Clinicians, vol. 71, no. 3, pp. 209–249, May 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref3",
+      "number": 3,
+      "raw_text": "G. Dileep and S. G. Gianchandani Gyani, ‘‘Artiﬁcial intelligence in breast cancer screening and diagnosis,’’ Cureus, vol. 14, no. 10, pp. 1–6, 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref4",
+      "number": 4,
+      "raw_text": "A. Esteva, A. Robicquet, B. Ramsundar, V. Kuleshov, M. A. DePristo, K. Chou, C. Cui, G. S. Corrado, S. Thrun, and J. Dean, ‘‘A guide to deep learning in healthcare,’’ Nature Med., vol. 25, no. 1, pp. 24–29, 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref5",
+      "number": 5,
+      "raw_text": "M. Huti, T. Lee, E. Sawyer, and A. P. King, ‘‘An investigation into race bias in random forest models based on breast DCE-MRI derived radiomics features,’’ in Proc. Workshop Clin. Image-Based Procedures. Cham, Switzerland: Springer, 2023, pp. 225–234.",
+      "parsed": null
+    },
+    {
+      "id": "ref6",
+      "number": 6,
+      "raw_text": "E. J. Topol, ‘‘High-performance medicine: The convergence of human and artiﬁcial intelligence,’’ Nature Med., vol. 25, no. 1, pp. 44–56, Jan. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref7",
+      "number": 7,
+      "raw_text": "Y. Abas Mohamed, B. Ee Khoo, M. Shahrimie Mohd Asaari, M. Ezane Aziz, and F. Rahiman Ghazali, ‘‘Decoding the black box: Explainable AI (XAI) for cancer diagnosis, prognosis, and treatment planning—A state-of—The art systematic review,’’ Int. J. Med. Informat., vol. 193, Jan. 2025, Art. no. 105689.",
+      "parsed": null
+    },
+    {
+      "id": "ref8",
+      "number": 8,
+      "raw_text": "M. Ghassemi, L. Oakden-Rayner, and A. L. Beam, ‘‘The false hope of current approaches to explainable artiﬁcial intelligence in health care,’’ Lancet Digit. Health, vol. 3, no. 11, pp. e745–e750, Nov. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref9",
+      "number": 9,
+      "raw_text": "B. S. Caffo, F. A. D’Asaro, A. Garcez, and E. Rafﬁnetti, ‘‘Explainable artiﬁcial intelligence models and methods in ﬁnance and healthcare,’’ Frontiers Artif. Intell., vol. 5, Aug. 2022, Art. no. 970246.",
+      "parsed": null
+    },
+    {
+      "id": "ref10",
+      "number": 10,
+      "raw_text": "G. Stiglic, P. Kocbek, N. Fijacko, M. Zitnik, K. Verbert, and L. Cilar, ‘‘Interpretability of machine learning-based prediction models in health- care,’’ Wiley Interdiscipl. Rev., Data Mining Knowl. Discovery, vol. 10, no. 5, p. e1379, 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref11",
+      "number": 11,
+      "raw_text": "D. Moher, A. Liberati, J. Tetzlaff, and D. G. Altman, ‘‘Preferred reporting items for systematic reviews and meta-analyses: The PRISMA statement,’’ PLoS Med., vol. 6, no. 7, Jul. 2009, Art. no. e1000097.",
+      "parsed": null
+    },
+    {
+      "id": "ref12",
+      "number": 12,
+      "raw_text": "A. Liberati, D. G. Altman, J. Tetzlaff, C. Mulrow, P. C. Gøtzsche, J. P. A. Ioannidis, M. Clarke, P. J. Devereaux, J. Kleijnen, and D. Moher, ‘‘The PRISMA statement for reporting systematic reviews and meta-analyses of studies that evaluate health care interventions: Explanation and elaboration,’’ PLoS Med., vol. 6, no. 7, Jul. 2009, Art. no. e1000100.",
+      "parsed": null
+    },
+    {
+      "id": "ref13",
+      "number": 13,
+      "raw_text": "B. Kitchenham, R. Pretorius, D. Budgen, O. P. Brereton, M. Turner, M. Niazi, and S. Linkman, ‘‘Systematic literature reviews in software engineering—A tertiary study,’’ Inf. Softw. Technol., vol. 52, no. 8, pp. 792–805, 2010.",
+      "parsed": null
+    },
+    {
+      "id": "ref14",
+      "number": 14,
+      "raw_text": "J.-B. Lamy, B. Sekar, G. Guezennec, J. Bouaud, and B. Séroussi, ‘‘Explainable artiﬁcial intelligence for breast cancer: A visual case-based reasoning approach,’’ Artif. Intell. Med., vol. 94, pp. 42–53, Mar. 2019. [Online]. Available: https://www.sciencedirect. com/science/article/pii/S0933365718304846",
+      "parsed": null
+    },
+    {
+      "id": "ref15",
+      "number": 15,
+      "raw_text": "A. B. Tosun, F. Pullara, M. J. Becich, D. L. Taylor, J. L. Fine, and S. C. Chennubhotla, ‘‘Explainable AI (xAI) for anatomic pathology,’’ Adv. Anatomic Pathol., vol. 27, no. 4, pp. 241–250, 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref16",
+      "number": 16,
+      "raw_text": "D. Gu, K. Su, and H. Zhao, ‘‘A case-based ensemble learning system for explainable breast cancer recurrence prediction,’’ Artif. Intell. Med., vol. 107, Jul. 2020, Art. no. 101858.",
+      "parsed": null
+    },
+    {
+      "id": "ref17",
+      "number": 17,
+      "raw_text": "M. Masud, A. E. Eldin Rashed, and M. S. Hossain, ‘‘Convolutional neural network-based models for diagnosis of breast cancer,’’ Neural Comput. Appl., vol. 34, no. 14, pp. 1–12, Jul. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref18",
+      "number": 18,
+      "raw_text": "Y. J. Suh, J. Jung, and B.-J. Cho, ‘‘Automated breast cancer detection in digital mammograms of various densities via deep learning,’’ J. Personalized Med., vol. 10, no. 4, p. 211, Nov. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref19",
+      "number": 19,
+      "raw_text": "H. Rasaee and H. Rivaz, ‘‘Explainable AI and susceptibility to adversarial attacks: A case study in classiﬁcation of breast ultrasound images,’’ in Proc. IEEE Int. Ultrason. Symp. (IUS), Sep. 2021, pp. 1–4.",
+      "parsed": null
+    },
+    {
+      "id": "ref20",
+      "number": 20,
+      "raw_text": "Y. Yu, P. Kossinna, Q. Li, W. Liao, and Q. Zhang, ‘‘Explainable autoencoder-based representation learning for gene expression data,’’ bioRxiv, 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref21",
+      "number": 21,
+      "raw_text": "H. Chereda, A. Bleckmann, K. Menck, J. Perera-Bel, P. Stegmaier, F. Auer, F. Kramer, A. Leha, and T. Beißbarth, ‘‘Explaining decisions of graph convolutional neural networks: Patient-speciﬁc molecular subnetworks responsible for metastasis prediction in breast cancer,’’ Genome Med., vol. 13, no. 1, p. 42, Mar. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref22",
+      "number": 22,
+      "raw_text": "V. Modhukur, S. Sharma, M. Mondal, A. Lawarde, K. Kask, R. Sharma, and A. Salumets, ‘‘Machine learning approaches to classify primary and metastatic cancers using tissue of origin-based DNA methylation proﬁles,’’ Cancers, vol. 13, no. 15, p. 3768, Jul. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref23",
+      "number": 23,
+      "raw_text": "Y.-W. Lee, C.-S. Huang, C.-C. Shih, and R.-F. Chang, ‘‘Axillary lymph node metastasis status prediction of early-stage breast cancer using convolutional neural networks,’’ Comput. Biol. Med., vol. 130, Mar. 2021, Art. no. 104206.",
+      "parsed": null
+    },
+    {
+      "id": "ref24",
+      "number": 24,
+      "raw_text": "F. Dong, R. She, C. Cui, S. Shi, X. Hu, J. Zeng, H. Wu, J. Xu, and Y. Zhang, ‘‘One step further into the blackbox: A pilot study of how to build more conﬁdence around an AI-based decision system of breast nodule assessment in 2D ultrasound,’’ Eur. Radiol., vol. 31, no. 7, pp. 4991–5000, Jul. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref25",
+      "number": 25,
+      "raw_text": "D. Chakraborty, C. Ivan, P. Amero, M. Khan, C. Rodriguez-Aguayo, H. Başağaoğlu, and G. Lopez-Berestein, ‘‘Explainable artiﬁcial intel- ligence reveals novel insight into tumor microenvironment conditions linked with better prognosis in patients with breast cancer,’’ Cancers, vol. 13, no. 14, p. 3450, Jul. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref26",
+      "number": 26,
+      "raw_text": "K. A. Kabakçi, A. Çakir, I. Türkmen, B. U. Töreyin, and A. Çapar, ‘‘Automated scoring of CerbB2/HER2 receptors using histogram based analysis of immunohistochemistry breast cancer tissue images,’’ Biomed. Signal Process. Control, vol. 69, Aug. 2021, Art. no. 102924.",
+      "parsed": null
+    },
+    {
+      "id": "ref27",
+      "number": 27,
+      "raw_text": "A. Binder, G. Montavon, S. Lapuschkin, K.-R. Müller, and W. Samek, ‘‘Layer-wise relevance propagation for neural networks with local renormalization layers,’’ in Proc. Artif. Neural Netw. Mach. Learn.– ICANN: 25th Int. Conf. Artif. Neural Netw., Barcelona, Spain. Cham, Switzerland: Springer, 2016, pp. 63–71.",
+      "parsed": null
+    },
+    {
+      "id": "ref28",
+      "number": 28,
+      "raw_text": "R. Ricciardi, G. Mettivier, M. Staffa, A. Sarno, G. Acampora, S. Minelli, A. Santoro, E. Antignani, A. Orientale, I. A. M. Pilotti, V. Santangelo, P. D’Andria, and P. Russo, ‘‘A deep learning classiﬁer for digital breast tomosynthesis,’’ Phys. Medica, vol. 83, pp. 184–193, Mar. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref29",
+      "number": 29,
+      "raw_text": "M. Lou, R. Wang, Y. Qi, W. Zhao, C. Xu, J. Meng, X. Deng, and Y. Ma, ‘‘MGBN: Convolutional neural networks for automated benign and malignant breast masses classiﬁcation,’’ Multimedia Tools Appl., vol. 80, no. 17, pp. 26731–26750, Jul. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref30",
+      "number": 30,
+      "raw_text": "N. Amoroso, D. Pomarico, A. Fanizzi, V. Didonna, F. Giotta, D. La Forgia, A. Latorre, A. Monaco, E. Pantaleo, N. Petruzzellis, P. Tamborra, A. Zito, V. Lorusso, R. Bellotti, and R. Massafra, ‘‘A roadmap towards breast cancer therapies supported by explain- able artiﬁcial intelligence,’’ Appl. Sci., vol. 11, no. 11, p. 4881, May 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref31",
+      "number": 31,
+      "raw_text": "M. Saarela and S. Jauhiainen, ‘‘Comparison of feature importance measures as explanations for classiﬁcation models,’’ Social Netw. Appl. Sci., vol. 3, no. 2, pp. 1–12, Feb. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref32",
+      "number": 32,
+      "raw_text": "A. Moncada-Torres, M. C. van Maaren, M. P. Hendriks, S. Siesling, and G. Geleijnse, ‘‘Explainable machine learning can outperform cox regression predictions and provide insights in breast cancer survival,’’ Sci. Rep., vol. 11, no. 1, p. 6968, Mar. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref33",
+      "number": 33,
+      "raw_text": "D. Kaplun, A. Krasichkov, P. Chetyrbok, N. Oleinikov, A. Garg, and H. S. Pannu, ‘‘Cancer cell proﬁling using image moments and neural networks with model agnostic explainability: A case study of breast cancer histopathological (BreakHis) database,’’ Mathematics, vol. 9, no. 20, p. 2616, Oct. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref34",
+      "number": 34,
+      "raw_text": "C. Moreira, Y. Chou, C. Hsieh, C. Ouyang, J. Jorge, and J. Pereira, ‘‘Benchmarking counterfactual algorithms for XAI: From white box to black box,’’ 2022, arXiv:2203.02399.",
+      "parsed": null
+    },
+    {
+      "id": "ref35",
+      "number": 35,
+      "raw_text": "M. Idrees and A. Sohail, ‘‘Explainable machine learning of the breast cancer staging for designing smart biomarker sensors,’’ Sensors Int., vol. 3, Jan. 2022, Art. no. 100202.",
+      "parsed": null
+    },
+    {
+      "id": "ref36",
+      "number": 36,
+      "raw_text": "F. Wang, D. Wang, Y. Xu, H. Jiang, Y. Liu, and J. Zhang, ‘‘Potential of the non-contrast-enhanced chest CT radiomics to distinguish molecular subtypes of breast cancer: A retrospective study,’’ Frontiers Oncol., vol. 12, Mar. 2022, Art. no. 848726.",
+      "parsed": null
+    },
+    {
+      "id": "ref37",
+      "number": 37,
+      "raw_text": "Y. Zhang, Y. Weng, and J. Lund, ‘‘Applications of explainable artiﬁcial intelligence in diagnosis and surgery,’’ Diagnostics, vol. 12, no. 2, p. 237, Jan. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref38",
+      "number": 38,
+      "raw_text": "S. M. Hussain, D. Buongiorno, N. Altini, F. Berloco, B. Prencipe, M. Moschetta, V. Bevilacqua, and A. Brunetti, ‘‘Shape-based breast lesion classiﬁcation using digital tomosynthesis images: The role of explainable artiﬁcial intelligence,’’ Appl. Sci., vol. 12, no. 12, p. 6230, Jun. 2022. 24 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases",
+      "parsed": null
+    },
+    {
+      "id": "ref39",
+      "number": 39,
+      "raw_text": "T. M. Hanis, N. I. R. Ruhaiyem, W. N. Ariﬁn, J. Haron, W. F. Wan Abdul Rahman, R. Abdullah, and K. I. Musa, ‘‘Over-the-counter breast cancer classiﬁcation using machine learning and patient registration records,’’ Diagnostics, vol. 12, no. 11, p. 2826, Nov. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref40",
+      "number": 40,
+      "raw_text": "S. Meshoul, A. Batouche, H. Shaiba, and S. AlBinali, ‘‘Explainable multi-class classiﬁcation based on integrative feature selection for breast cancer subtyping,’’ Mathematics, vol. 10, no. 22, p. 4271, Nov. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref41",
+      "number": 41,
+      "raw_text": "F. Silva-Aravena, H. N. Delafuente, J. H. Gutiérrez-Bahamondes, and J. Morales, ‘‘A hybrid algorithm of ML and XAI to prevent breast cancer: A strategy to support decision making,’’ Cancers, vol. 15, no. 9, p. 2443, Apr. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref42",
+      "number": 42,
+      "raw_text": "S. Deshmukh, B. K. Behera, P. Mulay, E. A. Ahmed, S. Al-Kuwari, P. Tiwari, and A. Farouk, ‘‘Explainable quantum clustering method to model medical data,’’ Knowl.-Based Syst., vol. 267, May 2023, Art. no. 110413.",
+      "parsed": null
+    },
+    {
+      "id": "ref43",
+      "number": 43,
+      "raw_text": "R. Massafra et al., ‘‘Analyzing breast cancer invasive disease event classiﬁcation through explainable artiﬁcial intelligence,’’ Frontiers Med., vol. 10, Feb. 2023, Art. no. 1116354.",
+      "parsed": null
+    },
+    {
+      "id": "ref44",
+      "number": 44,
+      "raw_text": "J. Wang, Y. Zheng, J. Ma, X. Li, C. Wang, J. Gee, H. Wang, and W. Huang, ‘‘Information bottleneck-based interpretable multitask net- work for breast cancer classiﬁcation and segmentation,’’ Med. Image Anal., vol. 83, Jan. 2023, Art. no. 102687.",
+      "parsed": null
+    },
+    {
+      "id": "ref45",
+      "number": 45,
+      "raw_text": "J. Vrdoljak, Z. Boban, D. Baric, D. Šegvic, M. Kumric, M. Avirovic, M. P. Balja, M. M. Periša, C. Tomasovic, and S. Tomić, ‘‘Applying explainable machine learning models for detection of breast cancer lymph node metastasis in patients eligible for neoadjuvant treatment,’’ Cancers, vol. 15, no. 3, p. 634, Jan. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref46",
+      "number": 46,
+      "raw_text": "S. Kumar and A. Das, ‘‘Peripheral blood mononuclear cell derived biomarker detection using eXplainable artiﬁcial intelligence (XAI) provides better diagnosis of breast cancer,’’ Comput. Biol. Chem., vol. 104, Jun. 2023, Art. no. 107867.",
+      "parsed": null
+    },
+    {
+      "id": "ref47",
+      "number": 47,
+      "raw_text": "M. Prodan, E. Paraschiv, and A. Stanciu, ‘‘Applying deep learning methods for mammography analysis and breast cancer detection,’’ Appl. Sci., vol. 13, no. 7, p. 4272, Mar. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref48",
+      "number": 48,
+      "raw_text": "T. Khater, A. Hussain, R. Bendardaf, I. M. Talaat, H. Tawﬁk, S. Ansari, and S. Mahmoud, ‘‘An explainable artiﬁcial intelligence model for the classiﬁcation of breast cancer,’’ IEEE Access, vol. 13, pp. 5618–5633, 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref49",
+      "number": 49,
+      "raw_text": "B. Yagin, F. Yagin, C. Colak, F. Inceoglu, S. Kadry, and J. Kim, ‘‘Cancer metastasis prediction and genomic biomarker identiﬁca- tion through machine learning and eXplainable artiﬁcial intelligence in breast cancer research,’’ Diagnostics, vol. 13, no. 21, p. 3314, Oct. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref50",
+      "number": 50,
+      "raw_text": "K. Raghavan, B. Sivaselvan, and V. Kamakoti, ‘‘Attention guided grad-CAM: An improved explainable artiﬁcial intelligence model for infrared breast cancer detection,’’ Multimedia Tools Appl., vol. 83, pp. 57551–57578, Dec. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref51",
+      "number": 51,
+      "raw_text": "T. Alelyani, M. M. Alshammari, A. Almuhanna, and O. Asan, ‘‘Explainable artiﬁcial intelligence in quantifying breast cancer factors: Saudi Arabia context,’’ Healthcare, vol. 12, no. 10, p. 1025, May 2024. [Online]. Available: https://www.mdpi.com/2227-9032/12/10/1025",
+      "parsed": null
+    },
+    {
+      "id": "ref52",
+      "number": 52,
+      "raw_text": "R. M. Munshi, L. Cascone, N. Alturki, O. Saidani, A. Alshardan, and M. Umer, ‘‘A novel approach for breast cancer detection using optimized ensemble learning framework and XAI,’’ Image Vis. Comput., vol. 142, Feb. 2024, Art. no. 104910.",
+      "parsed": null
+    },
+    {
+      "id": "ref53",
+      "number": 53,
+      "raw_text": "E. Cerekci, D. Alis, N. Denizoglu, O. Camurdan, M. Ege Seker, C. Ozer, M. Y. Hansu, T. Tanyel, I. Oksuz, and E. Karaarslan, ‘‘Quantitative evaluation of saliency-based explainable artiﬁcial intelligence (XAI) methods in deep learning-based mammogram analysis,’’ Eur. J. Radiol., vol. 173, Apr. 2024, Art. no. 111356.",
+      "parsed": null
+    },
+    {
+      "id": "ref54",
+      "number": 54,
+      "raw_text": "T. K. Murugan, P. Karthikeyan, and P. Sekar, ‘‘Efﬁcient breast cancer detection using neural networks and explainable artiﬁcial intelligence,’’ Neural Comput. Appl., vol. 37, no. 5, pp. 3759–3776, Feb. 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref55",
+      "number": 55,
+      "raw_text": "M. A. Talukder, ‘‘An improved XAI-based DenseNet model for breast cancer detection using reconstruction and ﬁne-tuning,’’ Results Eng., vol. 26, Jun. 2025, Art. no. 104802.",
+      "parsed": null
+    },
+    {
+      "id": "ref56",
+      "number": 56,
+      "raw_text": "A. Alhussen, M. Anul Haq, A. Ahmad Khan, R. K. Mahendran, and S. Kadry, ‘‘XAI-RACapsNet: Relevance aware capsule network-based breast cancer detection using mammography images via explainability O-Net ROI segmentation,’’ Expert Syst. Appl., vol. 261, Feb. 2025, Art. no. 125461. S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases",
+      "parsed": null
+    },
+    {
+      "id": "ref57",
+      "number": 57,
+      "raw_text": "M. R. Alom, F. A. Farid, M. A. Rahaman, A. Rahman, T. Debnath, A. S. M. Miah, and S. Mansor, ‘‘An explainable AI-driven deep neural network for accurate breast cancer detection from histopatho- logical and ultrasound images,’’ Sci. Rep., vol. 15, no. 1, p. 17531, May 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref58",
+      "number": 58,
+      "raw_text": "W. H. Wolberg, W. N. Street, and O. L. Mangasarian. (1992). Breast Cancer Wisconsin (Diagnostic) Data Set. [Online]. Available: http://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+ (Diagnostic)",
+      "parsed": null
+    },
+    {
+      "id": "ref59",
+      "number": 59,
+      "raw_text": "Z. Matjaz and S. Milan, ‘‘Breast cancer,’’ in UCI Machine Learning Repository. Irvine, CA, USA: UCI Machine Learning Repository, University of California, Irvine, 1988, doi: 10.24432/C51P4M.",
+      "parsed": null
+    },
+    {
+      "id": "ref60",
+      "number": 60,
+      "raw_text": "(2021). Mammographic Mass Data Set. Kaggle Dataset. [Online]. Avail- able: https://www.kaggle.com/datasets/overratedgman/mammographic- mass-data-set/data",
+      "parsed": null
+    },
+    {
+      "id": "ref61",
+      "number": 61,
+      "raw_text": "R. S. Lee, F. Gimenez, A. Hoogi, K. K. Miyake, M. Gorovoy, and D. L. Rubin, ‘‘A curated mammography data set for use in computer-aided detection and diagnosis research,’’ Sci. Data, vol. 4, no. 1, pp. 1–9, Dec. 2017.",
+      "parsed": null
+    },
+    {
+      "id": "ref62",
+      "number": 62,
+      "raw_text": "M.-L. Huang and T.-Y. Lin, ‘‘Dataset of breast mammography images with masses,’’ Data Brief, vol. 31, Aug. 2020, Art. no. 105928.",
+      "parsed": null
+    },
+    {
+      "id": "ref63",
+      "number": 63,
+      "raw_text": "M. D. Halling-Brown, L. M. Warren, D. Ward, E. Lewis, A. Mackenzie, M. G. Wallis, L. S. Wilkinson, R. M. Given-Wilson, R. McAvinchey, and K. C. Young, ‘‘OPTIMAM mammography image database: A large-scale resource of mammography images and clinical data,’’ Radiol., Artif. Intell., vol. 3, no. 1, Jan. 2021, Art. no. e200103.",
+      "parsed": null
+    },
+    {
+      "id": "ref64",
+      "number": 64,
+      "raw_text": "The Cancer Genome Atlas (TCGA). Accessed: Nov. 3, 2025. [Online]. Available: https://www.cancer.gov/ccg/research/genome-sequencing/ tcga",
+      "parsed": null
+    },
+    {
+      "id": "ref65",
+      "number": 65,
+      "raw_text": "Gene Expression Omnibus (Geo). Accessed: Nov. 3, 2025. [Online]. Available: https://www.ncbi.nlm.nih.gov/geo/",
+      "parsed": null
+    },
+    {
+      "id": "ref66",
+      "number": 66,
+      "raw_text": "H. G. LaBreche, J. R. Nevins, and E. Huang, ‘‘Integrating factor analysis and a transgenic mouse model to reveal a peripheral blood predictor of breast tumors,’’ BMC Med. Genomics, vol. 4, no. 1, pp. 1–14, Dec. 2011.",
+      "parsed": null
+    },
+    {
+      "id": "ref67",
+      "number": 67,
+      "raw_text": "S. R. Piccolo, L. M. Hoffman, T. Conner, G. Shrestha, A. L. Cohen, J. R. Marks, L. A. Neumayer, C. A. Agarwal, M. C. Beckerle, I. L. Andrulis, A. E. Spira, P. J. Moos, S. S. Buys, W. E. Johnson, and A. H. Bild, ‘‘Integrative analyses reveal signaling pathways underlying familial breast cancer susceptibility,’’ Mol. Syst. Biol., vol. 12, no. 3, p. 860, Mar. 2016.",
+      "parsed": null
+    },
+    {
+      "id": "ref68",
+      "number": 68,
+      "raw_text": "W. Al-Dhabyani, M. Gomaa, H. Khaled, and A. Fahmy, ‘‘Dataset of breast ultrasound images,’’ Data Brief, vol. 28, Feb. 2020, Art. no. 104863.",
+      "parsed": null
+    },
+    {
+      "id": "ref69",
+      "number": 69,
+      "raw_text": "P. S. Rodrigues, ‘‘Breast ultrasound image,’’ Mendeley Data, Ams- terdam, The Netherlands, Dec. 2017. Accessed: Nov. 3, 2025. [Online]. Available: https://data.mendeley.com/datasets/wmy84gzngw/1 and http://dx.doi.org/10.17632/wmy84gzngw.1",
+      "parsed": null
+    },
+    {
+      "id": "ref70",
+      "number": 70,
+      "raw_text": "F. A. Spanhol, L. S. Oliveira, C. Petitjean, and L. Heutte, ‘‘A dataset for breast cancer histopathological image classiﬁcation,’’ IEEE Trans. Biomed. Eng., vol. 63, no. 7, pp. 1455–1462, Jul. 2016.",
+      "parsed": null
+    },
+    {
+      "id": "ref71",
+      "number": 71,
+      "raw_text": "L. F. Silva, D. C. M. Saade, G. O. Sequeiros, A. C. Silva, A. C. Paiva, R. S. Bravo, and A. Conci, ‘‘A new database for breast research with infrared image,’’ J. Med. Imag. Health Informat., vol. 4, no. 1, pp. 92–100, Mar. 2014.",
+      "parsed": null
+    },
+    {
+      "id": "ref72",
+      "number": 72,
+      "raw_text": "A. Binder, M. Bockmayr, M. Hägele, S. Wienert, D. Heim, K. Hellweg, M. Ishii, A. Stenzinger, A. Hocke, C. Denkert, K.-R. Müller, and F. Klauschen, ‘‘Morphological and molecular breast cancer proﬁling through explainable machine learning,’’ Nature Mach. Intell., vol. 3, no. 4, pp. 355–366, Mar. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref73",
+      "number": 73,
+      "raw_text": "H. Sharif and R. A. Khan, ‘‘A novel machine learning based framework for detection of autism spectrum disorder (ASD),’’ Appl. Artif. Intell., vol. 36, no. 1, Dec. 2022, Art. no. 2004655.",
+      "parsed": null
+    },
+    {
+      "id": "ref74",
+      "number": 74,
+      "raw_text": "Y. Li, X. Wu, P. Yang, G. Jiang, and Y. Luo, ‘‘Machine learning for lung cancer diagnosis, treatment, and prognosis,’’ Genomics, Proteomics Bioinf., vol. 20, no. 5, pp. 850–866, Oct. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref75",
+      "number": 75,
+      "raw_text": "S. M. Shah, R. A. Khan, S. Arif, and U. Sajid, ‘‘Artiﬁcial intelligence for breast cancer analysis: Trends & directions,’’ Comput. Biol. Med., vol. 142, Mar. 2022, Art. no. 105221.",
+      "parsed": null
+    },
+    {
+      "id": "ref76",
+      "number": 76,
+      "raw_text": "S. Nasir, R. Ahmed Khan, and S. Bai, ‘‘Ethical framework for harnessing the power of AI in healthcare and beyond,’’ 2023, arXiv:2309.00064.",
+      "parsed": null
+    },
+    {
+      "id": "ref77",
+      "number": 77,
+      "raw_text": "S. Lundberg and S. Lee, ‘‘A uniﬁed approach to interpreting model predictions,’’ in Proc. Adv. Neural Inf. Process. Syst., 2017, pp. 1–10. VOLUME 13, 2025 25",
+      "parsed": null
+    },
+    {
+      "id": "ref78",
+      "number": 78,
+      "raw_text": "M. T. Ribeiro, S. Singh, and C. Guestrin, ‘‘‘Why should I trust you?’: Explaining the predictions of any classiﬁer,’’ in Proc. 22nd ACM SIGKDD Int. Conf. Knowl. Discovery Data Mining, 2016, pp. 1135–1144.",
+      "parsed": null
+    },
+    {
+      "id": "ref79",
+      "number": 79,
+      "raw_text": "R. R. Selvaraju, M. Cogswell, A. Das, R. Vedantam, D. Parikh, and D. Batra, ‘‘Grad-CAM: Visual explanations from deep networks via gradient-based localization,’’ in Proc. IEEE Int. Conf. Comput. Vis. (ICCV), Oct. 2017, pp. 618–626.",
+      "parsed": null
+    },
+    {
+      "id": "ref80",
+      "number": 80,
+      "raw_text": "B. Zhou, A. Khosla, A. Lapedriza, A. Oliva, and A. Torralba, ‘‘Learning deep features for discriminative localization,’’ in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2016, pp. 2921–2929.",
+      "parsed": null
+    },
+    {
+      "id": "ref81",
+      "number": 81,
+      "raw_text": "K.-D. Althoff, ‘‘Case-based reasoning,’’ in Handbook of Software Engineering and Knowledge Engineering: Volume I: Fundamentals. Singapore: World Scientiﬁc, 2001, pp. 549–587.",
+      "parsed": null
+    },
+    {
+      "id": "ref82",
+      "number": 82,
+      "raw_text": "S. Bach, A. Binder, G. Montavon, F. Klauschen, K.-R. Müller, and W. Samek, ‘‘On pixel-wise explanations for non-linear classiﬁer deci- sions by layer-wise relevance propagation,’’ PLoS ONE, vol. 10, no. 7, Jul. 2015, Art. no. e0130140.",
+      "parsed": null
+    },
+    {
+      "id": "ref83",
+      "number": 83,
+      "raw_text": "A. Altmann, L. Toloşi, O. Sander, and T. Lengauer, ‘‘Permutation importance: A corrected feature importance measure,’’ Bioinformatics, vol. 26, no. 10, pp. 1340–1347, May 2010.",
+      "parsed": null
+    },
+    {
+      "id": "ref84",
+      "number": 84,
+      "raw_text": "L. Gianfagna and A. Di Cecco, Explainable AI With Python. Cham, Switzerland: Springer, 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref85",
+      "number": 85,
+      "raw_text": "L. Breiman, ‘‘Random forests,’’ Mach. Learn., vol. 45, no. 1, pp. 5–32, Oct. 2001.",
+      "parsed": null
+    },
+    {
+      "id": "ref86",
+      "number": 86,
+      "raw_text": "H. Ishwaran, U. B. Kogalur, E. H. Blackstone, and M. S. Lauer, Random Survival Forests. Waite Hill, OH, USA: Institute of Mathematical Statistics, 2008.",
+      "parsed": null
+    },
+    {
+      "id": "ref87",
+      "number": 87,
+      "raw_text": "J. H. Friedman, ‘‘Greedy function approximation: A gradient boosting machine,’’ Ann. Statist., vol. 29, no. 5, pp. 1189–1232, Oct. 2001.",
+      "parsed": null
+    },
+    {
+      "id": "ref88",
+      "number": 88,
+      "raw_text": "Y. Freund and R. E. Schapire, ‘‘A decision-theoretic generalization of on-line learning and an application to boosting,’’ J. Comput. Syst. Sci., vol. 55, no. 1, pp. 119–139, Aug. 1997.",
+      "parsed": null
+    },
+    {
+      "id": "ref89",
+      "number": 89,
+      "raw_text": "C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan, V. Vanhoucke, and A. Rabinovich, ‘‘Going deeper with convolutions,’’ in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2015, pp. 1–9.",
+      "parsed": null
+    },
+    {
+      "id": "ref90",
+      "number": 90,
+      "raw_text": "A. Krizhevsky, I. Sutskever, and G. E. Hinton, ‘‘ImageNet classiﬁcation with deep convolutional neural networks,’’ in Proc. Adv. Neural Inf. Process. Syst., vol. 60, 2017, pp. 84–90.",
+      "parsed": null
+    },
+    {
+      "id": "ref91",
+      "number": 91,
+      "raw_text": "K. Simonyan and A. Zisserman, ‘‘Very deep convolutional networks for large-scale image recognition,’’ 2014, arXiv:1409.1556.",
+      "parsed": null
+    },
+    {
+      "id": "ref92",
+      "number": 92,
+      "raw_text": "F. Chollet, ‘‘Xception: Deep learning with depthwise separable convo- lutions,’’ in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jul. 2017, pp. 1800–1807.",
+      "parsed": null
+    },
+    {
+      "id": "ref93",
+      "number": 93,
+      "raw_text": "K. He, X. Zhang, S. Ren, and J. Sun, ‘‘Deep residual learning for image recognition,’’ in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2016, pp. 770–778.",
+      "parsed": null
+    },
+    {
+      "id": "ref94",
+      "number": 94,
+      "raw_text": "G. Huang, Z. Liu, L. Van Der Maaten, and K. Q. Weinberger, ‘‘Densely connected convolutional networks,’’ in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jul. 2017, pp. 2261–2269.",
+      "parsed": null
+    },
+    {
+      "id": "ref95",
+      "number": 95,
+      "raw_text": "K. He, G. Gkioxari, P. Dollár, and R. Girshick, ‘‘Mask R-CNN,’’ in Proc. IEEE Int. Conf. Comput. Vis. (ICCV), Oct. 2017, pp. 2980–2988.",
+      "parsed": null
+    },
+    {
+      "id": "ref96",
+      "number": 96,
+      "raw_text": "M. Defferrard, X. Bresson, and P. Vandergheynst, ‘‘Convolutional neural networks on graphs with fast localized spectral ﬁltering,’’ in Proc. Adv. Neural Inf. Process. Syst., vol. 29, 2016, pp. 1–9.",
+      "parsed": null
+    },
+    {
+      "id": "ref97",
+      "number": 97,
+      "raw_text": "A. G. Howard, M. Zhu, B. Chen, D. Kalenichenko, W. Wang, T. Weyand, M. Andreetto, and H. Adam, ‘‘MobileNets: Efﬁcient convolutional neural networks for mobile vision applications,’’ 2017, arXiv:1704.04861.",
+      "parsed": null
+    },
+    {
+      "id": "ref98",
+      "number": 98,
+      "raw_text": "F. N. Iandola, S. Han, M. W. Moskewicz, K. Ashraf, W. J. Dally, and K. Keutzer, ‘‘SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size,’’ 2016, arXiv:1602.07360.",
+      "parsed": null
+    },
+    {
+      "id": "ref99",
+      "number": 99,
+      "raw_text": "S. Xie, R. Girshick, P. Dollár, Z. Tu, and K. He, ‘‘Aggregated residual transformations for deep neural networks,’’ in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jul. 2017, pp. 5987–5995.",
+      "parsed": null
+    },
+    {
+      "id": "ref100",
+      "number": 100,
+      "raw_text": "J. Redmon and A. Farhadi, ‘‘YOLO9000: Better, faster, stronger,’’ in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jul. 2017, pp. 6517–6525.",
+      "parsed": null
+    },
+    {
+      "id": "ref101",
+      "number": 101,
+      "raw_text": "B. Koonce, ‘‘EfﬁcientNet,’’ Convolutional Neural Networks With Swift for Tensorﬂow: Image Recognition and Dataset Categorization. Berkeley, CA, USA: Apress, 2021, pp. 109–123.",
+      "parsed": null
+    },
+    {
+      "id": "ref102",
+      "number": 102,
+      "raw_text": "T. Chen and C. Guestrin, ‘‘XGBoost: A scalable tree boosting system,’’ in Proc. 22nd ACM SIGKDD Int. Conf. Knowl. Discovery Data Mining, Aug. 2016, pp. 785–794.",
+      "parsed": null
+    },
+    {
+      "id": "ref103",
+      "number": 103,
+      "raw_text": "B. E. Boser, I. M. Guyon, and V. N. Vapnik, ‘‘A training algorithm for optimal margin classiﬁers,’’ in Proc. 5th Annu. Workshop Comput. Learn. Theory, Jul. 1992, pp. 144–152.",
+      "parsed": null
+    },
+    {
+      "id": "ref104",
+      "number": 104,
+      "raw_text": "G. Ke, Q. Meng, T. Finley, T. Wang, W. Chen, W. Ma, Q. Ye, and T. Liu, ‘‘LightGBM: A highly efﬁcient gradient boosting decision tree,’’ in Proc. Adv. Neural Inf. Process. Syst., 2017, pp. 1–9.",
+      "parsed": null
+    },
+    {
+      "id": "ref105",
+      "number": 105,
+      "raw_text": "A. Veronika Dorogush, V. Ershov, and A. Gulin, ‘‘CatBoost: Gradient boosting with categorical features support,’’ 2018, arXiv:1810.11363.",
+      "parsed": null
+    },
+    {
+      "id": "ref106",
+      "number": 106,
+      "raw_text": "G. E. Hinton and R. R. Salakhutdinov, ‘‘Reducing the dimensionality of data with neural networks,’’ Science, vol. 313, no. 5786, pp. 504–507, Jul. 2006.",
+      "parsed": null
+    },
+    {
+      "id": "ref107",
+      "number": 107,
+      "raw_text": "P. Hansen and B. Jaumard, ‘‘Cluster analysis and mathematical program- ming,’’ Math. Program., vol. 79, nos. 1–3, pp. 191–215, Oct. 1997.",
+      "parsed": null
+    },
+    {
+      "id": "ref108",
+      "number": 108,
+      "raw_text": "Z. Tu, H. Talebi, H. Zhang, F. Yang, P. Milanfar, A. Bovik, and Y. Li, ‘‘MaxViT: Multi-axis vision transformer,’’ in Proc. Eur. Conf. Comput. Vis. Cham, Switzerland: Springer, 2022, pp. 459–479.",
+      "parsed": null
+    },
+    {
+      "id": "ref109",
+      "number": 109,
+      "raw_text": "P. Langley, a. W. Iba, and K. Thompson, ‘‘An analysis of Bayesian classiﬁers,’’ in Proc. AAAI, vol. 90, 1992, pp. 223–228.",
+      "parsed": null
+    },
+    {
+      "id": "ref110",
+      "number": 110,
+      "raw_text": "C. D. Manning, An Introduction to Information Retrieval. Cambridge, U.K.: Cambridge Univ. Press, 2009.",
+      "parsed": null
+    },
+    {
+      "id": "ref111",
+      "number": 111,
+      "raw_text": "S. Hochreiter and J. Schmidhuber, ‘‘Long short-term memory,’’ Neural Comput., vol. 9, no. 8, pp. 1735–1780, Nov. 1997.",
+      "parsed": null
+    },
+    {
+      "id": "ref112",
+      "number": 112,
+      "raw_text": "A. Barredo Arrieta, N. Díaz-Rodríguez, J. Del Ser, A. Bennetot, S. Tabik, A. Barbado, S. Garcia, S. Gil-Lopez, D. Molina, R. Benjamins, R. Chatila, and F. Herrera, ‘‘Explainable artiﬁcial intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI,’’ Inf. Fusion, vol. 58, pp. 82–115, Jun. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref113",
+      "number": 113,
+      "raw_text": "K. Sokol and P. Flach, ‘‘Explainability fact sheets: A framework for systematic assessment of explainable approaches,’’ in Proc. Conf. Fairness, Accountability, Transparency, Jan. 2020, pp. 56–67.",
+      "parsed": null
+    },
+    {
+      "id": "ref114",
+      "number": 114,
+      "raw_text": "H. P. Young, ‘‘Monotonic solutions of cooperative games,’’ Int. J. Game Theory, vol. 14, no. 2, pp. 65–72, Jun. 1985.",
+      "parsed": null
+    },
+    {
+      "id": "ref115",
+      "number": 115,
+      "raw_text": "A. Khan, ‘‘Model-speciﬁc explainable artiﬁcial intelligence techniques: State-of-the-art, advantages and limitations,’’ Fac. Elect. Eng., Math. Comput. Sci. (EEMCS), Delft Univ. Technol., Delft, The Netherlands, Tech. Rep., 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref116",
+      "number": 116,
+      "raw_text": "L. Van der Maaten and G. Hinton, ‘‘Visualizing data using t- SNE,’’ J. Mach. Learn. Res., vol. 9, no. 11, pp. 2579–2605, 2008.",
+      "parsed": null
+    },
+    {
+      "id": "ref117",
+      "number": 117,
+      "raw_text": "L. McInnes, J. Healy, and J. Melville, ‘‘UMAP: Uniform mani- fold approximation and projection for dimension reduction,’’ 2018, arXiv:1802.03426.",
+      "parsed": null
+    },
+    {
+      "id": "ref118",
+      "number": 118,
+      "raw_text": "O. Biran and C. Cotton, ‘‘Explanation and justiﬁcation in machine learning: A survey,’’ in Proc. IJCAI Workshop Explainable AI (XAI), 2017, pp. 8–13.",
+      "parsed": null
+    },
+    {
+      "id": "ref119",
+      "number": 119,
+      "raw_text": "R. M. J. Byrne, ‘‘Counterfactuals in explainable artiﬁcial intelligence (XAI): Evidence from human reasoning,’’ in Proc. 28th Int. Joint Conf. Artif. Intell., Aug. 2019, pp. 6276–6282.",
+      "parsed": null
+    },
+    {
+      "id": "ref120",
+      "number": 120,
+      "raw_text": "R. Guidotti, A. Monreale, F. Giannotti, D. Pedreschi, S. Ruggieri, and F. Turini, ‘‘Factual and counterfactual explanations for black box decision making,’’ IEEE Intell. Syst., vol. 34, no. 6, pp. 14–23, Nov. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref121",
+      "number": 121,
+      "raw_text": "T. Miller, ‘‘Explanation in artiﬁcial intelligence: Insights from the social sciences,’’ Artif. Intell., vol. 267, pp. 1–38, Feb. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref122",
+      "number": 122,
+      "raw_text": "S. Wachter, B. Mittelstadt, and C. Russell, ‘‘Counterfactual explanations without opening the black box: Automated decisions and the GDPR,’’ Harvard J. Law Technol., vol. 31, no. 2, p. 841, 2017.",
+      "parsed": null
+    },
+    {
+      "id": "ref123",
+      "number": 123,
+      "raw_text": "U. Bhatt, A. Xiang, S. Sharma, A. Weller, A. Taly, Y. Jia, J. Ghosh, R. Puri, J. M. Moura, and P. Eckersley, ‘‘Explainable machine learning in deployment,’’ in Proc. Conf. Fairness, Accountability, Transparency, 2020, pp. 648–657.",
+      "parsed": null
+    },
+    {
+      "id": "ref124",
+      "number": 124,
+      "raw_text": "J. G. Santillán-Benítez, H. Mendieta-Zerón, L. M. Gómez-Oliván, J. J. Torres-Juárez, J. M. González-Bañales, L. V. Hernández-Peña, and A. Ordóñez-Quiroz, ‘‘The tetrad BMI, leptin, leptin/adiponectin (L/A) ratio and CA 15-3 are reliable biomarkers of breast cancer,’’ J. Clin. Lab. Anal., vol. 27, no. 1, pp. 12–20, Jan. 2013.",
+      "parsed": null
+    },
+    {
+      "id": "ref125",
+      "number": 125,
+      "raw_text": "A. M. A. Assiri and H. F. M. Kamel, ‘‘Evaluation of diagnostic and predictive value of serum adipokines: Leptin, resistin and visfatin in postmenopausal breast cancer,’’ Obesity Res. Clin. Pract., vol. 10, no. 4, pp. 442–453, Jul. 2016. 26 VOLUME 13, 2025 S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases",
+      "parsed": null
+    },
+    {
+      "id": "ref126",
+      "number": 126,
+      "raw_text": "M. Patrício, J. Pereira, J. Crisóstomo, P. Matafome, M. Gomes, R. Seiça, and F. Caramelo, ‘‘Using resistin, glucose, age and BMI to predict the presence of breast cancer,’’ BMC Cancer, vol. 18, no. 1, pp. 1–8, Dec. 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref127",
+      "number": 127,
+      "raw_text": "M. Ahmed, T. Bibi, R. A. Khan, and S. Nasir, ‘‘Enhancing breast cancer diagnosis in mammography: Evaluation and integration of convolutional neural networks and explainable AI,’’ in Proc. 26th Int. Multi-Topic Conf. (INMIC), Dec. 2024, pp. 1–6.",
+      "parsed": null
+    },
+    {
+      "id": "ref128",
+      "number": 128,
+      "raw_text": "A. Adadi and M. Berrada, ‘‘Peeking inside the black-box: A survey on explainable artiﬁcial intelligence (XAI),’’ IEEE Access, vol. 6, pp. 52138–52160, 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref129",
+      "number": 129,
+      "raw_text": "M. Tulio Ribeiro, S. Singh, and C. Guestrin, ‘‘Model-agnostic inter- pretability of machine learning,’’ 2016, arXiv:1606.05386.",
+      "parsed": null
+    },
+    {
+      "id": "ref130",
+      "number": 130,
+      "raw_text": "J.-B. Lamy, B. Sekar, G. Guezennec, J. Bouaud, and B. Séroussi, ‘‘Hierarchical visual case-based reasoning for supporting breast cancer therapy,’’ in Proc. 5th Int. Conf. Adv. Biomed. Eng. (ICABME), Oct. 2019, pp. 1–4.",
+      "parsed": null
+    },
+    {
+      "id": "ref131",
+      "number": 131,
+      "raw_text": "S. M. Lundberg, B. Nair, M. S. Vavilala, M. Horibe, M. J. Eisses, T. Adams, D. E. Liston, D. K.-W. Low, S.-F. Newman, J. Kim, and S.-I. Lee, ‘‘Explainable machine-learning predictions for the prevention of hypoxaemia during surgery,’’ Nature Biomed. Eng., vol. 2, no. 10, pp. 749–760, Oct. 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref132",
+      "number": 132,
+      "raw_text": "A. Chaddad, J. Peng, J. Xu, and A. Bouridane, ‘‘Survey of explainable AI techniques in healthcare,’’ Sensors, vol. 23, no. 2, p. 634, Jan. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref133",
+      "number": 133,
+      "raw_text": "D. Alvarez-Melis and T. S. Jaakkola, ‘‘On the robustness of interpretabil- ity methods,’’ 2018, arXiv:1806.08049.",
+      "parsed": null
+    },
+    {
+      "id": "ref134",
+      "number": 134,
+      "raw_text": "R. Guidotti, A. Monreale, S. Ruggieri, F. Turini, F. Giannotti, and D. Pedreschi, ‘‘A survey of methods for explaining black box models,’’ ACM Comput. Surv., vol. 51, no. 5, pp. 1–42, Sep. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref135",
+      "number": 135,
+      "raw_text": "M. Sundararajan, A. Taly, and Q. Yan, ‘‘Axiomatic attribution for deep networks,’’ in Proc. Int. Conf. Mach. Learn., 2017, pp. 3319–3328.",
+      "parsed": null
+    },
+    {
+      "id": "ref136",
+      "number": 136,
+      "raw_text": "S. Jain and B. C. Wallace, ‘‘Attention is not explanation,’’ 2019, arXiv:1902.10186.",
+      "parsed": null
+    },
+    {
+      "id": "ref137",
+      "number": 137,
+      "raw_text": "S. Abnar and W. Zuidema, ‘‘Quantifying attention ﬂow in transformers,’’ 2020, arXiv:2005.00928.",
+      "parsed": null
+    },
+    {
+      "id": "ref138",
+      "number": 138,
+      "raw_text": "H. Chefer, S. Gur, and L. Wolf, ‘‘Transformer interpretability beyond attention visualization,’’ in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2021, pp. 782–791.",
+      "parsed": null
+    },
+    {
+      "id": "ref139",
+      "number": 139,
+      "raw_text": "Z. Wang, Z. Wu, D. Agarwal, and J. Sun, ‘‘MedCLIP: Contrastive learning from unpaired medical images and text,’’ in Proc. Conf. Empirical Methods Natural Lang. Process., 2022, pp. 3876–3887.",
+      "parsed": null
+    },
+    {
+      "id": "ref140",
+      "number": 140,
+      "raw_text": "E. Tiu, E. Talius, P. Patel, C. P. Langlotz, A. Y. Ng, and P. Rajpurkar, ‘‘Expert-level detection of pathologies from unannotated chest X-ray images via self-supervised learning,’’ Nature Biomed. Eng., vol. 6, no. 12, pp. 1399–1406, Sep. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref141",
+      "number": 141,
+      "raw_text": "European Parliament and Council. (2024). Regulation (EU) 2024/1689 (Artiﬁcial Intelligence Act). Ofﬁcial Journal of the European Union. Jul. 2024. Accessed: Jul. 12, 2024. [Online]. Available: https://eur- lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "parsed": null
+    },
+    {
+      "id": "ref142",
+      "number": 142,
+      "raw_text": "FDA, Health Canada, and MHRA. (2021). Good Machine Learning Practice for Medical Device Development: Guiding Principles. [Online]. Available: https://www.fda.gov/medical-devices/software- medical-device-samd/good-machine-learning-practice-medical-device- development-guiding-principles",
+      "parsed": null
+    },
+    {
+      "id": "ref143",
+      "number": 143,
+      "raw_text": "(Jun. 2024). Transparency for Machine Learning-Enabled Medical Devices: Guiding Principles. [Online]. Available: https://www.fda. gov/medical-devices/software-medical-device-samd/transparency- machine-learning-enabled-medical-devices-guiding-principles",
+      "parsed": null
+    },
+    {
+      "id": "ref144",
+      "number": 144,
+      "raw_text": "Information Technology—Artiﬁcial Intelligence—Guidance on Risk Management, International Organization for Standardization (ISO) and International Electrotechnical Commission (IEC), Standard ISO/IEC 23894:2023, 2023. [Online]. Available: https://www. iso.org/standard/77304.html",
+      "parsed": null
+    },
+    {
+      "id": "ref145",
+      "number": 145,
+      "raw_text": "Software as a Medical Device (SAMD): Clinical Evaluation, International Medical Device Regulators Forum (IMDRF), document IMDRF/SaMD WG/N41FINAL:2017, 2017. [Online]. Available: https://www.imdrf. org/documents/software-medical-device-samd-clinical-evaluation",
+      "parsed": null
+    },
+    {
+      "id": "ref146",
+      "number": 146,
+      "raw_text": "S. C. Rivera, X. Liu, A.-W. Chan, A. K. Denniston, and M. J. Calvert, ‘‘Guidelines for clinical trial protocols for interventions involving artiﬁcial intelligence: The SPIRIT-AI extension,’’ Lancet Digit. Health, vol. 2, no. 10, pp. e549–e560, 2020. S. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases",
+      "parsed": null
+    },
+    {
+      "id": "ref147",
+      "number": 147,
+      "raw_text": "X. Liu, S. C. Rivera, D. Moher, M. J. Calvert, and A. K. Denniston, ‘‘Reporting guidelines for clinical trial reports for interventions involving artiﬁcial intelligence: The CONSORT-AI extension,’’ Lancet Digit. Health, vol. 2, no. 10, pp. e537–e548, 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref148",
+      "number": 148,
+      "raw_text": "M. Nauta, J. Trienes, S. Pathak, E. Nguyen, M. Peters, Y. Schmitt, J. Schlötterer, M. van Keulen, and C. Seifert, ‘‘From anecdotal evidence to quantitative evaluation methods: A systematic review on evaluating explainable AI,’’ 2022, arXiv:2201.08164.",
+      "parsed": null
+    },
+    {
+      "id": "ref149",
+      "number": 149,
+      "raw_text": "J. Kim, H. Maathuis, and D. Sent, ‘‘Human-centered evaluation of explainable AI applications: A systematic review,’’ Frontiers Artif. Intell., vol. 7, Oct. 2024, Art. no. 1456486. [Online]. Available: https://www.frontiersin.org/articles/10.3389/frai.2024.1456486/full",
+      "parsed": null
+    },
+    {
+      "id": "ref150",
+      "number": 150,
+      "raw_text": "I. Donoso-Guzmán, K. S. Kacafírková, M. Szymanski, A. Jacobs, D. Parra, and K. Verbert, ‘‘A systematic review of user-centred evaluation of explainable AI in healthcare,’’ 2025, arXiv:2506.13904.",
+      "parsed": null
+    },
+    {
+      "id": "ref151",
+      "number": 151,
+      "raw_text": "S. Goh, R. S. J. Goh, B. Chong, Q. X. Ng, G. C. H. Koh, K. Y. Ngiam, and M. Hartman, ‘‘Challenges in implementing artiﬁcial intelligence in breast cancer screening programs: Systematic review and framework for safe adoption,’’ J. Med. Internet Res., vol. 27, May 2025, Art. no. e62941.",
+      "parsed": null
+    },
+    {
+      "id": "ref152",
+      "number": 152,
+      "raw_text": "K. Borys, Y. A. Schmitt, M. Nauta, C. Seifert, N. Krämer, C. M. Friedrich, and F. Nensa, ‘‘Explainable AI in medical imaging: An overview for clinical practitioners—Beyond saliency-based XAI approaches,’’ Eur. J. Radiol., vol. 162, May 2023, Art. no. 110786, doi: 10.1016/j.ejrad.2023.110786.",
+      "parsed": null
+    },
+    {
+      "id": "ref153",
+      "number": 153,
+      "raw_text": "Z. Sadeghi, R. Alizadehsani, M. A. Çifçi, S. Kausar, R. Rehman, P. Mahanta, P. K. Bora, A. Almasri, R. S. Alkhawaldeh, S. Hussain, B. Alataş, A. Shoeibi, H. Moosaei, M. Hladík, S. Nahavandi, and P. M. Pardalos, ‘‘A review of explainable artiﬁcial intelligence in healthcare,’’ Inf. Fusion, vol. 118, Jan. 2024, Art. no. 109370.",
+      "parsed": null
+    },
+    {
+      "id": "ref154",
+      "number": 154,
+      "raw_text": "C. M. van Leersum and C. Maathuis, ‘‘Human centred explainable AI decision-making in healthcare,’’ J. Responsible Technol., vol. 21, Mar. 2025, Art. no. 100108.",
+      "parsed": null
+    },
+    {
+      "id": "ref155",
+      "number": 155,
+      "raw_text": "M. A. TelemedToday, ‘‘The role of explainable AI and evaluation frameworks for safe and trusted medical AI,’’ Telehealth Med. Today, vol. 9, no. 1, pp. 485–500, 2024.",
+      "parsed": null
+    },
+    {
+      "id": "ref156",
+      "number": 156,
+      "raw_text": "M. Rozanec, E. Montini, V. Cutrona, D. Papamartzivanos, T. Klemencic, B. Fortuna, D. Mladenic, E. Veliou, T. Giannetsos, and C. Emmanouilidis, ‘‘Human in the AI loop via xAI and active learning for visual inspection,’’ in Artiﬁcial Intelligence in Manufacturing: Enabling Intelligent, Flexible and Cost-Effective Production Through AI, J. Soldatos, Ed., Cham, Switzerland: Springer, 2023, pp. 381–406, doi: 10.1007/978-3-031- 46452-2_22.",
+      "parsed": null
+    },
+    {
+      "id": "ref157",
+      "number": 157,
+      "raw_text": "M. A. Kadir, A. Mosavi, and D. Sonntag, ‘‘Evaluation metrics for XAI: A review, taxonomy, and practical applications,’’ in Proc. IEEE 27th Int. Conf. Intell. Eng. Syst. (INES), Jul. 2023, pp. 111–124. [Online]. Available: https://ieeexplore.ieee.org/document/10297629",
+      "parsed": null
+    },
+    {
+      "id": "ref158",
+      "number": 158,
+      "raw_text": "B. Ko?ak, A. Ponsiglione, A. Stanzione, C. Bluethgen, J. Santinha, L. Ugga, M. Huisman, M. E. Klontzas, R. Cannella, and R. Cuocolo, ‘‘Bias in artiﬁcial intelligence for medical imaging: Fundamentals, detection, avoidance, mitigation, challenges, ethics, and prospects,’’ Diagnostic Interventional Radiol., vol. 31, no. 2, pp. 75–88, 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref159",
+      "number": 159,
+      "raw_text": "F. Pahde, M. Dreyer, W. Samek, and S. Lapuschkin, ‘‘Reveal to revise: An explainable ai life cycle for iterative bias correction of deep models,’’ in Medical Image Computing and Computer Assisted Intervention– (MICCAI) (Lecture Notes in Computer Science), vol. 14221. Cham, Switzerland: Springer, 2023, pp. 596–606. SAMITA BAI received the Ph.D. degree in computer science from the Institute of Business Administration (IBA), Karachi, Pakistan, in 2021. She is currently a Postdoctoral Fellow with Canadian Institute of Cybersecurity (CIC), Univer- sity of New Brunswick, Fredericton, NB Canada. Her research interests include explainable artiﬁcial intelligence (XAI), semantic web, information retrieval, machine learning, and AI applications in cybersecurity and healthcare. VOLUME 13, 2025 27 SIDRA NASIR is currently pursuing the Ph.D. degree in computer science with Universitá di Verona, Italy, with a focus on multimodal large language models (LLMs) and large vision models (LVMs) for real-world decision support. Her research interests include explainable AI (XAI), trustworthy ML, and cybersecurity of AI systems. RIZWAN AHMED KHAN received the Ph.D. degree in machine learning and computer vision from Université Claude Bernard Lyon 1, France. He is currently a Professor with the Department of Computer Science, Institute of Business Admin- istration (IBA), Karachi, Pakistan. He is also an Invited Professor and a Researcher with Université Jean Monnet, France, where he contributes to teaching and research in computer vision and artiﬁcial intelligence. He was a Postdoctoral Researcher in immersive gaming environments, France. He has authored numerous publications and actively contributes to advancing AI for healthcare and societal impact. His research interests include responsible AI, explainable AI (XAI), medical imaging, and computer vision. He is an Erasmus Mundus Scholar. He was a recipient of the Best University Teacher Award, in 2023. ALEXANDRE MEYER received the Ph.D. de",
+      "parsed": null
+    }
+  ],
+  "figures": [
+    {
+      "id": "fig1",
+      "number": 1,
+      "caption": "Complete overview of studies selection process.\nmethods for data extraction, and criteria for assessing the\nquality of included studies.\nThe review protocol separates SLRs from traditional or\nnarrative literature reviews. It improves the uniformity of the\nreview process. It reduces researcher bias by demanding the\nprovision of an explicit search strategy as well as established\ncriteria for the inclusion and removal of studies.\nB. CRITERIA FOR INCLUSION AND EXCLUSION\nSetting precise inclusion and",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig1_0.png",
+      "suggested_filename": "figure1.eps"
+    },
+    {
+      "id": "fig1",
+      "number": 1,
+      "caption": "These databases were\nselected for their extensive collection of relevant research\narticles in the ﬁeld. While other sources such as magazines,\nworking papers, newspapers, books, and blogs contain\nvaluable information, they were not included in this survey\ndue to the lack of rigorous peer-review processes, which\ncould potentially compromise the reliability and quality of\nthe ﬁndings.\nA variety of general keywords exploring different aspects\nof XAI in breast cancer diagnosis were used for the sear",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig1_0.png",
+      "suggested_filename": "figure1.eps"
+    },
+    {
+      "id": "fig4",
+      "number": 4,
+      "caption": "In this ﬁgure, each bar\nrepresents a speciﬁc imaging modality (name written at the\nbottom), with the accompanying dataset names given at the\ntop. The height of each bar represents the total number of\nstudies that used that modality, giving a clear visual depiction\nof how frequently each dataset modality was used. This\nanalysis illustrates the variability in data utilization among\nstudies, providing insights into potential patterns and gaps.\nAmong the most commonly employed imaging modalities\nfor",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig4_0.png",
+      "suggested_filename": "figure4.eps"
+    },
+    {
+      "id": "fig5",
+      "number": 5,
+      "caption": "The literature review has indicated that XAI methods\nhave been signiﬁcantly employed across various modalities,\nwith the features dataset emerging as a prominently utilized\nresource for enhancing the transparency and interpretability\nof models in breast cancer research, as exhibited in",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig5_0.png",
+      "suggested_filename": "figure5.eps"
+    },
+    {
+      "id": "fig4",
+      "number": 4,
+      "caption": "A feature dataset in breast cancer research encompasses\nspeciﬁc attributes gathered from various diagnostic tools,\nincluding imaging, genetic tests, and biochemical analysis.\nImaging features from mammograms detail tumor character-\nistics like shape and texture [72]. Histopathological features\nS. Bai et al.: Breast Cancer Diagnosis With XAI: Uncovering Strengths and Biases\nTABLE 1. Selected studies and citations, ordered by their year of publication (Last accessed on November 2025).\nVOLUME 13, 2",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig4_0.png",
+      "suggested_filename": "figure4.eps"
+    },
+    {
+      "id": "fig6",
+      "number": 6,
+      "caption": "This section presents a taxonomy of XAI methodolo-\ngies, focusing on the three most often used approaches:\nSHapley Additive Explanations (SHAP), Local Interpretable\nModel-Agnostic\nExplanations\n(LIME),\nand\nGradient-\nweighted Class Activation Mapping (Grad-CAM). The\nstrengths and weaknesses have been discussed in Section VI.\nAs this review article is a comprehensive examination\nof individual studies, aiming to pinpoint the algorithms\nand methodologies proposed, this section showcases the\nrelations",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig6_0.png",
+      "suggested_filename": "figure6.eps"
+    },
+    {
+      "id": "fig7",
+      "number": 7,
+      "caption": "In general, XAI models can be categorized\ninto two types, including intrinsic and post-hoc models.\nIt is possible to explain and comprehend intrinsic models,\nalso called transparent models. Typical examples of trans-\nparent models include linear regression, logistic regression,\nand decision trees [112]. On the other hand, post-hoc is\ncategorized into model-speciﬁc and model-agnostic. XAI\nexplanations can also be categorized into two main types\nbased on their scope, which includes global and loca",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig7_0.png",
+      "suggested_filename": "figure7.eps"
+    },
+    {
+      "id": "fig2",
+      "number": 2,
+      "caption": "The distribution of studies about breast cancer diagnosis using XAI spanning from 2019-2025.",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig2_0.png",
+      "suggested_filename": "figure2.eps"
+    },
+    {
+      "id": "fig3",
+      "number": 3,
+      "caption": "Investigating breast cancer diagnosis with XAI: Analyzing first author affiliation belonging to different\ncountries.\nTask-speciﬁc effectiveness is another key area, particularly\nhow explanations inﬂuence Decision-Making Impact and\nsupport Debugging and Model Improvement. Metrics such\nas Task Performance and Decision Conﬁdence evaluate\nwhether explanations help users make faster, more accurate\ndecisions. At the same time, Error Detection Rates and Bias\nIdentiﬁcation measure the ability of explana",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig3_0.png",
+      "suggested_filename": "figure3.eps"
+    },
+    {
+      "id": "fig4",
+      "number": 4,
+      "caption": "Graph illustrating the distribution of selected studies based on the use of specific imaging modalities or datasets.\nFeatures Wisconsin Breast Diagonstic Dataset (WBDC) [58] and others}, Mammograms {Breast Cancer Dataset (BCD) [59],\nMammographic Mass (MM) [60], MIAS, Digital Database for Screening Mammography (DDSM) [61], INbreast [62], Wisconsin\nBreast Cancer (WBC) [58], and Radiological Society of North America (RSNA) [63] and others}, Genes {The Cancer Genome\nAtlas (TCGA) and Gene Expression ",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig4_0.png",
+      "suggested_filename": "figure4.eps"
+    },
+    {
+      "id": "fig5",
+      "number": 5,
+      "caption": "Visual representation of the modalities.\nensure that XAI systems are not only technically sound\nbut also effective in real-world applications.The explanation\nprovided in this section is based on/conferred from the article\nby Sokol and Flach [113].\nVOLUME 13, 2025\n9",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig5_0.png",
+      "suggested_filename": "figure5.eps"
+    },
+    {
+      "id": "fig6",
+      "number": 6,
+      "caption": "Concept of black box models focusing the essential aspect of explainability in machine learning [76].\nTABLE 3. Association of machine learning/deep learning models with utilized XAI methods in reviewed studies (holistic view) CBR= Case-based\nReasoning, (G)LRP= (Graph) Layer-wise Relevance Propagation, PIMP= Permutation Importance, PDP= Partial Dependence Plot, ADR= Adaptive\nDimension Reduction, RF= Random Forest, LightGBM= Light Gradient Boosting Machine, SVM= Support Vector Machine, MIB-Net= Mu",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig6_0.png",
+      "suggested_filename": "figure6.eps"
+    },
+    {
+      "id": "fig7",
+      "number": 7,
+      "caption": "XAI taxonomy; A detailed depiction.\nVOLUME 13, 2025\n11\nfeature to the prediction. SHAP values provide a measure\nfor the impact of each feature in a given data instance\non the model’s output, offering both a global and local\nunderstanding of the model.\nThe mathematical foundation of SHAP is rooted in game\ntheory [114], speciﬁcally in the concept of Shapley values.\nIts design ensures equitable distribution of the ‘‘payout’’\n(prediction) among the ‘‘players’’ (features).\n1) SHAP EQUATION\nThe primar",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig7_0.png",
+      "suggested_filename": "figure7.eps"
+    },
+    {
+      "id": "fig8",
+      "number": 8,
+      "caption": "Comparative visualization of XAI techniques for breast cancer\ndetection [127]. (a) The input image (b) SHAP (c) Grad-CAM (d) LIME.\nAlHussen et al. [56] introduced the XAI-RACapsNet\nframework, which integrates explainable ROI segmentation\nthrough the XAI O-Net architecture combining transformer\nand ResNet modules. The model generates relevance-based\nheat maps from segmented mammograms, providing inter-\npretable localization of malignant regions alongside high\ndiagnostic accuracy.\nSimilarly, Munsh",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig8_0.png",
+      "suggested_filename": "figure8.eps"
+    },
+    {
+      "id": "fig9",
+      "number": 9,
+      "caption": "Comprehensive evaluation framework for XAI.\nclinician’s context or model architecture risk being\nignored or mis-interpreted [154].\n• Address bias, fairness, ethics and regulatory readiness\nearly in the design and deployment of XAI systems.\nWithout careful attention to fairness of explanations, lia-\nbility, informed consent and auditability, XAI-enabled\ntools may fail regulatory or ethical acceptability even if\ntechnically accurate [157].\nC. BRIDGING BIAS DISCOVERY TO CLINICAL IMPACT AND\nMITIGATI",
+      "image_path": "data\\uploads\\a2bb13ec-f577-4412-9b44-1045cec8ee10\\fig9_0.png",
+      "suggested_filename": "figure9.eps"
+    }
+  ],
+  "tables": [
+    {
+      "id": "table1",
+      "number": 1,
+      "title": "Table 1",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 5"
+    },
+    {
+      "id": "table2",
+      "number": 2,
+      "title": "Table 2",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 6"
+    },
+    {
+      "id": "table3",
+      "number": 3,
+      "title": "Table 3",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 10"
+    },
+    {
+      "id": "table4",
+      "number": 4,
+      "title": "Table 4",
+      "rows": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 10"
+    },
+    {
+      "id": "table5",
+      "number": 5,
+      "title": "Table 5",
+      "rows": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 10"
+    },
+    {
+      "id": "table6",
+      "number": 6,
+      "title": "Table 6",
+      "rows": [
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 15"
+    },
+    {
+      "id": "table7",
+      "number": 7,
+      "title": "Table 7",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 18"
+    },
+    {
+      "id": "table8",
+      "number": 8,
+      "title": "Table 8",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 19"
+    }
+  ],
+  "equations": [],
+  "metadata": {
+    "manuscript_id": "",
+    "source_filename": "paper.pdf",
+    "doi": "10.24432/C51P4M."
+  },
+  "extraction_warnings": []
+}

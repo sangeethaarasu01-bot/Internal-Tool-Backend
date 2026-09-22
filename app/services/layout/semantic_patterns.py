@@ -32,6 +32,16 @@ TABLE_CONTINUATION_KNOWN_RE = re.compile(
 ABSTRACT_RE = re.compile(r"^abstract[\s—\-–]", re.IGNORECASE)
 KEYWORDS_RE = re.compile(r"^index terms[\s—\-–]", re.IGNORECASE)
 DATE_HISTORY_RE = re.compile(r"^received\s+\d", re.IGNORECASE)
+IEEE_ACCESS_VOLUME_HEADER_RE = re.compile(r"^VOLUME\s+\d+,\s*\d{4}\s*$", re.IGNORECASE)
+IEEE_ACCESS_JOURNAL_HEADER_RE = re.compile(r"^IEEE\s+ACCESS\s*$", re.IGNORECASE)
+IEEE_PUBLICATION_HISTORY_RE = re.compile(
+    r"(?:received\s+\d|accepted\s+\d|date of publication|date of current version|00\s+xxxx\s+0000)",
+    re.IGNORECASE,
+)
+IEEE_LICENSE_FOOTER_RE = re.compile(
+    r"(?:creativecommons\.org|creative commons attribution|this work is licensed under)",
+    re.IGNORECASE,
+)
 CORRESPONDING_RE = re.compile(r"corresponding author", re.IGNORECASE)
 REFERENCE_HEADING_RE = re.compile(r"^references(?:\s*[:\-–—])?\s*$", re.IGNORECASE)
 ACKNOWLEDGMENT_RE = re.compile(r"^acknowledgment", re.IGNORECASE)

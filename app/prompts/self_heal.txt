@@ -1,0 +1,5 @@
+The previous XML generation failed validation with these errors:
+{errors}
+
+Fix them in the new output. Preserve all other content. Return ONLY 
+the corrected XML.

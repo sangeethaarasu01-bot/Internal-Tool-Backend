@@ -14,8 +14,13 @@ from app.services.layout.semantic_patterns import (
     _CORRESPONDING_AUTHOR_NAME_RE,
     _IEEE_ET_AL_HEADER_RE,
     build_author_running_header_prefixes as derive_author_running_header_prefixes,
+    DATE_HISTORY_RE,
     extract_ieee_et_al_header_prefix,
     extract_leading_roman_section_heading,
+    IEEE_ACCESS_JOURNAL_HEADER_RE,
+    IEEE_ACCESS_VOLUME_HEADER_RE,
+    IEEE_LICENSE_FOOTER_RE,
+    IEEE_PUBLICATION_HISTORY_RE,
     REFERENCE_LABEL_RE,
     matches_author_running_header_prefix,
     normalize_text,
@@ -27,7 +32,12 @@ FOOTER_Y_MARGIN = 40.0
 
 FOOTER_PATTERN = re.compile(
     r"(©|copyright|all rights reserved|ieee\.org|publications/rights|"
-    r"personal use is permitted|republication/redistribution)",
+    r"personal use is permitted|republication/redistribution|"
+    r"the authors\.|licensed under a creative commons)",
+    re.IGNORECASE,
+)
+RUNNING_HEADER_ACCESS = re.compile(
+    r"^(?:\d+\s+)?IEEE\s+ACCESS(?:\s+\d+)?$",
     re.IGNORECASE,
 )
 CITATION_PATTERN = re.compile(
@@ -108,6 +118,24 @@ def collect_author_running_header_prefixes(result: ExtractionResult) -> list[str
     )
 
 
+def build_running_footer_candidates(
+    result: ExtractionResult,
+) -> dict[str, set[int]]:
+    """Map normalized bottom-band text -> page numbers where it appears."""
+    hits: dict[str, set[int]] = defaultdict(set)
+    for page in result.pages:
+        for block in page.blocks:
+            if block.type != "text" or not (block.text or "").strip():
+                continue
+            y1 = block.bbox[3]
+            if not _near_bottom(y1, page.height):
+                continue
+            flat = _normalize_header_text(block.text)
+            if flat and len(flat) < 220:
+                hits[flat].add(page.page_number)
+    return hits
+
+
 def build_page_number_candidates(result: ExtractionResult) -> dict[str, set[int]]:
     """Map isolated page-number strings to pages where they appear near top/bottom."""
     hits: dict[str, set[int]] = defaultdict(set)
@@ -129,10 +157,18 @@ def build_page_number_candidates(result: ExtractionResult) -> dict[str, set[int]
     return hits
 
 
-def is_footer_block(text: str, near_bottom: bool) -> FilterDecision | None:
+def is_footer_block(text: str, near_bottom: bool, near_top: bool = False) -> FilterDecision | None:
+    flat = _normalize_header_text(text)
+    if IEEE_LICENSE_FOOTER_RE.search(flat):
+        return FilterDecision(
+            classification="FOOTER",
+            exclude_from_content=True,
+            exclusion_reason="ieee_license_footer",
+            confidence=0.96,
+        )
     if not FOOTER_PATTERN.search(text):
         return None
-    if not near_bottom and "ieee.org" not in text.lower():
+    if not near_bottom and not near_top and "ieee.org" not in text.lower():
         return None
     return FilterDecision(
         classification="FOOTER",
@@ -140,6 +176,59 @@ def is_footer_block(text: str, near_bottom: bool) -> FilterDecision | None:
         exclusion_reason="copyright_or_rights_pattern",
         confidence=0.95,
     )
+
+
+def is_ieee_access_boilerplate(
+    text: str,
+    *,
+    near_top: bool,
+    near_bottom: bool,
+    running_footer_pages: dict[str, set[int]] | None = None,
+) -> FilterDecision | None:
+    """IEEE Access / periodicals margin lines (volume, dates, license, page chrome)."""
+    flat = _normalize_header_text(text)
+    if not flat:
+        return None
+
+    if IEEE_ACCESS_VOLUME_HEADER_RE.match(flat) or RUNNING_HEADER_ACCESS.match(flat):
+        if near_top or near_bottom:
+            return FilterDecision(
+                classification="RUNNING_HEADER",
+                exclude_from_content=True,
+                exclusion_reason="ieee_access_running_header",
+                confidence=0.94,
+            )
+
+    if IEEE_ACCESS_JOURNAL_HEADER_RE.match(flat) and (near_top or near_bottom):
+        return FilterDecision(
+            classification="RUNNING_HEADER",
+            exclude_from_content=True,
+            exclusion_reason="ieee_access_journal_header",
+            confidence=0.94,
+        )
+
+    if DATE_HISTORY_RE.match(flat) or (
+        IEEE_PUBLICATION_HISTORY_RE.search(flat) and len(flat) < 260
+    ):
+        return FilterDecision(
+            classification="RUNNING_HEADER",
+            exclude_from_content=True,
+            exclusion_reason="ieee_publication_history",
+            confidence=0.93,
+        )
+
+    if running_footer_pages:
+        pages = running_footer_pages.get(flat, set())
+        if len(pages) >= 2 and (near_bottom or near_top) and len(flat) < 200:
+            if IEEE_LICENSE_FOOTER_RE.search(flat) or FOOTER_PATTERN.search(flat):
+                return FilterDecision(
+                    classification="FOOTER",
+                    exclude_from_content=True,
+                    exclusion_reason="repeated_margin_footer",
+                    confidence=0.9,
+                )
+
+    return None
 
 
 def is_running_header_block(
@@ -199,13 +288,16 @@ def is_page_number_block(
     flat = _normalize_header_text(text)
     if not (near_top or near_bottom):
         return None
-    if PAGE_NUMBER_ONLY.match(flat) and len(page_number_candidates.get(flat, set())) >= 2:
-        return FilterDecision(
-            classification="PAGE_NUMBER",
-            exclude_from_content=True,
-            exclusion_reason="isolated_repeated_page_number",
-            confidence=0.85,
-        )
+    if PAGE_NUMBER_ONLY.match(flat):
+        if len(page_number_candidates.get(flat, set())) >= 2 or near_bottom or (
+            near_top and int(flat) > 1
+        ):
+            return FilterDecision(
+                classification="PAGE_NUMBER",
+                exclude_from_content=True,
+                exclusion_reason="isolated_page_number_margin",
+                confidence=0.85,
+            )
     if RUNNING_HEADER_JOURNAL.match(flat):
         return None
     return None
@@ -221,6 +313,7 @@ def classify_content_block(
     page_number_candidates: dict[str, set[int]],
     body_font_size: float,
     author_header_prefixes: list[str] | None = None,
+    running_footer_pages: dict[str, set[int]] | None = None,
 ) -> FilterDecision:
     text = (block.text or "").strip()
     if not text:
@@ -230,13 +323,22 @@ def classify_content_block(
     near_top = _near_top(y0)
     near_bottom = _near_bottom(y1, page_height)
 
-    footer = is_footer_block(text, near_bottom)
+    boilerplate = is_ieee_access_boilerplate(
+        text,
+        near_top=near_top,
+        near_bottom=near_bottom,
+        running_footer_pages=running_footer_pages,
+    )
+    if boilerplate and not CITATION_PATTERN.search(text):
+        return boilerplate
+
+    footer = is_footer_block(text, near_bottom, near_top=near_top)
     if footer and not CITATION_PATTERN.search(text):
         return footer
 
-    if near_bottom and re.fullmatch(r"[A-Z]", text):
+    if (near_bottom or near_top) and re.fullmatch(r"[A-Z]", text):
         return FilterDecision(
-            classification="FOOTER",
+            classification="FOOTER" if near_bottom else "RUNNING_HEADER",
             exclude_from_content=True,
             exclusion_reason="stray_page_glyph",
             confidence=0.9,

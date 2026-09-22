@@ -1,0 +1,8 @@
+{
+  "mappings": [],
+  "unmapped_xml": [],
+  "unmapped_pdf": [],
+  "warnings": [],
+  "llm_model": "claude-3-5-haiku-20241022+offline-fallback",
+  "llm_cost_usd": 0.0
+}

@@ -1,0 +1,23 @@
+2026-09-22 12:11:20.187 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:11:38.860 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:26:51.206 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:26:56.538 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:26:59.789 | INFO     | app.llm.client:complete:67 - LLM complete provider=anthropic model=m tokens_in=4465 tokens_out=90 cost=$0.0000 duration=1.29s
+2026-09-22 12:29:44.757 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:29:48.986 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:30:50.770 | WARNING  | app.llm.anthropic_provider:anthropic_complete:71 - Anthropic billing/auth error — offline fallback: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfJ3hCUbkCTrY8r9ae23J'}
+2026-09-22 12:30:50.772 | INFO     | app.llm.client:complete:85 - LLM complete provider=anthropic model=claude-sonnet-4-20250514+offline-fallback tokens_in=20514 tokens_out=90 cost=$0.0000 duration=2.44s
+2026-09-22 12:31:14.235 | WARNING  | app.llm.anthropic_provider:anthropic_complete:71 - Anthropic billing/auth error — offline fallback: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfJ3iw1jE1QWKb8RhYHhT'}
+2026-09-22 12:31:14.236 | INFO     | app.llm.client:complete:85 - LLM complete provider=anthropic model=claude-3-5-haiku-20241022+offline-fallback tokens_in=20497 tokens_out=90 cost=$0.0000 duration=1.12s
+2026-09-22 12:34:13.528 | WARNING  | app.llm.anthropic_provider:anthropic_complete:71 - Anthropic billing/auth error — offline fallback: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfJ3x9TShyNkCaWxn5tj9'}
+2026-09-22 12:34:13.530 | INFO     | app.llm.client:complete:85 - LLM complete provider=anthropic model=claude-3-5-haiku-20241022+offline-fallback tokens_in=20497 tokens_out=90 cost=$0.0000 duration=1.12s
+2026-09-22 12:35:26.984 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:37:30.873 | WARNING  | app.llm.anthropic_provider:anthropic_complete:71 - Anthropic billing/auth error — offline fallback: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfJ4CgmkiLRzjVV2fwFwW'}
+2026-09-22 12:37:30.875 | INFO     | app.llm.client:complete:85 - LLM complete provider=anthropic model=claude-3-5-haiku-20241022+offline-fallback tokens_in=20497 tokens_out=90 cost=$0.0000 duration=3.01s
+2026-09-22 12:38:22.772 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:38:26.784 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:39:35.580 | WARNING  | app.llm.anthropic_provider:anthropic_complete:71 - Anthropic billing/auth error — offline fallback: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfJ4Mt1BYNqwoz5y7Zfkd'}
+2026-09-22 12:39:35.584 | INFO     | app.llm.client:complete:85 - LLM complete provider=anthropic model=claude-3-5-haiku-20241022+offline-fallback tokens_in=20497 tokens_out=90 cost=$0.0000 duration=3.27s
+2026-09-22 12:41:24.261 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:42:01.475 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-22 12:42:02.499 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
