@@ -11,6 +11,7 @@ import pdfplumber
 
 from app.config import settings
 from app.llm.client import LLMClient
+from app.utils.xml_helpers import clean_extracted_abstract
 from app.models.paper import (
     Affiliation,
     Author,
@@ -144,7 +145,7 @@ class PDFExtractor:
             re.DOTALL | re.IGNORECASE,
         )
         if m:
-            abstract = re.sub(r"\s+", " ", m.group(1).strip())
+            abstract = clean_extracted_abstract(m.group(1))
         km = re.search(
             r"INDEX\s+TERMS\s*[—\-:]?\s*(.+?)(?:I\.\s+INTRODUCTION|\n\n)",
             full_text,

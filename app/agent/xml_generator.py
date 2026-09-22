@@ -14,9 +14,10 @@ from app.models.mapping_plan import MappingEntry, MappingPlan
 from app.models.paper import Author, PaperData, Section
 from app.utils.xml_helpers import (
     apply_ieee_entities_to_tree,
-    encode_ieee_text_entities,
+    clean_extracted_abstract,
     escape_xml_text,
     is_element_node,
+    normalize_text_for_xml_dom,
     post_process_ieee_entities,
     serialize_tree,
     xml_local_name,
@@ -62,6 +63,8 @@ def _apply_simple_mappings(
     for entry in plan.mappings:
         if entry.transform not in ("none", "escape_xml"):
             continue
+        if entry.xml_tag == "abstract":
+            continue
         nodes = _find_by_local_tag(root, entry.xml_tag)
         if not nodes:
             continue
@@ -72,21 +75,44 @@ def _apply_simple_mappings(
         if entry.transform == "escape_xml":
             text = escape_xml_text(raw)
         else:
-            text = encode_ieee_text_entities(raw)
+            text = normalize_text_for_xml_dom(raw)
         if text and nodes:
             nodes[0].text = text
 
     title_nodes = _find_by_local_tag(root, "article-title")
     if title_nodes and paper.title:
-        title_nodes[0].text = encode_ieee_text_entities(paper.title)
+        title_nodes[0].text = normalize_text_for_xml_dom(paper.title)
+
+
+def _abstract_paragraph_populated(p: etree._Element) -> bool:
+    for child in p:
+        if is_element_node(child):
+            return True
+    return len((p.text or "").strip()) > 80
+
+
+def _fill_abstract(root: etree._Element, abstract: str) -> None:
+    """Fill abstract from PDF only when the template paragraph is empty; preserve client markup."""
     abs_nodes = _find_by_local_tag(root, "abstract")
-    if abs_nodes and paper.abstract:
-        enc = encode_ieee_text_entities(paper.abstract)
-        p_nodes = _find_by_local_tag(abs_nodes[0], "p")
-        if p_nodes:
-            p_nodes[0].text = enc
-        else:
-            abs_nodes[0].text = enc
+    if not abs_nodes:
+        return
+    abs_el = abs_nodes[0]
+    abs_el.text = None
+    cleaned = clean_extracted_abstract(abstract) if abstract else ""
+    p_nodes = _find_by_local_tag(abs_el, "p")
+    if p_nodes:
+        p = p_nodes[0]
+        if _abstract_paragraph_populated(p):
+            return
+        if not cleaned:
+            return
+        p.clear()
+        p.text = cleaned
+        return
+    if not cleaned:
+        return
+    p = etree.SubElement(abs_el, "p")
+    p.text = cleaned
 
 
 def _contrib_rids_referenced(root: etree._Element) -> list[str]:
@@ -128,8 +154,8 @@ def _set_text_on_tag(parent: etree._Element, tag: str, text: str) -> None:
 
 def _apply_author_to_contrib(contrib: etree._Element, author: Author, idx: int) -> None:
     given, surname = _author_name_parts(author)
-    given_enc = encode_ieee_text_entities(given) if given else ""
-    surname_enc = encode_ieee_text_entities(surname) if surname else ""
+    given_enc = normalize_text_for_xml_dom(given) if given else ""
+    surname_enc = normalize_text_for_xml_dom(surname) if surname else ""
 
     for string_name in _find_by_local_tag(contrib, "string-name"):
         string_name.text = None
@@ -225,6 +251,7 @@ class XMLGenerator:
             root = etree.fromstring(template_xml.encode("utf-8"), parser=parser)
             tree = etree.ElementTree(root)
             _apply_simple_mappings(root, paper, plan)
+            _fill_abstract(root, paper.abstract)
             if any(m.transform == "loop" and "author" in m.pdf_field for m in plan.mappings):
                 _fill_authors(root, paper.authors)
             elif paper.authors:

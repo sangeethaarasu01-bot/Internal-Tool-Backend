@@ -37,6 +37,24 @@ async def test_fill_authors_unique_contrib_ids():
     assert 'rid="contrib3"' in xml
 
 
+def test_fill_abstract_preserves_template_paragraph_with_markup():
+    from app.agent.xml_generator import _fill_abstract
+
+    tpl = """<article><front><article-meta><abstract><p>
+In this facile approach with (<italic>R</italic><sup>2</sup>) value.
+</p></abstract></article-meta></front></article>"""
+    root = etree.fromstring(tpl.encode())
+    pdf_abstract = (
+        "\u2014In this facile approach, duplicate from PDF with "
+        "coefficient of determination (R2) of 0.967."
+    )
+    _fill_abstract(root, pdf_abstract)
+    xml = etree.tostring(root, encoding="unicode")
+    assert xml.count("In this facile approach") == 1
+    assert "<italic>R</italic>" in xml
+    assert "duplicate from PDF" not in xml
+
+
 def test_fill_authors_uses_each_template_contrib_not_first_only():
     from app.agent.xml_generator import _fill_authors
 

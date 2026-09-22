@@ -82,38 +82,97 @@ _IEEE_CHAR_ENTITIES: dict[str, str] = {
 }
 
 
+def normalize_text_for_xml_dom(value: str) -> str:
+    """PDF typography cleanup for lxml text nodes (entities applied at serialize time)."""
+    if not value:
+        return value
+    return normalize_typographic_ligatures(value.replace("\u00ad", ""))
+
+
+def clean_extracted_abstract(text: str) -> str:
+    """Strip IEEE 'Abstract—' label and PDF line-break hyphens from abstract text."""
+    text = normalize_text_for_xml_dom(text)
+    text = re.sub(r"\s+", " ", text.strip())
+    text = re.sub(
+        r"^(?:Abstract|ABSTRACT)\s*[—–\-\u2013\u2014:]?\s*",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(r"^[—–\-\u2013\u2014]\s*", "", text)
+    text = re.sub(r"(\w)-\s+(\w)", r"\1\2", text)
+    return text.strip()
+
+
+def _encode_plain_text_chunk(chunk: str) -> str:
+    parts: list[str] = []
+    k = 0
+    while k < len(chunk):
+        if chunk[k] == "&":
+            ent_end = chunk.find(";", k)
+            if ent_end != -1:
+                ent = chunk[k : ent_end + 1]
+                if re.match(r"&(?:#\d+|#x[0-9A-Fa-f]+|amp|lt|gt|quot|apos);", ent):
+                    parts.append(ent)
+                    k = ent_end + 1
+                    continue
+        ch = chunk[k]
+        if ch in _IEEE_CHAR_ENTITIES:
+            parts.append(_IEEE_CHAR_ENTITIES[ch])
+        elif should_encode_as_hex_entity(ch):
+            parts.append(f"&#x{ord(ch):04X};")
+        else:
+            parts.append(ch)
+        k += 1
+    return "".join(parts)
+
+
 def encode_ieee_text_entities(value: str) -> str:
     """IEEE hex entities for punctuation and accented letters — not PDF ligatures."""
     if not value:
         return value
-    value = normalize_typographic_ligatures(value.replace("\u00ad", ""))
+    return _encode_plain_text_chunk(normalize_text_for_xml_dom(value))
+
+
+def _encode_xml_text_content(xml_str: str) -> str:
+    """Apply IEEE entity rules to text between XML tags (not inside tags)."""
     out: list[str] = []
-    for ch in value:
-        if ch in _IEEE_CHAR_ENTITIES:
-            out.append(_IEEE_CHAR_ENTITIES[ch])
-        elif should_encode_as_hex_entity(ch):
-            out.append(f"&#x{ord(ch):04X};")
-        else:
-            out.append(ch)
+    i = 0
+    n = len(xml_str)
+    while i < n:
+        if xml_str[i] == "<":
+            j = xml_str.find(">", i)
+            if j == -1:
+                out.append(xml_str[i:])
+                break
+            out.append(xml_str[i : j + 1])
+            i = j + 1
+            continue
+        j = i
+        while j < n and xml_str[j] != "<":
+            j += 1
+        chunk = xml_str[i:j]
+        if chunk:
+            out.append(_encode_plain_text_chunk(chunk))
+        i = j
     return "".join(out)
 
 
 def apply_ieee_entities_to_tree(root: etree._Element) -> None:
-    """Walk element text/tail and apply IEEE entity encoding."""
+    """Normalize PDF typography in the DOM; hex entities are applied when serializing."""
     for elem in root.iter():
         if not is_element_node(elem):
             continue
         if elem.text:
-            elem.text = encode_ieee_text_entities(elem.text)
+            elem.text = normalize_text_for_xml_dom(elem.text)
         if elem.tail:
-            elem.tail = encode_ieee_text_entities(elem.tail)
+            elem.tail = normalize_text_for_xml_dom(elem.tail)
 
 
 def post_process_ieee_entities(xml_str: str) -> str:
-    """Replace any remaining Unicode chars in serialized XML with hex entities."""
-    for uchar, ent in _IEEE_CHAR_ENTITIES.items():
-        xml_str = xml_str.replace(uchar, ent)
-    return xml_str
+    """Encode punctuation/accented letters in serialized XML (avoids &amp;#x double-escape)."""
+    xml_str = re.sub(r"&amp;(#x[0-9A-Fa-f]+;)", r"&\1", xml_str)
+    return _encode_xml_text_content(xml_str)
 
 
 def serialize_tree(tree: etree._ElementTree, doctype: str | None = None) -> str:
