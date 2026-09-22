@@ -1,0 +1,323 @@
+{
+  "title": "Population Change in ",
+  "authors": [
+    {
+      "first_name": "United",
+      "last_name": "Kingdom",
+      "full_name": "United Kingdom",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "United",
+      "last_name": "Kingdom",
+      "full_name": "United Kingdom",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Tony",
+      "last_name": "Champion",
+      "full_name": "Tony Champion",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Jane",
+      "last_name": "Falkingham",
+      "full_name": "Jane Falkingham",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "New",
+      "last_name": "York",
+      "full_name": "New York",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Littlefield",
+      "last_name": "International",
+      "full_name": "Littlefield International",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Whitacre",
+      "last_name": "Mews",
+      "full_name": "Whitacre Mews",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Stannary",
+      "last_name": "Street",
+      "full_name": "Stannary Street",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Littlefield",
+      "last_name": "International",
+      "full_name": "Littlefield International",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Forbes",
+      "last_name": "Boulevard",
+      "full_name": "Forbes Boulevard",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    }
+  ],
+  "affiliations": [
+    {
+      "id": "aff1",
+      "department": null,
+      "institution": "See PDF for affiliation details",
+      "city": null,
+      "state": null,
+      "post_code": null,
+      "country": null
+    }
+  ],
+  "abstract": "",
+  "keywords": [],
+  "sections": [],
+  "references": [],
+  "figures": [],
+  "tables": [
+    {
+      "id": "table1",
+      "number": 1,
+      "title": "Table 1",
+      "rows": [
+        [
+          "List of Figures"
+        ],
+        [
+          ""
+        ]
+      ],
+      "caption": "Table on page 8"
+    },
+    {
+      "id": "table2",
+      "number": 2,
+      "title": "Table 2",
+      "rows": [
+        [
+          "Figure 3.3 Model Cohort-Specific Trajectories of Frailty\nby Wealth Tertiles 34\nFigure 3.4 Age Pattern of Well-Being (Life Satisfaction) in an\nUncontrolled Age-Based Model and After Progressively\nAdding Controls for Marital Status, Socio-Economic\nFactors, Health and Social Support 35\nFigure 3.5a Age Patterns of Self-Reported Limiting Long-Term Illness\nat Retirement in Bury, Merthyr Tydfil and South Bucks 38\nFigure 3.5b Spatial Distribution of Districts according to Three Patterns\nof Self-Reported Limiting Long-Term Illness at Retirement 39\nFigure 3.6 Causal Mechanisms Associating Class with Health\nin Later Life 41\nFigure 4.1 IPS-Based Estimates of UK Immigration, Emigration\nand Net Migration, 1964–2014 50\nFigure 4.2 UK Population Shares by Country of Birth, 2014\nEstimates 54\nFigure 4.3 Annual Asylum Applications, Grants and Refusals, UK,\n1984–2014 57\nFigure 5.1 UK-Born Women by Selected Ethnicity and\nAge Distribution 66\nFigure 5.2 Change in the Proportion of UK-Born Women Aged\n15–49 Within Ethnic Groups 68\nFigure 5.3 Trends in Total Fertility of the Main South Asian\nEthnic Groups 71\nFigure 5.4 TFRs and ASFRs of Immigrant and UK-Born Women\nWithin the Main Ethnic Groups 73\nFigure 5.5 Age-Specific Fertility Rates of Women Before and\nAfter Migration to the UK, Average for 1987–2006 76\nFigure 6.1a Distribution of Co-resident Siblings in Family Unit,\nby Survey Year 89\nFigure 6.1b Distribution of Co-resident Children in Family Unit,\nby Survey Year 89\nFigure 6.2a Average Number of Co-resident Siblings, by Survey Year\nand Mother’s Level of Education 91\nFigure 6.2b Average Number of Co-resident Children, by Survey Year\nand Mother’s Level of Education 91\nFigure 6.3 Per cent of Children Living with a Lone Mother,\nby Child Age and Birth Cohort 94\nFigure 6.4a Mothers in Employment, by Survey Year and Mothers’\nPartnership Status: Per cent of Children Living with\na Mother in Employment 95\nFigure 6.4b Mothers in Employment, by Survey Year and Mothers’"
+        ],
+        [
+          "Partnership Status: Per cent of Mothers in Employment 95"
+        ]
+      ],
+      "caption": "Table on page 9"
+    },
+    {
+      "id": "table3",
+      "number": 3,
+      "title": "Table 3",
+      "rows": [
+        [
+          "Figure 6.5 Per cent of Children Living with a Lone Mother,\nby Survey Year and Mother’s Level of Education 97\nFigure 6.6a Children Living with an Employed Mother, by Child Age\nand Child Birth Cohort: Per cent of Children Living\nwith a Mother Who Is in Paid Work for at Least\nOne Hour Per Week 99\nFigure 6.6b Children Living with an Employed Mother, by Child\nAge and Child Birth Cohort: Per cent of Children Living\nwith a Mother Who Is in Paid Work for More than\nThirty-Five Hours Per Week 99\nFigure 6.7 Per cent of Children with an Employed Mother,\nby Survey Year and Mother’s Level of Education 101\nFigure 7.1 Change in Number of Households and Housebuilding,\nAnnual Averages for Decades 1961–2021, England 108\nFigure 7.2 Annual Numbers of New Houses Built, UK, 1920–2014 109\nFigure 7.3 Percentage Private Renting by Age of Household\nReference Person, 2001 and 2014, UK 111\nFigure 7.4 Average Household Size and Adults Per Household,\n1801–2011, for England and Wales and Scotland 113\nFigure 7.5 One- and Two-Person Households as a Percentage of\nAll Households, 1961–2011, for London, England,\nOutside London, Scotland, Wales and Northern Ireland 114\nFigure 7.6 England Household Representative Rates, 1991, 2001\nand 2011, for Males and Females by Age 115\nFigure 7.7 England Household Representative Rates, Change\n1991–2011, for Males and Females by Age 115\nFigure 7.8 Percentage of UK Young Adults Living with at\nLeast One Parent, by Whether Single or Living as a\nConcealed Family 121\nFigure 8.1 Net Migration from North to South of UK, 1971–2014 129\nFigure 8.2 Population Change, 1981–2014, for the UK and Its\nUrban Status Types 133\nFigure 8.3 Annual Rate of Net Within-UK Migration, 2001–2002\nto 2013–2014, UK, by Settlement-Size Group 135\nFigure 8.4 Migration Rate, 1975–2011, for All Inter-Area\nMoves and Between-Region and Within-Region\nSeparately 138\nFigure 9.1a Population Pyramids Showing the Age and\nSex Distribution of Ethnic Groups in England\nand Wales, White British 150\nFigure 9.1b Population Pyramids Showing the Age and Sex\nDistribution of Ethnic Groups in England and"
+        ],
+        [
+          "Wales, Indian 150"
+        ]
+      ],
+      "caption": "Table on page 10"
+    },
+    {
+      "id": "table4",
+      "number": 4,
+      "title": "Table 4",
+      "rows": [
+        [
+          "Table 1.1 Percentage Distribution of the Population by Ethnic Group, England and\nWales, 2001–2011"
+        ],
+        [
+          "2001 2011"
+        ],
+        [
+          "White White British 87.4 80.5\nIrish 1.2 0.9\nGypsy or Irish Traveller† n/a 0.1\nOther White 2.6 4.4\nMixed/Multiple ethnic White and Black Caribbean 0.5 0.8\ngroups White and Asian 0.4 0.6\nWhite and Black African 0.2 0.3\nOther Mixed 0.3 0.5\nAsian/Asian British Indian 2.0 2.5\nPakistani 1.4 2.0\nBangladeshi 0.5 0.8\nChinese* 0.4 0.7\nOther Asian* 0.5 1.5\nBlack/African/Caribbean/ African 0.9 1.8\nBlack British Caribbean 1.1 1.1\nOther Black 0.2 0.5\nOther ethnic group Arab† n/a 0.4\nAny other ethnic group 0.4 0.6"
+        ],
+        [
+          "*Comparability issues exist between these ethnic groups for the 2001 and 2011 Census.\n†No comparable data exists for these ethnic groups in 2001 Census.\nSource: Census 2001 and 2011, Office for National Statistics.\nthe effect of their departure has been offset by new arrivals from overseas,\nswelling the number of overseas-born there and leading to an expansion of\nthe zones with ‘majority minority’ populations, with implications for a range\nof services, most notably education and health, and also potentially for com-\nmunity relations given the steadily increasing diversity within the minority\npopulation itself.\nChanging Families and households\nSubstantial changes are occurring in the patterns of family formation and dis-\nsolution in the UK, as very widely across Europe. Declining marriage, increas-\ning cohabitation, the legalisation of same-sex civil partnerships and marriages,\ndelayed fertility and increasing childlessness have resulted in new forms of\nfamilies and households, with British families becoming considerably more\ndiverse. In Chapter 6, Ursula Henz looks at family change from a child’s per-\nspective, examining three aspects of children’s families: the size of the sibling\ngroup, living with a lone mother and mothers’ labour-force participation.\nWhen the Joshi volume was published, one of the most notable changes in\nfamilies with dependent children over the preceding two decades had been\nthe growth of lone-parent families. In 2015, as shown in Table 1.2, there were"
+        ]
+      ],
+      "caption": "Table on page 25"
+    },
+    {
+      "id": "table5",
+      "number": 5,
+      "title": "Table 5",
+      "rows": [
+        [
+          "Table 1.2 Families by Family Type in the UK, 1996, 2005 and 2015"
+        ],
+        [
+          "Family Type 1996 2005 2015"
+        ],
+        [
+          "Married or civil partner couple With dependent children 5.2 4.7 4.7\nfamily* Without dependent children 7.4 7.5 7.8\nCohabiting couple family* With dependent children 0.5 0.9 1.3\nWithout dependent children 0.9 1.5 1.9\nLone-parent family With dependent children 1.6 1.9 2.0\nWithout dependent children 0.8 0.8 1.1"
+        ],
+        [
+          "Families without dependent children have only non-dependent children or no children in the household.\n*Married-couple families include both opposite-sex and same-sex married couples in 2005 and 2015.\nCohabiting couple families include both opposite-sex and same-sex cohabiting couples in 2005 and 2015.\nSource: Labour Force Survey, Office for National Statistics.\n3.1 million lone-parent families, of which two million contained dependent\nchildren (aged under sixteen or aged sixteen to eighteen in full-time educa-\ntion). These lone parents with dependent children comprised around a quarter\nof all families with dependent children, a figure only slightly higher than\nthe 22 per cent share in 1996. In contrast, the fastest growing family type\nover the past two decades has been cohabiting couples, more than doubling\nto 3.2 million in 2015, of which 1.3 million were with dependent children\n(Table 1.2).\nThis change reflects the continued shift away from childbearing within\nmarriage highlighted by Kathleen Kiernan’s chapter in Joshi (1989a). Even\nin 1989, 27 per cent of all births were to parents outside a legal union; in\n2014, nearly half of all births (47 per cent) were outside a marriage or civil\npartnership (ONS, 2015j). Births outside marriage or civil partnership can be\nregistered solely by the mother or jointly by both the mother and the father/\nsecond parent. In the latter case, where parents give the same address, it can\nbe inferred that they are cohabiting. The proportion of births registered to\ncohabiting parents has increased in recent years, with just under a third of all\nbirths (32 per cent) being registered to cohabiting parents in 2014, compared\nwith 27 per cent in 2004 and 10 per cent in 1986. In contrast, the percentage\nof births registered solely by the mother has fallen from 7.2 per cent in 1986\nto 5.4 per cent in 2014 (ONS, 2015j). Thus, more births are taking place in\nthe context of both partners being present, this in part being a reflection of\nthe rise in the average age of parenthood, given that the majority of births\nregistered by the mother alone are to younger mothers.\nThe increases in the likelihood of becoming a lone mother that occurred\nin the 1970s and 1980s, either through experiencing a birth prior to any\nresidential partnership or through the experience of partnership dissolu-\ntion, have slowed during the 2000s, explaining why the share of lone-parent\nfamilies appears to have stabilised (Berrington, 2014). Nevertheless, as\nHenz discusses in Chapter 6, children growing up with a lone mother remain"
+        ]
+      ],
+      "caption": "Table on page 26"
+    },
+    {
+      "id": "table6",
+      "number": 6,
+      "title": "Table 6",
+      "rows": [
+        [
+          "of the well-being of society. From these it is possible to calculate the propor-\ntion of life spent on average in a health state. Moreover, these measures can\nalso be calculated for different sub-groups of the population.\nTable 2.1 shows life expectancy and healthy life expectancy for women\nand men at ages sixty-five, seventy-five and eighty-five in England in\n2011–2013. The proportion of later life spent in ‘good’ health is higher for\nmen than women and, not surprisingly, drops with age. Amongst those who\nhave survived to age eighty-five, women can expect around 40 per cent\nof their remaining years to be in good health and men 44 per cent. There\nare difficulties in examining trends across time due to changes in question\nwording. However, Jagger (2015), in her paper for the recent UK Govern-\nment Foresight ‘Future of an Ageing Population’ project, concluded that the\nincreases in health expectancies in the UK have not kept pace with gains in\nlife expectancy, particularly at older ages, meaning that a greater proportion\nof later life is now spent in not good health than in the past. Moreover, some\ngroups are less likely to reach state pension age in good health, reflecting the\nsignificant variations in healthy and disability-free life expectancy by region,\nsocial class and ethnicity (ONS, 2014b, 2015n; Wohland et al., 2015; see also\nMarshall and Nazroo, this volume). In 2011–2013, HLE was lower than the\nstate pension age in three-quarters of areas for males and two-thirds of areas\nfor females, presenting a challenge to policies aimed at extending working\nlife. It may be that the planned increases of the state pension age will, in some\ninstances, simply transfer spending from the state pension to disability and\nunemployment benefits (Sinclair et al., 2014). Furthermore, the additional\nbenefits tied to the state pension age, such as the free bus pass and winter fuel\nallowance, will, on average, not be available to some disadvantaged groups\nuntil well beyond their disability life expectancy. Yet it is these groups of\nindividuals who are likely to benefit most from it.\nTable 2.1 Life Expectancy and Healthy Life Expectancy for Females and Males at Age\n65, 75 and 85 and Over in England, 2011–2013"
+        ],
+        [
+          "Healthy Life Proportion of Life Spent\nLife Expectancy Expectancy in ‘Good’ Health (%)"
+        ],
+        [
+          "Women\nAt age 65 21.1 11.3 53.4%\nAt age 75 13.3 6.1 45.7%\nAt age 85 7.1 2.9 40.3%\nMen\nAt age 65 18.7 10.5 56.2%\nAt age 75 11.5 5.8 50.6%\nAt age 85 6.3 2.8 43.9%"
+        ],
+        [
+          "Source: ONS (2015e)."
+        ]
+      ],
+      "caption": "Table on page 38"
+    },
+    {
+      "id": "table7",
+      "number": 7,
+      "title": "Table 7",
+      "rows": [
+        [
+          "Table 2.2 Completed Family Size at Age 45 Amongst Women in England and Wales,\nby Birth Cohort"
+        ],
+        [
+          "Average Number of Live-Born Children (Percentages)\nYear of Birth Family\nof Woman Size Childless 1 2 3 4+ Total"
+        ],
+        [
+          "1945 2.19 10 14 43 21 12 100%\n1950 2.07 14 13 44 20 10 100%\n1955 2.02 16 13 41 19 11 100%\n1960 1.98 19 12 38 20 11 100%\n1965 1.91 20 13 38 19 10 100%"
+        ],
+        [
+          "Note: Individual numbers are rounded to nearest integer, so the total may be more or less than 100.\nSource: ONS Birth Statistics.\nand other social changes affecting the willingness to care, even over the next\ntwo decades the supply of unpaid care to older people with disabilities by\ntheir adult children in England is unlikely to keep pace with demand and that\nby 2032 there is projected to be a shortfall of 160,000 caregivers in England\n(Pickard, 2015). Bearing in mind that the 1960s baby boomers will only be\nentering their seventies at this date, it is highly likely that this care gap will\ncontinue to widen further. Of great concern are men who are living alone\nand who have never had children, have no educational qualifications, are not\neconomically active and who live in rented housing; they represent an espe-\ncially vulnerable group, having both low social capital and poor economic\nresources (Demey et al., 2013).\nConCLUsion\nThis chapter has highlighted the progress made over the past century in\nterms of improving life expectancy, as well as the challenges presented by\nan ageing society. The fact that more people are living longer is something\nto be celebrated. However, we also need to plan for our longer lives, as the\nFilkin Report notes: ‘Without urgent action this great boon could turn into a\nseries of miserable crises’ (House of Lords, 2013: 1, para. 1) for individuals,\nfamilies and society.\nProgress has been made over the past twenty-five years, and Pat Thane\nwould be amongst the first to recognise that it is no longer the case that the\nwork of gerontologists and demographers is invisible to policymakers and\neconomists. There remains, however, work to do in reaching the public.\nMany people remain unaware of the improvements in mortality and the\nconsequent increase in the number of years that they may expect to live in\nretirement. As a consequence, many remain under-provisioned in terms of\ntheir pension savings."
+        ]
+      ],
+      "caption": "Table on page 43"
+    },
+    {
+      "id": "table8",
+      "number": 8,
+      "title": "Table 8",
+      "rows": [
+        [
+          "ConverGinG eThniC FerTiLiTY Trends\nDifferences in fertility by ethnic group in the UK are well documented (e.g.,\nLarge et al., 2006; Rees, 2008; Coleman and Dubuc, 2010). Relatively large\ndifferences in the estimated levels of fertility between major ethnic groups\nreflect specific fertility behaviour of immigrant populations and the differ-\nent levels of fertility experienced in their home country. Fertility estimates\nfrom the late 1960s for ethnic groups originating from relatively high-fertility\ncountries (e.g., South Asian and African countries) show a marked decrease\nin TFR over time (Coleman and Dubuc, 2010), indicating some convergence\nin process towards the lower UK average (Dubuc and Haskey, 2010).\nTable 5.1 shows less variability in the level of the TFRs across ethnic\ngroups in recent years compared with that in the 1990s, as measured by the\ndecreasing coefficient of variation of TFR by ethnic group over time: from\n0.36 in 1987–1997 to 0.27 in 1998–2006. Because White British women con-\nstitute the vast majority of women, their total fertility is very close to the UK\naverage (1.8). Irish women have higher fertility (above 2). In contrast, White\nwomen who do not identify as either British or Irish have fertility below\nthe UK average. Fertility differences across ethnic groups within the White\nTable 5.1 TFR of the Major Ethnic Groups in the UK and Decreasing Inter-Ethnic\nVariability, 1987–1997 and 1998–2006"
+        ],
+        [
+          "1987–1997 1998–2006\nInter-Period Total\nCI 95% CI 95% Change Sample\nTFR (+/-) TFR (+/-) (%) Women"
+        ],
+        [
+          "White British 1.79 0.01 1.74 0.02 -2.9 2336617\nWhite other 1.46 0.05 1.5 0.06 2.7 123584\nIndian 1.75 0.08 1.67 0.09 -4.8 52955\nPakistani 3.16 0.15 2.89 0.15 -9.3 33108\nOther 2.02 0.12 2.05 0.13 1.5 29858\nBlack Caribbean 1.94 0.11 2.04 0.14 4.9 29237\nBlack African 2.37 0.14 2.41 0.14 1.7 28210\nBangladeshi 4.12 0.29 3.15 0.24 -30.8 11164\nChinese 1.32 0.16 1.24 0.17 -6.5 11840\nmean TFR 2.49 2.34\nStandard deviation 0.90 0.64\nCoefficient of variation 0.36 0.27"
+        ],
+        [
+          "Total fertility figures are generally consistent with data by Simpson (2013) using the child-women ratio\nbased on census 2001 and 2011 data, although estimates appear much lower for the Caribbean group\nin comparison with estimates presented here, which can (at least partly) be explained by the limit of the\nchild-women ratio method used in a context of increasing prevalence of children of mixed ethnic unions\n(as explained and detailed in Dubuc, 2009).\nNote: The UK average TFR over 1987–2006 is 1.77.\nSource: LFS 2001–2006; author’s calculations based on LFS-OCM estimates in Dubuc and Haskey (2010)\nand Coleman and Dubuc (2010)."
+        ]
+      ],
+      "caption": "Table on page 87"
+    }
+  ],
+  "equations": [
+    {
+      "id": "deqn2013",
+      "number": 2013,
+      "latex": "a beneficial influence on health outcomes. For example, Steptoe et al.",
+      "display": true
+    },
+    {
+      "id": "deqn2011",
+      "number": 2011,
+      "latex": "unemployment of British natives, especially in the long term. Nathan",
+      "display": true
+    },
+    {
+      "id": "deqn2010",
+      "number": 2010,
+      "latex": "Source: LFS 2001–2006; author’s calculations based on LFS-OCM estimates in Dubuc and Haskey",
+      "display": true
+    }
+  ],
+  "metadata": {
+    "manuscript_id": "",
+    "source_filename": "paper.pdf"
+  },
+  "extraction_warnings": [
+    "Abstract not detected; check PDF layout",
+    "No IEEE-style section headings detected"
+  ]
+}
