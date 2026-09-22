@@ -98,40 +98,110 @@ def _contrib_rids_referenced(root: etree._Element) -> list[str]:
     return rids
 
 
+def _contrib_children(group: etree._Element) -> list[etree._Element]:
+    return [
+        c
+        for c in group
+        if is_element_node(c) and xml_local_name(c) == "contrib"
+    ]
+
+
+def _author_name_parts(author: Author) -> tuple[str, str]:
+    first = (author.first_name or "").strip()
+    last = (author.last_name or "").strip()
+    if first and last:
+        return first, last
+    full = (author.full_name or "").strip()
+    if full:
+        tokens = full.split()
+        if len(tokens) >= 2:
+            return " ".join(tokens[:-1]), tokens[-1]
+        return full, ""
+    return first, last
+
+
+def _set_text_on_tag(parent: etree._Element, tag: str, text: str) -> None:
+    nodes = _find_by_local_tag(parent, tag)
+    if nodes and text:
+        nodes[0].text = text
+
+
+def _apply_author_to_contrib(contrib: etree._Element, author: Author, idx: int) -> None:
+    given, surname = _author_name_parts(author)
+    given_enc = encode_ieee_text_entities(given) if given else ""
+    surname_enc = encode_ieee_text_entities(surname) if surname else ""
+
+    for string_name in _find_by_local_tag(contrib, "string-name"):
+        string_name.text = None
+        if given_enc:
+            _set_text_on_tag(string_name, "given-names", given_enc)
+        if surname_enc:
+            _set_text_on_tag(string_name, "surname", surname_enc)
+
+    if author.email:
+        _set_text_on_tag(contrib, "email", author.email)
+
+    orcid_nodes = [
+        n
+        for n in _find_by_local_tag(contrib, "contrib-id")
+        if n.get("contrib-id-type") == "orcid"
+    ]
+    if author.orcid:
+        if orcid_nodes:
+            orcid_nodes[0].text = author.orcid
+    else:
+        for node in orcid_nodes:
+            parent = node.getparent()
+            if parent is not None:
+                parent.remove(node)
+
+    for xref in _find_by_local_tag(contrib, "xref"):
+        if xref.get("ref-type") == "bio":
+            xref.set("rid", f"bio{idx}")
+
+    contrib.set("id", f"contrib{idx}")
+    if author.corresponding:
+        contrib.set("corresp", "yes")
+    elif contrib.get("corresp") == "yes" and idx > 1:
+        contrib.set("corresp", "no")
+    if idx == 1 and contrib.get("primary") is not None:
+        contrib.set("primary", "yes")
+    elif idx > 1 and contrib.get("primary") is not None:
+        contrib.set("primary", "no")
+
+
 def _fill_authors(root: etree._Element, authors: list[Author]) -> None:
     contrib_group = _find_by_local_tag(root, "contrib-group")
     if not contrib_group:
         return
     group = contrib_group[0]
-    template_contribs = _find_by_local_tag(group, "contrib")
+    template_contribs = _contrib_children(group)
     if not template_contribs:
         return
-    proto = template_contribs[0]
-    for c in list(group):
-        if is_element_node(c) and xml_local_name(c) == "contrib":
-            group.remove(c)
+    fallback_proto = template_contribs[0]
+    for c in list(template_contribs):
+        group.remove(c)
 
     author_list = authors or []
-    count = max(len(author_list), len(_contrib_rids_referenced(root)), 1)
+    count = max(
+        len(author_list),
+        len(template_contribs),
+        len(_contrib_rids_referenced(root)),
+        1,
+    )
 
     for idx in range(1, count + 1):
-        clone = etree.fromstring(etree.tostring(proto))
-        clone.set("id", f"contrib{idx}")
+        if idx <= len(template_contribs):
+            clone = etree.fromstring(etree.tostring(template_contribs[idx - 1]))
+        else:
+            clone = etree.fromstring(etree.tostring(fallback_proto))
         if idx <= len(author_list):
-            author = author_list[idx - 1]
-            name_nodes = _find_by_local_tag(clone, "string-name")
-            if name_nodes:
-                name_nodes[0].text = encode_ieee_text_entities(
-                author.full_name or f"{author.first_name} {author.last_name}".strip()
-            )
-            if author.corresponding:
-                clone.set("corresp", "yes")
-            elif clone.get("corresp") == "yes" and idx > 1:
-                clone.set("corresp", "no")
-            if idx == 1 and clone.get("primary") is not None:
-                clone.set("primary", "yes")
-            elif idx > 1 and clone.get("primary") is not None:
-                clone.set("primary", "no")
+            _apply_author_to_contrib(clone, author_list[idx - 1], idx)
+        else:
+            clone.set("id", f"contrib{idx}")
+            for xref in _find_by_local_tag(clone, "xref"):
+                if xref.get("ref-type") == "bio":
+                    xref.set("rid", f"bio{idx}")
         group.append(clone)
 
 
