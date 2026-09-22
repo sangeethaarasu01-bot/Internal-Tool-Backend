@@ -1,0 +1,546 @@
+{
+  "title": "A Customized Electronic Tongue by Developing",
+  "authors": [
+    {
+      "first_name": "Molecular",
+      "last_name": "Imprinted",
+      "full_name": "Molecular Imprinted",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Based",
+      "last_name": "Voltammetric",
+      "full_name": "Based Voltammetric",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Tea",
+      "last_name": "Quality",
+      "full_name": "Tea Quality",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Evaluation",
+      "last_name": "Madhurima",
+      "full_name": "Evaluation Madhurima",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Sagar",
+      "last_name": "Chowdhury",
+      "full_name": "Sagar Chowdhury",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Mainak",
+      "last_name": "Das",
+      "full_name": "Mainak Das",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Sangram",
+      "last_name": "Saha",
+      "full_name": "Sangram Saha",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Shreya",
+      "last_name": "Nag",
+      "full_name": "Shreya Nag",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Jeet",
+      "last_name": "Naskar",
+      "full_name": "Jeet Naskar",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Angiras",
+      "last_name": "Modak",
+      "full_name": "Angiras Modak",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    }
+  ],
+  "affiliations": [
+    {
+      "id": "aff1",
+      "department": null,
+      "institution": "See PDF for affiliation details",
+      "city": null,
+      "state": null,
+      "post_code": null,
+      "country": null
+    }
+  ],
+  "abstract": "—In this facile approach, a well-developed voltam- metric electronic tongue (e-tongue) consisting of an array of molecular-imprinted polymer (MIP) electrodes has been designed for the detection of theophylline (TH), tannic acid (TAN), and total theaﬂavins (TFs) in real samples of black tea. These compounds are responsible for having a high impact on the taste of tea in terms of astringency, thus contributing to the taste of tea infusion. The developed e-tongue has been found to detect the signatures of these analytes from different tea samples under the same conditions. Thus, this e-tongue, in conjunction with a switching circuit, has been able to extract current responses from the working electrodes (WEs), giving an overall signature of the tea quality. The differential pulse voltammograms (DPVs) responses were obtained to assess the performance on introducing MIP electrodes into the black tea samples. The obtained dataset was subject to the gradient boosting method. The prediction model was designed based on the responses of the e-tongue and yielded a mean-squared error (mse) of 0.00003 and a coefﬁcient of determination (R2) of 0.967 for the fused data responses. From the explained variance score and R2 value, it is clear that the overall quality of tea has been predicted better for the sensor array when considering the individual dataset from each sensor. On application of t-distributed stochastic neighbor embedding (t-SNE) on the fused dataset, successful discrimination among the different black tea samples was obtained. The results point toward the possibility of an e-tongue based on an array of MIP electrodes to detect the quality of black tea liquor.",
+  "keywords": [
+    "Electronic tongue (e-tongue)",
+    "t-Distributed stochastic neighbor embedding (t-SNE)",
+    "total theaﬂavins (TFs)",
+    "voltammograms."
+  ],
+  "sections": [
+    {
+      "id": "sec1",
+      "label": "I.",
+      "title": "INTRODUCTION",
+      "level": 1,
+      "paragraphs": [
+        "R ESEARCHERS have been seeking alternative instrumen- tal means for a long time to detect the quality of tea in a Received 25 September 2025; revised 19 November 2025; accepted 24 November 2025. The associate editor coordinating the review of this article and approving it for publication was Prof. Li-Chia J. Tai. (Corresponding author: Runu Banerjee Roy.) Madhurima Moulick, Sagar Chowdhury, Mainak Das, Sangram Saha, Angiras Modak, and Runu Banerjee Roy are with the Department of Instrumentation and Electronics Engineering, Jadavpur Univer- sity, Kolkata 700106, India (e-mail: madhurimamoulick92@gmail.com; syncwithsagar@gmail.com; dmainak706@gmail.com; sangramsaha04 08@gmail.com; angiras.modak@gmail.com; rbanerjee75@gmail.com). Shreya Nag and Jeet Naskar are with the Department of Electronics and Communication Engineering, Institute of Engineer- ing and Management, University of Engineering and Management, Kolkata 700160, India (e-mail: snshreya20@gmail.com; naskarjeet29@ gmail.com). D 1558-1748 © 2025 IEEE. All rights reserved, including rights for text and data mining, and training of artiﬁcial intelligence and similar technologies. Personal use is permitted, but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information. nonsubjective way, replacing the dependency on organoleptic sensing. Evaluation of black tea is a complex procedure and is, performed by experienced tea tasters, who grade the tea on a scale of 1–10 separately for taste, aroma, and ﬂavor of the tea sample [1]. Human tea tasting is completely subjective and suffers from inconsistency. Black tea contains innumerable analytes and their multidimensional contribution makes the quality assess- ment of tea extremely difﬁcult. Tea mainly consists of two different types of compounds—polyphenols and methylxan- thines. The presence of the TAN (polyphenol) determines tea astringency and theophylline (TH) (a methylxanthine deriva- tive) is responsible for its bitterness. However, the interaction of TH with ﬂavonols and polyphenols inﬂuences the per- ception of bitterness and astringency in a tea infusion. The total theaﬂavins (TFs) in black tea can be attributed to the ﬂavor of tea. 2 IEEE SENSORS JOURNAL TF, TAN, and TH belong to the group of ﬂavonoids, polyphenols, and methylxanthines, respectively, and each of these groups and their derivatives is known to inﬂuence the taste and astringency of tea signiﬁcantly. These compounds have been marked to control gastric diseases, cardiovascular issues, and premenstrual problems [2], [3], [4], [5], hence, inferred as important biomarkers for the quality proﬁling of tea. Traditionally, very conventional techniques such as high-performance liquid chromatography (HPLC) [5], and spectrophotometry [6] had been deployed for the detection of important biomarkers of tea; however, the reduced cost- effectiveness, nonportable nature of the device, requirement of highly skilled labor necessitated the development of instru- ments like electronic tongue (e-tongue) that can give quick, reliable, and repeatable results. The quality of tea depends on a wide range of compounds and their intricately woven multidimensional inﬂuence on the taste of the tea infusion gave a clear insight toward the development of the e-tongue. An e-tongue was reported as developed at Jadavpur Univer- sity [7], consisting of an array of nonspeciﬁc noble metals that provided a collective estimation of the taste index. Signiﬁcant research has been reported in [8], where discrimination of tea by means of a voltammetric e-tongue using different applied waveforms was established. An amperometric e-tongue has been reported to be used to quantify tea astringency [9]. An interesting work reported the use of a potentiometric e-tongue for determining the taste of Korean green tea [10]. The aforementioned methods reported in the above literature, produce good qualitative discriminations among different tea grades; however, the sensors used in the e-tongues were not selective in their approach, hence the quantitative dis- crimination was not ensured. In this work, a customized e-tongue consisting of an array of selective electrodes has been attempted to design with a switching circuit using the principles of cyclic and differential voltammetry. Voltammetry has been the choice as the electrochemical sensing technology due to its high sensitivity and robustness [11]. An attempt was made to fabricate a CuO nanoparticle-modiﬁed graphite electrode for the detection of both analytes epicatechin (EC) and TH from the same tea sample simultaneously [12]. As an extension of this work, molecular imprinted polymer (MIP) based multimolecular crafted sensors for the detection of EC and TH were attempted. However, the complex and compara- tively larger structure of EC in comparison to TH, led to the adsorption of both the analyte molecules in the sample into the cavities created for EC. Thus, it can be seen that during the experimentation with MIP-based sensor, the size selectivity factor of EC suppressed that of TH. It was observed that multimolecular sensing using a sin- gle sensor was hazardous, so a hardware-level multisensor e-tongue was attempted. To develop a highly selective array of working electrodes (WEs), MIP technology was employed. It involves the development of a polymer matrix with the help of a crosslinker, monomer and initiator. Further, cavities structurally similar to the targeted analytes were leached out on the polymer bed by continuous washing with an appropriate solvent [13]. The three WEs used here are highly selective to TAN (MIP_TAN), TF (MIP_TF), and TH (MIP_TH). The MIP technology has been reported to detect other biomarkers in tea, such as caffeine [14], gallic acid [15], and epigallocatechin-3- gallate [16] by the same group of researchers. The MIP-based sensors are an upcoming alternative to bare graphite electrodes as they offer higher stability under optimum environmental conditions. MIP-based sensors are advantageous due to selec- tivity and cost-effectiveness, ease of preparation and wide compatibility in various scientiﬁc areas [17], [18], [19], [20]. The ever-increasing demand for the consumption of black tea provides a strong foundation for the development of an array of MIP electrodes to improve the overall quality proﬁling of tea. Although individual sensors for the detection of analytes such as TAN, TH, and TF have been reported [21], [22], [23], an array of sensors that can detect the major biomarkers in black tea in a single measurement setup would give a major insight into the proper judgment of the quality of tea. Using the responses from the MIP electrodes, the prediction of any speciﬁc analyte in tea is possible due to the enhanced speciﬁcity of the fabricated electrodes. The novelty of this approach lies in the development of a customized e-tongue coupled with an automatic switching circuit for the detection of individual compounds of tea from the same tea sample under the same operating conditions. The working principle of the device employs three-electrode voltammetric measurement method which consists of an array of three WEs (MIP_TAN, MIP_TH, and MIP_TF), a Pt counter electrode and a reference electrode. A switching circuit has been incorporated for effective selection of the WE one at a time, keeping the measurement conditions unaltered. In this treatise, it is clearly observed that the overall quality discrimination of different black teas has been improved sat- isfactorily when t-distributed stochastic neighbor embedding (t-SNE) algorithm was applied over the sensor array responses in comparison to individual sensor response. Moreover, the response from the sensor array set was subjected to gradient booster regressor algorithm which shows a R2 value of 0.967, indicating the improved performance of an array in quality discrimination over individual sensors."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    },
+    {
+      "id": "sec2",
+      "label": "II.",
+      "title": "MATERIALS AND METHODOLOGY",
+      "level": 1,
+      "paragraphs": [],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec3",
+          "label": "A.",
+          "title": "Chemical Reagents and Standards",
+          "level": 2,
+          "paragraphs": [
+            "Pure graphite (98%) purity was obtained from Loba Chemie Pvt. Ltd., ethylene glycol dimethyl acrylate (EGDMA), ben- zoyl peroxide, and TH were obtained from Sigma Aldrich. The monomers acrylic acid (AA) and methyl methacrylic acid (MAA) were obtained from Sigma Aldrich and E-Merck, respectively. TAN was purchased from Nice Chemicals Pvt. TF extract was obtained from Tocklai Tea Research Institute, Jorhat, Assam. In the process of developing and testing the electrodes, ethanol and parafﬁn oil from Merck & Com- pany were employed as binders and solvents, respectively. During experiments, distilled water [resistance (R) approxi- mately 18 M\u0002] from the Millipore water puriﬁcation system was used for washing electrode materials. B. Equipment Speciﬁcations PGSTAT101, a potentiostat system, employs a three- electrode conﬁguration. This setup includes a platinum counter MOULICK et al.: CUSTOMIZED e-TONGUE BY DEVELOPING AN ARRAY OF MIP 3 electrode (Pt), MIP_TAN, MIP_TF, and MIP_TH as the WEs in the sensor array and an Ag/AgCl reference electrode. HPLC was used for precise quantitative measurement of TAN, TF, and TH in real tea samples."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec4",
+          "label": "C.",
+          "title": "Synthesis of MIP Electrodes",
+          "level": 2,
+          "paragraphs": [
+            "For the preparation of MIP electrodes, graphite powder (0.95 g) was suspended in ethyl alcohol (20 mL) using ultra- sonication for 45 min. Following this, the optimized monomer (0.05 g) and the target molecule (0.05 g), were successively added and sonicated for 35 min. Next, 400 μL of EGDMA (cross-linker) was put into the above solution in addition to 1 mg of benzoyl peroxide followed by sonication for another 35 min. The solution was next polymerized by constantly heating in a water bath at an optimized temperature of 30 ◦C for half an hour. After the preparation of the polymer, it was rinsed with distilled water. The target molecules were washed out for 24 h to leach them, producing the MIP substance. The prepared material was dried and collected for the fabrication of MIP sensors. The detailed synthesis of the MIP materials is similar to that followed in [13], [21], and [22]. The material was then packed into a capillary tube with an inner radius of 1.25 mm, resulting in the fabrication of the respective MIP electrodes. Copper wires were used to establish electrical contact. Table I shows the precursors used in the individual sensor development."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec5",
+          "label": "D.",
+          "title": "Template Removal Procedure",
+          "level": 2,
+          "paragraphs": [
+            "To ensure accurate and reproducible measurements while using MIP electrodes across multiple tea samples, a standard cleaning protocol has been followed between the measure- ments. The electrode was removed from the analyte solution and rinsed under a continuous stream of ultrapure deionised water (18.2 M\u0002·cm) for 30 s to remove loosely bound surface residues. Since MIP binding sites may strongly interact with polar and semipolar VOCs, the electrode was gently immersed in 10 mL of ethanol: water (70:30 v/v) and magnetically agitated at 200 r/min for 1 min. This solvent system efﬁciently disrupts hydrogen bonding and dipole interactions within the MIP cavities without damaging the polymer structure. The electrode was again rinsed with deionized water and dried for next record. For the molecular removal attestation, UV analysis was conducted over the electrode washed elute. At initial stage, the presence of speciﬁc target molecule will be observed which fades out gradually with repeated washes. The electrode was rinsed until the speciﬁc molecule peak is completely removed. E. e-Tongue Setup An e-tongue set up has been designed using an array of three MIP electrodes selective to TAN, TH, and TF analytes, an Ag/AgCl counter electrode and a Pt reference electrode. The functional block diagram of the developed e-tongue is shown in Fig. 1 and the detailed circuit used for the operation of e-tongue is shown in Fig. 2. The system consists of ﬁve distinct modules: 1) power supply unit; 2) switching circuit; 3) sensor array unit; 4) autolab potentiostat; and 5) recorder. TABLE I PRECURSORS FOR SENSOR DEVELOPMENT AND OPERATIONAL STATISTICS Fig. 1. Functional block diagram of e-tongue setup. The detailed components present in the switching circuit are 1) arduino Board is used as an interface for the switching process; 2) the relay unit is used to transfer the signal to the WE which is connected to the relay output through connecting wires; and 3) the Arduino and the relay are connected through wires. The complete circuit consists of two components: 1) relay module and 2) timing signal generator. 1) Relay Module: Each relay in the relay module has its isolated driver made of an opto coupler (PC817D) to provide 4 IEEE SENSORS JOURNAL Fig. 2. Internal circuit diagram of the relay module and timing signal generator. isolation between controller and driver, a pull-down NPN transistor (2N3904) to give a ground path for the coil of relay, depending on the timing signal, and a p-n junction diode (1N4148) connected in reverse bias with the coil. The diode helps to minimize the knocking current generated by the coil which may damage the transistor. The common terminal of the three relays is connected to the three MIP electrodes, respectively, as shown in Fig. 2. All the NO terminals of the relay are shorted together and connected to the WE port of the potentiostat device, and all NC terminals of relays are kept ﬂoating. 2) Timing Signal Generator: An ATmega328p-based micro- controller has been utilized as a timing signal generator. The microcontroller was programmed to trigger and hold each relay repetitively, with a 180-s time cycle. Relay1, relay2, and relay3 are connected with the D3, D4, and D5 pins of microcontroller, respectively. F. Response Recording From e-Tongue The tea liquor was prepared as in [21] and was allowed to cool to room temperature. Typically, 20 mL of the tea infusion was used for testing. The e-tongue was subjected to this sample for the detection of the analytes-TAN, TF, and TH. After completing one set of measurements with the ﬁrst MIP electrode, the switching circuit automatically shifts control to the next WE, keeping the RE and CE constant, after a period of 180 s. Ten repetitive electrochemical responses were recorded from each of the tea sample at a constant scan rate of 50 mV/s. The duration of each cycle of differential pulse voltammogram (DPV) response is 180 s. As the scan rate ﬁxed for the entire experimentation, a uniform data size has been obtained for all three sensors for each of the tea samples and used for further analysis. The original setup used for the experimentation is shown in Fig. 3(a) and (b)."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec6",
+          "label": "G.",
+          "title": "Correlation of DPV Responses With Standard",
+          "level": 2,
+          "paragraphs": [
+            "HPLC Values Experiments were conducted on ﬁve different samples of black tea. The standard values of TAN, TF, and TH of each of the samples were obtained using HPLC method. The individual DPV responses obtained from the MIP electrodes Fig. 3. (a) e-tongue setup used in the experiment. (b) Top view of sensor array showing three WEs along with the reference and counter electrodes. TABLE II HPLC VALUES OF TAN, TH, AND TF were co-related with the HPLC data to estimate the sensors’ accuracy. Further, it was observed that the correlation of the HPLC data with the fused data responses yielded higher accuracy. Table II shows the HPLC values of the different analytes in the different samples of tea."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec7",
+      "label": "III.",
+      "title": "RESULTS AND DISCUSSIONS",
+      "level": 1,
+      "paragraphs": [],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec8",
+          "label": "A.",
+          "title": "DPV Responses Obtained From the WEs",
+          "level": 2,
+          "paragraphs": [
+            "The fabricated e-tongue based on dedicated MIP sensors was immersed in a tea sample. It was able to distinctly detect the presence of the three analytes in the tea sample under the same experimental conditions. This e-tongue in conjunction, with an effective switching circuit, was able to transfer control from one WE to the next, keeping the counter, and reference electrodes unaltered. The DPV responses for each WE from a single tea sample for the ﬁrst cycle are shown in Fig. 4. To comment on the repetitive nature of the three WEs, ten repetitive DPV responses from each of the WE were recorded from a single tea sample at a constant scan rate of 50 mV/s. The selectivity study of each of the WEs have also been shown in Fig. 5. Fig. 5(a), shows the selective behavior of MIP_TAN, in Fig. 5(b), the selective nature of MIP_TF has been analyzed using solutions of other analytes such as TAN and CAF. Lastly, Fig. 5(c) shows that the MIP_TH electrode responds satisfactorily in the presence of TH in comparison to the other analytes such as TAN, GA, and EC. Fig. 6 shows a bar plot highlighting the ten repetitive cycles performed by each WE on the tea sample. All the three electrodes show satisfactory repeatability with RSD values of 6.007%, 7.73%, and 3.86% for MIP_TAN, MIP_TF, and MIP_TH, respectively. MOULICK et al.: CUSTOMIZED e-TONGUE BY DEVELOPING AN ARRAY OF MIP 5 Fig. 4. DPV responses of MIP_TAN, MIP_TF, and MIP_TH electrodes obtained from the same S122. Fig. 5. Bar plot showing the selective behavior of (a) MIP_TAN, (b) MIP_TF, and (c) MIP_TH. Five different samples of tea were chosen for experimental purposes. B. Clustering Using t-SNE t-SNE is a popular machine learning algorithm used to visualize high-dimensional data. It was introduced by Laurens van der Maaten and Geoffrey Hinton in 2008. Its main goal is to convert similarities between data points into probabil- ities and then create a low-dimensional map that represents these probabilities as accurately as possible. One of the most common applications of t-SNE is in the visualization of complex datasets. It is particularly useful for identifying patterns, clusters, and outliers in high-dimensional data such as those found in genomics, image recognition, and natural language processing. In this approach, the t-SNE algorithm was applied on the fused response from the array of sensors, and it was successfully able to discriminate among the ﬁve different samples of black tea as shown in Fig.7. The input parameters for the successful clustering are as fol- lows. Fig. 6. Study of repeatability of the three electrodes MIP_TAN, MIP_TF and MIP_TH of the sensor array. Fig. 7. Efﬁcient discrimination among different black tea samples based on fused response from the WE. 1) Fused data—50 × 180. 2) Total of samples—50 (5 Samples × Runs: 10). 3) No. of features—180 (TAN: 60+TF: 60+TH: 60) (Com- bination of TAN [TAN_0, TAN_1,....TAN_59], TF [TF_0, TF_1 ...TF_59] and THEOTH [TH_0, TH_1, ...TH_59])."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec9",
+          "label": "C.",
+          "title": "Gradient Boost Regression",
+          "level": 2,
+          "paragraphs": [
+            "The gradient boost regressor [24] is an ensemble boost- ing method that incrementally trains numerous models in a sequential and additive manner. To implement gradient boosting, the residual is identiﬁed and subsequently ﬁt a new model to it. The new model is then integrated with the preceding model to initiate the next iteration. The approach of converging on the residues at each stage may be interpreted as a progression toward the negative gradient of the loss function. The generalization of the boosting process is facilitated by gradient descent. The default hyper parameters of gradient boost regressor function from the ensemble module of the ScikitLearn package has been considered for model training. Procedure for individual and multiple input/output fusion process 6 IEEE SENSORS JOURNAL TABLE III COMPARATIVE PERFORMANCE STUDY OF INDIVIDUAL SENSOR AND THE DEVELOPED E-TONGUE X1 TAN, X2 TAN, X3 TAN, . . . , X64 TAN are the input feature sets for TAN (XTAN) X1 TF, X2 TF, X13 TF, . . . , X64 TF are the input feature sets for TF (XTF) X1 TH, X2 TH, X3 TH, . . . , X64 TH are the input feature sets for TH (XTH) XTAN ∈{X1 TAN, X2 TAN, X3 TAN, . . . , X64 TAN} XTF ∈{X1 TF, X2 TF, X3 TF, . . . , X64 TF} XTH ∈{X1 TH, X2 TH, X3 TH, . . . , X64 TH} where yHPLC TAN , yHPLC TF , yHPLC TH are the HPLC values of TAN, TF, and TH, respectively. The model for individual TAN, TF, and TH in Fig. 8(a) can be represented as yHPLC TAN = fTAN(XTAN) yHPLC TF = fTF(XTF) yHPLC TH = fTH(XTH) where fTAN, fTF, and fTH are the regressor function for individual TAN, TF, and TH, respectively. There are three different models created individually to predict the content of TAN, TF, and TH present in the tea samples. As the data generated from different chemical sensors are for the same sample; therefore, the features from different chemical sensors are also interrelated. Hence, it will be more efﬁcient to have a joint prediction so that the overall quality of tea sample can be established in a better way. The model for the fused dataset of TAN, TF, and TH in Fig. 8(b) can be represented as yHPLC TAN , yHPLC TF , yHPLC TH = ffused(XTAN, XTF, XTH) where ffused is the regressor function for the multiinput/output regressor. The average values of performance metrics obtained from the individual and fused model are further considered to identify the overall quality of the tea sample is tabulated in Table III. From the explained variance score and R-square value, it is clear that the overall quality of tea has been predicted better for the fused dataset rather than considering the individual dataset from each sensor. The prediction accuracy for the e-tongue is calculated to be 96.8%, which is quite improved Fig. 8. Sensor correlation with standard HPLC analysis (a) for individual sensor and (b) for e-tongue. as obtained using individual sensors. Also, the error metrics are also identiﬁed quite less for the sensor array with respect to the individual sensor performance."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec10",
+      "label": "IV.",
+      "title": "CONCLUSION",
+      "level": 1,
+      "paragraphs": [
+        "The current approach focuses on the development of an e-tongue comprising an array of highly speciﬁc MIP elec- trodes for the evaluation of tea quality with an efﬁcient switching circuit. The switching circuit enables the selection one particular WE at a time, resulting in a higher chance of trapping that bio marker instead of others as the MIP sensors are highly selective and sensitive toward that particular molecule. Five different samples of black tea were used for the experimentation. Ten repetitive DPV signatures from each WE were recorded at a time and the control was then transferred to the next WE using the automatic switching circuit. Gradient MOULICK et al.: CUSTOMIZED e-TONGUE BY DEVELOPING AN ARRAY OF MIP 7 boost algorithm has been used to develop a robust cognitive model. As can be seen from the results section the fusion of the three sensors performed better over the individual sensors as indicated by the R2 value of 0.967. Moreover, by using the t-SNE algorithm on the fused data, successful discrimination was obtained among the ﬁve different samples of black tea. The e-tongue shows an improved operational accuracy of 99.6%. Addition of a few more speciﬁc sensors, targeting other major tea biomarkers to this array may be considered for further study. The developed system has the potential to be used as a taste-proﬁling instrument on a day-to-day basis in the tea industries. ACKNOWLEDGMENT The authors acknowledge the help of Tocklai Tea Research Institute, Jorhat, Assam, for providing the TF extract. They also like to acknowledge IICB Kolkata for providing them with the HPLC facility."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    }
+  ],
+  "references": [
+    {
+      "id": "ref1",
+      "number": 1,
+      "raw_text": "N. Bhattacharyya, R. Bandyopadhyay, M. Bhuyan, B. Tudu, D. Ghosh, and A. Jana, “Electronic nose for black tea classiﬁcation and correlation of measurements with ‘tea taster’ marks,” IEEE Trans. Instrum. Meas., vol. 57, no. 7, pp. 1313–1321, Jul. 2008.",
+      "parsed": null
+    },
+    {
+      "id": "ref2",
+      "number": 2,
+      "raw_text": "V. W. Setiawan et al., “Protective effect of green tea on the risks of chronic gastritis and stomach cancer,” Int. J. Cancer, vol. 92, no. 4, pp. 600–604, May 2001.",
+      "parsed": null
+    },
+    {
+      "id": "ref3",
+      "number": 3,
+      "raw_text": "K. Shibata, M. Moriyama, T. Fukushima, A. Kaetsu, M. Miyazaki, and H. Une, “Green tea consumption and chronic atrophic gastritis: A cross- sectional study in a green tea production village,” J. Epidemiology, vol. 10, no. 5, pp. 310–316, 2000.",
+      "parsed": null
+    },
+    {
+      "id": "ref4",
+      "number": 4,
+      "raw_text": "L. Jian, L. P. Xie, A. H. Lee, and C. W. Binns, “Protective effect of green tea against prostate cancer: A case-control study in Southeast China,” Int. J. Cancer, vol. 108, no. 1, pp. 130–135, Jan. 2004.",
+      "parsed": null
+    },
+    {
+      "id": "ref5",
+      "number": 5,
+      "raw_text": "D. Zhang, S. Kuhr, and U. H. Engelhardt, “Inﬂuence of catechins and theaﬂavins on astringent taste of black tea brews,” Z Lebensm-Unters. Forsc, vol. 195, no. 2, pp. 108–111, 1992.",
+      "parsed": null
+    },
+    {
+      "id": "ref6",
+      "number": 6,
+      "raw_text": "D. Cozzolino, “Near infrared spectroscopy in natural products analysis,” Planta Medica, vol. 75, no. 7, pp. 746–756, Jun. 2009.",
+      "parsed": null
+    },
+    {
+      "id": "ref7",
+      "number": 7,
+      "raw_text": "M. Palit et al., “Classiﬁcation of black tea taste and correlation with tea taster’s mark using voltammetric electronic tongue,” IEEE Trans. Instrum. Meas., vol. 59, no. 8, pp. 2230–2239, Aug. 2010.",
+      "parsed": null
+    },
+    {
+      "id": "ref8",
+      "number": 8,
+      "raw_text": "P. Ivarsson, S. Holmin, N.-E. Höjer, C. Krantz-Rülcker, and F. Winquist, “Discrimination of tea by means of a voltammetric electronic tongue and different applied waveforms,” Sens. Actuators B, Chem., vol. 76, nos. 1–3, pp. 449–454, Jun. 2001.",
+      "parsed": null
+    },
+    {
+      "id": "ref9",
+      "number": 9,
+      "raw_text": "M. Scampicchio, S. Benedetti, B. Brunetti, and S. Mannino, “Amper- ometric electronic tongue for the evaluation of the tea astringency,” Electroanalysis, vol. 18, no. 17, pp. 1643–1648, Sep. 2006.",
+      "parsed": null
+    },
+    {
+      "id": "ref10",
+      "number": 10,
+      "raw_text": "L. Lvova, A. Legin, Y. G. Vlasov, G. Sig, and H. Nam, “Multicomponent analysis of Korean green tea by means of disposable all-solid-state potentiometric electronic tongue microsystem,” Sens. Actuators B, vol. 95, nos. 1–3, pp. 391–399, Oct. 2003.",
+      "parsed": null
+    },
+    {
+      "id": "ref11",
+      "number": 11,
+      "raw_text": "P. Ivarsson et al., “Comparison of a voltammetric electronic tongue and a lipid membrane taste sensor,” Analytica Chim. Acta, vol. 449, nos. 1–2, pp. 59–68, Dec. 2001.",
+      "parsed": null
+    },
+    {
+      "id": "ref12",
+      "number": 12,
+      "raw_text": "M. Moulick, D. Das, S. Nag, A. Paul, D. K. Das, and R. B. Roy, “Simultaneous detection of epicatechin and theophylline in black tea with nano cupric oxide infused graphite electrode,” Nano LIFE, vol. 15, no. 1, Feb. 2025, Art. no. 2450009.",
+      "parsed": null
+    },
+    {
+      "id": "ref13",
+      "number": 13,
+      "raw_text": "M. Moulick, D. Das, S. Nag, B. Tudu, R. Bandyopadhyay, and R. Baner- jee Roy, “Molecularly imprinted polymer-based electrode for tannic acid detection in black tea,” IEEE Sensors J., vol. 23, no. 6, pp. 5535–5542, Mar. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref14",
+      "number": 14,
+      "raw_text": "D. Das et al., “Titanium oxide nanocubes embedded molecularly imprinted polymer-based electrode for selective detection of caffeine in green tea,” IEEE Sensors J., vol. 20, no. 12, pp. 6240–6247, Jun. 2020, doi: 10.1109/JSEN.2020.2972773.",
+      "parsed": null
+    },
+    {
+      "id": "ref15",
+      "number": 15,
+      "raw_text": "D. Das et al., “CuO nanoparticles decorated MIP-based electrode for sen- sitive determination of gallic acid in green tea,” IEEE Sensors J., vol. 21, no. 5, pp. 5687–5694, Mar. 2021, doi: 10.1109/JSEN.2020.3036663.",
+      "parsed": null
+    },
+    {
+      "id": "ref16",
+      "number": 16,
+      "raw_text": "T. Nandy Chatterjee et al., “Development of a nickel hydroxide nanopetal decorated molecular imprinted polymer based electrode for sensitive detection of epigallocatechin-3-gallate in green tea,” Sens. Actuators B, Chem., vol. 283, pp. 69–78, Mar. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref17",
+      "number": 17,
+      "raw_text": "M. L. Quint, F. S. de Souza, A. Spinelli, and J. B. Domingos, “Low- range detection of the phosphate group by a molecularly imprinted polymer-modiﬁed carbon paste electrode,” IEEE Sensors J., vol. 15, no. 2, pp. 1012–1019, Feb. 2015.",
+      "parsed": null
+    },
+    {
+      "id": "ref18",
+      "number": 18,
+      "raw_text": "H. Bai, C. Wang, J. Chen, Z. Li, K. Fu, and Q. Cao, “Graphene@AuNPs modiﬁed molecularly imprinted electrochemical sensor for the deter- mination of colchicine in pharmaceuticals and serum,” J. Electroanal. Chem., vol. 816, pp. 7–13, May 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref19",
+      "number": 19,
+      "raw_text": "T. N. Chatterjee et al., “Detection of theaﬂavins in black tea using a molecular imprinted polyacrylamide-graphite nanocomposite electrode,” Sens. Actuators B, vol. 246, pp. 840–847, Jul. 2017.",
+      "parsed": null
+    },
+    {
+      "id": "ref20",
+      "number": 20,
+      "raw_text": "T. Nandy Chatterjee et al., “Molecular imprinted polymer based elec- trode for sensing catechin (+C) in green tea,” IEEE Sensors J., vol. 18, no. 6, pp. 2236–2244, Mar. 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref21",
+      "number": 21,
+      "raw_text": "M. Moulick, S. Nag, D. Das, A. Kumar Hazarika, S. Sabhapondit, and R. Banerjee Roy, “A molecular imprinted bi-polymer graphite electrode decorated with NiCo2O4 nano-cubes for rapid detection of theaﬂavin in black tea,” IEEE Sensors J., vol. 25, no. 10, pp. 16621–16627, May 2025, doi: 10.1109/JSEN.2025.3555887.",
+      "parsed": null
+    },
+    {
+      "id": "ref22",
+      "number": 22,
+      "raw_text": "M. Moulick, D. Das, S. Nag, P. Pramanik, and R. B. Roy, “Gadolinium oxide modiﬁed molecular imprinted polymer electrode for the electro- chemical detection of theophylline in black tea,” J. Food Composition Anal., vol. 19, Nov. 2024, Art. no. 106994.",
+      "parsed": null
+    },
+    {
+      "id": "ref23",
+      "number": 23,
+      "raw_text": "M. Moulick et al., “Development of an electronic tongue with MIP sensors for black tea quality evaluation,” in Proc. IEEE Calcutta Conf. (CALCON), Kolkata, India, Dec. 2024, pp. 1–4, doi: 10.1109/cal- con63337.2024.10914342.",
+      "parsed": null
+    },
+    {
+      "id": "ref24",
+      "number": 24,
+      "raw_text": "J. H. Friedman, “Greedy function approximation: A gradient boosting machine,” Ann. Statist., vol. 29, no. 5, pp. 1189–1232, Oct. 2001. Madhurima Moulick is a Research Scholar with the Department of Instrumentation and Electronics Engineering, Jadavpur University, Kolkata, India. Her current research interests include electronic tongue, electrochemical sensors, and molecularly imprinted polymers. Sagar Chowdhury received the B.Tech. degree from the Department of IEE, Jadavpur University, Kolkata, India, in 2024. Mainak Das recevied the B.Tech. degree from the Department of IEE, Jadavpur University, Kolkata, India, in 2024. Sangram Saha recevied the B.Tech. degree from the Department of IEE, Jadavpur University, Kolkata, India, in 2024. Shreya Nag (Member, IEEE) received the Ph.D. degree from Jadavpur University, Kolkata, India, in 2023. She is working as an Associate Professor with the Department of Electronics and Communication Engineering, Institute of Engineering and Management, University of Engineering and Management, Kolkata. Her research interests include electronic tongue, electrochemical sen- sor, molecularly imprinted polymer, nanotechnology, pattern recognition, and signal processing. Jeet Naskar received the degree from the Department of Electronics and Communication Engineering, Institute of Engineering and Man- agement, University of Engineering and Management, Kolkata, India, in 2025. His key research areas include the IoT, electronic nose, and olfaction systems. Angiras Modak is currently pursuing the Ph.D. degree with the Department of Instrumentation and Electronics Engineering, Jadavpur University, Kolkata, India. He is a certiﬁed Data Scientist specialized in process mining. His research interests include machine learning, data fusion, and optimization. Runu Banerjee Roy received the Ph.D. degree from Jadavpur Univer- sity, Kolkata, India, in 2015. She is currently a Professor with the Department of IEE, Jadavpur University. Her key research areas",
+      "parsed": null
+    }
+  ],
+  "figures": [],
+  "tables": [
+    {
+      "id": "table1",
+      "number": 1,
+      "title": "Table 1",
+      "rows": [
+        [
+          "Abstract—Inthisfacileapproach,awell-developedvoltam-\nmetric electronic tongue (e-tongue) consisting of an array\nof molecular-imprinted polymer (MIP) electrodes has been\ndesigned for the detection of theophylline (TH), tannic acid\n(TAN),andtotaltheaflavins(TFs)inrealsamplesofblacktea.\nThese compounds are responsible for having a high impact\nonthetasteofteaintermsofastringency,thuscontributing\ntothetasteofteainfusion.Thedevelopede-tonguehasbeen\nfoundtodetectthesignaturesoftheseanalytesfromdifferent\nteasamplesunderthesameconditions.Thus,thise-tongue,\nin conjunction with a switching circuit, has been able to\nextractcurrentresponsesfromtheworkingelectrodes(WEs),\ngivinganoverallsignatureoftheteaquality.Thedifferential\npulse voltammograms (DPVs) responses were obtained to\nassess the performance on introducing MIP electrodes into\nthe black tea samples. The obtained dataset was subject to the gradient boosting method. The prediction model was\ndesignedbasedontheresponsesofthee-tongueandyieldedamean-squarederror(mse)of0.00003andacoefficient\nofdetermination(R2)of0.967forthefuseddataresponses.FromtheexplainedvariancescoreandR2 value,itisclear\nthattheoverallqualityofteahasbeenpredictedbetterforthesensorarraywhenconsideringtheindividualdatasetfrom\neach sensor. On application of t-distributed stochastic neighbor embedding (t-SNE) on the fused dataset, successful\ndiscrimination among the different black tea samples was obtained. The results point toward the possibility of an\ne-tonguebasedonanarrayofMIPelectrodestodetectthequalityofblacktealiquor.\nIndex Terms"
+        ],
+        [
+          "—Electronic tongue (e-tongue), t-Distributed stochastic neighbor embedding (t-SNE), total theaflavins\n(TFs),voltammograms."
+        ]
+      ],
+      "caption": "Table on page 1"
+    },
+    {
+      "id": "table2",
+      "number": 2,
+      "title": "Table 2",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 6"
+    }
+  ],
+  "equations": [],
+  "metadata": {
+    "manuscript_id": "",
+    "source_filename": "paper.pdf",
+    "doi": "10.1109/JSEN.2020.2972773."
+  },
+  "extraction_warnings": []
+}

@@ -12,7 +12,15 @@ from lxml import etree
 from app.llm.client import LLMClient
 from app.models.mapping_plan import MappingEntry, MappingPlan
 from app.models.paper import Author, PaperData, Section
-from app.utils.xml_helpers import escape_xml_text, is_element_node, serialize_tree, xml_local_name
+from app.utils.xml_helpers import (
+    apply_ieee_entities_to_tree,
+    encode_ieee_text_entities,
+    escape_xml_text,
+    is_element_node,
+    post_process_ieee_entities,
+    serialize_tree,
+    xml_local_name,
+)
 
 PROMPTS_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
@@ -60,20 +68,25 @@ def _apply_simple_mappings(
         val = _get_field(paper, entry.pdf_field)
         if isinstance(val, list):
             continue
-        text = escape_xml_text(str(val)) if entry.transform == "escape_xml" else str(val)
+        raw = str(val)
+        if entry.transform == "escape_xml":
+            text = escape_xml_text(raw)
+        else:
+            text = encode_ieee_text_entities(raw)
         if text and nodes:
             nodes[0].text = text
 
     title_nodes = _find_by_local_tag(root, "article-title")
     if title_nodes and paper.title:
-        title_nodes[0].text = paper.title
+        title_nodes[0].text = encode_ieee_text_entities(paper.title)
     abs_nodes = _find_by_local_tag(root, "abstract")
     if abs_nodes and paper.abstract:
+        enc = encode_ieee_text_entities(paper.abstract)
         p_nodes = _find_by_local_tag(abs_nodes[0], "p")
         if p_nodes:
-            p_nodes[0].text = paper.abstract
+            p_nodes[0].text = enc
         else:
-            abs_nodes[0].text = paper.abstract
+            abs_nodes[0].text = enc
 
 
 def _contrib_rids_referenced(root: etree._Element) -> list[str]:
@@ -108,9 +121,9 @@ def _fill_authors(root: etree._Element, authors: list[Author]) -> None:
             author = author_list[idx - 1]
             name_nodes = _find_by_local_tag(clone, "string-name")
             if name_nodes:
-                name_nodes[0].text = author.full_name or (
-                    f"{author.first_name} {author.last_name}".strip()
-                )
+                name_nodes[0].text = encode_ieee_text_entities(
+                author.full_name or f"{author.first_name} {author.last_name}".strip()
+            )
             if author.corresponding:
                 clone.set("corresp", "yes")
             elif clone.get("corresp") == "yes" and idx > 1:
@@ -146,7 +159,8 @@ class XMLGenerator:
                 _fill_authors(root, paper.authors)
             elif paper.authors:
                 _fill_authors(root, paper.authors)
-            output = serialize_tree(tree, doctype=doctype)
+            apply_ieee_entities_to_tree(root)
+            output = post_process_ieee_entities(serialize_tree(tree, doctype=doctype))
             etree.fromstring(output.encode("utf-8"))
             return output
         except etree.XMLSyntaxError:

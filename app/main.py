@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import clients, convert, jobs, schema, stream, upload
+from app.api import clients, convert, jobs, refine, schema, stream, upload
 from app.config import settings
 from app.db import create_db_and_tables
 from app.events import EVENTS, EVENT_TIMESTAMPS
@@ -48,6 +48,7 @@ app.include_router(upload.router, prefix="/api")
 app.include_router(convert.router, prefix="/api")
 app.include_router(stream.router, prefix="/api")
 app.include_router(jobs.router, prefix="/api")
+app.include_router(refine.router, prefix="/api")
 app.include_router(clients.router, prefix="/api")
 app.include_router(schema.router, prefix="/api")
 

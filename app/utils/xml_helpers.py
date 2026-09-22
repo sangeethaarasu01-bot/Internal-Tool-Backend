@@ -64,6 +64,52 @@ def escape_xml_text(value: str) -> str:
     )
 
 
+# IEEE/JATS-style hex character entities (see prompts/system.txt)
+_IEEE_CHAR_ENTITIES: dict[str, str] = {
+    "\u201c": "&#x201C;",
+    "\u201d": "&#x201D;",
+    "\u2018": "&#x2019;",
+    "\u2019": "&#x2019;",
+    "\u2013": "&#x2013;",
+    "\u2014": "&#x2014;",
+    "\u2026": "&#x2026;",
+    "\u00a0": "&#x00A0;",
+}
+
+
+def encode_ieee_text_entities(value: str) -> str:
+    """Convert Unicode punctuation to hex XML entities for IEEE templates."""
+    if not value:
+        return value
+    out: list[str] = []
+    for ch in value:
+        if ch in _IEEE_CHAR_ENTITIES:
+            out.append(_IEEE_CHAR_ENTITIES[ch])
+        elif ord(ch) > 127:
+            out.append(f"&#x{ord(ch):04X};")
+        else:
+            out.append(ch)
+    return "".join(out)
+
+
+def apply_ieee_entities_to_tree(root: etree._Element) -> None:
+    """Walk element text/tail and apply IEEE entity encoding."""
+    for elem in root.iter():
+        if not is_element_node(elem):
+            continue
+        if elem.text:
+            elem.text = encode_ieee_text_entities(elem.text)
+        if elem.tail:
+            elem.tail = encode_ieee_text_entities(elem.tail)
+
+
+def post_process_ieee_entities(xml_str: str) -> str:
+    """Replace any remaining Unicode chars in serialized XML with hex entities."""
+    for uchar, ent in _IEEE_CHAR_ENTITIES.items():
+        xml_str = xml_str.replace(uchar, ent)
+    return xml_str
+
+
 def serialize_tree(tree: etree._ElementTree, doctype: str | None = None) -> str:
     xml_bytes = etree.tostring(
         tree,
