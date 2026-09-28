@@ -289,23 +289,34 @@ class PDFExtractor:
                 refs.append(Reference(id=f"ref{num}", number=num, raw_text=body))
         return refs
 
-    def _extract_figures(self, doc: fitz.Document, full_text: str, job_dir: Path | None) -> list[Figure]:
+    def _extract_figures(
+        self,
+        doc: fitz.Document,
+        full_text: str,
+        job_dir: Path | None,
+        *,
+        light: bool = False,
+    ) -> list[Figure]:
         figures: list[Figure] = []
         for m in FIG_CAP.finditer(full_text):
             num = int(m.group(1))
             cap = m.group(2).strip()[:500]
             img_path = None
-            if job_dir:
+            if not light and job_dir:
                 job_dir.mkdir(parents=True, exist_ok=True)
                 for page in doc:
-                    for img_index, img in enumerate(page.get_images()):
-                        xref = img[0]
-                        pix = fitz.Pixmap(doc, xref)
-                        if pix.n - pix.alpha < 4:
-                            out = job_dir / f"fig{num}_{img_index}.png"
-                            pix.save(str(out))
-                            img_path = str(out)
-                            break
+                    if img_path:
+                        break
+                    for img_index, img in enumerate(page.get_images(full=True)):
+                        try:
+                            pix = fitz.Pixmap(doc, img[0])
+                            if pix.n - pix.alpha < 4:
+                                out = job_dir / f"fig{num}_{img_index}.png"
+                                pix.save(str(out))
+                                img_path = str(out)
+                                break
+                        except Exception:
+                            continue
             figures.append(
                 Figure(
                     id=f"fig{num}",
@@ -372,9 +383,10 @@ class PDFExtractor:
             sections = self._build_sections(lines)
             references = self._extract_references(full_text)
             job_dir = settings.uploads_dir / job_id if job_id else None
-            figures = self._extract_figures(doc, full_text, job_dir)
+            light = settings.LIGHT_PDF_EXTRACT
+            figures = self._extract_figures(doc, full_text, job_dir, light=light)
             tables: list[Table] = []
-            if not settings.LIGHT_PDF_EXTRACT:
+            if not light:
                 tables = self._extract_tables(pdf_path, full_text)
             equations = self._extract_equations(lines)
 
@@ -392,8 +404,10 @@ class PDFExtractor:
                 warnings.append("Abstract not detected; check PDF layout")
             if not sections:
                 warnings.append("No IEEE-style section headings detected")
-            if settings.LIGHT_PDF_EXTRACT:
-                warnings.append("Table extraction skipped (LIGHT_PDF_EXTRACT)")
+            if light:
+                warnings.append(
+                    "Light PDF mode: tables/figure images skipped (set LIGHT_PDF_EXTRACT=false locally for full extract)",
+                )
 
             return PaperData(
                 title=title,
