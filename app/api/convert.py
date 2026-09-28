@@ -9,8 +9,9 @@ from fastapi import APIRouter, HTTPException
 
 from app.agent.converter_agent import ConverterAgent
 from app.db import get_job, update_job
-from app.llm.client import create_llm_client
 from app.events import ensure_event_queue
+from app.llm.client import create_llm_client
+from app.utils.logger import logger
 
 router = APIRouter(prefix="/convert", tags=["convert"])
 
@@ -19,6 +20,7 @@ async def run_agent(job_id: str) -> None:
     job = get_job(job_id)
     if not job:
         return
+
     queue = ensure_event_queue(job_id)
 
     def on_event(event: dict) -> None:
@@ -29,7 +31,7 @@ async def run_agent(job_id: str) -> None:
         if event.get("type") == "stage" and "progress" in event:
             update_job(
                 job_id,
-                stage=event.get("message", job.stage),
+                stage=str(event.get("message", job.stage)),
                 progress=int(event.get("progress", job.progress)),
             )
 
@@ -52,10 +54,11 @@ async def run_agent(job_id: str) -> None:
             llm_cost_usd=result["cost_usd"],
             llm_tokens=result["tokens"],
         )
-        queue.put_nowait({"type": "done", "message": "completed"})
-    except Exception as e:
-        update_job(job_id, status="failed", error=str(e), stage="failed")
-        queue.put_nowait({"type": "error", "message": str(e)})
+        on_event({"type": "done", "message": "completed"})
+    except Exception as exc:
+        logger.exception("Conversion failed for job {}", job_id)
+        update_job(job_id, status="failed", error=str(exc), stage="failed")
+        on_event({"type": "error", "message": str(exc)})
 
 
 @router.post("/{job_id}")

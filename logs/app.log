@@ -77,3 +77,5 @@
 2026-09-28 17:57:00.530 | WARNING  | app.llm.anthropic_provider:anthropic_complete:71 - Anthropic billing/auth error — offline fallback: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfVqRK2hG1S7hFyEGrYxc'}
 2026-09-28 17:57:00.532 | INFO     | app.llm.client:complete:85 - LLM complete provider=anthropic model=claude-3-5-haiku-20241022+offline-fallback tokens_in=20497 tokens_out=90 cost=$0.0000 duration=3.03s
 2026-09-28 18:17:50.581 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-28 19:12:57.548 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-28 19:12:58.634 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started

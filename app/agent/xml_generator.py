@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import re
 from collections.abc import Callable
@@ -323,6 +324,29 @@ def _fill_authors(root: etree._Element, authors: list[Author]) -> None:
         group.append(clone)
 
 
+def _generate_from_template_dom(
+    template_xml: str,
+    paper: PaperData,
+    plan: MappingPlan,
+) -> str:
+    doctype_m = re.search(r"<!DOCTYPE[^>]+>", template_xml, re.DOTALL | re.IGNORECASE)
+    doctype = doctype_m.group(0) if doctype_m else None
+    parser = etree.XMLParser(remove_blank_text=False, recover=True)
+    root = etree.fromstring(template_xml.encode("utf-8"), parser=parser)
+    tree = etree.ElementTree(root)
+    _apply_simple_mappings(root, paper, plan)
+    _fill_abstract(root, paper.abstract)
+    if any(m.transform == "loop" and "author" in m.pdf_field for m in plan.mappings):
+        _fill_authors(root, paper.authors)
+    elif paper.authors:
+        _fill_authors(root, paper.authors)
+    sync_bio_xrefs(root)
+    apply_ieee_entities_to_tree(root)
+    output = post_process_ieee_entities(serialize_tree(tree, doctype=doctype))
+    etree.fromstring(output.encode("utf-8"))
+    return output
+
+
 class XMLGenerator:
     def __init__(self, llm: LLMClient) -> None:
         self.llm = llm
@@ -335,24 +359,13 @@ class XMLGenerator:
         on_event: Callable[[dict], None] | None = None,
         prior_errors: list[str] | None = None,
     ) -> str:
-        doctype_m = re.search(r"<!DOCTYPE[^>]+>", template_xml, re.DOTALL | re.IGNORECASE)
-        doctype = doctype_m.group(0) if doctype_m else None
-
-        parser = etree.XMLParser(remove_blank_text=False, recover=True)
         try:
-            root = etree.fromstring(template_xml.encode("utf-8"), parser=parser)
-            tree = etree.ElementTree(root)
-            _apply_simple_mappings(root, paper, plan)
-            _fill_abstract(root, paper.abstract)
-            if any(m.transform == "loop" and "author" in m.pdf_field for m in plan.mappings):
-                _fill_authors(root, paper.authors)
-            elif paper.authors:
-                _fill_authors(root, paper.authors)
-            sync_bio_xrefs(root)
-            apply_ieee_entities_to_tree(root)
-            output = post_process_ieee_entities(serialize_tree(tree, doctype=doctype))
-            etree.fromstring(output.encode("utf-8"))
-            return output
+            return await asyncio.to_thread(
+                _generate_from_template_dom,
+                template_xml,
+                paper,
+                plan,
+            )
         except etree.XMLSyntaxError:
             pass
 

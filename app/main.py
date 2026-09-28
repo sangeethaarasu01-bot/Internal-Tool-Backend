@@ -39,9 +39,11 @@ app = FastAPI(title="IEEE XML Converter API", version="1.0.0", lifespan=lifespan
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
+    allow_origin_regex=settings.CORS_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 app.include_router(upload.router, prefix="/api")

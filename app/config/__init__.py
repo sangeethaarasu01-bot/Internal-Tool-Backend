@@ -23,9 +23,13 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "https://internal-tool-sepia.vercel.app",
     ]
+    # Vercel preview deployments (e.g. internal-tool-sepia-git-xxx.vercel.app)
+    CORS_ORIGIN_REGEX: str = r"https://.*\.vercel\.app"
     SCHEMA_CACHE_TTL_DAYS: int = 30
     MAX_PDF_PAGES: int = 100
     LOG_LEVEL: str = "INFO"
+    # Skip pdfplumber table pass (saves RAM on Render free tier)
+    LIGHT_PDF_EXTRACT: bool = False
     # When true, billing/auth/rate-limit errors use deterministic offline LLM mocks
     LLM_FALLBACK_MOCK: bool = True
 

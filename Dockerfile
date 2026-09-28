@@ -7,4 +7,4 @@ COPY . .
 ENV DATA_DIR=/app/data
 RUN mkdir -p /app/data/uploads /app/data/outputs /app/data/schemas /app/logs
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--timeout-keep-alive", "120"]

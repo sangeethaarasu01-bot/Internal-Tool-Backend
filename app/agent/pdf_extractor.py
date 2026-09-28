@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import re
 from collections.abc import Callable
 from pathlib import Path
@@ -352,53 +353,61 @@ class PDFExtractor:
     ) -> PaperData:
         if on_event:
             on_event({"type": "log", "message": f"Opening PDF {pdf_path.name}"})
+        return await asyncio.to_thread(self._extract_sync, pdf_path, job_id)
 
+    def _extract_sync(self, pdf_path: Path, job_id: str | None) -> PaperData:
         doc = fitz.open(str(pdf_path))
-        lines = self._page_text_blocks(doc)
-        full_text = "\n".join(lines)
-        title = self._extract_title(doc)
-        if not title and lines:
-            for line in lines[:15]:
-                if len(line) > 20 and "ABSTRACT" not in line.upper():
-                    title = line
-                    break
+        try:
+            lines = self._page_text_blocks(doc)
+            full_text = "\n".join(lines)
+            title = self._extract_title(doc)
+            if not title and lines:
+                for line in lines[:15]:
+                    if len(line) > 20 and "ABSTRACT" not in line.upper():
+                        title = line
+                        break
 
-        abstract, keywords = self._extract_abstract_keywords(full_text)
-        authors, affiliations = self._extract_authors_affiliations(lines, title=title)
-        sections = self._build_sections(lines)
-        references = self._extract_references(full_text)
-        job_dir = settings.uploads_dir / job_id if job_id else None
-        figures = self._extract_figures(doc, full_text, job_dir)
-        tables = self._extract_tables(pdf_path, full_text)
-        equations = self._extract_equations(lines)
+            abstract, keywords = self._extract_abstract_keywords(full_text)
+            authors, affiliations = self._extract_authors_affiliations(lines, title=title)
+            sections = self._build_sections(lines)
+            references = self._extract_references(full_text)
+            job_dir = settings.uploads_dir / job_id if job_id else None
+            figures = self._extract_figures(doc, full_text, job_dir)
+            tables: list[Table] = []
+            if not settings.LIGHT_PDF_EXTRACT:
+                tables = self._extract_tables(pdf_path, full_text)
+            equations = self._extract_equations(lines)
 
-        msid_m = re.search(r"(\d{6,})", pdf_path.name)
-        metadata = {
-            "manuscript_id": msid_m.group(1) if msid_m else "",
-            "source_filename": pdf_path.name,
-        }
-        doi_m = re.search(r"10\.\d{4,}/[^\s]+", full_text)
-        if doi_m:
-            metadata["doi"] = doi_m.group(0)
+            msid_m = re.search(r"(\d{6,})", pdf_path.name)
+            metadata = {
+                "manuscript_id": msid_m.group(1) if msid_m else "",
+                "source_filename": pdf_path.name,
+            }
+            doi_m = re.search(r"10\.\d{4,}/[^\s]+", full_text)
+            if doi_m:
+                metadata["doi"] = doi_m.group(0)
 
-        warnings: list[str] = []
-        if not abstract:
-            warnings.append("Abstract not detected; check PDF layout")
-        if not sections:
-            warnings.append("No IEEE-style section headings detected")
+            warnings: list[str] = []
+            if not abstract:
+                warnings.append("Abstract not detected; check PDF layout")
+            if not sections:
+                warnings.append("No IEEE-style section headings detected")
+            if settings.LIGHT_PDF_EXTRACT:
+                warnings.append("Table extraction skipped (LIGHT_PDF_EXTRACT)")
 
-        doc.close()
-        return PaperData(
-            title=title,
-            authors=authors,
-            affiliations=affiliations,
-            abstract=abstract,
-            keywords=keywords,
-            sections=sections,
-            references=references,
-            figures=figures,
-            tables=tables,
-            equations=equations,
-            metadata=metadata,
-            extraction_warnings=warnings,
-        )
+            return PaperData(
+                title=title,
+                authors=authors,
+                affiliations=affiliations,
+                abstract=abstract,
+                keywords=keywords,
+                sections=sections,
+                references=references,
+                figures=figures,
+                tables=tables,
+                equations=equations,
+                metadata=metadata,
+                extraction_warnings=warnings,
+            )
+        finally:
+            doc.close()
