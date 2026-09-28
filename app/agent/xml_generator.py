@@ -124,6 +124,94 @@ def _contrib_rids_referenced(root: etree._Element) -> list[str]:
     return rids
 
 
+def _bio_index(rid: str) -> int:
+    m = re.match(r"^bio(\d+)$", rid or "")
+    return int(m.group(1)) if m else 0
+
+
+def _cap_authors_to_template_slots(
+    authors: list[Author],
+    template_contrib_count: int,
+    root: etree._Element,
+) -> list[Author]:
+    """Prefer template author/bio slots so PDF over-extraction does not inflate contrib count."""
+    cap = template_contrib_count
+    bio_ids = [
+        b.get("id")
+        for b in _find_by_local_tag(root, "bio")
+        if b.get("id")
+    ]
+    if bio_ids:
+        cap = max(cap, len(bio_ids))
+    if cap and len(authors) > cap:
+        return authors[:cap]
+    return authors
+
+
+def sync_bio_xrefs(root: etree._Element) -> None:
+    """Ensure every contrib bio xref rid has a matching <bio id=\"...\"> (template-adaptive)."""
+    bio_rids: set[str] = set()
+    for xref in root.xpath(".//*[local-name()='xref']"):
+        if xref.get("ref-type") == "bio":
+            rid = (xref.get("rid") or "").strip()
+            if rid:
+                bio_rids.add(rid)
+    if not bio_rids:
+        return
+
+    bio_group_nodes = _find_by_local_tag(root, "bio-group")
+    group: etree._Element | None
+    bios: list[etree._Element]
+    if bio_group_nodes:
+        group = bio_group_nodes[0]
+        bios = [
+            c
+            for c in group
+            if is_element_node(c) and xml_local_name(c) == "bio"
+        ]
+    else:
+        bios = _find_by_local_tag(root, "bio")
+        group = bios[0].getparent() if bios else None
+        if group is None:
+            back_nodes = _find_by_local_tag(root, "back")
+            if not back_nodes:
+                return
+            group = etree.SubElement(back_nodes[0], "bio-group")
+            bios = []
+
+    existing = {b.get("id") for b in bios if b.get("id")}
+    prototype = bios[-1] if bios else None
+
+    for rid in sorted(bio_rids, key=_bio_index):
+        if rid in existing:
+            continue
+        idx = _bio_index(rid) or 1
+        if prototype is not None:
+            clone = etree.fromstring(etree.tostring(prototype))
+        else:
+            clone = etree.Element("bio")
+            p = etree.SubElement(clone, "p")
+            etree.SubElement(
+                p,
+                "xref",
+                {"ref-type": "contrib", "rid": f"contrib{idx}"},
+            )
+        clone.set("id", rid)
+        for inner in clone.xpath(".//*[local-name()='xref']"):
+            if inner.get("ref-type") == "contrib":
+                inner.set("rid", f"contrib{idx}")
+        group.append(clone)
+        existing.add(rid)
+
+
+def repair_xml_xrefs(xml: str) -> str:
+    """Deterministic xref repair (bio targets) before validation."""
+    parser = etree.XMLParser(remove_blank_text=False, recover=True)
+    root = etree.fromstring(xml.encode("utf-8"), parser=parser)
+    sync_bio_xrefs(root)
+    return etree.tostring(root, encoding="unicode")
+
+
 def _contrib_children(group: etree._Element) -> list[etree._Element]:
     return [
         c
@@ -208,7 +296,11 @@ def _fill_authors(root: etree._Element, authors: list[Author]) -> None:
     for c in list(template_contribs):
         group.remove(c)
 
-    author_list = authors or []
+    author_list = _cap_authors_to_template_slots(
+        authors or [],
+        len(template_contribs),
+        root,
+    )
     count = max(
         len(author_list),
         len(template_contribs),
@@ -256,6 +348,7 @@ class XMLGenerator:
                 _fill_authors(root, paper.authors)
             elif paper.authors:
                 _fill_authors(root, paper.authors)
+            sync_bio_xrefs(root)
             apply_ieee_entities_to_tree(root)
             output = post_process_ieee_entities(serialize_tree(tree, doctype=doctype))
             etree.fromstring(output.encode("utf-8"))

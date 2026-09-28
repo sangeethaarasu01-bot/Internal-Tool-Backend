@@ -1,0 +1,2707 @@
+<article xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" article-type="research" content-type="orig-research" dtd-version="2.0" lifecycle="final" open-access="no" peer-reviewed="yes" xml:lang="eng" specific-use="proof">
+<!--Article Processing Date: 09/28/2026-->
+<!--Vendor Name: DCL-->
+<!--IEEE XML JATS Tagging Guidelines version: v20241024-->
+<!--IEEE Math Coding Requirements and Guidelines for Vendors version: v2.4-->
+<!--new_sw_ran-->
+<front>
+<journal-meta>
+<journal-id journal-id-type="ieee">0055700</journal-id>
+<journal-id journal-id-type="acronym">JSSC</journal-id>
+<journal-id journal-id-type="coden">IJSCBC</journal-id>
+<journal-title-group>
+<journal-title>IEEE Journal of Solid-State Circuits</journal-title>
+</journal-title-group>
+<issn publication-format="print">0018-9200</issn>
+<issn publication-format="online">1558-173X</issn>
+<publisher>
+<publisher-name>IEEE</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1109/JSSC.2026.3738035</article-id>
+<article-id pub-id-type="manuscript">JSSC-26-0380</article-id>
+<xplore-article-id/>
+<xplore-issue/>
+<xplore-pub-id/>
+<article-categories>
+<assembly-group sequence="0"/>
+</article-categories>
+<title-group>
+<article-title>AUTHOR QUERIES AUTHOR PLEASE ANSWER ALL QUERIES</article-title>
+</title-group>
+<contrib-group>
+<author-comment>
+<p>This article was approved by Associate Editor Minoru Fujishima. <italic>(Corresponding author: Ahmed Helaly.)</italic></p></author-comment>
+<contrib id="contrib1" primary="yes" ieee-member-type="Graduate_Student_Member" corresp="yes" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+</name-alternatives>
+<email>ahelaly@ucsd.edu</email>
+<xref ref-type="aff" rid="aff1"/>
+<xref ref-type="bio" rid="bio1"/>
+</contrib><contrib id="contrib2" primary="no" ieee-member-type="Graduate_Student_Member" corresp="no" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff1"/><xref ref-type="bio" rid="bio2"/>
+</contrib><contrib id="contrib3" primary="no" ieee-member-type="Fellow" corresp="no" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Gabriel</given-names> 
+<surname>Rebeiz</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Gabriel</given-names> 
+<surname>Rebeiz</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff1"/><xref ref-type="bio" rid="bio3"/>
+</contrib></contrib-group>
+<aff id="aff1">
+<institution-wrap>
+<institution content-type="department">Department of Electrical and Computer Engineering</institution>
+<institution content-type="institution">University of California, San Diego</institution>
+</institution-wrap>
+<city>La Jolla</city>
+<state>CA</state>
+<post-code>92093</post-code>
+<country>USA</country>
+</aff>
+<pub-date date-type="cover" iso-8601-date="2026" pub-type="print" publication-format="pdf">
+<year>2026</year>
+</pub-date>
+<fpage>1</fpage>
+<lpage>0</lpage>
+<history>
+<date date-type="receiveddate" iso-8601-date="2026-05-29">
+<day>29</day>
+<month>05</month>
+<year>2026</year>
+</date>
+<date date-type="reviseddate1" iso-8601-date="2026-08-03">
+<day>03</day>
+<month>08</month>
+<year>2026</year>
+</date>
+<date date-type="reviseddate2" iso-8601-date="2026-09-02">
+<day>02</day>
+<month>09</month>
+<year>2026</year>
+</date>
+<date date-type="accepteddate" iso-8601-date="2026-09-23">
+<day>23</day>
+<month>09</month>
+<year>2026</year>
+</date>
+</history>
+<permissions>
+<copyright-statement>0018-9200 © 2026 IEEE. All rights reserved, including rights for text and data mining, and training of artificial intelligence and similar technologies. Personal use is permitted, but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information.</copyright-statement>
+<copyright-year>2026</copyright-year><copyright-holder copyright-owner="IEEE"/><license license-type="IEEE"><ali:license_ref/></license></permissions>
+<self-uri content-type="xml">jssc-helaly-3738035.xml</self-uri>
+<self-uri content-type="print">jssc-helaly-3738035.pdf</self-uri>
+<self-uri content-type="online">jssc-helaly-3738035-x.pdf</self-uri>
+<abstract><p>A K-band frequency tripler with high harmonic rejection and a wide operating bandwidth is presented. The tripler design uses a triple-push topology, where three phase-shifted replicas of the input signal are coherently combined to suppress the fundamental and undesired harmonics, thereby alleviating the tradeoff between harmonic rejection and bandwidth in conventional triplers. A passive all-pass filter is analyzed in detail and optimized to generate accurate 120° spaced signals for robust harmonic suppression over a wide bandwidth. These signals drive three class-C–biased differential pairs whose outputs are combined to generate the desired third-harmonic signal. A low-Q resonant network tuned at the third harmonic is incorporated at the output to enable wideband operation. A highly linear buffer is also employed to increase the output power level and isolate the tripler core from load variations. Fabricated in a 22-nm FDSOI CMOS process, the tripler achieves a 32% fractional bandwidth from 21 to 29 GHz. Measurements show output power <inline-formula><tex-math notation="LaTeX">$\gt -1$</tex-math></inline-formula> dBm across the band, with a peak of + 2.5 dBm at 25 GHz while consuming 25 mW. The unwanted harmonics are suppressed by &gt; 37 dBc, with the fundamental attenuated by &gt; 40 dBc across the frequency range. The results demonstrate a power-efficient and broadband solution for high-purity K-band frequency generation, with application areas in wideband mm-wave systems.</p>
+</abstract>
+<kwd-group kwd-group-type="AuthorFree">
+<kwd>All-pass filter</kwd>
+<kwd>CMOS</kwd>
+<kwd>frequency multiplier</kwd>
+<kwd>harmonics</kwd>
+<kwd>K-band</kwd>
+<kwd>phase noise (PN)</kwd>
+<kwd>three-phase generation</kwd>
+<kwd>triple-push</kwd>
+<kwd>tripler</kwd>
+<kwd>wideband</kwd>
+</kwd-group>
+<counts>
+<fig-count count="22"/>
+<table-count count="1"/>
+<equation-count count="135"/>
+<ref-count count="31"/>
+<page-count count="11"/>
+</counts>
+</article-meta>
+</front>
+<body>
+<sec id="sec1">
+<label>I.</label>
+<title>Introduction</title>
+<p>The demand for high data rates, improved sensing capabilities, and compact wireless systems has driven interest in circuits operating at millimeter-wave (mm-wave) frequencies. The mm-wave spectrum offers large contiguous bandwidth that can support multi-gigabit data rates. Within this spectrum, the K-band (20–30 GHz) is notably attractive due to its relatively low propagation loss compared to the higher mm-wave bands. In particular, this range is widely used in satellite communications, short-range radar systems, 5G networks, and high-capacity point-to-point wireless links <xref ref-type="bibr" rid="ref1">[1]</xref>, <xref ref-type="bibr" rid="ref2">[2]</xref>, <xref ref-type="bibr" rid="ref3">[3]</xref>, <xref ref-type="bibr" rid="ref4">[4]</xref>, <xref ref-type="bibr" rid="ref5">[5]</xref>.</p>
+<p>A key component in such systems is the voltage-controlled oscillator (VCO), which serves as the primary source for the generation of local oscillator (LO) signals. The VCO must satisfy demanding specifications, particularly low phase noise (PN) and wide frequency tuning range (FTR) <xref ref-type="bibr" rid="ref6">[6]</xref>. To achieve a multi-GHz FTR, varactors with a large capacitance tuning range are incorporated within the VCO; however, their low quality factor at mm-wave frequencies adversely impacts PN. This poses a tradeoff between PN and wide FTR.</p>
+<p>To mitigate these limitations, a common approach is to generate the signal at a lower frequency, where the VCO design is more robust, and then translate it to mm-wave frequencies using a frequency multiplier. This enables the VCO to operate with lower power consumption and reduced PN <xref ref-type="bibr" rid="ref5">[5]</xref>, <xref ref-type="bibr" rid="ref7">[7]</xref>, <xref ref-type="bibr" rid="ref8">[8]</xref>. Consequently, broadband multipliers become essential building blocks in such architectures. In addition, preserving the spectral purity of the multiplier output is critical to avoid spurious harmonic components that could corrupt transmitted/received signals <xref ref-type="bibr" rid="ref9">[9]</xref> or degrade the blocker rejection and linearity performance of the transceiver chain (as shown in <xref ref-type="fig" rid="fig1">Fig. 1</xref>). This approach can be extended to a multiplication chain to generate LO signals at E-, W-, and D-bands <xref ref-type="bibr" rid="ref10">[10]</xref>, <xref ref-type="bibr" rid="ref11">[11]</xref>, <xref ref-type="bibr" rid="ref12">[12]</xref>. In such cases, maintaining spectral purity becomes even more crucial, as spurious tones can be shifted close to the final LO frequency by intermodulation/mixing processes within the frequency generation chain <xref ref-type="bibr" rid="ref13">[13]</xref>.
+<fig id="fig1">
+<label>Fig. 1.</label>
+<caption><p>Block diagram of a typical receiver channel using a tripler and buffer as its LO multiplier chain.</p></caption>
+<graphic xlink:href="helal1-3738035.eps"/>
+</fig>
+</p>
+<p>Odd-order frequency multipliers rely on device nonlinearities to generate strong higher order harmonics, making it challenging to maintain high spectral purity without sacrificing bandwidth, efficiency, or output power. Waveform shaping and harmonic engineering have been used to design low-spurious triplers. In <xref ref-type="bibr" rid="ref14">[14]</xref>, the time-domain waveform of an overdriven signal is shaped with a deep cut to increase the third-harmonic content and suppress the fundamental component, but only achieves a 12 dBc rejection of the first harmonic. The current-folding technique proposed in <xref ref-type="bibr" rid="ref15">[15]</xref> achieves excellent harmonic rejection by folding the transconductance characteristic of the MOS device three times within a single cycle to synthesize a strong third-harmonic component. However, its bandwidth remains limited. Another attempt <xref ref-type="bibr" rid="ref16">[16]</xref> employed a class-F technique [similar to a class-F power amplifier (PA)] by adding a matching network at the output to show high impedance for the third harmonic. Although high efficiency is achieved, it suffers from a narrow bandwidth.</p>
+<p>Another category of tripler designs relies on the self-mixing technique <xref ref-type="bibr" rid="ref17">[17]</xref>, <xref ref-type="bibr" rid="ref18">[18]</xref>, <xref ref-type="bibr" rid="ref19">[19]</xref>, <xref ref-type="bibr" rid="ref20">[20]</xref>, <xref ref-type="bibr" rid="ref21">[21]</xref>, where a push–push doubler is cascaded with a mixer to exploit the strong second-order nonlinearity of MOS devices. The generated second harmonic is mixed with the input to produce the third harmonic. However, this inherently generates both the fundamental and the third-harmonic components at the output, requiring a notch filter <xref ref-type="bibr" rid="ref19">[19]</xref>, <xref ref-type="bibr" rid="ref21">[21]</xref> or feedforward cancellation <xref ref-type="bibr" rid="ref17">[17]</xref> to suppress the fundamental. Although a fundamental rejection ratio (FRR) of 33 dBc has been reported, the total harmonic rejection ratio (HRR) is limited by second-harmonic leakage from the mixer. Harmonic injection locking has also been adopted for frequency tripling <xref ref-type="bibr" rid="ref3">[3]</xref>, <xref ref-type="bibr" rid="ref22">[22]</xref>. However, the achievable 3-dB bandwidth is limited by the oscillator locking range despite its demonstrated excellent spectral purity.</p>
+<p>In this work, a frequency tripler for LO generation at K-band is presented. The tripler achieves wide operational bandwidth, high power efficiency, and outstanding HRR. The tripler uses an N-push technique to improve the rejection of unwanted harmonics without relying on a high-Q output filter. A fully passive multi-phase generation circuit is proposed to generate the phase-shifted signals required by the N-push technique over a wide bandwidth. This proposed network enables phase generation with zero DC power consumption, thereby improving the overall efficiency of the frequency multiplier. In addition, the passive phase-generation mechanism avoids introducing additional harmonic components at the tripler input, thereby preserving the phase and amplitude balances essential for effective N-push operation. This article is organized as follows. <xref ref-type="sec" rid="sec2">Section II</xref> reviews the tripler topology. <xref ref-type="sec" rid="sec3">Section III</xref> describes the tripler architecture and its implementation. The measurement results are reported in <xref ref-type="sec" rid="sec4">Section IV</xref> along with a comparison with the state-of-the-art triplers. Finally, the work is concluded in <xref ref-type="sec" rid="sec5">Section V</xref>.</p>
+</sec>
+<sec id="sec2">
+<label>II.</label>
+<title>Frequency Tripler Principle and Topology</title>
+<p>Conventional frequency tripler designs rely on the nonlinear characteristics of active devices to generate the third harmonic, with differential circuit topology employed to cancel even-order harmonics [as shown in <xref ref-type="fig" rid="fig2">Fig. 2(a)</xref>]. High-Q filtering at the output improves the spectral purity but at the expense of a limited operational bandwidth as in <xref ref-type="bibr" rid="ref23">[23]</xref>. Furthermore, high-Q filters introduce additional insertion loss, thereby degrading the conversion efficiency. This tradeoff can be understood by considering the frequency response of a resonant tank, whose attenuation around resonance is
+<disp-formula id="deqn1"><tex-math notation="LaTeX">\begin{equation*} H\left ({ f}\right ) = 10log_{10}\left [{ 1+Q^{2}\left ({ \frac {f}{f_{c}} - \frac {f_{c}}{f} }\right )^{2}}\right ] \tag {1}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$f_{c}$</tex-math></inline-formula> is the center frequency of the resonant tank and is equal to <inline-formula><tex-math notation="LaTeX">${\mathrm {3f}}_{o}$</tex-math></inline-formula>. For a resonant tank centered at 25 GHz and placed at the tripler output, as the tank Q-factor increases, the attenuation of the fundamental component increases at the expense of increased attenuation within the passband around <inline-formula><tex-math notation="LaTeX">$3f_{o}$</tex-math></inline-formula> [as shown in <xref ref-type="fig" rid="fig2">Fig. 2(b)</xref>]. For a 3-dB bandwidth of 10 GHz, corresponding to a Q-factor of 2.5, the fundamental suppression is limited to 15–19 dB.
+<fig id="fig2">
+<label>Fig. 2.</label>
+<caption><p>(a) Conventional frequency tripler implementation and (b) effect of Q on the attenuation of the first harmonic and the achieved bandwidth.</p></caption>
+<graphic xlink:href="helal2ab-3738035.eps"/>
+</fig>
+</p>
+<p>On the other hand, even-order multipliers (e.g., frequency doublers) exploit push–push transistors, which inherently suppress the odd harmonics of the signal, including the fundamental component <xref ref-type="bibr" rid="ref24">[24]</xref>, <xref ref-type="bibr" rid="ref25">[25]</xref>. The push–push topology consists of two differential MOS devices with connected drains at the output [as shown in <xref ref-type="fig" rid="fig3">Fig. 3(a)</xref>]. This concept can be generalized to generate the <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula>th harmonic of the input signal by using N devices driven by signals that are phase-shifted by <inline-formula><tex-math notation="LaTeX">$2\pi /N$</tex-math></inline-formula> relative to each other. This behavior can be understood by expressing the input signals as phase-shifted replicas of a common input. For an N-path structure, the inputs can be written as
+<disp-formula id="deqn2"><tex-math notation="LaTeX">\begin{equation*} v_{k}\left ({ t}\right ) = V_{0} \cos \left ({ \omega _{o}t+\frac {2\pi k}{N}}\right ),\quad k=0,1,\ldots .,N-1. \tag {2}\end{equation*}</tex-math></disp-formula>
+<fig id="fig3">
+<label>Fig. 3.</label>
+<caption><p>(a) Push–push doubler, (b) triple-push frequency multiplier, (c) differential implementation of the triple-push multiplier, and (d) vector representation of the harmonics generated by the N-push tripler.</p></caption>
+<graphic xlink:href="helal3abcd-3738035.eps"/>
+</fig>
+</p>
+<p>Assuming a nonlinear device response that can be approximated by a power series, the output current of each branch contains harmonic components. The contribution of the <inline-formula><tex-math notation="LaTeX">$m$</tex-math></inline-formula>th harmonic from all branches can be expressed as
+<disp-formula id="deqn3-deqn4"><tex-math notation="LaTeX">\begin{align*} i_{out,m}\left ({ t}\right ) &amp; = I_{0} \sum _{k=0}^{N-1} \cos \left ({ m\omega _{o}t+\frac {2\pi mk}{N}}\right ) \tag {3}\\ i_{out,m}\left ({ t}\right ) &amp; = I_{0}*\Re \left \{{ \sum _{k=0}^{N-1}e^{j\left ({ m\omega _{o}t+2\pi mk/N}\right ) }}\right \} \\ &amp; = I_{0}*\Re \left \{{ e^{jm\omega _{o}t}\sum _{k=0}^{N-1}e^{j2\pi mk/N }}\right \}. \tag {4}\end{align*}</tex-math></disp-formula></p>
+<p>Using geometric series summation, this equation evaluates to zero for all harmonics except when <inline-formula><tex-math notation="LaTeX">$m$</tex-math></inline-formula> is a multiple of <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula><disp-formula id="deqn5"><tex-math notation="LaTeX">\begin{equation*} \sum _{k=0}^{N-1}e^{j2\pi mk/N} = \begin{cases} \displaystyle N, {m = aN, \quad a \in \mathbb {Z}} \\ \displaystyle 0, {\,}{\,}{\,}\text {otherwise.} \end{cases} \tag {5}\end{equation*}</tex-math></disp-formula>As a result, only the <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula>th harmonic (and its multiples) constructively combine at the output, whereas all other harmonics are ideally canceled.</p>
+<p>A triple-push implementation is illustrated in <xref ref-type="fig" rid="fig3">Fig. 3(b)</xref>, where <inline-formula><tex-math notation="LaTeX">$N = 3$</tex-math></inline-formula>, and the inputs of the three devices are phase-shifted by <inline-formula><tex-math notation="LaTeX">$2\pi /3$</tex-math></inline-formula> (120°). A differential implementation of the triple-push topology is employed to further reject even harmonics, specifically the sixth harmonic [as shown in <xref ref-type="fig" rid="fig3">Fig. 3(c)</xref>]. This rejection is frequency-independent, and the achievable bandwidth is primarily limited by the three-phase generation circuit.</p>
+<p>The tripler operation can also be interpreted using a phasor diagram [as shown in <xref ref-type="fig" rid="fig3">Fig. 3(d)</xref>]. Three vectors, V1, V2, and V3, represent the output currents of the individual devices in <xref ref-type="fig" rid="fig3">Fig. 3(b)</xref>, and their summation depicts the combined current at the common drain node. The first, second, fourth, and fifth harmonics cancel vectorially, while the third harmonic adds constructively, resulting in a spectrally pure third-harmonic output.</p>
+</sec>
+<sec id="sec3">
+<label>III.</label>
+<title>Tripler Design</title>
+<p>The tripler block diagram is shown in <xref ref-type="fig" rid="fig4">Fig. 4</xref>. The design consists of the triple-push core driven by a three-phase generation polyphase circuit. The tripler core is followed by a buffer to boost the output power level. An input matching network is used before the polyphase filter for power matching.
+<fig id="fig4">
+<label>Fig. 4.</label>
+<caption><p>Block diagram of the proposed tripler.</p></caption>
+<graphic xlink:href="helal4-3738035.eps"/>
+</fig>
+</p>
+<sec id="sec3a">
+<label>A.</label>
+<title>Tripler Core</title>
+<p>The harmonic content of a MOS device is strongly influenced by its class of operation, which is determined by the conduction angle (<inline-formula><tex-math notation="LaTeX">$\theta _{c}$</tex-math></inline-formula>). <xref ref-type="fig" rid="fig5">Fig. 5(a)</xref> illustrates the short-circuit drain current density of the NMOS device used in this design. It can be observed that a conduction angle of <inline-formula><tex-math notation="LaTeX">$\theta _{c} \approx 150^{\circ } $</tex-math></inline-formula>, corresponding to class-C operation, yields the maximum third-harmonic content. Accordingly, the transistors are biased to operate near this conduction angle. To account for different input signal amplitudes, the bias point can be adjusted to maintain the desired conduction angle <xref ref-type="bibr" rid="ref10">[10]</xref> [as shown in <xref ref-type="fig" rid="fig5">Fig. 5(b)</xref>]. The output current waveforms, shown in <xref ref-type="fig" rid="fig5">Fig. 5(c)</xref>, confirm operation in class-C at <inline-formula><tex-math notation="LaTeX">$\theta _{c} = 150^{\circ } $</tex-math></inline-formula> for all signal amplitudes (A<inline-formula><tex-math notation="LaTeX">$_{sig}$</tex-math></inline-formula>).
+<fig id="fig5">
+<label>Fig. 5.</label>
+<caption><p>(a) Harmonic current density against conduction angle for a 22-nm NMOS device. (b) Optimum tripler bias voltage for different input signal amplitudes at a conduction angle of 150°. (c) Current waveform for the chosen class-C operation at 8 GHz for different amplitudes.</p></caption>
+<graphic xlink:href="helal5abc-3738035.eps"/>
+</fig>
+</p>
+<p>From <xref ref-type="fig" rid="fig5">Fig. 5(a)</xref>, it can be observed that the fundamental component of the output current is approximately 15 dB higher than the third-harmonic at the chosen <inline-formula><tex-math notation="LaTeX">$\theta _{c}$</tex-math></inline-formula>. Since a practical low-Q output resonator provides only 15–19 dB suppression of the fundamental while maintaining a 10-GHz bandwidth [as shown in <xref ref-type="fig" rid="fig2">Fig. 2(b)</xref>], the resulting FRR is limited to &lt; 5 dBc. In contrast, by employing the triple-push topology, the FRR can reach up to 20 dBc under optimum bias conditions (assuming realistic driving signals with 0.5-dB amplitude imbalance and 3° phase imbalance), even in the absence of any filtering (as shown in <xref ref-type="fig" rid="fig6">Fig. 6</xref>).
+<fig id="fig6">
+<label>Fig. 6.</label>
+<caption><p>HRR (defined as current ratios) of the tripler core for different conduction angles (assuming realistic driving signals).</p></caption>
+<graphic xlink:href="helal6-3738035.eps"/>
+</fig>
+</p>
+<p>The harmonic rejection of the triple-push topology is sensitive to phase and amplitude imbalances in the input signals and rapidly degrades with increasing mismatches. Phase mismatch (<inline-formula><tex-math notation="LaTeX">$\Delta \phi $</tex-math></inline-formula>) is the deviation from the ideal phase relationship between the 0° input and the ±120° inputs, while <inline-formula><tex-math notation="LaTeX">$\alpha $</tex-math></inline-formula> denotes the amplitude ratio of the ±120° inputs relative to the 0° input. For a reasonable <inline-formula><tex-math notation="LaTeX">$\alpha $</tex-math></inline-formula> of −1.5 dB (corresponding to 0.85), the allowed <inline-formula><tex-math notation="LaTeX">$|\Delta \phi |$</tex-math></inline-formula> must be <inline-formula><tex-math notation="LaTeX">$\leq 4^{\circ } $</tex-math></inline-formula> to ensure a minimum fundamental suppression of 15 dBc prior to filtering, as shown in <xref ref-type="fig" rid="fig7">Fig. 7</xref>.
+<fig id="fig7">
+<label>Fig. 7.</label>
+<caption><p>FRR of the tripler against phase mismatch at different <inline-formula><tex-math notation="LaTeX">$\alpha $</tex-math></inline-formula> values.</p></caption>
+<graphic xlink:href="helal7-3738035.eps"/>
+</fig>
+</p>
+<p><xref ref-type="fig" rid="fig8">Fig. 8(a)</xref> presents the tripler core schematic. The differential triple-push devices are sized at <inline-formula><tex-math notation="LaTeX">$17.28 {\,}\mu \text {m}/18{\,}\text {nm}$</tex-math></inline-formula> as a compromise between achieving high output power (which favors larger devices) and minimizing the loading effects on the preceding phase-generation stage. A tail inductor (~400 pH) is employed to suppress common-mode gain that arises from layout asymmetries. Cascode transistors M<sub>7,8</sub> are used to improve the input–output isolation and reduce coupling that disturbs the phase relationships established by the preceding circuitry. In addition, the cascode arrangement improves the gain by enhancing the current-to-voltage conversion [as shown in <xref ref-type="fig" rid="fig8">Fig. 8(b)</xref>]. The tripler is loaded by a resonant tank tuned at <inline-formula><tex-math notation="LaTeX">$3f_{o}$</tex-math></inline-formula>. Small series resistors (<inline-formula><tex-math notation="LaTeX">$7~\Omega $</tex-math></inline-formula>) are used to reduce the tank quality factor, thus broadening the bandwidth. Post-layout simulations are performed assuming 0.5-dB amplitude imbalance and 3° phase mismatch in the input driving signals, along with a load capacitance that mimics the following stage. The resulting HRR values are shown in <xref ref-type="fig" rid="fig8">Fig. 8(c)</xref>: HRR1 exceeds 30 dBc, while HRR5 remains above 45 dBc across the bandwidth. Even harmonics are suppressed due to the differential topology.
+<fig id="fig8">
+<label>Fig. 8.</label>
+<caption><p>(a) Schematic of the triple-push multiplier core, (b) effect of using the cascode devices on the output signal amplitude, and (c) simulated odd HRRs for the tripler core.</p></caption>
+<graphic xlink:href="helal8abc-3738035.eps"/>
+</fig>
+</p>
+</sec>
+<sec id="sec3b">
+<label>B.</label>
+<title>Three Phase Generation</title>
+<p>The generation of accurate multi-phase signals is crucial to maintain high HRR. An all-pass filtering approach is adopted instead of conventional LPF–HPF-based phase shifters, as it inherently maintains a relatively flat amplitude response while providing the desired phase rotation <xref ref-type="bibr" rid="ref26">[26]</xref>. This is achieved by leveraging two <italic>LC</italic> resonant sections to produce the required phases (as shown in <xref ref-type="fig" rid="fig9">Fig. 9</xref>). Compared to traditional <italic>RC</italic> polyphase filters, the <italic>LC</italic>-based structure exhibits significantly lower insertion loss and can provide voltage gain without linearity constraints. Moreover, <italic>LC</italic>-based implementations benefit from reduced thermal noise contributions compared to their resistive counterparts. In addition, unlike previously reported ring-oscillator-based phase generators <xref ref-type="bibr" rid="ref27">[27]</xref>, <xref ref-type="bibr" rid="ref28">[28]</xref>, the proposed passive network incurs no DC power consumption and does not introduce additional harmonic components, thus improving the overall efficiency of the frequency multiplier while preserving the spectral purity of the driving signals.
+<fig id="fig9">
+<label>Fig. 9.</label>
+<caption><p>Three-phase generation using two all-pass filters to generate 0°, 120°, and 240° outputs.</p></caption>
+<graphic xlink:href="helal9-3738035.eps"/>
+</fig>
+</p>
+<p>The network is implemented in a differential scheme using two sections: the first generates the 0° and 120° phases, while the second generates the 240° phase (as shown in <xref ref-type="fig" rid="fig9">Fig. 9</xref>). The fourth branch is terminated with equivalent dummy devices to ensure uniform loading across all nodes, thus minimizing amplitude/phase imbalances. This symmetric configuration not only stabilizes the phase relationships, but also reduces the sensitivity of the network to external loading effects <xref ref-type="bibr" rid="ref26">[26]</xref>.</p>
+<p>The phase-generation network can be analyzed using the following transfer functions:
+<disp-formula id="deqn6-deqn8"><tex-math notation="LaTeX">\begin{align*} \frac {V_{out,0\pm }}{V_{in}}\left ({ s}\right ) &amp; = \pm \frac {s^{2}+\frac {R_{1}}{L_{1}}s-\frac {1}{L_{1}C_{1}}}{s^{2}+\frac {R_{1}}{L_{1}}s+\frac {1}{L_{1}C_{1}}} \tag {6}\\ \frac {V_{out,120\pm }}{V_{in}} \left ({ s}\right ) &amp; = \mp \frac {s^{2}-\frac {R_{1}}{L_{1}}s-\frac {1}{L_{1}C_{1}}}{s^{2}+\frac {R_{1}}{L_{1}}s+\frac {1}{L_{1}C_{1}}} \tag {7}\\ \frac {V_{out,240\pm }}{V_{in}}\left ({ s}\right ) &amp; = \pm \frac {s^{2}+\frac {R_{2}}{L_{2}}s-\frac {1}{L_{2}C_{2}}}{s^{2}+\frac {R_{2}}{L_{2}}s+\frac {1}{L_{2}C_{2}}}. \tag {8}\end{align*}</tex-math></disp-formula></p>
+<p>The transfer functions corresponding to the 0° and 120° phases exhibit identical magnitude responses for all frequencies, as their numerators are complex conjugates while sharing the same denominator. This property ensures an inherent balance of amplitude between these two signals, independent of frequency. In contrast, the components associated with the 240° phase must be selected to ensure magnitude matching with the 0° and 120° phases at the center frequency. By equating the magnitudes of the transfer functions corresponding to the 0° and 240° phases at the design frequency (<inline-formula><tex-math notation="LaTeX">$\omega _{o1}$</tex-math></inline-formula>), a condition on the resonance frequencies of the two sections (<inline-formula><tex-math notation="LaTeX">$\omega _{o1}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$\omega _{o2}$</tex-math></inline-formula>) can be derived as
+<disp-formula id="deqn9-deqn10"><tex-math notation="LaTeX">\begin{align*} &amp; \left \lvert { \frac {V_{out,240\pm }}{V_{in}}\left ({ \omega _{o1}}\right )}\right \rvert = \left \lvert { \frac {V_{out,0\pm }}{V_{in}}\left ({ \omega _{o1}}\right )}\right \rvert \tag {9}\\ &amp; \sqrt {\frac {\left ({ 1+\beta ^{2}}\right )^{2}\omega _{o1}^{4}+\left ({ \frac {R_{2}}{L_{2}}\omega _{o1}}\right )^{2}}{\left ({ 1-\beta ^{2}}\right )^{2}\omega _{o1}^{4}+\left ({ \frac {R_{2}}{L_{2}}\omega _{o1}}\right )^{2}}}=\sqrt {1+\frac {4\omega _{o1}^{2}}{\left ({ R_{1}/L_{1}}\right )^{2}}} \tag {10}\end{align*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$\omega _{o1}=1/\sqrt {(}L_{1}C_{1})$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$\omega _{o2}=1/\sqrt {(}L_{2}C_{2})$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$\beta = \omega _{o2}/\omega _{o1}$</tex-math></inline-formula>. By simplifying the expressions and realizing the quality factors as: <inline-formula><tex-math notation="LaTeX">$Q_{1}=((L_{1}/C_{1}))^{1/2}/R_{1}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$Q_{2}=((L_{2}/C_{2}))^{1/2}/R_{2}$</tex-math></inline-formula>, the condition on the resonance frequency ratio (<inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula>) is
+<disp-formula id="deqn11"><tex-math notation="LaTeX">\begin{equation*} \frac {\left ({ 1+\beta ^{2}}\right )^{2}+\left ({ \frac {\beta }{Q_{2}}}\right )^{2}}{\left ({ 1-\beta ^{2}}\right )^{2}+\left ({ \frac {\beta }{Q_{2}}}\right )^{2}}=1+4Q_{1}^{2}. \tag {11}\end{equation*}</tex-math></disp-formula></p>
+<p>Solving for <inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula> yields
+<disp-formula id="deqn12"><tex-math notation="LaTeX">\begin{equation*} \beta = \sqrt {\frac {\left ({ 2+\frac {1}{Q_{1}^{2}}-\frac {1}{Q_{2}^{2}}}\right )+\sqrt {\left ({ 2+\frac {1}{Q_{1}^{2}}-\frac {1}{Q_{2}^{2}}}\right )^{2}-4}}{2}}. \tag {12}\end{equation*}</tex-math></disp-formula></p>
+<p>Interestingly, if the two resonant networks have the same Q, this will force them to have the same resonance frequency in order to achieve the amplitude balance condition.</p>
+<p>After specifying the condition needed to satisfy the amplitude balance between the three phase signals, the phase relation must be identified. The phase shift between the 0° and 120° signals (<inline-formula><tex-math notation="LaTeX">$\Delta \phi _{1}$</tex-math></inline-formula>) at <inline-formula><tex-math notation="LaTeX">$\omega = \omega _{o1}$</tex-math></inline-formula> is given by
+<disp-formula id="deqn13"><tex-math notation="LaTeX">\begin{equation*} \Delta \phi _{1}\left ({ \omega _{o1}}\right ) = \pi -2 \tan ^{-1}{\left ({ \frac {1}{2Q_{1}}}\right )}. \tag {13}\end{equation*}</tex-math></disp-formula></p>
+<p>Similarly, the phase shift between the 0° and 240° signals (<inline-formula><tex-math notation="LaTeX">$\Delta \phi _{2}$</tex-math></inline-formula>) at <inline-formula><tex-math notation="LaTeX">$\omega = \omega _{o1}$</tex-math></inline-formula> is
+<disp-formula id="deqn14-deqn16"><tex-math notation="LaTeX">\begin{align*} \Delta \phi _{2}\left ({ \omega _{o1}}\right ) &amp; = \phi _{0}\left ({ \omega _{o1}}\right )-\phi _{240}\left ({ \omega _{o1}}\right ) \tag {14}\\ \phi _{0}\left ({ \omega _{o1}}\right ) &amp; = \frac {\pi }{2}-\tan ^{-1}{\left ({ \frac {1}{2Q_{1}}}\right )} \tag {15}\\ \phi _{240}\left ({ \omega _{o1}}\right ) &amp; = \pi -\tan ^{-1}{\left ({ \frac {2\beta ^{3}Q_{2}}{\left ({ \beta ^{4}-1}\right )Q_{2}^{2}-\beta ^{2}}}\right )}. \tag {16}\end{align*}</tex-math></disp-formula></p>
+<p>The required value of <inline-formula><tex-math notation="LaTeX">$\Delta \phi _{2}(\omega _{o1})$</tex-math></inline-formula> is 240° (or −120°) resulting in
+<disp-formula id="deqn17"><tex-math notation="LaTeX">\begin{equation*} \frac {-2\pi }{3} = \frac {-\pi }{2}+\tan ^{-1}{\left ({ \frac {2\beta ^{3}Q_{2}}{\left ({ \beta ^{4}-1}\right )Q_{2}^{2}-\beta ^{2}}}\right )-\tan ^{-1}{\left ({ \frac {1}{2Q_{1}}}\right )}}. \tag {17}\end{equation*}</tex-math></disp-formula></p>
+<p>By re-arranging and taking tan of both sides of <xref ref-type="disp-formula" rid="deqn17">(17)</xref><disp-formula id="deqn18-deqn19"><tex-math notation="LaTeX">\begin{align*} \frac {\sqrt {3}}{3} = \tan \left ({ \tan ^{-1}{\left ({ \frac {1}{2Q_{1}}}\right )}-\tan ^{-1}{\left ({ \frac {2\beta ^{3}Q_{2}}{\left ({ \beta ^{4}-1}\right )Q_{2}^{2}-\beta ^{2}}}\right )}}\right ) \tag {18}\\ \mathrm {Let} {\,}{\,}{\,}A= \tan ^{-1}{\left ({ \frac {1}{2Q_{1}}}\right )}, {\,}{\,}B = \tan ^{-1}{\left ({ \frac {2\beta ^{3}Q_{2}}{(\beta ^{4}-1)Q_{2}^{2}-\beta ^{2}}}\right )}. \tag {19}\end{align*}</tex-math></disp-formula></p>
+<p>Using the following identity:
+<disp-formula id="deqn20"><tex-math notation="LaTeX">\begin{equation*} \tan \left ({ A-B}\right ) = \frac {\tan \left ({ A}\right )-\tan \left ({ B}\right )}{1+\tan \left ({ A}\right )\tan \left ({ B}\right )} \tag {20}\end{equation*}</tex-math></disp-formula>we get
+<disp-formula id="deqn21-deqn22"><tex-math notation="LaTeX">\begin{align*} \frac {\sqrt {3}}{3} &amp; = \frac {\frac {1}{2Q_{1}}-\frac {2\beta ^{3}Q_{2}}{\left ({ \beta ^{4}-1}\right )Q_{2}^{2}-\beta ^{2}}}{1+\frac {1}{2Q_{1}}\frac {2\beta ^{3}Q_{2}}{\left ({ \beta ^{4}-1}\right )Q_{2}^{2}-\beta ^{2}}} \tag {21}\\ \frac {\sqrt {3}}{3} &amp; = \frac {\beta ^{2}Q_{2}^{2}-4\beta Q_{1}Q_{2}-1}{2Q_{1}\left ({ \beta ^{2}Q_{2}^{2}-1}\right )+2\beta Q_{2}}, \quad if {\,}\beta ^{4}\gt \gt 1. \tag {22}\end{align*}</tex-math></disp-formula></p>
+<p>The values of <inline-formula><tex-math notation="LaTeX">$Q_{1}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula> can be calculated using <xref ref-type="disp-formula" rid="deqn12">(12)</xref>, <xref ref-type="disp-formula" rid="deqn13">(13)</xref>, and <xref ref-type="disp-formula" rid="deqn21-deqn22">(22)</xref> to achieve the magnitude and phase balances at the center frequency (<inline-formula><tex-math notation="LaTeX">$\omega _{o1}$</tex-math></inline-formula>).</p>
+<p>By applying the phase condition <inline-formula><tex-math notation="LaTeX">$\Delta \phi _{1}=120^{\circ } $</tex-math></inline-formula>, the needed value of <inline-formula><tex-math notation="LaTeX">$Q_{1}$</tex-math></inline-formula> is <inline-formula><tex-math notation="LaTeX">$\sqrt {3}/2$</tex-math></inline-formula>. By substituting in <xref ref-type="disp-formula" rid="deqn14-deqn16">(14)–(16)</xref>, <inline-formula><tex-math notation="LaTeX">$\Delta \phi _{2}$</tex-math></inline-formula> cannot reach the ideal 240° (−120°) value for any finite <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula>. Instead, the solution converges to −120° only asymptotically as <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula> tends to infinity (as shown in <xref ref-type="fig" rid="fig10">Fig. 10</xref>). This is due to the transfer-function response of the all-pass filter, which exhibits one right-half-plane (RHP) zero and one left-half-plane (LHP) zero. The RHP zero limits the achievable phase lag. Therefore, achieving 240° phase shift would require violating the other phase constraint (120°). <xref ref-type="fig" rid="fig10">Fig. 10</xref> presents this case, where using a smaller <inline-formula><tex-math notation="LaTeX">$Q_{1}$</tex-math></inline-formula> than the nominal value (<inline-formula><tex-math notation="LaTeX">$\sqrt {3}/2$</tex-math></inline-formula>) makes <inline-formula><tex-math notation="LaTeX">$\Delta \phi _{2}$</tex-math></inline-formula> approach −120° (using <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula> of 10 and <inline-formula><tex-math notation="LaTeX">$Q_{1}$</tex-math></inline-formula> of 0.7) but at the expense of not achieving the exact + 120° on the other output branch (<inline-formula><tex-math notation="LaTeX">$\Delta \phi _{1} \approx +109^{\circ } $</tex-math></inline-formula> at <inline-formula><tex-math notation="LaTeX">$Q_{1}=0.7$</tex-math></inline-formula>). Note that for this sweep, <inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula> is adjusted for each combination of <inline-formula><tex-math notation="LaTeX">$Q_{1}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula> to ensure amplitude balance according to <xref ref-type="disp-formula" rid="deqn12">(12)</xref> (as shown in <xref ref-type="fig" rid="fig10">Fig. 10</xref>).
+<fig id="fig10">
+<label>Fig. 10.</label>
+<caption><p><inline-formula><tex-math notation="LaTeX">$\Delta \phi _{2}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula> factor variation with <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula> for different <inline-formula><tex-math notation="LaTeX">$Q_{1}$</tex-math></inline-formula> values while maintaining perfect amplitude balance.</p></caption>
+<graphic xlink:href="helal10-3738035.eps"/>
+</fig>
+</p>
+<p>Although both phase balance conditions cannot be achieved simultaneously at <inline-formula><tex-math notation="LaTeX">$\omega =\omega _{o1}$</tex-math></inline-formula> with a finite <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula>, selecting a design frequency above <inline-formula><tex-math notation="LaTeX">$\omega _{o1}$</tex-math></inline-formula> allows a feasible finite-Q solution. By re-visiting <xref ref-type="disp-formula" rid="deqn9-deqn10">(9)</xref><xref ref-type="disp-formula" rid="deqn11"/>
+<xref ref-type="disp-formula" rid="deqn12"/>
+<xref ref-type="disp-formula" rid="deqn13"/>
+<xref ref-type="disp-formula" rid="deqn14-deqn16"/>
+<xref ref-type="disp-formula" rid="deqn17"/>
+<xref ref-type="disp-formula" rid="deqn18-deqn19"/>
+<xref ref-type="disp-formula" rid="deqn20"/>–<xref ref-type="disp-formula" rid="deqn21-deqn22">(22)</xref>, and solving for an arbitrary frequency (<inline-formula><tex-math notation="LaTeX">$\omega _{d}=x\omega _{o1}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$x\gt 1$</tex-math></inline-formula>), the conditions required for phase and amplitude balances are
+<disp-formula id="deqn23-deqn25"><tex-math notation="LaTeX">\begin{align*} Q_{1} &amp; = \frac {\sqrt {3}x}{1+x^{2}} \tag {23}\\ \beta &amp; = \sqrt {x^{4}+x^{2}+1} \tag {24}\\ Q_{2} &amp; = \frac {\sqrt {3}x \sqrt {x^{4}+x^{2}+1}}{x^{4}-1}. \tag {25}\end{align*}</tex-math></disp-formula></p>
+<p>Therefore, neither of the two resonant sections should be centered at the desired input frequency. Instead, their resonance frequencies (<inline-formula><tex-math notation="LaTeX">$\omega _{o1}$</tex-math></inline-formula>and <inline-formula><tex-math notation="LaTeX">$\omega _{o2}$</tex-math></inline-formula>) are intentionally positioned on either side of the target frequency such that the required amplitude and phase relationships are simultaneously satisfied at the designated frequency <inline-formula><tex-math notation="LaTeX">$\omega _{d}$</tex-math></inline-formula>.</p>
+<p>For example, by selecting <inline-formula><tex-math notation="LaTeX">$x=\omega _{d}/\omega _{o1}=1.2$</tex-math></inline-formula>, the corresponding values of <inline-formula><tex-math notation="LaTeX">$Q_{1}, Q_{2}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula> that yield exact amplitude and phase balances are 0.85, 4.1, and 2.12, respectively. The resulting phase errors, <inline-formula><tex-math notation="LaTeX">$\Delta \phi _{1}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\Delta \phi _{2}$</tex-math></inline-formula>, along with the amplitude imbalance between the transfer functions, are plotted in <xref ref-type="fig" rid="fig11">Fig. 11</xref> as functions of the normalized frequency <inline-formula><tex-math notation="LaTeX">$\omega /\omega _{o1}$</tex-math></inline-formula>. As shown in <xref ref-type="fig" rid="fig11">Fig. 11</xref>, all three error metrics intersect at zero at <inline-formula><tex-math notation="LaTeX">$\omega =\omega _{d}$</tex-math></inline-formula>, confirming that an exact balance is achieved at this frequency. <xref ref-type="disp-formula" rid="deqn23-deqn25">Equations (23)–(25)</xref> reveal a direct tradeoff between the resonance frequencies placement and the required quality factors. Selecting <inline-formula><tex-math notation="LaTeX">$x$</tex-math></inline-formula> close to unity minimizes the separation between the resonances but causes <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula> to increase sharply. Conversely, increasing <inline-formula><tex-math notation="LaTeX">$x$</tex-math></inline-formula> relaxes the required quality factors at the expense of a larger separation between <inline-formula><tex-math notation="LaTeX">$\omega _{o1}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\omega _{o2}$</tex-math></inline-formula>.
+<fig id="fig11">
+<label>Fig. 11.</label>
+<caption><p>Phase/amplitude imbalance against frequency when <inline-formula><tex-math notation="LaTeX">$\omega _{d}=1.2\omega _{o1}$</tex-math></inline-formula>.</p></caption>
+<graphic xlink:href="helal11-3738035.eps"/>
+</fig>
+</p>
+<p>Away from <inline-formula><tex-math notation="LaTeX">$\omega _{d}$</tex-math></inline-formula>, both phase and amplitude errors gradually increase, illustrating the frequency-selective nature of the balance condition (as shown in <xref ref-type="fig" rid="fig11">Fig. 11</xref>). The usable fractional bandwidth is 17%–20%, where the phase imbalance is within ±4° and the amplitude imbalance is within 1.5 dB. A wider bandwidth is achieved by introducing series resistors (<inline-formula><tex-math notation="LaTeX">$R_{s1-4}$</tex-math></inline-formula>) within the all-pass structure [as shown in <xref ref-type="fig" rid="fig12">Fig. 12(a)</xref>]. The added resistors reduce the effective quality factors and flatten the phase and amplitude responses around the design frequency <xref ref-type="bibr" rid="ref29">[29]</xref>. However, this comes at the cost of reduced gain and a shift in frequency, which necessitates re-optimization of all the design parameters (<inline-formula><tex-math notation="LaTeX">$x$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula>, and Q values).
+<fig id="fig12">
+<label>Fig. 12.</label>
+<caption><p>(a) Schematic, (b) layout of the three-phase generator, (c) simulated gains of the 0°, 120° and 240° outputs, (d) simulated amplitude imbalance with respect to 0° output, and (e) simulated phase imbalance with respect to 0° output.</p></caption>
+<graphic xlink:href="helal12abcde-3738035.eps"/>
+</fig>
+</p>
+<p>The use of series resistors enables the decoupling of the pole and zero locations of the all-pass sections. Furthermore, introducing asymmetry between <inline-formula><tex-math notation="LaTeX">$R_{s3}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$R_{s4}$</tex-math></inline-formula> leads to an additional advantage that can be realized from the transfer function of the 240° path
+<disp-formula id="deqn26"><tex-math notation="LaTeX">\begin{equation*} \frac {V_{out,240\pm }}{V_{in}}\left ({ s}\right ) = \pm \frac {s^{2}+\frac {R_{2}+R_{s4}-R_{s3}}{L_{2}}s-\frac {1}{L_{2}C_{2}}}{s^{2}+\frac {R_{2}+R_{s4}+R_{s3}}{L_{2}}s+\frac {1}{L_{2}C_{2}}}. \tag {26}\end{equation*}</tex-math></disp-formula>If <inline-formula><tex-math notation="LaTeX">$R_{s3}\gt R_{s4}{\,}+{\,}R_{2}$</tex-math></inline-formula>, the sign of the imaginary numerator term is flipped, providing additional phase rotation without relying on <inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula> or high <inline-formula><tex-math notation="LaTeX">$Q_{2}$</tex-math></inline-formula> values, as discussed before (as shown in <xref ref-type="fig" rid="fig10">Fig. 10</xref>).</p>
+<p>Previously, the finite-Q limitation forced <inline-formula><tex-math notation="LaTeX">$\Delta \phi _{2}$</tex-math></inline-formula> to approach −120° only asymptotically under amplitude balance. However, by making the imaginary term of the numerator negative, the zero contribution of the transfer function is shifted, moving the phase of <xref ref-type="disp-formula" rid="deqn26">(26)</xref> in the required direction to satisfy the −120° condition with finite and practical component values.</p>
+<p>The phase-generation circuit is shown in <xref ref-type="fig" rid="fig12">Fig. 12(a)</xref>. The two resonant tanks are designed with natural resonance frequencies of 7.5 and 19 GHz, respectively. A T-matching network is employed at the input of the polyphase circuit to match its input impedance (<inline-formula><tex-math notation="LaTeX">$\approx 28 {\,}\Omega $</tex-math></inline-formula>) to the source impedance. The inductors are realized on the top copper layer of the stack with a sheet resistance of 6 m<inline-formula><tex-math notation="LaTeX">$\Omega $</tex-math></inline-formula> [as shown in <xref ref-type="fig" rid="fig12">Fig. 12(b)</xref>]. The signal paths are laid out with a symmetric floor plan using identical device placement and matched routings to minimize systematic mismatches. In addition, all passive structures and interconnects are EM simulated and incorporated into the postlayout models to accurately account for parasitic coupling and routing effects. The simulated voltage gain is 0.8–1.7 dB at 6.5–10 GHz [as shown in <xref ref-type="fig" rid="fig12">Fig. 12(c)</xref>]. The amplitude imbalance reaches a maximum of 0.9 dB at 10 GHz for the 240° output relative to the 0° output [as shown in <xref ref-type="fig" rid="fig12">Fig. 12(d)</xref>], while the phase imbalance is within ±4° [as shown in <xref ref-type="fig" rid="fig12">Fig. 12(e)</xref>]. These results demonstrate that the circuit meets the phase and amplitude balance requirements of the triple-push core.</p>
+</sec>
+<sec id="sec3c">
+<label>C.</label>
+<title>Output Buffer</title>
+<p>To boost the output power at the generated third harmonic, a buffer stage is used [as shown in <xref ref-type="fig" rid="fig13">Fig. 13(a)</xref>]. This stage serves to isolate the phase-generation and tripler core circuitry from the load, while providing additional gain. The buffer adopts a pseudo-differential cascode topology. The cascode configuration suppresses the Miller effect, thereby preserving the high-frequency performance required at the third-harmonic frequency. The pseudo-differential implementation avoids the need for a tail current source, reducing voltage headroom requirements. The buffer is biased in class-AB to achieve high linearity and avoid creating additional harmonics.
+<fig id="fig13">
+<label>Fig. 13.</label>
+<caption><p>(a) Schematic of the class AB output buffer, (b) output power load-pull at 25 GHz, and (c) simulated buffer S-parameters/linearity.</p></caption>
+<graphic xlink:href="helal13abc-3738035.eps"/>
+</fig>
+</p>
+<p>The buffer is matched to the optimum load impedance that maximizes power delivery at the third harmonic. This is analogous to PA load-pull optimization, where the load is selected to maximize output power rather than to achieve a specific voltage gain or impedance match. A T-network is used for wideband operation, with its component values chosen to present the required impedance based on the load-pull results in <xref ref-type="fig" rid="fig13">Fig. 13(b)</xref>. The optimum differential load impedance at 25 GHz is <inline-formula><tex-math notation="LaTeX">$(350{\,}+{\,}270j)\Omega $</tex-math></inline-formula>, which corresponds to an output power of + 6 dBm.</p>
+<p>The simulated buffer S-parameters show a peak gain of 15 dB with a 3-dB bandwidth of 12 GHz centered at 25 GHz [as shown in <xref ref-type="fig" rid="fig13">Fig. 13(c)</xref>]. The simulated <inline-formula><tex-math notation="LaTeX">$S_{22}$</tex-math></inline-formula> is <inline-formula><tex-math notation="LaTeX">$\lt -6$</tex-math></inline-formula> dB across the band, reflecting the tradeoff between output matching and presenting the optimum load-pull impedance. Owing to its bandpass response, the buffer contributes to harmonic suppression by attenuating the fundamental and fifth-harmonic components by up to 10 and 6 dBc, respectively. The simulated OP1dB is + 4.5 dBm, indicating ~1.5 dB loss in the matching network. The buffer consumes 15 mA from a 1.2 V supply.</p>
+</sec>
+</sec>
+<sec id="sec4">
+<label>IV.</label>
+<title>Measurements</title>
+<p>The tripler chip is implemented in the GlobalFoundries 22-nm FDSOI process and occupies a core area of <inline-formula><tex-math notation="LaTeX">$0.79\times 0.37$</tex-math></inline-formula> mm<sup>2</sup> (as shown in <xref ref-type="fig" rid="fig14">Fig. 14</xref>). The chip is characterized using on-chip probing with GSSG 1.85-mm probes at both the input and output ports, while DC bias and supply voltages are applied through DC probes. A Keysight four-port N5247A PNA-X network analyzer is used to generate the input signal (at <inline-formula><tex-math notation="LaTeX">$f_{out}/3$</tex-math></inline-formula>) and measure the output power at different harmonics, as shown in <xref ref-type="fig" rid="fig15">Fig. 15</xref>. Phase-matched cables are used between the RF probes and the analyzer to preserve differential signal balance. A calibration substrate is used to de-embed the measurement setup losses up to the probe tips.
+<fig id="fig14">
+<label>Fig. 14.</label>
+<caption><p>Chip micrograph of the frequency tripler.</p></caption>
+<graphic xlink:href="helal14-3738035.eps"/>
+</fig>
+<fig id="fig15">
+<label>Fig. 15.</label>
+<caption><p>Measurement setup for evaluating the tripler.</p></caption>
+<graphic xlink:href="helal15-3738035.eps"/>
+</fig>
+</p>
+<p>The measured output power at the third harmonic reaches a maximum of + 2.5 dBm at 25 GHz and exhibits a flat response across frequency, achieving a 3-dB bandwidth from 21 to 29 GHz (as shown in <xref ref-type="fig" rid="fig16">Fig. 16</xref>). The fundamental component is suppressed at the output, remaining below −40 dBm, while the fifth harmonic appears with power levels between −35 and −41 dBm [as shown in <xref ref-type="fig" rid="fig16">Fig. 16(a)</xref>]. The even harmonics, namely the second and fourth harmonics, also appear at the output but remain below −45 dBm across the band [as shown in <xref ref-type="fig" rid="fig16">Fig. 16(b)</xref>]. Ideally, even harmonics should be suppressed; however, unavoidable circuit asymmetries and mismatches, along with mixing between odd harmonics, give rise to residual even-order components.
+<fig id="fig16">
+<label>Fig. 16.</label>
+<caption><p>Measured and simulated output power against frequency for (a) odd harmonics and (b) even harmonics, with the 3rd harmonic output.</p></caption>
+<graphic xlink:href="helal16ab-3738035.eps"/>
+</fig>
+</p>
+<p>The FRR and the <inline-formula><tex-math notation="LaTeX">$n{\mathrm {th}}$</tex-math></inline-formula>-order HRR (HRRn) are measured as <inline-formula><tex-math notation="LaTeX">$P_{3f_{o}}/P_{f_{o}}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$P_{3f_{o}}/P_{nf_{o}}$</tex-math></inline-formula>, respectively. The tripler achieves an FRR &gt; 40 dBc at 20–30 GHz, while HRR5 remains above 37 dBc [as shown in <xref ref-type="fig" rid="fig17">Fig. 17(a)</xref>], agreeing well with the simulations. In addition, HRR2 and HRR4 exceed 39 dBc across the same frequency range [as shown in <xref ref-type="fig" rid="fig17">Fig. 17(b)</xref>]. The lower HRR2 observed near the upper edge of the band is attributed to the second harmonic approaching 20 GHz, which falls within the output buffer bandwidth and, therefore, experiences additional amplification. The input power level for these measurements is fixed at + 10 dBm.
+<fig id="fig17">
+<label>Fig. 17.</label>
+<caption><p>Measured and simulated (a) odd HRR against frequency and (b) even HRR against frequency.</p></caption>
+<graphic xlink:href="helal17ab-3738035.eps"/>
+</fig>
+</p>
+<p>A 1000-sample post-layout Monte Carlo analysis, including both process and mismatch variations, is performed to evaluate the robustness of the proposed tripler at the center frequency (25 GHz). The resulting FRR, HRR2, HRR4, and HRR5 are shown in <xref ref-type="fig" rid="fig18">Fig. 18</xref>, together with their corresponding mean (<inline-formula><tex-math notation="LaTeX">$\mu $</tex-math></inline-formula>) and standard deviation (<inline-formula><tex-math notation="LaTeX">$\sigma $</tex-math></inline-formula>) values. The rejection ratios remain within acceptable ranges, confirming the robustness of the proposed architecture.
+<fig id="fig18">
+<label>Fig. 18.</label>
+<caption><p>Post-layout Monte Carlo simulated (a) FRR, (b) HRR2, (c) HRR4, and (d) HRR5 of the tripler at 25 GHz output frequency.</p></caption>
+<graphic xlink:href="helal18abcd-3738035.eps"/>
+</fig>
+</p>
+<p>The input and output matching of the tripler are <inline-formula><tex-math notation="LaTeX">$\lt -6$</tex-math></inline-formula> dB across the band (as shown in <xref ref-type="fig" rid="fig19">Fig. 19</xref>). The conversion loss reaches a minimum of 7.5 dB at the center frequency with an input power of + 10 dBm [as shown in <xref ref-type="fig" rid="fig19">Fig. 19(b)</xref>]. The input power is swept from 0 to + 15 dBm, and the conversion loss is measured at different frequencies (as shown in <xref ref-type="fig" rid="fig20">Fig. 20</xref>). The best conversion loss is consistently achieved for input power levels between + 8 and + 12 dBm across the band, where the tripler core operates close to the optimum conduction angle for third-harmonic generation. Beyond this point, compression and harmonic redistribution degrade the conversion efficiency.
+<fig id="fig19">
+<label>Fig. 19.</label>
+<caption><p>Measured and simulated (a) <inline-formula><tex-math notation="LaTeX">$S_{11}$</tex-math></inline-formula> and (b) conversion loss and <inline-formula><tex-math notation="LaTeX">$S_{22}$</tex-math></inline-formula> of the tripler at <inline-formula><tex-math notation="LaTeX">$P_{in}=+10$</tex-math></inline-formula> dBm.</p></caption>
+<graphic xlink:href="helal19ab-3738035.eps"/>
+</fig>
+<fig id="fig20">
+<label>Fig. 20.</label>
+<caption><p>Measured conversion loss against input power sweep for different frequencies.</p></caption>
+<graphic xlink:href="helal20-3738035.eps"/>
+</fig>
+</p>
+<p>The harmonic purity of the output signal is also evaluated for different power levels. The measured FRR remains above 40 dBc even at 3-dB back-off [as shown in <xref ref-type="fig" rid="fig21">Fig. 21(a)</xref>], while HRR5 exceeds 36 dBc for input power levels ranging from 2 to 10 dBm [as shown in <xref ref-type="fig" rid="fig21">Fig. 21(b)</xref>]. In addition, even-harmonic rejection remains high for frequencies below 30 GHz across a broad range of input power levels [as shown in <xref ref-type="fig" rid="fig21">Fig. 21(c) and (d)</xref>]. These results ensure the robustness of the proposed tripler over a wide input power range.
+<fig id="fig21">
+<label>Fig. 21.</label>
+<caption><p>(a) FRR, (b) HRR5, (c) HRR2, and (d) HRR4 of the tripler against input power at different frequencies.</p></caption>
+<graphic xlink:href="helal21abcd-3738035.eps"/>
+</fig>
+</p>
+<p>The tripler, including the output buffer, consumes a total DC power of 24–27 mW from a 1.2-V supply [as shown in <xref ref-type="fig" rid="fig22">Fig. 22(a)</xref>]. Approximately 70% of the power is consumed by the output buffer, while the remaining power is dissipated in the tripler core. The measured efficiency (defined as the ratio between output power at the third harmonic and consumed DC power) reaches 7.1% near the center frequency. Above 27 GHz, the efficiency decreases due to the increased passive losses and the roll-off in the buffer gain. The measured PN of the tripler is shown in <xref ref-type="fig" rid="fig22">Fig. 22(b)</xref>. As expected for a frequency tripler, the output PN follows the input source PN with an approximately <inline-formula><tex-math notation="LaTeX">$20\log (3)$</tex-math></inline-formula> (<inline-formula><tex-math notation="LaTeX">$\approx 9.5$</tex-math></inline-formula> dB) degradation due to frequency multiplication. The measured phase-noise profile closely tracks that of the input source, indicating that the proposed tripler introduces negligible additional PN.
+<fig id="fig22">
+<label>Fig. 22.</label>
+<caption><p>(a) Measured and simulated DC power consumption and efficiency of the tripler against frequency for <inline-formula><tex-math notation="LaTeX">$P_{in} =10$</tex-math></inline-formula> dBm and (b) measured PN at the input and output of the tripler using Keysight UXA N9040B.</p></caption>
+<graphic xlink:href="helal22ab-3738035.eps"/>
+</fig>
+</p>
+<p><xref ref-type="table" rid="table1">Table I</xref> summarizes the performance of the frequency tripler and compares it with previously reported state-of-the-art frequency triplers. The implemented tripler achieves the highest fractional bandwidth (32%) and the best overall harmonic rejection performance among the reported works while demonstrating a competitive peak efficiency of 7.1%.
+<table-wrap id="table1">
+<label>TABLE I</label>
+<caption><title>Comparison With State-of-the-Art Tripler Designs</title></caption>
+<graphic xlink:href="helal.t1-3738035.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="9"/>
+</colgroup>
+<thead>
+<tr>
+<th/>
+<th>This work</th>
+<th><xref ref-type="bibr" rid="ref3">[3]</xref></th>
+<th><xref ref-type="bibr" rid="ref13">[13]</xref></th>
+<th><xref ref-type="bibr" rid="ref15">[15]</xref></th>
+<th><xref ref-type="bibr" rid="ref22">[22]</xref></th>
+<th><xref ref-type="bibr" rid="ref23">[23]</xref></th>
+<th><xref ref-type="bibr" rid="ref30">[30]</xref></th>
+<th><xref ref-type="bibr" rid="ref31">[31]</xref></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Process</td>
+<td>22-nm CMOS SOI</td>
+<td>55-nm CMOS</td>
+<td>55-nm SiGe HBT</td>
+<td>90-nm CMOS</td>
+<td>28-nm CMOS</td>
+<td>130-nm SiGe HBT</td>
+<td>90-nm CMOS</td>
+<td>28-nm CMOS</td>
+</tr>
+<tr>
+<td>Topology</td>
+<td>N-Push</td>
+<td>Injection Locking</td>
+<td>Waveform Shaping</td>
+<td>Current Folding</td>
+<td>Injection Locking</td>
+<td>Selective Filter</td>
+<td>Notch Filter</td>
+<td>Varactor Based</td>
+</tr>
+<tr>
+<td>Output Frequency (GHz)</td>
+<td>21–29</td>
+<td>33.9–41.4</td>
+<td>35–41</td>
+<td>17.5–21</td>
+<td>57–74</td>
+<td>84–106</td>
+<td>51.3–70.2</td>
+<td>53.7–61.8</td>
+</tr>
+<tr>
+<td>Frac. BW (%)</td>
+<td>32</td>
+<td>20</td>
+<td>16</td>
+<td>18</td>
+<td>26</td>
+<td>23</td>
+<td>32</td>
+<td>14</td>
+</tr>
+<tr>
+<td>Output Buffer</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><inline-formula><tex-math notation="LaTeX">$\mathbf {P}_{\text {out}~} (\mathbf {d B m})$</tex-math></inline-formula></td>
+<td>-0.5 to +2.5</td>
+<td>-12.5 to -10</td>
+<td>-3 to 0</td>
+<td>-30 to -20</td>
+<td>-10 to -4</td>
+<td>0.5 to 2.5</td>
+<td>-1.2 to +1.8</td>
+<td>-4.3 to -1.3</td>
+</tr>
+<tr>
+<td>Conv. Loss (dB)</td>
+<td>7.5–10.5</td>
+<td>10 to 12.5</td>
+<td>0–3</td>
+<td>N.R.</td>
+<td>4–10</td>
+<td>0–2</td>
+<td>5.5–8.5</td>
+<td>8.3 to 11.3</td>
+</tr>
+<tr>
+<td>FRR (dB)</td>
+<td>¿ 41</td>
+<td>¿ 33</td>
+<td>¿ 39</td>
+<td>¿ 36</td>
+<td>¿ 35</td>
+<td>¿ 45</td>
+<td>¿ 30</td>
+<td>¿ 16</td>
+</tr>
+<tr>
+<td>HRR (dB)</td>
+<td>¿ 37</td>
+<td>¿ 28<xref ref-type="table-fn" rid="table1-fn1">(a)</xref></td>
+<td>¿ 37<xref ref-type="table-fn" rid="table1-fn2">(b)</xref></td>
+<td>¿37<xref ref-type="table-fn" rid="table1-fn1">(a)</xref></td>
+<td>N.R.</td>
+<td>¿ 25</td>
+<td><inline-formula><tex-math notation="LaTeX">$\gt 35$</tex-math></inline-formula> <xref ref-type="table-fn" rid="table1-fn1">(a)</xref></td>
+<td>¿ 24</td>
+</tr>
+<tr>
+<td><inline-formula><tex-math notation="LaTeX">$\mathbf {P}_{\mathbf {D C}} \text {(m W)}$</tex-math></inline-formula></td>
+<td>24–27</td>
+<td>10</td>
+<td>119</td>
+<td>3.5</td>
+<td>17</td>
+<td>120</td>
+<td>44</td>
+<td>9.5</td>
+</tr>
+<tr>
+<td>Max. Efficiency (%)</td>
+<td>7.1</td>
+<td>1</td>
+<td>0.9</td>
+<td>0.3</td>
+<td>2.4</td>
+<td>1.5</td>
+<td>3.4</td>
+<td>7.9</td>
+</tr>
+<tr>
+<td>Area <inline-formula><tex-math notation="LaTeX">$(\mathbf {m m}^{\mathbf {2}})$</tex-math></inline-formula></td>
+<td>0.29</td>
+<td>0.08</td>
+<td>N.R.</td>
+<td>0.32</td>
+<td>0.4<xref ref-type="table-fn" rid="table1-fn3">(c)</xref></td>
+<td>0.52</td>
+<td>0.92<xref ref-type="table-fn" rid="table1-fn3">(c)</xref></td>
+<td>0.47<xref ref-type="table-fn" rid="table1-fn3">(c)</xref></td>
+</tr>
+</tbody>
+</table>
+<table-wrap-foot>
+<fn id="table1-fn1">
+<label><sup>(a)</sup></label>
+<p>HRR4 and HRR5 are N.R.</p>
+</fn>
+<fn id="table1-fn2">
+<label><sup>(b)</sup></label>
+<p>HRR2 and HRR4 are N.R.</p>
+</fn>
+<fn id="table1-fn3">
+<label><sup>(c)</sup></label>
+<p>Including pads N.R: Not Reported</p>
+</fn>
+</table-wrap-foot>
+</table-wrap>
+</p>
+</sec>
+<sec id="sec5">
+<label>V.</label>
+<title>Conclusion</title>
+<p>This work presents a wideband frequency tripler with high HRR implemented in 22-nm FDSOI. The triple-push topology is used to enhance harmonic rejection without compromising bandwidth. A novel polyphase filter is developed to generate three signals with 120° phase spacing required for proper triple-push operation. Measurements demonstrate a peak output power of + 2.5 dBm with a 3-dB bandwidth spanning 21–29 GHz. The tripler achieves a minimum conversion loss of 7.5 dB, along with state-of-the-art harmonic rejection performance, including an FRR exceeding 40 dBc and an HRR &gt; 37 dBc with a peak efficiency of 7.1%. The results validate the triple-push technique for wideband, high-purity mm-wave signal generation.</p>
+</sec>
+</body>
+<back>
+<ack>
+<title>Acknowledgment</title>
+<p>The authors would like to thank Analog Devices for supporting this project, Cadence for simulation software, GlobalFoundries for chip fabrication, and Keysight for measurement equipment and software.</p>
+</ack>
+<ref-list>
+<title>
+References
+</title>
+<ref id="ref1">
+<label>
+[1]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Teberio
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+I.
+</given-names> 
+<surname>
+Arregui
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Soto
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M. A. G.
+</given-names> 
+<surname>
+Laso
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+V. E.
+</given-names> 
+<surname>
+Boria
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Guglielmi
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+High-performance compact diplexers for Ku/K-band satellite applications
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+65
+</volume>
+, no. 
+<issue>
+10
+</issue>
+, pp. 
+<fpage>
+3866
+</fpage>
+–
+<lpage>
+3876
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref2">
+<label>
+[2]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Peng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Ran
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A K-band portable FMCW radar with beamforming array for short-range localization and vital-Doppler targets discrimination
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+65
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, pp. 
+<fpage>
+3443
+</fpage>
+–
+<lpage>
+3452
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref3">
+<label>
+[3]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K.
+</given-names> 
+<surname>
+Ma
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Ma
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Fu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Xu
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 20.7–43.8-GHz low power reconfigurable × 2/× 3 frequency multiplier for multiple 5G-mm-Wave bands
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+57
+</volume>
+, no. 
+<issue>
+8
+</issue>
+, pp. 
+<fpage>
+2348
+</fpage>
+–
+<lpage>
+2361
+</lpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref4">
+<label>
+[4]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Zhao
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+K.
+</given-names> 
+<surname>
+Kang
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+An injection-current-boosting locking-range enhancement technique for ultra-wideband mm-Wave injection-locked frequency triplers
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+67
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+3174
+</fpage>
+–
+<lpage>
+3186
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref5">
+<label>
+[5]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Zheng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Yin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Luo
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H. C.
+</given-names> 
+<surname>
+Luong
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 21–48 GHz subharmonic injection-locked fractional-N frequency synthesizer for multiband point-to-point backhaul communications
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+49
+</volume>
+, no. 
+<issue>
+8
+</issue>
+, pp. 
+<fpage>
+1785
+</fpage>
+–
+<lpage>
+1799
+</lpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2014
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref6">
+<label>
+[6]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+V.
+</given-names> 
+<surname>
+Issakov
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+The state of the art in CMOS VCOs: mm-Wave VCOs in advanced CMOS technology nodes
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Microw. Mag.
+</source>
+, vol. 
+<volume>
+20
+</volume>
+, no. 
+<issue>
+12
+</issue>
+, pp. 
+<fpage>
+59
+</fpage>
+–
+<lpage>
+71
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref7">
+<label>
+[7]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Luo
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Lin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+N.
+</given-names> 
+<surname>
+Yan
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Xu
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 22.5–31.2-GHz continuously tuning frequency synthesizer with 8.7-GHz chirp for FMCW applications
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Microw. Wireless Compon. Lett.
+</source>
+, vol. 
+<volume>
+30
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, pp. 
+<fpage>
+904
+</fpage>
+–
+<lpage>
+907
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref8">
+<label>
+[8]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Yoo
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Choi
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Kim
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Yoon
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Lee
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Choi
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A low-integrated-phase-noise 27–30-GHz injection-locked frequency multiplier with an ultra-low-power frequency-tracking loop for mm-wave-band 5G transceivers
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+53
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+375
+</fpage>
+–
+<lpage>
+388
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2018
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref9">
+<label>
+[9]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Zong
+</surname>
+</string-name> and 
+<string-name>
+<given-names>
+R. B.
+</given-names> 
+<surname>
+Staszewski
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+Effects of subharmonics in LO generation on RF transceivers
+</article-title>
+,” in 
+<source specific-use="IEEE">
+IEEE MTT-S Int. Microw. Symp. Dig.
+</source>
+, 
+<conf-date>Aug. 2018</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+–
+<lpage>
+3
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref10">
+<label>
+[10]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M. M.
+</given-names> 
+<surname>
+Pirbazari
+</surname>
+</string-name> and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Mazzanti
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+E-band frequency sextupler with &gt; 35 dB harmonics rejection over 20 GHz bandwidth in 55 nm BiCMOS
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+57
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+2155
+</fpage>
+–
+<lpage>
+2166
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref11">
+<label>
+[11]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+B.-H.
+</given-names> 
+<surname>
+Ku
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Chung
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+G. M.
+</given-names> 
+<surname>
+Rebeiz
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A milliwatt-level 70–110 GHz frequency quadrupler with ¿30 dBc harmonic rejection
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+68
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+1697
+</fpage>
+–
+<lpage>
+1705
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref12">
+<label>
+[12]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Kim
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Nam
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.-K.
+</given-names> 
+<surname>
+Kim
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+D. Young
+</given-names> 
+<surname>
+Lee
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 5.5 dBm 125–140 GHz × 6 frequency multiplier operating with −27 dBm input power in 28-nm CMOS
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Microw. Wireless Technol. Lett.
+</source>
+, vol. 
+<volume>
+34
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+935
+</fpage>
+–
+<lpage>
+938
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref13">
+<label>
+[13]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M. M.
+</given-names> 
+<surname>
+Pirbazari
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Pepe
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Mazzanti
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+40 GHz frequency tripler with high fundamental and harmonics rejection in 55 nm SiGe-BiCMOS
+</article-title>
+,” in 
+<source specific-use="IEEE">
+Proc. IEEE 45th Eur. Solid State Circuits Conf. (ESSCIRC)
+</source>
+, 
+<conf-date>
+Sep. 2019
+</conf-date>
+, pp. 
+<fpage>
+229
+</fpage>
+–
+<lpage>
+232
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref14">
+<label>
+[14]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zheng
+</surname>
+</string-name> and 
+<string-name>
+<given-names>
+C. E.
+</given-names> 
+<surname>
+Saavedra
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A broadband CMOS frequency tripler using a third-harmonic enhanced technique
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+42
+</volume>
+, no. 
+<issue>
+10
+</issue>
+, pp. 
+<fpage>
+2197
+</fpage>
+–
+<lpage>
+2203
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2007
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref15">
+<label>
+[15]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.-Y.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.-H.
+</given-names> 
+<surname>
+Lin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R. C.
+</given-names> 
+<surname>
+Chang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Palermo
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 17.5-to-21-GHz current-folding frequency tripler with &gt; 36-dBc harmonic rejection in 90-nm CMOS
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Solid-State Circuits Lett.
+</source>
+, vol. 
+<volume>
+6
+</volume>
+, pp. 
+<fpage>
+77
+</fpage>
+–
+<lpage>
+80
+</lpage>
+, 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref16">
+<label>
+[16]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Park
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+Class-F technique as applied to active frequency multiplier designs
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+57
+</volume>
+, no. 
+<issue>
+12
+</issue>
+, pp. 
+<fpage>
+3212
+</fpage>
+–
+<lpage>
+3218
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2009
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref17">
+<label>
+[17]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+B. R.
+</given-names> 
+<surname>
+Jackson
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Mazzilli
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C. E.
+</given-names> 
+<surname>
+Saavedra
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A frequency tripler using a subharmonic mixer and fundamental cancellation
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+57
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+1083
+</fpage>
+–
+<lpage>
+1090
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2009
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref18">
+<label>
+[18]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.-N.
+</given-names> 
+<surname>
+Kuo
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.-S.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+T.-C.
+</given-names> 
+<surname>
+Yan
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A K-band CMOS quadrature frequency tripler using sub-harmonic mixer
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Microw. Wireless Compon. Lett.
+</source>
+, vol. 
+<volume>
+19
+</volume>
+, no. 
+<issue>
+12
+</issue>
+, pp. 
+<fpage>
+822
+</fpage>
+–
+<lpage>
+824
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2009
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref19">
+<label>
+[19]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Huang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Jia
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Deng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Chi
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 91.9–113.2 GHz compact frequency tripler with 44.6 dBc peak fundamental harmonic-rejection-ratio using embedded notch-filters and area-efficient matching network in 65 nm CMOS
+</article-title>
+,” in 
+<source specific-use="IEEE">
+Proc. IEEE Radio Freq. Integr. Circuits Symp. (RFIC)
+</source>
+, 
+<conf-date>
+Jun. 2023
+</conf-date>
+, pp. 
+<fpage>
+165
+</fpage>
+–
+<lpage>
+168
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref20">
+<label>
+[20]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S. S.
+</given-names> 
+<surname>
+Ghouchani
+</surname>
+</string-name> and 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Paramesh
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A wideband millimeter-wave frequency doubler-tripler in 0.13-μm CMOS</article-title>
+,” in 
+<source specific-use="IEEE">
+Proc. IEEE Radio Freq. Integr. Circuits Symp.
+</source>
+, 
+<conf-date>
+May 2010
+</conf-date>
+, pp. 
+<fpage>
+65
+</fpage>
+–
+<lpage>
+68
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref21">
+<label>
+[21]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Ouyang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Yu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Zhao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+K.
+</given-names> 
+<surname>
+Kang
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A single-path reconfigurable × 2/× 3 frequency multiplier for 5G NR application
+</article-title>
+,” in 
+<source specific-use="IEEE">
+IEEE MTT-S Int. Microw. Symp. Dig.
+</source>
+, 
+<conf-date>Nov. 2022</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+–
+<lpage>
+3
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref22">
+<label>
+[22]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Iotti
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+LaCaille
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A. M.
+</given-names> 
+<surname>
+Niknejad
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 57–74-GHz tail-switching injection-locked frequency tripler in 28-nm CMOS
+</article-title>
+,” in 
+<source specific-use="IEEE">
+Proc. IEEE 45th Eur. Solid State Circuits Conf. (ESSCIRC)
+</source>
+, 
+<conf-date>
+Sep. 2019
+</conf-date>
+, pp. 
+<fpage>
+115
+</fpage>
+–
+<lpage>
+118
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref23">
+<label>
+[23]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Chandra-Prabhu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Grzyb
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Hillger
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Heinemann
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Rücker
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+U.
+</given-names> 
+<surname>
+Pfeiffer
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A wideband W-band frequency tripler with a novel mode-selective filter for high harmonic rejection
+</article-title>
+,” in 
+<source>
+Proc. 18th Eur. Microw. Integr. Circuits Conf. (EuMIC)
+</source>
+, 
+<conf-date>
+Sep. 2023
+</conf-date>
+, pp. 
+<fpage>
+197
+</fpage>
+–
+<lpage>
+200
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref24">
+<label>
+[24]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Huang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+T. R.
+</given-names> 
+<surname>
+LaRocca
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Samoska
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Fung
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M.-C. F.
+</given-names> 
+<surname>
+Chang
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+324 GHz CMOS frequency generator using linear superposition technique
+</article-title>
+,” in 
+<source specific-use="IEEE">
+IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers
+</source>
+, 
+<year>
+2008
+</year>
+, pp. 
+<fpage>
+476
+</fpage>
+–
+<lpage>
+629
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref25">
+<label>
+[25]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Helal
+</surname>
+</string-name> and 
+<string-name>
+<given-names>
+G. M.
+</given-names> 
+<surname>
+Rebeiz
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A compact 25–32 GHz frequency doubler with up to 32% efficiency and &gt; 39 dBc harmonic rejection in 22 nm FDSOI
+</article-title>
+,” in 
+<source specific-use="IEEE">
+Proc. IEEE Radio Freq. Integr. Circuits Symp. (RFIC)
+</source>
+, 
+<conf-date>
+Jun. 2025
+</conf-date>
+, pp. 
+<fpage>
+95
+</fpage>
+–
+<lpage>
+98
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref26">
+<label>
+[26]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+K.-J.
+</given-names> 
+<surname>
+Koh
+</surname>
+</string-name> and 
+<string-name>
+<given-names>
+G. M.
+</given-names> 
+<surname>
+Rebeiz
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+0.13-μm CMOS phase shifters for X-, Ku-, and K-band phased arrays
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+42
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, pp. 
+<fpage>
+2535
+</fpage>
+–
+<lpage>
+2546
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2007
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref27">
+<label>
+[27]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Bevilacqua
+</surname>
+</string-name> and 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Andreani
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 2.7–6.1 GHz CMOS local oscillator based on frequency multiplication by 3/2
+</article-title>
+,” 
+<source>
+Anal. Integr. Circuits Signal Process.
+</source>
+, vol. 
+<volume>
+74
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+11
+</fpage>
+–
+<lpage>
+20
+</lpage>
+, 
+<year>
+2013
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref28">
+<label>
+[28]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S.-K.
+</given-names> 
+<surname>
+Kim
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Choi
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Cui
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.-S.
+</given-names> 
+<surname>
+Kim
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Seo
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A W-band signal generation using N-push frequency multipliers for low phase noise
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Microw. Wireless Compon. Lett.
+</source>
+, vol. 
+<volume>
+24
+</volume>
+, no. 
+<issue>
+10
+</issue>
+, pp. 
+<fpage>
+710
+</fpage>
+–
+<lpage>
+712
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2014
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref29">
+<label>
+[29]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S. Y.
+</given-names> 
+<surname>
+Kim
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.-W.
+</given-names> 
+<surname>
+Kang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K.-J.
+</given-names> 
+<surname>
+Koh
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+G. M.
+</given-names> 
+<surname>
+Rebeiz
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+An improved wideband all-pass I/Q network for millimeter-wave phase shifters
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+60
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, pp. 
+<fpage>
+3431
+</fpage>
+–
+<lpage>
+3439
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2012
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref30">
+<label>
+[30]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.-L.
+</given-names> 
+<surname>
+Chou
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.-C.
+</given-names> 
+<surname>
+Chiu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.-L.
+</given-names> 
+<surname>
+Kao
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+F.-H.
+</given-names> 
+<surname>
+Huang
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+A 60-GHz CMOS frequency tripler with broadband performance
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Microw. Wireless Compon. Lett.
+</source>
+, vol. 
+<volume>
+27
+</volume>
+, no. 
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+281
+</fpage>
+–
+<lpage>
+283
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref31">
+<label>
+[31]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Yoo
+</surname>
+</string-name> and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Hong
+</surname>
+</string-name>
+</person-group>
+, “
+<article-title>
+An efficient V-band frequency tripler with back-to-back connected varactors
+</article-title>
+,” 
+<source specific-use="IEEE">
+IEEE Microw. Wireless Technol. Lett.
+</source>
+, vol. 
+<volume>
+33
+</volume>
+, no. 
+<issue>
+8
+</issue>
+, pp. 
+<fpage>
+1219
+</fpage>
+–
+<lpage>
+1222
+</lpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+</ref-list>
+<bio-group>
+<bio id="bio1">
+<graphic xlink:href="ahela-3738035.tif"/>
+<p><xref ref-type="contrib" rid="contrib1">Ahmed Helaly</xref> (Graduate Student Member, IEEE) received the B.Sc. and M.Sc. degrees in electronics and electrical communications engineering from Cairo University, Giza, Egypt, in 2018 and 2022, respectively. He is currently pursuing the Ph.D. degree in electrical and computer engineering (ECE) with the University of California, San Diego, La Jolla, CA, USA.
+</p>
+<p>
+His research interests include RF/mmWave and power management-integrated circuits and systems.</p>
+</bio>
+<bio id="bio2">
+<graphic xlink:href="mhela-3738035.tif"/>
+<p><xref ref-type="contrib" rid="contrib2">Mohammed Helal</xref> (Graduate Student Member, IEEE) received the B.Sc. and M.Sc. degrees in electronics and electrical communications engineering from Cairo University, Giza, Egypt, in 2019 and 2022, respectively. He is currently pursuing the Ph.D. degree in electrical and computer engineering (ECE) with the University of California, San Diego, La Jolla, CA, USA.
+</p>
+<p>
+His research interests include RF/mmWave-integrated circuits and phased array systems for 5G and 6G communication.</p>
+</bio>
+<bio id="bio3">
+<graphic xlink:href="rebei-3738035.tif"/>
+<p><xref ref-type="contrib" rid="contrib3">Gabriel M. Rebeiz</xref> (Fellow, IEEE) received the Ph.D. degree from California Institute of Technology, Pasadena, CA, USA, in 1988.
+</p>
+<p>
+From 1988 to 2004, he was with the University of Michigan, Ann Arbor, MI, USA. His group has optimized the dielectric-lens antenna, which is the most widely used antenna at millimeter-wave and terahertz frequencies. His group also developed 6–18-, 30–35-, 40–50-, 77–86-, 60–100-, and 90–110-GHz eight- and 16-element phased arrays on a single silicon chip, the first silicon phased array chip with built-in self-test capabilities, the first wafer-scale phased arrays with on-chip antennas, and the first SiGe millimeter-wave silicon passive imager chip at 85–105 GHz. His group also demonstrated high-performance RF MEMS tunable filters at 0.7–6 GHz, RF MEMS phase shifters at 1–100 GHz, and high-power, high-reliability RF MEMS metal contact switches. As a consultant, he helped develop 24- and 77-GHz single-chip SiGe automotive radars, phased arrays operating at X- to W-band for defense and commercial applications, such as (SATCOM, automotive, and point-to-point), digital beamforming systems, and several industrial RF MEMS switches. He is currently a Distinguished Professor and the Wireless Communications Industry Chair Professor of electrical and computer engineering with the University of California, San Diego (UCSD),San Diego, La Jolla, CA, USA. He has authored or co-authored over 650 IEEE publications, and authored the book 
+<italic>
+RF MEMS: Theory, Design and Technology
+</italic>
+ (Wiley, 2003). He has graduated 64 Ph.D. students and 21 Post-Doctoral Fellows. He currently leads a group of 16 Ph.D. Students and Post-Doctoral Fellows in the area of millimeter-wave radio frequency-integrated circuits (RFICs), tunable microwave circuits, RF MEMS, and planar millimeter-wave antennas and terahertz systems.
+</p>
+<p>
+Dr. Rebeiz is a member of the National Academy. He was a recipient of the URSI Koga Gold Medal, the IEEE Microwave Theory and Technique Society (IEEE MTT-S) 2000 and 2014 Microwave Prize, the IEEE MTT-S 2010 Distinguished Educator Award, the IEEE Antennas and Propagation Society (AP-S) 2011 John D. Kraus Antenna Award, the 2012 Intel Semiconductor Technology Council Outstanding Researcher in Microsystems, the Research and Development 100 2014 Award for his work on phased array automotive radars, the 2014 IEEE Daniel E. Noble Field Medal for his work on RF MEMS, and the IEEE AP-S 2015 Harold A. Wheeler Applications Prize Paper Award. He was also a recipient of the 1997–1998 Eta Kappa Nu Professor of the Year Award, the 1998 College of Engineering Teaching Award, the 1998 Amoco Teaching Award given to the Best Undergraduate Teacher at the University of Michigan, and the 2008 Teacher of the Year Award of the Jacobs School of Engineering, UCSD. He was a National Science Foundation Presidential Young Investigator and the 2003 IEEE MTTS Distinguished Young Engineer. His students have received a total of 22 Best Paper Awards from IEEE MTT-S, RFICs, and AP-S Conferences. He has been an Associate Editor of <sc>IEEE Transactions on Microwave Theory and Techniques</sc>. He has been a Distinguished Lecturer of IEEE MTT-S, IEEE AP-S, and the IEEE Solid-State Circuits Society.</p>
+</bio>
+</bio-group>
+</back>
+</article>

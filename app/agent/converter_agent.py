@@ -10,7 +10,7 @@ from app.agent.pdf_extractor import PDFExtractor
 from app.agent.schema_analyzer import SchemaAnalyzer
 from app.agent.semantic_matcher import SemanticMatcher
 from app.agent.validator import Validator
-from app.agent.xml_generator import XMLGenerator
+from app.agent.xml_generator import XMLGenerator, repair_xml_xrefs
 from app.config import settings
 from app.llm.client import LLMClient, create_llm_client
 
@@ -64,11 +64,16 @@ class ConverterAgent:
         )
 
         self.emit("stage", "validating", 92)
+        output_xml = repair_xml_xrefs(output_xml)
         ok, errors = Validator().validate(output_xml, template_xml, schema)
 
         if not ok:
             for attempt in range(settings.MAX_RETRIES):
                 self.emit("log", f"validation failed, retry {attempt + 1}: {errors}")
+                output_xml = repair_xml_xrefs(output_xml)
+                ok, errors = Validator().validate(output_xml, template_xml, schema)
+                if ok:
+                    break
                 output_xml = await XMLGenerator(self.llm).generate(
                     template_xml,
                     paper,
@@ -76,6 +81,7 @@ class ConverterAgent:
                     self.on_event,
                     prior_errors=errors,
                 )
+                output_xml = repair_xml_xrefs(output_xml)
                 ok, errors = Validator().validate(output_xml, template_xml, schema)
                 if ok:
                     break

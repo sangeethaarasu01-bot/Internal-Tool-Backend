@@ -134,3 +134,35 @@ async def test_xml_generator_valid_output():
     root = etree.fromstring(out.encode("utf-8"))
     titles = root.xpath(".//*[local-name()='article-title']")
     assert titles and (titles[0].text or "").strip() == "Test Title"
+
+
+def test_sync_bio_xrefs_creates_missing_bios():
+    from app.agent.validator import Validator
+    from app.agent.xml_generator import _fill_authors, repair_xml_xrefs, sync_bio_xrefs
+    from app.models.schema_map import SchemaMap
+
+    tpl = """<article><front><article-meta><contrib-group>
+    <contrib id="contrib1"><xref ref-type="bio" rid="bio1"/></contrib>
+    <contrib id="contrib2"><xref ref-type="bio" rid="bio2"/></contrib>
+    <contrib id="contrib3"><xref ref-type="bio" rid="bio3"/></contrib>
+    </contrib-group></article-meta></front>
+    <back><bio-group>
+    <bio id="bio1"><p><xref ref-type="contrib" rid="contrib1">A</xref></p></bio>
+    <bio id="bio2"><p><xref ref-type="contrib" rid="contrib2">B</xref></p></bio>
+    <bio id="bio3"><p><xref ref-type="contrib" rid="contrib3">C</xref></p></bio>
+    </bio-group></back></article>"""
+    root = etree.fromstring(tpl.encode())
+    many = [
+        Author(full_name=f"Author {i}", first_name="A", last_name=str(i))
+        for i in range(1, 11)
+    ]
+    _fill_authors(root, many)
+    sync_bio_xrefs(root)
+    xml = etree.tostring(root, encoding="unicode")
+    for n in range(1, 4):
+        assert f'id="bio{n}"' in xml
+    assert 'rid="bio4"' not in xml
+
+    fixed = repair_xml_xrefs(xml)
+    ok, errors = Validator().validate(fixed, tpl, SchemaMap(root_tag="article", elements=[]))
+    assert ok, errors
