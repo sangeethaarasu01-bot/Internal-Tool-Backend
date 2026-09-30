@@ -1,7 +1,10 @@
 """Tests for IEEE entity encoding in agent XML output."""
 
+from lxml import etree
+
 from app.utils.xml_helpers import (
     clean_extracted_abstract,
+    normalize_text_for_xml_dom,
     collapse_ieee_empty_element_tags,
     encode_ieee_text_entities,
     expand_self_closing_empty_tags,
@@ -9,6 +12,15 @@ from app.utils.xml_helpers import (
     format_ieee_empty_element_tags,
     post_process_ieee_entities,
 )
+
+
+def test_normalize_text_for_xml_dom_strips_illegal_control_chars() -> None:
+    dirty = "Title\x00with\x08control"
+    clean = normalize_text_for_xml_dom(dirty)
+    assert "\x00" not in clean and "\x08" not in clean
+    p = etree.Element("p")
+    p.text = clean
+    assert etree.tostring(p, encoding="unicode") == "<p>Titlewithcontrol</p>"
 
 
 def test_ligatures_expand_to_ascii_not_hex() -> None:

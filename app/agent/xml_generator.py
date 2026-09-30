@@ -315,7 +315,7 @@ def _author_name_parts(author: Author) -> tuple[str, str]:
 def _set_text_on_tag(parent: etree._Element, tag: str, text: str) -> None:
     nodes = _find_by_local_tag(parent, tag)
     if nodes and text:
-        nodes[0].text = text
+        nodes[0].text = normalize_text_for_xml_dom(text)
 
 
 def _clear_contrib_document_text(contrib: etree._Element) -> None:
@@ -375,7 +375,7 @@ def _apply_author_to_contrib(contrib: etree._Element, author: Author, idx: int) 
     ]
     if author.orcid:
         if orcid_nodes:
-            orcid_nodes[0].text = author.orcid
+            orcid_nodes[0].text = normalize_text_for_xml_dom(author.orcid)
     else:
         for node in orcid_nodes:
             if (node.text or "").strip():

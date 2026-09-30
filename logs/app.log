@@ -386,3 +386,4 @@ RuntimeError: Gemini API error 503: {
 }
 ), using heuristic plan
 2026-09-30 18:32:22.605 | INFO     | app.agent.converter_agent:run:70 - Stage mapping plan: 2 entries
+2026-09-30 18:41:57.142 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started

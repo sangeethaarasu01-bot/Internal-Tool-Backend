@@ -10,6 +10,7 @@ from lxml import etree
 from app.utils.xml_text import (
     ieee_hex_entity_for_char,
     normalize_typographic_ligatures,
+    sanitize_xml_text,
     should_encode_as_hex_entity,
 )
 
@@ -141,7 +142,8 @@ def normalize_text_for_xml_dom(value: str) -> str:
     """PDF typography cleanup for lxml text nodes (entities applied at serialize time)."""
     if not value:
         return value
-    return normalize_typographic_ligatures(value.replace("\u00ad", ""))
+    cleaned = sanitize_xml_text(value.replace("\u00ad", ""))
+    return normalize_typographic_ligatures(cleaned)
 
 
 def clean_extracted_abstract(text: str) -> str:

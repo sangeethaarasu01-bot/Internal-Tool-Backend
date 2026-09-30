@@ -12,6 +12,7 @@ import pdfplumber
 
 from app.config import settings
 from app.llm.client import LLMClient
+from app.utils.paper_sanitize import sanitize_paper_data
 from app.utils.xml_helpers import clean_extracted_abstract
 from app.models.paper import (
     Affiliation,
@@ -409,19 +410,21 @@ class PDFExtractor:
                     "Light PDF mode: tables/figure images skipped (set LIGHT_PDF_EXTRACT=false locally for full extract)",
                 )
 
-            return PaperData(
-                title=title,
-                authors=authors,
-                affiliations=affiliations,
-                abstract=abstract,
-                keywords=keywords,
-                sections=sections,
-                references=references,
-                figures=figures,
-                tables=tables,
-                equations=equations,
-                metadata=metadata,
-                extraction_warnings=warnings,
+            return sanitize_paper_data(
+                PaperData(
+                    title=title,
+                    authors=authors,
+                    affiliations=affiliations,
+                    abstract=abstract,
+                    keywords=keywords,
+                    sections=sections,
+                    references=references,
+                    figures=figures,
+                    tables=tables,
+                    equations=equations,
+                    metadata=metadata,
+                    extraction_warnings=warnings,
+                )
             )
         finally:
             doc.close()
