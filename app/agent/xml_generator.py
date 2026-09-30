@@ -13,6 +13,12 @@ from lxml import etree
 from app.llm.client import LLMClient
 from app.models.mapping_plan import MappingEntry, MappingPlan
 from app.models.paper import Author, PaperData, Section
+from app.utils.logger import logger
+from app.utils.template_skeleton import (
+    clear_subtree_text,
+    prepare_template_for_pdf_content,
+    skeleton_template_xml,
+)
 from app.utils.xml_helpers import (
     apply_ieee_entities_to_tree,
     clean_extracted_abstract,
@@ -270,6 +276,7 @@ def sync_bio_xrefs(root: etree._Element) -> None:
         for inner in clone.xpath(".//*[local-name()='xref']"):
             if inner.get("ref-type") == "contrib":
                 inner.set("rid", f"contrib{idx}")
+        clear_subtree_text(clone)
         group.append(clone)
         existing.add(rid)
 
@@ -309,6 +316,41 @@ def _set_text_on_tag(parent: etree._Element, tag: str, text: str) -> None:
     nodes = _find_by_local_tag(parent, tag)
     if nodes and text:
         nodes[0].text = text
+
+
+def _clear_contrib_document_text(contrib: etree._Element) -> None:
+    """Remove sample author names/email from a contrib shell (keep structure/attrs)."""
+    for tag in ("given-names", "surname", "email"):
+        for node in _find_by_local_tag(contrib, tag):
+            node.text = None
+    for string_name in _find_by_local_tag(contrib, "string-name"):
+        string_name.text = None
+        for child in list(string_name):
+            if is_element_node(child):
+                string_name.remove(child)
+
+
+def _fill_affiliations(root: etree._Element, paper: PaperData) -> None:
+    aff_nodes = _find_by_local_tag(root, "aff")
+    if not aff_nodes:
+        return
+    if not paper.affiliations:
+        for aff in aff_nodes:
+            clear_subtree_text(aff)
+        return
+    for idx, aff_el in enumerate(aff_nodes):
+        if idx >= len(paper.affiliations):
+            break
+        data = paper.affiliations[idx]
+        inst_nodes = _find_by_local_tag(aff_el, "institution")
+        if inst_nodes and data.institution:
+            inst_nodes[0].text = normalize_text_for_xml_dom(data.institution)
+        if data.city:
+            _set_text_on_tag(aff_el, "city", data.city)
+        if data.country:
+            _set_text_on_tag(aff_el, "country", data.country)
+        if data.department:
+            _set_text_on_tag(aff_el, "addr-line", data.department)
 
 
 def _apply_author_to_contrib(contrib: etree._Element, author: Author, idx: int) -> None:
@@ -390,6 +432,7 @@ def _fill_authors(root: etree._Element, authors: list[Author]) -> None:
             _apply_author_to_contrib(clone, author_list[idx - 1], idx)
         else:
             clone.set("id", f"contrib{idx}")
+            _clear_contrib_document_text(clone)
             for xref in _find_by_local_tag(clone, "xref"):
                 if xref.get("ref-type") == "bio":
                     xref.set("rid", f"bio{idx}")
@@ -407,6 +450,12 @@ def _generate_from_template_dom(
     parser = etree.XMLParser(remove_blank_text=False, recover=True)
     root = etree.fromstring(template_xml.encode("utf-8"), parser=parser)
     tree = etree.ElementTree(root)
+    prepare_template_for_pdf_content(root)
+    logger.debug(
+        "XML DOM: stripped template example content; PDF title={} sections={}",
+        (paper.title or "")[:80],
+        len(paper.sections),
+    )
     _apply_simple_mappings(root, paper, plan)
     _fill_abstract(root, paper.abstract)
     if any(m.transform == "loop" and "author" in m.pdf_field for m in plan.mappings):
@@ -414,6 +463,7 @@ def _generate_from_template_dom(
     elif paper.authors:
         _fill_authors(root, paper.authors)
     _fill_keywords(root, paper.keywords)
+    _fill_affiliations(root, paper)
     _fill_body_from_paper(root, paper)
     _fill_references_from_paper(root, paper)
     sync_bio_xrefs(root)
@@ -451,9 +501,15 @@ class XMLGenerator:
                 errors="\n".join(prior_errors),
             )
 
+        structural_template = skeleton_template_xml(template_xml)
+        logger.info(
+            "LLM XML fallback: using structural template ({} chars), paper title={!r:.60}",
+            len(structural_template),
+            paper.title,
+        )
         prompt = _render(
             _load_prompt("xml_generator.txt"),
-            template=template_xml[:60000],
+            template=structural_template[:60000],
             paper_data=paper.model_dump_json()[:30000],
             mapping_plan=plan.model_dump_json()[:20000],
             prior_errors_block=prior_block,
@@ -468,6 +524,12 @@ class XMLGenerator:
             text = re.sub(r"\n?```$", "", text)
         try:
             etree.fromstring(text.encode("utf-8"))
-            return text
+            return finalize_ieee_xml(text)
         except etree.XMLSyntaxError:
-            return template_xml
+            logger.error("LLM XML output invalid; using deterministic DOM fill")
+            return await asyncio.to_thread(
+                _generate_from_template_dom,
+                template_xml,
+                paper,
+                plan,
+            )

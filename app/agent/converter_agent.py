@@ -11,6 +11,7 @@ from app.agent.schema_analyzer import SchemaAnalyzer
 from app.agent.semantic_matcher import SemanticMatcher
 from app.agent.validator import Validator
 from app.agent.xml_generator import XMLGenerator, repair_xml_xrefs
+from app.utils.logger import logger
 from app.utils.xml_helpers import finalize_ieee_xml
 from app.config import settings
 from app.llm.client import LLMClient, create_llm_client
@@ -54,11 +55,19 @@ class ConverterAgent:
         paper = await PDFExtractor(self.llm).extract(pdf_path, self.on_event, job_id=job_id)
         paper_path = settings.outputs_dir / f"{job_id}_paper.json"
         paper_path.write_text(paper.model_dump_json(indent=2), encoding="utf-8")
+        logger.info(
+            "Stage PDF IR: title={} authors={} sections={} refs={}",
+            (paper.title or "")[:100],
+            len(paper.authors),
+            len(paper.sections),
+            len(paper.references),
+        )
 
         self.emit("stage", "matching_semantics", 55)
         plan = await SemanticMatcher(self.llm).match(schema, paper, self.on_event)
         plan_path = settings.outputs_dir / f"{job_id}_plan.json"
         plan_path.write_text(plan.model_dump_json(indent=2), encoding="utf-8")
+        logger.info("Stage mapping plan: {} entries", len(plan.mappings))
 
         self.emit("stage", "generating_xml", 75)
         template_xml = template_path.read_text(encoding="utf-8", errors="replace")

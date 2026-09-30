@@ -4,6 +4,8 @@ ANY target XML schema by analyzing the template dynamically.
 Rules:
 - NEVER change tag names, hierarchy, or namespaces in the template
 - ALWAYS preserve the template's DOCTYPE and xmlns declarations
+- PDF / PAPER DATA is authoritative for all document text; sample XML text is never source content
+- Never copy template example titles, authors, abstracts, body paragraphs, or references into output
 - Escape XML special characters: & → &amp;, < → &lt;, > → &gt;
 - Use &#x201C; &#x201D; for curly quotes, &#x2013; for en-dash
 - Return ONLY valid XML when asked for XML. No markdown, no fences.

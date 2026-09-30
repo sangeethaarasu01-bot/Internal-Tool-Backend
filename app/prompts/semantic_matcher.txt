@@ -4,8 +4,11 @@ XML template schema.
 SCHEMA MAP:
 {schema_map}
 
-PAPER DATA (extracted from PDF):
+PAPER DATA (extracted from PDF — authoritative for all document content):
 {paper_data}
+
+The schema describes template STRUCTURE only. Map PDF fields into XML elements;
+never treat sample/template example text as real article content.
 
 For each XML element in the schema, identify which PDF field(s) 
 should populate it.

@@ -1,9 +1,19 @@
 Fill this XML template with paper data per the mapping plan.
 
-TEMPLATE XML (structure must not change):
+IMPORTANT — CONTENT SOURCE:
+- PAPER DATA (from the uploaded PDF) is the ONLY authoritative source for document content
+  (title, authors, abstract, keywords, body sections, paragraphs, references, captions, etc.).
+- The TEMPLATE XML defines STRUCTURE ONLY (tags, hierarchy, namespaces, attributes, ordering).
+  Any text still present in the template is placeholder/example content — NEVER copy it into output.
+- Replace every placeholder with PDF-derived values from PAPER DATA.
+- If PAPER DATA has no value for a template element, leave it empty or omit when the schema allows.
+- Do NOT hallucinate article content. Preserve PDF wording as closely as possible.
+- Do NOT return the template unchanged.
+
+TEMPLATE XML (structure must not change; example text must not appear in output):
 {template}
 
-PAPER DATA:
+PAPER DATA (authoritative content):
 {paper_data}
 
 MAPPING PLAN:
@@ -13,7 +23,7 @@ MAPPING PLAN:
 
 Generate the final XML:
 - Preserve template's tags, hierarchy, namespaces, DOCTYPE, comments
-- Insert values at mapped XPaths
+- Insert values at mapped XPaths from PAPER DATA only
 - Duplicate repeating elements per array length
 - Apply transforms (loop, label_split, escape_xml, to_latex, etc.)
 - Leave unmapped elements empty (do NOT drop them)
