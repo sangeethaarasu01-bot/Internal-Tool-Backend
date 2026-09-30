@@ -375,3 +375,14 @@ RuntimeError: Gemini API error 503: {
 2026-09-30 18:31:23.614 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
 2026-09-30 18:31:48.212 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
 2026-09-30 18:31:49.236 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 18:31:57.127 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 18:32:21.524 | INFO     | app.agent.converter_agent:run:58 - Stage PDF IR: title=Pragmatism and the Philosophy of Sport authors=10 sections=10 refs=0
+2026-09-30 18:32:22.602 | WARNING  | app.agent.semantic_matcher:match:90 - Semantic matching LLM failed (Gemini API error 403: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+), using heuristic plan
+2026-09-30 18:32:22.605 | INFO     | app.agent.converter_agent:run:70 - Stage mapping plan: 2 entries
