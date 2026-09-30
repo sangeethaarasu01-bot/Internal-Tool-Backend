@@ -1,0 +1,3000 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" article-type="research" content-type="orig-research" dtd-version="2.0" lifecycle="final" open-access="no" peer-reviewed="yes" xml:lang="eng" specific-use="proof">
+<!--Article Processing Date: 01/27/2026-->
+<!--Vendor Name: DCL-->
+<!--IEEE XML JATS Tagging Guidelines version: v20241024-->
+<!--IEEE Math Coding Requirements and Guidelines for Vendors version: v2.4-->
+<!--new_sw_ran-->
+<front>
+<journal-meta>
+<journal-id journal-id-type="ieee">0033400</journal-id>
+<journal-id journal-id-type="acronym">TAP</journal-id>
+<journal-id journal-id-type="coden">IETPAK</journal-id>
+<journal-title-group>
+<journal-title>IEEE Transactions on Antennas and Propagation</journal-title>
+</journal-title-group>
+<issn publication-format="print">0018-926X</issn>
+<issn publication-format="online">1558-2221</issn>
+<publisher>
+<publisher-name>IEEE</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1109/TAP.2026.3657825</article-id>
+<article-id pub-id-type="manuscript">AP2504-1116</article-id>
+<xplore-article-id></xplore-article-id>
+<xplore-issue></xplore-issue>
+<xplore-pub-id></xplore-pub-id>
+<article-categories>
+<assembly-group sequence="0"></assembly-group>
+</article-categories>
+<title-group>
+<article-title>AUTHOR QUERIES</article-title>
+</title-group>
+<contrib-group>
+<contrib id="contrib1" primary="yes" corresp="yes" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4266-6826</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+</name-alternatives>
+<email>cxmao@scut.edu.cn</email>
+<xref ref-type="aff" rid="aff1"></xref>
+</contrib><contrib id="contrib2" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0009-0000-1480-1499</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff1"></xref>
+</contrib><contrib id="contrib3" primary="no" corresp="no" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Filtering</given-names>
+<surname>Antenna</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Filtering</given-names>
+<surname>Antenna</surname>
+</string-name>
+</name-alternatives>
+<email>li.jf01@gdut.edu.cn</email>
+<xref ref-type="aff" rid="aff2"></xref>
+</contrib><author-comment>
+<p><italic>(Corresponding author: Chunxu Mao.)</italic></p></author-comment>
+</contrib-group>
+<aff id="aff1">
+<institution-wrap>
+<institution content-type="division">School of Electronic and Information Engineering</institution>
+<institution content-type="institution">South China University of Technology</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">26467</institution-id>
+</institution-wrap>
+<city>Guangzhou</city>
+<post-code>510600</post-code>
+<country>China</country>
+</aff>
+<aff id="aff2">
+<institution-wrap>
+<institution content-type="division">School of Physics and Optoelectronic Engineering</institution>
+<institution content-type="institution">Guangdong University of Technology</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">47870</institution-id>
+</institution-wrap>
+<city>Guangzhou</city>
+<post-code>510600</post-code>
+<country>China</country>
+</aff>
+<pub-date date-type="cover" iso-8601-date="2026" pub-type="print" publication-format="pdf">
+<year>2026</year>
+</pub-date>
+<fpage>1</fpage>
+<lpage>0</lpage>
+<history>
+<date date-type="receiveddate" iso-8601-date="2025-04-14">
+<day>14</day>
+<month>04</month>
+<year>2025</year>
+</date>
+<date date-type="reviseddate1" iso-8601-date="2025-11-30">
+<day>30</day>
+<month>11</month>
+<year>2025</year>
+</date>
+<date date-type="reviseddate2" iso-8601-date="2025-12-29">
+<day>29</day>
+<month>12</month>
+<year>2025</year>
+</date>
+<date date-type="accepteddate" iso-8601-date="2026-01-18">
+<day>18</day>
+<month>01</month>
+<year>2026</year>
+</date>
+</history>
+<self-uri content-type="xml">tap-mao-3657825.xml</self-uri>
+<self-uri content-type="print">tap-mao-3657825.pdf</self-uri>
+<self-uri content-type="online">tap-mao-3657825-x.pdf</self-uri>
+<abstract><p>In this communication, a compact filtering antenna with high frequency selectivity and intensive harmonic suppression over a wide frequency range (<inline-formula><tex-math notation="LaTeX">$3~f_{0}$</tex-math></inline-formula>) is proposed. The antenna mainly consists of a planar inverted-F structure (PIFS), a square patch, two parasitic half-wavelength strips, and a layer of metasurface under the patch. The PIFS, parasitic strips, and patch are cross-coupled and tuned at their fundamental mode to produce the third-order filtering response with enhanced bandwidth and sharp roll-off at band-edges. To suppress the higher order harmonics, a split ring resonator (SRR) is first inset into the PIFS to reject the main input power. Then, a layer of metasurface is introduced under the patch to further absorb extra power. As a result, the radiation efficiency at the second-order harmonic can be reduced from 40% to 4%. The principles of the proposed antenna are investigated in detail. The filtering antenna is prototyped and verified, exhibiting a passband from 2.5 to 3.0 GHz and a gain suppression of 24 dB from 3.1 to 6.0 GHz and 18 dB from 6.0 to 9.0 GHz.</p>
+</abstract>
+<kwd-group kwd-group-type="AuthorFree">
+<kwd>Antenna</kwd>
+<kwd>filtering antenna</kwd>
+<kwd>frequency selectivity</kwd>
+<kwd>harmonic suppression</kwd>
+<kwd>meta-surface</kwd>
+</kwd-group>
+<funding-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>Guangdong Innovative and Entrepreneurial Research Team Program</institution></institution-wrap></funding-source>
+<award-id>2023ZT10x148</award-id>
+</award-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>Guangdong Province and Applied Basic Research Foundation</institution></institution-wrap></funding-source>
+<award-id>2025A1515010151</award-id>
+</award-group>
+<funding-statement>This work was supported in part by Guangdong Innovative and Entrepreneurial Research Team Program under Grant 2023ZT10x148 and in part by Guangdong Province and Applied Basic Research Foundation under Grant 2025A1515010151.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="14"></fig-count>
+<table-count count="1"></table-count>
+<equation-count count="55"></equation-count>
+<ref-count count="35"></ref-count>
+<page-count count="7"></page-count>
+</counts>
+</article-meta>
+</front>
+<body>
+<sec id="sec1">
+<label>I.</label>
+<title>Introduction</title>
+<p>Filtering antennas can simultaneously function as antennas and filters, leading to a significant reduction of complexity and cost of RF frontends and improvement of overall frequency responses, and hence, have been a popular research topic in the last decades <xref ref-type="bibr" rid="ref1">[1]</xref>. Various of antennas with integrated filtering performance are proposed, such as wideband filtering antennas <xref ref-type="bibr" rid="ref2">[2]</xref>, <xref ref-type="bibr" rid="ref3">[3]</xref>, dual-band filtering antennas <xref ref-type="bibr" rid="ref4">[4]</xref>, <xref ref-type="bibr" rid="ref5">[5]</xref>, dual-polarization filtering antennas <xref ref-type="bibr" rid="ref6">[6]</xref>, <xref ref-type="bibr" rid="ref7">[7]</xref>, <xref ref-type="bibr" rid="ref8">[8]</xref>, circular-polarized filtering antennas <xref ref-type="bibr" rid="ref9">[9]</xref>, <xref ref-type="bibr" rid="ref10">[10]</xref>, and millimeter-wave filtering antennas <xref ref-type="bibr" rid="ref11">[11]</xref>, <xref ref-type="bibr" rid="ref12">[12]</xref>, <xref ref-type="bibr" rid="ref13">[13]</xref>. Besides, the filtering antennas with low-profile <xref ref-type="bibr" rid="ref14">[14]</xref>, <xref ref-type="bibr" rid="ref15">[15]</xref>, <xref ref-type="bibr" rid="ref16">[16]</xref> and duplexing/multiplexing functions <xref ref-type="bibr" rid="ref17">[17]</xref>, <xref ref-type="bibr" rid="ref18">[18]</xref> are investigated. To replace traditional scenarios of cascaded filter and antenna in the RF frontend system, the filtering antennas with high frequency selectivity and harmonic suppression are highly desired.</p>
+<p>The frequency selectivity represents the ability of suppressing the interference from adjacent bands, which can usually be achieved by integrating filters at the feeds of antennas or introducing radiation nulls at the band-edges. In <xref ref-type="bibr" rid="ref19">[19]</xref> and <xref ref-type="bibr" rid="ref20">[20]</xref>, bandpass filters are integrated with antennas, and good frequency selectivity can be achieved by the resonators. However, these added resonators will lead to extra insertion loss. Another popular method of improving the frequency selectivity is to configure the cross-coupling path between the feed and radiator; the out-of-phase between the main coupling path and cross-coupling path will lead to the cancellation of the power, resulting in radiation nulls at specific frequencies <xref ref-type="bibr" rid="ref21">[21]</xref>, <xref ref-type="bibr" rid="ref22">[22]</xref>, <xref ref-type="bibr" rid="ref23">[23]</xref>. By adjusting the coupling intensity, the radiation nulls can be easily controlled. In addition, single or multiple radiation nulls can be generated by slitting slots in the radiating element <xref ref-type="bibr" rid="ref24">[24]</xref> or using a reverse feeding method <xref ref-type="bibr" rid="ref25">[25]</xref>.</p>
+<p>Another important issue to be concerned with the filtering antenna is the harmonic radiation, which can lead to potential cross-band interference between different wireless applications since the microwave frequency spectrum is already crowded. A straightforward way of suppressing the harmonic radiation is to cascade a bandpass of low-pass filter at the feed of the antenna <xref ref-type="bibr" rid="ref26">[26]</xref>, <xref ref-type="bibr" rid="ref27">[27]</xref>, <xref ref-type="bibr" rid="ref28">[28]</xref>. However, this will lead to additional insertion loss and reduce the system&#x2019;s efficiency. By detuning the resonances of high-order modes of different parts of the antenna, the harmonics in the high-band can be significantly suppressed without affecting the in-band radiation <xref ref-type="bibr" rid="ref29">[29]</xref>, <xref ref-type="bibr" rid="ref30">[30]</xref>. Besides, by loading parasitic structures <xref ref-type="bibr" rid="ref31">[31]</xref>, <xref ref-type="bibr" rid="ref32">[32]</xref> or using a hybrid feeding network <xref ref-type="bibr" rid="ref33">[33]</xref>, improved out-of-band rejection can be achieved. In <xref ref-type="bibr" rid="ref34">[34]</xref>, a hybrid approach of combining multiple slots loading and bandpass filter is studied, and multiple radiation nulls are intentionally generated in the specific bands, leading to a wideband harmonic suppression of over four times of center frequency (4 f<sub>0</sub>). However, most of these works have a limited frequency range of suppression, or the suppression is not intense enough. In addition, most of the works only show the broadside realized gain, which is not sufficient when evaluating the harmonic suppression performance, as interferences may come from different directions.</p>
+<p>In this communication, an innovative filtering antenna features of high frequency selectivity and wideband harmonic suppression is proposed. By symmetrically placing two resonant structures beside the driven planar inverted-F structure (PIFS), an additional in-band resonant mode and a radiation null can be generated simultaneously, leading to an improved bandwidth and frequency selectivity at the band-edge. The method of controlling radiation null is analyzed in detail. Furthermore, an effective approach to suppressing harmonic radiation is studied step-by-step. First, a split ring resonator (SRR) is inset into the feed PIFS to introduce impedance mismatch in the band of harmonic, resulting in most of the input power reflected back at the port. Then, a metasurface is loaded below the patch radiator, sharing the same layer with the PIFS, and the harmonic radiation can be further reduced to around 4% without affecting the in-band radiation efficiency. It should be noticed that the parameters of peak realized gain and radiation efficiency are used in the analysis in this communication to provide a fair way to evaluate the filtering performance. The proposed filtering antenna is prototyped and verified experimentally, showing an improved frequency selectivity and harmonic suppression.</p>
+<p>The remainder of the manuscript is organized as follows. <xref ref-type="sec" rid="sec2">Section II</xref> illustrates the design considerations and the principles of realizing the filtering response. <xref ref-type="sec" rid="sec3">Section III</xref> discusses the methods of realizing the wideband harmonic suppression. <xref ref-type="sec" rid="sec4">Section IV</xref> presents the simulated and measured results, and a conclusion in <xref ref-type="sec" rid="sec5">Section V</xref>.</p>
+</sec>
+<sec id="sec2">
+<label>II.</label>
+<title>Antenna Design</title>
+<sec id="sec2a">
+<label>A.</label>
+<title>Antenna Configurations</title>
+<p><xref ref-type="fig" rid="fig1">Fig. 1</xref> shows the configurations of the proposed filtering antenna. The antenna is mainly composed of two stacked substrates with an air gap of 5 mm between them, as shown in <xref ref-type="fig" rid="fig1">Fig. 1(b)</xref>. The radiator is a square patch, which is printed on the upper layer of the top substrate. The driven source is a PIFS, which is printed on the top layer of the lower substrate, as shown in <xref ref-type="fig" rid="fig1">Fig. 1(c)</xref>. Two bent parasitic strips are placed on both sides of the PIFS. The PIFS and strips are surrounded by a circle of metasurface. Besides, an SRR is inserted in the PIFS for suppressing the second-order harmonic suppression. It is also noted that the low-band antenna&#x2019;s parasitic patch is served as the complexity and profile of the dual-band shared aperture antenna. Rogers 4003C substrate with dielectric constant of 3.55 and a loss tangent of 0.0027 is used in the design. The thicknesses of the top and bottom substrates are 0.3 mm and 1.525 mm, respectively. The antenna was designed and optimized by high frequency structural simulator (HFSS), and the final dimensional parameters are listed in the caption of <xref ref-type="fig" rid="fig1">Fig. 1</xref>.
+<table-wrap id="table1">
+<label>TABLE I</label>
+<caption><title>Comparison With Other Harmonic Suppression Filtering Antennas</title></caption>
+<graphic xlink:href="mao.t1-3657825.eps"></graphic>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span=""></col>
+</colgroup>
+<thead>
+<tr>
+<th>Ref.</th>
+<th>Operation Frequency</th>
+<th>Impedance Bandwidth</th>
+<th>Size (<inline-formula><tex-math notation="LaTeX">$\lambda _{0}^{2}$</tex-math></inline-formula>)</th>
+<th>Profile (<inline-formula><tex-math notation="LaTeX">$\lambda _{0}$</tex-math></inline-formula>)</th>
+<th>Method of Suppression</th>
+<th>Gain In-Band (dBi)</th>
+<th>Freq. Selectivity (dB/GHz)</th>
+<th>Gain Suppression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><xref ref-type="bibr" rid="ref26">[26]</xref></td>
+<td>2.9 GHz</td>
+<td>27.5%</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.33\ast 0.32$</tex-math></inline-formula></td>
+<td>-</td>
+<td>filter integrated</td>
+<td>2.5</td>
+<td>30</td>
+<td>10 dB@<inline-formula><tex-math notation="LaTeX">$4.5f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td><xref ref-type="bibr" rid="ref28">[28]</xref></td>
+<td>2.25 GHz</td>
+<td>49%</td>
+<td><inline-formula><tex-math notation="LaTeX">$1.05\ast 1.05$</tex-math></inline-formula></td>
+<td>0.25</td>
+<td>filter integrated</td>
+<td>7.9</td>
+<td>42</td>
+<td>13 dB@<inline-formula><tex-math notation="LaTeX">$4f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td><xref ref-type="bibr" rid="ref31">[31]</xref></td>
+<td>5.44 GHz</td>
+<td>19.7%</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.66\ast 0.66$</tex-math></inline-formula></td>
+<td>0.1</td>
+<td>resonator loading</td>
+<td>7.4</td>
+<td>60</td>
+<td>23 dB@<inline-formula><tex-math notation="LaTeX">$2.3f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td><xref ref-type="bibr" rid="ref32">[32]</xref></td>
+<td>2.35 GHz</td>
+<td>56%</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.4\ast 0.4$</tex-math></inline-formula></td>
+<td>0.28</td>
+<td>resonator loading</td>
+<td>8.3</td>
+<td>170</td>
+<td>18.4 dB@<inline-formula><tex-math notation="LaTeX">$1.9f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td><xref ref-type="bibr" rid="ref29">[29]</xref></td>
+<td>2.38 GHz</td>
+<td>5.6%</td>
+<td>-</td>
+<td>0.02</td>
+<td>resonator integrated</td>
+<td>9.7</td>
+<td>200</td>
+<td>25 dB@<inline-formula><tex-math notation="LaTeX">$2.2f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td><xref ref-type="bibr" rid="ref27">[27]</xref></td>
+<td>2.45 GHz</td>
+<td>3.2%</td>
+<td>-</td>
+<td>0.02</td>
+<td>resonator integrated</td>
+<td>2</td>
+<td>220</td>
+<td>12.6 dB@<inline-formula><tex-math notation="LaTeX">$6.4f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td><xref ref-type="bibr" rid="ref33">[33]</xref></td>
+<td>3.55 GHz</td>
+<td>13.3%</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.54\ast 0.54$</tex-math></inline-formula></td>
+<td>0.08</td>
+<td>hybrid feed</td>
+<td>8.1</td>
+<td>60</td>
+<td>18 dB@<inline-formula><tex-math notation="LaTeX">$1.7f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td><xref ref-type="bibr" rid="ref30">[30]</xref></td>
+<td>2.45 GHz</td>
+<td>9%</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.65\ast 0.65$</tex-math></inline-formula></td>
+<td>0.05</td>
+<td>slot loading</td>
+<td>6.7</td>
+<td>50</td>
+<td>16.7 dB@<inline-formula><tex-math notation="LaTeX">$4f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td><xref ref-type="bibr" rid="ref34">[34]</xref></td>
+<td>2.3 GHz</td>
+<td>50.8%</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.46\ast 0.46$</tex-math></inline-formula></td>
+<td>0.28</td>
+<td>slot loading + filter</td>
+<td>8</td>
+<td>130</td>
+<td>24.8 dB@<inline-formula><tex-math notation="LaTeX">$4.8f_{0}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td>Prop.</td>
+<td>2.65 GHz</td>
+<td>18.8%</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.37\ast 0.37$</tex-math></inline-formula></td>
+<td>0.06</td>
+<td>resonator loading + metasurface</td>
+<td>8.5</td>
+<td>220</td>
+<td>24 
+<email>dB@2.2
+</email><inline-formula><tex-math notation="LaTeX">$f$</tex-math></inline-formula><inline-formula><tex-math notation="LaTeX">$_{\mathbf {0}}$</tex-math></inline-formula>; 18 
+<email>dB@3.5
+</email><inline-formula><tex-math notation="LaTeX">$f$</tex-math></inline-formula><inline-formula><tex-math notation="LaTeX">$_{\mathbf {0}}$</tex-math></inline-formula></td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+<fig id="fig1">
+<label>Fig. 1.</label>
+<caption><p>Configurations of the proposed filtering antenna. (a) Exploded view, (b) side view, and (c) top layer of the bottom substrate. <italic>Lg = 80</italic> mm, <italic>Lp = 39.5</italic> mm, <inline-formula><tex-math notation="LaTeX">$L 1=15.8$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$L 2=7$</tex-math></inline-formula> mm, <italic>L3 = 27</italic> mm, <italic>L4 = 5.8</italic> mm, <inline-formula><tex-math notation="LaTeX">$W 1=4$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$W 2=3$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$W 3=4.5$</tex-math></inline-formula> mm, W<inline-formula><tex-math notation="LaTeX">$4=0.2$</tex-math></inline-formula> mm, gap = 1.5 mm, <inline-formula><tex-math notation="LaTeX">$D =0.6$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$H 1=1.525$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$H 2=0.3$</tex-math></inline-formula> mm, and <inline-formula><tex-math notation="LaTeX">$H 3=5.0$</tex-math></inline-formula> mm.</p></caption>
+<graphic xlink:href="mao1-3657825.eps"></graphic>
+</fig>
+</p>
+</sec>
+<sec id="sec2b">
+<label>B.</label>
+<title>Design Procedures</title>
+<p>To better illustrate the design procedure of the filtering antenna, three referenced antennas and their corresponding topologies, denoted as Type-A, B, and C, are presented in <xref ref-type="fig" rid="fig2">Fig. 2</xref>. The antenna design is originally from a traditional proximate-fed patch antenna (Type-A), as shown in <xref ref-type="fig" rid="fig2">Fig. 2(a)</xref>. Here, the patch antenna is equivalent to a resonator, <inline-formula><tex-math notation="LaTeX">$R1$</tex-math></inline-formula>, and the radiation in free space is viewed as a load. Since only the dominant mode is concerned and excited, the Type-A reference antenna has shown only one resonant frequency at around 2.6 GHz, leading to a limited bandwidth of 100 MHz, as shown in <xref ref-type="fig" rid="fig3">Fig. 3</xref>. When the microstrip feed is replaced by a PIFS through shorting one end of the microstrip to the ground, a second-order resonant structure can be achieved, as the topology presented. The resonances of the patch and the PIFS are tuned to similar frequency, resulting in a second-order frequency response with improved bandwidth of 300 MHz. By further loading two parasitic strip resonators (denoted as <inline-formula><tex-math notation="LaTeX">$R3$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$R3'$</tex-math></inline-formula>) around the PIFS, as depicted in <xref ref-type="fig" rid="fig2">Fig. 2(c)</xref>, one more resonant frequency can be realized, rendering a third-order frequency response with an improved bandwidth of over 500 MHz. In addition, the parasitic strips can configure a cross-coupling path with a 180° phase behind the main coupling path. When the power from the two coupling paths is comparable at a given frequency, the power will be canceled out, leading to a radiation null. As shown in <xref ref-type="fig" rid="fig3">Fig. 3</xref>, the radiation null is generated at 3.1 GHz, resulting in a sharp roll-off from the bandpass to band-stop at the higher band-edge. An approximate calculation shows that the roll-off is over 218 dB/GHz, which is comparable to a filter.
+<fig id="fig2">
+<label>Fig. 2.</label>
+<caption><p>Evolution of the filtering antennas and the corresponding topologies. (a) Patch antenna fed by L-shaped microstrip, Type-A, (b) patch antenna fed by a PIFS, Type-B, and (c) PIFS-fed patch antenna with two parasitic half-wavelength resonators, Type-C.</p></caption>
+<graphic xlink:href="mao2-3657825.eps"></graphic>
+</fig>
+<fig id="fig3">
+<label>Fig. 3.</label>
+<caption><p>Comparisons of the three antenna designs about <inline-formula><tex-math notation="LaTeX">$S_{11}$</tex-math></inline-formula> and realized gains.</p></caption>
+<graphic xlink:href="mao3-3657825.eps"></graphic>
+</fig>
+</p>
+</sec>
+<sec id="sec2c">
+<label>C.</label>
+<title>Mechanism of Radiation Null</title>
+<p>To further demonstrate the mechanism of the radiation null, the current and electric field distributions of the filtering antenna are studied. <xref ref-type="fig" rid="fig4">Fig. 4</xref> shows the comparisons of the simulated current and <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field distributions of the proposed antenna at 2.8 and 3.1 GHz, respectively. One can see that the input power can be coupled to the parasitic strips and then radiated out to free space from the patch in the operating band, as shown in <xref ref-type="fig" rid="fig4">Fig. 4(a)</xref>. At the band of radiation null, there is still a noticeable coupling between the parasitic strips and PIFS, but the power on the patch is canceled out, leading to a weak current distribution on the radiating patch, as shown in <xref ref-type="fig" rid="fig4">Fig. 4(b)</xref>. <xref ref-type="fig" rid="fig5">Fig. 5</xref> shows the current distributions of the antenna at around the frequency of radiation null, denoted as <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>. As observed, the current on the PIFS is comparable to the current on the two strips at <inline-formula><tex-math notation="LaTeX">$f_{n} =3.1$</tex-math></inline-formula> GHz, which satisfies the condition of producing the radiation null. At the lower or higher bands, the current on the PIFS is either stronger or weaker than the current on the strip resonators, and hence, no radiation null can be generated, which proves the validity of the assumption.
+<fig id="fig4">
+<label>Fig. 4.</label>
+<caption><p>Comparison of the current distribution on the Type-C antenna at (a) 2.8 and (b) 3.1 GHz.</p></caption>
+<graphic xlink:href="mao4-3657825.eps"></graphic>
+</fig>
+<fig id="fig5">
+<label>Fig. 5.</label>
+<caption><p>Simulated current distributions of the PIFS and parasitic strips at around the frequency of radiation null, <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>. (a) Below <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>, 3.05 GHz, (b) at <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>, 3.1 GHz, and (c) above <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>, 3.15 GHz.</p></caption>
+<graphic xlink:href="mao5-3657825.eps"></graphic>
+</fig>
+</p>
+<p>Under this assumption, if the mutual coupling between the PIFS and strip resonators is changed, the radiation null will be shifted correspondingly. To verify it, a parametric study is carried out. <xref ref-type="fig" rid="fig6">Fig. 6</xref> shows the simulated realized of the proposed antenna with different distances between the PIFS and the strips, denoted as <italic>gap</italic>. As observed, the radiation null moves from 3.2 to 3.05 GHz when the <italic>gap</italic> is increased from 5.0 to 5.8 mm.
+<fig id="fig6">
+<label>Fig. 6.</label>
+<caption><p>Simulated realized gains of the proposed antenna with different spaces between the PIFS and strips, <italic>gap</italic>.</p></caption>
+<graphic xlink:href="mao6-3657825.eps"></graphic>
+</fig>
+</p>
+</sec>
+</sec>
+<sec id="sec3">
+<label>III.</label>
+<title>Wideband Harmonic Suppression</title>
+<p>For a filtering antenna, another important issue to be concerned with is the cross-band interference due to the radiation of the higher order modes, especially for the second-order harmonics, which are not far away from the predominant mode and usually very strong. In this section, different methods, including an embedded SRR and metasurface layer, are combined to suppress the harmonic radiation over a wide frequency range.</p>
+<sec id="sec3a">
+<label>A.</label>
+<title>Embedded SRR</title>
+<p>To suppress the radiation of the second-order harmonic, a SRR is embedded into the PIFS, as shown in <xref ref-type="fig" rid="fig7">Fig. 7(a)</xref>. The resonant frequency of the SRR is tuned to the second-order harmonic of the proposed filtering antenna, at around 5.6 GHz. <xref ref-type="fig" rid="fig8">Fig. 8</xref> compares the simulated current distribution at 5.6 GHz between the Type-C and Type-D antennas. As observed from <xref ref-type="fig" rid="fig8">Fig. 8(a)</xref>, when the PIFS and the parasitic strip resonators are working at the second-order mode, intensive power can be coupled from PIFS to the strip resonators. When the SRR is embedded into the PIFS, which is resonant at around 5.6 GHz, an intensive current is distributed around the SRR. Hence, the power coupled to the two parasitic strip resonators can be significantly reduced. Since the majority power is reflected back on the PIFS, the second-order harmonic can be efficiently suppressed.
+<fig id="fig7">
+<label>Fig. 7.</label>
+<caption><p>Antenna designs for harmonic suppression. (a) Embedded SRR in the PIFS, denoted as Type-D and (b) proposed design, loaded with a metasurface.</p></caption>
+<graphic xlink:href="mao7-3657825.eps"></graphic>
+</fig>
+<fig id="fig8">
+<label>Fig. 8.</label>
+<caption><p>Comparison of the simulated current distribution at 5.6 GHz. (a) Type-C. (b) Type-D.</p></caption>
+<graphic xlink:href="mao8-3657825.eps"></graphic>
+</fig>
+</p>
+<p><xref ref-type="fig" rid="fig9">Fig. 9</xref> compares the simulated peak realized gain and radiation efficiency among the reference antennas Type-C, Type-D, Type-E, and the proposed antenna. It is noted that the peak realized gain instead of the realized gain in the broadside direction is adopted to measure the harmonic suppression performance as the cross-band interference may originally come from any direction, but not only from the broadside direction. As observed from <xref ref-type="fig" rid="fig9">Fig. 9(a)</xref>, the peak realized gain of the second-order harmonic is reduced from 6 dBi to below 0 dBi from the Type-C antenna to the Type-D antenna, and the radiation efficiency is reduced from 40% to 14%.
+<fig id="fig9">
+<label>Fig. 9.</label>
+<caption><p>Comparisons of the simulated peak realized gain and radiation efficiency between the Type-C, Type-D, Type-E, and proposed antennas. (a) Peak realized gain and (b) radiation efficiency.</p></caption>
+<graphic xlink:href="mao9-3657825.eps"></graphic>
+</fig>
+</p>
+</sec>
+<sec id="sec3b">
+<label>B.</label>
+<title>Metasurface for Harmonic Suppression</title>
+<p>Although most of the input power of the second-order harmonic is reflected back at the PIFS, there are still some power couples from the PIFS to the patch and radiate out. To further suppress unwanted radiation, a new method of loading a layer of metasurface below the radiator is proposed, as shown in <xref ref-type="fig" rid="fig7">Fig. 7(b)</xref>. The metasurface is placed on the upper layer of the bottom substrate without introducing additional substrate/layer. The configuration of the unit cell is presented in <xref ref-type="fig" rid="fig10">Fig. 10(a)</xref>, which is simply a patch shorted to the ground plane through a pin. The opened sides of the patch are equivalent to a capacitor, whereas the shorted pin can be molded as an inductor; the lossy substrate is represented by a resistor. Thus, the unit cell can be viewed as a series resonant circuit, and the resonant frequency can be controlled by tuning the gap between the unit cells. When it resonates, an intensive E-field distribution will be generated, leading to the loss of power. As a result, the power in the designed frequency can be suppressed <xref ref-type="bibr" rid="ref35">[35]</xref>.
+<fig id="fig10">
+<label>Fig. 10.</label>
+<caption><p>(a) Configuration of the unitcell of the metasurface and (b) simulated <inline-formula><tex-math notation="LaTeX">$\vert S_{11}\vert $</tex-math></inline-formula> of the unitcell with different lengths of <italic>L4</italic>.</p></caption>
+<graphic xlink:href="mao10-3657825.eps"></graphic>
+</fig>
+</p>
+<p>A periodic boundary is used to investigate the resonance of the unit cell, as shown in <xref ref-type="fig" rid="fig10">Fig. 10(b)</xref>. As observed, the resonance is moved to the lower band when <inline-formula><tex-math notation="LaTeX">$L4$</tex-math></inline-formula> is increased. The resonance here indicates that a small part of the incident wave is absorbed and lost in the unit cell when it resonates, but it is insufficient to deal with high-power cases when it works alone, as the Type-E curve shown in <xref ref-type="fig" rid="fig9">Fig. 9</xref>. However, this additional structure can be used to further suppress the radiation in the given frequency range. As depicted in <xref ref-type="fig" rid="fig9">Fig. 9</xref>, the peak realized gain at the second-order harmonic can be reduced by 14 dB when rejection bands of the SRR and the metasurface are aligned with each other. Analyzing the radiation efficiency in <xref ref-type="fig" rid="fig9">Fig. 9(b)</xref>, the power radiated out is further suppressed to below 4% when the metasurface is applied, demonstrating that a good harmonic suppression can be achieved.</p>
+<p>For better presenting the harmonic suppression performance, the simulated <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field distributions of the antenna are displayed and compared in <xref ref-type="fig" rid="fig11">Fig. 11</xref>. As shown in <xref ref-type="fig" rid="fig11">Fig. 11(a)</xref>, although a major power of the second-order harmonic has been reflected back at the input, there are still some power coupled to the radiating patch, which is working at its high-order mode. When the metasurface is placed below the radiating patch, the power that is coupled to the radiating patch is much weaker than that the one without a metasurface, as shown in <xref ref-type="fig" rid="fig11">Fig. 11(b)</xref>. Having another check of the <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field distribution on the upper layer of the bottom substrate, an intensive <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field is distributed along the gaps between the unit cell without producing an effective radiation, which verifies our supposition. Therefore, by combining the embedded SRR in the PIFS and loading a layer of metasurface, the radiation of the harmonics can be significantly suppressed.
+<fig id="fig11">
+<label>Fig. 11.</label>
+<caption><p>Simulated <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field distribution on the antenna at 5.6 GHz. (a) <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field on the patch, Type-D antenna, (b) <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field on the patch, proposed antenna, and (c) <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field on the metasurface layer, proposed antenna.</p></caption>
+<graphic xlink:href="mao11-3657825.eps"></graphic>
+</fig>
+</p>
+</sec>
+</sec>
+<sec id="sec4">
+<label>IV.</label>
+<title>Results and Discussion</title>
+<p>The proposed filtering antenna was fabricated, and the upper layers of the bottom and top substrates of the prototype are respectively shown in <xref ref-type="fig" rid="fig12">Fig. 12</xref>. As shown in <xref ref-type="fig" rid="fig12">Fig. 12(a)</xref>, from inner to outer, they are PIFS with embedded SRR, two parasitic strip resonators, and a layer of metasurface surrounding. The copper areas of the two layers are similar, and thus, a compact size can be maintained. <xref ref-type="fig" rid="fig13">Fig. 13(a)</xref> presents the measured and simulated S-parameters from 1.5 to 9 GHz. As observed, the measured results agree well with the simulations in terms of impedance match and gain response. The measured impedance −10 dB bandwidth of the antenna is from 2.4 to 2.9 GHz. Outside of the band, the reflection coefficients are close to 0 dB. <xref ref-type="fig" rid="fig13">Fig. 13(b)</xref> displays the simulated and measured peak realized gains and the radiation efficiency of the proposed filtering antenna. Similarly, a good consistence can be observed between the simulated and measured results. As can be seen, the measured peak realized gains are about 8 dBi in the band, which is quickly reduced to below −15 dBi from 3 to 5.8 GHz, giving a harmonic suppression of over 23 dB. The realized gain is somehow increased in the band of 6.0&#x2013;9.0 GHz, but still remains over 18 dB gain suppression. This is mainly due to the mismatch between the higher order resonance of the patch and the PIFS. The minor discrepancy between the simulated and measured results at around 6 GHz is mainly attributed to the fabrication tolerances. Besides, the antenna has a high efficiency of around 90% in the band, but it is basically remained below 8% out of the band from 3.0 to 9.0 GHz, showing an excellent harmonic suppression performance.
+<fig id="fig12">
+<label>Fig. 12.</label>
+<caption><p>Photographs of the proposed filtering antenna prototype. (a) Upper layer of the bottom substrate and (b) upper layer of the top substrate.</p></caption>
+<graphic xlink:href="mao12-3657825.eps"></graphic>
+</fig>
+<fig id="fig13">
+<label>Fig. 13.</label>
+<caption><p>Simulated and measured results of the proposed filtering antenna. (a) S-parameters and (b) realized gain and radiation efficiency.</p></caption>
+<graphic xlink:href="mao13-3657825.eps"></graphic>
+</fig>
+</p>
+<p><xref ref-type="fig" rid="fig14">Fig. 14</xref> shows the simulated and measured normalized radiation patterns of the proposed antenna at 2.6 GHz. The antenna exhibits uni-directional radiation pattern in the broadside direction. The cross-polarization level is more than 30 dB lower than in the co-polarization. In addition, the front-to-back ratio is over 20 dB, showing the proposed antenna has a good radiation performance. The small discrepancy between the simulated and measured radiation patterns is mainly due to the tolerances during the measurement.
+<fig id="fig14">
+<label>Fig. 14.</label>
+<caption><p>Measured and simulated normalized radiation patterns of the proposed filtering antenna at 2.6 GHz. (a) <italic>x</italic>z-plane and (b) <italic>y</italic>z-plane.</p></caption>
+<graphic xlink:href="mao14-3657825.eps"></graphic>
+</fig>
+</p>
+<p>The proposed antenna is compared with other filtering antennas with harmonic suppression performance reported in <xref ref-type="bibr" rid="ref26">[26]</xref>, <xref ref-type="bibr" rid="ref27">[27]</xref>, <xref ref-type="bibr" rid="ref28">[28]</xref>, <xref ref-type="bibr" rid="ref29">[29]</xref>, <xref ref-type="bibr" rid="ref30">[30]</xref>, <xref ref-type="bibr" rid="ref31">[31]</xref>, <xref ref-type="bibr" rid="ref32">[32]</xref>, <xref ref-type="bibr" rid="ref33">[33]</xref>, and <xref ref-type="bibr" rid="ref34">[34]</xref> in terms of antenna profile, method of suppression, gain in-band, frequency selectivity, and gain suppression. The antennas in <xref ref-type="bibr" rid="ref32">[32]</xref> and <xref ref-type="bibr" rid="ref33">[33]</xref> have a limited bandwidth of suppression of less than <inline-formula><tex-math notation="LaTeX">$2~f_{0}$</tex-math></inline-formula>, without tackling the second-order harmonics. The works in <xref ref-type="bibr" rid="ref26">[26]</xref> and <xref ref-type="bibr" rid="ref27">[27]</xref> have a wideband harmonic suppression, but a low in-band gain of less than 3 dBi can be achieved. The works in <xref ref-type="bibr" rid="ref28">[28]</xref>, <xref ref-type="bibr" rid="ref31">[31]</xref>, and <xref ref-type="bibr" rid="ref33">[33]</xref> have a limited frequency selectivity with the roll-off ratio less than 60 dB/GHz. The work in <xref ref-type="bibr" rid="ref34">[34]</xref> has a high gain in-band, good frequency selectivity, and wideband gain suppression, but the antenna has a high profile. Compared with these works, the proposed filtering antenna has a low profile, an improved frequency selectivity, and out-of-band rejection, and this is the first time that resonator and metasurface are combined together to realize wideband harmonic suppression. Moreover, different from other works, the peak realized gain instead of realized in the broadside direction is used to evaluate the harmonic suppression performance.</p>
+</sec>
+<sec id="sec5">
+<label>V.</label>
+<title>Conclusion</title>
+<p>In this communication, a compact filtering antenna with improved frequency selectivity and wideband harmonic suppression has been proposed for wireless applications. By configuring a cross-coupling, a radiation null can be realized at the band-edge for enhancing the frequency selectivity. To suppress the radiation from harmonics over a wide frequency range, a slit ring resonator is first embedded into the feed source. Then, a metasurface is employed to further reduce the harmonic radiation for the first time. The principles of generating and controlling the radiation null, as well as the procedure of suppressing harmonics, have been explained in detail. Compared with other reported works, the proposed filtering antenna has shown an improved frequency selectivity and wideband harmonic suppression performance. The techniques developed in this work can be widely used in other types of antennas.</p>
+</sec>
+</body>
+<back>
+<ref-list>
+<title>
+References
+</title>
+<ref id="ref1">
+<label>
+[1]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C. X.
+</given-names> 
+<surname>
+Mao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X. Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Xiao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Gao
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Filtering antennas: Design methods and recent developments
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Microw. Mag.
+</source>
+, vol. 
+<volume>
+22
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, pp. 
+<fpage>
+52
+</fpage>
+&#x2013;
+<lpage>
+63
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref2">
+<label>
+[2]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.-T.
+</given-names> 
+<surname>
+Hu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.-C.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.-X.
+</given-names> 
+<surname>
+Chu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Novel broadband filtering slotline antennas excited by multimode resonators
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+16
+</volume>
+, pp. 
+<fpage>
+489
+</fpage>
+&#x2013;
+<lpage>
+492
+</lpage>
+, 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref3">
+<label>
+[3]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+G.-H.
+</given-names> 
+<surname>
+Wen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.-X.
+</given-names> 
+<surname>
+Du
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+F.-C.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Broadband stub-loaded integrated filtering antenna for base station applications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+24
+</volume>
+, pp. 
+<fpage>
+781
+</fpage>
+&#x2013;
+<lpage>
+785
+</lpage>
+, 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref4">
+<label>
+[4]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.-M.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Two-port dual-band filtering network and its application on filtering antennas
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+22
+</volume>
+, pp. 
+<fpage>
+679
+</fpage>
+&#x2013;
+<lpage>
+683
+</lpage>
+, 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref5">
+<label>
+[5]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C. X.
+</given-names> 
+<surname>
+Mao
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Dual-band patch antenna with filtering performance and harmonic suppression
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+64
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, pp. 
+<fpage>
+4074
+</fpage>
+&#x2013;
+<lpage>
+4077
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2016
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref6">
+<label>
+[6]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Zhai
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Guo
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Ma
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A novel differentially fed dual-polarized filtering magneto-electric dipole antenna for 5G base station applications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+70
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+5373
+</fpage>
+&#x2013;
+<lpage>
+5382
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref7">
+<label>
+[7]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.-Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.-H.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Dual-polarized filtering magnetoelectric dipole antenna utilizing intrinsic highpass filter network and integrated lowpass filter network
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+69
+</volume>
+, no. 
+<issue>
+12
+</issue>
+, pp. 
+<fpage>
+8090
+</fpage>
+&#x2013;
+<lpage>
+8099
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref8">
+<label>
+[8]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Zhao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Tang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Yin
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Differentially fed, dual-band dual-polarized filtering antenna with high selectivity for 5G sub-6 GHz base station applications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+68
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+3231
+</fpage>
+&#x2013;
+<lpage>
+3236
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref9">
+<label>
+[9]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.-J.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.-M.
+</given-names> 
+<surname>
+Pan
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+X.-Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A single-layer low-profile circularly polarized filtering patch antenna
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+20
+</volume>
+, pp. 
+<fpage>
+602
+</fpage>
+&#x2013;
+<lpage>
+606
+</lpage>
+, 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref10">
+<label>
+[10]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Xiao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Cao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Che
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Xue
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Millimeter-wave filtering circularly polarized antenna using hybrid radiation modes for satellite applications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+72
+</volume>
+, no. 
+<issue>
+10
+</issue>
+, pp. 
+<fpage>
+7584
+</fpage>
+&#x2013;
+<lpage>
+7593
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref11">
+<label>
+[11]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.-M.
+</given-names> 
+<surname>
+Pan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.-Y.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K. W.
+</given-names> 
+<surname>
+Leung
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+P. F.
+</given-names> 
+<surname>
+Hu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A wideband and high-gain filtering antenna for 5G millimeter-wave applications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+71
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, pp. 
+<fpage>
+9006
+</fpage>
+&#x2013;
+<lpage>
+9011
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref12">
+<label>
+[12]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S. J.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y. M.
+</given-names> 
+<surname>
+Pan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.-Y.
+</given-names> 
+<surname>
+Shi
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+X. Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Millimeter-wave dual-polarized filtering antenna for 5G application
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+68
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+5114
+</fpage>
+&#x2013;
+<lpage>
+5121
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref13">
+<label>
+[13]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Xue
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Huang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Che
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Broadband dual-polarized differential-fed filtering antenna array for 5G millimeter-wave applications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+70
+</volume>
+, no. 
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+1989
+</fpage>
+&#x2013;
+<lpage>
+1998
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref14">
+<label>
+[14]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Xue
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Che
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Shen
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Feng
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Novel filtering method based on metasurface antenna and its application for wideband high-gain filtering antenna with low profile
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+67
+</volume>
+, no. 
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+1535
+</fpage>
+&#x2013;
+<lpage>
+1544
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref15">
+<label>
+[15]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Zhu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A wideband patch and SIW cavity hybrid antenna with filtering response
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+19
+</volume>
+, pp. 
+<fpage>
+836
+</fpage>
+&#x2013;
+<lpage>
+840
+</lpage>
+, 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref16">
+<label>
+[16]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Xiang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Shi
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Yu Wu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Hong
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Single-layer millimeter-wave filtenna with quasi-elliptic gain response under dual-mode resonance
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+23
+</volume>
+, pp. 
+<fpage>
+2797
+</fpage>
+&#x2013;
+<lpage>
+2801
+</lpage>
+, 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref17">
+<label>
+[17]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.-X.
+</given-names> 
+<surname>
+Mao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Gao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Qin
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.-X.
+</given-names> 
+<surname>
+Chu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Compact highly integrated planar duplex antenna for wireless communications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+64
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+2006
+</fpage>
+&#x2013;
+<lpage>
+2013
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2016
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref18">
+<label>
+[18]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C. X.
+</given-names> 
+<surname>
+Mao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Khalily
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Gao
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Xiao
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A multiplexing filtering antenna
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+69
+</volume>
+, no. 
+<issue>
+8
+</issue>
+, pp. 
+<fpage>
+5066
+</fpage>
+&#x2013;
+<lpage>
+5071
+</lpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref19">
+<label>
+[19]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.-X.
+</given-names> 
+<surname>
+Mao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Gao
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Dual-band full-duplex Tx/Rx antennas for vehicular communications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Veh. Technol.
+</source>
+, vol. 
+<volume>
+67
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+4059
+</fpage>
+&#x2013;
+<lpage>
+4070
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2018
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref20">
+<label>
+[20]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.-X.
+</given-names> 
+<surname>
+Mao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Gao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Qin
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.-X.
+</given-names> 
+<surname>
+Chu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Multimode resonator-fed dual-polarized antenna array with enhanced bandwidth and selectivity
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+63
+</volume>
+, no. 
+<issue>
+12
+</issue>
+, pp. 
+<fpage>
+5492
+</fpage>
+&#x2013;
+<lpage>
+5499
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2015
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref21">
+<label>
+[21]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Fan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.-L.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.-Y.
+</given-names> 
+<surname>
+Xie
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Su
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+High-gain SIW filtering antenna with low H-plane cross polarization and controllable radiation nulls
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+69
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+2336
+</fpage>
+&#x2013;
+<lpage>
+2340
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref22">
+<label>
+[22]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+B.-J.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.-S.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+B.-Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A compact high-selectivity wideband filtering antenna with multipath coupling structure
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+21
+</volume>
+, pp. 
+<fpage>
+1654
+</fpage>
+&#x2013;
+<lpage>
+1658
+</lpage>
+, 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref23">
+<label>
+[23]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Dong
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A compact filtering patch antenna with high suppression level and its CP application
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+22
+</volume>
+, pp. 
+<fpage>
+769
+</fpage>
+&#x2013;
+<lpage>
+773
+</lpage>
+, 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref24">
+<label>
+[24]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J. Y.
+</given-names> 
+<surname>
+Jin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Liao
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Xue
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Design of filtering-radiating patch antennas with tunable radiation nulls for high selectivity
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+66
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+2125
+</fpage>
+&#x2013;
+<lpage>
+2130
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2018
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref25">
+<label>
+[25]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Fan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.-Y.
+</given-names> 
+<surname>
+Xie
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.-Z.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Synthesis and design of filtering antenna with flexible passband and radiation null based on parallel scheme
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+20
+</volume>
+, pp. 
+<fpage>
+838
+</fpage>
+&#x2013;
+<lpage>
+842
+</lpage>
+, 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref26">
+<label>
+[26]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+G.-H.
+</given-names> 
+<surname>
+Sun
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.-W.
+</given-names> 
+<surname>
+Wong
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Zhu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.-X.
+</given-names> 
+<surname>
+Chu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A compact printed filtering antenna with good suppression of upper harmonic band
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+15
+</volume>
+, pp. 
+<fpage>
+1349
+</fpage>
+&#x2013;
+<lpage>
+1352
+</lpage>
+, 
+<year>
+2016
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref27">
+<label>
+[27]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.-F.
+</given-names> 
+<surname>
+Qian
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.-C.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.-H.
+</given-names> 
+<surname>
+Ding
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.-T.
+</given-names> 
+<surname>
+Hu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.-X.
+</given-names> 
+<surname>
+Chu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A wide stopband filtering patch antenna and its application in MIMO system
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+67
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+654
+</fpage>
+&#x2013;
+<lpage>
+658
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref28">
+<label>
+[28]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.-H.
+</given-names> 
+<surname>
+Wen
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A wideband differentially fed dual-polarized antenna with wideband harmonic suppression
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+67
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, pp. 
+<fpage>
+6176
+</fpage>
+&#x2013;
+<lpage>
+6181
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref29">
+<label>
+[29]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.-X.
+</given-names> 
+<surname>
+Mao
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+An integrated filtering antenna array with high selectivity and harmonics suppression
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+64
+</volume>
+, no. 
+<issue>
+6
+</issue>
+, pp. 
+<fpage>
+1798
+</fpage>
+&#x2013;
+<lpage>
+1805
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2016
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref30">
+<label>
+[30]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.-X.
+</given-names> 
+<surname>
+Mao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Gao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Cheng
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Filtering antenna with two-octave harmonic suppression
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Antennas Wireless Propag. Lett.
+</source>
+, vol. 
+<volume>
+16
+</volume>
+, pp. 
+<fpage>
+1361
+</fpage>
+&#x2013;
+<lpage>
+1364
+</lpage>
+, 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref31">
+<label>
+[31]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A simple, compact filtering patch antenna based on mode analysis with wide out-of-band suppression
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+67
+</volume>
+, no. 
+<issue>
+10
+</issue>
+, pp. 
+<fpage>
+6244
+</fpage>
+&#x2013;
+<lpage>
+6253
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref32">
+<label>
+[32]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A compact dual-polarized filtering antenna with steep cut-off for base-station applications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+70
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+5941
+</fpage>
+&#x2013;
+<lpage>
+5946
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref33">
+<label>
+[33]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.-T.
+</given-names> 
+<surname>
+Du
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K. X.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Wong
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Design of a filtering antenna with hybrid feed structure for 5G communications
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+71
+</volume>
+, no. 
+<issue>
+12
+</issue>
+, pp. 
+<fpage>
+9405
+</fpage>
+&#x2013;
+<lpage>
+9414
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref34">
+<label>
+[34]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Zhou
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Wong
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Broadband dual-polarized filtering antenna with wideband and deep out-of-band suppression
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Antennas Propag.
+</source>
+, vol. 
+<volume>
+73
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+884
+</fpage>
+&#x2013;
+<lpage>
+896
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref35">
+<label>
+[35]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Sievenpiper
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R. F. J.
+</given-names> 
+<surname>
+Broas
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+N. G.
+</given-names> 
+<surname>
+Alexopolous
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+E.
+</given-names> 
+<surname>
+Yablonovitch
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+High-impedance electromagnetic surfaces with a forbidden frequency band
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+47
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, pp. 
+<fpage>
+2059
+</fpage>
+&#x2013;
+<lpage>
+2074
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+1999
+</year>
+.
+</mixed-citation>
+</ref>
+</ref-list>
+</back>
+</article>

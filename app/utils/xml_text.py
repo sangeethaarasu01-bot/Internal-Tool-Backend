@@ -133,6 +133,33 @@ def should_encode_as_hex_entity(char: str) -> bool:
     return category.startswith("L")
 
 
+# IEEE vendor punctuation / symbols (non-letter) as hex character references.
+IEEE_HEX_CHAR_ENTITIES: dict[str, str] = {
+    "\u201c": "&#x201C;",
+    "\u201d": "&#x201D;",
+    "\u2018": "&#x2019;",
+    "\u2019": "&#x2019;",
+    "\u2013": "&#x2013;",
+    "\u2014": "&#x2014;",
+    "\u2026": "&#x2026;",
+    "\u00a0": "&#x00A0;",
+    "\u2022": "&#x2022;",
+    "\u00b7": "&#x00B7;",
+    "\u2217": "&#x2217;",
+    "\u204e": "&#x204E;",
+    "\u00d7": "&#x00D7;",
+    "\u00f7": "&#x00F7;",
+    "\u00ae": "&#x00AE;",
+    "\u00a9": "&#x00A9;",
+    "\u2122": "&#x2122;",
+}
+
+
+def ieee_hex_entity_for_char(char: str) -> str | None:
+    """Return IEEE hex entity for a single character, if defined."""
+    return IEEE_HEX_CHAR_ENTITIES.get(char)
+
+
 def sanitize_xml_text(value: str | None, *, log_context: dict[str, Any] | None = None) -> str:
     """Remove characters that are illegal in XML 1.0 text nodes."""
     if not value:

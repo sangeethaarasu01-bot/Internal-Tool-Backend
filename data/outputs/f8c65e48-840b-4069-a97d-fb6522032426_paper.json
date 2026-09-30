@@ -1,0 +1,482 @@
+{
+  "title": "AUTHOR QUERIES",
+  "authors": [
+    {
+      "first_name": "Author",
+      "last_name": "Gateway",
+      "full_name": "Author Gateway",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Author",
+      "last_name": "Gateway",
+      "full_name": "Author Gateway",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Filtering",
+      "last_name": "Antenna",
+      "full_name": "Filtering Antenna",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "With",
+      "last_name": "Improved",
+      "full_name": "With Improved",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Frequency",
+      "last_name": "Selectivity",
+      "full_name": "Frequency Selectivity",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Wideband",
+      "last_name": "Harmonic",
+      "full_name": "Wideband Harmonic",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Suppression",
+      "last_name": "Chunxu",
+      "full_name": "Suppression Chunxu",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Yuekun",
+      "last_name": "Sun",
+      "full_name": "Yuekun Sun",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Jian",
+      "last_name": "Feng",
+      "full_name": "Jian Feng",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    }
+  ],
+  "affiliations": [
+    {
+      "id": "aff1",
+      "department": null,
+      "institution": "See PDF for affiliation details",
+      "city": null,
+      "state": null,
+      "post_code": null,
+      "country": null
+    }
+  ],
+  "abstract": "In this communication, a compact filtering antenna with high frequency selectivity and intensive harmonic suppression over a wide frequency range (3 f0) is proposed. The antenna mainly consists of a planar inverted-F structure (PIFS), a square patch, two parasitic half-wavelength strips, and a layer of metasurface under the patch. The PIFS, parasitic strips, and patch are cross-coupled and tuned at their fundamental mode to produce the third-order filtering response with enhanced bandwidth and sharp roll-off at band-edges. To suppress the higher order harmonics, a split ring resonator (SRR) is first inset into the PIFS to reject the main input power. Then, a layer of metasurface is introduced under the patch to further absorb extra power. As a result, the radiation efficiency at the second-order harmonic can be reduced from 40% to 4%. The principles of the proposed antenna are investigated in detail. The filtering antenna is prototyped and verified, exhibiting a passband from 2.5 to 3.0 GHz and a gain suppression of 24 dB from 3.1 to 6.0 GHz and 18 dB from 6.0 to 9.0 GHz.",
+  "keywords": [
+    "Antenna",
+    "ﬁltering antenna",
+    "frequency selectivity",
+    "har- monic suppression",
+    "meta-surface."
+  ],
+  "sections": [
+    {
+      "id": "sec1",
+      "label": "I.",
+      "title": "INTRODUCTION",
+      "level": 1,
+      "paragraphs": [
+        "Filtering antennas can simultaneously function as antennas and ﬁlters, leading to a signiﬁcant reduction of complexity and cost of RF frontends and improvement of overall frequency responses, and hence, have been a popular research topic in the last decades [1]. Various of antennas with integrated ﬁltering performance are pro- posed, such as wideband ﬁltering antennas [2], [3], dual-band ﬁltering antennas [4], [5], dual-polarization ﬁltering antennas [6], [7], [8], circular-polarized ﬁltering antennas [9], [10], and millimeter-wave ﬁltering antennas [11], [12], [13]. Besides, the ﬁltering antennas with low-proﬁle [14], [15], [16] and duplexing/multiplexing functions [17], [18] are investigated. To replace traditional scenarios of cascaded ﬁlter and antenna in the RF frontend system, the ﬁltering antennas with high frequency selectivity and harmonic suppression are highly desired. The frequency selectivity represents the ability of suppressing the interference from adjacent bands, which can usually be achieved by integrating ﬁlters at the feeds of antennas or introducing radiation nulls at the band-edges. In [19] and [20], bandpass ﬁlters are integrated with antennas, and good frequency selectivity can be achieved by the resonators. However, these added resonators will lead to extra insertion loss. Another popular method of improving the frequency selectivity is to conﬁgure the cross-coupling path between Received 14 April 2025; revised 29 December 2025; accepted 18 January 2026. This work was supported in part by Guangdong Innovative and Entrepreneurial Research Team Program under Grant 2023ZT10x148 and in part by Guangdong Province and Applied Basic Research Foundation under Grant 2025A1515010151. (Corresponding author: Chunxu Mao.) Chunxu Mao and Yuekun Sun are with the School of Electronic and Information Engineering, South China University of Technology, Guangzhou 510600, China (e-mail: cxmao@scut.edu.cn). Jian Feng Li is with the School of Physics and Optoelectronic Engineering, Guangdong University of Technology, Guangzhou 510600, China (e-mail: li.jf01@gdut.edu.cn). D 0018-926X © 2026 IEEE. All rights reserved, including rights for text and data mining, and training of artiﬁcial intelligence and similar technologies. Personal use is permitted, but republication/redistribution requires IEEE permission. See https://www.ieee.org/publications/rights/index.html for more information. the feed and radiator; the out-of-phase between the main coupling path and cross-coupling path will lead to the cancellation of the power, resulting in radiation nulls at speciﬁc frequencies [21], [22], [23]. By adjusting the coupling intensity, the radiation nulls can be easily controlled. In addition, single or multiple radiation nulls can be generated by slitting slots in the radiating element [24] or using a reverse feeding method [25]. Another important issue to be concerned with the ﬁltering antenna is the harmonic radiation, which can lead to potential cross-band interference between different wireless applications since the microwave frequency spectrum is already crowded. A straight- forward way of suppressing the harmonic radiation is to cascade a bandpass of low-pass ﬁlter at the feed of the antenna [26], [27], [28]. However, this will lead to additional insertion loss and reduce the sys- tem’s efﬁciency. By detuning the resonances of high-order modes of different parts of the antenna, the harmonics in the high-band can be signiﬁcantly suppressed without affecting the in-band radiation [29], [30]. Besides, by loading parasitic structures [31], [32] or using a hybrid feeding network [33], improved out-of-band rejection can be achieved. In [34], a hybrid approach of combining multiple slots loading and bandpass ﬁlter is studied, and multiple radiation nulls are intentionally generated in the speciﬁc bands, leading to a wideband harmonic suppression of over four times of center frequency (4 f0). However, most of these works have a limited frequency range of suppression, or the suppression is not intense enough. In addition, most of the works only show the broadside realized gain, which is not sufﬁcient when evaluating the harmonic suppression performance, as interferences may come from different directions. In this communication, an innovative ﬁltering antenna features of high frequency selectivity and wideband harmonic suppression is proposed. By symmetrically placing two resonant structures beside the driven planar inverted-F structure (PIFS), an additional in-band resonant mode and a radiation null can be generated simultaneously, leading to an improved bandwidth and frequency selectivity at the band-edge. The method of controlling radiation null is analyzed in detail. Furthermore, an effective approach to suppressing harmonic radiation is studied step-by-step. First, a split ring resonator (SRR) is inset into the feed PIFS to introduce impedance mismatch in the band of harmonic, resulting in most of the input power reﬂected back at the port. Then, a metasurface is loaded below the patch radiator, sharing the same layer with the PIFS, and the harmonic radiation can be further reduced to around 4% without affecting the in-band radiation efﬁciency. It should be noticed that the parameters of peak realized gain and radiation efﬁciency are used in the analysis in this communi- cation to provide a fair way to evaluate the ﬁltering performance. The proposed ﬁltering antenna is prototyped and veriﬁed experimentally, showing an improved frequency selectivity and harmonic suppression. The remainder of the manuscript is organized as follows. Section II illustrates the design considerations and the principles of realizing the ﬁltering response. Section III discusses the methods of realizing the 2 IEEE TRANSACTIONS ON ANTENNAS AND PROPAGATION Fig. 1. Conﬁgurations of the proposed ﬁltering antenna. (a) Exploded view, (b) side view, and (c) top layer of the bottom substrate. Lg = 80 mm, Lp = 39.5 mm, L1 = 15.8 mm, L2 = 7 mm, L3 = 27 mm, L4 = 5.8 mm, W1 = 4 mm, W2 = 3 mm, W3 = 4.5 mm, W4 = 0.2 mm, gap = 1.5 mm, D = 0.6 mm, H1 = 1.525 mm, H2 = 0.3 mm, and H3 = 5.0 mm. Fig. 2. Evolution of the ﬁltering antennas and the corresponding topologies. (a) Patch antenna fed by L-shaped microstrip, Type-A, (b) patch antenna fed by a PIFS, Type-B, and (c) PIFS-fed patch antenna with two parasitic half-wavelength resonators, Type-C. wideband harmonic suppression. Section IV presents the simulated and measured results, and a conclusion in Section V. Fig. 3. Comparisons of the three antenna designs about S11 and realized gains. Fig. 4. Comparison of the current distribution on the Type-C antenna at (a) 2.8 and (b) 3.1 GHz. Fig. 5. Simulated current distributions of the PIFS and parasitic strips at around the frequency of radiation null, fn. (a) Below fn, 3.05 GHz, (b) at fn, 3.1 GHz, and (c) above fn, 3.15 GHz. Fig. 6. Simulated realized gains of the proposed antenna with different spaces between the PIFS and strips, gap."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    },
+    {
+      "id": "sec2",
+      "label": "II.",
+      "title": "ANTENNA DESIGN",
+      "level": 1,
+      "paragraphs": [
+        "A. Antenna Conﬁgurations Fig. 1 shows the conﬁgurations of the proposed ﬁltering antenna. The antenna is mainly composed of two stacked substrates with an air gap of 5 mm between them, as shown in Fig. 1(b). The radiator is a square patch, which is printed on the upper layer of the top IEEE TRANSACTIONS ON ANTENNAS AND PROPAGATION 3 TABLE I COMPARISON WITH OTHER HARMONIC SUPPRESSION FILTERING ANTENNAS Fig. 7. Antenna designs for harmonic suppression. (a) Embedded SRR in the PIFS, denoted as Type-D and (b) proposed design, loaded with a metasurface. Fig. 8. Comparison of the simulated current distribution at 5.6 GHz. (a) Type-C. (b) Type-D. substrate. The driven source is a PIFS, which is printed on the top layer of the lower substrate, as shown in Fig. 1(c). Two bent parasitic strips are placed on both sides of the PIFS. The PIFS and strips are surrounded by a circle of metasurface. Besides, an SRR is inserted in the PIFS for suppressing the second-order harmonic suppression. It is also noted that the low-band antenna’s parasitic patch is served as the complexity and proﬁle of the dual-band shared aperture antenna. Rogers 4003C substrate with dielectric constant of 3.55 and a loss tangent of 0.0027 is used in the design. The thicknesses of the top and bottom substrates are 0.3 mm and 1.525 mm, respectively. The antenna was designed and optimized by high frequency structural simulator (HFSS), and the ﬁnal dimensional parameters are listed in the caption of Fig. 1. Fig. 9. Comparisons of the simulated peak realized gain and radiation efﬁciency between the Type-C, Type-D, Type-E, and proposed antennas. (a) Peak realized gain and (b) radiation efﬁciency."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec3",
+          "label": "B.",
+          "title": "Design Procedures",
+          "level": 2,
+          "paragraphs": [
+            "To better illustrate the design procedure of the ﬁltering antenna, three referenced antennas and their corresponding topologies, denoted as Type-A, B, and C, are presented in Fig. 2. The antenna design is originally from a traditional proximate-fed patch antenna (Type- A), as shown in Fig. 2(a). Here, the patch antenna is equivalent to a resonator, R1, and the radiation in free space is viewed as a load. Since only the dominant mode is concerned and excited, the Type-A reference antenna has shown only one resonant frequency at around 2.6 GHz, leading to a limited bandwidth of 100 MHz, as shown in Fig. 3. When the microstrip feed is replaced by a PIFS through shorting one end of the microstrip to the ground, a second-order resonant structure can be achieved, as the topology 4 IEEE TRANSACTIONS ON ANTENNAS AND PROPAGATION Fig. 10. (a) Conﬁguration of the unitcell of the metasurface and (b) simulated |S11| of the unitcell with different lengths of L4. Fig. 11. Simulated E-ﬁeld distribution on the antenna at 5.6 GHz. (a) E-ﬁeld on the patch, Type-D antenna, (b) E-ﬁeld on the patch, proposed antenna, and (c) E-ﬁeld on the metasurface layer, proposed antenna. Fig. 12. Photographs of the proposed ﬁltering antenna prototype. (a) Upper layer of the bottom substrate and (b) upper layer of the top substrate. presented. The resonances of the patch and the PIFS are tuned to similar frequency, resulting in a second-order frequency response with improved bandwidth of 300 MHz. By further loading two parasitic strip resonators (denoted as R3 and R3′) around the PIFS, as depicted in Fig. 2(c), one more resonant frequency can be realized, rendering a third-order frequency response with an improved bandwidth of over 500 MHz. In addition, the parasitic strips can conﬁgure a cross-coupling path with a 180◦phase behind the main coupling path. When the power from the two coupling paths is comparable at a given frequency, the power will be canceled out, leading to a radiation null. As shown in Fig. 3, the radiation null is generated at 3.1 GHz, resulting in a sharp roll-off from the bandpass to band-stop at the higher band-edge. An approximate calculation shows that the roll-off is over 218 dB/GHz, which is comparable to a ﬁlter."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec4",
+          "label": "C.",
+          "title": "Mechanism of Radiation Null",
+          "level": 2,
+          "paragraphs": [
+            "To further demonstrate the mechanism of the radiation null, the current and electric ﬁeld distributions of the ﬁltering antenna are studied. Fig. 4 shows the comparisons of the simulated current and E-ﬁeld distributions of the proposed antenna at 2.8 and 3.1 GHz, Fig. 13. Simulated and measured results of the proposed ﬁltering antenna. (a) S-parameters and (b) realized gain and radiation efﬁciency. Fig. 14. Measured and simulated normalized radiation patterns of the proposed ﬁltering antenna at 2.6 GHz. (a) xz-plane and (b) yz-plane. respectively. One can see that the input power can be coupled to the parasitic strips and then radiated out to free space from the patch in the operating band, as shown in Fig. 4(a). At the band of radiation null, there is still a noticeable coupling between the parasitic strips and PIFS, but the power on the patch is canceled out, leading to a weak current distribution on the radiating patch, as shown in Fig. 4(b). Fig. 5 shows the current distributions of the antenna at around the frequency of radiation null, denoted as fn. As observed, the current on the PIFS is comparable to the current on the two strips at fn = 3.1 GHz, which satisﬁes the condition of producing the radiation null. At the lower or higher bands, the current on the PIFS is either stronger or weaker than the current on the strip resonators, and hence, no radiation null can be generated, which proves the validity of the assumption. Under this assumption, if the mutual coupling between the PIFS and strip resonators is changed, the radiation null will be shifted correspondingly. To verify it, a parametric study is carried out. Fig. 6 shows the simulated realized of the proposed antenna with different distances between the PIFS and the strips, denoted as gap. As observed, the radiation null moves from 3.2 to 3.05 GHz when the gap is increased from 5.0 to 5.8 mm. IEEE TRANSACTIONS ON ANTENNAS AND PROPAGATION 5"
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec5",
+      "label": "III.",
+      "title": "WIDEBAND HARMONIC SUPPRESSION",
+      "level": 1,
+      "paragraphs": [
+        "For a ﬁltering antenna, another important issue to be concerned with is the cross-band interference due to the radiation of the higher order modes, especially for the second-order harmonics, which are not far away from the predominant mode and usually very strong. In this section, different methods, including an embedded SRR and metasurface layer, are combined to suppress the harmonic radiation over a wide frequency range."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec6",
+          "label": "A.",
+          "title": "Embedded SRR",
+          "level": 2,
+          "paragraphs": [
+            "To suppress the radiation of the second-order harmonic, a SRR is embedded into the PIFS, as shown in Fig. 7(a). The resonant frequency of the SRR is tuned to the second-order harmonic of the proposed ﬁltering antenna, at around 5.6 GHz. Fig. 8 compares the simulated current distribution at 5.6 GHz between the Type-C and Type-D antennas. As observed from Fig. 8(a), when the PIFS and the parasitic strip resonators are working at the second-order mode, intensive power can be coupled from PIFS to the strip resonators. When the SRR is embedded into the PIFS, which is resonant at around 5.6 GHz, an intensive current is distributed around the SRR. Hence, the power coupled to the two parasitic strip resonators can be signiﬁcantly reduced. Since the majority power is reﬂected back on the PIFS, the second-order harmonic can be efﬁciently suppressed. Fig. 9 compares the simulated peak realized gain and radiation efﬁciency among the reference antennas Type-C, Type-D, Type-E, and the proposed antenna. It is noted that the peak realized gain instead of the realized gain in the broadside direction is adopted to measure the harmonic suppression performance as the cross-band interference may originally come from any direction, but not only from the broadside direction. As observed from Fig. 9(a), the peak realized gain of the second-order harmonic is reduced from 6 dBi to below 0 dBi from the Type-C antenna to the Type-D antenna, and the radiation efﬁciency is reduced from 40% to 14%."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec7",
+          "label": "B.",
+          "title": "Metasurface for Harmonic Suppression",
+          "level": 2,
+          "paragraphs": [
+            "Although most of the input power of the second-order harmonic is reﬂected back at the PIFS, there are still some power couples from the PIFS to the patch and radiate out. To further suppress unwanted radiation, a new method of loading a layer of metasurface below the radiator is proposed, as shown in Fig. 7(b). The metasurface is placed on the upper layer of the bottom substrate without introducing addi- tional substrate/layer. The conﬁguration of the unit cell is presented in Fig. 10(a), which is simply a patch shorted to the ground plane through a pin. The opened sides of the patch are equivalent to a capacitor, whereas the shorted pin can be molded as an inductor; the lossy substrate is represented by a resistor. Thus, the unit cell can be viewed as a series resonant circuit, and the resonant frequency can be controlled by tuning the gap between the unit cells. When it resonates, an intensive E-ﬁeld distribution will be generated, leading to the loss of power. As a result, the power in the designed frequency can be suppressed [35]. A periodic boundary is used to investigate the resonance of the unit cell, as shown in Fig. 10(b). As observed, the resonance is moved to the lower band when L4 is increased. The resonance here indicates that a small part of the incident wave is absorbed and lost in the unit cell when it resonates, but it is insufﬁcient to deal with high-power cases when it works alone, as the Type-E curve shown in Fig. 9. However, this additional structure can be used to further suppress the radiation in the given frequency range. As depicted in Fig. 9, the peak realized gain at the second-order harmonic can be reduced by 14 dB when rejection bands of the SRR and the metasurface are aligned with each other. Analyzing the radiation efﬁciency in Fig. 9(b), the power radiated out is further suppressed to below 4% when the metasurface is applied, demonstrating that a good harmonic suppression can be achieved. For better presenting the harmonic suppression performance, the simulated E-ﬁeld distributions of the antenna are displayed and com- pared in Fig. 11. As shown in Fig. 11(a), although a major power of the second-order harmonic has been reﬂected back at the input, there are still some power coupled to the radiating patch, which is working at its high-order mode. When the metasurface is placed below the radiating patch, the power that is coupled to the radiating patch is much weaker than that the one without a metasurface, as shown in Fig. 11(b). Having another check of the E-ﬁeld distribution on the upper layer of the bottom substrate, an intensive E-ﬁeld is distributed along the gaps between the unit cell without producing an effective radiation, which veriﬁes our supposition. Therefore, by combining the embedded SRR in the PIFS and loading a layer of metasurface, the radiation of the harmonics can be signiﬁcantly suppressed."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec8",
+      "label": "IV.",
+      "title": "RESULTS AND DISCUSSION",
+      "level": 1,
+      "paragraphs": [
+        "The proposed ﬁltering antenna was fabricated, and the upper layers of the bottom and top substrates of the prototype are respectively shown in Fig. 12. As shown in Fig. 12(a), from inner to outer, they are PIFS with embedded SRR, two parasitic strip resonators, and a layer of metasurface surrounding. The copper areas of the two layers are similar, and thus, a compact size can be maintained. Fig. 13(a) presents the measured and simulated S-parameters from 1.5 to 9 GHz. As observed, the measured results agree well with the simulations in terms of impedance match and gain response. The measured impedance −10 dB bandwidth of the antenna is from 2.4 to 2.9 GHz. Outside of the band, the reﬂection coefﬁcients are close to 0 dB. Fig. 13(b) displays the simulated and measured peak realized gains and the radiation efﬁciency of the proposed ﬁltering antenna. Similarly, a good consistence can be observed between the simulated and measured results. As can be seen, the measured peak realized gains are about 8 dBi in the band, which is quickly reduced to below −15 dBi from 3 to 5.8 GHz, giving a harmonic suppression of over 23 dB. The realized gain is somehow increased in the band of 6.0–9.0 GHz, but still remains over 18 dB gain suppression. This is mainly due to the mismatch between the higher order resonance of the patch and the PIFS. The minor discrepancy between the simulated and measured results at around 6 GHz is mainly attributed to the fabrication tolerances. Besides, the antenna has a high efﬁciency of around 90% in the band, but it is basically remained below 8% out of the band from 3.0 to 9.0 GHz, showing an excellent harmonic suppression performance. Fig. 14 shows the simulated and measured normalized radia- tion patterns of the proposed antenna at 2.6 GHz. The antenna exhibits uni-directional radiation pattern in the broadside direction. The cross-polarization level is more than 30 dB lower than in the co-polarization. In addition, the front-to-back ratio is over 20 dB, showing the proposed antenna has a good radiation performance. The small discrepancy between the simulated and measured radiation patterns is mainly due to the tolerances during the measurement. The proposed antenna is compared with other ﬁltering antennas with harmonic suppression performance reported in [26], [27], [28], [29], [30], [31], [32], [33], and [34] in terms of antenna proﬁle, method of suppression, gain in-band, frequency selectivity, and gain suppression. The antennas in [32] and [33] have a limited bandwidth of suppression of less than 2 f0, without tackling the second-order harmonics. The works in [26] and [27] have a wideband harmonic suppression, but a low in-band gain of less than 3 dBi can be achieved. The works in [28], [31], and [33] have a limited frequency selectivity with the roll-off ratio less than 60 dB/GHz. The work 6 IEEE TRANSACTIONS ON ANTENNAS AND PROPAGATION in [34] has a high gain in-band, good frequency selectivity, and wideband gain suppression, but the antenna has a high proﬁle. Compared with these works, the proposed ﬁltering antenna has a low proﬁle, an improved frequency selectivity, and out-of-band rejection, and this is the ﬁrst time that resonator and metasurface are combined together to realize wideband harmonic suppression. Moreover, different from other works, the peak realized gain instead of realized in the broadside direction is used to evaluate the harmonic suppression performance."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    },
+    {
+      "id": "sec9",
+      "label": "V.",
+      "title": "CONCLUSION",
+      "level": 1,
+      "paragraphs": [
+        "In this communication, a compact ﬁltering antenna with improved frequency selectivity and wideband harmonic suppression has been proposed for wireless applications. By conﬁguring a cross-coupling, a radiation null can be realized at the band-edge for enhancing the frequency selectivity. To suppress the radiation from harmonics over a wide frequency range, a slit ring resonator is ﬁrst embedded into the feed source. Then, a metasurface is employed to further reduce the harmonic radiation for the ﬁrst time. The principles of generating and controlling the radiation null, as well as the procedure of suppressing harmonics, have been explained in detail. Compared with other reported works, the proposed ﬁltering antenna has shown an improved frequency selectivity and wideband harmonic suppression performance. The techniques developed in this work can be widely used in other types of antennas."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    }
+  ],
+  "references": [
+    {
+      "id": "ref1",
+      "number": 1,
+      "raw_text": "C. X. Mao, Y. Zhang, X. Y. Zhang, P. Xiao, Y. Wang, and S. Gao, “Filtering antennas: Design methods and recent developments,” IEEE Microw. Mag., vol. 22, no. 11, pp. 52–63, Nov. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref2",
+      "number": 2,
+      "raw_text": "H.-T. Hu, F.-C. Chen, and Q.-X. Chu, “Novel broadband ﬁltering slotline antennas excited by multimode resonators,” IEEE Antennas Wireless Propag. Lett., vol. 16, pp. 489–492, 2017.",
+      "parsed": null
+    },
+    {
+      "id": "ref3",
+      "number": 3,
+      "raw_text": "R. Wu, G.-H. Wen, Z.-X. Du, and F.-C. Chen, “Broadband stub-loaded integrated ﬁltering antenna for base station applications,” IEEE Antennas Wireless Propag. Lett., vol. 24, pp. 781–785, 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref4",
+      "number": 4,
+      "raw_text": "Y.-M. Zhang and S. Zhang, “Two-port dual-band ﬁltering network and its application on ﬁltering antennas,” IEEE Antennas Wireless Propag. Lett., vol. 22, pp. 679–683, 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref5",
+      "number": 5,
+      "raw_text": "C. X. Mao et al., “Dual-band patch antenna with ﬁltering performance and harmonic suppression,” IEEE Trans. Antennas Propag., vol. 64, no. 9, pp. 4074–4077, Sep. 2016.",
+      "parsed": null
+    },
+    {
+      "id": "ref6",
+      "number": 6,
+      "raw_text": "D. Yang, H. Zhai, C. Guo, and C. Ma, “A novel differentially fed dual-polarized ﬁltering magneto-electric dipole antenna for 5G base station applications,” IEEE Trans. Antennas Propag., vol. 70, no. 7, pp. 5373–5382, Jul. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref7",
+      "number": 7,
+      "raw_text": "Y. Zhang, X.-Y. Zhang, and Q.-H. Liu, “Dual-polarized ﬁltering mag- netoelectric dipole antenna utilizing intrinsic highpass ﬁlter network and integrated lowpass ﬁlter network,” IEEE Trans. Antennas Propag., vol. 69, no. 12, pp. 8090–8099, Dec. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref8",
+      "number": 8,
+      "raw_text": "Y. Li, Z. Zhao, Z. Tang, and Y. Yin, “Differentially fed, dual-band dual- polarized ﬁltering antenna with high selectivity for 5G sub-6 GHz base station applications,” IEEE Trans. Antennas Propag., vol. 68, no. 4, pp. 3231–3236, Apr. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref9",
+      "number": 9,
+      "raw_text": "W.-J. Yang, Y.-M. Pan, and X.-Y. Zhang, “A single-layer low-proﬁle circularly polarized ﬁltering patch antenna,” IEEE Antennas Wireless Propag. Lett., vol. 20, pp. 602–606, 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref10",
+      "number": 10,
+      "raw_text": "Z. Xiao, Y. Cao, W. Che, and Q. Xue, “Millimeter-wave ﬁltering circularly polarized antenna using hybrid radiation modes for satel- lite applications,” IEEE Trans. Antennas Propag., vol. 72, no. 10, pp. 7584–7593, Oct. 2024.",
+      "parsed": null
+    },
+    {
+      "id": "ref11",
+      "number": 11,
+      "raw_text": "Y.-M. Pan, G. Liu, X.-Y. Liu, K. W. Leung, and P. F. Hu, “A wideband and high-gain ﬁltering antenna for 5G millimeter-wave appli- cations,” IEEE Trans. Antennas Propag., vol. 71, no. 11, pp. 9006–9011, Nov. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref12",
+      "number": 12,
+      "raw_text": "S. J. Yang, Y. M. Pan, L.-Y. Shi, and X. Y. Zhang, “Millimeter- wave dual-polarized ﬁltering antenna for 5G application,” IEEE Trans. Antennas Propag., vol. 68, no. 7, pp. 5114–5121, Jul. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref13",
+      "number": 13,
+      "raw_text": "Y. Zhang, W. Yang, Q. Xue, J. Huang, and W. Che, “Broadband dual-polarized differential-fed ﬁltering antenna array for 5G millimeter- wave applications,” IEEE Trans. Antennas Propag., vol. 70, no. 3, pp. 1989–1998, Mar. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref14",
+      "number": 14,
+      "raw_text": "W. Yang, S. Chen, Q. Xue, W. Che, G. Shen, and W. Feng, “Novel ﬁltering method based on metasurface antenna and its application for wideband high-gain ﬁltering antenna with low proﬁle,” IEEE Trans. Antennas Propag., vol. 67, no. 3, pp. 1535–1544, Mar. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref15",
+      "number": 15,
+      "raw_text": "Q. Liu, L. Zhu, J. Wang, and W. Wu, “A wideband patch and SIW cavity hybrid antenna with ﬁltering response,” IEEE Antennas Wireless Propag. Lett., vol. 19, pp. 836–840, 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref16",
+      "number": 16,
+      "raw_text": "J. Li, L. Xiang, Y. Shi, X. Yu Wu, and W. Hong, “Single-layer millimeter-wave ﬁltenna with quasi-elliptic gain response under dual- mode resonance,” IEEE Antennas Wireless Propag. Lett., vol. 23, pp. 2797–2801, 2024.",
+      "parsed": null
+    },
+    {
+      "id": "ref17",
+      "number": 17,
+      "raw_text": "C.-X. Mao, S. Gao, Y. Wang, F. Qin, and Q.-X. Chu, “Compact highly integrated planar duplex antenna for wireless communications,” IEEE Trans. Microw. Theory Techn., vol. 64, no. 7, pp. 2006–2013, Jul. 2016.",
+      "parsed": null
+    },
+    {
+      "id": "ref18",
+      "number": 18,
+      "raw_text": "C. X. Mao, L. Zhang, M. Khalily, Y. Gao, and P. Xiao, “A multiplex- ing ﬁltering antenna,” IEEE Trans. Antennas Propag., vol. 69, no. 8, pp. 5066–5071, Aug. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref19",
+      "number": 19,
+      "raw_text": "C.-X. Mao, S. Gao, and Y. Wang, “Dual-band full-duplex Tx/Rx anten- nas for vehicular communications,” IEEE Trans. Veh. Technol., vol. 67, no. 5, pp. 4059–4070, May 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref20",
+      "number": 20,
+      "raw_text": "C.-X. Mao, S. Gao, Y. Wang, F. Qin, and Q.-X. Chu, “Multimode resonator-fed dual-polarized antenna array with enhanced bandwidth and selectivity,” IEEE Trans. Antennas Propag., vol. 63, no. 12, pp. 5492–5499, Dec. 2015.",
+      "parsed": null
+    },
+    {
+      "id": "ref21",
+      "number": 21,
+      "raw_text": "C. Fan, B. Wu, Y.-L. Wang, H.-Y. Xie, and T. Su, “High-gain SIW ﬁltering antenna with low H-plane cross polarization and control- lable radiation nulls,” IEEE Trans. Antennas Propag., vol. 69, no. 4, pp. 2336–2340, Apr. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref22",
+      "number": 22,
+      "raw_text": "B.-J. Chen, X.-S. Yang, and B.-Z. Wang, “A compact high-selectivity wideband ﬁltering antenna with multipath coupling structure,” IEEE Antennas Wireless Propag. Lett., vol. 21, pp. 1654–1658, 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref23",
+      "number": 23,
+      "raw_text": "S. Liu, Z. Wang, and Y. Dong, “A compact ﬁltering patch antenna with high suppression level and its CP application,” IEEE Antennas Wireless Propag. Lett., vol. 22, pp. 769–773, 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref24",
+      "number": 24,
+      "raw_text": "J. Y. Jin, S. Liao, and Q. Xue, “Design of ﬁltering-radiating patch antennas with tunable radiation nulls for high selectivity,” IEEE Trans. Antennas Propag., vol. 66, no. 4, pp. 2125–2130, Apr. 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref25",
+      "number": 25,
+      "raw_text": "M. Yang, B. Wu, C. Fan, H.-Y. Xie, J.-Z. Chen, and L. Wu, “Synthesis and design of ﬁltering antenna with ﬂexible passband and radiation null based on parallel scheme,” IEEE Antennas Wireless Propag. Lett., vol. 20, pp. 838–842, 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref26",
+      "number": 26,
+      "raw_text": "G.-H. Sun, S.-W. Wong, L. Zhu, and Q.-X. Chu, “A compact printed ﬁltering antenna with good suppression of upper harmonic band,” IEEE Antennas Wireless Propag. Lett., vol. 15, pp. 1349–1352, 2016.",
+      "parsed": null
+    },
+    {
+      "id": "ref27",
+      "number": 27,
+      "raw_text": "J.-F. Qian, F.-C. Chen, Y.-H. Ding, H.-T. Hu, and Q.-X. Chu, “A wide stopband ﬁltering patch antenna and its application in MIMO system,” IEEE Trans. Antennas Propag., vol. 67, no. 1, pp. 654–658, Jan. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref28",
+      "number": 28,
+      "raw_text": "L.-H. Wen et al., “A wideband differentially fed dual-polarized antenna with wideband harmonic suppression,” IEEE Trans. Antennas Propag., vol. 67, no. 9, pp. 6176–6181, Sep. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref29",
+      "number": 29,
+      "raw_text": "C.-X. Mao et al., “An integrated ﬁltering antenna array with high selectivity and harmonics suppression,” IEEE Trans. Microw. Theory Techn., vol. 64, no. 6, pp. 1798–1805, Jun. 2016.",
+      "parsed": null
+    },
+    {
+      "id": "ref30",
+      "number": 30,
+      "raw_text": "C.-X. Mao, S. Gao, Y. Wang, and Z. Cheng, “Filtering antenna with two-octave harmonic suppression,” IEEE Antennas Wireless Propag. Lett., vol. 16, pp. 1361–1364, 2017.",
+      "parsed": null
+    },
+    {
+      "id": "ref31",
+      "number": 31,
+      "raw_text": "W. Yang et al., “A simple, compact ﬁltering patch antenna based on mode analysis with wide out-of-band suppression,” IEEE Trans. Antennas Propag., vol. 67, no. 10, pp. 6244–6253, Oct. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref32",
+      "number": 32,
+      "raw_text": "X. Liu et al., “A compact dual-polarized ﬁltering antenna with steep cut-off for base-station applications,” IEEE Trans. Antennas Propag., vol. 70, no. 7, pp. 5941–5946, Jul. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref33",
+      "number": 33,
+      "raw_text": "Z.-T. Du, K. X. Wang, Z. Chen, and H. Wong, “Design of a ﬁltering antenna with hybrid feed structure for 5G communications,” IEEE Trans. Antennas Propag., vol. 71, no. 12, pp. 9405–9414, Dec. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref34",
+      "number": 34,
+      "raw_text": "H. Liu, C. Zhou, X. Zhang, H. Li, Y. Li, and H. Wong, “Broadband dual-polarized ﬁltering antenna with wideband and deep out-of- band suppression,” IEEE Trans. Antennas Propag., vol. 73, no. 2, pp. 884–896, Feb. 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref35",
+      "number": 35,
+      "raw_text": "D. Sievenpiper, L. Zhang, R. F. J. Broas, N. G. Alexopolous, and E. Yablonovitch, “High-impedance electromagnetic surfaces with a for- IEEE TRANSACTIONS ON ANTENNAS AND PROPAGATION 7 bidden frequency band,” IEEE Trans. Microw. Theory Techn., vol. 47, no. 11, pp. 2059–2074, Nov. 1999.",
+      "parsed": null
+    }
+  ],
+  "figures": [],
+  "tables": [],
+  "equations": [],
+  "metadata": {
+    "manuscript_id": "",
+    "source_filename": "paper.pdf"
+  },
+  "extraction_warnings": []
+}

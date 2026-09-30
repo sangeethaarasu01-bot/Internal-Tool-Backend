@@ -166,3 +166,61 @@ def test_sync_bio_xrefs_creates_missing_bios():
     fixed = repair_xml_xrefs(xml)
     ok, errors = Validator().validate(fixed, tpl, SchemaMap(root_tag="article", elements=[]))
     assert ok, errors
+
+
+def test_fill_authors_preserves_template_orcid_when_pdf_has_none():
+    from app.agent.xml_generator import _fill_authors
+
+    tpl = """<article><front><article-meta><contrib-group>
+    <contrib id="contrib1" contrib-type="author">
+      <contrib-id contrib-id-type="orcid">0009-0001-4364-1559</contrib-id>
+      <string-name><given-names>T</given-names><surname>One</surname></string-name>
+    </contrib>
+    </contrib-group></article-meta></front></article>"""
+    root = etree.fromstring(tpl.encode())
+    _fill_authors(
+        root,
+        [Author(first_name="Yuki", last_name="Kakichi", full_name="Yuki Kakichi")],
+    )
+    xml = etree.tostring(root, encoding="unicode")
+    assert "0009-0001-4364-1559" in xml
+    assert 'contrib-id-type="orcid"' in xml
+
+
+def test_author_comment_follows_contribs_before_affiliations():
+    from app.agent.xml_generator import _fill_authors
+    from app.utils.xml_helpers import reorder_contrib_group_author_comments, xml_local_name
+    from app.utils.xml_helpers import is_element_node
+
+    tpl = """<article><front><article-meta><contrib-group>
+    <author-comment><p>Corresponding author: Yuki Kakichi</p></author-comment>
+    <contrib id="contrib1" contrib-type="author"><string-name>A</string-name></contrib>
+    </contrib-group>
+    <aff id="aff1"><institution>Example U</institution></aff>
+    </article-meta></front></article>"""
+    root = etree.fromstring(tpl.encode())
+    _fill_authors(root, [Author(full_name="Yuki Kakichi", first_name="Yuki", last_name="Kakichi")])
+    reorder_contrib_group_author_comments(root)
+    group = root.xpath(".//*[local-name()='contrib-group']")[0]
+    order = [xml_local_name(c) for c in group if is_element_node(c)]
+    assert order == ["contrib", "author-comment"]
+    aff = root.xpath(".//*[local-name()='aff']")[0]
+    assert group.getparent().index(group) < group.getparent().index(aff)
+
+
+def test_repair_xml_xrefs_preserves_ieee_hex_entities_in_front_matter():
+    from app.agent.xml_generator import repair_xml_xrefs
+
+    xml = """<?xml version="1.0"?>
+<article><front><article-meta>
+<aff id="aff1"><institution>Universit&#x00E9; Claude Bernard</institution></aff>
+<contrib-group>
+<contrib id="contrib1"><xref ref-type="bio" rid="bio1"/></contrib>
+</contrib-group>
+</article-meta></front>
+<back><bio-group>
+<bio id="bio1"><p><xref ref-type="contrib" rid="contrib1">A</xref></p></bio>
+</bio-group></back></article>"""
+    fixed = repair_xml_xrefs(xml)
+    assert "Universit&#x00E9;" in fixed
+    assert "Universit\xe9" not in fixed.replace("&#x00E9;", "")

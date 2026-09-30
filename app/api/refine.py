@@ -13,7 +13,12 @@ from app.agent.validator import Validator
 from app.db import get_job
 from app.llm.client import create_llm_client
 from app.models.schema_map import SchemaMap
-from app.utils.xml_helpers import apply_ieee_entities_to_tree, post_process_ieee_entities
+from app.utils.output_paths import xml_output_filename
+from app.utils.xml_helpers import (
+    apply_ieee_entities_to_tree,
+    format_ieee_empty_element_tags,
+    post_process_ieee_entities,
+)
 
 router = APIRouter(prefix="/jobs", tags=["refine"])
 
@@ -41,8 +46,12 @@ async def refine_job_output(job_id: str, body: RefineRequest) -> dict:
         parser = etree.XMLParser(remove_blank_text=False, recover=True)
         root = etree.fromstring(xml.encode("utf-8"), parser=parser)
         apply_ieee_entities_to_tree(root)
-        xml = post_process_ieee_entities(
-            etree.tostring(root, encoding="UTF-8", xml_declaration=True, pretty_print=True).decode("utf-8")
+        xml = format_ieee_empty_element_tags(
+            post_process_ieee_entities(
+                etree.tostring(
+                    root, encoding="UTF-8", xml_declaration=True, pretty_print=True
+                ).decode("utf-8")
+            )
         )
 
     instruction = body.instruction.strip()
@@ -88,4 +97,5 @@ async def refine_job_output(job_id: str, body: RefineRequest) -> dict:
         "xml_content": xml,
         "validation": validation,
         "download_url": f"/api/download/{job_id}",
+        "download_filename": xml_output_filename(job.pdf_filename),
     }

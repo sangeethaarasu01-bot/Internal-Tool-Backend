@@ -17,9 +17,10 @@ from app.utils.xml_helpers import (
     apply_ieee_entities_to_tree,
     clean_extracted_abstract,
     escape_xml_text,
+    finalize_ieee_xml,
     is_element_node,
     normalize_text_for_xml_dom,
-    post_process_ieee_entities,
+    reorder_contrib_group_author_comments,
     serialize_tree,
     xml_local_name,
 )
@@ -210,7 +211,8 @@ def repair_xml_xrefs(xml: str) -> str:
     parser = etree.XMLParser(remove_blank_text=False, recover=True)
     root = etree.fromstring(xml.encode("utf-8"), parser=parser)
     sync_bio_xrefs(root)
-    return etree.tostring(root, encoding="unicode")
+    repaired = etree.tostring(root, encoding="unicode")
+    return finalize_ieee_xml(repaired)
 
 
 def _contrib_children(group: etree._Element) -> list[etree._Element]:
@@ -266,6 +268,8 @@ def _apply_author_to_contrib(contrib: etree._Element, author: Author, idx: int) 
             orcid_nodes[0].text = author.orcid
     else:
         for node in orcid_nodes:
+            if (node.text or "").strip():
+                continue
             parent = node.getparent()
             if parent is not None:
                 parent.remove(node)
@@ -322,6 +326,7 @@ def _fill_authors(root: etree._Element, authors: list[Author]) -> None:
                 if xref.get("ref-type") == "bio":
                     xref.set("rid", f"bio{idx}")
         group.append(clone)
+    reorder_contrib_group_author_comments(root)
 
 
 def _generate_from_template_dom(
@@ -341,8 +346,7 @@ def _generate_from_template_dom(
     elif paper.authors:
         _fill_authors(root, paper.authors)
     sync_bio_xrefs(root)
-    apply_ieee_entities_to_tree(root)
-    output = post_process_ieee_entities(serialize_tree(tree, doctype=doctype))
+    output = finalize_ieee_xml(serialize_tree(tree, doctype=doctype))
     etree.fromstring(output.encode("utf-8"))
     return output
 

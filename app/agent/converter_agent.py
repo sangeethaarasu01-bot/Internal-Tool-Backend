@@ -11,8 +11,10 @@ from app.agent.schema_analyzer import SchemaAnalyzer
 from app.agent.semantic_matcher import SemanticMatcher
 from app.agent.validator import Validator
 from app.agent.xml_generator import XMLGenerator, repair_xml_xrefs
+from app.utils.xml_helpers import finalize_ieee_xml
 from app.config import settings
 from app.llm.client import LLMClient, create_llm_client
+from app.utils.output_paths import xml_output_filename
 
 
 class ConverterAgent:
@@ -36,6 +38,7 @@ class ConverterAgent:
         template_path: Path,
         job_id: str,
         client_id: str | None = None,
+        pdf_filename: str | None = None,
     ) -> dict:
         self.emit("stage", "starting", 0)
 
@@ -89,7 +92,9 @@ class ConverterAgent:
         if not ok:
             raise ValueError(f"Validation failed: {errors}")
 
-        output_path = settings.outputs_dir / f"{job_id}.xml"
+        output_xml = finalize_ieee_xml(output_xml)
+        output_name = xml_output_filename(pdf_filename or pdf_path.name)
+        output_path = settings.outputs_dir / output_name
         output_path.write_text(output_xml, encoding="utf-8")
         self.emit("stage", "done", 100)
         self.emit("done", "Conversion complete", 100)

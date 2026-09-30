@@ -1,0 +1,1274 @@
+{
+  "title": "Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader",
+  "authors": [
+    {
+      "first_name": "Yanmar",
+      "last_name": "Holdings",
+      "full_name": "Yanmar Holdings",
+      "orcid": null,
+      "email": "kakichiyuki.de@gmail.com",
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": true,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "The",
+      "last_name": "Netherlands",
+      "full_name": "The Netherlands",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Europe",
+      "last_name": "Gmb",
+      "full_name": "Europe Gmb",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Yanmar",
+      "last_name": "Power",
+      "full_name": "Yanmar Power",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Technology",
+      "last_name": "Co",
+      "full_name": "Technology Co",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Japan",
+      "last_name": "Corresponding",
+      "full_name": "Japan Corresponding",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Yuki",
+      "last_name": "Kakichi",
+      "full_name": "Yuki Kakichi",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    }
+  ],
+  "affiliations": [
+    {
+      "id": "aff1",
+      "department": null,
+      "institution": "See PDF for affiliation details",
+      "city": null,
+      "state": null,
+      "post_code": null,
+      "country": null
+    }
+  ],
+  "abstract": "Hybrid technologies are considered one of the key solutions for CO2 reduction in large off-highway machines that operate for long hours in suburban areas with limited access to energy refueling infrastructure. The effectiveness of CO2 reduction through hybridization largely depends on the hybrid powertrain architecture and its operating strategies. This paper uses a parallel-series hybrid wheel loader as a research platform to investigate and optimize energy management strategies. The parallel-series hybrid powertrain consists of a pure electric propulsion system and a parallel hybrid working hydraulic system. In this paper, a real-time capable energy management strategy based on an optimization theory is presented. This strategy combines Dynamic Programming (DP) and Pontryagin’s Minimum Principle (PMP) to optimize both engine start-stop sequence and torque split between the engine and the electric machine, while balancing the disadvantages of each control theory. To enable real-time implementation of the proposed control strategy, short-term vehicle power demand is predicted using a state detection algorithm developed to account for the repetitive nature of the duty cycles of a wheel loader. Simulation results indicate that fuel consumption can be reduced by 4.0% compared to a rule-based strategy in a typical loading cycle. Test results with a prototype hybrid wheel loader confirm that the proposed control strategy operates in real-time and improves system efficiency. In particular, the average engine brake fuel consumption (BSFC) improved by 0.7% in the loading cycle and by 1.3% in a more realistic mission cycle that combines the loading cycle with driving.",
+  "keywords": [
+    "CO2 reduction",
+    "dynamic programming (DP)",
+    "engine start-stop control",
+    "hybrid wheel loader",
+    "Pontryagin’s minimum principle (PMP)",
+    "optimal control."
+  ],
+  "sections": [
+    {
+      "id": "sec1",
+      "label": "I.",
+      "title": "INTRODUCTION",
+      "level": 1,
+      "paragraphs": [
+        "The global concern over climate change is pushing automo- tive manufacturers to reduce pollutant emissions from their products. Since pollutant emission limits for the off-highway sector have become more stringent, following the trend of on-highway vehicles, it is expected that even stricter emis- sion standards will be introduced in the off-highway sector. Although greenhouse gases (GHG) emissions from the off- highway sector are estimated to account for only 2% of the The associate editor coordinating the review of this manuscript and approving it for publication was Md. Abdur Razzaque . VOLUME 14, 2026 2026 The Authors. This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/ 1 total EU27 GHG emissions [1], reducing CO2 emissions in this sector will have even greater signiﬁcance in the future, as food production and construction demands are expected to rise with the growing world population. In this context, hybrid technologies have been attract- ing the attention of researchers and construction machinery manufacturers due to their onboard energy capacity and ease of refueling [31]. Several hybrid construction machines have already been developed in the past [2], [3], [4], [5]. The effectiveness of CO2 reduction through hybridization depends not only on the hybrid powertrain architecture, but also on its energy management strategies. An overview and Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader classiﬁcation of energy management strategies developed for off-highway machines can be found in [6] and [7]. A primary distinction is made between rule-based and optimization- based control strategies. In rule-based control strategies, control decisions are made based on predeﬁned rules derived from prior knowledge of the system, operating conditions, and empirical experience. These strategies are often preferred for real-world vehicle implementation because of their low computational effort. For this reason, existing hybrid construction machines pri- marily adopt rule-based strategies [6], and extensive research has been conducted in this area. In [8], a rule-based strategy was developed for an excavator equipped with a parallel hybrid system for the hydraulic pump and an electric swing motor. This strategy adjusts the motor-generator power based on the required pump power. Similarly, in [9], various rule- based control strategies were designed for a parallel hybrid wheel loader. These strategies were evaluated in simulations in terms of fuel efﬁciency and achieved a 3–13% reduction in fuel consumption compared to a conventional wheel loader. Rule-based control strategies have also been validated in real-world operations. In [10], a prototype hybrid excavator with a parallel hybrid system for the pump and an electric swing motor was developed. A rule-based control strategy was implemented and tested in this prototype excavator. Rule-based strategies are simple and have a low compu- tational effort. However, they are typically optimized for a speciﬁc mission cycle and do not guarantee the same level of performance in real-world cycles. In contrast, optimization-based strategies introduce control objectives by deﬁning cost functions to be optimized and thus providing proof of optimality. Dynamic Programming (DP) [11] is one of the most widely used techniques for global optimization. However, DP requires prior knowledge of the entire cycle, and its high computational burden makes real-time energy management highly challenging. In [12], a rule-based control strategy for a hybrid excavator was developed by analyzing the results of a DP-based control strategy. Furthermore, DP is also used as a benchmark strategy [13], [14]. Control strategies based on Pontryagin’s Minimum Princi- ple (PMP) are strong candidates for real-time capable control strategies. The application of the Equivalent Consump- tion Minimization Strategy (ECMS) to off-highway hybrid machines has been widely documented in the literature [13], [14], [15]. In [13], an ECMS-based energy management strat- egy was implemented in a hybrid excavator equipped with an electric swing motor. Test results with the real vehicle demon- strated approximately 30% reduction in fuel consumption compared to a conventional excavator. PMP-based strategies require lower computational effort but cannot handle discrete states, such as mode transitions and gear shifts, within their control framework. To address this limitation, the authors of [16] combined DP and PMP to derive the optimal start- stop sequence of the internal combustion engine (ICE) for plug-in electric vehicles. Their simulations conﬁrmed that the 2 VOLUME 14, 2026 DP-PMP algorithm yields near-optimal performance. Other studies [17], [18], [19] extended this approach to optimize both ICE start-stop and gear shifting for on-highway hybrid vehicles. However, to the best of the authors’ knowledge, DP-PMP-based energy management strategies have not yet been validated through real-world testing. Furthermore, their application is limited to on-highway vehicles so far. In this paper, we propose a DP-PMP-based control algorithm as a real-time energy management strategy for a hybrid wheel loader. The main contributions of this paper are as follows: • We adapt the DP-PMP approach to off-highway hybrid powertrains and formulate an energy management algorithm. • We present the control architecture, including support functions, to ensure real-time implementation of the developed algorithm. • We evaluate control performance in terms of fuel con- sumption in both simulation and real-world testing. Additionally, we assess the real-time capability of the controller. The rest of this paper is structured as follows: Section II presents the developed hybrid powertrain and the investigated mission cycles. Section III describes the modeling of key powertrain components for the implementation of an optimal control strategy. Section IV details the adopted optimal con- trol algorithm, the controller design, and its implementation in the prototype hybrid wheel loader. The developed con- trol algorithm is evaluated through simulations in Section V and validated via real-world testing in Section VI. Finally, Section VII concludes the paper. FIGURE 1. Schematic of conventional wheel loader powertrain. II. PARALLEL-SERIES HYBRID SYSTEM"
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec2",
+          "label": "A.",
+          "title": "CONVENTIONAL POWERTRAIN",
+          "level": 2,
+          "paragraphs": [
+            "A conventional 7-ton class wheel loader depicted in Fig. 1 is used as a baseline for research. The powertrain of the conventional wheel loader consists of three sub-systems:"
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": [
+            {
+              "id": "sec3",
+              "label": "1)",
+              "title": "POWER SOURCE",
+              "level": 3,
+              "paragraphs": [
+                "The baseline wheel loader is powered by a 3.6 L, 4-cylinder Diesel internal combustion engine (ICE) with a maximum Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader power of 74.4 kW. The ICE is equipped with a Diesel Oxi- dation Catalyst (DOC) and a Selective Catalytic Reduction (SCR) system for exhaust gas aftertreatment. The ICE drives two hydraulic pumps connected to the engine output shaft. On the other side, a hydraulic pump for cooling fan is also connected."
+              ],
+              "equations": [],
+              "figure_refs": [],
+              "table_refs": [],
+              "subsections": [
+                {
+                  "id": "sec4",
+                  "label": "2)",
+                  "title": "WORKING HYDRAULIC SYSTEM",
+                  "level": 3,
+                  "paragraphs": [
+                    "A hydraulic pump with ﬁxed displacement driven by the ICE provides hydraulic oil ﬂow to the valve system. There are four cylinders in the hydraulic system, namely two steering cylinders, one tilt cylinder and one lift cylinder. The lift and tilt cylinders enable a wide range of work with various attachments. The most typical attachment is a bucket used for moving gravel, rocks, and other materials, but other attach- ments such as forklift, timber grapple, snowplow, sweeper roller and material handling arm are also used for special purposes [20]. The steering system is a so-called articulated steering system. The relative yaw angle between the front and rear part of the vehicle is changed by two hydraulic cylinders, allowing the vehicle to be signiﬁcantly more maneuverable than a vehicle with coordinated steering [21], [22]. The steer- ing wheel column is connected to the orbitrol, which supplies oil proportional to the amount of steering wheel rotation to the steering cylinders in the desired direction. The priority valve supplies the required oil to the steering cylinders ﬁrst, giving priority to steering for safety reasons. The remaining oil is supplied to the open center control valve, where the direction and ﬂow rate are controlled by the spools."
+                  ],
+                  "equations": [],
+                  "figure_refs": [],
+                  "table_refs": [],
+                  "subsections": [
+                    {
+                      "id": "sec5",
+                      "label": "3)",
+                      "title": "PROPULSION SYSTEM",
+                      "level": 3,
+                      "paragraphs": [
+                        "A hydraulic pump with variable displacement driven by the ICE forms a hydrostatic transmission (HST) together with a variable displacement hydraulic motor. All four wheels are mechanically connected to the output shaft of the hydraulic motor, enabling all-wheel drive functionality. There is a hydraulically actuated two-speed transmission between the HST output shaft and the cardan shaft. With the second gear, high-speed driving up to 36 km/h is possible."
+                      ],
+                      "equations": [],
+                      "figure_refs": [],
+                      "table_refs": [],
+                      "subsections": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sec6",
+          "label": "B.",
+          "title": "MISSION CYCLES",
+          "level": 2,
+          "paragraphs": [
+            "Wheel loaders cover a wide range of work, and their appli- cations are versatile. Among others, the most common and widely studied [23], [24], [25] wheel loader cycle is a loading cycle, also called a V-cycle because of the shape of the vehicle movement. Fig. 2 presents a schematic top view of the V-cycle, while the top two subplots in Fig. 3 show the measured vehicle speed and cylinder stroke during the V-cycle. In this cycle, a wheel loader loads materials such as soil, gravel and sand into a load receiver, which is typically a truck placed next to a pile of material. The V-cycle can be divided into four parts. In phase A, the wheel loader moves forward to a pile of material and ﬁlls the bucket with material. In phase B, the vehicle drives backwards and returns to the starting point. In this phase, the bucket’s position remains VOLUME 14, 2026 3 almost unchanged. In phase C, the vehicle steers slightly and moves forward towards the load receiver. While driving forward, the bucket is raised by extending the lift cylinder. After stopping the vehicle in front of the load receiver, the tilt cylinder is extended to empty the bucket. Finally, in phase D, the vehicle reverses and returns to the starting point. The bucket is lowered by contracting the lift cylinder while driving backwards. The series of phase A to D is repeated several times until the load receiver is full of material. FIGURE 2. Schematic top view of the V-cycle. The bottom two subplots in Fig. 3 compare the requested hydraulic ﬂow rate with the actual supply from the hydraulic pump. There is a large gap between the supplied ﬂow rate and the requested ﬂow rate, especially during phase A and phase B, as marked by red arrows in Fig. 3. In these phases, the bucket is moved only slightly, resulting in a low requested ﬂow rate. However, since the hydraulic pump is connected to the same ICE output shaft as the HST, it is driven at high speeds when the operator presses the accel- erator pedal to drive the vehicle. As a result, the hydraulic pump generates an unnecessarily large amount of oil ﬂow within the hydraulic system, which returns to the tank without doing useful hydraulic work. The key to reducing hydraulic losses from the operational perspective is, therefore, to keep the pump speed as close as possible to the speed required for the requested hydraulic ﬂow rate. Another mission cycle considered in this paper is a combi- nation of the V-cycle with short driving, as shown in Fig. 4. This combined cycle serves as a more realistic mission cycle in a quarry. After ﬁve repetitions of the V-cycle (marked as 1 in Fig. 4), the wheel loader transports material to another location to increase productivity instead of simply waiting for another truck to arrive at the loading area. First, the bucket is loaded (2 in Fig. 4), and then the vehicle drives with a full bucket (3 in Fig. 4). After transportation, the bucket is emptied (4 in Fig. 4), and then the vehicle drives the same route with an empty bucket (5 in Fig. 4) to return to Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 3. Vehicle speed, cylinder stroke measurements, and a comparison of the hydraulic oil flow rate request with the actual supply from the pump during the V-cycle, as measured on a conventional wheel loader. the loading area. The driving segments are divided into two distinct parts: a downhill segment with lower drive power requirements (Drive A) and an uphill segment with higher drive power requirements (Drive B). C. PARALLEL-SERIES HYBRID SYSTEM The powertrain of the baseline wheel loader shown in Fig. 1 has been converted to a parallel-series hybrid system. Fig. 5 shows the schematic of the developed parallel-series hybrid system for a wheel loader. The parallel-series hybrid combines aspects of both par- allel and series topologies. In this conﬁguration, the ICE is not directly connected to the drivetrain, allowing independent control of the ICE regardless of the drivetrain speed. The hydraulic pump is driven by the P2 parallel hybrid system consisting of an electric machine (P2 EM) and a downsized ICE. Pure electric operation is possible with the clutch located between the P2 EM and the ICE. The hydraulic drivetrain has been electriﬁed with two elec- tric machines, integrated into each axle. In general, hydraulic motors have higher torque density compared to electric motors [26]. A reduction transmission is integrated into each electric drive unit (EDU) to fulﬁll the maximum vehicle speed target and the high torque demand at low vehicle speeds. Details and technical data of the hybrid system are summarized in Table 1. 4 VOLUME 14, 2026 TABLE 1. Specifications of main components of hybrid wheel loader."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec7",
+          "label": "D.",
+          "title": "OPERATOR INTERFACE AND OPERATING STRATEGIES",
+          "level": 2,
+          "paragraphs": [
+            "FOR PARALLEL-SERIES HYBRID SYSTEM In the conventional wheel loader, the operator presses the accelerator pedal to regulate the ICE speed to get the desired hydraulic ﬂow rate from the pump or to get the desired propulsion torque. This brings with it several drawbacks, and the operator interface and operating strategies for the hybrid wheel loader must be designed to overcome them. These are: 1) Low efﬁciency in the working hydraulic system: Since the hydraulic pump is coupled with the drivetrain via ICE, the pump runs at high speeds e.g. during vehicle acceleration even though the hydraulic oil required for steering is quite low, causing large losses due to excess ﬂow. 2) High operator workload: As the ICE drives both work- ing hydraulic pumps, the accelerator pedal position inﬂuences the pump ﬂow rate and the propulsion torque. This means that the values controlled by the operator – cylinder speed and vehicle acceleration – must be adjusted via additional inputs, namely the joy- stick and brake pedal. Fig. 7. shows the new operator interface developed for the parallel-series hybrid wheel loader. Unlike conventional wheel loaders, all operator inputs are forwarded to the Hybrid Control Unit (HCU), which determines the target pump speed and propulsion torque. Since the propulsion system is decoupled from the working hydraulic system, the accelerator pedal position is solely used to determine the propulsion torque. The electriﬁed propulsion system also offers the possibility of recuperating the kinetic energy of the vehicle, which in conventional vehicles would be lost as heat through mechanical brakes, through regenera- tive braking. By calibrating the target propulsion to a negative value at a low pedal position, the operator can decelerate the vehicle by releasing the accelerator pedal. In addition to efﬁciency beneﬁts, this operating strategy facilitates one- Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 4. Combined cycle, consisting of V-cycle and driving phase. FIGURE 5. Schematic of parallel-series hybrid wheel loader powertrain. pedal operation, eliminating the need to use the brake pedal for controlling vehicle acceleration in the V-cycle. The target pump speed is determined to meet the ﬂow rate requested by the operator while keeping the excess ﬂow as low as possible. First, the total ﬂow rate demand is calculated based on the joystick input djystk and the angular velocity of the steering wheel ωsteer. Then the ﬂow rate demand is converted to pump speed according to the following equation: npump,req = Qreq,tot (1) Vpump·ηv where npump,req is the required pump speed, Qreq,tot is the total ﬂow rate requested by the operator for steering and bucket, Vpump is the pump displacement, and ηv is the volumetric efﬁciency of the pump which is calculated by a look-up table. VOLUME 14, 2026 5 FIGURE 6. Parallel hybrid system control concept. The pump speed in hybrid wheel loader is controlled by the P2 EM, not by the ICE in the conventional wheel loader for the following two reasons. Firstly, the ICE is not always connected to the pump. In full electric opera- tion, the ICE is disconnected from the pump and cannot control the pump speed. Secondly, and more importantly, controlling the pump speed by the EM avoids transient ICE operations, thereby reducing pollutant emissions and fuel consumption [27]. The target EM speed nEM,tar is therefore calculated based on the required pump speed npump,req, while the ICE receives the target torque rather than the target speed. The target ICE torque is one of the most important control parameters that affects system efﬁciency and will be further investigated in detail in the following sections. The concept of pump speed control is illustrated in Fig. 6. The hydraulic pump applies braking torque Mpump to the shaft, generated by the hydraulic pressure within the pump. In hybrid mode, the Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 7. Operator interface of hybrid wheel loader. ICE provides positive torque to charge the battery, except dur- ing fuel cut. The P2 EM receives the target speed calculated based on the ﬂow request and adjusts the torque to regulate the pump speed, thereby absorbing the ﬂuctuations in pump torque."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec8",
+      "label": "III.",
+      "title": "POWERTRAIN MODELING",
+      "level": 1,
+      "paragraphs": [],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec9",
+          "label": "A.",
+          "title": "INTERNAL COMBUSTION ENGINE",
+          "level": 2,
+          "paragraphs": [
+            "The fuel rate of the ICE ˙mfuel(nICE, MICE) is represented by a nonlinear static map shown in Fig. 8 and calculated based on the operating point. The fuel rate map has been calibrated using steady state measurement data provided by the engine supplier. FIGURE 8. ICE fuel consumption characteristics (Y-axis scale not shown for confidentiality)."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec10",
+          "label": "B.",
+          "title": "ELECTRIC MACHINES",
+          "level": 2,
+          "paragraphs": [
+            "P2 electric machine and EDU power losses are calculated based on the motor speed and torque using a static map. The power of electric machines is calculated according to (2), with 6 VOLUME 14, 2026 the constraint of available torque (3) Pi (ni, Mi) \u0002 2 · π · ni·Mi + Ploss,i (ni, Mi) if ni · Mi ≥0 2 · π · ni·Mi −Ploss,i (ni, Mi) if ni · Mi< 0 (2) = Mi,min (ni) ≤Mi ≤Mi,max (ni) (3) with i = P2 EM, EDU. Losses were calculated using the efﬁciency maps shown in Fig. 9."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec11",
+          "label": "C.",
+          "title": "HV BATTERY",
+          "level": 2,
+          "paragraphs": [
+            "There are many different modeling approaches available in literature [28]. In this paper, an equivalent circuit model is used for its simplicity and low computational effort. Fig. 10 shows the schematic of the equivalent battery circuit model. According to the Kirchhoff’s law, the battery voltage Ubat is calculated as: Ubat = UOC −Ri · Ibat (4) where UOC is the open circuit voltage, Ri is the internal resistance, and Ibat is the battery current. The battery power is calculated as the product of battery voltage and current as follows: Pbat = Ubat·Ibat = UOC·Ibat −Ri · I2 bat (5) Solving (5) for the battery current gives the following: \u0003 U2 OC−4·Ri · Pbat UOC − (6) Ibat = 2 · Ri The time derivative of battery SOC ξ is expressed using (6): \u0003 U2 OC−4·Ri · Pbat UOC − ˙ξ (t) = −Ibat (t) (7) = − 2 · Ri · Qbat Qbat Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 9. Normalized efficiency maps of electric machines (left: P2, right: Front EDU). The isolines are normalized such that 100 corresponds to the maximum efficiency. where Qbat represents the battery capacity. The battery power is calculated as the sum of all electrical power consumption using (2) as follows: Pbat = PEM + PEDU + Paux (8) where Paux represents the electrical power required for auxiliary components and is modeled as a constant power consumption for both DC-DC converters in this paper."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec12",
+      "label": "IV.",
+      "title": "OPTIMAL ENERGY MANAGEMENT STRATEGY",
+      "level": 1,
+      "paragraphs": [
+        "A. DP-PMP FORMULATION The objective of the energy management strategy is to minimize fuel consumption over a given mission cycle by optimizing two control inputs: the ICE start-stop decision and the ICE torque setpoint. The ﬁrst control input, the ICE start-stop decision, affects the operating mode of the vehicle through the following dynamics: ssICE (k + 1) = ssICE (k) + uss (k) (9) ⎧ ⎪⎨ −1 ICE turn off (10) uss (k) = 0 Do nothing ⎪⎩ 1 ICE start Here, ssICE (k) represents the ICE state at time step k, where ssICE = 1 indicates that the ICE is on, and ssICE = 0 indicates that it is off. The variable uss (k) denotes the ICE start-stop control input. The additional fuel consumption required to start the ICE is considered when uss (k) = 1 and is represented by ˙ms(k). The other dynamics considered in the optimal control prob- lem are the battery SOC ξ. By substituting (8) into (7) and then discretizing the equation, the following discrete-time representation of the battery SOC is obtained: ξ (k + 1) −ξ (k) = − \u0006t · 2·Ri · Qbat \b \u0003 U2 OC−4·Ri · [PEM (MICE) + PEDU + Paux] UOC − (11) VOLUME 14, 2026 7 The power of the P2 EM is expressed as a function of the ICE torque MICE using (2) and the following relationship. \u0002 Mpump,req −MICE, hybrid mode Mpump,req, electric mode (12) MEM = Here, Mpump,req represents the estimated required pump torque. The estimation algorithm will be explained in the following subsection. Note that the control input MICE is zero in electric mode; therefore, the battery SOC change is solely determined by the cycle information. FIGURE 10. Equivalent circuit model of batter. A classic Dynamic Programming (DP) problem can be formulated to determine the control inputs that min- imize the total fuel consumption over the given mis- sion cycle, while considering the ICE state (9) and SOC dynamics (11) as follows: Jopt ξi (k) , ssICE,j (k) k k, MICE (k) , ssICE,j(k) = min · \u0006t ˙mfuel MICE,uss∈U + ˙ms (k, uss (k)) · \u0006t + Jopt k+1 (ξ (k + 1) , ssICE (k + 1)) (13) Here, Jopt represents the cost-to-go ξi (k) , ssICE,j (k) k function at time step k, where indices i and j correspond to the positions of the battery SOC and ICE state on the discretized grid, respectively. The cost-to-go function must be computed backward according to (13), from the end of the cycle to the Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader start, for all possible combinations of battery SOC and ICE state. The main disadvantage of DP is its high computational effort. Due to the two-dimensional state grid in this problem, implementing this control policy in a real vehicle controller is highly challenging. In this paper, the classical DP problem is modiﬁed into DP-PMP [16], [17], [18], [19] to enable real- time implementation of ICE start-stop and torque control. In particular, the sub-problem of determining the optimal ICE torque in hybrid mode is separated from the DP formula- tion. Instead, the Pontryagin’s Minimum Principle (PMP) is applied to reduce the dimensionality of the state grid. As a result, the optimal energy management problem is divided into two parts as follows. • DP is used to optimize the ICE stat-stop decision. • PMP is used to determine the optimal torque split between the ICE and the electric machine. FIGURE 11. DP-PMP calculation flowchart. Fig. 11 illustrates the optimization ﬂowchart via DP-PMP. In the ﬁrst step, the optimal ICE torque is computed for a given equivalence factor s, which serves as a conversion fac- tor from battery power to equivalent fuel power and appears in the optimization problem based on PMP. The optimal ICE torque is determined as follows: \u000e \u000f ˙mfuel −s · UOC·Qbat · ˙ξ MICE (t) = arg min Hu MICE(t) 1 \u0010 = arg min (14) Pfuel + s · Pelec Hu MICE(t) where Pfuel = Hu · ˙mfuel (15) Pelec = −UOC · Qbat · ˙ξ (16) 8 VOLUME 14, 2026 The equivalence factor s is deﬁned as follows, using the Lagrange multiplier λ in the Hamiltonian. s = −λ · Hu (17) UOC·Qbat Note that the entire mission cycle information is required to calculate the value of the equivalence factor that brings the battery SOC to the target value at the end of the cycle. In DP- PMP, the ﬁrst ICE torque optimization is performed with an initially selected equivalence factor, which is estimated empirically based on previous investigations. This value is then updated iteratively until the battery SOC condition is satisﬁed. Equation (14) shows that the optimal ICE torque should minimize the total fuel consumption, which consists of the fuel power Pfuel and the electrical power Pelec, the latter being converted into a fuel term using the equivalence factor s. Once the optimal ICE torque is calculated, the ICE start- stop decision is optimized using DP in the next step. For a given equivalence factor, the equivalent fuel power consump- tion in hybrid mode Hhyb and in electric mode Helec can be deﬁned as follows: Hhyb = min (18) Pfuel + s · Pelec Helec = s · Pelec (19) Accordingly, (13) is modiﬁed as follows: Jopt ξi (k) , ssICE,j (k) k \u000e 1 ·H(k,ssICE,j(k)) · \u0006t + ˙ms (k, uss (k)) · \u0006t = min Hu uss∈U +Jopt ssICE,j (k + 1) (20) k+1 k, ssICE,j (k) H \u0002 Hhyb, ifssICE,j (k) = 1 : ICE ON Helec, ifssICE,j (k) = 0 : ICE OFF (21) = The cost-to-go Jopt k is a function of the ICE state ssICE,j (k) only. The control input is the optimal ICE start-stop decision sequence uss (k). In this DP formulation, the ICE start-stop decision is the only discrete state to be considered, which has only two admissible states at each time step. Therefore, the required computational effort is signiﬁcantly reduced, making this approach a candidate for real-time optimization algorithms. The approach described above does not take into account the battery SOC because the initial equivalence factor was chosen arbitrarily. To meet the terminal battery SOC condi- tion, an optimal equivalence factor must be found through iterative calculations, as illustrated in Fig. 11. In this paper, the equivalence factor is updated using a combination of the bisection method and the false-position method [29], [30] with the number of iterations limited to ﬁve in order to keep the computational effort sufﬁciently low for real-time implementation. Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader TABLE 2. Operational constraints considered in the proposed energy management strategy. FIGURE 12. Optimization-based controller architecture."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec13",
+          "label": "B.",
+          "title": "CONTROLLER DESIGN AND IMPLEMENTATION OF THE",
+          "level": 2,
+          "paragraphs": [
+            "DP-PMP-BASED OPTIMAL ENERGY MANAGEMENT STRATEGY The optimization algorithm based on DP-PMP requires future cycle information, such as the pump ﬂow rate, pressure, and EDU power. Compared to on-highway vehicles, predicting future power demands of off-highway vehicles is more complicated, as it depends not only on the speed proﬁle but also on factors such as the interaction of the power take-offs (PTOs) with the boundary conditions. One feature of off-highway mission cycles that simpliﬁes the prediction of power demands is their repetitiveness. The power demand prediction in this paper assumes that wheel loaders follow repetitive daily mission cycles, as they operate within a limited work area, such as a quarry. The main idea is to use previously performed mission cycles for predicting future power demands. As described in Section II, mission cycles are divided into smaller seg- ments, referred to as ‘‘states’’ in this paper. The prediction of power/ﬂow demand is based on the set of states expected to be performed in the future. Fig. 12 shows the architecture of the DP-PMP-based energy management controller. The state detection block determines the current vehicle state based on operator inputs and the vehicle status. The possible states and transitions VOLUME 14, 2026 9 between different states need to be pre-deﬁned and modeled in a state machine in the controller. When one of the states is active in the state machine, cycle information for the currently active state is stored in vectors. In this paper, the considered vehicle states are z ∈ {1 = Phase A, 2 = Phase B, 3 = Phase C, 4 = Phase D, 5 = Drive A, 6=Drive B} of the combined cycle, as described in Section II. The cycle data for state z, including ppump,z (hydraulic pump pressure), Qpump,z (ﬂow rate), and PEDU,z (EDU power), are stored in vectors at a time step of \u0006t = 0.2 sec and become available to other parts of the software once another state is detected. In the scenario coordinator block, a scenario-to-go vector Sc, which contains a series of states predicted to be performed by the machine, as well as the optimization calculation trigger Tr, are generated. In this paper, it is assumed that the task of the wheel loader is predeﬁned and communicated to the operator in advance. This means that a set of machine states is known a priori and provided to the controller externally before the task begins. Let Scpred = [St1, St2, · · · , Stn] represent the predicted scenario. The element Sti is the i-th predicted vehicle state, and one of the predeﬁned states from z is assigned to it. The scenario-to-go refers to the remaining set of states in the predicted scenario, as schematically illustrated in Fig. 13. Predictive cycle information vectors are built Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader using the scenario-to-go and the cycle information stored in the state detection algorithm. Vectors containing the cycle information of each deﬁned state are merged in the order of the predicted scenario as follows: \u0011 ppump,Sc = ppump,Stj,ppump,Stj+1, · · · ,ppump,Stn (22) \u0011 Qpump,Stj,Qpump,Stj+1, · · · ,Qpump,Stn Qpump,Sc = (23) \u0010 PEDU,Stj,PEDU,Stj+1, · · · ,PEDU,Stn PEDU,Sc = (24) where ppump,Sc, Qpump,Sc, and PEDU,Sc represent the hydraulic pump pressure, ﬂow rate, and EDU power for the states to be performed, respectively. In order to speed up the optimization calculation and make the control strategy real-time implementable, the number of cost-to-go calculations in the DP algorithm is reduced by introducing a state-based optimization approach. This approach assumes that the ICE state does not change during each phase, and that the ICE start-stop events occur only when the state changes. The state-based ICE state optimization not only reduces the computational effort but also ensures minimal operating time of the ICE and thus avoids frequent start-stop events. Implementing the state-based optimization approach requires slight modiﬁcations to (20) and (21) as follows: Jopt ξi (k) , ssICE,j (k) k \u000e 1 = min · H k, ssICE,j (k) · \u0006t + ˙ms (k, uss (k)) · \u0006t Hu uss∈U +Jopt ssICE,j (k + 1) (25) k+1 m, ssICE,j (m) H ⎧ ⎪⎪⎪⎪⎪⎨ kSt,m+1−1 \u0012 Hhyb (i), if ssICE,j (m) = 1 : ICE ON i=kSt,m = kSt,m+1−1 \u0012 ⎪⎪⎪⎪⎪⎩ Helec (i), if ssICE,j (m) = 0 : ICE OFF i=kSt,m (26) where m (1 ≤m ≤n −j + 1) represents the position of the m-th element within the scenario-to-go vector \u0010 Sc = , which consists of a set of pre- Stj, Stj+1, . . . , Stn \u0010 dicted states. Each element of the vector kSt,j, . . . , kSt,n corresponds to the starting time step of the respective ele- ment in the scenario-to-go vector. The cost-to-go function is calculated on a state basis, not a time basis. The control input uss (m) is the ICE start-stop decision at the beginning of the m-th state. Since the ICE state is constant for one vehicle state, the equivalent fuel power for that vehicle state can be calculated by simply adding up Hhyb and Helec, as in (26). Fig. 14 schematically illustrates the optimization pro- cedure via DP-PMP. DP is applied to the ICE start-stop optimization problem on a state basis. By minimizing the cost-to-go function from the end of the prediction horizon to the start, the optimized ICE state at each predicted state is obtained. In the next step, the battery SOC is calculated 10 VOLUME 14, 2026 by forward simulation, using the optimal ICE state and pre- calculated ICE torque. This forward battery SOC calculation is done on a time basis. If the battery SOC at the end of the prediction horizon does not meet the speciﬁed termination criterion, the equivalence factor is updated. These steps are repeated with the updated equivalence factor until the termi- nal battery SOC condition is met. Finally, the optimal ICE state for each state and the optimal equivalence factor are obtained as the output of the calculation. Based on the controller architecture described above, sev- eral operational constraints are inherently enforced to ensure robust and real-time operation. As summarized in Table 2, SOC bounds and hardware power limits are respected during operation, while ICE start–stop decisions are constrained to discrete vehicle state transitions. While the state-based for- mulation reduces start–stop toggling as an outcome, it also serves as an explicit operational constraint by enforcing a minimum on/off duration at the vehicle-state level. Thermal behavior is handled by restricting operation to the validated thermal operating envelope of the demonstrator to preserve real-time feasibility. FIGURE 13. Scenario-to-go."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec14",
+      "label": "V.",
+      "title": "SIMULATIVE INVESTIGATIONS",
+      "level": 1,
+      "paragraphs": [
+        "In this section, the DP-PMP-based control strategy is com- pared with the rule-based control strategy through simula- tions of two different driving cycles. The ﬁrst driving cycle is a V-cycle repeated ten times. The prediction horizon encom- passes one loading cycle, which consists of four phases. The second driving cycle is the combined cycle introduced in Section II. This cycle includes ﬁve repetitions of the V-cycle, followed by a bucket loading phase, driving with a loaded bucket, a bucket emptying phase, and driving with an empty bucket. It is assumed that all future scenarios, along with the power/ﬂow demands of the ﬁrst loading cycle and the ﬁrst two drive states, are known a priori. The power/ﬂow demand for each state in the prediction horizon is overwritten once that state is completed. The rule-based control strategy adopted in this paper shifts the ICE torque to more fuel-efﬁcient operating points while maintaining the battery SOC close to the target value [32]. The rule-based ICE start-stop control uses the total vehicle power demand to switch off the ICE, with a calibratable turn- off delay time. The turn-off power threshold and turn-off Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 14. Optimization-based controller architecture. delay time are calibrated so that the ICE remains on during the V-cycle, thereby avoiding frequent ICE start-stop events during highly transient operations. A. V-CYCLE Fig. 15 shows the simulation results of the V-cycle in compar- ison to the rule-based strategy. The ﬁrst V-cycle operates with an initial equivalence factor of s = 3.0, assuming that the con- troller has no prior cycle information. After completing the ﬁrst loading cycle, the optimization calculation is performed using the data from the previous loading cycle. Since the investigated cycle consists of repeated, nearly identical loading cycles, the battery SOC in the rule-based strategy does not deviate signiﬁcantly from the target value. Consequently, the battery SOC remains close to the target value at the end of each loading cycle. Compared to the rule-based strategy, which is calibrated to keep the ICE on during the V-cycle, the DP-PMP-based strategy uses the ICE more effectively by combining electric operation, while keeping the battery SOC around the tar- get value through cycle-to-cycle updates of the equivalence factor. By discharging the battery in the electric mode, the required charge power to balance the battery SOC increases, resulting in a shift of the ICE torque to lower BSFC areas in hybrid mode. Table 3 summarizes the simulated fuel consumption, cor- rected by the battery SOC deviation from the target value at the end of the cycle. Under the tested conditions, DP-PMP VOLUME 14, 2026 11 reduces fuel consumption by 3.3% compared to the rule- based strategy. TABLE 3. Comparison of soc-corrected fuel consumption in the V-cycle. TABLE 4. Operational trade-offs in the V-cycle. While Table 3 highlights the fuel consumption beneﬁt of the DP-PMP strategy, Table 4 reports additional operational metrics to make the associated trade-offs explicit. In the V-cycle, the fuel reduction is achieved by increased utilization of electric operation, which results in higher battery energy throughput and an increased number of engine start events. Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 15. Simulation results for the V-cycle with rule-based control strategy and DP-PMP based control strategy. The initial and target battery SOC is 70%. FIGURE 16. Sankey diagram of the hybrid wheel loader during the V-cycle: The bold values after the arrows represent the DP-PMP results, normalized to the fuel power of the rule-based strategy. To compare the energy ﬂow in the powertrain and to illustrate efﬁciency improvements, a Sankey diagram of the hybrid wheel loader in the V-cycle with both control strate- gies is presented in Fig. 16. The values in bold after arrows 12 VOLUME 14, 2026 represent the contributions of DP-PMP, while the remaining values pertain to the rule-based strategy. The values of DP- PMP are normalized to the fuel power of the rule-based strategy. Consequently, the EDU work, recuperation, auxil- iary work, and effective hydraulic work remain consistent with those of the rule-based strategy. It is evident that DP- PMP reduces losses in the hydraulic system, and for the same amount of hydraulic work, the necessary input to the hydraulic pump decreased from 17.3% to 15.7% of the fuel power of the rule-based strategy. Although the efﬁciency of P2 EM decreases slightly due to operation at lower speeds in electric mode – resulting in a slight increase in input power from the ICE (from 21.3% to 21.9% for the same battery charging power) – the reduction in hydraulic losses outweighs this effect. Consequently, the total power demand on the ICE is reduced from 38.6% to 37.6%. Furthermore, the ICE efﬁciency increases from 38.6% to 38.9%, resulting in an overall fuel consumption beneﬁt of 3.3%. B. COMBINED-CYCLE Fig. 17 shows the simulation results for the combined cycle. With the rule-based strategy, the ICE is switched off during driving if the total electrical power demand is below the threshold for a predeﬁned time. The ICE turn-off delay time is calibrated to ensure that the ICE is not switched off during the V-cycle. Consequently, the beneﬁt of electric operation in the rule-based strategy is quite limited due to the delayed turn-off of the ICE while driving. The battery SOC with the DP-PMP based strategy dif- fers signiﬁcantly from that of the rule-based strategy. Using future power/ﬂow demand predictions, the controller aims to increase the battery SOC during the loading phases to enable electric driving. Consequently, even higher ICE torque is required in hybrid mode than in the V-cycle test case, result- ing in the ICE operating points reaching even lower BSFC areas. Electric operation during driving substantially reduces fuel consumption. While driving, only a small amount of hydraulic ﬂow is required for steering. Therefore, by switch- ing off the ICE and operating the hydraulic pump at lower speeds, excessive hydraulic oil ﬂow can be avoided. In the simulation results, it can be observed that three out of four drive states are electric, with the only hybrid drive occurring during a high-power-demand drive state (Drive B). Fig. 18 illustrates a comparison of the operating points of the ICE during the combined cycle. The ICE torque of the rule-based strategy is lower than that of the optimization- based strategy. It can be observed that the optimization-based strategy operates the ICE around its best efﬁciency torque at the required pump speed and the time share of elec- tric operation is signiﬁcantly higher compared to that of rule-based strategy. In other words, the DP-PMP based strat- egy efﬁciently discharges the battery by switching off the ICE and increases the ICE efﬁciency in hybrid mode to compensate for the battery energy discharge. As summarized in Table 5, the fuel consumption beneﬁt of DP-PMP in the combined cycle is 4.0%, which is higher Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 17. Simulation results for the combined cycle with rule-based control strategy and DP-PMP based control strategy. The initial and target battery SOC is 70%. TABLE 5. Comparison of soc-corrected fuel consumption in the combined cycle. than in the V-cycle. This is because the combined cycle has long drive periods in which both power demand and hydraulic oil demand are lower than in loading cycles. Thus, there is greater potential for system efﬁciency improvement through optimization in the combined cycle compared to pure loading cycles. TABLE 6. Operational trade-offs in the combined cycle. VOLUME 14, 2026 13 Table 6 complements the fuel consumption results in Table 5 by reporting additional operational metrics. While the combined cycle enables higher fuel efﬁciency, the results indicate that this beneﬁt is primarily associated with increased battery energy throughput, whereas the number of engine start events remains comparable between the two strategies."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    },
+    {
+      "id": "sec15",
+      "label": "VI.",
+      "title": "EXPERIMENTAL RESULTS",
+      "level": 1,
+      "paragraphs": [],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec16",
+          "label": "A.",
+          "title": "VALIDATION OF CONTROL FUNCTIONS IN THE",
+          "level": 2,
+          "paragraphs": [
+            "PROTOTYPE HYBRID WHEEL LOADER The DP-PMP-based control strategy was implemented in the prototype hybrid wheel loader. The hardware used as the HCU (Hybrid Control Unit) is a MicroAutoBox (MABX) II from dSPACE. Fig. 19 shows the details of the optimization calculation using DP-PMP during the combined cycle. These results are for the ﬁrst optimization; hence the prediction horizon is the entire cycle (ﬁve repetitions of V-cycle, bucket loading, drive, bucket emptying, and drive). Upon detecting the start of the ﬁrst V-cycle at 169.1 second, the optimization trigger was set to 1. The ﬁve dots in the middle and the bot- tom plots represent the equivalence factor and the predicted battery SOC at the end of the prediction horizon for each of the ﬁve iterations. These values are updated upon completion of each iteration, with the corresponding time of each dot indicating the time at which each iteration is ﬁnished. The calculation time for the ﬁve iterations is 2.2 seconds on the MABX II, which is fast enough to be used as a real-time control strategy."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec17",
+          "label": "B.",
+          "title": "COMPARISON OF SYSTEM EFFICIENCY",
+          "level": 2,
+          "paragraphs": [
+            "Table 7 summarizes the test results for the V-cycle. The V-cycle, consisting of 8 loading cycles, was measured four times with the rule-based control strategy and three times with the DP-PMP-based strategy. Control parameters were not changed during the test; only the control strategy was switched. Even though the same operator performed the V-cycle, the amount of work done by the wheel loader varies from measurement to measurement, as indicated in the second column from the right in Table 7. This variability arises from the fact that the wheel loader is equipped with a bucket and the loading phase in particular is a challenge to reproduce consistently, even for an experienced operator. Additionally, the V-shaped wheel loader trace may not be identical in every cycle, which further increases variability. This makes it difﬁcult to compare fuel consumption between different mea- surements and to evaluate fuel consumption beneﬁts based solely on SOC-corrected fuel consumption, which is subject to considerable variations. One way to evaluate fuel efﬁciency is by comparing the BSFC of the ICE, as both control strategies aim to operate the ICE in higher efﬁciency areas. The BSFC with DP-PMP is lower than that with the rule-based strategy overall. In partic- ular, the average BSFC with DP-PMP is 216.8 g/kWh, which Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 18. Comparison of the ICE operating points during the combined cycle, with 100 isoline corresponding to the best efficiency range. TABLE 7. Summary of V-cycle measurements (8 loading cycles). TABLE 8. Summary of the combined cycle measurements. is 0.7% lower compared to the average BSFC with the rule- based strategy of 218.4 g/kWh, as shown in the left side of Fig. 20. This result conﬁrms that DP-PMP uses the ICE more effectively by using electric mode. Similar to the V-cycle, the results for the combined cycle in Table 8 show that the SOC corrected fuel consumption varies signiﬁcantly from measurement to measurement due to different amounts of work performed by the vehicle, even when the same control strategy was engaged. However, the average BSFC with DP-PMP of 216.3 g/kWh is lower than that of the rule-based strategy of 219.2 g/kWh, a reduction of 1.3% as shown in the right side of Fig. 20. 14 VOLUME 14, 2026 Of particular note is that the third measurement with the rule-based strategy (RB 3) shows a signiﬁcantly higher BSFC compared to the other two measurements with the same strategy. In this measurement, the battery SOC decreased due to an initial SOC that was higher than the target value. In this scenario, the controller had to discharge the battery. The rule-based controller discharges the battery by reducing the ICE torque during the V-cycle in order to bring the battery SOC to the target value. Consequently, the ICE operates in lower-efﬁciency areas. On the other hand, the optimization-based control strategy can manage the charge-depleting scenarios, by efﬁciently Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader FIGURE 19. Optimization calculation in combined cycle. FIGURE 20. Comparison of average BSFC for rule-based strategy (RB) and optimization-based strategy (DP-PMP). discharging the battery in electric mode. The second mea- surement with DP-PMP (DP-PMP 2) shows that the BSFC remains low in such scenarios. This suggests that the optimization-based strategy offers greater fuel consumption reduction beneﬁts in charge-depleting scenarios, such as those where external battery charging is possible. To fully exploit the potential of the proposed control strategy in charge depleting scenarios, optimization of the SOC trajectory through better task scheduling using sophisticated systems such as a ﬂeet management system would be required."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec18",
+      "label": "VII.",
+      "title": "CONCLUSION",
+      "level": 1,
+      "paragraphs": [
+        "This paper has presented a novel real-time capable energy management strategy based on the DP-PMP algorithm for a hybrid wheel loader. To enable real-time implementation, wheel loader mission cycles were divided into small seg- ments, and a future power demand prediction algorithm based on the repetitiveness of the mission cycles was introduced. Additionally, the timing of the ICE start-stop control decision was changed from the conventional time-based approach to machine state changes in order to further reduce the compu- tational effort and to avoid unnecessary ICE start-stop events. VOLUME 14, 2026 15 The developed energy management algorithm was tested in a simulation environment, and the simulation results conﬁrmed that the proposed strategy can reduce fuel con- sumption by 3.3% in the V-cycle and 4.0% in the combined cycle. A detailed analysis of the powertrain energy ﬂow has shown that the optimization-based control strategy reduces losses in the hydraulic system by reducing the pump speed in electric mode and uses the ICE more efﬁciently in areas with lower BSFC. The test results with the demonstrator con- ﬁrmed that the required time for the optimization calculation is 2.2 seconds on the MABX II, proving that the proposed strategy is capable of real-time operation. The test results with the hybrid wheel loader conﬁrmed that the presented control strategy can improve the BSFC of the ICE in both the V-cycle and the combined cycle by using the ICE in areas with higher efﬁciency. However, due to the varying workloads during testing, it is difﬁcult to evaluate the overall fuel consumption beneﬁts. The proposed approach relies on correct state detection to trigger optimization based on predicted power demand. In practical implementation, when state detection conﬁdence is insufﬁcient or misclassiﬁcation is detected, the controller intentionally disables the DP–PMP optimization and falls back to a conservative baseline strategy, such as a rule- based controller or adaptive ECMS. This fallback mechanism ensures robust and safe operation under uncertain or unfore- seen conditions, while preserving the beneﬁts of optimization when reliable predictions are available. Future research could focus on analyzing the potential for reducing raw pollutant emissions through reduced tran- sient ICE operation, thanks to hybridization. Furthermore, the integration of emission control into the optimization control framework to investigate the optimal concept for exhaust aftertreatment systems is another area for future studies. In addition, the provision of future scenarios through the networking of machines and their management as a ﬂeet on the construction site is another research focus. ACKNOWLEDGMENT The authors would like to express their sincere gratitude to Yanmar Compact Germany GmbH for their support in facili- tating the conversion of the powertrain and assisting with the testing process."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    }
+  ],
+  "references": [
+    {
+      "id": "ref1",
+      "number": 1,
+      "raw_text": "L. Franckx, A. Van Hyfte, and D. Vandenbroucke, ‘‘Study in view of the revision of directive 97/68/EC on non-road mobile machinery (NRMM)—An emissions inventory and impact assessment,’’ Publica- tions Ofﬁce Eur. Union, Luxembourg, Tech. Rep., 2010, Accessed: Jan. 21, 2026. [Online]. Available: https://op.europa.eu/en/publication- detail/-/publication/60e67ef3-f68f-42d0-ba3f-afb053704359/language-en",
+      "parsed": null
+    },
+    {
+      "id": "ref2",
+      "number": 2,
+      "raw_text": "J. Deere. 944 X-Tier. Accessed: Mar. 13, 2025. [Online]. Available: https:// www.deere.com/en/loaders/wheel-loaders/large-wheel-loaders/944-x- wheel-loader/",
+      "parsed": null
+    },
+    {
+      "id": "ref3",
+      "number": 3,
+      "raw_text": "Hitachi Construction Machinery Japan. Hybrid Machine Series. Accessed: Mar. 13, 2025. [Online]. Available: https://japan.hitachi- kenki.co.jp/products/industry/general/hybrid/ Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader",
+      "parsed": null
+    },
+    {
+      "id": "ref4",
+      "number": 4,
+      "raw_text": "Kobelco Construction Machinery. Hybrid Excavator (Conventional Model Information) SK200H [SK210HLC]. Accessed: Mar. 13, 2025. [Online]. Available: https://www.kobelco-kenki.co.jp/products/shovel/SK200H- 10.html?_gl=1*hiv120*_ga*MjA1Nzg5MzIxOS4xNzA4MzQ0OTUx*_ ga_Y4XSMPGQ92*MTcwODM0NDk1MC4xLjEuMTcwODM0NTEw Mi40NC4wLjA.&_ga=2.99431837.2030818322.1708344951-20578932 19.1708344951",
+      "parsed": null
+    },
+    {
+      "id": "ref5",
+      "number": 5,
+      "raw_text": "Komatsu Ltd. HB205(LC)-3 Hybrid. Accessed: Mar. 13, 2025. [Online]. Available: https://kcsj.komatsu/products/construction_machine/excavator _01/hb205-3",
+      "parsed": null
+    },
+    {
+      "id": "ref6",
+      "number": 6,
+      "raw_text": "W. Zhang, J. Wang, S. Du, H. Ma, W. Zhao, and H. Li, ‘‘Energy management strategies for hybrid construction machinery: Evolution, classiﬁcation, comparison and future trends,’’ Energies, vol. 12, no. 10, p. 2024, May 2019, doi: 10.3390/en12102024.",
+      "parsed": null
+    },
+    {
+      "id": "ref7",
+      "number": 7,
+      "raw_text": "H.-A. Trinh, H. V. A. Truong, T. C. Do, M. H. Nguyen, V. D. Phan, and K. K. Ahn, ‘‘Optimization-based energy management strategies for hybrid construction machinery: A review,’’ Energy Rep., vol. 8, pp. 6035–6057, Nov. 2022, doi: 10.1016/j.egyr.2022.04.050.",
+      "parsed": null
+    },
+    {
+      "id": "ref8",
+      "number": 8,
+      "raw_text": "J. Choi, H. Kim, S. Yu, and K. Yi, ‘‘Development of integrated controller for a compound hybrid excavator,’’ J. Mech. Sci. Technol., vol. 25, no. 6, pp. 1557–1563, Jun. 2011, doi: 10.1007/s12206-011-0333-z.",
+      "parsed": null
+    },
+    {
+      "id": "ref9",
+      "number": 9,
+      "raw_text": "X. Zeng, N. Yang, Y. Peng, Y. Zhang, and J. Wang, ‘‘Research on energy saving control strategy of parallel hybrid loader,’’ Autom. Construct., vol. 38, pp. 100–108, Mar. 2014, doi: 10.1016/j.autcon.2013.11.007.",
+      "parsed": null
+    },
+    {
+      "id": "ref10",
+      "number": 10,
+      "raw_text": "S. Yoo, S. An, C.-G. Park, and N. Kim, ‘‘Design and control of hybrid electric power system for a hydraulically actuated excavator,’’ SAE Int. J. Commercial Vehicles, vol. 2, no. 2, pp. 264–273, Oct. 2009, doi: 10.4271/2009-01-2927.",
+      "parsed": null
+    },
+    {
+      "id": "ref11",
+      "number": 11,
+      "raw_text": "D. P. Bertsekas, Dynamic Programming and Optimal Control, vol. 1, 3rd ed., Belmont, MA, USA: Athena Scientiﬁc, 2005.",
+      "parsed": null
+    },
+    {
+      "id": "ref12",
+      "number": 12,
+      "raw_text": "H. Kim, J. Choi, and K. Yi, ‘‘Development of supervisory control strategy for optimized fuel consumption of the compound hybrid excavator,’’ Proc. Inst. Mech. Engineers, Part D, J. Automobile Eng., vol. 226, no. 12, pp. 1652–1666, Dec. 2012, doi: 10.1177/0954407012447019.",
+      "parsed": null
+    },
+    {
+      "id": "ref13",
+      "number": 13,
+      "raw_text": "H. Kim, S. Yoo, S. Cho, and K. Yi, ‘‘Hybrid control algorithm for fuel consumption of a compound hybrid excavator,’’ Autom. Construction, vol. 68, pp. 1–10, Aug. 2016, doi: 10.1016/j.autcon.2016.03.017.",
+      "parsed": null
+    },
+    {
+      "id": "ref14",
+      "number": 14,
+      "raw_text": "C. S. Teodorescu, S. Vandenplas, B. Depraetere, K. Shariatmadar, T. Vyncke, J. Duﬂou, and A. Nowé, ‘‘An ECMS-based powertrain con- trol of a parallel hybrid electric forklift,’’ in Proc. 21st Int. Conf. Syst. Theory, Control Comput. (ICSTCC), Oct. 2017, pp. 763–770, doi: 10.1109/ICSTCC.2017.8107129.",
+      "parsed": null
+    },
+    {
+      "id": "ref15",
+      "number": 15,
+      "raw_text": "I. Shaﬁkhani and J. Åslund, ‘‘Analytical solution to equivalent con- sumption minimization strategy for series hybrid electric vehicles,’’ IEEE Trans. Veh. Technol., vol. 70, no. 3, pp. 2124–2137, Mar. 2021, doi: 10.1109/TVT.2021.3059205.",
+      "parsed": null
+    },
+    {
+      "id": "ref16",
+      "number": 16,
+      "raw_text": "R. Schmid, J. Buerger, and N. Bajcinca, ‘‘Energy management for series-production plug-in-hybrid electric vehicles based on predictive DP- PMP,’’ Automatisierungstechnik, vol. 69, no. 1, pp. 52–64, Jan. 2021, doi: 10.1515/auto-2020-0025.",
+      "parsed": null
+    },
+    {
+      "id": "ref17",
+      "number": 17,
+      "raw_text": "V. Ngo, T. Hofman, M. Steinbuch, and A. Serrarens, ‘‘Optimal con- trol of the gearshift command for hybrid electric vehicles,’’ IEEE Trans. Veh. Technol., vol. 61, no. 8, pp. 3531–3543, Oct. 2012, doi: 10.1109/TVT.2012.2207922.",
+      "parsed": null
+    },
+    {
+      "id": "ref18",
+      "number": 18,
+      "raw_text": "M. Razi, N. Murgovski, T. McKelvey, and T. Wik, ‘‘Predictive energy management of hybrid electric vehicles via multi-layer control,’’ IEEE Trans. Veh. Technol., vol. 70, no. 7, pp. 6485–6499, Jul. 2021, doi: 10.1109/TVT.2021.3081346.",
+      "parsed": null
+    },
+    {
+      "id": "ref19",
+      "number": 19,
+      "raw_text": "V. Ngo, T. Hofman, M. Steinbuch, and A. Serrarens, ‘‘Predictive gear shift control for a parallel hybrid electric vehicle,’’ in Proc. IEEE Vehi- cle Power Propuls. Conf., Chicago, IL, USA, Sep. 2011, pp. 1–6, doi: 10.1109/VPPC.2011.6043185.",
+      "parsed": null
+    },
+    {
+      "id": "ref20",
+      "number": 20,
+      "raw_text": "S. Alpsten and H. Eklund, ‘‘Design of an ergonomic control lever for wheel loader attachments,’’ M.S. thesis, Dept. Product Produc- tion Development, Chalmers Univ. Technol., Gothenburg, Sweden, 2012.",
+      "parsed": null
+    },
+    {
+      "id": "ref21",
+      "number": 21,
+      "raw_text": "X. Li, G. Wang, Z. Yao, and J. Qu, ‘‘Dynamic model and validation of an articulated steering wheel loader on slopes and over obstacles,’’ Vehicle Syst. Dyn., vol. 51, no. 9, pp. 1305–1323, Sep. 2013, doi: 10.1080/00423114.2013.800893.",
+      "parsed": null
+    },
+    {
+      "id": "ref22",
+      "number": 22,
+      "raw_text": "B. Shamah, M. D. Wagner, S. Moorehead, J. Teza, D. Wettergreen, and W. L. Whittaker, ‘‘Steering and control of a passively articulated robot,’’ in Proc. SPIE, vol. 4571, 2001, pp. 1–2. 16 VOLUME 14, 2026",
+      "parsed": null
+    },
+    {
+      "id": "ref23",
+      "number": 23,
+      "raw_text": "F. Y. Wang, J. Zhang, R. F. Sun, and F. Yu, ‘‘Analysis on the performance of wheel loader in typical work cycle,’’ Appl. Mech. Mater., vols. 148–149, pp. 526–529, Dec. 2011, doi: 10.4028/www.scientiﬁc.net/amm.148- 149.526.",
+      "parsed": null
+    },
+    {
+      "id": "ref24",
+      "number": 24,
+      "raw_text": "W. Ma, Y. Zhang, C. Liu, and S. Wang, ‘‘Prediction method of the fuel con- sumption of wheel loaders in the V-type loading cycle,’’ Math. Problems Eng., vol. 2015, pp. 1–12, Oct. 2015, doi: 10.1155/2015/538176.",
+      "parsed": null
+    },
+    {
+      "id": "ref25",
+      "number": 25,
+      "raw_text": "R. Filla, ‘‘Optimizing the trajectory of a wheel loader working in short loading cycles,’’ in Proc. 13th Scandin. Int. Conf. Fluid Power (SICFP), 2013, pp. 3–5.",
+      "parsed": null
+    },
+    {
+      "id": "ref26",
+      "number": 26,
+      "raw_text": "N. Gadiyar, J. Van de Ven, and E. L. Severson, ‘‘Evaluation of torque- dense electric machine technology for off-highway vehicle electriﬁcation,’’ IEEE Trans. Ind. Appl., vol. 60, no. 2, pp. 3062–3074, Mar. 2024, doi: 10.1109/TIA.2023.3335890.",
+      "parsed": null
+    },
+    {
+      "id": "ref27",
+      "number": 27,
+      "raw_text": "M. Lindgren and P.-A. Hansson, ‘‘Effects of transient conditions on exhaust emissions from two non-road diesel engines,’’ Biosystems Eng., vol. 87, no. 1, pp. 57–66, Jan. 2004, doi: 10.1016/j.biosystemseng.2003.10.001.",
+      "parsed": null
+    },
+    {
+      "id": "ref28",
+      "number": 28,
+      "raw_text": "L. Guzzella and A. Sciarretta, Vehicle Propulsion Systems. Berlin, Germany: Springer, 2005.",
+      "parsed": null
+    },
+    {
+      "id": "ref29",
+      "number": 29,
+      "raw_text": "C. L. Sabharwal, ‘‘Blended root ﬁnding algorithm outperforms bisec- tion and regula falsi algorithms,’’ Mathematics, vol. 7, no. 11, p. 1118, Nov. 2019, doi: 10.3390/math7111118.",
+      "parsed": null
+    },
+    {
+      "id": "ref30",
+      "number": 30,
+      "raw_text": "N. D. Dixit, ‘‘Comparision of numerical accuracy of bisection, Newton raphson, falsi-position and secant methods,’’ Adv. Math., Sci. J., vol. 10, no. 12, pp. 3733–3745, Feb. 2022, doi: 10.37418/amsj.10.12.13.",
+      "parsed": null
+    },
+    {
+      "id": "ref31",
+      "number": 31,
+      "raw_text": "J. Schaub, M. Ehrly, S. Ghetti, Y. Kakichi, and T. Kossioris, ‘‘Mild hybrid powertrain concepts for off-highway applications,’’ in Heavy-Duty- , On- und Off-Highway-Motoren 2020, J. Liebl, Ed., Wiesbaden, Germany: Springer Vieweg, 2021, doi: 10.1007/978-3-658-34362-0_5.",
+      "parsed": null
+    },
+    {
+      "id": "ref32",
+      "number": 32,
+      "raw_text": "Y. Kakichi, S. Pischinger, J. Schaub, A. Müller, and R. Kawano, ‘‘Parallel- series hybrid powertrain concept for a wheel loader,’’ in Heavy-Duty-, On- und Off-Highway-Motoren 2023. HDENGI 2022, A. Heintzel, Ed. Wiesbaden, Germany: Springer Vieweg, 2025, doi: 10.1007/978-3-658- 46538-4_10. YUKI KAKICHI received the M.Sc. degree in aerospace engineering from The University of Tokyo, Tokyo, Japan, in 2014. He is currently pursuing the Ph.D. degree with RWTH Aachen University. He is with Yanmar Holdings Co., Ltd., where he is involved in the development of elec- tric powertrains for industrial applications. Prior to this, he was a Researcher at RWTH Aachen University, from 2019 to 2024. His research inter- ests include optimization and predictive control for off-highway vehicles and systems. JOSCHKA SCHAUB received the Diploma and Ph.D. degrees in mechanical engineering from RWTH Aachen University, in 2010 and 2015, respectively. He is currently the Department Man- ager for controls of FEV Europe GmbH, Aachen, where he focuses on control system development for motor, hybrid, and fuel cell powertrains. Before this role, he was a Researcher at RWTH Aachen University, from 2010 to 2014, specializing in con- trol function development for diesel engines and aftertreatment systems. His research interests include control system devel- opment for complex powertrain systems, energy management, application of artiﬁcial intelligence, and predictive control for various applications. Y. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader ARNE MÜLLER received the Diploma degree in mechanical engineering with a specialization in automotive engineering from RWTH Aachen University, in 2012. He began his professional career at FEV Europe GmbH, Aachen, focusing on function development and model-based sys- tems engineering for hybrid and electric vehicles. He gained international experience during a seven- month assignment at FEV North America bef",
+      "parsed": null
+    }
+  ],
+  "figures": [
+    {
+      "id": "fig1",
+      "number": 1,
+      "caption": "Schematic of conventional wheel loader powertrain.\nII. PARALLEL-SERIES HYBRID SYSTEM\nA. CONVENTIONAL POWERTRAIN\nA conventional 7-ton class wheel loader depicted in Fig. 1\nis used as a baseline for research. The powertrain of the\nconventional wheel loader consists of three sub-systems:\n1) POWER SOURCE\nThe baseline wheel loader is powered by a 3.6 L, 4-cylinder\nDiesel internal combustion engine (ICE) with a maximum\nY. Kakichi et al.: Real-Time Capable Optimal Energy Management Strategy for a Hybri",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig1_0.png",
+      "suggested_filename": "figure1.eps"
+    },
+    {
+      "id": "fig2",
+      "number": 2,
+      "caption": "Schematic top view of the V-cycle.\nThe bottom two subplots in Fig. 3 compare the requested\nhydraulic ﬂow rate with the actual supply from the hydraulic\npump. There is a large gap between the supplied ﬂow rate\nand the requested ﬂow rate, especially during phase A and\nphase B, as marked by red arrows in Fig. 3.\nIn these phases, the bucket is moved only slightly, resulting\nin a low requested ﬂow rate. However, since the hydraulic\npump is connected to the same ICE output shaft as the HST,\nit is driv",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig2_0.png",
+      "suggested_filename": "figure2.eps"
+    },
+    {
+      "id": "fig3",
+      "number": 3,
+      "caption": "Vehicle speed, cylinder stroke measurements, and a\ncomparison of the hydraulic oil flow rate request with the actual supply\nfrom the pump during the V-cycle, as measured on a conventional wheel\nloader.\nthe loading area. The driving segments are divided into two\ndistinct parts: a downhill segment with lower drive power\nrequirements (Drive A) and an uphill segment with higher\ndrive power requirements (Drive B).\nC. PARALLEL-SERIES HYBRID SYSTEM\nThe powertrain of the baseline wheel loader shown in F",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig3_0.png",
+      "suggested_filename": "figure3.eps"
+    },
+    {
+      "id": "fig4",
+      "number": 4,
+      "caption": "Combined cycle, consisting of V-cycle and driving phase.",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig4_0.png",
+      "suggested_filename": "figure4.eps"
+    },
+    {
+      "id": "fig5",
+      "number": 5,
+      "caption": "Schematic of parallel-series hybrid wheel loader powertrain.\npedal operation, eliminating the need to use the brake pedal\nfor controlling vehicle acceleration in the V-cycle.\nThe target pump speed is determined to meet the ﬂow rate\nrequested by the operator while keeping the excess ﬂow as\nlow as possible. First, the total ﬂow rate demand is calculated\nbased on the joystick input djystk and the angular velocity\nof the steering wheel ωsteer. Then the ﬂow rate demand is\nconverted to pump speed acco",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig5_0.png",
+      "suggested_filename": "figure5.eps"
+    },
+    {
+      "id": "fig6",
+      "number": 6,
+      "caption": "Parallel hybrid system control concept.\nThe pump speed in hybrid wheel loader is controlled\nby the P2 EM, not by the ICE in the conventional wheel\nloader for the following two reasons. Firstly, the ICE is\nnot always connected to the pump. In full electric opera-\ntion, the ICE is disconnected from the pump and cannot\ncontrol the pump speed. Secondly, and more importantly,\ncontrolling the pump speed by the EM avoids transient ICE\noperations, thereby reducing pollutant emissions and fuel\nconsumptio",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig6_0.png",
+      "suggested_filename": "figure6.eps"
+    },
+    {
+      "id": "fig7",
+      "number": 7,
+      "caption": "Operator interface of hybrid wheel loader.\nICE provides positive torque to charge the battery, except dur-\ning fuel cut. The P2 EM receives the target speed calculated\nbased on the ﬂow request and adjusts the torque to regulate\nthe pump speed, thereby absorbing the ﬂuctuations in pump\ntorque.\nIII. POWERTRAIN MODELING\nA. INTERNAL COMBUSTION ENGINE\nThe fuel rate of the ICE ˙mfuel(nICE, MICE) is represented by\na nonlinear static map shown in Fig. 8 and calculated based\non the operating point. The f",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig7_0.png",
+      "suggested_filename": "figure7.eps"
+    },
+    {
+      "id": "fig8",
+      "number": 8,
+      "caption": "ICE fuel consumption characteristics (Y-axis scale not shown\nfor confidentiality).\nB. ELECTRIC MACHINES\nP2 electric machine and EDU power losses are calculated\nbased on the motor speed and torque using a static map. The\npower of electric machines is calculated according to (2), with\n6\nVOLUME 14, 2026\nthe constraint of available torque (3)\nPi (ni, Mi)\n\u0002\n2 · π · ni·Mi + Ploss,i (ni, Mi)\nif ni · Mi ≥0\n2 · π · ni·Mi −Ploss,i (ni, Mi)\nif ni · Mi< 0\n(2)\n=\nMi,min (ni) ≤Mi ≤Mi,max (ni)\n(3)\nwith i = P2 E",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig8_0.png",
+      "suggested_filename": "figure8.eps"
+    },
+    {
+      "id": "fig9",
+      "number": 9,
+      "caption": "Normalized efficiency maps of electric machines (left: P2, right: Front EDU). The isolines are normalized\nsuch that 100 corresponds to the maximum efficiency.\nwhere Qbat represents the battery capacity. The battery power\nis calculated as the sum of all electrical power consumption\nusing (2) as follows:\nPbat = PEM + PEDU + Paux\n(8)\nwhere Paux represents the electrical power required for\nauxiliary components and is modeled as a constant power\nconsumption for both DC-DC converters in this paper.\nIV",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig9_0.png",
+      "suggested_filename": "figure9.eps"
+    },
+    {
+      "id": "fig10",
+      "number": 10,
+      "caption": "Equivalent circuit model of batter.\nA classic Dynamic Programming (DP) problem can\nbe formulated to determine the control inputs that min-\nimize the total fuel consumption over the given mis-\nsion cycle, while considering the ICE state (9) and SOC\ndynamics (11) as follows:\nJopt\nξi (k) , ssICE,j (k)\nk\nk, MICE (k) , ssICE,j(k)\n=\nmin\n· \u0006t\n˙mfuel\nMICE,uss∈U\n+ ˙ms (k, uss (k)) · \u0006t + Jopt\nk+1 (ξ (k + 1) , ssICE (k + 1))\n(13)\nHere, Jopt\nrepresents the cost-to-go\nξi (k) , ssICE,j (k)\nk\nfunction at time",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig10_0.png",
+      "suggested_filename": "figure10.eps"
+    },
+    {
+      "id": "fig11",
+      "number": 11,
+      "caption": "DP-PMP calculation flowchart.\nFig. 11 illustrates the optimization ﬂowchart via DP-PMP.\nIn the ﬁrst step, the optimal ICE torque is computed for a\ngiven equivalence factor s, which serves as a conversion fac-\ntor from battery power to equivalent fuel power and appears\nin the optimization problem based on PMP. The optimal ICE\ntorque is determined as follows:\n\u000e\n\u000f\n˙mfuel −s · UOC·Qbat\n· ˙ξ\nMICE (t) = arg min\nHu\nMICE(t)\n1\n\u0010\n= arg min\n(14)\nPfuel + s · Pelec\nHu\nMICE(t)\nwhere\nPfuel = Hu · ˙mfuel\n(15)\nP",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig11_0.png",
+      "suggested_filename": "figure11.eps"
+    },
+    {
+      "id": "fig12",
+      "number": 12,
+      "caption": "Optimization-based controller architecture.\nB. CONTROLLER DESIGN AND IMPLEMENTATION OF THE\nDP-PMP-BASED OPTIMAL ENERGY MANAGEMENT\nSTRATEGY\nThe optimization algorithm based on DP-PMP requires future\ncycle information, such as the pump ﬂow rate, pressure, and\nEDU power.\nCompared to on-highway vehicles, predicting future power\ndemands of off-highway vehicles is more complicated, as it\ndepends not only on the speed proﬁle but also on factors\nsuch as the interaction of the power take-offs (PTOs) with",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig12_0.png",
+      "suggested_filename": "figure12.eps"
+    },
+    {
+      "id": "fig13",
+      "number": 13,
+      "caption": "Scenario-to-go.\nV. SIMULATIVE INVESTIGATIONS\nIn this section, the DP-PMP-based control strategy is com-\npared with the rule-based control strategy through simula-\ntions of two different driving cycles. The ﬁrst driving cycle is\na V-cycle repeated ten times. The prediction horizon encom-\npasses one loading cycle, which consists of four phases.\nThe second driving cycle is the combined cycle introduced\nin Section II. This cycle includes ﬁve repetitions of the\nV-cycle, followed by a bucket loading p",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig13_0.png",
+      "suggested_filename": "figure13.eps"
+    },
+    {
+      "id": "fig14",
+      "number": 14,
+      "caption": "Optimization-based controller architecture.\ndelay time are calibrated so that the ICE remains on during\nthe V-cycle, thereby avoiding frequent ICE start-stop events\nduring highly transient operations.\nA. V-CYCLE\nFig. 15 shows the simulation results of the V-cycle in compar-\nison to the rule-based strategy. The ﬁrst V-cycle operates with\nan initial equivalence factor of s = 3.0, assuming that the con-\ntroller has no prior cycle information. After completing the\nﬁrst loading cycle, the optimizatio",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig14_0.png",
+      "suggested_filename": "figure14.eps"
+    },
+    {
+      "id": "fig15",
+      "number": 15,
+      "caption": "Simulation results for the V-cycle with rule-based control\nstrategy and DP-PMP based control strategy. The initial and target battery\nSOC is 70%.",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig15_0.png",
+      "suggested_filename": "figure15.eps"
+    },
+    {
+      "id": "fig16",
+      "number": 16,
+      "caption": "Sankey diagram of the hybrid wheel loader during the\nV-cycle: The bold values after the arrows represent the DP-PMP results,\nnormalized to the fuel power of the rule-based strategy.\nTo compare the energy ﬂow in the powertrain and to\nillustrate efﬁciency improvements, a Sankey diagram of the\nhybrid wheel loader in the V-cycle with both control strate-\ngies is presented in Fig. 16. The values in bold after arrows\n12\nVOLUME 14, 2026\nrepresent the contributions of DP-PMP, while the remaining\nvalues ",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig16_0.png",
+      "suggested_filename": "figure16.eps"
+    },
+    {
+      "id": "fig17",
+      "number": 17,
+      "caption": "Simulation results for the combined cycle with rule-based\ncontrol strategy and DP-PMP based control strategy. The initial and target\nbattery SOC is 70%.\nTABLE 5. Comparison of soc-corrected fuel consumption in the combined\ncycle.\nthan in the V-cycle. This is because the combined cycle has\nlong drive periods in which both power demand and hydraulic\noil demand are lower than in loading cycles. Thus, there is\ngreater potential for system efﬁciency improvement through\noptimization in the combined cy",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig17_0.png",
+      "suggested_filename": "figure17.eps"
+    },
+    {
+      "id": "fig18",
+      "number": 18,
+      "caption": "Comparison of the ICE operating points during the combined cycle, with 100 isoline corresponding to the best\nefficiency range.\nTABLE 7. Summary of V-cycle measurements (8 loading cycles).\nTABLE 8. Summary of the combined cycle measurements.\nis 0.7% lower compared to the average BSFC with the rule-\nbased strategy of 218.4 g/kWh, as shown in the left side of\nFig. 20. This result conﬁrms that DP-PMP uses the ICE more\neffectively by using electric mode.\nSimilar to the V-cycle, the results for the co",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig18_0.png",
+      "suggested_filename": "figure18.eps"
+    },
+    {
+      "id": "fig19",
+      "number": 19,
+      "caption": "Optimization calculation in combined cycle.",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig19_0.png",
+      "suggested_filename": "figure19.eps"
+    },
+    {
+      "id": "fig20",
+      "number": 20,
+      "caption": "Comparison of average BSFC for rule-based strategy (RB) and\noptimization-based strategy (DP-PMP).\ndischarging the battery in electric mode. The second mea-\nsurement with DP-PMP (DP-PMP 2) shows that the BSFC\nremains low in such scenarios. This suggests that the\noptimization-based strategy offers greater fuel consumption\nreduction beneﬁts in charge-depleting scenarios, such as\nthose where external battery charging is possible. To fully\nexploit the potential of the proposed control strategy in cha",
+      "image_path": "data\\uploads\\1e3c9b24-14f1-487a-b6ea-1793c4e209c8\\fig20_0.png",
+      "suggested_filename": "figure20.eps"
+    }
+  ],
+  "tables": [
+    {
+      "id": "table1",
+      "number": 1,
+      "title": "Table 1",
+      "rows": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 2"
+    },
+    {
+      "id": "table2",
+      "number": 2,
+      "title": "Table 2",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 2"
+    },
+    {
+      "id": "table3",
+      "number": 3,
+      "title": "Table 3",
+      "rows": [
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 2"
+    },
+    {
+      "id": "table4",
+      "number": 4,
+      "title": "Table 4",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 4"
+    },
+    {
+      "id": "table5",
+      "number": 5,
+      "title": "Table 5",
+      "rows": [
+        [
+          ""
+        ],
+        [
+          ""
+        ],
+        [
+          ""
+        ],
+        [
+          ""
+        ],
+        [
+          ""
+        ],
+        [
+          ""
+        ],
+        [
+          ""
+        ]
+      ],
+      "caption": "Table on page 5"
+    },
+    {
+      "id": "table6",
+      "number": 6,
+      "title": "Table 6",
+      "rows": [
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 5"
+    },
+    {
+      "id": "table7",
+      "number": 7,
+      "title": "Table 7",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 7"
+    },
+    {
+      "id": "table8",
+      "number": 8,
+      "title": "Table 8",
+      "rows": [
+        [
+          ""
+        ],
+        [
+          ""
+        ]
+      ],
+      "caption": "Table on page 7"
+    },
+    {
+      "id": "table9",
+      "number": 9,
+      "title": "Table 9",
+      "rows": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 8"
+    },
+    {
+      "id": "table10",
+      "number": 10,
+      "title": "Table 10",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 11"
+    },
+    {
+      "id": "table11",
+      "number": 11,
+      "title": "Table 11",
+      "rows": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 13"
+    },
+    {
+      "id": "table12",
+      "number": 12,
+      "title": "Table 12",
+      "rows": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 15"
+    },
+    {
+      "id": "table13",
+      "number": 13,
+      "title": "Table 13",
+      "rows": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 15"
+    },
+    {
+      "id": "table14",
+      "number": 14,
+      "title": "Table 14",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "caption": "Table on page 15"
+    }
+  ],
+  "equations": [
+    {
+      "id": "deqn3",
+      "number": 3,
+      "latex": "the constraint of available torque",
+      "display": true
+    }
+  ],
+  "metadata": {
+    "manuscript_id": "",
+    "source_filename": "paper.pdf",
+    "doi": "10.3390/en12102024."
+  },
+  "extraction_warnings": []
+}

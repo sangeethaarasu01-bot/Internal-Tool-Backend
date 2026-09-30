@@ -17,10 +17,13 @@ def _default_light_pdf_extract() -> bool:
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    LLM_PROVIDER: Literal["openai", "anthropic"] = "anthropic"
+    LLM_PROVIDER: Literal["openai", "anthropic", "gemini"] = "anthropic"
     LLM_MODEL_GENERATION: str = "claude-sonnet-4-20250514"
     LLM_MODEL_MATCHING: str = "claude-3-5-haiku-20241022"
     LLM_MODEL_EXTRACTION: str = "claude-3-5-haiku-20241022"
+    GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-2.5-flash"
+    GEMINI_API_BASE: str = "https://generativelanguage.googleapis.com/v1beta"
     OPENAI_API_KEY: str = ""
     ANTHROPIC_API_KEY: str = ""
     MAX_RETRIES: int = 3
@@ -56,6 +59,20 @@ class Settings(BaseSettings):
     def ensure_data_dirs(self) -> None:
         for d in (self.uploads_dir, self.outputs_dir, self.schemas_dir):
             d.mkdir(parents=True, exist_ok=True)
+
+    def resolve_llm_model(self, role: str) -> str:
+        """Return model id for generation / matching / extraction (Gemini-aware)."""
+        by_role = {
+            "generation": self.LLM_MODEL_GENERATION,
+            "matching": self.LLM_MODEL_MATCHING,
+            "extraction": self.LLM_MODEL_EXTRACTION,
+        }
+        model = by_role.get(role.lower(), self.LLM_MODEL_GENERATION)
+        if self.LLM_PROVIDER == "gemini":
+            name = model.strip()
+            if not (name.startswith("gemini") or name.startswith("models/")):
+                return self.GEMINI_MODEL
+        return model
 
 
 settings = Settings()

@@ -10,6 +10,7 @@ from app.agent.validator import Validator
 from app.db import get_job, list_jobs, update_job
 from app.models.mapping_plan import MappingPlan
 from app.models.schema_map import SchemaMap
+from app.utils.output_paths import xml_output_filename
 
 router = APIRouter(tags=["jobs"])
 
@@ -52,6 +53,7 @@ def api_get_result(job_id: str) -> dict:
                     "valid": False,
                     "errors": [f"Validation skipped: {exc}"],
                 }
+    download_name = xml_output_filename(job.pdf_filename)
     return {
         "status": job.status,
         "xml_content": xml_content,
@@ -61,6 +63,7 @@ def api_get_result(job_id: str) -> dict:
         "error": job.error,
         "output_path": job.output_path,
         "download_url": f"/api/download/{job_id}",
+        "download_filename": download_name,
     }
 
 
@@ -72,7 +75,11 @@ def api_download(job_id: str) -> FileResponse:
     path = Path(job.output_path)
     if not path.exists():
         raise HTTPException(404, "Output file missing")
-    return FileResponse(path, filename=f"{job_id}.xml", media_type="application/xml")
+    return FileResponse(
+        path,
+        filename=xml_output_filename(job.pdf_filename),
+        media_type="application/xml",
+    )
 
 
 @router.delete("/jobs/{job_id}")

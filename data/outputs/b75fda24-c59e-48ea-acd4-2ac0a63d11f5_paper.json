@@ -1,0 +1,791 @@
+{
+  "title": "AUTHOR QUERIES AUTHOR PLEASE ANSWER ALL QUERIES",
+  "authors": [
+    {
+      "first_name": "Author",
+      "last_name": "Gateway",
+      "full_name": "Author Gateway",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Author",
+      "last_name": "Gateway",
+      "full_name": "Author Gateway",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "National",
+      "last_name": "Research",
+      "full_name": "National Research",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Rehabilitation",
+      "last_name": "Technical",
+      "full_name": "Rehabilitation Technical",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Age",
+      "last_name": "Disability",
+      "full_name": "Age Disability",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Sequential",
+      "last_name": "Dual-",
+      "full_name": "Sequential Dual-",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Dynamic",
+      "last_name": "Characteristics",
+      "full_name": "Dynamic Characteristics",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Brain",
+      "last_name": "Networks",
+      "full_name": "Brain Networks",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Lingling",
+      "last_name": "Chen",
+      "full_name": "Lingling Chen",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    },
+    {
+      "first_name": "Yanglong",
+      "last_name": "Wang",
+      "full_name": "Yanglong Wang",
+      "orcid": null,
+      "email": null,
+      "affiliation_refs": [
+        "aff1"
+      ],
+      "corresponding": false,
+      "bio": null,
+      "photo_path": null
+    }
+  ],
+  "affiliations": [
+    {
+      "id": "aff1",
+      "department": null,
+      "institution": "See PDF for affiliation details",
+      "city": null,
+      "state": null,
+      "post_code": null,
+      "country": null
+    }
+  ],
+  "abstract": "Transcranial magnetic stimulation (TMS) modulates cortical excitability to promote neuroplasticity, but single-target TMS has limited effects on multi-region synergy. Sequential dual-target TMS may enhance brain network reorganization through temporal stimulation, though its mechanisms remain unclear. This study investigates the immediate effects of singleand dualtarget TMS on brain functional networks in stroke patients using functional near-infrared spectroscopy (fNIRS) and dynamic functional connectivity (dFNC) analysis. Fifteen subacute stroke patients and fifteen healthy controls underwent three interventions: single-target SMA-rTMS, single-target LDLPFC-rTMS, and sequential dual-target stimulation (Dual-rTMS). fNIRS data were analyzed via dFNC to identify connectivity states (weak, moderate, strong) and evaluate time fraction, state transitions, global efficiency, and total signal power. Results revealed three dFNC states: State 1 (weak connectivity, 44.24%), State 2 (moderate, 39.44%), and State 3 (strong, 16.32%). Single-target TMS (especially SMA-rTMS) increased time fraction in State 1, indicating low-connectivity induction, Received 4 September 2025; revised 23 December 2025; accepted 16 January 2026. This work was supported in part by the National Key Research and Development Project under Grant 2023YFC3603703, in part by the National Natural Science Foundation of China under Grant 32271370, and in part by the Fundamental Research Funds for Central Public Welfare Research Institutes under Grant 118009001000160001. (Corresponding author: Zengyong Li.) This work involved human subjects or animals in its research. Approval of all ethical and experimental procedures and protocols was granted by the Ethics Committee of Yueyang Integrative Medicine Hospital affiliated to Shanghai University of Traditional Chinese Medicine under Approval No. ChiCTR2000035984. Lingling Chen is with the School of Artificial Intelligence, Hebei University of Technology, Tianjin 300130, China, and also with the Intelligent Rehabilitation Device and Detection Technology Engineering Research Centre of the Ministry of Education, Tianjin 300130, China. Yanglong Wang is with the School of Artificial Intelligence, Hebei University of Technology, Tianjin 300130, China. Congcong Huo, Guangjian Shao, and Zengyong Li are with the National Research Center for Rehabilitation Technical Aids, Beijing, China, also with the Key Laboratory of Rehabilitation Technical Aids of the Ministry of Civil Affairs, Beijing, China, and also with the Beijing Key Laboratory of Rehabilitation Technical Aids for Old-Age Disability, Beijing, China (e-mail: zyongli2025@163.com). Xingshuo Dong is with the National Rehabilitation Hospital, National Research Center for Rehabilitation Technical Aids, Beijing 102676, China. DongSheng Xu is with the School of Rehabilitation Science, Shanghai University of Traditional Chinese Medicine, Shanghai 201203, China. D © 2026 The Authors. This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/ while Dual-rTMS further prolonged State 1 and reduced inefficient transitions (e.g., State 1→2: p < 0.005). Stroke patients showed impaired transitions from State 2→3 (p = 0.024) versus controls. Time fraction in State 3 correlated positively with motor function scores (FMA-LE: r = 0.52, p = 0.045; BBS: r = 0.52, p = 0.047), while State 1 correlated negatively (FMA-LE: r = −0.52, p = 0.045). Sequential dual-target TMS optimizes network dynamics by sustaining low-energy states and suppressing maladaptive transitions, outperforming single-target approaches. dFNC temporal patterns may serve as biomarkers for post-stroke motor function, supporting sequential dual-target TMS as a promising rehabilitation tool.",
+  "keywords": [
+    "TMS",
+    "fNIRS",
+    "dynamic functional connec- tivity",
+    "stroke",
+    "lower limb motor dysfunction."
+  ],
+  "sections": [
+    {
+      "id": "sec1",
+      "label": "I.",
+      "title": "INTRODUCTION",
+      "level": 1,
+      "paragraphs": [
+        "S TROKE is a common clinical cerebrovascular disease with high incidence, mortality, and disability rates. It is mainly caused by cerebral vascular rupture or embolism, leading to ischemia and hypoxia in brain tissue, which in turn causes nerve cell death and seriously affects the health and life of patients [1], [2]. After a stroke, patients often experience var- ious neurological sequelae, with hemiplegia being a common sequela that leads to balance dysfunction and impaired walking ability. According to reports, nearly 80% of stroke patients are unable to successfully maintain balance and control their walking posture [3]. Previous studies have shown that the neurobiological basis for motor function recovery after stroke lies in the plasticity of the central nervous system [4], [5]. During this process, the central nervous system reorganizes its structure and function to reestablish neural connections, thereby partially compensating for the functional impairments caused by damage to the lesion area [6], [7]. Therefore, promoting and restoring neural plasticity is a key intervention strategy in the motor rehabilitation of stroke patients. Transcranial magnetic stimulation (TMS) is a non-invasive focal brain stimulation technique based on electromagnetic induction, in which a rapidly changing magnetic ﬁeld induces small intracranial currents in the brain [8]. The induced currents cause depolarization of neuronal clusters in the cortical region directly beneath the stimulation coil, while 2 IEEE TRANSACTIONS ON NEURAL SYSTEMS AND REHABILITATION ENGINEERING Fig. 1. Lower limb motor rehabilitation circuit. The SMA directly projects ﬁbers to the corticospinal tract to intervene in the execu- tion of movement, while the DLPFC indirectly inﬂuences the basal neural circuit through projections to the SMA, further affecting the execution of movement. Created in BioRender. Wang, Y. (2026) https://BioRender.com/pqs8f1d. also affecting neuronal clusters in adjacent and distant brain regions, thereby eliciting neurophysiological and behavioral effects and inducing synaptic-level neuroplasticity changes [9], [10]. While traditional single-target TMS can improve motor function by modulating local brain region excitability [11], [12], [13], the execution of motor behavior relies on dynamic interactions among multiple brain regions, thereby limiting its therapeutic efﬁcacy [14], [15]. Dual-Target Brain Region Stimulation is an emerging neurostimulation strategy that sequentially stimulates multiple functionally complementary brain regions, offering advantages in integrating dual-brain region synergistic effects and optimizing neural signal trans- mission pathways [16], [17], [18]. Importantly, sequential dual-target TMS has demonstrated signiﬁcant therapeutic efﬁ- cacy in conditions such as consciousness disorders, post-stroke motor function recovery, and cognitive impairments [19], [20], [21]. In neurostimulation strategies for promoting rehabilitation of lower limb motor disorders, the supplementary motor area (SMA) is a commonly used stimulation site for rTMS. Research indicates that the SMA receives neural inputs from multiple levels, including primary and secondary somatosen- sory areas, the parietal association cortex, and projections from the basal ganglia via the thalamus [22]. These connec- tions form the basal ganglia-thalamus-cortex-SMA functional circuit, which is involved in the autonomous generation of internal movements, automated behaviors, and the planning and initiation of learned motor sequences [23]. On the other hand, the SMA sends projection ﬁbers to the corticospinal tract. As shown in Fig. 1. Through this unique corticospinal projection, the SMA not only participates in the planning and initiation stages of movement but also directly intervenes in the execution process of movement [24]. Notably, recent studies have shown that the relationship between cognition and movement is complementary rather than competitive [25]. The results of Yu et al. [26] also conﬁrm that rTMS treatment of the left dorsolateral prefrontal cortex (L-DLPFC) improves patients’ balance and postural control abilities and signiﬁcantly reduces the risk of falls in daily life. Additionally, previous literature suggests that the L-DLPFC is responsible for plan- ning, organizing, and regulating motor functions [27], [28] and may maintain postural control and balance through the allocation of attentional resources [29]. Another study suggests that the frontal cortex indirectly inﬂuences basal neural circuits through projections to the SMA [30]. Therefore, we hypothe- size that stimulating the L-DLPFC ﬁrst may promote resource integration within the cognitive-motor network, followed by stimulation of the SMA to further regulate the immediate reor- ganization of movement-related networks, thereby enhancing neural plasticity across multiple brain regions. It should be noted that “dual-target rTMS” in this study refers to sequential stimulation of the L-DLPFC and the SMA. However, the underlying mechanisms of this temporal network regulation remain poorly understood. Understanding the potential mechanisms underlying motor recovery induced by different intervention modalities is cru- cial for enhancing our understanding of neural mechanisms and further optimizing motor rehabilitation strategies. Func- tional near-infrared spectroscopy (fNIRS) is a neuroimaging technique used to monitor cortical hemodynamics. Its mea- surement principle is based on the optical properties of the medium being studied, so near-infrared light signals are funda- mentally less susceptible to electromagnetic interference from TMS pulses and impose no restrictions on the placement of TMS coils [31], [32]. These characteristics of fNIRS make it well-suited for use in conjunction with TMS, enabling the study of the immediate effects of TMS on brain functional networks. Traditional static functional connectivity analysis is based on the assumption that functional interactions between differ- ent brain regions remain static throughout the scan. However, brain regions do not interact statically but rather through dynamic processes [33], [34], [35]. Dynamic functional net- work connectivity (dFNC) aids in studying dynamic functional interactions between brain networks and better captures the dynamic temporal properties of brain functional networks during TMS stimulation. Therefore, in this study, we aimed to investigate the effects of single-target and sequential dual- target stimulation on brain functional networks in stroke patients (Stroke) and healthy controls (HC) using dFNC anal- ysis methods with fNIRS. We hypothesize that: (1) there are signiﬁcant differences in the temporal characteristics of dFNC between Stroke and HC; (2) changes in the temporal char- acteristics of dFNC are associated with the severity of lower limb motor impairments in stroke patients; (3) Compared to single-target stimulation, sequential dual-target rTMS induces more pronounced alterations in brain network dynamics."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": []
+    },
+    {
+      "id": "sec2",
+      "label": "II.",
+      "title": "MATERIALS AND METHODS",
+      "level": 1,
+      "paragraphs": [],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec3",
+          "label": "A.",
+          "title": "Participants",
+          "level": 2,
+          "paragraphs": [
+            "This study recruited a total of 20 patients with subacute stroke from the hospital afﬁliated with the National Research Center for Rehabilitation Technical Aids. The inclusion cri- teria were as follows: (1) radiological evidence of unilateral CHEN et al.: EFFECTS OF SEQUENTIAL DUAL-TARGET TMS 3 subcortical stroke; (2) age between 20 and 85 years; (3) the enrollment period was within 7 days and 6 months after the onset of the disease; (4) presence of mild, mod- erate, or severe unilateral lower limb motor dysfunction, as deﬁned by the Fugl-Meyer Assessment for Lower Extrem- ity (FMA-LE) with the following cutoff scores [36]: severe (FMA-LE < 19), moderate (FMA-LE 20–28), and mild (FMA-LE > 29) (5) no contraindications for rTMS mea- surement; (6) ability to understand and follow instructions. During the course of this study, three subjects were excluded due to poor compliance, as they were unable to complete data collection in accordance with the study requirements. Additionally, two subjects were excluded after fNIRS data preprocessing due to excessive motion artifacts resulting in low signal-to-noise ratios, which did not meet the quality requirements for fNIRS data analysis. After rigorous data veriﬁcation, a total of 15 stroke patients were ultimately included for subsequent analysis. Additionally, 15 healthy participants matched for age, gender, and educational level, with no history of mental or neurological disorders, were recruited as controls. All patients underwent a series of clinical assessments, including National Institutes of Health Stroke Scale (NIHSS), Fugl-Meyer Lower Limb Motor Function Assessment Scale (FMA-LE), Berg Balance Scale (BBS), and Mini-Mental State Examination (MMSE). Table I describes the detailed demographic data and clinical characteristics of the participants, including age, gender, time since stroke onset, and cognitive status. According to the Chinese version of the Dominant Hand Scale [37], all participants were right-handed. All patients signed informed consent forms and were informed of potential adverse events prior to the trial. This study (Trial Registration: ChiCTR2000035984) was approved by Ethics Committee of Yueyang Integrative Medicine Hospital afﬁliated to Shanghai University of Traditional Chinese Medicine and strictly adheres to the ethical standards for medical research as stipulated in the 1975 Helsinki Declaration (revised in 2008)."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec4",
+          "label": "B.",
+          "title": "Experimental Design and Procedures",
+          "level": 2,
+          "paragraphs": [
+            "This study is a randomized, prospective, cross-sectional clinical trial. All participants must complete three experimental sessions under different intervention conditions, with each session spaced more than 48 hours apart [38], [39]. The exper- imental intervention conditions include: (1) SMA single target stimulation (SMA-rTMS), (2) L-DLPFC single target stimu- lation (LDLPFC-rTMS), (3) Sequential dual-target rTMS of the L-DLPFC and SMA (Dual-rTMS). The order of the three experimental sessions was assigned using a random sequence generated by MATLAB (The MathWorks, Inc., Natick, MA, USA) and balanced across participants. Each experimental ses- sion consisted of two stages: a 6-minute resting-state recording and a 10-minute transcranial magnetic stimulation interven- tion. Prior to the experiment, participants were instructed to rest in a quiet environment for 10-20 minutes to relax both mentally and physically. Subsequently, fNIRS was used to simultaneously detect dynamic hemodynamic information during resting state and rTMS. Additionally, participants were required to remain awake and avoid voluntary movements and speech during both the resting state and transcranial magnetic stimulation. The TMS used in this study was a magnetic ﬁeld stimulator with a cone-shaped coil(Yiruide MagTD, Wuhan, China). For healthy subjects, the resting motor threshold (rMT) was measured over the right primary motor cortex (M1). The rMT was deﬁned as the minimum stimulus intensity required to elicit motor evoked potentials with an amplitude greater than 50 μV in at least 5 out of 10 stimuli recorded from the contralateral abductor pollicis brevis muscle. For patients, if the above method fails to obtain rMT from the affected side M1, the location of the healthy hemisphere M1 is deﬁned as the stimulation target, and the healthy hemisphere rMT is used as the intervention intensity for rTMS. Fig. 2 shows the intervention parameters for different experimental phases, as follows: SMA-rTMS: 10 Hz, 100% rMT, 1000 pulses (2 s × 50 trains, 10 s interval); LDLPFC-rTMS: 10 Hz, 80% rMT, 1000 pulses (5 s × 20 trains, 25 s interval); Dual-rTMS: 5 minutes of LDLPFC-rTMS followed by 5 minutes of SMA- rTMS, totaling 1000 pulses. Additionally, the stimulation site for L-DLPFC was located at F3 using the ﬁber cap positioning from the international 10/20 EEG system [40], and the SMA stimulation point was deﬁned as the scalp location 3 cm anterior to the CZ point [41], [42]. All stimulation was admin- istered by an experienced neurologist who was not involved in the clinical assessment or data analysis of the participants. C. fNIRS Measurement and Preprocessing Brain hemodynamic responses during resting state and TMS intervention were collected using a multi-channel continuous wave (740 nm and 850 nm) fNIRS device (NirSmart, Danyang Huichuang Medical Equipment Co., LTD., Beijing, China) in a quiet environment. The data sampling frequency was set to 10 Hz. Following the international 10-20 system [43], 16 detector probes and 18 light source probes were symmetri- cally arranged on both sides of the prefrontal cortex and motor cortex, forming a total of 38 signal channels, with a channel spacing of 30 mm. To achieve precise localization of channel signals within brain regions, we acquired three-dimensional coordinates for all probes and key anatomical landmarks such as the nasal root and preauricular point using a 3D digitizer. These coordinates were then mapped to the Montreal Neurological Institute standard space [44]. Subsequently, prob- abilistic mapping analysis was performed using NIRS-SPM software [45]. Signals were categorized into 14 regions of interest based on Brodmann areas: bilateral prefrontal cortex (PFC), dorsolateral prefrontal cortex (DLPFC), superior frontal cortex (SFC), presupplementary motor area (PSMA), M1, primary somatosensory cortex (S1), and occipital cortex (OC). Additionally, to ensure compatibility with TMS equipment, a TMS-speciﬁc probe was employed to mitigate limitations such as shallow TMS penetration depth and susceptibility to interference. This study utilized custom routines in MATLAB for fNIRS data preprocessing, executed via the following procedure. First, the raw light intensity data were converted into light density data. Subsequently, the light density data were trans- formed into oxygenated hemoglobin (HbO2), deoxygenated 4 IEEE TRANSACTIONS ON NEURAL SYSTEMS AND REHABILITATION ENGINEERING Fig. 2. Stimulation location and parameters under different intervention conditions. All three stimulation modes used high-frequency (10 Hz) stimulation, and the total number of pulses was the same. Among them, sequential dual-target stimulation ﬁrst stimulated the DLPFC with 300 pulses, then stimulated the SMA with 300 pulses. Fig. 3. dFNC analysis method framework. First, the fNIRS data of all subjects are processed using a sliding window to calculate the FC of each time window. Then, the upper triangular part of all matrices is extracted and converted into dFNC feature vectors. Three functional connectivity states are identiﬁed through k-means clustering. Finally, dynamic functional network indicators are calculated based on the individual state time series. hemoglobin (HbR), and total hemoglobin (HbT) using an improved Beer-Lambert law [46]. Since HbO2 concentration is the most sensitive indicator of local cerebral blood ﬂow changes in fNIRS measurements [47], this study uses the HbO2 signal to assess changes in cortical oxygenation levels and determine the neural activity levels in brain regions asso- ciated with motor function. After obtaining the HbO2 signal, it was subjected to bandpass ﬁltering at 0.01–0.2 Hz (sixth- order zero-phase Butterworth ﬁlter), to reduce irrelevant noise components and low-frequency baseline drift [48]. Next, prin- cipal component analysis and independent component analysis were performed on the oxygenated hemoglobin change signals of each channel to identify and remove components potentially related to noise and artifacts, including heartbeats, respiratory signals, and blood pressure changes [49]. On average, two to ﬁve components were removed. Finally, cubic spline interpo- lation and the Hampel ﬁltering method were used to remove motion artifacts and signal spikes [50]. D. dFNC Computation Fig. 3 provides a framework for dynamic brain network con- nectivity analysis methods. Speciﬁcally, a rectangular window CHEN et al.: EFFECTS OF SEQUENTIAL DUAL-TARGET TMS 5 TABLE I CLINICAL CHARACTERISTICS OF PARTICIPANTS of size 20s is created, which is then slid in 1s increments [51]. A functional connectivity (FC) matrix is constructed by cal- culating the phase locking value (PLV) between each channel of fNIRS within each window. The PLV formula is deﬁned as follows [52]: N \u0002 PLVa,b = | 1 exp( j(ϕa [n] −ϕb [n]))| (1) N n=1 where ϕ[N] is the instantaneous phase of the nth sampling point of a speciﬁc channel, and N is the number of sampling points of that channel. The K-means clustering algorithm was applied to identify recurrent FC patterns across all subjects and time windows. Notably, the cluster analysis was performed based on the dFNC data from all subjects across all experimental condi- tions. Prior to clustering, each L×L FC matrix derived from sliding time windows was transformed into a feature vector representing dFNC. Speciﬁcally, the upper triangular ele- ments (excluding the diagonal) of each matrix were extracted and reshaped into one-dimensional vectors of length L×(L– 1)/2, hereafter termed dFNC vectors. Manhattan distance was employed to quantify similarity between these dFNC vectors. To avoid getting stuck in local optima, the maximum number of iterations was set to 500, and the number of repetitions was set to 150 [53]. Additionally, the elbow method was used to determine the optimal number of states as 3. Finally, two dFNC metrics were calculated: (1) the fraction time (FT), deﬁned as the ratio of the number of time windows in a state to the total number of time windows, and (2) the state transition percentage (STP), which describes the likelihood of transitioning from one state to another. ST Pi→j = Ni→j Ni −1 × 100% (2) where Ni→j represents the number of transitions from state i to state j throughout the entire state sequence. Ni denotes the total number of occurrences of state i. To assess the characteristics of the three connection states obtained from clustering, we also calculated the global efﬁ- ciency (GE) of each connection state. The GE was computed based on the weighted dFNC matrices, where the continuous PLV values (ranging from 0 to 1) were directly used as con- nection weights. GE is a global metric that reﬂects the overall information transmission capacity of a network and is closely related to the integrity of long-range connections across brain regions, reﬂecting the ability to transmit information across the entire brain functional network [54]. It is deﬁned as follows: \u0002 1 GE = 1 D(i, j) (3) N(N −1) i∈N, j̸=i where N is the total number of channels in the brain region. D(i,j) is the shortest path length between node i and node j. To investigate energy consumption patterns across different brain states, we employed the Welch algorithm to compute the power spectral density (PSD) of HbO2. A Hanning window with a length of 200 data points and 50% overlap was applied. After calculating the PSD for each window, numerical integration was performed across the 0.01–0.2 Hz frequency band to obtain the total power."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec5",
+          "label": "E.",
+          "title": "Statistical Analysis",
+          "level": 2,
+          "paragraphs": [
+            "The Kolmogorov-Smirnov test and Levene’s test were used to assess the variance, normality, and homogeneity of the data at the group level. A two-sample t-test was employed to detect group differences in normally distributed data, while the non- parametric Mann-Whitney U test was used for non-normally distributed data. Group differences included scores related to age, gender, MMSE, NIHSS, FMA-LE, and BBS. To exam- ine the effects on dFNC temporal characteristics, a series of two-way mixed ANOVAs were conducted with Health Status (HC vs. Stroke) as a between-subjects factor and Inter- vention Mode (Resting-state, SMA-rTMS, LDLPFC-rTMS, Dual-rTMS) as a within-subjects factor. These analyses were performed separately for the FT of each dFNC state. Post-hoc comparisons with Bonferroni correction were applied when signiﬁcant main or interaction effects were found. Finally, Spearman’s rank correlation analysis was used to explore the relationship between dFNC temporal characteristics and clinical variables. Statistical signiﬁcance was set at P < 0.05. All statistical analyses were performed using SPSS version 25.0 software."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec6",
+      "label": "III.",
+      "title": "RESULTS",
+      "level": 1,
+      "paragraphs": [],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec7",
+          "label": "A.",
+          "title": "Demographic and Clinical Characteristics",
+          "level": 2,
+          "paragraphs": [
+            "Ultimately, 15 stroke patients and 15 matched healthy con- trols were included in the ﬁnal data analysis. As summa-rized in TABLE I, the Stroke group demonstrated signiﬁcantly lower motor and balance function (as measured by FMA-LE and BBS scores, p < 0.0001) and higher neurological impairment (as measured by NIHSS scores, p < 0.0001) compared to the healthy control group. B. K-Means Clustering Results The elbow method was used to select the appropriate number of clusters (K value), as shown in Fig. 4. When K = 3, the rate of change in the total sum of minimum cluster 6 IEEE TRANSACTIONS ON NEURAL SYSTEMS AND REHABILITATION ENGINEERING Fig. 4. The variation curve of the minimum intra cluster distance sum with the number of states. distances began to slow signiﬁcantly, so the optimal number of cluster centers was determined to be 3, resulting in three key brain connection states. Additionally, Fig. 5(a) shows the cluster centroids of the three dFNC matrix states and their percentage occurrence in the total window, while Fig. 5(b) displays the top 10% of connection strengths within each state. The results indicate that state 3 occupies the shortest time proportion in the total time window (16.32% window proportion), exhibiting stronger brain functional connectivity patterns and more inter- hemispheric connections, primarily between M1_L, S1_L, and DLPFC_R, SFC_R. State 2 has moderate occurrence frequency and brain connectivity strength, with inter-brain region connections relatively weakened compared to state 3. State 1 occupied the longest time proportion in the total time window (44.24% window proportion), characterized by weaker connectivity within and between all networks, with further weakened cross-brain region connections, transforming into relatively stronger intra-brain region connections. C. Graph-Theoretic Properties and Energy Characteristics of Dynamic Functional Connectivity States To delve deeper into the intrinsic characteristics of dif- ferent states, we characterized them from two dimensions: network topology and energy metabolism. Fig. 6 illustrates the differences in graph-theoretic properties among the three states, where State 3 exhibits the highest GE, followed by State 2, while State 1 demonstrates signiﬁcantly lower GE (p< 0.0001). Correspondingly, analysis of fNIRS signal power revealed highly consistent energy consumption patterns (Fig. 7). Speciﬁcally, state 3 is associated with the highest total signal power, state 2 exhibits intermediate levels, and state 1 demonstrates the lowest total power (p< 0.0001)."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec8",
+          "label": "D.",
+          "title": "Time Attributes of Dynamic Functional Network",
+          "level": 2,
+          "paragraphs": [
+            "Connection Status The ANOVA revealed a signiﬁcant main effect of Inter- vention Mode on the FT of both State 1 (F(3,112) = 5.35, p = 0.0018) and State 2 (F(3,112) = 3.27, p = 0.024). No signiﬁcant main effect of Health Status or interaction between Health Status and Intervention Mode was found for any state (all p > 0.05). Post-hoc analyses, as illustrated in Fig. 8, were performed to delineate the speciﬁc effects of the interventions. The results indicated that the FT in State 1 during the Dual-rTMS intervention was signiﬁcantly higher than in the resting state for both groups (HC: p = 0.0042; Stroke: p = 0.0185). Furthermore, the FT of State 1 under SMA-rTMS was also signiﬁcantly higher than that in the resting state (p = 0.0411). Notably, the mean FT of State 1 during Dual-rTMS showed a trend of being higher than that under both single-target stimulations. In the stroke group, we observed that the FT of State 2 during the Dual-rTMS intervention was signiﬁcantly lower than that in the resting state (p = 0.0361). For State 3, while the main effect of Intervention Mode did not reach strict statistical signiﬁcance (F(3,112) = 2.54, p = 0.06), the data trend indicated that the FT of State 3 was relatively lower during the Dual-rTMS compared to other conditions. The STP results are shown in Fig. 9. In the HC group, the STP from State 1 to State 2 was signiﬁcantly lower under the Dual-rTMS and SMA-rTMS conditions than in the resting state (Dual-rTMS: p = 0.0009; SMA-rTMS: p = 0.0062). Notably, Dual-rTMS not only signiﬁcantly reduced the internal state STP of State 2 (p = 0.0372), but also signiﬁcantly reduced the STP from State 1 to State 2 compared to LDLPFC-rTMS (p = 0.0324). The Stroke group also showed that Dual-rTMS and SMA-rTMS signiﬁcantly reduced the STP from State 1 to State 2 (Dual-rTMS: p = 0.0041; SMA-rTMS: p = 0.0178). Additionally, in the Stroke group, both Dual-rTMS and LDLPFC-rTMS signiﬁcantly reduced the internal STP of State 2 (p =0.0396). Finally, by comparing group differences using the method of averaging sample values within each group, the STP from State 2 to State 3 in the Stroke group was signiﬁcantly lower than that in the HC group (p = 0.024)."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec9",
+          "label": "E.",
+          "title": "Correlation Between dFNC Time Characteristics and",
+          "level": 2,
+          "paragraphs": [
+            "Scale Scores Spearman’s correlation analysis was used to examine the relationship between dFNC time characteristics and clinical variables. The results are shown in Fig. 10. In the stroke group, the FT in State 1 was negatively correlated with Breg and FMA-LE scores, with the correlation with FMA-LE scores being statistically signiﬁcant (r = −0.5233, p = 0.0453); Additionally, the FT in State 3 showed signiﬁcant positive correlations with both clinical scores (BBS: r = 0.5206, p = 0.0466; FMA-LE: r = 0.5237, p = 0.0451)."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "id": "sec10",
+      "label": "IV.",
+      "title": "DISCUSSION",
+      "level": 1,
+      "paragraphs": [
+        "The human brain is essentially a complex system orga- nized into a network, and this structure endows it with high ﬂexibility and enables it to function as a dynamic system as a whole [55].Therefore, it is necessary to study the effects of TMS on the brain from a dynamic perspective. Based on this, we used the dFNC method to investigate CHEN et al.: EFFECTS OF SEQUENTIAL DUAL-TARGET TMS 7 Fig. 5. Functional connectivity characteristics of three dFNC states. (a) The semi-matrix diagram shows the functional connectivity patterns of each state and their time proportions; (b) the chord diagram shows the top 10% of signiﬁcant connections in each state, with the inner ring marking the channel position and the outer ring marking the corresponding brain region. Fig. 6. GE under different dFNC states. The horizontal solid and dashed lines in the violin plot represent the median and interquartile range, respectively. The asterisk indicates signiﬁcance: ∗∗P < 0.001. the potential mechanisms underlying brain functional network remodeling under different rTMS intervention patterns. In this study, the K-means clustering algorithm was used to iden- tify three relatively stable and recurrent connection states, these states exhibit distinct neurological characteristics: State 3 demonstrates the highest GE and total power, representing an integrated, high-energy-consumption pattern; State 1 exhibits the lowest GE and power, reﬂecting a low-connectivity, low- energy-consumption pattern; State 2 presents intermediate features. Furthermore, rTMS modulated the temporal dynam- ics of these states: Dual-rTMS signiﬁcantly increased FT of state 1 while reducing its STP. The study also revealed key group differences: compared to HC, Stroke exhibited signiﬁ- cantly reduced STP from state 2 to state 3. Additionally, the Fig. 7. Comparison of Total Power Across Different Functional Connec- tivity States. temporal characteristics of dFNC were signiﬁcantly correlated with patient questionnaire scores. The ﬁndings of this study provide new insights into the mechanisms underlying the effects of sequential dual-target TMS."
+      ],
+      "equations": [],
+      "figure_refs": [],
+      "table_refs": [],
+      "subsections": [
+        {
+          "id": "sec11",
+          "label": "A.",
+          "title": "Differences in dFNC Status and Groups",
+          "level": 2,
+          "paragraphs": [
+            "Recent studies have effectively demonstrated the tempo- ral variability of intrinsic brain networks, indicating that functional connectivity in the human brain is indeed highly dynamic, reﬂecting the ﬂexibility of functional coordination between different brain systems [56], [57]. Consistent with the results of previous reports, this study identiﬁed three recurrent dFNC states, with State 1 occupying the largest number of total time windows. Compared to the other two states, State 1 exhibits a “sparse connectivity state” characterized 8 IEEE TRANSACTIONS ON NEURAL SYSTEMS AND REHABILITATION ENGINEERING by weak connections and low integration, a ﬁnding consistent with previous studies in patients with schizophrenia, diabetes, and stroke [50], [55], [56]. This weak connectivity reﬂects the brain’s baseline connectivity pattern and suggests that the human brain may tend to maintain this low-efﬁciency information transmission state to conserve energy [58], [59]. However, we observed a negative correlation between the FT spent in state 1 during baseline resting conditions in Stroke and motor function scores. This suggests that the persistent dominance of this state in pathological contexts more likely reﬂects impaired network integration capacity. This ﬁnding aligns with evidence showing that prolonged dwell time in weak-connectivity states after stroke correlates with impaired neurological recovery [58], [60]. State 3 exhibits stronger regional and hemispheric connectivity, consistent with the characteristics of a “highly integrated state,” but it has the lowest time proportion (16.32%), potentially reﬂecting the brain’s efﬁcient information processing capacity within a limited timeframe. To more speciﬁcally characterize the connectivity features of each state, the GE of each state was also calculated. From the GE perspective, the results of this study align with ﬁndings from a Parkinson’s disease study indicating that “higher connectivity states correspond to higher global efﬁciency” [51]. This suggests that the dynamic layering of brain networks may follow an “efﬁciency-stability” trade-off principle, where the high connectivity of State 3 supports rapid information transmission but comes with higher energy consumption; the low connectivity of State 1 reduces energy consumption but may impair cross-regional collaboration. The differences in this layering across different intervention modes provide functional-level evidence for understanding brain net- work reorganization in disease states. This study also found that, regardless of whether it was the HC group or the Stroke group, Dual-rTMS signiﬁcantly increased the FT of State 1 and to some extent reduced the FT of State 2 and State 3.This phenomenon may suggest that Dual-rTMS induces a shift in the brain toward a low- energy state. Additionally, STP results showed that different stimulation patterns all exhibited signiﬁcant differences from the resting state to some extent, with Dual-rTMS causing a signiﬁcant reduction in STP for the transition from State 1 to State 2 in both the healthy group and the Stroke group. Research indicates that while intracranial stimulation ini- tially causes a temporary reduction in the brain network’s switching capacity and synchrony, this trend gradually stabi- lizes over time [61]. Intergroup comparisons revealed that the STP for the transition from State 2 to State 3 was signiﬁcantly lower in the Stroke group than in the healthy control group. This indicates impaired ability for the post-stroke brain to transition from a moderately integrated state to a highly inte- grated, efﬁcient state. Integrating these ﬁndings, we propose that this rTMS-induced increase in State 1 FT may repre- sent a distinct neural mechanism. Speciﬁcally, Dual-rTMS signiﬁcantly reduced the STP from State 1 to State 2. The combination of increased State 1 FT and reduced transition probability suggests that rTMS may actively impose a network stabilization or reset by disrupting brain network communi- cation mechanisms. This temporarily suppresses inefﬁcient, maladaptive ﬂuctuations, enabling the brain to stably maintain the low-energy State 1, thereby creating an opportunity for subsequent functional reorganization. Therefore, this study speculates that sequential dual-target stimulation may exert a dual regulatory effect on neural mechanisms: on one hand, by inhibiting the transition from State 1 to State 2, it reduces inefﬁcient network ﬂuctuations; on the other hand, the trend toward reduced FT in State 3 may prevent excessive energy consumption and maintain network homeostasis. This dynamic balance may explain why sequential dual-target intervention outperforms single- target stimulation in improving outcomes for lower-limb stroke patients, as it optimizes the functional coupling efﬁciency of motor-related brain regions by regulating the temporal distribution and transition probabilities of network states."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec12",
+          "label": "B.",
+          "title": "Network Reorganization Mechanisms in Stroke",
+          "level": 2,
+          "paragraphs": [
+            "Patients and Their Clinical Signiﬁcance This study revealed unique characteristics of functional network dynamics in Stroke. Compared with healthy controls, the Stroke group exhibited a reduction in STP from State 2 to State 3, reﬂecting impaired ability to transition to a state of strong hemispheric connectivity. Similarly, many studies have shown that reduced interhemispheric connectivity is a core feature of stroke [62], [63]. Siegel et al. [64] previously proposed that increased modularity is associated with post- stroke recovery. Our results further suggest that not only the degree of modularity itself but also the dynamic transition ability between states may be key indicators of functional prognosis. Interestingly, while bilateral stimulation primarily affects State 1 in HC group, it also signiﬁcantly impacts the FT of State 2 in the Stroke group, a difference that may reﬂect the Stroke brain’s speciﬁc response pattern to neuromodulation. Additionally, our correlation analysis results showed that the FT of State 1 in the Stroke group was negatively correlated with lower limb motor function scores and balance function, while the FT of State 3 was positively correlated with lower limb motor function scores and balance function, providing potential neuroimaging markers for clinical assessment. The pathological oscillations occurring within the network may trigger the symptoms induced by the stroke, and stimula- tion of any node within the neural network could disrupt this pathological rhythm [65]. We propose that the interpretation of State 1 exhibits dual characteristics: Speciﬁcally, under patho- logical conditions, the persistent dominance of State 1 indeed reﬂects a loss of network integration capacity. Conversely, we suggest that rTMS (particularly dual-target stimulation) can disrupt the dynamic rhythms of brain networks, transforming the current state into a controllable stable state. It is con- ceivable that establishing new connections from this weakly connected state may be more feasible, laying the groundwork for greater network ﬂexibility [66]. It is important to note that the neural effects of the temporal stimulation paradigm employed in this study are complex. A key consideration is the potential inﬂuence of homeo- static plasticity. Homeostatic plasticity mechanisms ensure neuronal network excitability remains within physiological CHEN et al.: EFFECTS OF SEQUENTIAL DUAL-TARGET TMS 9 Fig. 8. FT differences in different states. The bar chart shows the differences in the time proportions of each condition under different stimulation protocols (distinguished by color). From left to right: condition 1, condition 2, and condition 3, presenting the results of intra-group and inter-group comparisons. ∗P < 0.05. Fig. 9. STP differences in dFNC states. The green background area displays the analysis results of the healthy control group (HP group): the leftmost matrix column shows the STP values under four stimulation modes, and the matrix within the right half triangle shadow shows the signiﬁcance level (p-value) of the differences between modes. The yellow background area corresponds to the same analysis content of the Stroke group. The bottom matrix displays the signiﬁcant comparison results of the overall STP differences between the two groups. bounds, with the history of prior synaptic activity modulating the direction and extent of plasticity induced by subsequent stimulation [67], [68]. In this study, the initial high-frequency rTMS applied to the L-DLPFC may have induced height- ened excitability in this region and its associated networks. Given the functional and anatomical connectivity between the DLPFC and SMA, this alteration may have correspondingly modiﬁed the baseline excitability state of the SMA prior 10 IEEE TRANSACTIONS ON NEURAL SYSTEMS AND REHABILITATION ENGINEERING Fig. 10. Correlation between FT and behavioral scale scores in dFNC state. (a) The correlation between FT of state 1 and BBS and FMA-LE scale scores. (b) The correlation between FT of state 3 and BBS and FMA-LE scale scores. to receiving stimulation. Consequently, the effects of the subsequent rTMS applied to the SMA may not represent a simple superposition but rather an optimized network response pattern, regulated by homeostatic plasticity, that differs from what would be observed with single-target stimulation alone. Dual-target neuromodulation therapy is an emerging research direction in neuroscience [69]. A meta-analysis of 22 studies showed that compared to single-target stimula- tion, sequential dual-target stimulation can achieve higher efﬁcacy by enhancing neural network plasticity and improv- ing functional connectivity across cognitive domains [16]. Additionally, high-frequency rTMS (HF-rTMS) applied in a sequential dual-target stimulation paradigm has been shown to enhance synaptic efﬁcacy, induce effects similar to long-term potentiation, and strengthen functional connectivity between brain regions [70], [71]. Similarly, in this study, HF-rTMS was sequentially applied to the L-DLPFC and SMA of Stroke with lower limb motor dysfunction, and it was found that the connectivity between M1_L, S1_L, and DLPFC_R, SFC_R varied to different degrees within different dFNC states. This suggests that the current study protocol may better reshape the nervous system by optimizing the cross-regional information integration patterns between the frontal-sensorimotor cortex- motor cortex loop in patients. The aforementioned mechanisms and results suggest that rTMS methods based on neural net- work regulation may promote brain functional remodeling in Stroke by enhancing synaptic plasticity and repairing damaged functional connections. In summary, our study further validates that the therapeu- tic mechanisms of rTMS can inﬂuence dynamic functional connectivity between large-scale brain networks. Addition- ally, dynamic functional connectivity between brain networks can serve as a predictive indicator of rTMS treatment efﬁ- cacy. Finally, for Stroke with lower limb motor impairments, compared to traditional single-target stimulation, sequential dual-target stimulation may represent an efﬁcient therapeutic modality to promote brain remodeling."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        },
+        {
+          "id": "sec13",
+          "label": "C.",
+          "title": "Limitations",
+          "level": 2,
+          "paragraphs": [
+            "Our study also has some limitations. First, a potential limita- tion of this study is the absence of a sham-rTMS control group. Future experimental designs should include a sham-rTMS group as a control to better understand the effects of different stimulation patterns on dynamic brain functional networks. Second, the selection of sliding window size may inﬂuence the assessment of dynamic brain connectivity. Future analyses should be conducted using different window widths to validate the reliability and reproducibility of the results. Third, the 48- hour washout period may have been too short to completely avoid carryover effects between experimental sessions. Fourth, the localization of stimulation targets (L-DLPFC and SMA) in this study relied on EEG caps based on the international 10-20 system rather than individualized MRI navigation. This may introduce some degree of inter-individual variability. Future studies employing individualized neuro-navigation will enhance the precision of target localization. Finally, a key limitation of this study is the absence of resting-state fNIRS measurements following rTMS intervention. Consequently, our ﬁndings capture only the immediate online effects of stimulation, without clarifying whether the observed dynamic functional network connectivity changes (e.g., increased FT in state 1) persist as a lasting aftereffect into the post- stimulation phase. Future studies should incorporate longer post-intervention monitoring periods to elucidate the temporal dynamics and potential enduring beneﬁts of sequential dual- target TMS. DECLARATION OF INTEREST The authors declare that there are no ﬁnancial interests, commercial afﬁliations, or other potential conﬂicts of interest that could have inﬂuenced the objectivity of this research or the writing of this paper."
+          ],
+          "equations": [],
+          "figure_refs": [],
+          "table_refs": [],
+          "subsections": []
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "ref10",
+      "number": 10,
+      "raw_text": ". While traditional single-target TMS can improve motor function by modulating local brain region excitability [11],",
+      "parsed": null
+    },
+    {
+      "id": "ref12",
+      "number": 12,
+      "raw_text": ", [13], the execution of motor behavior relies on dynamic interactions among multiple brain regions, thereby limiting its therapeutic efﬁcacy [14], [15]. Dual-Target Brain Region Stimulation is an emerging neurostimulation strategy that sequentially stimulates multiple functionally complementary brain regions, offering advantages in integrating dual-brain region synergistic effects and optimizing neural signal trans- mission pathways [16], [17], [18]. Importantly, sequential dual-target TMS has demonstrated signiﬁcant therapeutic efﬁ- cacy in conditions such as consciousness disorders, post-stroke motor function recovery, and cognitive impairments [19], [20],",
+      "parsed": null
+    },
+    {
+      "id": "ref21",
+      "number": 21,
+      "raw_text": ". In neurostimulation strategies for promoting rehabilitation of lower limb motor disorders, the supplementary motor area (SMA) is a commonly used stimulation site for rTMS. Research indicates that the SMA receives neural inputs from multiple levels, including primary and secondary somatosen- sory areas, the parietal association cortex, and projections from the basal ganglia via the thalamus [22]. These connec- tions form the basal ganglia-thalamus-cortex-SMA functional circuit, which is involved in the autonomous generation of internal movements, automated behaviors, and the planning and initiation of learned motor sequences [23]. On the other hand, the SMA sends projection ﬁbers to the corticospinal tract. As shown in Fig. 1. Through this unique corticospinal projection, the SMA not only participates in the planning and initiation stages of movement but also directly intervenes in the execution process of movement [24]. Notably, recent studies have shown that the relationship between cognition and movement is complementary rather than competitive [25]. The results of Yu et al. [26] also conﬁrm that rTMS treatment of the left dorsolateral prefrontal cortex (L-DLPFC) improves patients’ balance and postural control abilities and signiﬁcantly reduces the risk of falls in daily life. Additionally, previous literature suggests that the L-DLPFC is responsible for plan- ning, organizing, and regulating motor functions [27], [28] and may maintain postural control and balance through the allocation of attentional resources [29]. Another study suggests that the frontal cortex indirectly inﬂuences basal neural circuits through projections to the SMA [30]. Therefore, we hypothe- size that stimulating the L-DLPFC ﬁrst may promote resource integration within the cognitive-motor network, followed by stimulation of the SMA to further regulate the immediate reor- ganization of movement-related networks, thereby enhancing neural plasticity across multiple brain regions. It should be",
+      "parsed": null
+    },
+    {
+      "id": "ref1",
+      "number": 1,
+      "raw_text": "C. Sierra, A. Coca, and E. L. Schiffrin, “Vascular mechanisms in the pathogenesis of stroke,” Current Hypertension Rep., vol. 13, no. 3, pp. 200–207, Jun. 2011. CHEN et al.: EFFECTS OF SEQUENTIAL DUAL-TARGET TMS 11",
+      "parsed": null
+    },
+    {
+      "id": "ref2",
+      "number": 2,
+      "raw_text": "T. Elarjani, S. Chen, I. Cajigas, B. Saway, S. Sur, and J. J. Morcos, “Pituitary apoplexy and cerebral infarction: Case report and literature review,” World Neurosurgery, vol. 141, pp. 73–80, Sep. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref3",
+      "number": 3,
+      "raw_text": "S. F. Tyson, M. Hanley, J. Chillala, A. Selley, and R. C. Tallis, “Balance disability after stroke,” Phys. Therapy, vol. 86, no. 1, pp. 30–38, Jan. 2006.",
+      "parsed": null
+    },
+    {
+      "id": "ref4",
+      "number": 4,
+      "raw_text": "H.-M. Heng et al., “Changes in balance, gait and electroencephalography oscillations after robot-assisted gait training: An exploratory study in people with chronic stroke,” Brain Sci., vol. 10, no. 11, p. 821, Nov. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref5",
+      "number": 5,
+      "raw_text": "S. Zhou et al., “Pathway-speciﬁc cortico-muscular coherence in proximal-to-distal compensation during ﬁne motor control of ﬁnger extension after stroke,” J. Neural Eng., vol. 18, no. 5, Sep. 2021, Art. no. 056034.",
+      "parsed": null
+    },
+    {
+      "id": "ref6",
+      "number": 6,
+      "raw_text": "S. Yang et al., “Exploring the use of brain–computer interfaces in stroke neurorehabilitation,” Biomed. Res. Int., vol. 2021, no. 1, 2021, Art. no. 9967348.",
+      "parsed": null
+    },
+    {
+      "id": "ref7",
+      "number": 7,
+      "raw_text": "W. Yan, Y. Lin, Y.-F. Chen, Y. Wang, J. Wang, and M. Zhang, “Enhancing neuroplasticity for post-stroke motor recovery: Mechanisms, models, and neurotechnology,” IEEE Trans. Neural Syst. Rehabil. Eng., vol. 33, pp. 1156–1168, 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref8",
+      "number": 8,
+      "raw_text": "E. S. King and A. D. Tang, “Intrinsic plasticity mechanisms of repet- itive transcranial magnetic stimulation,” Neuroscientist, vol. 30, no. 2, pp. 260–274, Apr. 2024.",
+      "parsed": null
+    },
+    {
+      "id": "ref9",
+      "number": 9,
+      "raw_text": "A. Valero-Cabré, J. L. Amengual, C. Stengel, A. Pascual-Leone, and O. A. Coubard, “Transcranial magnetic stimulation in basic and clinical neuroscience: A comprehensive review of fundamental principles and novel insights,” Neurosci. Biobehavioral Rev., vol. 83, pp. 381–404, Dec. 2017.",
+      "parsed": null
+    },
+    {
+      "id": "ref10",
+      "number": 10,
+      "raw_text": "J. Kricheldorff et al., “Evidence of neuroplastic changes after transcra- nial magnetic, electric, and deep brain stimulation,” Brain Sci., vol. 12, no. 7, p. 929, Jul. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref11",
+      "number": 11,
+      "raw_text": "N. Kang, R. D. Lee, J. H. Lee, and M. H. Hwang, “Functional balance and postural control improvements in patients with stroke after nonin- vasive brain stimulation: A meta-analysis,” Arch. Phys. Med. Rehabil., vol. 101, no. 1, pp. 141–153, Jan. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref12",
+      "number": 12,
+      "raw_text": "G. Koch et al., “Effect of cerebellar stimulation on gait and balance recovery in patients with hemiparetic stroke: A randomized clinical trial,” JAMA Neurol., vol. 76, no. 2, pp. 170–178, Feb. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref13",
+      "number": 13,
+      "raw_text": "L. Zhao, L. Chen, C. Wang, S. Li, and C. Wan, “Effects of repetitive transcranial magnetic stimulation at different targets on brain function in stroke patients: A randomized controlled trial,” Frontiers Neurol., vol. 15, Sep. 2024.",
+      "parsed": null
+    },
+    {
+      "id": "ref14",
+      "number": 14,
+      "raw_text": "J.-P. Lefaucheur et al., “Corrigendum to ‘evidence-based guidelines on the therapeutic use of repetitive transcranial magnetic stimulation (rTMS): An update (2014–2018),” Clin. Neurophysiol., vol. 131, no. 5, pp. 1168–1169, May 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref15",
+      "number": 15,
+      "raw_text": "A. G. Guggisberg, P. J. Koch, F. C. Hummel, and C. M. Bueteﬁsch, “Brain networks and their relevance for stroke rehabilitation,” Clin. Neurophysiol., vol. 130, no. 7, pp. 1098–1124, Jul. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref16",
+      "number": 16,
+      "raw_text": "Y. Zhang et al., “Comparative efﬁcacy of rTMS on different targets in Alzheimer’s disease: A systematic review and meta-analysis,” Frontiers Aging Neurosci., vol. 17, Apr. 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref17",
+      "number": 17,
+      "raw_text": "X. Zhang, B. Liu, Y. Li, G. Duan, J. Hou, and D. Wu, “Multi-target and multi-session transcranial direct current stimulation in patients with prolonged disorders of consciousness: A controlled study,” Frontiers Neurosci., vol. 15, Sep. 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref18",
+      "number": 18,
+      "raw_text": "L. Beynel, J. P. Powers, and L. G. Appelbaum, “Effects of repetitive transcranial magnetic stimulation on resting-state connectivity: A sys- tematic review,” NeuroImage, vol. 211, May 2020, Art. no. 116596.",
+      "parsed": null
+    },
+    {
+      "id": "ref19",
+      "number": 19,
+      "raw_text": "Y. Li, Y. Zhang, X. Wan, X. Yan, and W. Song, “Effects of dual-target repetitive transcranial magnetic stimula-tion in patients with mini- mally conscious state: A pre-liminary study,” Neuroscience, vol. 573, pp. 460–467, May 2025.",
+      "parsed": null
+    },
+    {
+      "id": "ref20",
+      "number": 20,
+      "raw_text": "Y. Meng, D. Zhang, H. Hai, Y.-Y. Zhao, and Y.-W. Ma, “Efﬁcacy of coupling intermittent theta-burst stimulation and 1 Hz repetitive transcranial magnetic stimulation to enhance upper limb motor recovery in subacute stroke patients: A randomized controlled trial,” Restorative Neurol. Neurosci., vol. 38, no. 1, pp. 109–118, Feb. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref21",
+      "number": 21,
+      "raw_text": "B. Xu, C. Lin, Y. Wang, H. Wang, Y. Liu, and X. Wang, “Using dual- target rTMS, single-target rTMS, or sham rTMS on post-stroke cognitive impairment,” J. Integrative Neurosci., vol. 23, no. 8, p. 161, Aug. 2024.",
+      "parsed": null
+    },
+    {
+      "id": "ref22",
+      "number": 22,
+      "raw_text": "G. E. Alexander and M. D. Crutcher, “Functional architecture of basal ganglia circuits: Neural substrates of parallel processing,” Trends Neurosci., vol. 13, no. 7, pp. 266–271, Jul. 1990.",
+      "parsed": null
+    },
+    {
+      "id": "ref23",
+      "number": 23,
+      "raw_text": "G. Goldberg, “Supplementary motor area structure and function: Review and hypotheses,” Behav. Brain Sci., vol. 8, no. 4, pp. 567–588, Dec. 1985.",
+      "parsed": null
+    },
+    {
+      "id": "ref24",
+      "number": 24,
+      "raw_text": "R. Dum and P. Strick, “The origin of corticospinal projections from the premotor areas in the frontal lobe,” J. Neurosci., vol. 11, no. 3, pp. 667–689, Mar. 1991.",
+      "parsed": null
+    },
+    {
+      "id": "ref25",
+      "number": 25,
+      "raw_text": "S. Yamamoto, D. Ishii, K. Ishibashi, and Y. Kohno, “Transcranial direct current stimulation of the dorsolateral prefrontal cortex modulates cognitive function related to motor execution during sequential task: A randomized control study,” Frontiers Hum. Neurosci., vol. 16, Jun. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref26",
+      "number": 26,
+      "raw_text": "H. Yu, S. Liu, P. Dai, Z. Wang, C. Liu, and H. Zhang, “Effects of repetitive transcranial magnetic stimulation on gait and postural control ability of patients with executive dysfunction after stroke,” Brain Sci., vol. 12, no. 9, p. 1185, Sep. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref27",
+      "number": 27,
+      "raw_text": "S. H. Jang and J. P. Seo, “The distribution of the cortical origin of the corticoreticular pathway in the human brain: A diffusion tensor imaging study,” Somatosensory Motor Res., vol. 31, no. 4, pp. 204–208, Dec. 2014.",
+      "parsed": null
+    },
+    {
+      "id": "ref28",
+      "number": 28,
+      "raw_text": "J.-B. Pochon, “The role of dorsolateral prefrontal cortex in the prepara- tion of forthcoming actions: An fMRI study,” Cerebral Cortex, vol. 11, no. 3, pp. 260–266, Mar. 2001.",
+      "parsed": null
+    },
+    {
+      "id": "ref29",
+      "number": 29,
+      "raw_text": "K. X.-Y. Chai, A. M. Goodwill, J. S.-P. Leuk, and W.-P. Teo, “Treadmill walking maintains dual-task gait performance and reduces frontopolar cortex activation in healthy adults,” Neuroscience, vol. 521, pp. 148–156, Jun. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref30",
+      "number": 30,
+      "raw_text": "J.-R. Duann, J. S. Ide, X. Luo, and C.-S.-R. Li, “Functional connectivity delineates distinct roles of the inferior frontal cortex and presupplemen- tary motor area in stop signal inhibition,” J. Neurosci., vol. 29, no. 32, pp. 10171–10179, Aug. 2009.",
+      "parsed": null
+    },
+    {
+      "id": "ref31",
+      "number": 31,
+      "raw_text": "A. Curtin, S. Tong, J. Sun, J. Wang, B. Onaral, and H. Ayaz, “A systematic review of integrated functional near-infrared spectroscopy (fNIRS) and transcranial magnetic stimulation (TMS) studies,” Frontiers Neurosci., vol. 13, Feb. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref32",
+      "number": 32,
+      "raw_text": "H. Xie et al., “Effects of transcranial magnetic stimulation on dynamic functional networks in stroke patients as assessed by functional near- infrared spectroscopy: A randomized controlled clinical trial,” Cerebral Cortex, vol. 33, no. 24, pp. 11668–11678, Dec. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref33",
+      "number": 33,
+      "raw_text": "W. Yang et al., “Abnormal dynamic functional network connectivity in ﬁrst-episode, drug-Naíve patients with major depressive disorder,” J. Affective Disorders, vol. 319, pp. 336–343, Dec. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref34",
+      "number": 34,
+      "raw_text": "Z. Hu, C. Zhou, and L. He, “Abnormal dynamic functional network connectivity in patients with early-onset bipolar disorder,” Frontiers Psychiatry, vol. 14, Jun. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref35",
+      "number": 35,
+      "raw_text": "M. G. Preti, T. A. Bolton, and D. Van De Ville, “The dynamic functional connectome: State-of-the-art and perspectives,” NeuroImage, vol. 160, pp. 41–54, Oct. 2017.",
+      "parsed": null
+    },
+    {
+      "id": "ref36",
+      "number": 36,
+      "raw_text": "P. Kiper, C. Luque-Moreno, S. Pernice, L. Maistrello, M. Agostini, and A. Turolla, “Functional changes in the lower extremity after non-immersive virtual reality and physiotherapy following stroke,” J. Rehabil. Med., vol. 52, no. 11, Nov. 2020, Art. no. jrm00122.",
+      "parsed": null
+    },
+    {
+      "id": "ref37",
+      "number": 37,
+      "raw_text": "R. C. Oldﬁeld, “The assessment and analysis of handedness: The Edinburgh inventory,” Neuropsychologia, vol. 9, no. 1, pp. 97–113, Mar. 1971.",
+      "parsed": null
+    },
+    {
+      "id": "ref38",
+      "number": 38,
+      "raw_text": "G. Thut and A. Pascual-Leone, “A review of combined TMS-EEG studies to characterize lasting effects of repetitive TMS and assess their usefulness in cognitive and clinical neuroscience,” Brain Topography, vol. 22, no. 4, pp. 219–232, Jan. 2010.",
+      "parsed": null
+    },
+    {
+      "id": "ref39",
+      "number": 39,
+      "raw_text": "L. Dong et al., “The effect of repetitive transcranial magnetic stimulation of cerebellar swallowing cortex on brain neural activities: A resting-state fMRI study,” Frontiers Hum. Neurosci., vol. 16, Apr. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref40",
+      "number": 40,
+      "raw_text": "U. Herwig, P. Satrapi, and C. Schönfeldt-Lecuona, “Using the inter- national 10–20 EEG system for positioning of transcranial magnetic stimulation,” Brain Topography, vol. 16, no. 2, pp. 95–99, Dec. 2003.",
+      "parsed": null
+    },
+    {
+      "id": "ref41",
+      "number": 41,
+      "raw_text": "W. Legon, J. K. Dionne, and W. R. Staines, “Continuous theta burst stimulation of the supplementary motor area: Effect upon perception and somatosensory and motor evoked potentials,” Brain Stimulation, vol. 6, no. 6, pp. 877–883, Nov. 2013.",
+      "parsed": null
+    },
+    {
+      "id": "ref42",
+      "number": 42,
+      "raw_text": "K.-M. Lee, K.-H. Chang, and J.-K. Roh, “Subregions within the supple- mentary motor area activated at different stages of movement preparation and execution,” NeuroImage, vol. 9, no. 1, pp. 117–123, Jan. 1999.",
+      "parsed": null
+    },
+    {
+      "id": "ref43",
+      "number": 43,
+      "raw_text": "V. Jurcak, D. Tsuzuki, and I. Dan, “10/20, 10/10, and 10/5 systems revis- ited: Their validity as relative head-surface-based positioning systems,” NeuroImage, vol. 34, no. 4, pp. 1600–1611, Feb. 2007. 12 IEEE TRANSACTIONS ON NEURAL SYSTEMS AND REHABILITATION ENGINEERING",
+      "parsed": null
+    },
+    {
+      "id": "ref44",
+      "number": 44,
+      "raw_text": "A. K. Singh, M. Okamoto, H. Dan, V. Jurcak, and I. Dan, “Spatial registration of multichannel multi-subject fNIRS data to MNI space without MRI,” NeuroImage, vol. 27, no. 4, pp. 842–851, Oct. 2005.",
+      "parsed": null
+    },
+    {
+      "id": "ref45",
+      "number": 45,
+      "raw_text": "J. C. Ye, S. Tak, K. E. Jang, J. Jung, and J. Jang, “NIRS-SPM: Statis- tical parametric mapping for near-infrared spectroscopy,” NeuroImage, vol. 44, no. 2, pp. 428–447, Jan. 2009.",
+      "parsed": null
+    },
+    {
+      "id": "ref46",
+      "number": 46,
+      "raw_text": "F. Scholkmann et al., “A review on continuous wave functional near- infrared spectroscopy and imaging instrumentation and methodology,” NeuroImage, vol. 85, pp. 6–27, Jan. 2014.",
+      "parsed": null
+    },
+    {
+      "id": "ref47",
+      "number": 47,
+      "raw_text": "M. Tetsuka et al., “Higher prefrontal activity based on short-term neurofeedback training can prevent working memory decline in acute stroke,” Frontiers Syst. Neurosci., vol. 17, Jun. 2023, Art. no. 1130272.",
+      "parsed": null
+    },
+    {
+      "id": "ref48",
+      "number": 48,
+      "raw_text": "Q. Tan et al., “Frequency-speciﬁc functional connectivity revealed by wavelet-based coherence analysis in elderly subjects with cere- bral infarction using NIRS method,” Med. Phys., vol. 42, no. 9, pp. 5391–5403, Sep. 2015.",
+      "parsed": null
+    },
+    {
+      "id": "ref49",
+      "number": 49,
+      "raw_text": "C. Huo et al., “Limb linkage rehabilitation training-related changes in cortical activation and effective connectivity after stroke: A functional near-infrared spectroscopy study,” Sci. Rep., vol. 9, no. 1, p. 6226, Apr. 2019.",
+      "parsed": null
+    },
+    {
+      "id": "ref50",
+      "number": 50,
+      "raw_text": "H. Xie et al., “Effects of robot-assisted task-oriented upper limb motor training on neuroplasticity in stroke patients with different degrees of motor dysfunction: A neuroimaging motor evaluation index,” Frontiers Neurosci., vol. 16, Sep. 2022, Art. no. 957972.",
+      "parsed": null
+    },
+    {
+      "id": "ref51",
+      "number": 51,
+      "raw_text": "J. Lu et al., “An fNIRS-based dynamic functional connectivity analysis method to signify functional neurodegeneration of Parkinson’s disease,” IEEE Trans. Neural Syst. Rehabil. Eng., vol. 31, pp. 1199–1207, 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref52",
+      "number": 52,
+      "raw_text": "F. Al-Shargie, R. Katmah, U. Tariq, F. Babiloni, F. Al-Mughairbi, and H. Al-Nashash, “Stress management using fNIRS and binaural beats stimulation,” Biomed. Opt. Exp., vol. 13, no. 6, pp. 3552–3575, Jun. 2022.",
+      "parsed": null
+    },
+    {
+      "id": "ref53",
+      "number": 53,
+      "raw_text": "W. Lyu et al., “Aberrant dynamic functional network connectivity in type 2 diabetes mellitus individuals,” Cognit. Neurodynamics, vol. 17, no. 6, pp. 1525–1539, Dec. 2023.",
+      "parsed": null
+    },
+    {
+      "id": "ref54",
+      "number": 54,
+      "raw_text": "Z. Einalou, K. Maghooli, S. K. Setarehdan, and A. Akin, “Graph theoretical approach to functional connectivity in prefrontal cortex via fNIRS,” Neurophotonics, vol. 4, no. 4, Aug. 2017, Art. no. 041407.",
+      "parsed": null
+    },
+    {
+      "id": "ref55",
+      "number": 55,
+      "raw_text": "D. S. Bassett and M. S. Gazzaniga, “Understanding complexity in the human brain,” Trends Cognit. Sci., vol. 15, no. 5, pp. 200–209, May 2011.",
+      "parsed": null
+    },
+    {
+      "id": "ref56",
+      "number": 56,
+      "raw_text": "M. Demirta¸s et al., “Dynamic functional connectivity reveals altered variability in functional connectivity among patients with major depres- sive disorder,” Human Brain Mapping, vol. 37, no. 8, pp. 2918–2930, Aug. 2016.",
+      "parsed": null
+    },
+    {
+      "id": "ref57",
+      "number": 57,
+      "raw_text": "S.-F. Jiang, J.-Y. Shi, Z.-T. Yang, L. Zhang, and H.-J. Chen, “Aberrant dynamic functional network connectivity in cirrhotic patients without overt hepatic encephalopathy,” Eur. J. Radiol., vol. 132, Nov. 2020, Art. no. 109324.",
+      "parsed": null
+    },
+    {
+      "id": "ref58",
+      "number": 58,
+      "raw_text": "Y. Wang et al., “An imbalance between functional seg-regation and integration in patients with pontine stroke: A dynamic functional network connectivity study,” NeuroImage Clin., vol. 28, Nov. 2020, Art. no. 102507.",
+      "parsed": null
+    },
+    {
+      "id": "ref59",
+      "number": 59,
+      "raw_text": "Y. Gu et al., “Abnormal dynamic functional connectiv-ity in Alzheimer’s disease,” CNS Neurosci. Therapeutics, vol. 26, no. 9, p. 962, May 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref60",
+      "number": 60,
+      "raw_text": "A. K. Bonkhoff et al., “Abnormal dynamic functional connectivity is linked to recovery after acute ischemic stroke,” Hum. Brain Mapping, vol. 42, no. 7, pp. 2278–2291, May 2021.",
+      "parsed": null
+    },
+    {
+      "id": "ref61",
+      "number": 61,
+      "raw_text": "M. Pedersen and A. Zalesky, “Intracranial brain stimulation modu- lates fMRI-based network switching,” Neurobiol. Disease, vol. 156, Aug. 2021, Art. no. 105401.",
+      "parsed": null
+    },
+    {
+      "id": "ref62",
+      "number": 62,
+      "raw_text": "M. H. Adhikari et al., “Decreased integration and information capacity in stroke measured by whole brain models of resting state activity,” Brain, vol. 140, no. 4, pp. 1068–1085, Apr. 2017.",
+      "parsed": null
+    },
+    {
+      "id": "ref63",
+      "number": 63,
+      "raw_text": "J. S. Siegel et al., “Disruptions of network connectivity predict impair- ment in multiple behavioral domains after stroke,” Proc. Nat. Acad. Sci. USA, vol. 113, no. 30, pp. E4367–E4376, Jul. 2016.",
+      "parsed": null
+    },
+    {
+      "id": "ref64",
+      "number": 64,
+      "raw_text": "J. S. Siegel et al., “Re-emergence of modular brain networks in stroke recovery,” Cortex, vol. 101, pp. 44–59, Apr. 2018.",
+      "parsed": null
+    },
+    {
+      "id": "ref65",
+      "number": 65,
+      "raw_text": "M. D. Fox, R. L. Buckner, H. Liu, M. M. Chakravarty, A. M. Lozano, and A. Pascual-Leone, “Resting-state networks link invasive and non- invasive brain stimulation across diverse psychiatric and neurological diseases,” Proc. Nat. Acad. Sci. USA, vol. 111, no. 41, pp. E4367–E4375, Oct. 2014.",
+      "parsed": null
+    },
+    {
+      "id": "ref66",
+      "number": 66,
+      "raw_text": "A. K. Bonkhoff et al., “Acute ischaemic stroke alters the brain’s preference for distinct dynamic connectivity states,” Brain, vol. 143, no. 5, pp. 1525–1540, May 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref67",
+      "number": 67,
+      "raw_text": "L. Chen, X. Li, M. Tjia, and S. Thapliyal, “Homeostatic plasticity and excitation-inhibition balance: The good, the bad, and the ugly,” Current Opinion Neurobiol., vol. 75, Aug. 2022, Art. no. 102553.",
+      "parsed": null
+    },
+    {
+      "id": "ref68",
+      "number": 68,
+      "raw_text": "W. C. Abraham, “Metaplasticity: Tuning synapses and networks for plasticity,” Nature Rev. Neurosci., vol. 9, no. 5, p. 387, May 2008.",
+      "parsed": null
+    },
+    {
+      "id": "ref69",
+      "number": 69,
+      "raw_text": "J. Lefaucheur et al., “Evidence-based guidelines on the therapeutic use of repetitive transcranial magnetic stimulation (rTMS): An update (2014– 2018),” Clin. Neurophysiol., vol. 131, no. 2, pp. 474–528, Feb. 2020.",
+      "parsed": null
+    },
+    {
+      "id": "ref70",
+      "number": 70,
+      "raw_text": "G. Koch, V. Ponzo, F. Di Lorenzo, C. Caltagirone, and D. Veniero, “Hebbian and anti-hebbian spike-timing-dependent plasticity of human cortico-cortical connections,” J. Neurosci., vol. 33, no. 23, pp. 9725–9733, Jun. 2013.",
+      "parsed": null
+    },
+    {
+      "id": "ref71",
+      "number": 71,
+      "raw_text": "E. R. Buch, V. M. Johnen, N. Nelissen, J. O’Shea, and M. F. S. Rushworth, “Noninvasive associative plasticity induction in a cortico- cortical pathway of the human brain,” J. Neurosci., vol. 31, no. 48, pp. 17669–17679, Nov. 2011.",
+      "parsed": null
+    }
+  ],
+  "figures": [],
+  "tables": [],
+  "equations": [
+    {
+      "id": "deqn2026",
+      "number": 2026,
+      "latex": "execution of movement. Created in BioRender. Wang, Y.",
+      "display": true
+    },
+    {
+      "id": "deqn3",
+      "number": 3,
+      "latex": "subcortical stroke; (2) age between 20 and 85 years;",
+      "display": true
+    }
+  ],
+  "metadata": {
+    "manuscript_id": "",
+    "source_filename": "paper.pdf"
+  },
+  "extraction_warnings": []
+}

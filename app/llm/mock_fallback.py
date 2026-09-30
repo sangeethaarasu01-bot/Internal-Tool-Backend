@@ -51,8 +51,17 @@ def should_use_offline_fallback(exc: BaseException) -> bool:
         "invalid_api_key",
         "authentication",
         "unauthorized",
+        "high demand",
+        "unavailable",
+        "overloaded",
+        "timeout",
+        "timed out",
         "401",
         "402",
         "429",
+        "500",
+        "502",
+        "503",
+        "504",
     )
     return any(n in msg for n in needles)

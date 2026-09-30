@@ -91,3 +91,277 @@
 2026-09-28 20:18:38.183 | INFO     | app.llm.client:complete:85 - LLM complete provider=anthropic model=claude-3-5-haiku-20241022+offline-fallback tokens_in=20497 tokens_out=90 cost=$0.0000 duration=3.21s
 2026-09-28 20:19:42.354 | WARNING  | app.llm.anthropic_provider:anthropic_complete:71 - Anthropic billing/auth error — offline fallback: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CfW2JST286fyrKxGaa6wD'}
 2026-09-28 20:19:42.356 | INFO     | app.llm.client:complete:85 - LLM complete provider=anthropic model=claude-3-5-haiku-20241022+offline-fallback tokens_in=20497 tokens_out=90 cost=$0.0000 duration=1.36s
+2026-09-30 12:23:37.981 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 12:33:34.909 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 12:38:58.473 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 12:39:27.513 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 12:41:19.169 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash tokens_in=6 tokens_out=3 cost=$0.0000 duration=7.81s
+2026-09-30 12:45:36.532 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 12:51:27.335 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash tokens_in=20688 tokens_out=490 cost=$0.0034 duration=46.30s
+2026-09-30 13:45:41.154 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 14:04:48.781 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash tokens_in=20688 tokens_out=307 cost=$0.0033 duration=45.16s
+2026-09-30 14:22:03.998 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 14:27:46.880 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 14:30:52.193 | ERROR    | app.api.convert:run_agent:60 - Conversion failed for job 02e2d1a3-ae18-42c5-b3a5-3ac704541115
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "C:\Python312\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 384
+               │     └ 3
+               └ <function _main at 0x000001F2BB671260>
+  File "C:\Python312\Lib\multiprocessing\spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 384
+           │    └ <function BaseProcess._bootstrap at 0x000001F2BB5637E0>
+           └ <SpawnProcess name='SpawnProcess-7' parent=7920 started>
+  File "C:\Python312\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x000001F2BB562D40>
+    └ <SpawnProcess name='SpawnProcess-7' parent=7920 started>
+  File "C:\Python312\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x000001F2BDA03650>, 'target': <bound method Server.run of <uvicorn.server.Server...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-7' parent=7920 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-7' parent=7920 started>
+    │    └ <function subprocess_started at 0x000001F2BDA92660>
+    └ <SpawnProcess name='SpawnProcess-7' parent=7920 started>
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\venv\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=424, family=2, type=1, proto=6, laddr=('0.0.0.0', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x000001F2BD2C98B0>>
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\venv\Lib\site-packages\uvicorn\server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=424, family=2, type=1, proto=6, laddr=('0.0.0.0', 8000)>]
+           │       │   │    └ <function Server.serve at 0x000001F2BDA91B20>
+           │       │   └ <uvicorn.server.Server object at 0x000001F2BD2C98B0>
+           │       └ <function run at 0x000001F2BD2E59E0>
+           └ <module 'asyncio' from 'C:\\Python312\\Lib\\asyncio\\__init__.py'>
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x000001F2BDB2CD60>
+           │      └ <function Runner.run at 0x000001F2BD355120>
+           └ <asyncio.runners.Runner object at 0x000001F2BDAB8230>
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\bac...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x000001F2BD34AD40>
+           │    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x000001F2BDAB8230>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 671, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x000001F2BD34ACA0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 638, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000001F2BD354AE0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 1971, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x000001F2BD2CCFE0>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000001F2D4F627A0>()>
+  File "C:\Python312\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000001F2D4F627A0>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000001F2D4F627A0>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000001F2D4F627A0>()>
+
+> File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\api\convert.py", line 40, in run_agent
+    result = await agent.run(
+                   │     └ <function ConverterAgent.run at 0x000001F2C0D04A40>
+                   └ <app.agent.converter_agent.ConverterAgent object at 0x000001F2C1394D70>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\agent\converter_agent.py", line 59, in run
+    plan = await SemanticMatcher(self.llm).match(schema, paper, self.on_event)
+                 │               │    │          │       │      │    └ <function run_agent.<locals>.on_event at 0x000001F2C19CAA20>
+                 │               │    │          │       │      └ <app.agent.converter_agent.ConverterAgent object at 0x000001F2C1394D70>
+                 │               │    │          │       └ PaperData(title='Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader', authors=[Author(first_name=...
+                 │               │    │          └ SchemaMap(root_tag='article', namespaces={'ali': 'http://www.niso.org/schemas/ali/1.0/', 'xlink': 'http://www.w3.org/1999/xli...
+                 │               │    └ LLMClient(provider='gemini', model='gemini-2.5-flash', api_key='AIzaSyC7oiGe_U1YYr059X2R4oldMALawxGotjA', total_cost=0.0, tot...
+                 │               └ <app.agent.converter_agent.ConverterAgent object at 0x000001F2C1394D70>
+                 └ <class 'app.agent.semantic_matcher.SemanticMatcher'>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\agent\semantic_matcher.py", line 86, in match
+    resp = await self.llm.complete(system=system, user=prompt, json_mode=True)
+                 │    │   │               │            └ 'You are a semantic matching expert. Match extracted PDF data to \nXML template schema.\n\nSCHEMA MAP:\n{"root_tag":"article"...
+                 │    │   │               └ "You are an expert at IEEE research paper XML conversion (IEEE JATS 2.0, \nIEEE Periodicals DTD, and any custom XML schema). ...
+                 │    │   └ <function LLMClient.complete at 0x000001F2C0B96C00>
+                 │    └ LLMClient(provider='gemini', model='gemini-2.5-flash', api_key='AIzaSyC7oiGe_U1YYr059X2R4oldMALawxGotjA', total_cost=0.0, tot...
+                 └ <app.agent.semantic_matcher.SemanticMatcher object at 0x000001F2DB62B0E0>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\llm\client.py", line 60, in complete
+    resp = await gemini_complete(
+                 └ <function gemini_complete at 0x000001F2DEE73100>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\llm\gemini_provider.py", line 111, in gemini_complete
+    raise exc
+          └ RuntimeError('Gemini API error 503: {\n  "error": {\n    "code": 503,\n    "message": "This model is currently experiencing h...
+
+RuntimeError: Gemini API error 503: {
+  "error": {
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+2026-09-30 14:32:00.165 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 14:38:12.440 | ERROR    | app.api.convert:run_agent:60 - Conversion failed for job 3ee3ca17-eef0-4882-bffe-ac3721919632
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "C:\Python312\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 368
+               │     └ 3
+               └ <function _main at 0x000001BE96511260>
+  File "C:\Python312\Lib\multiprocessing\spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 368
+           │    └ <function BaseProcess._bootstrap at 0x000001BE964037E0>
+           └ <SpawnProcess name='SpawnProcess-1' parent=12880 started>
+  File "C:\Python312\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x000001BE96402D40>
+    └ <SpawnProcess name='SpawnProcess-1' parent=12880 started>
+  File "C:\Python312\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x000001BE98853650>, 'target': <bound method Server.run of <uvicorn.server.Server...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=12880 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=12880 started>
+    │    └ <function subprocess_started at 0x000001BE988E2660>
+    └ <SpawnProcess name='SpawnProcess-1' parent=12880 started>
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\venv\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=456, family=2, type=1, proto=6, laddr=('0.0.0.0', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x000001BE981198B0>>
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\venv\Lib\site-packages\uvicorn\server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=456, family=2, type=1, proto=6, laddr=('0.0.0.0', 8000)>]
+           │       │   │    └ <function Server.serve at 0x000001BE988E1B20>
+           │       │   └ <uvicorn.server.Server object at 0x000001BE981198B0>
+           │       └ <function run at 0x000001BE981359E0>
+           └ <module 'asyncio' from 'C:\\Python312\\Lib\\asyncio\\__init__.py'>
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x000001BE9897CD60>
+           │      └ <function Runner.run at 0x000001BE981A5120>
+           └ <asyncio.runners.Runner object at 0x000001BE98908230>
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\bac...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x000001BE9819AD40>
+           │    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x000001BE98908230>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 671, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x000001BE9819ACA0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 638, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000001BE981A4AE0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 1971, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x000001BE9811CFE0>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000001BEA507C7C0>()>
+  File "C:\Python312\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000001BEA507C7C0>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000001BEA507C7C0>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000001BEA507C7C0>()>
+
+> File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\api\convert.py", line 40, in run_agent
+    result = await agent.run(
+                   │     └ <function ConverterAgent.run at 0x000001BE9BB54A40>
+                   └ <app.agent.converter_agent.ConverterAgent object at 0x000001BE9C71FC50>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\agent\converter_agent.py", line 59, in run
+    plan = await SemanticMatcher(self.llm).match(schema, paper, self.on_event)
+                 │               │    │          │       │      │    └ <function run_agent.<locals>.on_event at 0x000001BE9C739DA0>
+                 │               │    │          │       │      └ <app.agent.converter_agent.ConverterAgent object at 0x000001BE9C71FC50>
+                 │               │    │          │       └ PaperData(title='Real-Time Capable Optimal Energy Management Strategy for a Hybrid Wheel Loader', authors=[Author(first_name=...
+                 │               │    │          └ SchemaMap(root_tag='article', namespaces={'ali': 'http://www.niso.org/schemas/ali/1.0/', 'xlink': 'http://www.w3.org/1999/xli...
+                 │               │    └ LLMClient(provider='gemini', model='gemini-2.5-flash', api_key='AIzaSyC7oiGe_U1YYr059X2R4oldMALawxGotjA', total_cost=0.0, tot...
+                 │               └ <app.agent.converter_agent.ConverterAgent object at 0x000001BE9C71FC50>
+                 └ <class 'app.agent.semantic_matcher.SemanticMatcher'>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\agent\semantic_matcher.py", line 86, in match
+    resp = await self.llm.complete(system=system, user=prompt, json_mode=True)
+                 │    │   │               │            └ 'You are a semantic matching expert. Match extracted PDF data to \nXML template schema.\n\nSCHEMA MAP:\n{"root_tag":"article"...
+                 │    │   │               └ "You are an expert at IEEE research paper XML conversion (IEEE JATS 2.0, \nIEEE Periodicals DTD, and any custom XML schema). ...
+                 │    │   └ <function LLMClient.complete at 0x000001BE9B9E6C00>
+                 │    └ LLMClient(provider='gemini', model='gemini-2.5-flash', api_key='AIzaSyC7oiGe_U1YYr059X2R4oldMALawxGotjA', total_cost=0.0, tot...
+                 └ <app.agent.semantic_matcher.SemanticMatcher object at 0x000001BEB05B28A0>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\llm\client.py", line 60, in complete
+    resp = await gemini_complete(
+                 └ <function gemini_complete at 0x000001BEB9CC3B00>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\llm\gemini_provider.py", line 111, in gemini_complete
+    raise exc
+          └ RuntimeError('Gemini API error 503: {\n  "error": {\n    "code": 503,\n    "message": "This model is currently experiencing h...
+
+RuntimeError: Gemini API error 503: {
+  "error": {
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+2026-09-30 14:42:09.418 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 14:48:43.953 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash tokens_in=20688 tokens_out=490 cost=$0.0034 duration=65.58s
+2026-09-30 15:17:54.142 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash tokens_in=20688 tokens_out=490 cost=$0.0034 duration=38.39s
+2026-09-30 15:17:56.543 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 15:17:58.201 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 15:30:43.123 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 1/3
+2026-09-30 15:30:52.021 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 2/3
+2026-09-30 15:30:57.922 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 3/3
+2026-09-30 15:31:05.669 | WARNING  | app.llm.gemini_provider:gemini_complete:139 - Gemini API error — offline fallback: {
+  "error": {
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+2026-09-30 15:31:05.670 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash+offline-fallback tokens_in=20514 tokens_out=90 cost=$0.0000 duration=32.12s
+2026-09-30 15:31:17.838 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 1/3
+2026-09-30 15:33:08.222 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 2/3
+2026-09-30 15:33:19.513 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 3/3
+2026-09-30 15:33:30.299 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 15:33:31.072 | WARNING  | app.llm.gemini_provider:gemini_complete:139 - Gemini API error — offline fallback: {
+  "error": {
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+2026-09-30 15:33:31.073 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash+offline-fallback tokens_in=19392 tokens_out=90 cost=$0.0000 duration=137.97s
+2026-09-30 15:33:33.861 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 15:39:08.004 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 1/3
+2026-09-30 15:39:48.844 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash tokens_in=20631 tokens_out=1512 cost=$0.0040 duration=45.25s
+2026-09-30 15:40:12.679 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 1/3
+2026-09-30 15:40:44.545 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 503 — retry 2/3
+2026-09-30 15:40:47.044 | WARNING  | app.llm.gemini_provider:gemini_complete:120 - Gemini HTTP 429 — retry 3/3
+2026-09-30 15:40:51.563 | WARNING  | app.llm.gemini_provider:gemini_complete:139 - Gemini API error — offline fallback: {
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\nPlease retry in 8.744481016s.",
+    "status": "RESOURCE_EXHAUSTED",
+    "d
+2026-09-30 15:40:51.564 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash+offline-fallback tokens_in=20497 tokens_out=90 cost=$0.0000 duration=59.80s
+2026-09-30 15:59:47.486 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 15:59:48.592 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 16:05:30.608 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started

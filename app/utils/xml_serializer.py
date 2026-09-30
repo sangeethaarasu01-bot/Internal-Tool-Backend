@@ -7,7 +7,12 @@ from typing import Literal
 
 from lxml import etree
 
-from app.utils.xml_text import normalize_for_xml_serialization, should_encode_as_hex_entity
+from app.utils.xml_helpers import format_ieee_empty_element_tags
+from app.utils.xml_text import (
+    ieee_hex_entity_for_char,
+    normalize_for_xml_serialization,
+    should_encode_as_hex_entity,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -99,6 +104,9 @@ def _escape_xml_char(char: str) -> str:
         return HEX_QUOTE_DOUBLE
     if char == "'":
         return HEX_QUOTE_SINGLE
+    entity = ieee_hex_entity_for_char(char)
+    if entity:
+        return entity
     if should_encode_as_hex_entity(char):
         return _format_hex_char_entity(ord(char))
     return char
@@ -406,7 +414,7 @@ def serialize_lxml_tree(
     if doctype:
         lines.append(doctype)
     _serialize_element(element, lines, 0, pretty_print, ctx)
-    return "\n".join(lines)
+    return format_ieee_empty_element_tags("\n".join(lines))
 
 
 def parse_xml_for_serialization(xml: str) -> etree._Element:

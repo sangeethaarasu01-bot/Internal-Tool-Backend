@@ -42,6 +42,7 @@ async def run_agent(job_id: str) -> None:
             Path(job.template_path),
             job.id,
             job.client_id,
+            pdf_filename=job.pdf_filename,
         )
         update_job(
             job_id,

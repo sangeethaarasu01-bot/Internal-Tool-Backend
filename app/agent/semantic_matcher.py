@@ -8,6 +8,7 @@ from pathlib import Path
 
 from app.config import settings
 from app.llm.client import LLMClient, create_llm_client
+from app.utils.logger import logger
 from app.models.mapping_plan import MappingEntry, MappingPlan
 from app.models.paper import PaperData
 from app.models.schema_map import SchemaMap
@@ -69,7 +70,7 @@ def _default_plan(schema: SchemaMap, paper: PaperData) -> MappingPlan:
 class SemanticMatcher:
     def __init__(self, llm: LLMClient | None = None) -> None:
         base = llm or create_llm_client()
-        self.llm = base.with_model(settings.LLM_MODEL_MATCHING)
+        self.llm = base.with_model(settings.resolve_llm_model("matching"))
 
     async def match(
         self,
@@ -83,7 +84,19 @@ class SemanticMatcher:
             schema_map=schema.model_dump_json()[:40000],
             paper_data=paper.model_dump_json()[:40000],
         )
-        resp = await self.llm.complete(system=system, user=prompt, json_mode=True)
+        try:
+            resp = await self.llm.complete(system=system, user=prompt, json_mode=True)
+        except Exception as exc:
+            logger.warning("Semantic matching LLM failed ({}), using heuristic plan", exc)
+            if on_event:
+                on_event(
+                    {
+                        "type": "log",
+                        "message": "LLM unavailable for mapping — using default title/abstract/author rules",
+                    }
+                )
+            return _default_plan(schema, paper)
+
         try:
             data = json.loads(resp.text)
             plan = MappingPlan(

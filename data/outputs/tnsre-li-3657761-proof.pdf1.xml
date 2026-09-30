@@ -1,0 +1,5000 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" article-type="research" content-type="orig-research" dtd-version="2.0" lifecycle="final" open-access="yes" peer-reviewed="yes" xml:lang="eng" specific-use="proof">
+<!--Article Processing Date: 01/26/2026-->
+<!--Vendor Name: DCL-->
+<!--IEEE XML JATS Tagging Guidelines version: v20241024-->
+<!--IEEE Math Coding Requirements and Guidelines for Vendors version: v2.4-->
+<!--new_sw_ran-->
+<front>
+<journal-meta>
+<journal-id journal-id-type="ieee">0054500</journal-id>
+<journal-id journal-id-type="acronym">TNSRE</journal-id>
+<journal-id journal-id-type="coden">ITNSB3</journal-id>
+<journal-title-group>
+<journal-title>IEEE Transactions on Neural Systems and Rehabilitation Engineering</journal-title>
+</journal-title-group>
+<issn publication-format="print">1534-4320</issn>
+<issn publication-format="online">1558-0210</issn>
+<publisher>
+<publisher-name>IEEE</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1109/TNSRE.2026.3657761</article-id>
+<article-id pub-id-type="manuscript">TNSRE-2025-01300</article-id>
+<xplore-article-id></xplore-article-id>
+<xplore-issue></xplore-issue>
+<xplore-pub-id></xplore-pub-id>
+<article-categories>
+<assembly-group sequence="0"></assembly-group>
+</article-categories>
+<title-group>
+<article-title>AUTHOR QUERIES AUTHOR PLEASE ANSWER ALL QUERIES</article-title>
+</title-group>
+<contrib-group>
+<contrib id="contrib1" primary="yes" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0001-8903-0350</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff1"></xref>
+<xref ref-type="aff" rid="aff2"></xref>
+</contrib><contrib id="contrib2" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0009-0007-2563-3495</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Author</given-names>
+<surname>Gateway</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff1"></xref>
+</contrib><contrib id="contrib3" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-3198-0158</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>National</given-names>
+<surname>Research</surname>
+</string-name>
+<string-name specific-use="index"><given-names>National</given-names>
+<surname>Research</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff3"></xref>
+<xref ref-type="aff" rid="aff4"></xref>
+<xref ref-type="aff" rid="aff5"></xref>
+</contrib><contrib id="contrib4" primary="no" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0009-0003-4996-0555</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Rehabilitation</given-names>
+<surname>Technical</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Rehabilitation</given-names>
+<surname>Technical</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff3"></xref>
+<xref ref-type="aff" rid="aff4"></xref>
+<xref ref-type="aff" rid="aff5"></xref>
+</contrib><contrib id="contrib5" primary="no" corresp="no" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Age</given-names>
+<surname>Disability</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Age</given-names>
+<surname>Disability</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff6"></xref>
+</contrib><contrib id="contrib6" primary="no" corresp="no" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Sequential</given-names>
+<surname>Dual-</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Sequential</given-names>
+<surname>Dual-</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff7"></xref>
+</contrib><contrib id="contrib7" primary="no" corresp="no" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Dynamic</given-names>
+<surname>Characteristics</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Dynamic</given-names>
+<surname>Characteristics</surname>
+</string-name>
+</name-alternatives>
+<email>zyongli2025@163.com</email>
+<xref ref-type="aff" rid="aff3"></xref>
+<xref ref-type="aff" rid="aff4"></xref>
+<xref ref-type="aff" rid="aff5"></xref>
+</contrib><author-comment>
+<p><italic>(Corresponding author: Zengyong Li.)</italic></p></author-comment>
+</contrib-group>
+<aff id="aff1">
+<institution-wrap>
+<institution content-type="division">School of Artificial Intelligence</institution>
+<institution content-type="institution">Hebei University of Technology</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">12606</institution-id>
+</institution-wrap>
+<city>Tianjin</city>
+<post-code>300130</post-code>
+<country>China</country>
+</aff>
+<aff id="aff2">
+<institution-wrap>
+<institution content-type="institution">Intelligent Rehabilitation Device and Detection Technology Engineering Research Centre of the Ministry of Education</institution>
+</institution-wrap>
+<city>Tianjin</city>
+<post-code>300130</post-code>
+<country>China</country>
+</aff>
+<aff id="aff3">
+<institution-wrap>
+<institution content-type="institution">National Research Center for Rehabilitation Technical Aids</institution>
+</institution-wrap>
+<city>Beijing</city>
+<country>China</country>
+</aff>
+<aff id="aff4">
+<institution-wrap>
+<institution content-type="institution">Key Laboratory of Rehabilitation Technical Aids of the Ministry of Civil Affairs</institution>
+</institution-wrap>
+<city>Beijing</city>
+<country>China</country>
+</aff>
+<aff id="aff5">
+<institution-wrap>
+<institution content-type="institution">Beijing Key Laboratory of Rehabilitation Technical Aids for Old-Age Disability</institution>
+</institution-wrap>
+<city>Beijing</city>
+<country>China</country>
+</aff>
+<aff id="aff6">
+<institution-wrap>
+<institution content-type="institution">National Rehabilitation Hospital, National Research Center for Rehabilitation Technical Aids</institution>
+</institution-wrap>
+<city>Beijing</city>
+<post-code>102676</post-code>
+<country>China</country>
+</aff>
+<aff id="aff7">
+<institution-wrap>
+<institution content-type="division">School of Rehabilitation Science</institution>
+<institution content-type="institution">Shanghai University of Traditional Chinese Medicine</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">66322</institution-id>
+</institution-wrap>
+<city>Shanghai</city>
+<post-code>201203</post-code>
+<country>China</country>
+</aff>
+<pub-date date-type="cover" iso-8601-date="2026" pub-type="print" publication-format="pdf">
+<year>2026</year>
+</pub-date>
+<fpage>1</fpage>
+<lpage>0</lpage>
+<history>
+<date date-type="receiveddate" iso-8601-date="2025-09-04">
+<day>04</day>
+<month>09</month>
+<year>2025</year>
+</date>
+<date date-type="reviseddate1" iso-8601-date="2025-12-23">
+<day>23</day>
+<month>12</month>
+<year>2025</year>
+</date>
+<date date-type="accepteddate" iso-8601-date="2026-01-16">
+<day>16</day>
+<month>01</month>
+<year>2026</year>
+</date>
+</history>
+<self-uri content-type="xml">tnsre-li-3657761.xml</self-uri>
+<self-uri content-type="print">tnsre-li-3657761.pdf</self-uri>
+<self-uri content-type="online">tnsre-li-3657761-x.pdf</self-uri>
+<abstract><p>Transcranial magnetic stimulation (TMS) modulates cortical excitability to promote neuroplasticity, but single-target TMS has limited effects on multi-region synergy. Sequential dual-target TMS may enhance brain network reorganization through temporal stimulation, though its mechanisms remain unclear. This study investigates the immediate effects of single- and dual-target TMS on brain functional networks in stroke patients using functional near-infrared spectroscopy (fNIRS) and dynamic functional connectivity (dFNC) analysis. Fifteen subacute stroke patients and fifteen healthy controls underwent three interventions: single-target SMA-rTMS, single-target LDLPFC-rTMS, and sequential dual-target stimulation (Dual-rTMS). fNIRS data were analyzed via dFNC to identify connectivity states (weak, moderate, strong) and evaluate time fraction, state transitions, global efficiency, and total signal power. Results revealed three dFNC states: State 1 (weak connectivity, 44.24%), State 2 (moderate, 39.44%), and State 3 (strong, 16.32%). Single-target TMS (especially SMA-rTMS) increased time fraction in State 1, indicating low-connectivity induction, while Dual-rTMS further prolonged State 1 and reduced inefficient transitions (e.g., State <inline-formula><tex-math notation="LaTeX">$1\to 2$</tex-math></inline-formula>: p &lt;0.005). Stroke patients showed impaired transitions from State <inline-formula><tex-math notation="LaTeX">$2\to 3$</tex-math></inline-formula> (p = 0.024) versus controls. Time fraction in State 3 correlated positively with motor function scores (FMA-LE: r = 0.52, p = 0.045; BBS: r = 0.52, p = 0.047), while State 1 correlated negatively (FMA-LE: r <inline-formula><tex-math notation="LaTeX">$= -0.52$</tex-math></inline-formula>, p = 0.045). Sequential dual-target TMS optimizes network dynamics by sustaining low-energy states and suppressing maladaptive transitions, outperforming single-target approaches. dFNC temporal patterns may serve as biomarkers for post-stroke motor function, supporting sequential dual-target TMS as a promising rehabilitation tool.</p>
+</abstract>
+<kwd-group kwd-group-type="AuthorFree">
+<kwd>TMS</kwd>
+<kwd>fNIRS</kwd>
+<kwd>dynamic functional connectivity</kwd>
+<kwd>stroke</kwd>
+<kwd>lower limb motor dysfunction</kwd>
+</kwd-group>
+<funding-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>National Key Research and Development Project</institution></institution-wrap></funding-source>
+<award-id>2023YFC3603703</award-id>
+</award-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>National Natural Science Foundation of China</institution></institution-wrap></funding-source>
+<award-id>32271370</award-id>
+</award-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>Fundamental Research Funds for Central Public Welfare Research Institutes</institution><institution-id institution-id-type="fundref">10.13039/501100001809</institution-id></institution-wrap></funding-source>
+<award-id>118009001000160001</award-id>
+</award-group>
+<funding-statement>This work was supported in part by the National Key Research and Development Project under Grant 2023YFC3603703, in part by the National Natural Science Foundation of China under Grant 32271370, and in part by the Fundamental Research Funds for Central Public Welfare Research Institutes under Grant 118009001000160001.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="10"></fig-count>
+<table-count count="1"></table-count>
+<equation-count count="41"></equation-count>
+<ref-count count="71"></ref-count>
+<page-count count="12"></page-count>
+</counts>
+</article-meta>
+</front>
+<body>
+<sec id="sec1">
+<label>I.</label>
+<title>Introduction</title>
+<p>Stroke is a common clinical cerebrovascular disease with high incidence, mortality, and disability rates. It is mainly caused by cerebral vascular rupture or embolism, leading to ischemia and hypoxia in brain tissue, which in turn causes nerve cell death and seriously affects the health and life of patients <xref ref-type="bibr" rid="ref1">[1]</xref>, <xref ref-type="bibr" rid="ref2">[2]</xref>. After a stroke, patients often experience various neurological sequelae, with hemiplegia being a common sequela that leads to balance dysfunction and impaired walking ability. According to reports, nearly 80% of stroke patients are unable to successfully maintain balance and control their walking posture <xref ref-type="bibr" rid="ref3">[3]</xref>. Previous studies have shown that the neurobiological basis for motor function recovery after stroke lies in the plasticity of the central nervous system <xref ref-type="bibr" rid="ref4">[4]</xref>, <xref ref-type="bibr" rid="ref5">[5]</xref>. During this process, the central nervous system reorganizes its structure and function to reestablish neural connections, thereby partially compensating for the functional impairments caused by damage to the lesion area <xref ref-type="bibr" rid="ref6">[6]</xref>, <xref ref-type="bibr" rid="ref7">[7]</xref>. Therefore, promoting and restoring neural plasticity is a key intervention strategy in the motor rehabilitation of stroke patients.</p>
+<p>Transcranial magnetic stimulation (TMS) is a non-invasive focal brain stimulation technique based on electromagnetic induction, in which a rapidly changing magnetic field induces small intracranial currents in the brain <xref ref-type="bibr" rid="ref8">[8]</xref>. The induced currents cause depolarization of neuronal clusters in the cortical region directly beneath the stimulation coil, while also affecting neuronal clusters in adjacent and distant brain regions, thereby eliciting neurophysiological and behavioral effects and inducing synaptic-level neuroplasticity changes <xref ref-type="bibr" rid="ref9">[9]</xref>, <xref ref-type="bibr" rid="ref10">[10]</xref>. While traditional single-target TMS can improve motor function by modulating local brain region excitability <xref ref-type="bibr" rid="ref11">[11]</xref>, <xref ref-type="bibr" rid="ref12">[12]</xref>, <xref ref-type="bibr" rid="ref13">[13]</xref>, the execution of motor behavior relies on dynamic interactions among multiple brain regions, thereby limiting its therapeutic efficacy <xref ref-type="bibr" rid="ref14">[14]</xref>, <xref ref-type="bibr" rid="ref15">[15]</xref>. Dual-Target Brain Region Stimulation is an emerging neurostimulation strategy that sequentially stimulates multiple functionally complementary brain regions, offering advantages in integrating dual-brain region synergistic effects and optimizing neural signal transmission pathways <xref ref-type="bibr" rid="ref16">[16]</xref>, <xref ref-type="bibr" rid="ref17">[17]</xref>, <xref ref-type="bibr" rid="ref18">[18]</xref>. Importantly, sequential dual-target TMS has demonstrated significant therapeutic efficacy in conditions such as consciousness disorders, post-stroke motor function recovery, and cognitive impairments <xref ref-type="bibr" rid="ref19">[19]</xref>, <xref ref-type="bibr" rid="ref20">[20]</xref>, <xref ref-type="bibr" rid="ref21">[21]</xref>.</p>
+<p>In neurostimulation strategies for promoting rehabilitation of lower limb motor disorders, the supplementary motor area (SMA) is a commonly used stimulation site for rTMS. Research indicates that the SMA receives neural inputs from multiple levels, including primary and secondary somatosensory areas, the parietal association cortex, and projections from the basal ganglia via the thalamus <xref ref-type="bibr" rid="ref22">[22]</xref>. These connections form the basal ganglia-thalamus-cortex-SMA functional circuit, which is involved in the autonomous generation of internal movements, automated behaviors, and the planning and initiation of learned motor sequences <xref ref-type="bibr" rid="ref23">[23]</xref>. On the other hand, the SMA sends projection fibers to the corticospinal tract. As shown in <xref ref-type="fig" rid="fig1">Fig. 1</xref>. Through this unique corticospinal projection, the SMA not only participates in the planning and initiation stages of movement but also directly intervenes in the execution process of movement <xref ref-type="bibr" rid="ref24">[24]</xref>. Notably, recent studies have shown that the relationship between cognition and movement is complementary rather than competitive <xref ref-type="bibr" rid="ref25">[25]</xref>. The results of Yu et al. <xref ref-type="bibr" rid="ref26">[26]</xref> also confirm that rTMS treatment of the left dorsolateral prefrontal cortex (L-DLPFC) improves patients&#x2019; balance and postural control abilities and significantly reduces the risk of falls in daily life. Additionally, previous literature suggests that the L-DLPFC is responsible for planning, organizing, and regulating motor functions <xref ref-type="bibr" rid="ref27">[27]</xref>, <xref ref-type="bibr" rid="ref28">[28]</xref> and may maintain postural control and balance through the allocation of attentional resources <xref ref-type="bibr" rid="ref29">[29]</xref>. Another study suggests that the frontal cortex indirectly influences basal neural circuits through projections to the SMA <xref ref-type="bibr" rid="ref30">[30]</xref>. Therefore, we hypothesize that stimulating the L-DLPFC first may promote resource integration within the cognitive-motor network, followed by stimulation of the SMA to further regulate the immediate reorganization of movement-related networks, thereby enhancing neural plasticity across multiple brain regions. It should be noted that &#x201C;dual-target rTMS&#x201D; in this study refers to sequential stimulation of the L-DLPFC and the SMA. However, the underlying mechanisms of this temporal network regulation remain poorly understood.
+<fig id="fig1">
+<label>Fig. 1.</label>
+<caption><p>Lower limb motor rehabilitation circuit. The SMA directly projects fibers to the corticospinal tract to intervene in the execution of movement, while the DLPFC indirectly influences the basal neural circuit through projections to the SMA, further affecting the execution of movement. Created in BioRender. Wang, Y. (2026) <uri>https://BioRender.com/pqs8f1d</uri>.</p></caption>
+<graphic xlink:href="li1-3657761.eps"></graphic>
+</fig>
+</p>
+<p>Understanding the potential mechanisms underlying motor recovery induced by different intervention modalities is crucial for enhancing our understanding of neural mechanisms and further optimizing motor rehabilitation strategies. Functional near-infrared spectroscopy (fNIRS) is a neuroimaging technique used to monitor cortical hemodynamics. Its measurement principle is based on the optical properties of the medium being studied, so near-infrared light signals are fundamentally less susceptible to electromagnetic interference from TMS pulses and impose no restrictions on the placement of TMS coils <xref ref-type="bibr" rid="ref31">[31]</xref>, <xref ref-type="bibr" rid="ref32">[32]</xref>. These characteristics of fNIRS make it well-suited for use in conjunction with TMS, enabling the study of the immediate effects of TMS on brain functional networks.</p>
+<p>Traditional static functional connectivity analysis is based on the assumption that functional interactions between different brain regions remain static throughout the scan. However, brain regions do not interact statically but rather through dynamic processes <xref ref-type="bibr" rid="ref33">[33]</xref>, <xref ref-type="bibr" rid="ref34">[34]</xref>, <xref ref-type="bibr" rid="ref35">[35]</xref>. Dynamic functional network connectivity (dFNC) aids in studying dynamic functional interactions between brain networks and better captures the dynamic temporal properties of brain functional networks during TMS stimulation. Therefore, in this study, we aimed to investigate the effects of single-target and sequential dual-target stimulation on brain functional networks in stroke patients (Stroke) and healthy controls (HC) using dFNC analysis methods with fNIRS. We hypothesize that: <xref ref-type="disp-formula" rid="deqn1">(1)</xref> there are significant differences in the temporal characteristics of dFNC between Stroke and HC; <xref ref-type="disp-formula" rid="deqn2">(2)</xref> changes in the temporal characteristics of dFNC are associated with the severity of lower limb motor impairments in stroke patients; <xref ref-type="disp-formula" rid="deqn3">(3)</xref> Compared to single-target stimulation, sequential dual-target rTMS induces more pronounced alterations in brain network dynamics.</p>
+</sec>
+<sec id="sec2">
+<label>II.</label>
+<title>Materials and Methods</title>
+<sec id="sec2a">
+<label>A.</label>
+<title>Participants</title>
+<p>This study recruited a total of 20 patients with subacute stroke from the hospital affiliated with the National Research Center for Rehabilitation Technical Aids. The inclusion criteria were as follows: (1) radiological evidence of unilateral subcortical stroke; (2) age between 20 and 85 years; (3) the enrollment period was within 7 days and 6 months after the onset of the disease; (4) presence of mild, moderate, or severe unilateral lower limb motor dysfunction, as defined by the Fugl-Meyer Assessment for Lower Extremity (FMA-LE) with the following cutoff scores <xref ref-type="bibr" rid="ref36">[36]</xref>: severe (FMA-LE &lt;19), moderate (FMA-LE 20&#x2013;28), and mild (FMA-LE &gt;29) (5) no contraindications for rTMS measurement; (6) ability to understand and follow instructions. During the course of this study, three subjects were excluded due to poor compliance, as they were unable to complete data collection in accordance with the study requirements. Additionally, two subjects were excluded after fNIRS data preprocessing due to excessive motion artifacts resulting in low signal-to-noise ratios, which did not meet the quality requirements for fNIRS data analysis. After rigorous data verification, a total of 15 stroke patients were ultimately included for subsequent analysis. Additionally, 15 healthy participants matched for age, gender, and educational level, with no history of mental or neurological disorders, were recruited as controls. All patients underwent a series of clinical assessments, including National Institutes of Health Stroke Scale (NIHSS), Fugl-Meyer Lower Limb Motor Function Assessment Scale (FMA-LE), Berg Balance Scale (BBS), and Mini-Mental State Examination (MMSE). <xref ref-type="table" rid="table1">Table I</xref> describes the detailed demographic data and clinical characteristics of the participants, including age, gender, time since stroke onset, and cognitive status. According to the Chinese version of the Dominant Hand Scale <xref ref-type="bibr" rid="ref37">[37]</xref>, all participants were right-handed. All patients signed informed consent forms and were informed of potential adverse events prior to the trial. This study (Trial Registration: ChiCTR2000035984) was approved by Ethics Committee of Yueyang Integrative Medicine Hospital affiliated to Shanghai University of Traditional Chinese Medicine and strictly adheres to the ethical standards for medical research as stipulated in the 1975 Helsinki Declaration (revised in 2008).
+<table-wrap id="table1">
+<label>TABLE I</label>
+<caption><title>Clinical Characteristics of Participants</title></caption>
+<graphic xlink:href="li.t1-3657761.eps"></graphic>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="4"></col>
+</colgroup>
+<thead>
+<tr>
+<th rowspan="2">Characteristics</th>
+<th colspan="2">Mean ± SD</th>
+<th rowspan="2">P-value</th>
+</tr>
+<tr>
+<th>Stroke</th>
+<th>HP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sample size</td>
+<td>15</td>
+<td>15</td>
+<td>/</td>
+</tr>
+<tr>
+<td>Gender (male/female)</td>
+<td>9/6</td>
+<td>7/<inline-formula><tex-math notation="LaTeX">$8^{}$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.4814^{}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td>Age (years)</td>
+<td><inline-formula><tex-math notation="LaTeX">$61.4\pm 15.1035$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$62.0667\pm 7.5163$</tex-math></inline-formula></td>
+<td>0.8795</td>
+</tr>
+<tr>
+<td>Time of stroke onsets (months)</td>
+<td><inline-formula><tex-math notation="LaTeX">$4.6667\pm 3.4164^{}$</tex-math></inline-formula></td>
+<td>/</td>
+<td>/</td>
+</tr>
+<tr>
+<td>Stroke type (infarction/hemorrhage)</td>
+<td>11/4</td>
+<td>/</td>
+<td>/</td>
+</tr>
+<tr>
+<td>MMSE</td>
+<td><inline-formula><tex-math notation="LaTeX">$24.2667\pm 5.1888$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$25.6667\pm 4.1690$</tex-math></inline-formula></td>
+<td>0.4222</td>
+</tr>
+<tr>
+<td>NIHSS</td>
+<td><inline-formula><tex-math notation="LaTeX">$7\pm 5.305$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0\pm 0$</tex-math></inline-formula></td>
+<td>&lt;0.0001</td>
+</tr>
+<tr>
+<td>FMA-LE</td>
+<td><inline-formula><tex-math notation="LaTeX">$20.9333\pm 7.9684$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$34\pm 0$</tex-math></inline-formula></td>
+<td>&lt;0.0001</td>
+</tr>
+<tr>
+<td>BBS</td>
+<td><inline-formula><tex-math notation="LaTeX">$21.8000\pm 17.7651$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$56\pm 0$</tex-math></inline-formula></td>
+<td>&lt;0.0001</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+</sec>
+<sec id="sec2b">
+<label>B.</label>
+<title>Experimental Design and Procedures</title>
+<p>This study is a randomized, prospective, cross-sectional clinical trial. All participants must complete three experimental sessions under different intervention conditions, with each session spaced more than 48 hours apart <xref ref-type="bibr" rid="ref38">[38]</xref>, <xref ref-type="bibr" rid="ref39">[39]</xref>. The experimental intervention conditions include: <xref ref-type="disp-formula" rid="deqn1">(1)</xref> SMA single target stimulation (SMA-rTMS), <xref ref-type="disp-formula" rid="deqn2">(2)</xref> L-DLPFC single target stimulation (LDLPFC-rTMS), <xref ref-type="disp-formula" rid="deqn3">(3)</xref> Sequential dual-target rTMS of the L-DLPFC and SMA (Dual-rTMS). The order of the three experimental sessions was assigned using a random sequence generated by MATLAB (The MathWorks, Inc., Natick, MA, USA) and balanced across participants. Each experimental session consisted of two stages: a 6-minute resting-state recording and a 10-minute transcranial magnetic stimulation intervention. Prior to the experiment, participants were instructed to rest in a quiet environment for 10-20 minutes to relax both mentally and physically. Subsequently, fNIRS was used to simultaneously detect dynamic hemodynamic information during resting state and rTMS. Additionally, participants were required to remain awake and avoid voluntary movements and speech during both the resting state and transcranial magnetic stimulation.</p>
+<p>The TMS used in this study was a magnetic field stimulator with a cone-shaped coil(Yiruide MagTD, Wuhan, China). For healthy subjects, the resting motor threshold (rMT) was measured over the right primary motor cortex (M1). The rMT was defined as the minimum stimulus intensity required to elicit motor evoked potentials with an amplitude greater than <inline-formula><tex-math notation="LaTeX">$50~\mu $</tex-math></inline-formula>V in at least 5 out of 10 stimuli recorded from the contralateral abductor pollicis brevis muscle. For patients, if the above method fails to obtain rMT from the affected side M1, the location of the healthy hemisphere M1 is defined as the stimulation target, and the healthy hemisphere rMT is used as the intervention intensity for rTMS. <xref ref-type="fig" rid="fig2">Fig. 2</xref> shows the intervention parameters for different experimental phases, as follows: SMA-rTMS: 10 Hz, 100% rMT, 1000 pulses (2 s <inline-formula><tex-math notation="LaTeX">$\times 50$</tex-math></inline-formula> trains, 10 s interval); LDLPFC-rTMS: 10 Hz, 80% rMT, 1000 pulses (5 s <inline-formula><tex-math notation="LaTeX">$\times 20$</tex-math></inline-formula> trains, 25 s interval); Dual-rTMS: 5 minutes of LDLPFC-rTMS followed by 5 minutes of SMA-rTMS, totaling 1000 pulses. Additionally, the stimulation site for L-DLPFC was located at F3 using the fiber cap positioning from the international 10/20 EEG system <xref ref-type="bibr" rid="ref40">[40]</xref>, and the SMA stimulation point was defined as the scalp location 3 cm anterior to the CZ point <xref ref-type="bibr" rid="ref41">[41]</xref>, <xref ref-type="bibr" rid="ref42">[42]</xref>. All stimulation was administered by an experienced neurologist who was not involved in the clinical assessment or data analysis of the participants.
+<fig id="fig2">
+<label>Fig. 2.</label>
+<caption><p>Stimulation location and parameters under different intervention conditions. All three stimulation modes used high-frequency (10 Hz) stimulation, and the total number of pulses was the same. Among them, sequential dual-target stimulation first stimulated the DLPFC with 300 pulses, then stimulated the SMA with 300 pulses.</p></caption>
+<graphic xlink:href="li2-3657761.eps"></graphic>
+</fig>
+</p>
+</sec>
+<sec id="sec2c">
+<label>C.</label>
+<title>FNIRS Measurement and Preprocessing</title>
+<p>Brain hemodynamic responses during resting state and TMS intervention were collected using a multi-channel continuous wave (740 nm and 850 nm) fNIRS device (NirSmart, Danyang Huichuang Medical Equipment Co., LTD., Beijing, China) in a quiet environment. The data sampling frequency was set to 10 Hz. Following the international 10-20 system <xref ref-type="bibr" rid="ref43">[43]</xref>, 16 detector probes and 18 light source probes were symmetrically arranged on both sides of the prefrontal cortex and motor cortex, forming a total of 38 signal channels, with a channel spacing of 30 mm. To achieve precise localization of channel signals within brain regions, we acquired three-dimensional coordinates for all probes and key anatomical landmarks such as the nasal root and preauricular point using a 3D digitizer. These coordinates were then mapped to the Montreal Neurological Institute standard space <xref ref-type="bibr" rid="ref44">[44]</xref>. Subsequently, probabilistic mapping analysis was performed using NIRS-SPM software <xref ref-type="bibr" rid="ref45">[45]</xref>. Signals were categorized into 14 regions of interest based on Brodmann areas: bilateral prefrontal cortex (PFC), dorsolateral prefrontal cortex (DLPFC), superior frontal cortex (SFC), presupplementary motor area (PSMA), M1, primary somatosensory cortex (S1), and occipital cortex (OC). Additionally, to ensure compatibility with TMS equipment, a TMS-specific probe was employed to mitigate limitations such as shallow TMS penetration depth and susceptibility to interference.</p>
+<p>This study utilized custom routines in MATLAB for fNIRS data preprocessing, executed via the following procedure. First, the raw light intensity data were converted into light density data. Subsequently, the light density data were transformed into oxygenated hemoglobin (<inline-formula><tex-math notation="LaTeX">$HbO_{2} $</tex-math></inline-formula>), deoxygenated hemoglobin (HbR), and total hemoglobin (HbT) using an improved Beer-Lambert law <xref ref-type="bibr" rid="ref46">[46]</xref>. Since <inline-formula><tex-math notation="LaTeX">$HbO_{2}$</tex-math></inline-formula> concentration is the most sensitive indicator of local cerebral blood flow changes in fNIRS measurements <xref ref-type="bibr" rid="ref47">[47]</xref>, this study uses the <inline-formula><tex-math notation="LaTeX">$HbO_{2}$</tex-math></inline-formula> signal to assess changes in cortical oxygenation levels and determine the neural activity levels in brain regions associated with motor function. After obtaining the <inline-formula><tex-math notation="LaTeX">$HbO_{2}$</tex-math></inline-formula> signal, it was subjected to bandpass filtering at 0.01&#x2013;0.2 Hz (sixth-order zero-phase Butterworth filter), to reduce irrelevant noise components and low-frequency baseline drift <xref ref-type="bibr" rid="ref48">[48]</xref>. Next, principal component analysis and independent component analysis were performed on the oxygenated hemoglobin change signals of each channel to identify and remove components potentially related to noise and artifacts, including heartbeats, respiratory signals, and blood pressure changes <xref ref-type="bibr" rid="ref49">[49]</xref>. On average, two to five components were removed. Finally, cubic spline interpolation and the Hampel filtering method were used to remove motion artifacts and signal spikes <xref ref-type="bibr" rid="ref50">[50]</xref>.</p>
+</sec>
+<sec id="sec2d">
+<label>D.</label>
+<title>DFNC Computation</title>
+<p><xref ref-type="fig" rid="fig3">Fig. 3</xref> provides a framework for dynamic brain network connectivity analysis methods. Specifically, a rectangular window of size 20s is created, which is then slid in 1s increments <xref ref-type="bibr" rid="ref51">[51]</xref>. A functional connectivity (FC) matrix is constructed by calculating the phase locking value (PLV) between each channel of fNIRS within each window. The PLV formula is defined as follows <xref ref-type="bibr" rid="ref52">[52]</xref>:
+<disp-formula id="deqn1"><tex-math notation="LaTeX">\begin{equation*} PLV_{a,b} ={\vert }\frac {1}{N}\sum \limits _{n=1}^{N} e xp(j(\varphi _{a} \left [{{ n }}\right ]-\varphi _{b} \left [{{ n }}\right ]))\vert \tag {1}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$\varphi [N]$</tex-math></inline-formula> is the instantaneous phase of the nth sampling point of a specific channel, and <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula> is the number of sampling points of that channel.
+<fig id="fig3">
+<label>Fig. 3.</label>
+<caption><p>dFNC analysis method framework. First, the fNIRS data of all subjects are processed using a sliding window to calculate the FC of each time window. Then, the upper triangular part of all matrices is extracted and converted into dFNC feature vectors. Three functional connectivity states are identified through k-means clustering. Finally, dynamic functional network indicators are calculated based on the individual state time series.</p></caption>
+<graphic xlink:href="li3-3657761.eps"></graphic>
+</fig>
+</p>
+<p>The K-means clustering algorithm was applied to identify recurrent FC patterns across all subjects and time windows. Notably, the cluster analysis was performed based on the dFNC data from all subjects across all experimental conditions. Prior to clustering, each <italic>L</italic><inline-formula><tex-math notation="LaTeX">$\times $</tex-math></inline-formula><italic>L</italic> FC matrix derived from sliding time windows was transformed into a feature vector representing dFNC. Specifically, the upper triangular elements (excluding the diagonal) of each matrix were extracted and reshaped into one-dimensional vectors of length <italic>L</italic><inline-formula><tex-math notation="LaTeX">$\times $</tex-math></inline-formula><italic>(L&#x2013;1)/2</italic>, hereafter termed dFNC vectors. Manhattan distance was employed to quantify similarity between these dFNC vectors. To avoid getting stuck in local optima, the maximum number of iterations was set to 500, and the number of repetitions was set to 150 <xref ref-type="bibr" rid="ref53">[53]</xref>. Additionally, the elbow method was used to determine the optimal number of states as 3. Finally, two dFNC metrics were calculated: <xref ref-type="disp-formula" rid="deqn1">(1)</xref> the fraction time (FT), defined as the ratio of the number of time windows in a state to the total number of time windows, and <xref ref-type="disp-formula" rid="deqn2">(2)</xref> the state transition percentage (STP), which describes the likelihood of transitioning from one state to another.
+<disp-formula id="deqn2"><tex-math notation="LaTeX">\begin{equation*} STP_{i\to j} =\frac {N_{i\to j}}{N_{i} -1}\times 100\% \tag {2}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$N_{\textrm {i}\to \textrm {j}}$</tex-math></inline-formula> represents the number of transitions from state <inline-formula><tex-math notation="LaTeX">$i$</tex-math></inline-formula> to state <inline-formula><tex-math notation="LaTeX">$j$</tex-math></inline-formula> throughout the entire state sequence. <inline-formula><tex-math notation="LaTeX">$N_{\textrm {i}}$</tex-math></inline-formula> denotes the total number of occurrences of state i.</p>
+<p>To assess the characteristics of the three connection states obtained from clustering, we also calculated the global efficiency (GE) of each connection state. The GE was computed based on the weighted dFNC matrices, where the continuous PLV values (ranging from 0 to 1) were directly used as connection weights. GE is a global metric that reflects the overall information transmission capacity of a network and is closely related to the integrity of long-range connections across brain regions, reflecting the ability to transmit information across the entire brain functional network <xref ref-type="bibr" rid="ref54">[54]</xref>. It is defined as follows:
+<disp-formula id="deqn3"><tex-math notation="LaTeX">\begin{equation*} GE=\frac {1}{N(N-1)}\sum \limits _{i\in N,j\ne i} {\frac {1}{D(i,j)}} \tag {3}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula> is the total number of channels in the brain region. <italic>D(i,j)</italic> is the shortest path length between node <inline-formula><tex-math notation="LaTeX">$i$</tex-math></inline-formula> and node <inline-formula><tex-math notation="LaTeX">$j$</tex-math></inline-formula>.</p>
+<p>To investigate energy consumption patterns across different brain states, we employed the Welch algorithm to compute the power spectral density (PSD) of HbO<sub>2</sub>. A Hanning window with a length of 200 data points and 50% overlap was applied. After calculating the PSD for each window, numerical integration was performed across the 0.01&#x2013;0.2 Hz frequency band to obtain the total power.</p>
+</sec>
+<sec id="sec2e">
+<label>E.</label>
+<title>Statistical Analysis</title>
+<p>The Kolmogorov-Smirnov test and Levene&#x2019;s test were used to assess the variance, normality, and homogeneity of the data at the group level. A two-sample t-test was employed to detect group differences in normally distributed data, while the non-parametric Mann-Whitney U test was used for non-normally distributed data. Group differences included scores related to age, gender, MMSE, NIHSS, FMA-LE, and BBS. To examine the effects on dFNC temporal characteristics, a series of two-way mixed ANOVAs were conducted with Health Status (HC vs. Stroke) as a between-subjects factor and Intervention Mode (Resting-state, SMA-rTMS, LDLPFC-rTMS, Dual-rTMS) as a within-subjects factor. These analyses were performed separately for the FT of each dFNC state. Post-hoc comparisons with Bonferroni correction were applied when significant main or interaction effects were found. Finally, Spearman&#x2019;s rank correlation analysis was used to explore the relationship between dFNC temporal characteristics and clinical variables. Statistical significance was set at P &lt;0.05. All statistical analyses were performed using SPSS version 25.0 software.</p>
+</sec>
+</sec>
+<sec id="sec3">
+<label>III.</label>
+<title>Results</title>
+<sec id="sec3a">
+<label>A.</label>
+<title>Demographic and Clinical Characteristics</title>
+<p>Ultimately, 15 stroke patients and 15 matched healthy controls were included in the final data analysis. As summa-rized in <xref ref-type="table" rid="table1">TABLE I</xref>, the Stroke group demonstrated significantly lower motor and balance function (as measured by FMA-LE and BBS scores, p &lt;0.0001) and higher neurological impairment (as measured by NIHSS scores, p &lt;0.0001) compared to the healthy control group.</p>
+</sec>
+<sec id="sec3b">
+<label>B.</label>
+<title>K-Means Clustering Results</title>
+<p>The elbow method was used to select the appropriate number of clusters (K value), as shown in <xref ref-type="fig" rid="fig4">Fig. 4</xref>. When <inline-formula><tex-math notation="LaTeX">$K =3$</tex-math></inline-formula>, the rate of change in the total sum of minimum cluster distances began to slow significantly, so the optimal number of cluster centers was determined to be 3, resulting in three key brain connection states.
+<fig id="fig4">
+<label>Fig. 4.</label>
+<caption><p>The variation curve of the minimum intra cluster distance sum with the number of states.</p></caption>
+<graphic xlink:href="li4-3657761.eps"></graphic>
+</fig>
+</p>
+<p>Additionally, <xref ref-type="fig" rid="fig5">Fig. 5(a)</xref> shows the cluster centroids of the three dFNC matrix states and their percentage occurrence in the total window, while <xref ref-type="fig" rid="fig5">Fig. 5(b)</xref> displays the top 10% of connection strengths within each state. The results indicate that state 3 occupies the shortest time proportion in the total time window (16.32% window proportion), exhibiting stronger brain functional connectivity patterns and more interhemispheric connections, primarily between M1_L, S1_L, and DLPFC_R,
+<fig id="fig5">
+<label>Fig. 5.</label>
+<caption><p>Functional connectivity characteristics of three dFNC states. (a) The semi-matrix diagram shows the functional connectivity patterns of each state and their time proportions; (b) the chord diagram shows the top 10% of significant connections in each state, with the inner ring marking the channel position and the outer ring marking the corresponding brain region.</p></caption>
+<graphic xlink:href="li5-3657761.eps"></graphic>
+</fig>
+</p>
+<p>SFC_R. State 2 has moderate occurrence frequency and brain connectivity strength, with inter-brain region connections relatively weakened compared to state 3. State 1 occupied the longest time proportion in the total time window (44.24% window proportion), characterized by weaker connectivity within and between all networks, with further weakened cross-brain region connections, transforming into relatively stronger intra-brain region connections.</p>
+</sec>
+<sec id="sec3c">
+<label>C.</label>
+<title>Graph-Theoretic Properties and Energy Characteristics of Dynamic Functional Connectivity States</title>
+<p>To delve deeper into the intrinsic characteristics of different states, we characterized them from two dimensions: network topology and energy metabolism. <xref ref-type="fig" rid="fig6">Fig. 6</xref> illustrates the differences in graph-theoretic properties among the three states, where State 3 exhibits the highest GE, followed by State 2, while State 1 demonstrates significantly lower GE (p&lt;0.0001). Correspondingly, analysis of fNIRS signal power revealed highly consistent energy consumption patterns (<xref ref-type="fig" rid="fig7">Fig. 7</xref>). Specifically, state 3 is associated with the highest total signal power, state 2 exhibits intermediate levels, and state 1 demonstrates the lowest total power (p&lt;0.0001).
+<fig id="fig6">
+<label>Fig. 6.</label>
+<caption><p>GE under different dFNC states. The horizontal solid and dashed lines in the violin plot represent the median and interquartile range, respectively. The asterisk indicates significance: <inline-formula><tex-math notation="LaTeX">$^{\ast \ast } {P} \lt 0.001$</tex-math></inline-formula>.</p></caption>
+<graphic xlink:href="li6-3657761.eps"></graphic>
+</fig>
+<fig id="fig7">
+<label>Fig. 7.</label>
+<caption><p>Comparison of Total Power Across Different Functional Connectivity States.</p></caption>
+<graphic xlink:href="li7-3657761.eps"></graphic>
+</fig>
+</p>
+</sec>
+<sec id="sec3d">
+<label>D.</label>
+<title>Time Attributes of Dynamic Functional Network Connection Status</title>
+<p>The ANOVA revealed a significant main effect of Intervention Mode on the FT of both State 1 (F(3,112) = 5.35, p = 0.0018) and State 2 (F(3,112) = 3.27, p = 0.024). No significant main effect of Health Status or interaction between Health Status and Intervention Mode was found for any state (all p &gt;0.05).</p>
+<p>Post-hoc analyses, as illustrated in <xref ref-type="fig" rid="fig8">Fig. 8</xref>, were performed to delineate the specific effects of the interventions. The results indicated that the FT in State 1 during the Dual-rTMS intervention was significantly higher than in the resting state for both groups (HC: p = 0.0042; Stroke: p = 0.0185). Furthermore, the FT of State 1 under SMA-rTMS was also significantly higher than that in the resting state (p = 0.0411). Notably, the mean FT of State 1 during Dual-rTMS showed a trend of being higher than that under both single-target stimulations. In the stroke group, we observed that the FT of State 2 during the Dual-rTMS intervention was significantly lower than that in the resting state (p = 0.0361). For State 3, while the main effect of Intervention Mode did not reach strict statistical significance (F(3,112) = 2.54, p = 0.06), the data trend indicated that the FT of State 3 was relatively lower during the Dual-rTMS compared to other conditions.
+<fig id="fig8">
+<label>Fig. 8.</label>
+<caption><p>FT differences in different states. The bar chart shows the differences in the time proportions of each condition under different stimulation protocols (distinguished by color). From left to right: condition 1, condition 2, and condition 3, presenting the results of intra-group and inter-group comparisons. <inline-formula><tex-math notation="LaTeX">$^{\ast } {P} \lt 0.05$</tex-math></inline-formula>.</p></caption>
+<graphic xlink:href="li8-3657761.eps"></graphic>
+</fig>
+</p>
+<p>The STP results are shown in <xref ref-type="fig" rid="fig9">Fig. 9</xref>. In the HC group, the STP from State 1 to State 2 was significantly lower under the Dual-rTMS and SMA-rTMS conditions than in the resting state (Dual-rTMS: p = 0.0009; SMA-rTMS: p = 0.0062). Notably, Dual-rTMS not only significantly reduced the internal state STP of State 2 (p = 0.0372), but also significantly reduced the STP from State 1 to State 2 compared to LDLPFC-rTMS (p = 0.0324). The Stroke group also showed that Dual-rTMS and SMA-rTMS significantly reduced the STP from State 1 to State 2 (Dual-rTMS: p = 0.0041; SMA-rTMS: p = 0.0178). Additionally, in the Stroke group, both Dual-rTMS and LDLPFC-rTMS significantly reduced the internal STP of State 2 (p = 0.0396). Finally, by comparing group differences using the method of averaging sample values within each group, the STP from State 2 to State 3 in the Stroke group was significantly lower than that in the HC group (p = 0.024).
+<fig id="fig9">
+<label>Fig. 9.</label>
+<caption><p>STP differences in dFNC states. The green background area displays the analysis results of the healthy control group (HP group): the leftmost matrix column shows the STP values under four stimulation modes, and the matrix within the right half triangle shadow shows the significance level (p-value) of the differences between modes. The yellow background area corresponds to the same analysis content of the Stroke group. The bottom matrix displays the significant comparison results of the overall STP differences between the two groups.</p></caption>
+<graphic xlink:href="li9-3657761.eps"></graphic>
+</fig>
+</p>
+</sec>
+<sec id="sec3e">
+<label>E.</label>
+<title>Correlation Between dFNC Time Characteristics and Scale Scores</title>
+<p>Spearman&#x2019;s correlation analysis was used to examine the relationship between dFNC time characteristics and clinical variables. The results are shown in <xref ref-type="fig" rid="fig10">Fig. 10</xref>. In the stroke group, the FT in State 1 was negatively correlated with Breg and FMA-LE scores, with the correlation with FMA-LE scores being statistically significant (r <inline-formula><tex-math notation="LaTeX">$= -0.5233$</tex-math></inline-formula>, p = 0.0453);
+<fig id="fig10">
+<label>Fig. 10.</label>
+<caption><p>Correlation between FT and behavioral scale scores in dFNC state. (a) The correlation between FT of state 1 and BBS and FMA-LE scale scores. (b) The correlation between FT of state 3 and BBS and FMA-LE scale scores.</p></caption>
+<graphic xlink:href="li10-3657761.eps"></graphic>
+</fig>
+</p>
+<p>Additionally, the FT in State 3 showed significant positive correlations with both clinical scores (BBS: r = 0.5206, p = 0.0466; FMA-LE: r = 0.5237, p = 0.0451).</p>
+</sec>
+</sec>
+<sec id="sec4">
+<label>IV.</label>
+<title>Discussion</title>
+<p>The human brain is essentially a complex system organized into a network, and this structure endows it with high flexibility and enables it to function as a dynamic system as a whole <xref ref-type="bibr" rid="ref55">[55]</xref>.Therefore, it is necessary to study the effects of TMS on the brain from a dynamic perspective. Based on this, we used the dFNC method to investigate the potential mechanisms underlying brain functional network remodeling under different rTMS intervention patterns. In this study, the K-means clustering algorithm was used to identify three relatively stable and recurrent connection states, these states exhibit distinct neurological characteristics: State 3 demonstrates the highest GE and total power, representing an integrated, high-energy-consumption pattern; State 1 exhibits the lowest GE and power, reflecting a low-connectivity, low-energy-consumption pattern; State 2 presents intermediate features. Furthermore, rTMS modulated the temporal dynamics of these states: Dual-rTMS significantly increased FT of state 1 while reducing its STP. The study also revealed key group differences: compared to HC, Stroke exhibited significantly reduced STP from state 2 to state 3. Additionally, the temporal characteristics of dFNC were significantly correlated with patient questionnaire scores. The findings of this study provide new insights into the mechanisms underlying the effects of sequential dual-target TMS.</p>
+<sec id="sec4a">
+<label>A.</label>
+<title>Differences in dFNC Status and Groups</title>
+<p>Recent studies have effectively demonstrated the temporal variability of intrinsic brain networks, indicating that functional connectivity in the human brain is indeed highly dynamic, reflecting the flexibility of functional coordination between different brain systems <xref ref-type="bibr" rid="ref56">[56]</xref>, <xref ref-type="bibr" rid="ref57">[57]</xref>. Consistent with the results of previous reports, this study identified three recurrent dFNC states, with State 1 occupying the largest number of total time windows. Compared to the other two states, State 1 exhibits a &#x201C;sparse connectivity state&#x201D; characterized by weak connections and low integration, a finding consistent with previous studies in patients with schizophrenia, diabetes, and stroke <xref ref-type="bibr" rid="ref50">[50]</xref>, <xref ref-type="bibr" rid="ref55">[55]</xref>, <xref ref-type="bibr" rid="ref56">[56]</xref>. This weak connectivity reflects the brain&#x2019;s baseline connectivity pattern and suggests that the human brain may tend to maintain this low-efficiency information transmission state to conserve energy <xref ref-type="bibr" rid="ref58">[58]</xref>, <xref ref-type="bibr" rid="ref59">[59]</xref>. However, we observed a negative correlation between the FT spent in state 1 during baseline resting conditions in Stroke and motor function scores. This suggests that the persistent dominance of this state in pathological contexts more likely reflects impaired network integration capacity. This finding aligns with evidence showing that prolonged dwell time in weak-connectivity states after stroke correlates with impaired neurological recovery <xref ref-type="bibr" rid="ref58">[58]</xref>, <xref ref-type="bibr" rid="ref60">[60]</xref>. State 3 exhibits stronger regional and hemispheric connectivity, consistent with the characteristics of a &#x201C;highly integrated state,&#x201D; but it has the lowest time proportion (16.32%), potentially reflecting the brain&#x2019;s efficient information processing capacity within a limited timeframe.</p>
+<p>To more specifically characterize the connectivity features of each state, the GE of each state was also calculated. From the GE perspective, the results of this study align with findings from a Parkinson&#x2019;s disease study indicating that &#x201C;higher connectivity states correspond to higher global efficiency&#x201D; <xref ref-type="bibr" rid="ref51">[51]</xref>. This suggests that the dynamic layering of brain networks may follow an &#x201C;efficiency-stability&#x201D; trade-off principle, where the high connectivity of State 3 supports rapid information transmission but comes with higher energy consumption; the low connectivity of State 1 reduces energy consumption but may impair cross-regional collaboration. The differences in this layering across different intervention modes provide functional-level evidence for understanding brain network reorganization in disease states.</p>
+<p>This study also found that, regardless of whether it was the HC group or the Stroke group, Dual-rTMS significantly increased the FT of State 1 and to some extent reduced the FT of State 2 and State 3.This phenomenon may suggest that Dual-rTMS induces a shift in the brain toward a low-energy state. Additionally, STP results showed that different stimulation patterns all exhibited significant differences from the resting state to some extent, with Dual-rTMS causing a significant reduction in STP for the transition from State 1 to State 2 in both the healthy group and the Stroke group.</p>
+<p>Research indicates that while intracranial stimulation initially causes a temporary reduction in the brain network&#x2019;s switching capacity and synchrony, this trend gradually stabilizes over time <xref ref-type="bibr" rid="ref61">[61]</xref>. Intergroup comparisons revealed that the STP for the transition from State 2 to State 3 was significantly lower in the Stroke group than in the healthy control group. This indicates impaired ability for the post-stroke brain to transition from a moderately integrated state to a highly integrated, efficient state. Integrating these findings, we propose that this rTMS-induced increase in State 1 FT may represent a distinct neural mechanism. Specifically, Dual-rTMS significantly reduced the STP from State 1 to State 2. The combination of increased State 1 FT and reduced transition probability suggests that rTMS may actively impose a network stabilization or reset by disrupting brain network communication mechanisms. This temporarily suppresses inefficient, maladaptive fluctuations, enabling the brain to stably maintain the low-energy State 1, thereby creating an opportunity for subsequent functional reorganization.</p>
+<p>Therefore, this study speculates that sequential dual-target stimulation may exert a dual regulatory effect on neural mechanisms: on one hand, by inhibiting the transition from State 1 to State 2, it reduces inefficient network fluctuations; on the other hand, the trend toward reduced FT in State 3 may prevent excessive energy consumption and maintain network homeostasis. This dynamic balance may explain why sequential dual-target intervention outperforms single-target stimulation in improving outcomes for lower-limb stroke patients, as it optimizes the functional coupling efficiency of motor-related brain regions by regulating the temporal distribution and transition probabilities of network states.</p>
+</sec>
+<sec id="sec4b">
+<label>B.</label>
+<title>Network Reorganization Mechanisms in Stroke Patients and Their Clinical Significance</title>
+<p>This study revealed unique characteristics of functional network dynamics in Stroke. Compared with healthy controls, the Stroke group exhibited a reduction in STP from State 2 to State 3, reflecting impaired ability to transition to a state of strong hemispheric connectivity. Similarly, many studies have shown that reduced interhemispheric connectivity is a core feature of stroke <xref ref-type="bibr" rid="ref62">[62]</xref>, <xref ref-type="bibr" rid="ref63">[63]</xref>. Siegel et al. <xref ref-type="bibr" rid="ref64">[64]</xref> previously proposed that increased modularity is associated with post-stroke recovery. Our results further suggest that not only the degree of modularity itself but also the dynamic transition ability between states may be key indicators of functional prognosis. Interestingly, while bilateral stimulation primarily affects State 1 in HC group, it also significantly impacts the FT of State 2 in the Stroke group, a difference that may reflect the Stroke brain&#x2019;s specific response pattern to neuromodulation. Additionally, our correlation analysis results showed that the FT of State 1 in the Stroke group was negatively correlated with lower limb motor function scores and balance function, while the FT of State 3 was positively correlated with lower limb motor function scores and balance function, providing potential neuroimaging markers for clinical assessment.</p>
+<p>The pathological oscillations occurring within the network may trigger the symptoms induced by the stroke, and stimulation of any node within the neural network could disrupt this pathological rhythm <xref ref-type="bibr" rid="ref65">[65]</xref>. We propose that the interpretation of State 1 exhibits dual characteristics: Specifically, under pathological conditions, the persistent dominance of State 1 indeed reflects a loss of network integration capacity. Conversely, we suggest that rTMS (particularly dual-target stimulation) can disrupt the dynamic rhythms of brain networks, transforming the current state into a controllable stable state. It is conceivable that establishing new connections from this weakly connected state may be more feasible, laying the groundwork for greater network flexibility <xref ref-type="bibr" rid="ref66">[66]</xref>.</p>
+<p>It is important to note that the neural effects of the temporal stimulation paradigm employed in this study are complex. A key consideration is the potential influence of homeostatic plasticity. Homeostatic plasticity mechanisms ensure neuronal network excitability remains within physiological bounds, with the history of prior synaptic activity modulating the direction and extent of plasticity induced by subsequent stimulation <xref ref-type="bibr" rid="ref67">[67]</xref>, <xref ref-type="bibr" rid="ref68">[68]</xref>. In this study, the initial high-frequency rTMS applied to the L-DLPFC may have induced heightened excitability in this region and its associated networks. Given the functional and anatomical connectivity between the DLPFC and SMA, this alteration may have correspondingly modified the baseline excitability state of the SMA prior to receiving stimulation. Consequently, the effects of the subsequent rTMS applied to the SMA may not represent a simple superposition but rather an optimized network response pattern, regulated by homeostatic plasticity, that differs from what would be observed with single-target stimulation alone.</p>
+<p>Dual-target neuromodulation therapy is an emerging research direction in neuroscience <xref ref-type="bibr" rid="ref69">[69]</xref>. A meta-analysis of 22 studies showed that compared to single-target stimulation, sequential dual-target stimulation can achieve higher efficacy by enhancing neural network plasticity and improving functional connectivity across cognitive domains <xref ref-type="bibr" rid="ref16">[16]</xref>. Additionally, high-frequency rTMS (HF-rTMS) applied in a sequential dual-target stimulation paradigm has been shown to enhance synaptic efficacy, induce effects similar to long-term potentiation, and strengthen functional connectivity between brain regions <xref ref-type="bibr" rid="ref70">[70]</xref>, <xref ref-type="bibr" rid="ref71">[71]</xref>. Similarly, in this study, HF-rTMS was sequentially applied to the L-DLPFC and SMA of Stroke with lower limb motor dysfunction, and it was found that the connectivity between M1_L, S1_L, and DLPFC_R, SFC_R varied to different degrees within different dFNC states. This suggests that the current study protocol may better reshape the nervous system by optimizing the cross-regional information integration patterns between the frontal-sensorimotor cortex-motor cortex loop in patients. The aforementioned mechanisms and results suggest that rTMS methods based on neural network regulation may promote brain functional remodeling in Stroke by enhancing synaptic plasticity and repairing damaged functional connections.</p>
+<p>In summary, our study further validates that the therapeutic mechanisms of rTMS can influence dynamic functional connectivity between large-scale brain networks. Additionally, dynamic functional connectivity between brain networks can serve as a predictive indicator of rTMS treatment efficacy. Finally, for Stroke with lower limb motor impairments, compared to traditional single-target stimulation, sequential dual-target stimulation may represent an efficient therapeutic modality to promote brain remodeling.</p>
+</sec>
+<sec id="sec4c">
+<label>C.</label>
+<title>Limitations</title>
+<p>Our study also has some limitations. First, a potential limitation of this study is the absence of a sham-rTMS control group. Future experimental designs should include a sham-rTMS group as a control to better understand the effects of different stimulation patterns on dynamic brain functional networks. Second, the selection of sliding window size may influence the assessment of dynamic brain connectivity. Future analyses should be conducted using different window widths to validate the reliability and reproducibility of the results. Third, the 48-hour washout period may have been too short to completely avoid carryover effects between experimental sessions. Fourth, the localization of stimulation targets (L-DLPFC and SMA) in this study relied on EEG caps based on the international 10-20 system rather than individualized MRI navigation. This may introduce some degree of inter-individual variability. Future studies employing individualized neuro-navigation will enhance the precision of target localization. Finally, a key limitation of this study is the absence of resting-state fNIRS measurements following rTMS intervention. Consequently, our findings capture only the immediate online effects of stimulation, without clarifying whether the observed dynamic functional network connectivity changes (e.g., increased FT in state 1) persist as a lasting aftereffect into the post-stimulation phase. Future studies should incorporate longer post-intervention monitoring periods to elucidate the temporal dynamics and potential enduring benefits of sequential dual-target TMS.</p>
+</sec>
+</sec>
+<sec id="sec5">
+<title>Declaration of Interest</title>
+<p>The authors declare that there are no financial interests, commercial affiliations, or other potential conflicts of interest that could have influenced the objectivity of this research or the writing of this paper.</p>
+</sec>
+</body>
+<back>
+<ref-list>
+<title>
+References
+</title>
+<ref id="ref1">
+<label>
+[1]
+</label>
+<mixed-citation publication-type="report" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Sierra
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Coca
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+E. L.
+</given-names> 
+<surname>
+Schiffrin
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Vascular mechanisms in the pathogenesis of stroke
+</article-title>
+,&#x201D; 
+<source>
+Current Hypertension Rep.
+</source>
+, vol. 
+<volume>
+13
+</volume>
+, no. 
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+200
+</fpage>
+&#x2013;
+<lpage>
+207
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2011
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref2">
+<label>
+[2]
+</label>
+<mixed-citation publication-type="report" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Elarjani
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+I.
+</given-names> 
+<surname>
+Cajigas
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Saway
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Sur
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+J. J.
+</given-names> 
+<surname>
+Morcos
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Pituitary apoplexy and cerebral infarction: Case report and literature review
+</article-title>
+,&#x201D; 
+<source>
+World Neurosurgery
+</source>
+, vol. 
+<volume>
+141
+</volume>
+, pp. 
+<fpage>
+73
+</fpage>
+&#x2013;
+<lpage>
+80
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref3">
+<label>
+[3]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S. F.
+</given-names> 
+<surname>
+Tyson
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Hanley
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Chillala
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Selley
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R. C.
+</given-names> 
+<surname>
+Tallis
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Balance disability after stroke
+</article-title>
+,&#x201D; 
+<source>
+Phys. Therapy
+</source>
+, vol. 
+<volume>
+86
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+30
+</fpage>
+&#x2013;
+<lpage>
+38
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2006
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref4">
+<label>
+[4]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.-M.
+</given-names> 
+<surname>
+Heng
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Changes in balance, gait and electroencephalography oscillations after robot-assisted gait training: An exploratory study in people with chronic stroke
+</article-title>
+,&#x201D; 
+<source>
+Brain Sci.
+</source>
+, vol. 
+<volume>
+10
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, p. 
+<fpage>
+821
+</fpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref5">
+<label>
+[5]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Zhou
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Pathway-specific cortico-muscular coherence in proximal-to-distal compensation during fine motor control of finger extension after stroke
+</article-title>
+,&#x201D; 
+<source>
+J. Neural Eng.
+</source>
+, vol. 
+<volume>
+18
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2021
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+056034
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref6">
+<label>
+[6]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Exploring the use of brain&#x2013;computer interfaces in stroke neurorehabilitation
+</article-title>
+,&#x201D; 
+<source>
+Biomed. Res. Int.
+</source>
+, vol. 
+<volume>
+2021
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, 
+<year>
+2021
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+9967348
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref7">
+<label>
+[7]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Yan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Lin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.-F.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Enhancing neuroplasticity for post-stroke motor recovery: Mechanisms, models, and neurotechnology
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Neural Syst. Rehabil. Eng.
+</source>
+, vol. 
+<volume>
+33
+</volume>
+, pp. 
+<fpage>
+1156
+</fpage>
+&#x2013;
+<lpage>
+1168
+</lpage>
+, 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref8">
+<label>
+[8]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+E. S.
+</given-names> 
+<surname>
+King
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+A. D.
+</given-names> 
+<surname>
+Tang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Intrinsic plasticity mechanisms of repetitive transcranial magnetic stimulation
+</article-title>
+,&#x201D; 
+<source>
+Neuroscientist
+</source>
+, vol. 
+<volume>
+30
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+260
+</fpage>
+&#x2013;
+<lpage>
+274
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref9">
+<label>
+[9]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Valero-Cabr&#x00E9;
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J. L.
+</given-names> 
+<surname>
+Amengual
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Stengel
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Pascual-Leone
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+O. A.
+</given-names> 
+<surname>
+Coubard
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Transcranial magnetic stimulation in basic and clinical neuroscience: A comprehensive review of fundamental principles and novel insights
+</article-title>
+,&#x201D; 
+<source>
+Neurosci. Biobehavioral Rev.
+</source>
+, vol. 
+<volume>
+83
+</volume>
+, pp. 
+<fpage>
+381
+</fpage>
+&#x2013;
+<lpage>
+404
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref10">
+<label>
+[10]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Kricheldorff
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Evidence of neuroplastic changes after transcranial magnetic, electric, and deep brain stimulation
+</article-title>
+,&#x201D; 
+<source>
+Brain Sci.
+</source>
+, vol. 
+<volume>
+12
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, p. 
+<fpage>
+929
+</fpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref11">
+<label>
+[11]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+N.
+</given-names> 
+<surname>
+Kang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R. D.
+</given-names> 
+<surname>
+Lee
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J. H.
+</given-names> 
+<surname>
+Lee
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M. H.
+</given-names> 
+<surname>
+Hwang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Functional balance and postural control improvements in patients with stroke after noninvasive brain stimulation: A meta-analysis
+</article-title>
+,&#x201D; 
+<source>
+Arch. Phys. Med. Rehabil.
+</source>
+, vol. 
+<volume>
+101
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+141
+</fpage>
+&#x2013;
+<lpage>
+153
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref12">
+<label>
+[12]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Koch
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Effect of cerebellar stimulation on gait and balance recovery in patients with hemiparetic stroke: A randomized clinical trial
+</article-title>
+,&#x201D; 
+<source>
+JAMA Neurol.
+</source>
+, vol. 
+<volume>
+76
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+170
+</fpage>
+&#x2013;
+<lpage>
+178
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref13">
+<label>
+[13]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Zhao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Wan
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Effects of repetitive transcranial magnetic stimulation at different targets on brain function in stroke patients: A randomized controlled trial
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Neurol.
+</source>
+, vol. 
+<volume>
+15
+</volume>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref14">
+<label>
+[14]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.-P.
+</given-names> 
+<surname>
+Lefaucheur
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Corrigendum to &#x2019;evidence-based guidelines on the therapeutic use of repetitive transcranial magnetic stimulation (rTMS): An update (2014&#x2013;2018)
+</article-title>
+,&#x201D; 
+<source>
+Clin. Neurophysiol.
+</source>
+, vol. 
+<volume>
+131
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+1168
+</fpage>
+&#x2013;
+<lpage>
+1169
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref15">
+<label>
+[15]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A. G.
+</given-names> 
+<surname>
+Guggisberg
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P. J.
+</given-names> 
+<surname>
+Koch
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F. C.
+</given-names> 
+<surname>
+Hummel
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C. M.
+</given-names> 
+<surname>
+Buetefisch
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Brain networks and their relevance for stroke rehabilitation
+</article-title>
+,&#x201D; 
+<source>
+Clin. Neurophysiol.
+</source>
+, vol. 
+<volume>
+130
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+1098
+</fpage>
+&#x2013;
+<lpage>
+1124
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref16">
+<label>
+[16]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Comparative efficacy of rTMS on different targets in Alzheimer&#x2019;s disease: A systematic review and meta-analysis
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Aging Neurosci.
+</source>
+, vol. 
+<volume>
+17
+</volume>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref17">
+<label>
+[17]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Duan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Hou
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Multi-target and multi-session transcranial direct current stimulation in patients with prolonged disorders of consciousness: A controlled study
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Neurosci.
+</source>
+, vol. 
+<volume>
+15
+</volume>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref18">
+<label>
+[18]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Beynel
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J. P.
+</given-names> 
+<surname>
+Powers
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+L. G.
+</given-names> 
+<surname>
+Appelbaum
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Effects of repetitive transcranial magnetic stimulation on resting-state connectivity: A systematic review
+</article-title>
+,&#x201D; 
+<source>
+NeuroImage
+</source>
+, vol. 
+<volume>
+211
+</volume>
+, 
+<month>
+May
+</month> 
+<year>
+2020
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+116596
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref19">
+<label>
+[19]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Wan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Yan
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Song
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Effects of dual-target repetitive transcranial magnetic stimula-tion in patients with minimally conscious state: A pre-liminary study
+</article-title>
+,&#x201D; 
+<source>
+Neuroscience
+</source>
+, vol. 
+<volume>
+573
+</volume>
+, pp. 
+<fpage>
+460
+</fpage>
+&#x2013;
+<lpage>
+467
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref20">
+<label>
+[20]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Meng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Hai
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.-Y.
+</given-names> 
+<surname>
+Zhao
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Y.-W.
+</given-names> 
+<surname>
+Ma
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Efficacy of coupling intermittent theta-burst stimulation and 1 Hz repetitive transcranial magnetic stimulation to enhance upper limb motor recovery in subacute stroke patients: A randomized controlled trial
+</article-title>
+,&#x201D; 
+<source>
+Restorative Neurol. Neurosci.
+</source>
+, vol. 
+<volume>
+38
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+109
+</fpage>
+&#x2013;
+<lpage>
+118
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref21">
+<label>
+[21]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Xu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Lin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Using dual-target rTMS, single-target rTMS, or sham rTMS on post-stroke cognitive impairment
+</article-title>
+,&#x201D; 
+<source>
+J. Integrative Neurosci.
+</source>
+, vol. 
+<volume>
+23
+</volume>
+, no. 
+<issue>
+8
+</issue>
+, p. 
+<fpage>
+161
+</fpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref22">
+<label>
+[22]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+G. E.
+</given-names> 
+<surname>
+Alexander
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+M. D.
+</given-names> 
+<surname>
+Crutcher
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Functional architecture of basal ganglia circuits: Neural substrates of parallel processing
+</article-title>
+,&#x201D; 
+<source>
+Trends Neurosci.
+</source>
+, vol. 
+<volume>
+13
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+266
+</fpage>
+&#x2013;
+<lpage>
+271
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+1990
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref23">
+<label>
+[23]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Goldberg
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Supplementary motor area structure and function: Review and hypotheses
+</article-title>
+,&#x201D; 
+<source>
+Behav. Brain Sci.
+</source>
+, vol. 
+<volume>
+8
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+567
+</fpage>
+&#x2013;
+<lpage>
+588
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+1985
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref24">
+<label>
+[24]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Dum
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Strick
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+The origin of corticospinal projections from the premotor areas in the frontal lobe
+</article-title>
+,&#x201D; 
+<source>
+J. Neurosci.
+</source>
+, vol. 
+<volume>
+11
+</volume>
+, no. 
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+667
+</fpage>
+&#x2013;
+<lpage>
+689
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+1991
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref25">
+<label>
+[25]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Yamamoto
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Ishii
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K.
+</given-names> 
+<surname>
+Ishibashi
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Kohno
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Transcranial direct current stimulation of the dorsolateral prefrontal cortex modulates cognitive function related to motor execution during sequential task: A randomized control study
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Hum. Neurosci.
+</source>
+, vol. 
+<volume>
+16
+</volume>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref26">
+<label>
+[26]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Yu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Dai
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Effects of repetitive transcranial magnetic stimulation on gait and postural control ability of patients with executive dysfunction after stroke
+</article-title>
+,&#x201D; 
+<source>
+Brain Sci.
+</source>
+, vol. 
+<volume>
+12
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, p. 
+<fpage>
+1185
+</fpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref27">
+<label>
+[27]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S. H.
+</given-names> 
+<surname>
+Jang
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+J. P.
+</given-names> 
+<surname>
+Seo
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+The distribution of the cortical origin of the corticoreticular pathway in the human brain: A diffusion tensor imaging study
+</article-title>
+,&#x201D; 
+<source>
+Somatosensory Motor Res.
+</source>
+, vol. 
+<volume>
+31
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+204
+</fpage>
+&#x2013;
+<lpage>
+208
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2014
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref28">
+<label>
+[28]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.-B.
+</given-names> 
+<surname>
+Pochon
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+The role of dorsolateral prefrontal cortex in the preparation of forthcoming actions: An fMRI study
+</article-title>
+,&#x201D; 
+<source>
+Cerebral Cortex
+</source>
+, vol. 
+<volume>
+11
+</volume>
+, no. 
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+260
+</fpage>
+&#x2013;
+<lpage>
+266
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2001
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref29">
+<label>
+[29]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+K. X.-Y.
+</given-names> 
+<surname>
+Chai
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A. M.
+</given-names> 
+<surname>
+Goodwill
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J. S.-P.
+</given-names> 
+<surname>
+Leuk
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+W.-P.
+</given-names> 
+<surname>
+Teo
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Treadmill walking maintains dual-task gait performance and reduces frontopolar cortex activation in healthy adults
+</article-title>
+,&#x201D; 
+<source>
+Neuroscience
+</source>
+, vol. 
+<volume>
+521
+</volume>
+, pp. 
+<fpage>
+148
+</fpage>
+&#x2013;
+<lpage>
+156
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref30">
+<label>
+[30]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.-R.
+</given-names> 
+<surname>
+Duann
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J. S.
+</given-names> 
+<surname>
+Ide
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Luo
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C.-S.-R.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Functional connectivity delineates distinct roles of the inferior frontal cortex and presupplementary motor area in stop signal inhibition
+</article-title>
+,&#x201D; 
+<source>
+J. Neurosci.
+</source>
+, vol. 
+<volume>
+29
+</volume>
+, no. 
+<issue>
+32
+</issue>
+, pp. 
+<fpage>
+10171
+</fpage>
+&#x2013;
+<lpage>
+10179
+</lpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2009
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref31">
+<label>
+[31]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Curtin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Tong
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Sun
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Onaral
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Ayaz
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A systematic review of integrated functional near-infrared spectroscopy (fNIRS) and transcranial magnetic stimulation (TMS) studies
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Neurosci.
+</source>
+, vol. 
+<volume>
+13
+</volume>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref32">
+<label>
+[32]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Xie
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Effects of transcranial magnetic stimulation on dynamic functional networks in stroke patients as assessed by functional near-infrared spectroscopy: A randomized controlled clinical trial
+</article-title>
+,&#x201D; 
+<source>
+Cerebral Cortex
+</source>
+, vol. 
+<volume>
+33
+</volume>
+, no. 
+<issue>
+24
+</issue>
+, pp. 
+<fpage>
+11668
+</fpage>
+&#x2013;
+<lpage>
+11678
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref33">
+<label>
+[33]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Abnormal dynamic functional network connectivity in first-episode, drug-Na&#x00ED;ve patients with major depressive disorder
+</article-title>
+,&#x201D; 
+<source>
+J. Affective Disorders
+</source>
+, vol. 
+<volume>
+319
+</volume>
+, pp. 
+<fpage>
+336
+</fpage>
+&#x2013;
+<lpage>
+343
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref34">
+<label>
+[34]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Hu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Zhou
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+He
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Abnormal dynamic functional network connectivity in patients with early-onset bipolar disorder
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Psychiatry
+</source>
+, vol. 
+<volume>
+14
+</volume>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref35">
+<label>
+[35]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M. G.
+</given-names> 
+<surname>
+Preti
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+T. A.
+</given-names> 
+<surname>
+Bolton
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Van De Ville
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+The dynamic functional connectome: State-of-the-art and perspectives
+</article-title>
+,&#x201D; 
+<source>
+NeuroImage
+</source>
+, vol. 
+<volume>
+160
+</volume>
+, pp. 
+<fpage>
+41
+</fpage>
+&#x2013;
+<lpage>
+54
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref36">
+<label>
+[36]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Kiper
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Luque-Moreno
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Pernice
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Maistrello
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Agostini
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Turolla
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Functional changes in the lower extremity after non-immersive virtual reality and physiotherapy following stroke
+</article-title>
+,&#x201D; 
+<source>
+J. Rehabil. Med.
+</source>
+, vol. 
+<volume>
+52
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2020
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+jrm00122
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref37">
+<label>
+[37]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+R. C.
+</given-names> 
+<surname>
+Oldfield
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+The assessment and analysis of handedness: The Edinburgh inventory
+</article-title>
+,&#x201D; 
+<source>
+Neuropsychologia
+</source>
+, vol. 
+<volume>
+9
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+97
+</fpage>
+&#x2013;
+<lpage>
+113
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+1971
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref38">
+<label>
+[38]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Thut
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Pascual-Leone
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A review of combined TMS-EEG studies to characterize lasting effects of repetitive TMS and assess their usefulness in cognitive and clinical neuroscience
+</article-title>
+,&#x201D; 
+<source>
+Brain Topography
+</source>
+, vol. 
+<volume>
+22
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+219
+</fpage>
+&#x2013;
+<lpage>
+232
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2010
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref39">
+<label>
+[39]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Dong
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+The effect of repetitive transcranial magnetic stimulation of cerebellar swallowing cortex on brain neural activities: A resting-state fMRI study
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Hum. Neurosci.
+</source>
+, vol. 
+<volume>
+16
+</volume>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref40">
+<label>
+[40]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+U.
+</given-names> 
+<surname>
+Herwig
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Satrapi
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Sch&#x00F6;nfeldt-Lecuona
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Using the international 10&#x2013;20 EEG system for positioning of transcranial magnetic stimulation
+</article-title>
+,&#x201D; 
+<source>
+Brain Topography
+</source>
+, vol. 
+<volume>
+16
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+95
+</fpage>
+&#x2013;
+<lpage>
+99
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2003
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref41">
+<label>
+[41]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Legon
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J. K.
+</given-names> 
+<surname>
+Dionne
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+W. R.
+</given-names> 
+<surname>
+Staines
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Continuous theta burst stimulation of the supplementary motor area: Effect upon perception and somatosensory and motor evoked potentials
+</article-title>
+,&#x201D; 
+<source>
+Brain Stimulation
+</source>
+, vol. 
+<volume>
+6
+</volume>
+, no. 
+<issue>
+6
+</issue>
+, pp. 
+<fpage>
+877
+</fpage>
+&#x2013;
+<lpage>
+883
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2013
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref42">
+<label>
+[42]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+K.-M.
+</given-names> 
+<surname>
+Lee
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K.-H.
+</given-names> 
+<surname>
+Chang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+J.-K.
+</given-names> 
+<surname>
+Roh
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Subregions within the supplementary motor area activated at different stages of movement preparation and execution
+</article-title>
+,&#x201D; 
+<source>
+NeuroImage
+</source>
+, vol. 
+<volume>
+9
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+117
+</fpage>
+&#x2013;
+<lpage>
+123
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+1999
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref43">
+<label>
+[43]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+V.
+</given-names> 
+<surname>
+Jurcak
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Tsuzuki
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+I.
+</given-names> 
+<surname>
+Dan
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+10/20, 10/10, and 10/5 systems revisited: Their validity as relative head-surface-based positioning systems
+</article-title>
+,&#x201D; 
+<source>
+NeuroImage
+</source>
+, vol. 
+<volume>
+34
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+1600
+</fpage>
+&#x2013;
+<lpage>
+1611
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2007
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref44">
+<label>
+[44]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A. K.
+</given-names> 
+<surname>
+Singh
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Okamoto
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Dan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+V.
+</given-names> 
+<surname>
+Jurcak
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+I.
+</given-names> 
+<surname>
+Dan
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Spatial registration of multichannel multi-subject fNIRS data to MNI space without MRI
+</article-title>
+,&#x201D; 
+<source>
+NeuroImage
+</source>
+, vol. 
+<volume>
+27
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+842
+</fpage>
+&#x2013;
+<lpage>
+851
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2005
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref45">
+<label>
+[45]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J. C.
+</given-names> 
+<surname>
+Ye
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Tak
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K. E.
+</given-names> 
+<surname>
+Jang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Jung
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Jang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+NIRS-SPM: Statistical parametric mapping for near-infrared spectroscopy
+</article-title>
+,&#x201D; 
+<source>
+NeuroImage
+</source>
+, vol. 
+<volume>
+44
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+428
+</fpage>
+&#x2013;
+<lpage>
+447
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2009
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref46">
+<label>
+[46]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Scholkmann
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A review on continuous wave functional near-infrared spectroscopy and imaging instrumentation and methodology
+</article-title>
+,&#x201D; 
+<source>
+NeuroImage
+</source>
+, vol. 
+<volume>
+85
+</volume>
+, pp. 
+<fpage>
+6
+</fpage>
+&#x2013;
+<lpage>
+27
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2014
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref47">
+<label>
+[47]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Tetsuka
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Higher prefrontal activity based on short-term neurofeedback training can prevent working memory decline in acute stroke
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Syst. Neurosci.
+</source>
+, vol. 
+<volume>
+17
+</volume>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2023
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+1130272
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref48">
+<label>
+[48]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Tan
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Frequency-specific functional connectivity revealed by wavelet-based coherence analysis in elderly subjects with cerebral infarction using NIRS method
+</article-title>
+,&#x201D; 
+<source>
+Med. Phys.
+</source>
+, vol. 
+<volume>
+42
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, pp. 
+<fpage>
+5391
+</fpage>
+&#x2013;
+<lpage>
+5403
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2015
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref49">
+<label>
+[49]
+</label>
+<mixed-citation publication-type="report" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Huo
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Limb linkage rehabilitation training-related changes in cortical activation and effective connectivity after stroke: A functional near-infrared spectroscopy study
+</article-title>
+,&#x201D; 
+<source>
+Sci. Rep.
+</source>
+, vol. 
+<volume>
+9
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, p. 
+<fpage>
+6226
+</fpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref50">
+<label>
+[50]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Xie
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Effects of robot-assisted task-oriented upper limb motor training on neuroplasticity in stroke patients with different degrees of motor dysfunction: A neuroimaging motor evaluation index
+</article-title>
+,&#x201D; 
+<source>
+Frontiers Neurosci.
+</source>
+, vol. 
+<volume>
+16
+</volume>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2022
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+957972
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref51">
+<label>
+[51]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Lu
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+An fNIRS-based dynamic functional connectivity analysis method to signify functional neurodegeneration of Parkinson&#x2019;s disease
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Neural Syst. Rehabil. Eng.
+</source>
+, vol. 
+<volume>
+31
+</volume>
+, pp. 
+<fpage>
+1199
+</fpage>
+&#x2013;
+<lpage>
+1207
+</lpage>
+, 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref52">
+<label>
+[52]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Al-Shargie
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Katmah
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+U.
+</given-names> 
+<surname>
+Tariq
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Babiloni
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Al-Mughairbi
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Al-Nashash
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Stress management using fNIRS and binaural beats stimulation
+</article-title>
+,&#x201D; 
+<source>
+Biomed. Opt. Exp.
+</source>
+, vol. 
+<volume>
+13
+</volume>
+, no. 
+<issue>
+6
+</issue>
+, pp. 
+<fpage>
+3552
+</fpage>
+&#x2013;
+<lpage>
+3575
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref53">
+<label>
+[53]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Lyu
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Aberrant dynamic functional network connectivity in type 2 diabetes mellitus individuals
+</article-title>
+,&#x201D; 
+<source>
+Cognit. Neurodynamics
+</source>
+, vol. 
+<volume>
+17
+</volume>
+, no. 
+<issue>
+6
+</issue>
+, pp. 
+<fpage>
+1525
+</fpage>
+&#x2013;
+<lpage>
+1539
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref54">
+<label>
+[54]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Einalou
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K.
+</given-names> 
+<surname>
+Maghooli
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S. K.
+</given-names> 
+<surname>
+Setarehdan
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Akin
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Graph theoretical approach to functional connectivity in prefrontal cortex via fNIRS
+</article-title>
+,&#x201D; 
+<source>
+Neurophotonics
+</source>
+, vol. 
+<volume>
+4
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2017
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+041407
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref55">
+<label>
+[55]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D. S.
+</given-names> 
+<surname>
+Bassett
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+M. S.
+</given-names> 
+<surname>
+Gazzaniga
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Understanding complexity in the human brain
+</article-title>
+,&#x201D; 
+<source>
+Trends Cognit. Sci.
+</source>
+, vol. 
+<volume>
+15
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+200
+</fpage>
+&#x2013;
+<lpage>
+209
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2011
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref56">
+<label>
+[56]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Demirta&#x015F;
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Dynamic functional connectivity reveals altered variability in functional connectivity among patients with major depressive disorder
+</article-title>
+,&#x201D; 
+<source>
+Human Brain Mapping
+</source>
+, vol. 
+<volume>
+37
+</volume>
+, no. 
+<issue>
+8
+</issue>
+, pp. 
+<fpage>
+2918
+</fpage>
+&#x2013;
+<lpage>
+2930
+</lpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2016
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref57">
+<label>
+[57]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S.-F.
+</given-names> 
+<surname>
+Jiang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.-Y.
+</given-names> 
+<surname>
+Shi
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.-T.
+</given-names> 
+<surname>
+Yang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.-J.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Aberrant dynamic functional network connectivity in cirrhotic patients without overt hepatic encephalopathy
+</article-title>
+,&#x201D; 
+<source>
+Eur. J. Radiol.
+</source>
+, vol. 
+<volume>
+132
+</volume>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2020
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+109324
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref58">
+<label>
+[58]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+An imbalance between functional seg-regation and integration in patients with pontine stroke: A dynamic functional network connectivity study
+</article-title>
+,&#x201D; 
+<source>
+NeuroImage Clin.
+</source>
+, vol. 
+<volume>
+28
+</volume>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2020
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+102507
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref59">
+<label>
+[59]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Gu
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Abnormal dynamic functional connectiv-ity in Alzheimer&#x2019;s disease
+</article-title>
+,&#x201D; 
+<source>
+CNS Neurosci. Therapeutics
+</source>
+, vol. 
+<volume>
+26
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, p. 
+<fpage>
+962
+</fpage>
+, 
+<month>
+May
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref60">
+<label>
+[60]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A. K.
+</given-names> 
+<surname>
+Bonkhoff
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Abnormal dynamic functional connectivity is linked to recovery after acute ischemic stroke
+</article-title>
+,&#x201D; 
+<source>
+Hum. Brain Mapping
+</source>
+, vol. 
+<volume>
+42
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+2278
+</fpage>
+&#x2013;
+<lpage>
+2291
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref61">
+<label>
+[61]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Pedersen
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Zalesky
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Intracranial brain stimulation modulates fMRI-based network switching
+</article-title>
+,&#x201D; 
+<source>
+Neurobiol. Disease
+</source>
+, vol. 
+<volume>
+156
+</volume>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2021
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+105401
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref62">
+<label>
+[62]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M. H.
+</given-names> 
+<surname>
+Adhikari
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Decreased integration and information capacity in stroke measured by whole brain models of resting state activity
+</article-title>
+,&#x201D; 
+<source>
+Brain
+</source>
+, vol. 
+<volume>
+140
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+1068
+</fpage>
+&#x2013;
+<lpage>
+1085
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref63">
+<label>
+[63]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J. S.
+</given-names> 
+<surname>
+Siegel
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Disruptions of network connectivity predict impairment in multiple behavioral domains after stroke
+</article-title>
+,&#x201D; 
+<source>
+Proc. Nat. Acad. Sci. USA
+</source>
+, vol. 
+<volume>
+113
+</volume>
+, no. 
+<issue>
+30
+</issue>
+, pp. 
+<fpage>
+E4367
+</fpage>
+&#x2013;
+<lpage>
+E4376
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2016
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref64">
+<label>
+[64]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J. S.
+</given-names> 
+<surname>
+Siegel
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Re-emergence of modular brain networks in stroke recovery
+</article-title>
+,&#x201D; 
+<source>
+Cortex
+</source>
+, vol. 
+<volume>
+101
+</volume>
+, pp. 
+<fpage>
+44
+</fpage>
+&#x2013;
+<lpage>
+59
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2018
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref65">
+<label>
+[65]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M. D.
+</given-names> 
+<surname>
+Fox
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R. L.
+</given-names> 
+<surname>
+Buckner
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M. M.
+</given-names> 
+<surname>
+Chakravarty
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A. M.
+</given-names> 
+<surname>
+Lozano
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Pascual-Leone
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Resting-state networks link invasive and noninvasive brain stimulation across diverse psychiatric and neurological diseases
+</article-title>
+,&#x201D; 
+<source>
+Proc. Nat. Acad. Sci. USA
+</source>
+, vol. 
+<volume>
+111
+</volume>
+, no. 
+<issue>
+41
+</issue>
+, pp. 
+<fpage>
+E4367
+</fpage>
+&#x2013;
+<lpage>
+E4375
+</lpage>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2014
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref66">
+<label>
+[66]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A. K.
+</given-names> 
+<surname>
+Bonkhoff
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Acute ischaemic stroke alters the brain&#x2019;s preference for distinct dynamic connectivity states
+</article-title>
+,&#x201D; 
+<source>
+Brain
+</source>
+, vol. 
+<volume>
+143
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+1525
+</fpage>
+&#x2013;
+<lpage>
+1540
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref67">
+<label>
+[67]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Tjia
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Thapliyal
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Homeostatic plasticity and excitation-inhibition balance: The good, the bad, and the ugly
+</article-title>
+,&#x201D; 
+<source>
+Current Opinion Neurobiol.
+</source>
+, vol. 
+<volume>
+75
+</volume>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2022
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+102553
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref68">
+<label>
+[68]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W. C.
+</given-names> 
+<surname>
+Abraham
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Metaplasticity: Tuning synapses and networks for plasticity
+</article-title>
+,&#x201D; 
+<source>
+Nature Rev. Neurosci.
+</source>
+, vol. 
+<volume>
+9
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, p. 
+<fpage>
+387
+</fpage>
+, 
+<month>
+May
+</month> 
+<year>
+2008
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref69">
+<label>
+[69]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Lefaucheur
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Evidence-based guidelines on the therapeutic use of repetitive transcranial magnetic stimulation (rTMS): An update (2014&#x2013;2018)
+</article-title>
+,&#x201D; 
+<source>
+Clin. Neurophysiol.
+</source>
+, vol. 
+<volume>
+131
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+474
+</fpage>
+&#x2013;
+<lpage>
+528
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref70">
+<label>
+[70]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Koch
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+V.
+</given-names> 
+<surname>
+Ponzo
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Di Lorenzo
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Caltagirone
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Veniero
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Hebbian and anti-hebbian spike-timing-dependent plasticity of human cortico-cortical connections
+</article-title>
+,&#x201D; 
+<source>
+J. Neurosci.
+</source>
+, vol. 
+<volume>
+33
+</volume>
+, no. 
+<issue>
+23
+</issue>
+, pp. 
+<fpage>
+9725
+</fpage>
+&#x2013;
+<lpage>
+9733
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2013
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref71">
+<label>
+[71]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+E. R.
+</given-names> 
+<surname>
+Buch
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+V. M.
+</given-names> 
+<surname>
+Johnen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+N.
+</given-names> 
+<surname>
+Nelissen
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+O&#x2019;Shea
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M. F. S.
+</given-names> 
+<surname>
+Rushworth
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Noninvasive associative plasticity induction in a corticocortical pathway of the human brain
+</article-title>
+,&#x201D; 
+<source>
+J. Neurosci.
+</source>
+, vol. 
+<volume>
+31
+</volume>
+, no. 
+<issue>
+48
+</issue>
+, pp. 
+<fpage>
+17669
+</fpage>
+&#x2013;
+<lpage>
+17679
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2011
+</year>
+.
+</mixed-citation>
+</ref>
+</ref-list>
+</back>
+</article>

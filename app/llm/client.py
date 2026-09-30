@@ -23,7 +23,7 @@ class LLMResponse:
 
 @dataclass
 class LLMClient:
-    provider: Literal["openai", "anthropic"]
+    provider: Literal["openai", "anthropic", "gemini"]
     model: str
     api_key: str
     total_cost: float = field(default=0.0)
@@ -46,6 +46,18 @@ class LLMClient:
                 from app.llm.openai_provider import openai_complete
 
                 resp = await openai_complete(
+                    self.api_key,
+                    self.model,
+                    system,
+                    user,
+                    temperature,
+                    max_tokens,
+                    json_mode,
+                )
+            elif self.provider == "gemini":
+                from app.llm.gemini_provider import gemini_complete
+
+                resp = await gemini_complete(
                     self.api_key,
                     self.model,
                     system,
@@ -105,6 +117,10 @@ class LLMClient:
             from app.llm.openai_provider import openai_stream
 
             resp = await openai_stream(self.api_key, self.model, system, user, on_token)
+        elif self.provider == "gemini":
+            from app.llm.gemini_provider import gemini_stream
+
+            resp = await gemini_stream(self.api_key, self.model, system, user, on_token)
         else:
             from app.llm.anthropic_provider import anthropic_stream
 
@@ -123,8 +139,15 @@ class LLMClient:
         )
 
 
+def _api_key_for_provider(provider: str) -> str:
+    if provider == "openai":
+        return settings.OPENAI_API_KEY
+    if provider == "gemini":
+        return settings.GEMINI_API_KEY
+    return settings.ANTHROPIC_API_KEY
+
+
 def create_llm_client(model: str | None = None) -> LLMClient:
     provider = settings.LLM_PROVIDER
-    m = model or settings.LLM_MODEL_GENERATION
-    key = settings.OPENAI_API_KEY if provider == "openai" else settings.ANTHROPIC_API_KEY
-    return LLMClient(provider=provider, model=m, api_key=key)
+    m = model or settings.resolve_llm_model("generation")
+    return LLMClient(provider=provider, model=m, api_key=_api_key_for_provider(provider))
