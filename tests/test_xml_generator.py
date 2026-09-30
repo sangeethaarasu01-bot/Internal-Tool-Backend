@@ -37,7 +37,7 @@ async def test_fill_authors_unique_contrib_ids():
     assert 'rid="contrib3"' in xml
 
 
-def test_fill_abstract_preserves_template_paragraph_with_markup():
+def test_fill_abstract_replaces_template_sample_with_pdf_text():
     from app.agent.xml_generator import _fill_abstract
 
     tpl = """<article><front><article-meta><abstract><p>
@@ -50,9 +50,33 @@ In this facile approach with (<italic>R</italic><sup>2</sup>) value.
     )
     _fill_abstract(root, pdf_abstract)
     xml = etree.tostring(root, encoding="unicode")
-    assert xml.count("In this facile approach") == 1
-    assert "<italic>R</italic>" in xml
-    assert "duplicate from PDF" not in xml
+    assert "duplicate from PDF" in xml
+    assert "<italic>R</italic>" not in xml
+
+
+def test_fill_body_from_paper_replaces_template_article_text():
+    from app.agent.xml_generator import _fill_body_from_paper
+    from app.models.paper import PaperData, Section
+
+    tpl = """<article><body><sec id="sec1"><title>Template sample title</title>
+    <p>Template sample paragraph from another paper.</p></sec></body></article>"""
+    root = etree.fromstring(tpl.encode())
+    paper = PaperData(
+        sections=[
+            Section(
+                id="sec1",
+                label="I.",
+                title="Introduction",
+                level=1,
+                paragraphs=["Paragraph extracted from the uploaded PDF."],
+            )
+        ]
+    )
+    _fill_body_from_paper(root, paper)
+    xml = etree.tostring(root, encoding="unicode")
+    assert "Template sample paragraph" not in xml
+    assert "Paragraph extracted from the uploaded PDF" in xml
+    assert "Introduction" in xml
 
 
 def test_fill_authors_uses_each_template_contrib_not_first_only():

@@ -86,35 +86,103 @@ def _apply_simple_mappings(
         title_nodes[0].text = normalize_text_for_xml_dom(paper.title)
 
 
-def _abstract_paragraph_populated(p: etree._Element) -> bool:
-    for child in p:
-        if is_element_node(child):
-            return True
-    return len((p.text or "").strip()) > 80
-
-
 def _fill_abstract(root: etree._Element, abstract: str) -> None:
-    """Fill abstract from PDF only when the template paragraph is empty; preserve client markup."""
+    """Replace template abstract with PDF text (keep <abstract> wrapper from template)."""
     abs_nodes = _find_by_local_tag(root, "abstract")
     if not abs_nodes:
         return
+    cleaned = clean_extracted_abstract(abstract) if abstract else ""
+    if not cleaned:
+        return
     abs_el = abs_nodes[0]
     abs_el.text = None
-    cleaned = clean_extracted_abstract(abstract) if abstract else ""
+    for child in list(abs_el):
+        if is_element_node(child):
+            abs_el.remove(child)
     p_nodes = _find_by_local_tag(abs_el, "p")
     if p_nodes:
         p = p_nodes[0]
-        if _abstract_paragraph_populated(p):
-            return
-        if not cleaned:
-            return
         p.clear()
-        p.text = cleaned
-        return
-    if not cleaned:
+        p.text = normalize_text_for_xml_dom(cleaned)
         return
     p = etree.SubElement(abs_el, "p")
-    p.text = cleaned
+    p.text = normalize_text_for_xml_dom(cleaned)
+
+
+def _set_text_element(parent: etree._Element, tag: str, text: str) -> None:
+    if not text.strip():
+        return
+    el = etree.SubElement(parent, tag)
+    el.text = normalize_text_for_xml_dom(text)
+
+
+def _append_paper_section(parent: etree._Element, section: Section) -> None:
+    sec = etree.SubElement(parent, "sec", id=section.id or "sec1")
+    if section.label:
+        _set_text_element(sec, "label", section.label)
+    if section.title:
+        _set_text_element(sec, "title", section.title)
+    for para in section.paragraphs:
+        if not para.strip():
+            continue
+        p = etree.SubElement(sec, "p")
+        p.text = normalize_text_for_xml_dom(para)
+    for sub in section.subsections:
+        _append_paper_section(sec, sub)
+
+
+def _fill_body_from_paper(root: etree._Element, paper: PaperData) -> None:
+    """Replace sample-article body with sections/paragraphs extracted from the PDF."""
+    bodies = _find_by_local_tag(root, "body")
+    if not bodies or not paper.sections:
+        return
+    body = bodies[0]
+    for child in list(body):
+        if is_element_node(child):
+            body.remove(child)
+    for section in paper.sections:
+        _append_paper_section(body, section)
+
+
+def _fill_keywords(root: etree._Element, keywords: list[str]) -> None:
+    if not keywords:
+        return
+    kwd_groups = _find_by_local_tag(root, "kwd-group")
+    if not kwd_groups:
+        return
+    group = kwd_groups[0]
+    for child in list(group):
+        if is_element_node(child) and xml_local_name(child) == "kwd":
+            group.remove(child)
+    for token in keywords:
+        word = token.strip()
+        if not word:
+            continue
+        kwd = etree.SubElement(group, "kwd")
+        kwd.text = normalize_text_for_xml_dom(word)
+
+
+def _fill_references_from_paper(root: etree._Element, paper: PaperData) -> None:
+    if not paper.references:
+        return
+    backs = _find_by_local_tag(root, "back")
+    if not backs:
+        return
+    back = backs[0]
+    ref_lists = _find_by_local_tag(back, "ref-list")
+    if not ref_lists:
+        return
+    ref_list = ref_lists[0]
+    for child in list(ref_list):
+        if is_element_node(child) and xml_local_name(child) == "ref":
+            ref_list.remove(child)
+    for ref in paper.references:
+        ref_el = etree.SubElement(ref_list, "ref", id=ref.id)
+        label = etree.SubElement(ref_el, "label")
+        label.text = f"[{ref.number}]"
+        mixed = etree.SubElement(ref_el, "mixed-citation")
+        p = etree.SubElement(mixed, "p")
+        p.text = normalize_text_for_xml_dom(ref.raw_text)
 
 
 def _contrib_rids_referenced(root: etree._Element) -> list[str]:
@@ -345,6 +413,9 @@ def _generate_from_template_dom(
         _fill_authors(root, paper.authors)
     elif paper.authors:
         _fill_authors(root, paper.authors)
+    _fill_keywords(root, paper.keywords)
+    _fill_body_from_paper(root, paper)
+    _fill_references_from_paper(root, paper)
     sync_bio_xrefs(root)
     output = finalize_ieee_xml(serialize_tree(tree, doctype=doctype))
     etree.fromstring(output.encode("utf-8"))
