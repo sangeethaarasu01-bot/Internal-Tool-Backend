@@ -23,11 +23,15 @@ from app.utils.xml_helpers import (
     apply_ieee_entities_to_tree,
     clean_extracted_abstract,
     escape_xml_text,
+    extract_doctype_declaration,
     finalize_ieee_xml,
     is_element_node,
+    normalize_doctype_spacing,
     normalize_text_for_xml_dom,
+    parse_xml_string,
     reorder_contrib_group_author_comments,
     serialize_tree,
+    strip_xml_prolog_for_parse,
     xml_local_name,
 )
 
@@ -283,8 +287,7 @@ def sync_bio_xrefs(root: etree._Element) -> None:
 
 def repair_xml_xrefs(xml: str) -> str:
     """Deterministic xref repair (bio targets) before validation."""
-    parser = etree.XMLParser(remove_blank_text=False, recover=True)
-    root = etree.fromstring(xml.encode("utf-8"), parser=parser)
+    root = parse_xml_string(xml)
     sync_bio_xrefs(root)
     repaired = etree.tostring(root, encoding="unicode")
     return finalize_ieee_xml(repaired)
@@ -445,10 +448,12 @@ def _generate_from_template_dom(
     paper: PaperData,
     plan: MappingPlan,
 ) -> str:
-    doctype_m = re.search(r"<!DOCTYPE[^>]+>", template_xml, re.DOTALL | re.IGNORECASE)
-    doctype = doctype_m.group(0) if doctype_m else None
+    xml_body, doctype = strip_xml_prolog_for_parse(template_xml)
+    if not doctype:
+        raw_dt = extract_doctype_declaration(template_xml)
+        doctype = normalize_doctype_spacing(raw_dt) if raw_dt else None
     parser = etree.XMLParser(remove_blank_text=False, recover=True)
-    root = etree.fromstring(template_xml.encode("utf-8"), parser=parser)
+    root = etree.fromstring(xml_body.encode("utf-8"), parser=parser)
     tree = etree.ElementTree(root)
     prepare_template_for_pdf_content(root)
     logger.debug(
@@ -468,7 +473,7 @@ def _generate_from_template_dom(
     _fill_references_from_paper(root, paper)
     sync_bio_xrefs(root)
     output = finalize_ieee_xml(serialize_tree(tree, doctype=doctype))
-    etree.fromstring(output.encode("utf-8"))
+    parse_xml_string(output)
     return output
 
 

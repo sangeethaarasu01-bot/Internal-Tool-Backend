@@ -62,6 +62,18 @@ class ConverterAgent:
             len(paper.sections),
             len(paper.references),
         )
+        if paper.extraction_warnings:
+            for w in paper.extraction_warnings[:5]:
+                self.emit("log", w)
+        engine = paper.metadata.get("extraction_engine", "legacy")
+        self.emit("log", f"PDF extraction engine: {engine}")
+        if paper.title:
+            self.emit("log", f"PDF title extracted: {paper.title[:160]}")
+        else:
+            self.emit(
+                "log",
+                f"Warning: no title extracted from PDF — see outputs/{job_id}_paper.json",
+            )
 
         self.emit("stage", "matching_semantics", 55)
         plan = await SemanticMatcher(self.llm).match(schema, paper, self.on_event)

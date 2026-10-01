@@ -7,6 +7,7 @@ import re
 from lxml import etree
 
 from app.models.schema_map import SchemaMap
+from app.utils.xml_helpers import parse_xml_string
 
 
 class Validator:
@@ -18,7 +19,7 @@ class Validator:
     ) -> tuple[bool, list[str]]:
         errors: list[str] = []
         try:
-            out_root = etree.fromstring(output_xml.encode("utf-8"))
+            out_root = parse_xml_string(output_xml)
         except etree.XMLSyntaxError as e:
             return False, [f"Output XML not well-formed: {e}"]
 

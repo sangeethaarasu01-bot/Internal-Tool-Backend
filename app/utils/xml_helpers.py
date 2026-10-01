@@ -53,14 +53,54 @@ def reorder_contrib_group_author_comments(root: etree._Element) -> None:
             group.append(node)
 
 
+def extract_doctype_declaration(raw: str) -> str | None:
+    """Extract full <!DOCTYPE ...> including multi-line PUBLIC identifiers."""
+    match = re.search(r"<!DOCTYPE", raw, re.IGNORECASE)
+    if not match:
+        return None
+    start = match.start()
+    in_quote: str | None = None
+    for j in range(start, len(raw)):
+        ch = raw[j]
+        if in_quote:
+            if ch == in_quote:
+                in_quote = None
+            continue
+        if ch in "\"'":
+            in_quote = ch
+            continue
+        if ch == ">":
+            return raw[start : j + 1]
+    return None
+
+
+def normalize_doctype_spacing(doctype: str) -> str:
+    """Fix common vendor DOCTYPE typos that break lxml (missing space between literals)."""
+    s = " ".join(doctype.split())
+    s = re.sub(r"PUBLIC\s*\"", 'PUBLIC "', s, flags=re.IGNORECASE)
+    s = re.sub(r'"\s*"', '" "', s)
+    return s
+
+
+def strip_xml_prolog_for_parse(raw: str) -> tuple[str, str | None]:
+    """Remove DOCTYPE before lxml parse; return (xml_body, doctype_for_output)."""
+    doctype = extract_doctype_declaration(raw)
+    body = raw
+    if doctype:
+        body = body.replace(doctype, "", 1)
+        doctype = normalize_doctype_spacing(doctype)
+    return body.strip(), doctype
+
+
 def parse_xml_string(xml: str) -> etree._Element:
+    body, _ = strip_xml_prolog_for_parse(xml)
     parser = etree.XMLParser(remove_blank_text=False, recover=True)
-    return etree.fromstring(xml.encode("utf-8"), parser=parser)
+    return etree.fromstring(body.encode("utf-8"), parser=parser)
 
 
 def get_doctype_string(template_path: str | None, raw: str) -> str | None:
-    m = re.search(r"<!DOCTYPE[^>]+>", raw, re.DOTALL | re.IGNORECASE)
-    return m.group(0) if m else None
+    doctype = extract_doctype_declaration(raw)
+    return normalize_doctype_spacing(doctype) if doctype else None
 
 
 # IEEE/JATS vendor templates use explicit open/close pairs, not XML empty-element syntax.
@@ -248,9 +288,11 @@ def post_process_ieee_entities(xml_str: str) -> str:
 
 def finalize_ieee_xml(xml: str) -> str:
     """Re-serialize XML with IEEE hex entities (front matter, body, and template text)."""
-    doctype = get_doctype_string(None, xml)
+    body, doctype = strip_xml_prolog_for_parse(xml)
+    if not doctype:
+        doctype = get_doctype_string(None, xml)
     parser = etree.XMLParser(remove_blank_text=False, recover=True)
-    root = etree.fromstring(xml.encode("utf-8"), parser=parser)
+    root = etree.fromstring(body.encode("utf-8"), parser=parser)
     apply_ieee_entities_to_tree(root)
     reorder_contrib_group_author_comments(root)
     tree = etree.ElementTree(root)

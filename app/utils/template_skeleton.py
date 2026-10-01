@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from lxml import etree
 
-from app.utils.xml_helpers import is_element_node, xml_local_name
+from app.utils.xml_helpers import is_element_node, parse_xml_string, xml_local_name
 
 # journal-meta is usually vendor/journal scaffolding — keep its text nodes.
 _PRESERVE_TEXT_SUBTREE_LOCAL = frozenset({"journal-meta", "processing-meta"})
@@ -61,8 +61,7 @@ def prepare_template_for_pdf_content(root: etree._Element) -> None:
 
 def skeleton_template_xml(template_xml: str) -> str:
     """Return structural template XML with example article/body/back text removed."""
-    parser = etree.XMLParser(remove_blank_text=False, recover=True)
-    root = etree.fromstring(template_xml.encode("utf-8"), parser=parser)
+    root = parse_xml_string(template_xml)
     prepare_template_for_pdf_content(root)
     return etree.tostring(root, encoding="unicode")
 

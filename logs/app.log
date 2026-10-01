@@ -388,3 +388,24 @@ RuntimeError: Gemini API error 503: {
 2026-09-30 18:32:22.605 | INFO     | app.agent.converter_agent:run:70 - Stage mapping plan: 2 entries
 2026-09-30 18:41:57.142 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
 2026-09-30 18:41:58.252 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 18:47:58.941 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-09-30 18:47:59.938 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:06:56.001 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:15:07.342 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:15:08.569 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:15:25.163 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:16:34.295 | INFO     | app.agent.converter_agent:run:58 - Stage PDF IR: title=Pragmatism and the Philosophy of Sport authors=10 sections=70 refs=0
+2026-10-01 11:16:36.813 | WARNING  | app.agent.semantic_matcher:match:90 - Semantic matching LLM failed (Gemini API error 403: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+), using heuristic plan
+2026-10-01 11:16:36.815 | INFO     | app.agent.converter_agent:run:80 - Stage mapping plan: 2 entries
+2026-10-01 11:23:48.181 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:23:49.845 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:25:22.709 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:25:23.756 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 11:27:55.468 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:179 - Layout PDF extract: title=Breast Cancer Diagnosis With Explainable Artificial Intelligence (XAI): Uncoveri authors=9 sections=6 paras=18

@@ -11,7 +11,9 @@ import pymupdf as fitz
 import pdfplumber
 
 from app.config import settings
+from app.agent.layout_paper_adapter import extract_paper_via_layout
 from app.llm.client import LLMClient
+from app.utils.logger import logger
 from app.utils.paper_sanitize import sanitize_paper_data
 from app.utils.xml_helpers import clean_extracted_abstract
 from app.models.paper import (
@@ -25,7 +27,8 @@ from app.models.paper import (
     Table,
 )
 
-MAIN_SEC = re.compile(r"^([IVX]+)\.\s+([A-Z][A-Za-z\s&]+)$")
+MAIN_SEC = re.compile(r"^([IVXLC]+)\.\s+(.+)$", re.IGNORECASE)
+NUM_MAIN_SEC = re.compile(r"^(\d+)\.\s+(.+)$")
 SUB_SEC = re.compile(r"^([A-Z])\.\s+([A-Z][A-Za-z\s&]+)$")
 SUBSUB_SEC = re.compile(r"^(\d+)\)\s+([A-Z][A-Za-z\s]+)$")
 REF_SPLIT = re.compile(r"^\s*\[(\d+)\]", re.MULTILINE)
@@ -158,6 +161,30 @@ class PDFExtractor:
             keywords = [k.strip() for k in re.split(r"[;,]", raw) if k.strip()]
         return abstract, keywords
 
+    _NOT_AUTHOR_TOKENS = re.compile(
+        r"\b(?:books?|publishing|boulevard|road|street|press|united kingdom|"
+        r"lexington|littlefield|rowman|forbes|thornbury|isbn|library of congress|"
+        r"printed in)\b",
+        re.I,
+    )
+
+    def _is_plausible_author_name(self, name: str) -> bool:
+        if self._NOT_AUTHOR_TOKENS.search(name):
+            return False
+        parts = name.split()
+        if len(parts) < 2:
+            return False
+        if parts[0].lower() in {"new", "the", "united", "san", "los"}:
+            return False
+        return True
+
+    def _is_library_catalog_line(self, line: str) -> bool:
+        if re.search(r"library of congress|isbn|dc\d{2}|--dc\d{2}|ANSI/NISO", line, re.I):
+            return True
+        if re.search(r"\d{3,}\s*--\s*[A-Z]{2,}", line):
+            return True
+        return False
+
     def _line_is_title_fragment(self, line: str, title: str) -> bool:
         line_s = re.sub(r"\s+", " ", line.strip())
         title_s = re.sub(r"\s+", " ", title.strip())
@@ -190,6 +217,7 @@ class PDFExtractor:
             r"([A-Z][a-z]+(?:\s+[A-Z]\.)?\s+[A-Z][a-z\-]+)(?:\s*[\d,*]+)?",
             text,
         )
+        names = [n for n in names if self._is_plausible_author_name(n)]
         email_m = re.search(r"[\w.\-]+@[\w.\-]+\.\w+", text)
         email = email_m.group(0) if email_m else None
         for idx, name in enumerate(names[:10]):
@@ -227,15 +255,22 @@ class PDFExtractor:
             if re.search(r"^REFERENCES$", line, re.I):
                 flush_para(current_sub or current)
                 break
-            m_main = MAIN_SEC.match(line)
+            if self._is_library_catalog_line(line):
+                continue
+            m_main = MAIN_SEC.match(line) or NUM_MAIN_SEC.match(line)
             m_sub = SUB_SEC.match(line)
             m_subsub = SUBSUB_SEC.match(line)
-            if m_main:
+            if m_main and not self._is_library_catalog_line(m_main.group(2)):
                 flush_para(current_sub or current)
                 sec_id += 1
+                label = m_main.group(1)
+                if NUM_MAIN_SEC.match(line):
+                    label = f"{label}."
+                else:
+                    label = f"{label.upper()}."
                 current = Section(
                     id=f"sec{sec_id}",
-                    label=f"{m_main.group(1)}.",
+                    label=label,
                     title=m_main.group(2).strip(),
                     level=1,
                 )
@@ -272,6 +307,58 @@ class PDFExtractor:
 
         flush_para(current_sub or current)
         return sections
+
+    def _fallback_sections(self, full_text: str) -> list[Section]:
+        """When heading patterns fail, pull body text after abstract/introduction."""
+        ref_m = re.search(r"\bREFERENCES\b", full_text, re.I)
+        end = ref_m.start() if ref_m else len(full_text)
+        start = 0
+        for pat in (
+            r"(?:^|\n)\s*I\.\s+INTRODUCTION\b",
+            r"(?:^|\n)\s*1\.\s+Introduction\b",
+            r"(?:^|\n)\s*1\.\s+INTRODUCTION\b",
+            r"(?:^|\n)\s*INTRODUCTION\b",
+        ):
+            m = re.search(pat, full_text, re.I)
+            if m:
+                start = m.end()
+                break
+        if not start:
+            am = re.search(r"\bABSTRACT\b", full_text, re.I)
+            if am:
+                start = am.end()
+        chunk = full_text[start:end]
+        if len(chunk.strip()) < 80:
+            return []
+        paras: list[str] = []
+        buf: list[str] = []
+        for line in chunk.splitlines():
+            line = line.strip()
+            if not line:
+                if buf:
+                    paras.append(re.sub(r"\s+", " ", " ".join(buf)).strip())
+                    buf.clear()
+                continue
+            if MAIN_SEC.match(line) or NUM_MAIN_SEC.match(line) or SUB_SEC.match(line):
+                if buf:
+                    paras.append(re.sub(r"\s+", " ", " ".join(buf)).strip())
+                    buf.clear()
+                continue
+            if len(line) > 8:
+                buf.append(line)
+        if buf:
+            paras.append(re.sub(r"\s+", " ", " ".join(buf)).strip())
+        paras = [p for p in paras if len(p) >= 40][:40]
+        if not paras:
+            return []
+        return [
+            Section(
+                id="sec1",
+                title="Introduction",
+                level=1,
+                paragraphs=paras,
+            )
+        ]
 
     def _extract_references(self, full_text: str) -> list[Reference]:
         refs: list[Reference] = []
@@ -357,6 +444,40 @@ class PDFExtractor:
                 eqs.append(Equation(id=f"deqn{num}", number=num, latex=m.group(1).strip()))
         return eqs
 
+    def _attach_assets(
+        self, paper: PaperData, pdf_path: Path, job_id: str | None
+    ) -> PaperData:
+        """Figures/tables/equations from legacy helpers (layout path focuses on text)."""
+        doc = fitz.open(str(pdf_path))
+        try:
+            lines = self._page_text_blocks(doc)
+            full_text = "\n".join(lines)
+            job_dir = settings.uploads_dir / job_id if job_id else None
+            light = settings.LIGHT_PDF_EXTRACT
+            figures = self._extract_figures(doc, full_text, job_dir, light=light)
+            tables: list[Table] = []
+            if not light:
+                tables = self._extract_tables(pdf_path, full_text)
+            equations = self._extract_equations(lines)
+            meta = dict(paper.metadata)
+            meta.setdefault("source_filename", pdf_path.name)
+            msid_m = re.search(r"(\d{6,})", pdf_path.name)
+            if msid_m:
+                meta.setdefault("manuscript_id", msid_m.group(1))
+            doi_m = re.search(r"10\.\d{4,}/[^\s]+", full_text)
+            if doi_m:
+                meta.setdefault("doi", doi_m.group(0))
+            return paper.model_copy(
+                update={
+                    "figures": figures,
+                    "tables": tables,
+                    "equations": equations,
+                    "metadata": meta,
+                }
+            )
+        finally:
+            doc.close()
+
     async def extract(
         self,
         pdf_path: Path,
@@ -368,6 +489,13 @@ class PDFExtractor:
         return await asyncio.to_thread(self._extract_sync, pdf_path, job_id)
 
     def _extract_sync(self, pdf_path: Path, job_id: str | None) -> PaperData:
+        try:
+            layout_paper = extract_paper_via_layout(pdf_path)
+            layout_paper = self._attach_assets(layout_paper, pdf_path, job_id)
+            return sanitize_paper_data(layout_paper)
+        except Exception as exc:
+            logger.warning("Layout PDF extraction failed ({}), using legacy heuristics", exc)
+
         doc = fitz.open(str(pdf_path))
         try:
             lines = self._page_text_blocks(doc)
@@ -404,7 +532,15 @@ class PDFExtractor:
             if not abstract:
                 warnings.append("Abstract not detected; check PDF layout")
             if not sections:
-                warnings.append("No IEEE-style section headings detected")
+                sections = self._fallback_sections(full_text)
+                if sections:
+                    warnings.append(
+                        "Section headings not detected; body text taken from PDF after abstract/introduction",
+                    )
+                else:
+                    warnings.append("No body sections extracted from PDF; output body may be empty")
+            if not title:
+                warnings.append("PDF title not detected; check first page layout")
             if light:
                 warnings.append(
                     "Light PDF mode: tables/figure images skipped (set LIGHT_PDF_EXTRACT=false locally for full extract)",

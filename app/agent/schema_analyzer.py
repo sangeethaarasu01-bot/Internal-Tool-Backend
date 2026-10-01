@@ -12,7 +12,12 @@ from app.agent.cache import SchemaCache
 from app.llm.client import LLMClient
 from app.models.schema_map import SchemaMap, SchemaElement
 from app.utils.hashing import sha256_file
-from app.utils.xml_helpers import element_to_skeleton, iter_element_children, xml_local_name
+from app.utils.xml_helpers import (
+    element_to_skeleton,
+    iter_element_children,
+    parse_xml_string,
+    xml_local_name,
+)
 
 PROMPTS_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
@@ -112,8 +117,9 @@ class SchemaAnalyzer:
             emit("log", "Schema cache hit")
             return cached
 
-        tree = etree.parse(str(template_path))
         raw_xml = template_path.read_text(encoding="utf-8", errors="replace")
+        root = parse_xml_string(raw_xml)
+        tree = etree.ElementTree(root)
         skeleton = element_to_skeleton(tree.getroot())
         system = _load_prompt("system.txt")
         prompt = _render(

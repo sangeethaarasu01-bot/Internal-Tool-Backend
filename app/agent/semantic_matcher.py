@@ -89,12 +89,14 @@ class SemanticMatcher:
         except Exception as exc:
             logger.warning("Semantic matching LLM failed ({}), using heuristic plan", exc)
             if on_event:
-                on_event(
-                    {
-                        "type": "log",
-                        "message": "LLM unavailable for mapping — using default title/abstract/author rules",
-                    }
-                )
+                hint = "LLM unavailable for mapping — using default title/abstract/author rules"
+                err = str(exc)
+                if "403" in err and "leaked" in err.lower():
+                    hint += (
+                        " (Gemini API key revoked — set a new GEMINI_API_KEY in .env "
+                        "or LLM_PROVIDER=anthropic)"
+                    )
+                on_event({"type": "log", "message": hint})
             return _default_plan(schema, paper)
 
         try:
