@@ -564,3 +564,18 @@ ValueError: Validation failed: ['Broken xref: rid=deqn3 has no matching id', 'Br
 2026-10-01 14:17:46.694 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
 2026-10-01 14:17:46.696 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
 2026-10-01 14:18:34.090 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 14:18:35.232 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 14:18:42.057 | INFO     | app.api.upload:upload_files:48 - Upload job 6ccdebbd-017a-4ef6-91b6-2a47a07f74e4: saved PDF tit-fischer-3658855-proof.pdf1.pdf (1438851 bytes)
+2026-10-01 14:18:42.088 | INFO     | app.api.upload:upload_files:84 - Upload job 6ccdebbd-017a-4ef6-91b6-2a47a07f74e4 ready in 0.04s
+2026-10-01 14:20:14.856 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:191 - Layout PDF extract: title= authors=20 sections=8 paras=166
+2026-10-01 14:20:25.619 | INFO     | app.agent.converter_agent:run:58 - Stage PDF IR: title= authors=20 sections=8 refs=54
+2026-10-01 14:20:28.087 | WARNING  | app.agent.semantic_matcher:match:90 - Semantic matching LLM failed (Gemini API error 403: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+), using heuristic plan
+2026-10-01 14:20:28.091 | INFO     | app.agent.converter_agent:run:82 - Stage mapping plan: 2 entries
+2026-10-01 14:20:28.125 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
