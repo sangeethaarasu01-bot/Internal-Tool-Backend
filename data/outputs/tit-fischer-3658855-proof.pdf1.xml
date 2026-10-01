@@ -36,14 +36,10 @@
 <contrib-id contrib-id-type="orcid">0000-0003-3380-0066</contrib-id>
 <name-alternatives>
 <string-name specific-use="display"><given-names>Lasse</given-names>
-<surname>
-Fischer
-</surname>
+<surname>Fischer</surname>
 </string-name>
 <string-name specific-use="index"><given-names>Lasse</given-names>
-<surname>
-Fischer
-</surname>
+<surname>Fischer</surname>
 </string-name>
 </name-alternatives>
 <email>fischer1@uni-bremen.de</email>
@@ -53,14 +49,10 @@ Fischer
 <contrib-id contrib-id-type="orcid">0000-0003-0497-311X</contrib-id>
 <name-alternatives>
 <string-name specific-use="display"><given-names>Aaditya</given-names>
-<surname>
-Ramdas
-</surname>
+<surname>Ramdas</surname>
 </string-name>
 <string-name specific-use="index"><given-names>Aaditya</given-names>
-<surname>
-Ramdas
-</surname>
+<surname>Ramdas</surname>
 </string-name>
 </name-alternatives>
 <email>aramdas@cmu.edu</email>
@@ -138,10 +130,8 @@ Ramdas
 <institution>Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)</institution><institution-id institution-id-type="fundref">10.13039/501100001659</institution-id></institution-wrap></funding-source>
 <award-id>281474342/GRK2224/2</award-id>
 <principal-award-recipient><string-name>
-<given-names>Lasse
-</given-names> 
-<surname>Fischer
-</surname>
+<given-names>Lasse</given-names> 
+<surname>Fischer</surname>
 </string-name>
 </principal-award-recipient>
 </award-group>
@@ -150,10 +140,8 @@ Ramdas
 <institution>NSF</institution></institution-wrap></funding-source>
 <award-id>DMS-2310718</award-id>
 <principal-award-recipient><string-name>
-<given-names>Aaditya
-</given-names> 
-<surname>Ramdas
-</surname>
+<given-names>Aaditya</given-names> 
+<surname>Ramdas</surname>
 </string-name>
 </principal-award-recipient>
 </award-group>
@@ -809,12 +797,8 @@ References
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Wald
-</surname>
+<given-names>A.</given-names> 
+<surname>Wald</surname>
 </string-name>
 </person-group>
 , 
@@ -859,12 +843,8 @@ Jun.
 <mixed-citation publication-type="book" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Wald
-</surname>
+<given-names>A.</given-names> 
+<surname>Wald</surname>
 </string-name>
 </person-group>
 , 
@@ -893,12 +873,8 @@ Wiley
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Wald
-</surname>
+<given-names>A.</given-names> 
+<surname>Wald</surname>
 </string-name>
 </person-group>
 , 
@@ -943,21 +919,13 @@ Sep.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Wald
-</surname>
+<given-names>A.</given-names> 
+<surname>Wald</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-J.
-</given-names> 
-<surname>
-Wolfowitz
-</surname>
+<given-names>J.</given-names> 
+<surname>Wolfowitz</surname>
 </string-name>
 </person-group>
 , 
@@ -1002,12 +970,8 @@ Sep.
 <mixed-citation publication-type="book" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Siegmund
-</surname>
+<given-names>D.</given-names> 
+<surname>Siegmund</surname>
 </string-name>
 </person-group>
 , 
@@ -1036,12 +1000,8 @@ Springer
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-SPiegelhalter
-</surname>
+<given-names>D.</given-names> 
+<surname>SPiegelhalter</surname>
 </string-name>
 </person-group>
 , 
@@ -1086,12 +1046,8 @@ Feb.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Y.-C. I.
-</given-names> 
-<surname>
-Chang
-</surname>
+<given-names>Y.-C. I.</given-names> 
+<surname>Chang</surname>
 </string-name>
 </person-group>
 , 
@@ -1136,12 +1092,8 @@ Dec.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Chetouani
-</surname>
+<given-names>Y.</given-names> 
+<surname>Chetouani</surname>
 </string-name>
 </person-group>
 , 
@@ -1186,30 +1138,18 @@ May
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Hapfelmeier
-</surname>
+<given-names>A.</given-names> 
+<surname>Hapfelmeier</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-R.
-</given-names> 
-<surname>
-Hornung
-</surname>
+<given-names>R.</given-names> 
+<surname>Hornung</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-B.
-</given-names> 
-<surname>
-Haller
-</surname>
+<given-names>B.</given-names> 
+<surname>Haller</surname>
 </string-name>
 </person-group>
 , 
@@ -1246,30 +1186,18 @@ May
 <mixed-citation publication-type="book" publication-format="online">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Steinhilber
-</surname>
+<given-names>M.</given-names> 
+<surname>Steinhilber</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Schnuerch
-</surname>
+<given-names>M.</given-names> 
+<surname>Schnuerch</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-A.-L.
-</given-names> 
-<surname>
-Schubert
-</surname>
+<given-names>A.-L.</given-names> 
+<surname>Schubert</surname>
 </string-name>
 </person-group>
 . 
@@ -1295,12 +1223,8 @@ https://CRAN.R-project.org/package=sprtt
 <mixed-citation publication-type="book" publication-format="online">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-S. M.
-</given-names> 
-<surname>
-Bottine
-</surname>
+<given-names>S. M.</given-names> 
+<surname>Bottine</surname>
 </string-name>
 </person-group>
 . 
@@ -1326,21 +1250,13 @@ https://CRAN.R-project.org/package=SPRT
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-D. A.
-</given-names> 
-<surname>
-Darling
-</surname>
+<given-names>D. A.</given-names> 
+<surname>Darling</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Robbins
-</surname>
+<given-names>H.</given-names> 
+<surname>Robbins</surname>
 </string-name>
 </person-group>
 , 
@@ -1385,30 +1301,18 @@ Nov.
 <mixed-citation publication-type="book" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Y. S.
-</given-names> 
-<surname>
-Chow
-</surname>
+<given-names>Y. S.</given-names> 
+<surname>Chow</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Robbins
-</surname>
+<given-names>H.</given-names> 
+<surname>Robbins</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Siegmund
-</surname>
+<given-names>D.</given-names> 
+<surname>Siegmund</surname>
 </string-name>
 </person-group>
 , 
@@ -1437,39 +1341,23 @@ Houghton Mifflin Company
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Ramdas
-</surname>
+<given-names>A.</given-names> 
+<surname>Ramdas</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-J.
-</given-names> 
-<surname>
-Ruf
-</surname>
+<given-names>J.</given-names> 
+<surname>Ruf</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Larsson
-</surname>
+<given-names>M.</given-names> 
+<surname>Larsson</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Koolen
-</surname>
+<given-names>W.</given-names> 
+<surname>Koolen</surname>
 </string-name>
 </person-group>
 , 
@@ -1495,30 +1383,18 @@ arXiv:2009.03167
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-V.
-</given-names> 
-<surname>
-Vovk
-</surname>
+<given-names>V.</given-names> 
+<surname>Vovk</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Gammerman
-</surname>
+<given-names>A.</given-names> 
+<surname>Gammerman</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-G.
-</given-names> 
-<surname>
-Shafer
-</surname>
+<given-names>G.</given-names> 
+<surname>Shafer</surname>
 </string-name>
 </person-group>
 , 
@@ -1551,12 +1427,8 @@ Springer
 <mixed-citation publication-type="book" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-J.
-</given-names> 
-<surname>
-Ville
-</surname>
+<given-names>J.</given-names> 
+<surname>Ville</surname>
 </string-name>
 </person-group>
 , 
@@ -1577,39 +1449,23 @@ Etude Critique De La Notion De Collectif
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Ramdas
-</surname>
+<given-names>A.</given-names> 
+<surname>Ramdas</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-P.
-</given-names> 
-<surname>
-Gr&#x00FC;nwald
-</surname>
+<given-names>P.</given-names> 
+<surname>Gr&#x00FC;nwald</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-V.
-</given-names> 
-<surname>
-Vovk
-</surname>
+<given-names>V.</given-names> 
+<surname>Vovk</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-G.
-</given-names> 
-<surname>
-Shafer
-</surname>
+<given-names>G.</given-names> 
+<surname>Shafer</surname>
 </string-name>
 </person-group>
 , 
@@ -1654,21 +1510,13 @@ Nov.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-V.
-</given-names> 
-<surname>
-Vovk
-</surname>
+<given-names>V.</given-names> 
+<surname>Vovk</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-R.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>R.</given-names> 
+<surname>Wang</surname>
 </string-name>
 </person-group>
 , 
@@ -1713,21 +1561,13 @@ Jan.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-R.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>R.</given-names> 
+<surname>Wang</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Ramdas
-</surname>
+<given-names>A.</given-names> 
+<surname>Ramdas</surname>
 </string-name>
 </person-group>
 , 
@@ -1772,12 +1612,8 @@ Jul.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-N. W.
-</given-names> 
-<surname>
-Koning
-</surname>
+<given-names>N. W.</given-names> 
+<surname>Koning</surname>
 </string-name>
 </person-group>
 , 
@@ -1803,12 +1639,8 @@ arXiv:2409.05654
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Siegmund
-</surname>
+<given-names>D.</given-names> 
+<surname>Siegmund</surname>
 </string-name>
 </person-group>
 , 
@@ -1853,12 +1685,8 @@ Jul.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Robbins
-</surname>
+<given-names>H.</given-names> 
+<surname>Robbins</surname>
 </string-name>
 </person-group>
 , 
@@ -1903,21 +1731,13 @@ Oct.
 <mixed-citation publication-type="confproc" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Robbins
-</surname>
+<given-names>H.</given-names> 
+<surname>Robbins</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Siegmund
-</surname>
+<given-names>D.</given-names> 
+<surname>Siegmund</surname>
 </string-name>
 </person-group>
 , 
@@ -1951,21 +1771,13 @@ Proc. 6th Berkeley Symp. Math. Statist. Probab.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Robbins
-</surname>
+<given-names>H.</given-names> 
+<surname>Robbins</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Siegmund
-</surname>
+<given-names>D.</given-names> 
+<surname>Siegmund</surname>
 </string-name>
 </person-group>
 , 
@@ -2010,30 +1822,18 @@ May
 <mixed-citation publication-type="confproc" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-I.
-</given-names> 
-<surname>
-Waudby-Smith
-</surname>
+<given-names>I.</given-names> 
+<surname>Waudby-Smith</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-P. B.
-</given-names> 
-<surname>
-Stark
-</surname>
+<given-names>P. B.</given-names> 
+<surname>Stark</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Ramdas
-</surname>
+<given-names>A.</given-names> 
+<surname>Ramdas</surname>
 </string-name>
 </person-group>
 , 
@@ -2067,21 +1867,13 @@ Proc. Electron. Voting: 6th Int. Joint Conf.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-I.
-</given-names> 
-<surname>
-Waudby-Smith
-</surname>
+<given-names>I.</given-names> 
+<surname>Waudby-Smith</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Ramdas
-</surname>
+<given-names>A.</given-names> 
+<surname>Ramdas</surname>
 </string-name>
 </person-group>
 , 
@@ -2115,39 +1907,23 @@ Adv. Neural Inf. Proc. Syst.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Ramdas
-</surname>
+<given-names>A.</given-names> 
+<surname>Ramdas</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-J.
-</given-names> 
-<surname>
-Ruf
-</surname>
+<given-names>J.</given-names> 
+<surname>Ruf</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Larsson
-</surname>
+<given-names>M.</given-names> 
+<surname>Larsson</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-W. M.
-</given-names> 
-<surname>
-Koolen
-</surname>
+<given-names>W. M.</given-names> 
+<surname>Koolen</surname>
 </string-name>
 </person-group>
 , 
@@ -2188,12 +1964,8 @@ Feb.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-V.
-</given-names> 
-<surname>
-Vovk
-</surname>
+<given-names>V.</given-names> 
+<surname>Vovk</surname>
 </string-name>
 </person-group>
 , 
@@ -2238,12 +2010,8 @@ Nov.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Weiss
-</surname>
+<given-names>L.</given-names> 
+<surname>Weiss</surname>
 </string-name>
 </person-group>
 , 
@@ -2288,12 +2056,8 @@ Jun.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-G.
-</given-names> 
-<surname>
-Shafer
-</surname>
+<given-names>G.</given-names> 
+<surname>Shafer</surname>
 </string-name>
 </person-group>
 , 
@@ -2338,12 +2102,8 @@ Apr.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Siegmund
-</surname>
+<given-names>D.</given-names> 
+<surname>Siegmund</surname>
 </string-name>
 </person-group>
 , 
@@ -2388,12 +2148,8 @@ Jul.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Woodroofe
-</surname>
+<given-names>M.</given-names> 
+<surname>Woodroofe</surname>
 </string-name>
 </person-group>
 , 
@@ -2438,21 +2194,13 @@ Feb.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-T. L.
-</given-names> 
-<surname>
-Lai
-</surname>
+<given-names>T. L.</given-names> 
+<surname>Lai</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Siegmund
-</surname>
+<given-names>D.</given-names> 
+<surname>Siegmund</surname>
 </string-name>
 </person-group>
 , 
@@ -2497,12 +2245,8 @@ Sep.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-K. W.
-</given-names> 
-<surname>
-Kemp
-</surname>
+<given-names>K. W.</given-names> 
+<surname>Kemp</surname>
 </string-name>
 </person-group>
 , 
@@ -2547,12 +2291,8 @@ Jul.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-E. S.
-</given-names> 
-<surname>
-Page
-</surname>
+<given-names>E. S.</given-names> 
+<surname>Page</surname>
 </string-name>
 </person-group>
 , 
@@ -2597,30 +2337,18 @@ Jan.
 <mixed-citation publication-type="book" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Tartakovsky
-</surname>
+<given-names>A.</given-names> 
+<surname>Tartakovsky</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-I.
-</given-names> 
-<surname>
-Nikiforov
-</surname>
+<given-names>I.</given-names> 
+<surname>Nikiforov</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Basseville
-</surname>
+<given-names>M.</given-names> 
+<surname>Basseville</surname>
 </string-name>
 </person-group>
 , 
@@ -2649,30 +2377,18 @@ CRC Press
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-P.
-</given-names> 
-<surname>
-Armitage
-</surname>
+<given-names>P.</given-names> 
+<surname>Armitage</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-C. K.
-</given-names> 
-<surname>
-McPherson
-</surname>
+<given-names>C. K.</given-names> 
+<surname>McPherson</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-B. C.
-</given-names> 
-<surname>
-Rowe
-</surname>
+<given-names>B. C.</given-names> 
+<surname>Rowe</surname>
 </string-name>
 </person-group>
 , 
@@ -2714,21 +2430,13 @@ J. Roy. Stat. Soc., Ser. A (General)
 <mixed-citation publication-type="book" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C.
-</given-names> 
-<surname>
-Jennison
-</surname>
+<given-names>C.</given-names> 
+<surname>Jennison</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-B. W.
-</given-names> 
-<surname>
-Turnbull
-</surname>
+<given-names>B. W.</given-names> 
+<surname>Turnbull</surname>
 </string-name>
 </person-group>
 , 
@@ -2757,21 +2465,13 @@ CRC Press
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-G.
-</given-names> 
-<surname>
-Wassmer
-</surname>
+<given-names>G.</given-names> 
+<surname>Wassmer</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Brannath
-</surname>
+<given-names>W.</given-names> 
+<surname>Brannath</surname>
 </string-name>
 </person-group>
 , 
@@ -2804,30 +2504,18 @@ Springer
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-P.
-</given-names> 
-<surname>
-Gr&#x00FC;nwald
-</surname>
+<given-names>P.</given-names> 
+<surname>Gr&#x00FC;nwald</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-R. D.
-</given-names> 
-<surname>
-Heide
-</surname>
+<given-names>R. D.</given-names> 
+<surname>Heide</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-W. M.
-</given-names> 
-<surname>
-Koolen
-</surname>
+<given-names>W. M.</given-names> 
+<surname>Koolen</surname>
 </string-name>
 </person-group>
 , 
@@ -2869,21 +2557,13 @@ J. Roy. Stat. Soc. Ser. B, Stat. Methodol.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-V.
-</given-names> 
-<surname>
-Vovk
-</surname>
+<given-names>V.</given-names> 
+<surname>Vovk</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-R.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>R.</given-names> 
+<surname>Wang</surname>
 </string-name>
 </person-group>
 , 
@@ -2928,57 +2608,33 @@ Jun.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Z.
-</given-names> 
-<surname>
-Xu
-</surname>
+<given-names>Z.</given-names> 
+<surname>Xu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Solari
-</surname>
+<given-names>A.</given-names> 
+<surname>Solari</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Fischer
-</surname>
+<given-names>L.</given-names> 
+<surname>Fischer</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-R.
-</given-names> 
-<surname>
-de Heide
-</surname>
+<given-names>R.</given-names> 
+<surname>de Heide</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Ramdas
-</surname>
+<given-names>A.</given-names> 
+<surname>Ramdas</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-J.
-</given-names> 
-<surname>
-Goeman
-</surname>
+<given-names>J.</given-names> 
+<surname>Goeman</surname>
 </string-name>
 </person-group>
 , 
@@ -3004,39 +2660,23 @@ arXiv:2509.02517
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-R.
-</given-names> 
-<surname>
-Johari
-</surname>
+<given-names>R.</given-names> 
+<surname>Johari</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-P.
-</given-names> 
-<surname>
-Koomen
-</surname>
+<given-names>P.</given-names> 
+<surname>Koomen</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Pekelis
-</surname>
+<given-names>L.</given-names> 
+<surname>Pekelis</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Walsh
-</surname>
+<given-names>D.</given-names> 
+<surname>Walsh</surname>
 </string-name>
 </person-group>
 , 
@@ -3081,12 +2721,8 @@ May
 <mixed-citation publication-type="confproc" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Maharaj
-</surname>
+<given-names>A.</given-names> 
+<surname>Maharaj</surname>
 </string-name> 
 <etal></etal>
 </person-group>
@@ -3121,30 +2757,18 @@ Apr. 2023
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Lindeman
-</surname>
+<given-names>M.</given-names> 
+<surname>Lindeman</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-P. B.
-</given-names> 
-<surname>
-Stark
-</surname>
+<given-names>P. B.</given-names> 
+<surname>Stark</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-V. S.
-</given-names> 
-<surname>
-Yates
-</surname>
+<given-names>V. S.</given-names> 
+<surname>Yates</surname>
 </string-name>
 </person-group>
 , 
@@ -3181,12 +2805,8 @@ Oct.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-P. B.
-</given-names> 
-<surname>
-Stark
-</surname>
+<given-names>P. B.</given-names> 
+<surname>Stark</surname>
 </string-name>
 </person-group>
 , 
@@ -3231,30 +2851,18 @@ Mar.
 <mixed-citation publication-type="confproc" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-V.
-</given-names> 
-<surname>
-Vovk
-</surname>
+<given-names>V.</given-names> 
+<surname>Vovk</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-A.
-</given-names> 
-<surname>
-Gammerman
-</surname>
+<given-names>A.</given-names> 
+<surname>Gammerman</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-C.
-</given-names> 
-<surname>
-Saunders
-</surname>
+<given-names>C.</given-names> 
+<surname>Saunders</surname>
 </string-name>
 </person-group>
 , 

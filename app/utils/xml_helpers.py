@@ -9,10 +9,13 @@ from lxml import etree
 
 from app.utils.xml_text import (
     ieee_hex_entity_for_char,
+    normalize_person_name_text,
     normalize_typographic_ligatures,
     sanitize_xml_text,
     should_encode_as_hex_entity,
 )
+
+_PERSON_NAME_LOCAL_TAGS = frozenset({"given-names", "surname"})
 
 
 def is_element_node(elem: etree._Element) -> bool:
@@ -256,6 +259,18 @@ def _encode_xml_text_content(xml_str: str) -> str:
     return "".join(out)
 
 
+def normalize_person_name_fields_in_tree(root: etree._Element) -> None:
+    """Trim padding whitespace in JATS ``given-names`` / ``surname`` (vendor XML often has `` Robbins ``)."""
+    for elem in root.iter():
+        if not is_element_node(elem):
+            continue
+        if xml_local_name(elem) not in _PERSON_NAME_LOCAL_TAGS:
+            continue
+        if elem.text is None:
+            continue
+        elem.text = normalize_person_name_text(elem.text)
+
+
 def apply_ieee_entities_to_tree(root: etree._Element) -> None:
     """Normalize PDF typography in the DOM; hex entities are applied when serializing."""
     for elem in root.iter():
@@ -294,6 +309,7 @@ def finalize_ieee_xml(xml: str) -> str:
     parser = etree.XMLParser(remove_blank_text=False, recover=True)
     root = etree.fromstring(body.encode("utf-8"), parser=parser)
     apply_ieee_entities_to_tree(root)
+    normalize_person_name_fields_in_tree(root)
     reorder_contrib_group_author_comments(root)
     tree = etree.ElementTree(root)
     return post_process_ieee_entities(serialize_tree(tree, doctype=doctype))

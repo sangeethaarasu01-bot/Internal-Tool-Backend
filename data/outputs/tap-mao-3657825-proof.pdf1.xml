@@ -29,44 +29,47 @@
 <assembly-group sequence="0"></assembly-group>
 </article-categories>
 <title-group>
-<article-title>AUTHOR QUERIES</article-title>
+<article-title>A Filtering Antenna With Improved Frequency Selectivity and Wideband Harmonic Suppression</article-title>
 </title-group>
 <contrib-group>
 <contrib id="contrib1" primary="yes" corresp="yes" contrib-type="author">
 <contrib-id contrib-id-type="orcid">0000-0002-4266-6826</contrib-id>
 <name-alternatives>
-<string-name specific-use="display"><given-names>Author</given-names>
-<surname>Gateway</surname>
+<string-name specific-use="display"><given-names>Chunxu</given-names>
+<surname>Mao</surname>
 </string-name>
-<string-name specific-use="index"><given-names>Author</given-names>
-<surname>Gateway</surname>
+<string-name specific-use="index"><given-names>Chunxu</given-names>
+<surname>Mao</surname>
 </string-name>
 </name-alternatives>
 <email>cxmao@scut.edu.cn</email>
 <xref ref-type="aff" rid="aff1"></xref>
-</contrib><contrib id="contrib2" primary="no" corresp="no" contrib-type="author">
+</contrib>
+<contrib id="contrib2" primary="no" corresp="no" contrib-type="author">
 <contrib-id contrib-id-type="orcid">0009-0000-1480-1499</contrib-id>
 <name-alternatives>
-<string-name specific-use="display"><given-names>Author</given-names>
-<surname>Gateway</surname>
+<string-name specific-use="display"><given-names>Yuekun</given-names>
+<surname>Sun</surname>
 </string-name>
-<string-name specific-use="index"><given-names>Author</given-names>
-<surname>Gateway</surname>
+<string-name specific-use="index"><given-names>Yuekun</given-names>
+<surname>Sun</surname>
 </string-name>
 </name-alternatives>
 <xref ref-type="aff" rid="aff1"></xref>
-</contrib><contrib id="contrib3" primary="no" corresp="no" contrib-type="author">
+</contrib>
+<contrib id="contrib3" primary="no" corresp="no" contrib-type="author">
 <name-alternatives>
-<string-name specific-use="display"><given-names>Filtering</given-names>
-<surname>Antenna</surname>
+<string-name specific-use="display"><given-names>Jian</given-names>
+<surname>Feng Li</surname>
 </string-name>
-<string-name specific-use="index"><given-names>Filtering</given-names>
-<surname>Antenna</surname>
+<string-name specific-use="index"><given-names>Jian</given-names>
+<surname>Feng Li</surname>
 </string-name>
 </name-alternatives>
 <email>li.jf01@gdut.edu.cn</email>
 <xref ref-type="aff" rid="aff2"></xref>
-</contrib><author-comment>
+</contrib>
+<author-comment>
 <p><italic>(Corresponding author: Chunxu Mao.)</italic></p></author-comment>
 </contrib-group>
 <aff id="aff1">
@@ -119,7 +122,8 @@
 <self-uri content-type="xml">tap-mao-3657825.xml</self-uri>
 <self-uri content-type="print">tap-mao-3657825.pdf</self-uri>
 <self-uri content-type="online">tap-mao-3657825-x.pdf</self-uri>
-<abstract><p>In this communication, a compact filtering antenna with high frequency selectivity and intensive harmonic suppression over a wide frequency range (<inline-formula><tex-math notation="LaTeX">$3~f_{0}$</tex-math></inline-formula>) is proposed. The antenna mainly consists of a planar inverted-F structure (PIFS), a square patch, two parasitic half-wavelength strips, and a layer of metasurface under the patch. The PIFS, parasitic strips, and patch are cross-coupled and tuned at their fundamental mode to produce the third-order filtering response with enhanced bandwidth and sharp roll-off at band-edges. To suppress the higher order harmonics, a split ring resonator (SRR) is first inset into the PIFS to reject the main input power. Then, a layer of metasurface is introduced under the patch to further absorb extra power. As a result, the radiation efficiency at the second-order harmonic can be reduced from 40% to 4%. The principles of the proposed antenna are investigated in detail. The filtering antenna is prototyped and verified, exhibiting a passband from 2.5 to 3.0 GHz and a gain suppression of 24 dB from 3.1 to 6.0 GHz and 18 dB from 6.0 to 9.0 GHz.</p>
+<abstract>
+<p>In this communication, a compact filtering antenna with high frequency selectivity and intensive harmonic suppression over a wide frequency range (<inline-formula><tex-math notation="LaTeX">$3~f_{0}$</tex-math></inline-formula>) is proposed. The antenna mainly consists of a planar inverted-F structure (PIFS), a square patch, two parasitic half-wavelength strips, and a layer of metasurface under the patch. The PIFS, parasitic strips, and patch are cross-coupled and tuned at their fundamental mode to produce the third-order filtering response with enhanced bandwidth and sharp roll-off at band-edges. To suppress the higher order harmonics, a split ring resonator (SRR) is first inset into the PIFS to reject the main input power. Then, a layer of metasurface is introduced under the patch to further absorb extra power. As a result, the radiation efficiency at the second-order harmonic can be reduced from 40% to 4%. The principles of the proposed antenna are investigated in detail. The filtering antenna is prototyped and verified, exhibiting a passband from 2.5 to 3.0 GHz and a gain suppression of 24 dB from 3.1 to 6.0 GHz and 18 dB from 6.0 to 9.0 GHz.</p>
 </abstract>
 <kwd-group kwd-group-type="AuthorFree">
 <kwd>Antenna</kwd>
@@ -142,11 +146,11 @@
 <funding-statement>This work was supported in part by Guangdong Innovative and Entrepreneurial Research Team Program under Grant 2023ZT10x148 and in part by Guangdong Province and Applied Basic Research Foundation under Grant 2025A1515010151.</funding-statement>
 </funding-group>
 <counts>
-<fig-count count="14"></fig-count>
-<table-count count="1"></table-count>
-<equation-count count="55"></equation-count>
-<ref-count count="35"></ref-count>
-<page-count count="7"></page-count>
+<fig-count count="14"/>
+<table-count count="1"/>
+<equation-count count="55"/>
+<ref-count count="35"/>
+<page-count count="7"/>
 </counts>
 </article-meta>
 </front>
@@ -170,10 +174,10 @@
 <table-wrap id="table1">
 <label>TABLE I</label>
 <caption><title>Comparison With Other Harmonic Suppression Filtering Antennas</title></caption>
-<graphic xlink:href="mao.t1-3657825.eps"></graphic>
+<graphic xlink:href="mao.t1-3657825.eps"/>
 <table rules="all" frame="box" cellpadding="5">
 <colgroup>
-<col span=""></col>
+<col span=""/>
 </colgroup>
 <thead>
 <tr>
@@ -309,7 +313,7 @@
 <fig id="fig1">
 <label>Fig. 1.</label>
 <caption><p>Configurations of the proposed filtering antenna. (a) Exploded view, (b) side view, and (c) top layer of the bottom substrate. <italic>Lg = 80</italic> mm, <italic>Lp = 39.5</italic> mm, <inline-formula><tex-math notation="LaTeX">$L 1=15.8$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$L 2=7$</tex-math></inline-formula> mm, <italic>L3 = 27</italic> mm, <italic>L4 = 5.8</italic> mm, <inline-formula><tex-math notation="LaTeX">$W 1=4$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$W 2=3$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$W 3=4.5$</tex-math></inline-formula> mm, W<inline-formula><tex-math notation="LaTeX">$4=0.2$</tex-math></inline-formula> mm, gap = 1.5 mm, <inline-formula><tex-math notation="LaTeX">$D =0.6$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$H 1=1.525$</tex-math></inline-formula> mm, <inline-formula><tex-math notation="LaTeX">$H 2=0.3$</tex-math></inline-formula> mm, and <inline-formula><tex-math notation="LaTeX">$H 3=5.0$</tex-math></inline-formula> mm.</p></caption>
-<graphic xlink:href="mao1-3657825.eps"></graphic>
+<graphic xlink:href="mao1-3657825.eps"/>
 </fig>
 </p>
 </sec>
@@ -320,12 +324,12 @@
 <fig id="fig2">
 <label>Fig. 2.</label>
 <caption><p>Evolution of the filtering antennas and the corresponding topologies. (a) Patch antenna fed by L-shaped microstrip, Type-A, (b) patch antenna fed by a PIFS, Type-B, and (c) PIFS-fed patch antenna with two parasitic half-wavelength resonators, Type-C.</p></caption>
-<graphic xlink:href="mao2-3657825.eps"></graphic>
+<graphic xlink:href="mao2-3657825.eps"/>
 </fig>
 <fig id="fig3">
 <label>Fig. 3.</label>
 <caption><p>Comparisons of the three antenna designs about <inline-formula><tex-math notation="LaTeX">$S_{11}$</tex-math></inline-formula> and realized gains.</p></caption>
-<graphic xlink:href="mao3-3657825.eps"></graphic>
+<graphic xlink:href="mao3-3657825.eps"/>
 </fig>
 </p>
 </sec>
@@ -336,19 +340,19 @@
 <fig id="fig4">
 <label>Fig. 4.</label>
 <caption><p>Comparison of the current distribution on the Type-C antenna at (a) 2.8 and (b) 3.1 GHz.</p></caption>
-<graphic xlink:href="mao4-3657825.eps"></graphic>
+<graphic xlink:href="mao4-3657825.eps"/>
 </fig>
 <fig id="fig5">
 <label>Fig. 5.</label>
 <caption><p>Simulated current distributions of the PIFS and parasitic strips at around the frequency of radiation null, <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>. (a) Below <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>, 3.05 GHz, (b) at <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>, 3.1 GHz, and (c) above <inline-formula><tex-math notation="LaTeX">$f_{n}$</tex-math></inline-formula>, 3.15 GHz.</p></caption>
-<graphic xlink:href="mao5-3657825.eps"></graphic>
+<graphic xlink:href="mao5-3657825.eps"/>
 </fig>
 </p>
 <p>Under this assumption, if the mutual coupling between the PIFS and strip resonators is changed, the radiation null will be shifted correspondingly. To verify it, a parametric study is carried out. <xref ref-type="fig" rid="fig6">Fig. 6</xref> shows the simulated realized of the proposed antenna with different distances between the PIFS and the strips, denoted as <italic>gap</italic>. As observed, the radiation null moves from 3.2 to 3.05 GHz when the <italic>gap</italic> is increased from 5.0 to 5.8 mm.
 <fig id="fig6">
 <label>Fig. 6.</label>
 <caption><p>Simulated realized gains of the proposed antenna with different spaces between the PIFS and strips, <italic>gap</italic>.</p></caption>
-<graphic xlink:href="mao6-3657825.eps"></graphic>
+<graphic xlink:href="mao6-3657825.eps"/>
 </fig>
 </p>
 </sec>
@@ -364,19 +368,19 @@
 <fig id="fig7">
 <label>Fig. 7.</label>
 <caption><p>Antenna designs for harmonic suppression. (a) Embedded SRR in the PIFS, denoted as Type-D and (b) proposed design, loaded with a metasurface.</p></caption>
-<graphic xlink:href="mao7-3657825.eps"></graphic>
+<graphic xlink:href="mao7-3657825.eps"/>
 </fig>
 <fig id="fig8">
 <label>Fig. 8.</label>
 <caption><p>Comparison of the simulated current distribution at 5.6 GHz. (a) Type-C. (b) Type-D.</p></caption>
-<graphic xlink:href="mao8-3657825.eps"></graphic>
+<graphic xlink:href="mao8-3657825.eps"/>
 </fig>
 </p>
 <p><xref ref-type="fig" rid="fig9">Fig. 9</xref> compares the simulated peak realized gain and radiation efficiency among the reference antennas Type-C, Type-D, Type-E, and the proposed antenna. It is noted that the peak realized gain instead of the realized gain in the broadside direction is adopted to measure the harmonic suppression performance as the cross-band interference may originally come from any direction, but not only from the broadside direction. As observed from <xref ref-type="fig" rid="fig9">Fig. 9(a)</xref>, the peak realized gain of the second-order harmonic is reduced from 6 dBi to below 0 dBi from the Type-C antenna to the Type-D antenna, and the radiation efficiency is reduced from 40% to 14%.
 <fig id="fig9">
 <label>Fig. 9.</label>
 <caption><p>Comparisons of the simulated peak realized gain and radiation efficiency between the Type-C, Type-D, Type-E, and proposed antennas. (a) Peak realized gain and (b) radiation efficiency.</p></caption>
-<graphic xlink:href="mao9-3657825.eps"></graphic>
+<graphic xlink:href="mao9-3657825.eps"/>
 </fig>
 </p>
 </sec>
@@ -387,7 +391,7 @@
 <fig id="fig10">
 <label>Fig. 10.</label>
 <caption><p>(a) Configuration of the unitcell of the metasurface and (b) simulated <inline-formula><tex-math notation="LaTeX">$\vert S_{11}\vert $</tex-math></inline-formula> of the unitcell with different lengths of <italic>L4</italic>.</p></caption>
-<graphic xlink:href="mao10-3657825.eps"></graphic>
+<graphic xlink:href="mao10-3657825.eps"/>
 </fig>
 </p>
 <p>A periodic boundary is used to investigate the resonance of the unit cell, as shown in <xref ref-type="fig" rid="fig10">Fig. 10(b)</xref>. As observed, the resonance is moved to the lower band when <inline-formula><tex-math notation="LaTeX">$L4$</tex-math></inline-formula> is increased. The resonance here indicates that a small part of the incident wave is absorbed and lost in the unit cell when it resonates, but it is insufficient to deal with high-power cases when it works alone, as the Type-E curve shown in <xref ref-type="fig" rid="fig9">Fig. 9</xref>. However, this additional structure can be used to further suppress the radiation in the given frequency range. As depicted in <xref ref-type="fig" rid="fig9">Fig. 9</xref>, the peak realized gain at the second-order harmonic can be reduced by 14 dB when rejection bands of the SRR and the metasurface are aligned with each other. Analyzing the radiation efficiency in <xref ref-type="fig" rid="fig9">Fig. 9(b)</xref>, the power radiated out is further suppressed to below 4% when the metasurface is applied, demonstrating that a good harmonic suppression can be achieved.</p>
@@ -395,7 +399,7 @@
 <fig id="fig11">
 <label>Fig. 11.</label>
 <caption><p>Simulated <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field distribution on the antenna at 5.6 GHz. (a) <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field on the patch, Type-D antenna, (b) <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field on the patch, proposed antenna, and (c) <inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>-field on the metasurface layer, proposed antenna.</p></caption>
-<graphic xlink:href="mao11-3657825.eps"></graphic>
+<graphic xlink:href="mao11-3657825.eps"/>
 </fig>
 </p>
 </sec>
@@ -407,19 +411,19 @@
 <fig id="fig12">
 <label>Fig. 12.</label>
 <caption><p>Photographs of the proposed filtering antenna prototype. (a) Upper layer of the bottom substrate and (b) upper layer of the top substrate.</p></caption>
-<graphic xlink:href="mao12-3657825.eps"></graphic>
+<graphic xlink:href="mao12-3657825.eps"/>
 </fig>
 <fig id="fig13">
 <label>Fig. 13.</label>
 <caption><p>Simulated and measured results of the proposed filtering antenna. (a) S-parameters and (b) realized gain and radiation efficiency.</p></caption>
-<graphic xlink:href="mao13-3657825.eps"></graphic>
+<graphic xlink:href="mao13-3657825.eps"/>
 </fig>
 </p>
 <p><xref ref-type="fig" rid="fig14">Fig. 14</xref> shows the simulated and measured normalized radiation patterns of the proposed antenna at 2.6 GHz. The antenna exhibits uni-directional radiation pattern in the broadside direction. The cross-polarization level is more than 30 dB lower than in the co-polarization. In addition, the front-to-back ratio is over 20 dB, showing the proposed antenna has a good radiation performance. The small discrepancy between the simulated and measured radiation patterns is mainly due to the tolerances during the measurement.
 <fig id="fig14">
 <label>Fig. 14.</label>
 <caption><p>Measured and simulated normalized radiation patterns of the proposed filtering antenna at 2.6 GHz. (a) <italic>x</italic>z-plane and (b) <italic>y</italic>z-plane.</p></caption>
-<graphic xlink:href="mao14-3657825.eps"></graphic>
+<graphic xlink:href="mao14-3657825.eps"/>
 </fig>
 </p>
 <p>The proposed antenna is compared with other filtering antennas with harmonic suppression performance reported in <xref ref-type="bibr" rid="ref26">[26]</xref>, <xref ref-type="bibr" rid="ref27">[27]</xref>, <xref ref-type="bibr" rid="ref28">[28]</xref>, <xref ref-type="bibr" rid="ref29">[29]</xref>, <xref ref-type="bibr" rid="ref30">[30]</xref>, <xref ref-type="bibr" rid="ref31">[31]</xref>, <xref ref-type="bibr" rid="ref32">[32]</xref>, <xref ref-type="bibr" rid="ref33">[33]</xref>, and <xref ref-type="bibr" rid="ref34">[34]</xref> in terms of antenna profile, method of suppression, gain in-band, frequency selectivity, and gain suppression. The antennas in <xref ref-type="bibr" rid="ref32">[32]</xref> and <xref ref-type="bibr" rid="ref33">[33]</xref> have a limited bandwidth of suppression of less than <inline-formula><tex-math notation="LaTeX">$2~f_{0}$</tex-math></inline-formula>, without tackling the second-order harmonics. The works in <xref ref-type="bibr" rid="ref26">[26]</xref> and <xref ref-type="bibr" rid="ref27">[27]</xref> have a wideband harmonic suppression, but a low in-band gain of less than 3 dBi can be achieved. The works in <xref ref-type="bibr" rid="ref28">[28]</xref>, <xref ref-type="bibr" rid="ref31">[31]</xref>, and <xref ref-type="bibr" rid="ref33">[33]</xref> have a limited frequency selectivity with the roll-off ratio less than 60 dB/GHz. The work in <xref ref-type="bibr" rid="ref34">[34]</xref> has a high gain in-band, good frequency selectivity, and wideband gain suppression, but the antenna has a high profile. Compared with these works, the proposed filtering antenna has a low profile, an improved frequency selectivity, and out-of-band rejection, and this is the first time that resonator and metasurface are combined together to realize wideband harmonic suppression. Moreover, different from other works, the peak realized gain instead of realized in the broadside direction is used to evaluate the harmonic suppression performance.</p>
@@ -442,57 +446,33 @@ References
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C. X.
-</given-names> 
-<surname>
-Mao
-</surname>
+<given-names>C. X.</given-names> 
+<surname>Mao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>Y.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-X. Y.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>X. Y.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-P.
-</given-names> 
-<surname>
-Xiao
-</surname>
+<given-names>P.</given-names> 
+<surname>Xiao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>Y.</given-names> 
+<surname>Wang</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Gao
-</surname>
+<given-names>S.</given-names> 
+<surname>Gao</surname>
 </string-name>
 </person-group>
 , 
@@ -537,30 +517,18 @@ Nov.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-H.-T.
-</given-names> 
-<surname>
-Hu
-</surname>
+<given-names>H.-T.</given-names> 
+<surname>Hu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-F.-C.
-</given-names> 
-<surname>
-Chen
-</surname>
+<given-names>F.-C.</given-names> 
+<surname>Chen</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Q.-X.
-</given-names> 
-<surname>
-Chu
-</surname>
+<given-names>Q.-X.</given-names> 
+<surname>Chu</surname>
 </string-name>
 </person-group>
 , 
@@ -598,39 +566,23 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-R.
-</given-names> 
-<surname>
-Wu
-</surname>
+<given-names>R.</given-names> 
+<surname>Wu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-G.-H.
-</given-names> 
-<surname>
-Wen
-</surname>
+<given-names>G.-H.</given-names> 
+<surname>Wen</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Z.-X.
-</given-names> 
-<surname>
-Du
-</surname>
+<given-names>Z.-X.</given-names> 
+<surname>Du</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-F.-C.
-</given-names> 
-<surname>
-Chen
-</surname>
+<given-names>F.-C.</given-names> 
+<surname>Chen</surname>
 </string-name>
 </person-group>
 , 
@@ -668,21 +620,13 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Y.-M.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>Y.-M.</given-names> 
+<surname>Zhang</surname>
 </string-name> 
 and 
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>S.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 </person-group>
 , 
@@ -720,12 +664,8 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C. X.
-</given-names> 
-<surname>
-Mao
-</surname>
+<given-names>C. X.</given-names> 
+<surname>Mao</surname>
 </string-name> 
 <etal></etal>
 </person-group>
@@ -771,39 +711,23 @@ Sep.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Yang
-</surname>
+<given-names>D.</given-names> 
+<surname>Yang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Zhai
-</surname>
+<given-names>H.</given-names> 
+<surname>Zhai</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-C.
-</given-names> 
-<surname>
-Guo
-</surname>
+<given-names>C.</given-names> 
+<surname>Guo</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-C.
-</given-names> 
-<surname>
-Ma
-</surname>
+<given-names>C.</given-names> 
+<surname>Ma</surname>
 </string-name>
 </person-group>
 , 
@@ -848,30 +772,18 @@ Jul.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>Y.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-X.-Y.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>X.-Y.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Q.-H.
-</given-names> 
-<surname>
-Liu
-</surname>
+<given-names>Q.-H.</given-names> 
+<surname>Liu</surname>
 </string-name>
 </person-group>
 , 
@@ -916,39 +828,23 @@ Dec.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Li
-</surname>
+<given-names>Y.</given-names> 
+<surname>Li</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Z.
-</given-names> 
-<surname>
-Zhao
-</surname>
+<given-names>Z.</given-names> 
+<surname>Zhao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Z.
-</given-names> 
-<surname>
-Tang
-</surname>
+<given-names>Z.</given-names> 
+<surname>Tang</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Yin
-</surname>
+<given-names>Y.</given-names> 
+<surname>Yin</surname>
 </string-name>
 </person-group>
 , 
@@ -993,30 +889,18 @@ Apr.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-W.-J.
-</given-names> 
-<surname>
-Yang
-</surname>
+<given-names>W.-J.</given-names> 
+<surname>Yang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.-M.
-</given-names> 
-<surname>
-Pan
-</surname>
+<given-names>Y.-M.</given-names> 
+<surname>Pan</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-X.-Y.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>X.-Y.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 </person-group>
 , 
@@ -1054,39 +938,23 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Z.
-</given-names> 
-<surname>
-Xiao
-</surname>
+<given-names>Z.</given-names> 
+<surname>Xiao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Cao
-</surname>
+<given-names>Y.</given-names> 
+<surname>Cao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Che
-</surname>
+<given-names>W.</given-names> 
+<surname>Che</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Q.
-</given-names> 
-<surname>
-Xue
-</surname>
+<given-names>Q.</given-names> 
+<surname>Xue</surname>
 </string-name>
 </person-group>
 , 
@@ -1131,48 +999,28 @@ Oct.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Y.-M.
-</given-names> 
-<surname>
-Pan
-</surname>
+<given-names>Y.-M.</given-names> 
+<surname>Pan</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-G.
-</given-names> 
-<surname>
-Liu
-</surname>
+<given-names>G.</given-names> 
+<surname>Liu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-X.-Y.
-</given-names> 
-<surname>
-Liu
-</surname>
+<given-names>X.-Y.</given-names> 
+<surname>Liu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-K. W.
-</given-names> 
-<surname>
-Leung
-</surname>
+<given-names>K. W.</given-names> 
+<surname>Leung</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-P. F.
-</given-names> 
-<surname>
-Hu
-</surname>
+<given-names>P. F.</given-names> 
+<surname>Hu</surname>
 </string-name>
 </person-group>
 , 
@@ -1217,39 +1065,23 @@ Nov.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-S. J.
-</given-names> 
-<surname>
-Yang
-</surname>
+<given-names>S. J.</given-names> 
+<surname>Yang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y. M.
-</given-names> 
-<surname>
-Pan
-</surname>
+<given-names>Y. M.</given-names> 
+<surname>Pan</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-L.-Y.
-</given-names> 
-<surname>
-Shi
-</surname>
+<given-names>L.-Y.</given-names> 
+<surname>Shi</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-X. Y.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>X. Y.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 </person-group>
 , 
@@ -1294,48 +1126,28 @@ Jul.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>Y.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Yang
-</surname>
+<given-names>W.</given-names> 
+<surname>Yang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Q.
-</given-names> 
-<surname>
-Xue
-</surname>
+<given-names>Q.</given-names> 
+<surname>Xue</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-J.
-</given-names> 
-<surname>
-Huang
-</surname>
+<given-names>J.</given-names> 
+<surname>Huang</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Che
-</surname>
+<given-names>W.</given-names> 
+<surname>Che</surname>
 </string-name>
 </person-group>
 , 
@@ -1380,57 +1192,33 @@ Mar.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Yang
-</surname>
+<given-names>W.</given-names> 
+<surname>Yang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Chen
-</surname>
+<given-names>S.</given-names> 
+<surname>Chen</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Q.
-</given-names> 
-<surname>
-Xue
-</surname>
+<given-names>Q.</given-names> 
+<surname>Xue</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Che
-</surname>
+<given-names>W.</given-names> 
+<surname>Che</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-G.
-</given-names> 
-<surname>
-Shen
-</surname>
+<given-names>G.</given-names> 
+<surname>Shen</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Feng
-</surname>
+<given-names>W.</given-names> 
+<surname>Feng</surname>
 </string-name>
 </person-group>
 , 
@@ -1475,39 +1263,23 @@ Mar.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Q.
-</given-names> 
-<surname>
-Liu
-</surname>
+<given-names>Q.</given-names> 
+<surname>Liu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Zhu
-</surname>
+<given-names>L.</given-names> 
+<surname>Zhu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-J.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>J.</given-names> 
+<surname>Wang</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Wu
-</surname>
+<given-names>W.</given-names> 
+<surname>Wu</surname>
 </string-name>
 </person-group>
 , 
@@ -1545,48 +1317,28 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-J.
-</given-names> 
-<surname>
-Li
-</surname>
+<given-names>J.</given-names> 
+<surname>Li</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Xiang
-</surname>
+<given-names>L.</given-names> 
+<surname>Xiang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Shi
-</surname>
+<given-names>Y.</given-names> 
+<surname>Shi</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-X.
-</given-names> 
-<surname>
-Yu Wu
-</surname>
+<given-names>X.</given-names> 
+<surname>Yu Wu</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Hong
-</surname>
+<given-names>W.</given-names> 
+<surname>Hong</surname>
 </string-name>
 </person-group>
 , 
@@ -1624,48 +1376,28 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C.-X.
-</given-names> 
-<surname>
-Mao
-</surname>
+<given-names>C.-X.</given-names> 
+<surname>Mao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Gao
-</surname>
+<given-names>S.</given-names> 
+<surname>Gao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>Y.</given-names> 
+<surname>Wang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-F.
-</given-names> 
-<surname>
-Qin
-</surname>
+<given-names>F.</given-names> 
+<surname>Qin</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Q.-X.
-</given-names> 
-<surname>
-Chu
-</surname>
+<given-names>Q.-X.</given-names> 
+<surname>Chu</surname>
 </string-name>
 </person-group>
 , 
@@ -1710,48 +1442,28 @@ Jul.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C. X.
-</given-names> 
-<surname>
-Mao
-</surname>
+<given-names>C. X.</given-names> 
+<surname>Mao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>L.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Khalily
-</surname>
+<given-names>M.</given-names> 
+<surname>Khalily</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Gao
-</surname>
+<given-names>Y.</given-names> 
+<surname>Gao</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-P.
-</given-names> 
-<surname>
-Xiao
-</surname>
+<given-names>P.</given-names> 
+<surname>Xiao</surname>
 </string-name>
 </person-group>
 , 
@@ -1796,30 +1508,18 @@ Aug.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C.-X.
-</given-names> 
-<surname>
-Mao
-</surname>
+<given-names>C.-X.</given-names> 
+<surname>Mao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Gao
-</surname>
+<given-names>S.</given-names> 
+<surname>Gao</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>Y.</given-names> 
+<surname>Wang</surname>
 </string-name>
 </person-group>
 , 
@@ -1864,48 +1564,28 @@ May
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C.-X.
-</given-names> 
-<surname>
-Mao
-</surname>
+<given-names>C.-X.</given-names> 
+<surname>Mao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Gao
-</surname>
+<given-names>S.</given-names> 
+<surname>Gao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>Y.</given-names> 
+<surname>Wang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-F.
-</given-names> 
-<surname>
-Qin
-</surname>
+<given-names>F.</given-names> 
+<surname>Qin</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Q.-X.
-</given-names> 
-<surname>
-Chu
-</surname>
+<given-names>Q.-X.</given-names> 
+<surname>Chu</surname>
 </string-name>
 </person-group>
 , 
@@ -1950,48 +1630,28 @@ Dec.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C.
-</given-names> 
-<surname>
-Fan
-</surname>
+<given-names>C.</given-names> 
+<surname>Fan</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-B.
-</given-names> 
-<surname>
-Wu
-</surname>
+<given-names>B.</given-names> 
+<surname>Wu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.-L.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>Y.-L.</given-names> 
+<surname>Wang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-H.-Y.
-</given-names> 
-<surname>
-Xie
-</surname>
+<given-names>H.-Y.</given-names> 
+<surname>Xie</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-T.
-</given-names> 
-<surname>
-Su
-</surname>
+<given-names>T.</given-names> 
+<surname>Su</surname>
 </string-name>
 </person-group>
 , 
@@ -2036,30 +1696,18 @@ Apr.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-B.-J.
-</given-names> 
-<surname>
-Chen
-</surname>
+<given-names>B.-J.</given-names> 
+<surname>Chen</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-X.-S.
-</given-names> 
-<surname>
-Yang
-</surname>
+<given-names>X.-S.</given-names> 
+<surname>Yang</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-B.-Z.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>B.-Z.</given-names> 
+<surname>Wang</surname>
 </string-name>
 </person-group>
 , 
@@ -2097,30 +1745,18 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Liu
-</surname>
+<given-names>S.</given-names> 
+<surname>Liu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Z.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>Z.</given-names> 
+<surname>Wang</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Dong
-</surname>
+<given-names>Y.</given-names> 
+<surname>Dong</surname>
 </string-name>
 </person-group>
 , 
@@ -2158,30 +1794,18 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-J. Y.
-</given-names> 
-<surname>
-Jin
-</surname>
+<given-names>J. Y.</given-names> 
+<surname>Jin</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Liao
-</surname>
+<given-names>S.</given-names> 
+<surname>Liao</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Q.
-</given-names> 
-<surname>
-Xue
-</surname>
+<given-names>Q.</given-names> 
+<surname>Xue</surname>
 </string-name>
 </person-group>
 , 
@@ -2226,57 +1850,33 @@ Apr.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-M.
-</given-names> 
-<surname>
-Yang
-</surname>
+<given-names>M.</given-names> 
+<surname>Yang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-B.
-</given-names> 
-<surname>
-Wu
-</surname>
+<given-names>B.</given-names> 
+<surname>Wu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-C.
-</given-names> 
-<surname>
-Fan
-</surname>
+<given-names>C.</given-names> 
+<surname>Fan</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-H.-Y.
-</given-names> 
-<surname>
-Xie
-</surname>
+<given-names>H.-Y.</given-names> 
+<surname>Xie</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-J.-Z.
-</given-names> 
-<surname>
-Chen
-</surname>
+<given-names>J.-Z.</given-names> 
+<surname>Chen</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Wu
-</surname>
+<given-names>L.</given-names> 
+<surname>Wu</surname>
 </string-name>
 </person-group>
 , 
@@ -2314,39 +1914,23 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-G.-H.
-</given-names> 
-<surname>
-Sun
-</surname>
+<given-names>G.-H.</given-names> 
+<surname>Sun</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-S.-W.
-</given-names> 
-<surname>
-Wong
-</surname>
+<given-names>S.-W.</given-names> 
+<surname>Wong</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Zhu
-</surname>
+<given-names>L.</given-names> 
+<surname>Zhu</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Q.-X.
-</given-names> 
-<surname>
-Chu
-</surname>
+<given-names>Q.-X.</given-names> 
+<surname>Chu</surname>
 </string-name>
 </person-group>
 , 
@@ -2384,48 +1968,28 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-J.-F.
-</given-names> 
-<surname>
-Qian
-</surname>
+<given-names>J.-F.</given-names> 
+<surname>Qian</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-F.-C.
-</given-names> 
-<surname>
-Chen
-</surname>
+<given-names>F.-C.</given-names> 
+<surname>Chen</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.-H.
-</given-names> 
-<surname>
-Ding
-</surname>
+<given-names>Y.-H.</given-names> 
+<surname>Ding</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-H.-T.
-</given-names> 
-<surname>
-Hu
-</surname>
+<given-names>H.-T.</given-names> 
+<surname>Hu</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Q.-X.
-</given-names> 
-<surname>
-Chu
-</surname>
+<given-names>Q.-X.</given-names> 
+<surname>Chu</surname>
 </string-name>
 </person-group>
 , 
@@ -2470,12 +2034,8 @@ Jan.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-L.-H.
-</given-names> 
-<surname>
-Wen
-</surname>
+<given-names>L.-H.</given-names> 
+<surname>Wen</surname>
 </string-name> 
 <etal></etal>
 </person-group>
@@ -2521,12 +2081,8 @@ Sep.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C.-X.
-</given-names> 
-<surname>
-Mao
-</surname>
+<given-names>C.-X.</given-names> 
+<surname>Mao</surname>
 </string-name> 
 <etal></etal>
 </person-group>
@@ -2572,39 +2128,23 @@ Jun.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-C.-X.
-</given-names> 
-<surname>
-Mao
-</surname>
+<given-names>C.-X.</given-names> 
+<surname>Mao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-S.
-</given-names> 
-<surname>
-Gao
-</surname>
+<given-names>S.</given-names> 
+<surname>Gao</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>Y.</given-names> 
+<surname>Wang</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-Z.
-</given-names> 
-<surname>
-Cheng
-</surname>
+<given-names>Z.</given-names> 
+<surname>Cheng</surname>
 </string-name>
 </person-group>
 , 
@@ -2642,12 +2182,8 @@ IEEE Antennas Wireless Propag. Lett.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-W.
-</given-names> 
-<surname>
-Yang
-</surname>
+<given-names>W.</given-names> 
+<surname>Yang</surname>
 </string-name> 
 <etal></etal>
 </person-group>
@@ -2693,12 +2229,8 @@ Oct.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-X.
-</given-names> 
-<surname>
-Liu
-</surname>
+<given-names>X.</given-names> 
+<surname>Liu</surname>
 </string-name> 
 <etal></etal>
 </person-group>
@@ -2744,39 +2276,23 @@ Jul.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-Z.-T.
-</given-names> 
-<surname>
-Du
-</surname>
+<given-names>Z.-T.</given-names> 
+<surname>Du</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-K. X.
-</given-names> 
-<surname>
-Wang
-</surname>
+<given-names>K. X.</given-names> 
+<surname>Wang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Z.
-</given-names> 
-<surname>
-Chen
-</surname>
+<given-names>Z.</given-names> 
+<surname>Chen</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Wong
-</surname>
+<given-names>H.</given-names> 
+<surname>Wong</surname>
 </string-name>
 </person-group>
 , 
@@ -2821,57 +2337,33 @@ Dec.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Liu
-</surname>
+<given-names>H.</given-names> 
+<surname>Liu</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-C.
-</given-names> 
-<surname>
-Zhou
-</surname>
+<given-names>C.</given-names> 
+<surname>Zhou</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-X.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>X.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Li
-</surname>
+<given-names>H.</given-names> 
+<surname>Li</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-Y.
-</given-names> 
-<surname>
-Li
-</surname>
+<given-names>Y.</given-names> 
+<surname>Li</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-H.
-</given-names> 
-<surname>
-Wong
-</surname>
+<given-names>H.</given-names> 
+<surname>Wong</surname>
 </string-name>
 </person-group>
 , 
@@ -2916,48 +2408,28 @@ Feb.
 <mixed-citation publication-type="periodical" publication-format="print">
 <person-group person-group-type="author">
 <string-name>
-<given-names>
-D.
-</given-names> 
-<surname>
-Sievenpiper
-</surname>
+<given-names>D.</given-names> 
+<surname>Sievenpiper</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-L.
-</given-names> 
-<surname>
-Zhang
-</surname>
+<given-names>L.</given-names> 
+<surname>Zhang</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-R. F. J.
-</given-names> 
-<surname>
-Broas
-</surname>
+<given-names>R. F. J.</given-names> 
+<surname>Broas</surname>
 </string-name>
 , 
 <string-name>
-<given-names>
-N. G.
-</given-names> 
-<surname>
-Alexopolous
-</surname>
+<given-names>N. G.</given-names> 
+<surname>Alexopolous</surname>
 </string-name>
 , and 
 <string-name>
-<given-names>
-E.
-</given-names> 
-<surname>
-Yablonovitch
-</surname>
+<given-names>E.</given-names> 
+<surname>Yablonovitch</surname>
 </string-name>
 </person-group>
 , 
