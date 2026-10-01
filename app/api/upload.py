@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import asyncio
 import shutil
+import time
 from pathlib import Path
 from uuid import uuid4
 
@@ -10,8 +12,22 @@ from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
 from app.config import settings
 from app.db import Client, Job, get_session
+from app.utils.logger import logger
 
 router = APIRouter(prefix="/upload", tags=["upload"])
+
+
+async def _save_upload_to_disk(upload: UploadFile, dest: Path) -> int:
+    """Write multipart upload without blocking the event loop (large PDFs)."""
+
+    def _write() -> int:
+        nbytes = 0
+        with dest.open("wb") as f:
+            shutil.copyfileobj(upload.file, f)
+            nbytes = dest.stat().st_size
+        return nbytes
+
+    return await asyncio.to_thread(_write)
 
 
 @router.post("")
@@ -20,6 +36,7 @@ async def upload_files(
     template: UploadFile | None = File(None),
     client_id: str | None = Form(None),
 ) -> dict:
+    t0 = time.perf_counter()
     if not pdf.filename or not pdf.filename.lower().endswith(".pdf"):
         raise HTTPException(400, "pdf must be a .pdf file")
 
@@ -27,8 +44,8 @@ async def upload_files(
     job_dir = settings.uploads_dir / job_id
     job_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = job_dir / "paper.pdf"
-    with pdf_path.open("wb") as f:
-        shutil.copyfileobj(pdf.file, f)
+    pdf_bytes = await _save_upload_to_disk(pdf, pdf_path)
+    logger.info("Upload job {}: saved PDF {} ({} bytes)", job_id, pdf.filename, pdf_bytes)
 
     template_path: Path
     template_filename: str | None = None
@@ -46,8 +63,7 @@ async def upload_files(
         if not template.filename.lower().endswith(".xml"):
             raise HTTPException(400, "template must be .xml")
         template_path = job_dir / "template.xml"
-        with template_path.open("wb") as f:
-            shutil.copyfileobj(template.file, f)
+        await _save_upload_to_disk(template, template_path)
         template_filename = template.filename
 
     job = Job(
@@ -65,6 +81,11 @@ async def upload_files(
         session.add(job)
         session.commit()
 
+    logger.info(
+        "Upload job {} ready in {:.2f}s",
+        job_id,
+        time.perf_counter() - t0,
+    )
     return {
         "job_id": job_id,
         "pdf_filename": pdf.filename,

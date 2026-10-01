@@ -489,12 +489,13 @@ class PDFExtractor:
         return await asyncio.to_thread(self._extract_sync, pdf_path, job_id)
 
     def _extract_sync(self, pdf_path: Path, job_id: str | None) -> PaperData:
-        try:
-            layout_paper = extract_paper_via_layout(pdf_path)
-            layout_paper = self._attach_assets(layout_paper, pdf_path, job_id)
-            return sanitize_paper_data(layout_paper)
-        except Exception as exc:
-            logger.warning("Layout PDF extraction failed ({}), using legacy heuristics", exc)
+        if settings.USE_LAYOUT_PDF_EXTRACT:
+            try:
+                layout_paper = extract_paper_via_layout(pdf_path)
+                layout_paper = self._attach_assets(layout_paper, pdf_path, job_id)
+                return sanitize_paper_data(layout_paper)
+            except Exception as exc:
+                logger.warning("Layout PDF extraction failed ({}), using legacy heuristics", exc)
 
         doc = fitz.open(str(pdf_path))
         try:

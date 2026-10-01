@@ -41,6 +41,12 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     # Skip heavy pdfplumber tables + figure pixmap export (required on Render 512MB)
     LIGHT_PDF_EXTRACT: bool = _default_light_pdf_extract()
+    # Layout pipeline is accurate but CPU-heavy; disable on small Render instances if needed
+    USE_LAYOUT_PDF_EXTRACT: bool = os.getenv("USE_LAYOUT_PDF_EXTRACT", "true").lower() in (
+        "1",
+        "true",
+        "yes",
+    )
     # When true, billing/auth/rate-limit errors use deterministic offline LLM mocks
     LLM_FALLBACK_MOCK: bool = True
 

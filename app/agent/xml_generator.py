@@ -141,17 +141,75 @@ def _append_paper_section(parent: etree._Element, section: Section) -> None:
         _append_paper_section(sec, sub)
 
 
+def _direct_children(parent: etree._Element, local_tag: str) -> list[etree._Element]:
+    return [
+        c
+        for c in parent
+        if is_element_node(c) and xml_local_name(c) == local_tag
+    ]
+
+
+def _fill_or_create_child(parent: etree._Element, tag: str, text: str) -> None:
+    if not text or not text.strip():
+        return
+    nodes = _direct_children(parent, tag)
+    el = nodes[0] if nodes else etree.SubElement(parent, tag)
+    el.text = None
+    for child in list(el):
+        if is_element_node(child):
+            el.remove(child)
+    el.text = normalize_text_for_xml_dom(text)
+
+
+def _set_paragraph_element(p_el: etree._Element, para: str) -> None:
+    p_el.text = None
+    for child in list(p_el):
+        if is_element_node(child):
+            p_el.remove(child)
+    p_el.text = normalize_text_for_xml_dom(para)
+
+
+def _merge_sec_from_paper(template_sec: etree._Element, paper_sec: Section) -> None:
+    """Fill cleared template section slots with PDF text; keep fig/table/formula nodes."""
+    if paper_sec.label:
+        _fill_or_create_child(template_sec, "label", paper_sec.label)
+    if paper_sec.title:
+        _fill_or_create_child(template_sec, "title", paper_sec.title)
+
+    paras = [p.strip() for p in paper_sec.paragraphs if p.strip()]
+    p_slots = _direct_children(template_sec, "p")
+    for i, para in enumerate(paras):
+        if i < len(p_slots):
+            _set_paragraph_element(p_slots[i], para)
+        else:
+            p = etree.SubElement(template_sec, "p")
+            p.text = normalize_text_for_xml_dom(para)
+
+    template_subs = _direct_children(template_sec, "sec")
+    paper_subs = paper_sec.subsections
+    for i, t_sub in enumerate(template_subs):
+        if i < len(paper_subs):
+            _merge_sec_from_paper(t_sub, paper_subs[i])
+    for j in range(len(template_subs), len(paper_subs)):
+        _append_paper_section(template_sec, paper_subs[j])
+
+
 def _fill_body_from_paper(root: etree._Element, paper: PaperData) -> None:
-    """Replace sample-article body with sections/paragraphs extracted from the PDF."""
+    """Merge PDF sections into template body without destroying IEEE structure."""
     bodies = _find_by_local_tag(root, "body")
     if not bodies or not paper.sections:
         return
     body = bodies[0]
-    for child in list(body):
-        if is_element_node(child):
-            body.remove(child)
-    for section in paper.sections:
-        _append_paper_section(body, section)
+    top_secs = _direct_children(body, "sec")
+    if not top_secs:
+        for section in paper.sections:
+            _append_paper_section(body, section)
+        return
+    for i, t_sec in enumerate(top_secs):
+        if i < len(paper.sections):
+            _merge_sec_from_paper(t_sec, paper.sections[i])
+    for j in range(len(top_secs), len(paper.sections)):
+        _append_paper_section(body, paper.sections[j])
 
 
 def _fill_keywords(root: etree._Element, keywords: list[str]) -> None:

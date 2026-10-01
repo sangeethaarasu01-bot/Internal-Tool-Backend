@@ -31,7 +31,31 @@ def strip_article_meta_example_content(root: etree._Element) -> None:
         clear_subtree_text(am)
 
 
+def _clear_prose_element(elem: etree._Element) -> None:
+    """Remove example text from a prose element; keep the element shell."""
+    elem.text = None
+    for child in list(elem):
+        if is_element_node(child):
+            elem.remove(child)
+
+
+def strip_body_document_text(root: etree._Element) -> None:
+    """Clear sample article text in body but keep sec/fig/table/formula hierarchy."""
+    prose_tags = frozenset({"p", "title", "label", "article-title", "ack", "fn", "td", "th"})
+    for body in _find_by_local_tag(root, "body"):
+        for el in body.iter():
+            if not is_element_node(el):
+                continue
+            local = xml_local_name(el)
+            if local in prose_tags:
+                _clear_prose_element(el)
+            elif local == "caption":
+                for title in el.xpath(".//*[local-name()='title']"):
+                    _clear_prose_element(title)
+
+
 def strip_body_example_content(root: etree._Element) -> None:
+    """Legacy: remove all body children (prefer strip_body_document_text)."""
     for body in _find_by_local_tag(root, "body"):
         for child in list(body):
             if is_element_node(child):
@@ -55,7 +79,7 @@ def strip_back_example_content(root: etree._Element) -> None:
 def prepare_template_for_pdf_content(root: etree._Element) -> None:
     """Clear example document text while preserving template structure and journal-meta."""
     strip_article_meta_example_content(root)
-    strip_body_example_content(root)
+    strip_body_document_text(root)
     strip_back_example_content(root)
 
 

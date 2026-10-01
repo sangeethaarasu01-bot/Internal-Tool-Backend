@@ -131,6 +131,39 @@ async def test_xml_generator_async_path_same_as_dom():
     assert "Sample Article Title" not in out
 
 
+def test_rich_body_structure_preserved_after_merge():
+    tpl = """<article><body>
+    <sec id="sec1"><label>I.</label><title>Introduction</title>
+      <p>Sample Wald SPRT paragraph one.</p>
+      <disp-formula id="deqn1"><tex-math>\\alpha</tex-math></disp-formula>
+      <p>Sample paragraph two.</p>
+      <table-wrap id="table1"><label>TABLE I</label></table-wrap>
+    </sec>
+    </body></article>"""
+    paper = PaperData(
+        title="T",
+        sections=[
+            Section(
+                id="sec1",
+                label="I.",
+                title="Introduction",
+                level=1,
+                paragraphs=[
+                    "PDF paragraph one about sequential tests.",
+                    "PDF paragraph two about boosting.",
+                ],
+            ),
+        ],
+    )
+    out = _generate_from_template_dom(tpl, paper, MappingPlan(mappings=[]))
+    root = etree.fromstring(out.encode("utf-8"))
+    assert root.xpath(".//*[local-name()='disp-formula'][@id='deqn1']")
+    assert root.xpath(".//*[local-name()='table-wrap'][@id='table1']")
+    assert "PDF paragraph one" in out
+    assert "Sample Wald SPRT" not in out
+    assert "Sample paragraph two" not in out
+
+
 def test_prepare_template_clears_article_meta_but_keeps_journal_meta():
     tpl = """<article><front>
     <journal-meta><journal-title>IEEE Sample Journal</journal-title></journal-meta>
