@@ -33,6 +33,7 @@ class Section(BaseModel):
     title: str
     level: int
     paragraphs: list[str] = Field(default_factory=list)
+    drop_cap_letters: list[str | None] = Field(default_factory=list)
     equations: list[str] = Field(default_factory=list)
     figure_refs: list[str] = Field(default_factory=list)
     table_refs: list[str] = Field(default_factory=list)

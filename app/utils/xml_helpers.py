@@ -314,3 +314,50 @@ def serialize_tree(tree: etree._ElementTree, doctype: str | None = None) -> str:
             1,
         )
     return format_ieee_empty_element_tags(xml_str)
+
+
+def paragraph_has_drop_cap_bold(p_el: etree._Element, letter: str) -> bool:
+    for child in p_el:
+        if not is_element_node(child):
+            continue
+        if xml_local_name(child) != "bold":
+            continue
+        bold_text = (child.text or "").strip()
+        if bold_text and bold_text[0].upper() == letter.upper():
+            return True
+    return False
+
+
+def wrap_drop_cap_in_paragraph(p_el: etree._Element, letter: str) -> bool:
+    """Wrap the decorative first letter in ``<bold>`` (IEEE drop-cap markup)."""
+    if not letter or len(letter) != 1 or not letter.isalpha():
+        return False
+    if paragraph_has_drop_cap_bold(p_el, letter):
+        return False
+    raw = p_el.text or ""
+    if not raw.strip():
+        return False
+    match = re.match(r"^(\s*)(\S+)(.*)$", raw, flags=re.DOTALL)
+    if not match:
+        return False
+    prefix, first_token, after_token = match.group(1), match.group(2), match.group(3)
+    remainder: str | None = None
+    upper = letter.upper()
+    if first_token.upper().startswith(upper + upper) and len(first_token) >= 2:
+        # PDF merge: "TO" + "begin" → token "TO"
+        rest_word = first_token[1:]
+        if rest_word:
+            rest_word = rest_word[0].lower() + rest_word[1:]
+        remainder = rest_word + after_token
+    elif first_token[0].upper() == upper:
+        remainder = first_token[1:] + after_token
+    elif first_token[0].islower():
+        remainder = first_token + after_token
+    else:
+        return False
+    p_el.text = prefix or None
+    bold = etree.Element("bold")
+    bold.text = upper
+    p_el.insert(0, bold)
+    bold.tail = remainder
+    return True

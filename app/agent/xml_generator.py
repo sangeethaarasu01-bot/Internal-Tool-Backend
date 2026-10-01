@@ -14,8 +14,10 @@ from app.llm.client import LLMClient
 from app.models.mapping_plan import MappingEntry, MappingPlan
 from app.models.paper import Author, PaperData, Section
 from app.utils.logger import logger
+from app.utils.text_utils import infer_drop_cap_from_paragraph_start
 from app.utils.template_skeleton import (
     clear_subtree_text,
+    paragraph_has_block_structure,
     prepare_template_for_pdf_content,
     skeleton_template_xml,
 )
@@ -32,6 +34,7 @@ from app.utils.xml_helpers import (
     reorder_contrib_group_author_comments,
     serialize_tree,
     strip_xml_prolog_for_parse,
+    wrap_drop_cap_in_paragraph,
     xml_local_name,
 )
 
@@ -171,13 +174,7 @@ def _set_paragraph_element(p_el: etree._Element, para: str) -> None:
 
 def _paragraph_accepts_pdf_text(p_el: etree._Element) -> bool:
     """Do not overwrite IEEE paragraphs that still carry equations or formal statements."""
-    blocked = frozenset(
-        {"disp-formula", "fig", "table-wrap", "statement", "algorithm"},
-    )
-    for child in p_el:
-        if is_element_node(child) and xml_local_name(child) in blocked:
-            return False
-    return True
+    return not paragraph_has_block_structure(p_el)
 
 
 def _merge_sec_from_paper(template_sec: etree._Element, paper_sec: Section) -> None:
@@ -205,6 +202,38 @@ def _merge_sec_from_paper(template_sec: etree._Element, paper_sec: Section) -> N
             _merge_sec_from_paper(t_sub, paper_subs[i])
     for j in range(len(template_subs), len(paper_subs)):
         _append_paper_section(template_sec, paper_subs[j])
+
+
+def _drop_cap_letters_for_section(paper_sec: Section) -> list[str | None]:
+    if paper_sec.drop_cap_letters:
+        return list(paper_sec.drop_cap_letters)
+    return [infer_drop_cap_from_paragraph_start(p) for p in paper_sec.paragraphs]
+
+
+def _apply_drop_caps_for_section(template_sec: etree._Element, paper_sec: Section) -> None:
+    letters = _drop_cap_letters_for_section(paper_sec)
+    if not any(letters):
+        return
+    p_els = _direct_children(template_sec, "p")
+    for i, letter in enumerate(letters):
+        if not letter or i >= len(p_els):
+            continue
+        if wrap_drop_cap_in_paragraph(p_els[i], letter):
+            logger.debug("Applied drop-cap <bold>{}</bold> in section {}", letter, paper_sec.id)
+    template_subs = _direct_children(template_sec, "sec")
+    for i, t_sub in enumerate(template_subs):
+        if i < len(paper_sec.subsections):
+            _apply_drop_caps_for_section(t_sub, paper_sec.subsections[i])
+
+
+def _apply_drop_caps_from_paper(root: etree._Element, paper: PaperData) -> None:
+    bodies = _find_by_local_tag(root, "body")
+    if not bodies or not paper.sections:
+        return
+    top_secs = _direct_children(bodies[0], "sec")
+    for i, t_sec in enumerate(top_secs):
+        if i < len(paper.sections):
+            _apply_drop_caps_for_section(t_sec, paper.sections[i])
 
 
 def _fill_body_from_paper(root: etree._Element, paper: PaperData) -> None:
@@ -526,22 +555,30 @@ def _generate_from_template_dom(
     parser = etree.XMLParser(remove_blank_text=False, recover=True)
     root = etree.fromstring(xml_body.encode("utf-8"), parser=parser)
     tree = etree.ElementTree(root)
-    prepare_template_for_pdf_content(root)
+    merge_pdf = prepare_template_for_pdf_content(root, paper)
     logger.debug(
-        "XML DOM: stripped template example content; PDF title={} sections={}",
+        "XML DOM: merge_pdf={} PDF title={} sections={}",
+        merge_pdf,
         (paper.title or "")[:80],
         len(paper.sections),
     )
-    _apply_simple_mappings(root, paper, plan)
-    _fill_abstract(root, paper.abstract)
-    if any(m.transform == "loop" and "author" in m.pdf_field for m in plan.mappings):
-        _fill_authors(root, paper.authors)
-    elif paper.authors:
-        _fill_authors(root, paper.authors)
-    _fill_keywords(root, paper.keywords)
-    _fill_affiliations(root, paper)
-    _fill_body_from_paper(root, paper)
-    _fill_references_from_paper(root, paper)
+    if merge_pdf:
+        _apply_simple_mappings(root, paper, plan)
+        _fill_abstract(root, paper.abstract)
+        if any(m.transform == "loop" and "author" in m.pdf_field for m in plan.mappings):
+            _fill_authors(root, paper.authors)
+        elif paper.authors:
+            _fill_authors(root, paper.authors)
+        _fill_keywords(root, paper.keywords)
+        _fill_affiliations(root, paper)
+        _fill_body_from_paper(root, paper)
+        _fill_references_from_paper(root, paper)
+    else:
+        logger.info(
+            "PDF extraction unreliable for this file; output keeps template "
+            "front/body/back text and structure (IEEE proof + vendor XML workflow)."
+        )
+    _apply_drop_caps_from_paper(root, paper)
     sync_bio_xrefs(root)
     output = finalize_ieee_xml(serialize_tree(tree, doctype=doctype))
     parse_xml_string(output)
@@ -577,7 +614,7 @@ class XMLGenerator:
                 errors="\n".join(prior_errors),
             )
 
-        structural_template = skeleton_template_xml(template_xml)
+        structural_template = skeleton_template_xml(template_xml, paper)
         logger.info(
             "LLM XML fallback: using structural template ({} chars), paper title={!r:.60}",
             len(structural_template),

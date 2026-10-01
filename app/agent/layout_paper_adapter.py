@@ -14,6 +14,8 @@ from app.services.layout.document_pipeline import process_document_structure
 from app.services.layout.semantic_patterns import parse_author_names, split_section_label_and_title
 from app.services.text_extractor import extract_text_layout
 from app.utils.logger import logger
+from app.utils.template_skeleton import is_boilerplate_text
+from app.utils.text_utils import drop_cap_letter_from_ir
 
 
 def _ir_text(node: IRNode | None) -> str:
@@ -27,15 +29,22 @@ def _semantic_section_to_paper(sec: SemanticSection, sec_index: int) -> Section:
     if not title:
         title = (sec.heading or "").strip() or f"Section {sec_index}"
     paragraphs: list[str] = []
+    drop_cap_letters: list[str | None] = []
     for node in sec.paragraphs:
         text = _ir_text(node)
         if text:
             paragraphs.append(text)
+            drop_cap_letters.append(
+                drop_cap_letter_from_ir(node.detection_reason, text)
+            )
     for node in sec.content:
         if node.type in ("paragraph", "BODY_TEXT", "PARAGRAPH"):
             text = _ir_text(node)
             if text:
                 paragraphs.append(text)
+                drop_cap_letters.append(
+                    drop_cap_letter_from_ir(node.detection_reason, text)
+                )
     subsections = [
         _semantic_section_to_paper(sub, sec_index * 10 + i + 1)
         for i, sub in enumerate(sec.subsections)
@@ -46,6 +55,7 @@ def _semantic_section_to_paper(sec: SemanticSection, sec_index: int) -> Section:
         title=title,
         level=sec.level or 1,
         paragraphs=paragraphs,
+        drop_cap_letters=drop_cap_letters,
         subsections=subsections,
     )
 
@@ -58,7 +68,9 @@ def _authors_from_front(semantic: SemanticDocument) -> list[Author]:
             continue
         for name in parse_author_names(raw):
             name = name.strip()
-            if not name or len(name) < 4:
+            if not name or len(name) < 4 or is_boilerplate_text(name):
+                continue
+            if len(name) > 120:
                 continue
             parts = name.split()
             authors.append(

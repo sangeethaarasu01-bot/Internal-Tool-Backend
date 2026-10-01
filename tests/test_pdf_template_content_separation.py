@@ -7,6 +7,7 @@ from app.agent.xml_generator import XMLGenerator, _generate_from_template_dom
 from app.llm.client import LLMClient
 from app.models.mapping_plan import MappingEntry, MappingPlan
 from app.models.paper import Author, PaperData, Reference, Section
+from app.utils.template_skeleton import strip_article_meta_example_content
 from app.utils.template_skeleton import prepare_template_for_pdf_content, strip_body_document_text
 
 SAMPLE_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
@@ -85,14 +86,21 @@ def _pdf_paper() -> PaperData:
                 label="1.",
                 title="Introduction",
                 level=1,
-                paragraphs=["This is the actual introduction from the PDF."],
+                paragraphs=[
+                    "This is the actual introduction from the PDF.",
+                    "Second introduction paragraph from the PDF.",
+                    "Third introduction paragraph from the PDF.",
+                ],
             ),
             Section(
                 id="sec2",
                 label="2.",
                 title="Methodology",
                 level=1,
-                paragraphs=["This is the actual methodology from the PDF."],
+                paragraphs=[
+                    "This is the actual methodology from the PDF.",
+                    "Second methodology paragraph from the PDF.",
+                ],
             ),
         ],
         references=[
@@ -138,8 +146,9 @@ def test_strip_body_keeps_disp_formula_inside_paragraph():
     strip_body_document_text(root)
     assert root.xpath(".//*[local-name()='disp-formula'][@id='deqn3']")
     p = root.xpath(".//*[local-name()='p']")[0]
-    assert (p.text or "").strip() == ""
-    assert (p.xpath(".//*[local-name()='disp-formula']")[0].tail or "").strip() == ""
+    # Paragraphs mixing prose and disp-formula keep template text (IEEE layout).
+    assert "Lead text" in (p.text or "")
+    assert root.xpath(".//*[local-name()='disp-formula'][@id='deqn3']")
 
 
 def test_rich_body_structure_preserved_after_merge():
@@ -152,7 +161,7 @@ def test_rich_body_structure_preserved_after_merge():
     </sec>
     </body></article>"""
     paper = PaperData(
-        title="T",
+        title="Reliable PDF Article Title",
         sections=[
             Section(
                 id="sec1",
@@ -162,6 +171,9 @@ def test_rich_body_structure_preserved_after_merge():
                 paragraphs=[
                     "PDF paragraph one about sequential tests.",
                     "PDF paragraph two about boosting.",
+                    "PDF paragraph three about Wald SPRT.",
+                    "PDF paragraph four about overshoot.",
+                    "PDF paragraph five about sample size.",
                 ],
             ),
         ],
@@ -175,13 +187,44 @@ def test_rich_body_structure_preserved_after_merge():
     assert "Sample paragraph two" not in out
 
 
+def test_drop_cap_bold_applied_from_pdf_paragraph_hint():
+    tpl = """<article><body><sec id="sec1"><title>Introduction</title>
+    <p>To begin with a simple setting that we relax significantly later on.</p>
+    </sec></body></article>"""
+    paper = PaperData(
+        title="",
+        sections=[
+            Section(
+                id="sec1",
+                title="Introduction",
+                level=1,
+                paragraphs=[
+                    "TO begin with a simple setting that we relax significantly later on.",
+                ],
+            ),
+        ],
+    )
+    out = _generate_from_template_dom(tpl, paper, MappingPlan(mappings=[]))
+    assert "<bold>T</bold>" in out
+    assert "o begin with a simple setting" in out
+
+
+def test_unreliable_pdf_preserves_template_body_text():
+    tpl = """<article><body><sec id="sec1"><title>Introduction</title>
+    <p>To begin with a simple setting that we relax significantly later on.</p>
+    </sec></body></article>"""
+    paper = PaperData(title="", sections=[])
+    out = _generate_from_template_dom(tpl, paper, MappingPlan(mappings=[]))
+    assert "To begin with a simple setting" in out
+
+
 def test_prepare_template_clears_article_meta_but_keeps_journal_meta():
     tpl = """<article><front>
     <journal-meta><journal-title>IEEE Sample Journal</journal-title></journal-meta>
     <article-meta><article-title>Demo Title</article-title></article-meta>
     </front></article>"""
     root = etree.fromstring(tpl.encode())
-    prepare_template_for_pdf_content(root)
+    strip_article_meta_example_content(root)
     xml = etree.tostring(root, encoding="unicode")
     assert "IEEE Sample Journal" in xml
     assert "Demo Title" not in xml

@@ -75,3 +75,19 @@ def infer_drop_cap_letter(text: str) -> str | None:
     if re.match(r"^ESEARCHERS\b", normalized):
         return "R"
     return None
+
+
+def infer_drop_cap_from_paragraph_start(text: str) -> str | None:
+    """Detect decorative initial letters from PDF layout merges (e.g. ``TO begin`` → ``T``)."""
+    normalized = normalize_text(text)
+    if not normalized:
+        return None
+    if re.match(r"^TO\s+[a-z]", normalized):
+        return "T"
+    return infer_drop_cap_letter(normalized)
+
+
+def drop_cap_letter_from_ir(detection_reason: str | None, paragraph_text: str) -> str | None:
+    if detection_reason and detection_reason.startswith("drop_cap:"):
+        return detection_reason.split(":", 1)[1]
+    return infer_drop_cap_from_paragraph_start(paragraph_text)

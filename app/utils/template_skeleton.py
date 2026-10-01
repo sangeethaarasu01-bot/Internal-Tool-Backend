@@ -6,8 +6,11 @@ nodes (titles, paragraphs, sample authors, etc.) must not appear in final output
 
 from __future__ import annotations
 
+import re
+
 from lxml import etree
 
+from app.models.paper import PaperData, Section
 from app.utils.xml_helpers import is_element_node, parse_xml_string, xml_local_name
 
 # journal-meta is usually vendor/journal scaffolding — keep its text nodes.
@@ -63,6 +66,57 @@ _P_INLINE_STRUCTURE = frozenset(
     }
 )
 _P_INLINE_EMPHASIS = frozenset({"bold", "italic", "sc", "monospace", "uri", "named-content"})
+_P_BLOCK_IN_PARAGRAPH = frozenset(
+    {"disp-formula", "inline-formula", "statement", "algorithm", "table-wrap", "fig"},
+)
+
+_BOILERPLATE_RE = re.compile(
+    r"please note|author gateway|annotate the pdf|cannot accept new source",
+    re.I,
+)
+
+
+def is_boilerplate_text(text: str) -> bool:
+    """IEEE proof cover / gateway notices that must not become authors or titles."""
+    return bool(_BOILERPLATE_RE.search((text or "").strip()))
+
+
+def paragraph_has_block_structure(p_el: etree._Element) -> bool:
+    """True when <p> mixes prose with equations, tables, or formal statements."""
+    for child in p_el:
+        if is_element_node(child) and xml_local_name(child) in _P_BLOCK_IN_PARAGRAPH:
+            return True
+    return False
+
+
+def _count_section_paragraphs(sections: list[Section]) -> int:
+    total = 0
+
+    def walk(sec: Section) -> None:
+        nonlocal total
+        total += sum(1 for p in sec.paragraphs if (p or "").strip())
+        for sub in sec.subsections:
+            walk(sub)
+
+    for sec in sections:
+        walk(sec)
+    return total
+
+
+def should_apply_pdf_document_content(paper: PaperData | None) -> bool:
+    """Only replace template text when PDF extraction looks like real article content."""
+    if paper is None:
+        return False
+    title = (paper.title or "").strip()
+    if len(title) < 12 or is_boilerplate_text(title):
+        return False
+    for author in paper.authors[:5]:
+        name = (author.full_name or "").strip()
+        if name and is_boilerplate_text(name):
+            return False
+    if _count_section_paragraphs(paper.sections) < 5:
+        return False
+    return True
 
 
 def _clear_paragraph_prose(elem: etree._Element) -> None:
@@ -90,7 +144,8 @@ def strip_body_document_text(root: etree._Element) -> None:
                 continue
             local = xml_local_name(el)
             if local == "p":
-                _clear_paragraph_prose(el)
+                if not paragraph_has_block_structure(el):
+                    _clear_paragraph_prose(el)
             elif local in prose_tags:
                 _clear_prose_element(el)
             elif local == "caption":
@@ -120,17 +175,29 @@ def strip_back_example_content(root: etree._Element) -> None:
             clear_subtree_text(fn_group)
 
 
-def prepare_template_for_pdf_content(root: etree._Element) -> None:
-    """Clear example document text while preserving template structure and journal-meta."""
+def prepare_template_for_pdf_content(
+    root: etree._Element,
+    paper: PaperData | None = None,
+) -> bool:
+    """Clear example document text when PDF content is reliable enough to merge.
+
+    Returns True if template example text was stripped for PDF merge.
+    """
+    if not should_apply_pdf_document_content(paper):
+        return False
     strip_article_meta_example_content(root)
     strip_body_document_text(root)
     strip_back_example_content(root)
+    return True
 
 
-def skeleton_template_xml(template_xml: str) -> str:
+def skeleton_template_xml(
+    template_xml: str,
+    paper: PaperData | None = None,
+) -> str:
     """Return structural template XML with example article/body/back text removed."""
     root = parse_xml_string(template_xml)
-    prepare_template_for_pdf_content(root)
+    prepare_template_for_pdf_content(root, paper)
     return etree.tostring(root, encoding="unicode")
 
 
