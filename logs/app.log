@@ -582,32 +582,3 @@ ValueError: Validation failed: ['Broken xref: rid=deqn3 has no matching id', 'Br
 2026-10-01 15:05:26.926 | INFO     | app.agent.xml_generator:_generate_from_template_dom:578 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
 2026-10-01 15:07:59.819 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
 2026-10-01 15:08:01.045 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
-2026-10-01 15:08:15.058 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
-2026-10-01 15:08:49.282 | INFO     | app.api.upload:upload_files:48 - Upload job 664b8913-2a55-40a9-9084-c746866e9c46: saved PDF tit-fischer-3658855-proof.pdf1.pdf (1438851 bytes)
-2026-10-01 15:08:49.308 | INFO     | app.api.upload:upload_files:84 - Upload job 664b8913-2a55-40a9-9084-c746866e9c46 ready in 0.04s
-2026-10-01 15:10:40.697 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:191 - Layout PDF extract: title= authors=20 sections=8 paras=166
-2026-10-01 15:10:48.168 | INFO     | app.agent.converter_agent:run:58 - Stage PDF IR: title= authors=20 sections=8 refs=54
-2026-10-01 15:10:49.986 | WARNING  | app.agent.semantic_matcher:match:90 - Semantic matching LLM failed (Gemini API error 403: {
-  "error": {
-    "code": 403,
-    "message": "Your API key was reported as leaked. Please use another API key.",
-    "status": "PERMISSION_DENIED"
-  }
-}
-), using heuristic plan
-2026-10-01 15:10:49.988 | INFO     | app.agent.converter_agent:run:82 - Stage mapping plan: 2 entries
-2026-10-01 15:10:50.003 | INFO     | app.agent.xml_generator:_generate_from_template_dom:578 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
-2026-10-01 15:16:17.390 | INFO     | app.api.upload:upload_files:48 - Upload job 826b6497-4674-45b6-a5a7-24c2b808f030: saved PDF tap-mao-3657825-proof.pdf1.pdf (1505428 bytes)
-2026-10-01 15:16:17.403 | INFO     | app.api.upload:upload_files:84 - Upload job 826b6497-4674-45b6-a5a7-24c2b808f030 ready in 0.02s
-2026-10-01 15:16:52.357 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:191 - Layout PDF extract: title= authors=12 sections=5 paras=44
-2026-10-01 15:16:59.061 | INFO     | app.agent.converter_agent:run:58 - Stage PDF IR: title= authors=12 sections=5 refs=36
-2026-10-01 15:17:00.985 | WARNING  | app.agent.semantic_matcher:match:90 - Semantic matching LLM failed (Gemini API error 403: {
-  "error": {
-    "code": 403,
-    "message": "Your API key was reported as leaked. Please use another API key.",
-    "status": "PERMISSION_DENIED"
-  }
-}
-), using heuristic plan
-2026-10-01 15:17:00.988 | INFO     | app.agent.converter_agent:run:82 - Stage mapping plan: 2 entries
-2026-10-01 15:17:01.012 | INFO     | app.agent.xml_generator:_generate_from_template_dom:578 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
