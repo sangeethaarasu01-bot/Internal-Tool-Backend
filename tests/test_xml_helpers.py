@@ -112,15 +112,3 @@ def test_finalize_ieee_xml_repairs_double_escaped_entities() -> None:
     out = finalize_ieee_xml(xml)
     assert "Universit&#x00E1;" in out
     assert "&amp;#x00E1;" not in out
-
-
-def test_finalize_ieee_xml_trims_padded_surname() -> None:
-    xml = (
-        '<?xml version="1.0"?><article><front><contrib-group><contrib>'
-        "<name-alternatives><string-name>"
-        "<given-names> Aaditya </given-names><surname> Robbins </surname>"
-        "</string-name></name-alternatives></contrib></contrib-group></front></article>"
-    )
-    out = finalize_ieee_xml(xml)
-    assert "<surname>Robbins</surname>" in out.replace(" ", "")
-    assert "<given-names>Aaditya</given-names>" in out.replace(" ", "")

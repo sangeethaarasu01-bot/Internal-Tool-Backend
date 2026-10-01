@@ -15,7 +15,6 @@ from app.models.mapping_plan import MappingEntry, MappingPlan
 from app.models.paper import Author, PaperData, Section
 from app.utils.logger import logger
 from app.utils.text_utils import infer_drop_cap_from_paragraph_start
-from app.utils.xml_text import normalize_person_name_text
 from app.utils.template_skeleton import (
     clear_subtree_text,
     paragraph_has_block_structure,
@@ -459,8 +458,8 @@ def _fill_affiliations(root: etree._Element, paper: PaperData) -> None:
 
 def _apply_author_to_contrib(contrib: etree._Element, author: Author, idx: int) -> None:
     given, surname = _author_name_parts(author)
-    given_enc = normalize_person_name_text(given) if given else ""
-    surname_enc = normalize_person_name_text(surname) if surname else ""
+    given_enc = normalize_text_for_xml_dom(given) if given else ""
+    surname_enc = normalize_text_for_xml_dom(surname) if surname else ""
 
     for string_name in _find_by_local_tag(contrib, "string-name"):
         string_name.text = None

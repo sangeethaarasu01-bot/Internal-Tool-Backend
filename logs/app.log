@@ -579,6 +579,3 @@ ValueError: Validation failed: ['Broken xref: rid=deqn3 has no matching id', 'Br
 ), using heuristic plan
 2026-10-01 14:20:28.091 | INFO     | app.agent.converter_agent:run:82 - Stage mapping plan: 2 entries
 2026-10-01 14:20:28.125 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
-2026-10-01 15:05:26.926 | INFO     | app.agent.xml_generator:_generate_from_template_dom:578 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
-2026-10-01 15:07:59.819 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
-2026-10-01 15:08:01.045 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
