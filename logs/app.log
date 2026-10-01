@@ -525,3 +525,15 @@ ValueError: Validation failed: ['Broken xref: rid=deqn3 has no matching id', 'Br
 2026-10-01 13:25:29.901 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
 2026-10-01 13:27:38.444 | INFO     | app.api.upload:upload_files:48 - Upload job b4735402-6cc3-4779-98e5-177afc08fabe: saved PDF tit-fischer-3658855-proof.pdf1.pdf (1438851 bytes)
 2026-10-01 13:27:38.471 | INFO     | app.api.upload:upload_files:84 - Upload job b4735402-6cc3-4779-98e5-177afc08fabe ready in 0.04s
+2026-10-01 13:27:39.802 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 13:29:09.528 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:179 - Layout PDF extract: title= authors=20 sections=8 paras=166
+2026-10-01 13:29:19.855 | INFO     | app.agent.converter_agent:run:58 - Stage PDF IR: title= authors=20 sections=8 refs=54
+2026-10-01 13:29:21.856 | WARNING  | app.agent.semantic_matcher:match:90 - Semantic matching LLM failed (Gemini API error 403: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+), using heuristic plan
+2026-10-01 13:29:21.858 | INFO     | app.agent.converter_agent:run:82 - Stage mapping plan: 2 entries
