@@ -39,15 +39,59 @@ def _clear_prose_element(elem: etree._Element) -> None:
             elem.remove(child)
 
 
+# IEEE/JATS often nests equations and theorems inside <p>; never drop these when clearing text.
+_P_INLINE_STRUCTURE = frozenset(
+    {
+        "disp-formula",
+        "inline-formula",
+        "xref",
+        "fig",
+        "table-wrap",
+        "graphic",
+        "statement",
+        "algorithm",
+        "fn",
+        "sup",
+        "sub",
+        "bold",
+        "italic",
+        "sc",
+        "monospace",
+        "uri",
+        "named-content",
+        "break",
+    }
+)
+_P_INLINE_EMPHASIS = frozenset({"bold", "italic", "sc", "monospace", "uri", "named-content"})
+
+
+def _clear_paragraph_prose(elem: etree._Element) -> None:
+    """Clear running text in <p> but keep disp-formula, xrefs, and related inline structure."""
+    elem.text = None
+    for child in list(elem):
+        if not is_element_node(child):
+            continue
+        local = xml_local_name(child)
+        if local in _P_INLINE_STRUCTURE:
+            child.tail = None
+            if local in _P_INLINE_EMPHASIS:
+                _clear_prose_element(child)
+            continue
+        _clear_prose_element(child)
+        elem.remove(child)
+
+
 def strip_body_document_text(root: etree._Element) -> None:
     """Clear sample article text in body but keep sec/fig/table/formula hierarchy."""
-    prose_tags = frozenset({"p", "title", "label", "article-title", "ack", "fn", "td", "th"})
+    prose_tags = frozenset({"title", "label", "article-title", "ack", "fn", "td", "th"})
     for body in _find_by_local_tag(root, "body"):
         for el in body.iter():
             if not is_element_node(el):
                 continue
             local = xml_local_name(el)
-            if local in prose_tags:
+            if local == "p":
+                _clear_paragraph_prose(el)
+            elif local in prose_tags:
                 _clear_prose_element(el)
             elif local == "caption":
                 for title in el.xpath(".//*[local-name()='title']"):

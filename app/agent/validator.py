@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import re
-
 from lxml import etree
 
 from app.models.schema_map import SchemaMap
@@ -34,10 +32,14 @@ class Validator:
                 if not any((n.text or "").strip() or len(n) for n in found):
                     errors.append(f"Required element empty: {el.xpath}")
 
-        xref_rids = re.findall(r'<xref[^>]+rid="([^"]+)"', output_xml)
-        id_attrs = set(re.findall(r'\bid="([^"]+)"', output_xml))
-        for rid in xref_rids:
-            if rid not in id_attrs:
+        id_attrs = {
+            (el.get("id") or "").strip()
+            for el in out_root.xpath(".//*[@id]")
+            if (el.get("id") or "").strip()
+        }
+        for xref in out_root.xpath(".//*[local-name()='xref'][@rid]"):
+            rid = (xref.get("rid") or "").strip()
+            if rid and rid not in id_attrs:
                 errors.append(f"Broken xref: rid={rid} has no matching id")
 
         if schema.doctype and "DTD" in (schema.doctype or ""):

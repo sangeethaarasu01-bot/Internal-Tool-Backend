@@ -169,6 +169,17 @@ def _set_paragraph_element(p_el: etree._Element, para: str) -> None:
     p_el.text = normalize_text_for_xml_dom(para)
 
 
+def _paragraph_accepts_pdf_text(p_el: etree._Element) -> bool:
+    """Do not overwrite IEEE paragraphs that still carry equations or formal statements."""
+    blocked = frozenset(
+        {"disp-formula", "fig", "table-wrap", "statement", "algorithm"},
+    )
+    for child in p_el:
+        if is_element_node(child) and xml_local_name(child) in blocked:
+            return False
+    return True
+
+
 def _merge_sec_from_paper(template_sec: etree._Element, paper_sec: Section) -> None:
     """Fill cleared template section slots with PDF text; keep fig/table/formula nodes."""
     if paper_sec.label:
@@ -177,7 +188,9 @@ def _merge_sec_from_paper(template_sec: etree._Element, paper_sec: Section) -> N
         _fill_or_create_child(template_sec, "title", paper_sec.title)
 
     paras = [p.strip() for p in paper_sec.paragraphs if p.strip()]
-    p_slots = _direct_children(template_sec, "p")
+    p_slots = [
+        p for p in _direct_children(template_sec, "p") if _paragraph_accepts_pdf_text(p)
+    ]
     for i, para in enumerate(paras):
         if i < len(p_slots):
             _set_paragraph_element(p_slots[i], para)

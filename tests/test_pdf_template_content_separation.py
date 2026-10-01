@@ -7,7 +7,7 @@ from app.agent.xml_generator import XMLGenerator, _generate_from_template_dom
 from app.llm.client import LLMClient
 from app.models.mapping_plan import MappingEntry, MappingPlan
 from app.models.paper import Author, PaperData, Reference, Section
-from app.utils.template_skeleton import prepare_template_for_pdf_content
+from app.utils.template_skeleton import prepare_template_for_pdf_content, strip_body_document_text
 
 SAMPLE_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
 <article xmlns:mml="http://www.w3.org/1998/Math/MathML">
@@ -129,6 +129,17 @@ async def test_xml_generator_async_path_same_as_dom():
     out = await XMLGenerator(llm).generate(SAMPLE_TEMPLATE, _pdf_paper(), _full_plan())
     assert "Actual Paper Title" in out
     assert "Sample Article Title" not in out
+
+
+def test_strip_body_keeps_disp_formula_inside_paragraph():
+    tpl = """<article><body><sec id="sec1"><p>Lead text
+      <disp-formula id="deqn3"><tex-math>x</tex-math></disp-formula>After formula text.</p></sec></body></article>"""
+    root = etree.fromstring(tpl.encode())
+    strip_body_document_text(root)
+    assert root.xpath(".//*[local-name()='disp-formula'][@id='deqn3']")
+    p = root.xpath(".//*[local-name()='p']")[0]
+    assert (p.text or "").strip() == ""
+    assert (p.xpath(".//*[local-name()='disp-formula']")[0].tail or "").strip() == ""
 
 
 def test_rich_body_structure_preserved_after_merge():

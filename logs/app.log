@@ -425,3 +425,103 @@ RuntimeError: Gemini API error 503: {
 2026-10-01 12:58:58.321 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
 2026-10-01 13:03:58.688 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
 2026-10-01 13:03:59.616 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 13:20:13.478 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 13:20:14.429 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 13:20:28.711 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 13:20:52.130 | INFO     | app.api.upload:upload_files:48 - Upload job ed6edab4-4ba4-4990-834d-9e283e1ec078: saved PDF tit-fischer-3658855-proof.pdf1.pdf (1438851 bytes)
+2026-10-01 13:20:52.174 | INFO     | app.api.upload:upload_files:84 - Upload job ed6edab4-4ba4-4990-834d-9e283e1ec078 ready in 0.06s
+2026-10-01 13:21:47.635 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:179 - Layout PDF extract: title= authors=20 sections=8 paras=166
+2026-10-01 13:21:52.204 | INFO     | app.agent.converter_agent:run:58 - Stage PDF IR: title= authors=20 sections=8 refs=54
+2026-10-01 13:21:53.011 | WARNING  | app.agent.semantic_matcher:match:90 - Semantic matching LLM failed (Gemini API error 403: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+), using heuristic plan
+2026-10-01 13:21:53.014 | INFO     | app.agent.converter_agent:run:82 - Stage mapping plan: 2 entries
+2026-10-01 13:21:53.687 | ERROR    | app.api.convert:run_agent:60 - Conversion failed for job ed6edab4-4ba4-4990-834d-9e283e1ec078
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "C:\Python312\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 376
+               │     └ 3
+               └ <function _main at 0x0000023A36BC1260>
+  File "C:\Python312\Lib\multiprocessing\spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 376
+           │    └ <function BaseProcess._bootstrap at 0x0000023A36AB37E0>
+           └ <SpawnProcess name='SpawnProcess-1' parent=27036 started>
+  File "C:\Python312\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x0000023A36AB2D40>
+    └ <SpawnProcess name='SpawnProcess-1' parent=27036 started>
+  File "C:\Python312\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x0000023A38F534A0>, 'target': <bound method Server.run of <uvicorn.server.Server...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=27036 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=27036 started>
+    │    └ <function subprocess_started at 0x0000023A38FE2660>
+    └ <SpawnProcess name='SpawnProcess-1' parent=27036 started>
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\venv\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=460, family=2, type=1, proto=6, laddr=('0.0.0.0', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x0000023A39021A90>>
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\venv\Lib\site-packages\uvicorn\server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=460, family=2, type=1, proto=6, laddr=('0.0.0.0', 8000)>]
+           │       │   │    └ <function Server.serve at 0x0000023A38FE1B20>
+           │       │   └ <uvicorn.server.Server object at 0x0000023A39021A90>
+           │       └ <function run at 0x0000023A388459E0>
+           └ <module 'asyncio' from 'C:\\Python312\\Lib\\asyncio\\__init__.py'>
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x0000023A3905CD60>
+           │      └ <function Runner.run at 0x0000023A388B5120>
+           └ <asyncio.runners.Runner object at 0x0000023A38F536E0>
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\bac...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x0000023A388AAD40>
+           │    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x0000023A38F536E0>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 671, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x0000023A388AACA0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 638, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000023A388B4AE0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "C:\Python312\Lib\asyncio\base_events.py", line 1971, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000023A3882CFE0>
+    └ <Handle Task.task_wakeup(<Future finis...</article>\n'>)>
+  File "C:\Python312\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finis...</article>\n'>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finis...</article>\n'>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finis...</article>\n'>)>
+
+> File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\api\convert.py", line 40, in run_agent
+    result = await agent.run(
+                   │     └ <function ConverterAgent.run at 0x0000023A3C2AD3A0>
+                   └ <app.agent.converter_agent.ConverterAgent object at 0x0000023A3CEE6DB0>
+
+  File "C:\Users\ponar\OneDrive\Documents\Titanium\ieee-xml-converter\backend\app\agent\converter_agent.py", line 114, in run
+    raise ValueError(f"Validation failed: {errors}")
+                                           └ ['Broken xref: rid=deqn3 has no matching id', 'Broken xref: rid=deqn12 has no matching id', 'Broken xref: rid=deqn12 has no m...
+
+ValueError: Validation failed: ['Broken xref: rid=deqn3 has no matching id', 'Broken xref: rid=deqn12 has no matching id', 'Broken xref: rid=deqn12 has no matching id', 'Broken xref: rid=deqn22 has no matching id', 'Broken xref: rid=deqn22 has no matching id', 'Broken xref: rid=theorem6 has no matching id']
+2026-10-01 13:24:50.563 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 13:25:28.968 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 13:25:29.901 | INFO     | app.main:lifespan:31 - IEEE XML Converter API started
+2026-10-01 13:27:38.444 | INFO     | app.api.upload:upload_files:48 - Upload job b4735402-6cc3-4779-98e5-177afc08fabe: saved PDF tit-fischer-3658855-proof.pdf1.pdf (1438851 bytes)
+2026-10-01 13:27:38.471 | INFO     | app.api.upload:upload_files:84 - Upload job b4735402-6cc3-4779-98e5-177afc08fabe ready in 0.04s
