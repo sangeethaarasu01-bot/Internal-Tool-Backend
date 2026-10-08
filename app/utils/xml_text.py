@@ -160,14 +160,29 @@ def ieee_hex_entity_for_char(char: str) -> str | None:
     return IEEE_HEX_CHAR_ENTITIES.get(char)
 
 
-def sanitize_xml_text(value: str | None, *, log_context: dict[str, Any] | None = None) -> str:
+def strip_illegal_xml_chars(value: str | None) -> str:
+    """Remove XML 1.0-illegal code points without logging (forensic pipelines)."""
+    if not value:
+        return ""
+    if not isinstance(value, str):
+        value = str(value)
+    return _ILLEGAL_XML_CHARS.sub("", value)
+
+
+def sanitize_xml_text(
+    value: str | None,
+    *,
+    log_context: dict[str, Any] | None = None,
+    log_removals: bool = True,
+) -> str:
     """Remove characters that are illegal in XML 1.0 text nodes."""
     if not value:
         return ""
     if not isinstance(value, str):
         value = str(value)
     cleaned = _ILLEGAL_XML_CHARS.sub("", value)
-    _log_removed_chars(value, cleaned, log_context)
+    if log_removals:
+        _log_removed_chars(value, cleaned, log_context)
     return cleaned
 
 

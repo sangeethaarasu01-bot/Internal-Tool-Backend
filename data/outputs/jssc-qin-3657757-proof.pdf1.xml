@@ -1,0 +1,2730 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" article-type="research" content-type="orig-research" dtd-version="2.0" lifecycle="final" open-access="no" peer-reviewed="yes" xml:lang="eng" specific-use="proof">
+<!--Article Processing Date: 01/27/2026-->
+<!--Vendor Name: DCL-->
+<!--IEEE XML JATS Tagging Guidelines version: v20241024-->
+<!--IEEE Math Coding Requirements and Guidelines for Vendors version: v2.4-->
+<!--new_sw_ran-->
+<front>
+<journal-meta>
+<journal-id journal-id-type="ieee">0055700</journal-id>
+<journal-id journal-id-type="acronym">JSSC</journal-id>
+<journal-id journal-id-type="coden">IJSCBC</journal-id>
+<journal-title-group>
+<journal-title>IEEE Journal of Solid-State Circuits</journal-title>
+</journal-title-group>
+<issn publication-format="print">0018-9200</issn>
+<issn publication-format="online">1558-173X</issn>
+<publisher>
+<publisher-name>IEEE</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1109/JSSC.2026.3657757</article-id>
+<article-id pub-id-type="manuscript">JSSC-25-0533</article-id>
+<xplore-article-id></xplore-article-id>
+<xplore-issue></xplore-issue>
+<xplore-pub-id></xplore-pub-id>
+<article-categories>
+<assembly-group sequence="0"></assembly-group>
+</article-categories>
+<title-group>
+<article-title>A 4.21-to-15.18 GHz Magnetically Reconfigurable and Fully Symmetrical Quad-Core Quad-Mode VCO</article-title>
+</title-group>
+<contrib-group>
+<contrib id="contrib1" primary="yes" ieee-member-type="Graduate_Student_Member" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0009-0001-5791-0393</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Shijin</given-names>
+<surname>
+Huang
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Shijin</given-names>
+<surname>
+Huang
+</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff1"></xref><xref ref-type="bio" rid="bio1"></xref>
+</contrib>
+<contrib id="contrib2" primary="no" ieee-member-type="Member" corresp="yes" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-1743-2200</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Pei</given-names>
+<surname>
+Qin
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Pei</given-names>
+<surname>
+Qin
+</surname>
+</string-name>
+</name-alternatives>
+<email>qinpei7777@scut.edu.cn</email>
+<xref ref-type="aff" rid="aff1"></xref><xref ref-type="bio" rid="bio2"></xref>
+</contrib>
+<contrib id="contrib3" primary="no" ieee-member-type="Senior_Member" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-0330-737X</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Xiang</given-names>
+<surname>
+Yi
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Xiang</given-names>
+<surname>
+Yi
+</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff1"></xref>
+<xref ref-type="bio" rid="bio3"></xref>
+</contrib>
+<contrib id="contrib4" primary="no" ieee-member-type="Member" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0001-7972-4789</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Haoshen</given-names>
+<surname>
+Zhu
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Haoshen</given-names>
+<surname>
+Zhu
+</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff1"></xref>
+<xref ref-type="bio" rid="bio4"></xref>
+</contrib>
+<contrib id="contrib5" primary="no" ieee-member-type="Member" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0003-2944-3035</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Liang</given-names>
+<surname>
+Wu
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Liang</given-names>
+<surname>
+Wu
+</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff2"></xref>
+<xref ref-type="bio" rid="bio5"></xref>
+</contrib>
+<contrib id="contrib6" primary="no" ieee-member-type="Fellow" corresp="no" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0002-4226-2127</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Quan</given-names>
+<surname>
+Xue
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Quan</given-names>
+<surname>
+Xue
+</surname>
+</string-name>
+</name-alternatives>
+<xref ref-type="aff" rid="aff3"></xref>
+<xref ref-type="bio" rid="bio6"></xref>
+</contrib>
+<author-comment>
+<p>This article was approved by Associate Editor Wanghua Wu.</p>
+<p><italic>(Corresponding author: Pei Qin.)</italic></p></author-comment>
+</contrib-group>
+<aff id="aff1">
+<institution-wrap>
+<institution content-type="division">Guangdong Provincial Key Laboratory of Millimeter-Wave and Terahertz and the School of Microelectronics</institution>
+<institution content-type="institution">South China University of Technology</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">26467</institution-id>
+</institution-wrap>
+<city>Guangzhou</city>
+<post-code>510641</post-code>
+<country>China</country>
+</aff>
+<aff id="aff2">
+<institution-wrap>
+<institution content-type="division">School of Science and Engineering (SSE) and Guangdong-Hong Kong-Macao Joint Laboratory for Millimeter-Wave and Terahertz</institution>
+<institution content-type="institution">The Chinese University of Hong Kong</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">26451</institution-id>
+</institution-wrap>
+<city>Shenzhen</city>
+<province>Guangdong</province>
+<post-code>518172</post-code>
+<country>China</country>
+</aff>
+<aff id="aff3">
+<institution-wrap>
+<institution content-type="division">Guangdong Provincial Key Laboratory of Millimeter-Wave and Terahertz and the School of Electronic and Information Engineering</institution>
+<institution content-type="institution">South China University of Technology</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">26467</institution-id>
+</institution-wrap>
+<city>Guangzhou</city>
+<post-code>510641</post-code>
+<country>China</country>
+</aff>
+<pub-date date-type="cover" iso-8601-date="2026" pub-type="print" publication-format="pdf">
+<year>2026</year>
+</pub-date>
+<fpage>1</fpage>
+<lpage>0</lpage>
+<history>
+<date date-type="receiveddate" iso-8601-date="2025-09-02">
+<day>02</day>
+<month>09</month>
+<year>2025</year>
+</date>
+<date date-type="reviseddate1" iso-8601-date="2025-11-04">
+<day>04</day>
+<month>11</month>
+<year>2025</year>
+</date>
+<date date-type="reviseddate2" iso-8601-date="2025-12-08">
+<day>08</day>
+<month>12</month>
+<year>2025</year>
+</date>
+<date date-type="accepteddate" iso-8601-date="2026-01-20">
+<day>20</day>
+<month>01</month>
+<year>2026</year>
+</date>
+</history>
+<self-uri content-type="xml">jssc-qin-3657757.xml</self-uri>
+<self-uri content-type="print">jssc-qin-3657757.pdf</self-uri>
+<self-uri content-type="online">jssc-qin-3657757-x.pdf</self-uri>
+<abstract>
+<p>This work proposes a wideband low phase noise (PN) quad-core quad-mode voltage-controlled oscillator (VCO) which features magnetically reconfigurable (MR) technique and fully symmetrical architecture. The MR technique, realized through a transformer-based tank integrating an embedded switched inductor, leverages varying core excitation currents to achieve four distinct equivalent inductances, thereby enabling quad-mode operation. This approach avoids the frequency tuning range (FTR) compromise encountered when using capacitive tuning elements in multi-mode tanks. Furthermore, the fully symmetrical characteristics of the inductive, capacitive, and active elements, along with the routing layout, minimize mismatches among the VCO cores, ensuring effective synchronization of the four single-core VCOs and optimizing the PN in quad-core operation. The proposed quad-core quad-mode VCO achieves an FTR of 113.2% (4.21 to 15.18 GHz), a PN of −141.4 dBc/Hz at a 10 MHz offset from 4.28 GHz, a peak figure-of-merit (FoM) of 190.5 dBc/Hz, a peak <inline-formula><tex-math notation="LaTeX">$\text {FoM}_{T}$</tex-math></inline-formula> of 211.6 dBc/Hz and a peak FoM<sub>TA</sub> of 220.5 dBc/Hz at a 10 MHz offset.</p>
+</abstract>
+<kwd-group kwd-group-type="AuthorFree">
+<kwd>Magnetically reconfigurable (MR)</kwd>
+<kwd>phase noise (PN)</kwd>
+<kwd>quad-core</kwd>
+<kwd>quad-mode</kwd>
+<kwd>voltage-controlled oscillator (VCO)</kwd>
+<kwd>wide frequency tuning range (FTR)</kwd>
+</kwd-group>
+<funding-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>National Natural Science Foundation of China</institution><institution-id institution-id-type="fundref">10.13039/501100001809</institution-id></institution-wrap></funding-source>
+<award-id>62301224</award-id>
+<award-id>U23A20288</award-id>
+<award-id>62271210</award-id>
+</award-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>Natural Science Foundation of Guangdong Province</institution><institution-id institution-id-type="fundref">10.13039/501100003453</institution-id></institution-wrap></funding-source>
+<award-id>2023B0303000008</award-id>
+<award-id>2024A1515011982</award-id>
+</award-group>
+<funding-statement>This work was supported in part by the National Natural Science Foundation of China under Grant 62301224, Grant U23A20288, and Grant 62271210; and in part by the Natural Science Foundation of Guangdong Province under Grant 2023B0303000008 and Grant 2024A1515011982.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="25"/>
+<table-count count="1"/>
+<equation-count count="351"/>
+<ref-count count="29"/>
+<page-count count="15"/>
+</counts>
+</article-meta>
+</front>
+<body>
+<sec id="sec1">
+<label>I.</label>
+<title>Introduction</title>
+<p>To meet the requirements on multi-standard and multi-application scenarios in 5G communications, a local oscillator (LO) with wide frequency tuning range (FTR) is urgently desired. Besides, with the increasing demand for signal purity in high-order modulation schemes such as quadrature amplitude modulation (QAM), voltage-controlled oscillators (VCOs) are required to maintain low phase noise (PN). However, achieving wide bandwidth and low PN simultaneously remains a significant challenge for VCO designs.</p>
+<p>Compared to the scheme that uses multiple individual VCOs for multi-band operation, mode-switching technique summarized in <xref ref-type="bibr" rid="ref1">[1]</xref> provides a more efficient solution, enabling multi-band coverage with reduced area and lower power consumption. The switched-inductors or switched-transformers techniques are favorable to achieve wide bandwidth by utilizing multiple effective inductance values <xref ref-type="bibr" rid="ref2">[2]</xref>, <xref ref-type="bibr" rid="ref3">[3]</xref>, <xref ref-type="bibr" rid="ref4">[4]</xref>. Although these techniques can broaden the bandwidth effectively in a simple manner, the 
+<sc>on
+</sc>
+-resistance of the switches degrades the <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> factor of the tank, thus significantly deteriorating the PN. Recently, coupling multiple VCO cores operating at different modes via mode switches has been demonstrated to be a promising method to simultaneously achieve low PN and wide FTR.</p>
+<p>Based on Leeson&#x2019;s PN model <xref ref-type="bibr" rid="ref5">[5]</xref>, the PN can be expressed as follows:
+<disp-formula id="deqn1"><tex-math notation="LaTeX">\begin{equation*} L\left ({{\Delta \omega }}\right ) = 10\log \left [{{\frac {FkTR_{T}}{V_{0}^{2}{Q^{2}}}{\left ({{\frac {\omega _{0}}{\Delta \omega }}}\right )^{2}}}}\right ] \tag {1}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$k$</tex-math></inline-formula> is Boltzmann&#x2019;s constant, <inline-formula><tex-math notation="LaTeX">$T$</tex-math></inline-formula> is the absolute temperature, <inline-formula><tex-math notation="LaTeX">$F$</tex-math></inline-formula> is the device excess noise factor, <inline-formula><tex-math notation="LaTeX">$V_{0}$</tex-math></inline-formula> is the oscillation amplitude, <inline-formula><tex-math notation="LaTeX">$R_{T}$</tex-math></inline-formula> is the tank resistance, and <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> is the tank quality factor. Coupling <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula> VCO cores results in a <inline-formula><tex-math notation="LaTeX">$10\log N$</tex-math></inline-formula> dB PN reduction, as <inline-formula><tex-math notation="LaTeX">$R_{T}$</tex-math></inline-formula> in <xref ref-type="disp-formula" rid="deqn1">(1)</xref> is reduced by a factor of <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula> while other parameters remain fixed. However, this PN performance improvement comes at the cost of an <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula>-fold increase in power consumption. By utilizing mode switches among the multiple VCO cores, multiple operation modes can be generated, extending the FTR without incurring switch losses.</p>
+<p>Dual-mode VCOs have been widely reported <xref ref-type="bibr" rid="ref6">[6]</xref>, <xref ref-type="bibr" rid="ref7">[7]</xref>, <xref ref-type="bibr" rid="ref8">[8]</xref>, <xref ref-type="bibr" rid="ref9">[9]</xref>, <xref ref-type="bibr" rid="ref10">[10]</xref>, <xref ref-type="bibr" rid="ref11">[11]</xref>, <xref ref-type="bibr" rid="ref12">[12]</xref>, <xref ref-type="bibr" rid="ref13">[13]</xref>, which employ either magnetically reconfigurable (MR) inductance (denoted &#x201C;<inline-formula><tex-math notation="LaTeX">$M$</tex-math></inline-formula>&#x201D;) or electric coupling via added capacitors to change the effective capacitance (denoted &#x201C;<inline-formula><tex-math notation="LaTeX">$E$</tex-math></inline-formula>&#x201D;) to realize dual-mode operation. While an octave tuning range can theoretically be divided or multiplied to target any frequency band, dual-mode VCOs typically struggle to achieve full octave coverage due to practical limitations. As a result, triple-mode <xref ref-type="bibr" rid="ref14">[14]</xref>, <xref ref-type="bibr" rid="ref15">[15]</xref>, <xref ref-type="bibr" rid="ref16">[16]</xref>, <xref ref-type="bibr" rid="ref17">[17]</xref> or even quad-mode VCOs <xref ref-type="bibr" rid="ref18">[18]</xref>, <xref ref-type="bibr" rid="ref19">[19]</xref>, <xref ref-type="bibr" rid="ref20">[20]</xref>, <xref ref-type="bibr" rid="ref21">[21]</xref>, <xref ref-type="bibr" rid="ref22">[22]</xref>, <xref ref-type="bibr" rid="ref23">[23]</xref>, <xref ref-type="bibr" rid="ref24">[24]</xref> have gained popularity. In order to expand the number of operation modes, MR technique is typically combined with electric coupling. However, the latter introduces substantial parasitic capacitance, which increases <inline-formula><tex-math notation="LaTeX">$C_{\min }$</tex-math></inline-formula> and consequently reduces the FTR, expressed as follows:
+<disp-formula id="deqn2"><tex-math notation="LaTeX">\begin{equation*} \text {FTR} = 2 \times \frac {\sqrt {{C_{\max }}/{C_{\min }}} - 1}{\sqrt {{C_{\max }}/{C_{\min }}} + 1} \tag {2}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$C_{\min }$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$C_{\max }$</tex-math></inline-formula> denote the minimum and maximum values of the tank capacitance, respectively. Thus, MR technique is favored in those multi-core multi-mode VCO designs.</p>
+<p>In multi-core multi-mode VCOs, transformer-based resonant tanks are preferred for their design flexibility and area efficiency. However, as the number of operation modes increases, transformer design becomes challenging and the coupling network becomes complex, both of which tend to introduce asymmetries across VCO cores. As a result, the asymmetry induced by transformers or even other components inevitably introduces frequency mismatches in multi-core operation, which theoretically degrade the PN performance. Therefore, a fully symmetrical architecture in multi-core multi-mode VCOs are preferred to eliminate the negative impact on the PN performance.</p>
+<p>A substantial number of state-of-the-art triple-mode or quad-mode VCOs have been proposed in recent years. A dual-core triple-mode VCO with a wide FTR of 80.6% and a PN of −137.9 dBc/Hz at a 10 MHz offset from 7.15 GHz is proposed by using Electrical-Magnetic (E-M) mixed coupling in <xref ref-type="bibr" rid="ref15">[15]</xref>. However, the asymmetrical inductance seen from each core causes inter-core mismatches that degrades the PN. Moreover, the inclusion of additional mode switches and switched capacitor arrays (SCAs) impose extra parasitics, thus reducing the FTR. A quad-core quad-mode VCO in <xref ref-type="bibr" rid="ref22">[22]</xref> achieves an FTR of 101% and a PN of −133.2 dBc/Hz at a 10 MHz offset from 13.7 GHz by using E-M mixed coupling, whereas the issue of asymmetrical inductance persists, and the parasitics from electric coupling capacitors negatively impact the FTR. Additionally, the non-uniformity of the FTR across each mode is also undesirable. With the same total FTR, a uniform FTR in each mode yields roughly equal overlaps between adjacent modes, as shown in <xref ref-type="fig" rid="fig1">Fig. 1(a)</xref>. In contrast, a nonuniform FTR makes the overlaps highly uneven, as shown in <xref ref-type="fig" rid="fig1">Fig. 1(b)</xref>. This gives rise to two concerns. First, large differences in overlap make the band-decision thresholds difficult to unify and require additional algorithm adaptation, which increases system complexity. Second, under PVT variations, the smaller overlap is more likely to shrink and create a frequency gap between adjacent modes. Other works still suffer from these issues <xref ref-type="bibr" rid="ref18">[18]</xref>, <xref ref-type="bibr" rid="ref21">[21]</xref>. In summary, although multi-core multi-mode VCOs have demonstrated superior performance in terms of FTR and PN, issues such as asymmetrical inductance, parasitic-induced FTR reduction, and nonuniform FTR still persist, ultimately degrading the overall performance of the VCOs.
+<fig id="fig1">
+<label>Fig. 1.</label>
+<caption><p>(a) Uniform FTR in each mode. (b) Nonuniform FTR in each mode.</p></caption>
+<graphic xlink:href="qin1-3657757.eps"/>
+</fig>
+</p>
+<p>To surmount these issues, this work proposes a quad-core quad-mode VCO that achieves ultra-wide bandwidth and low PN by employing MR technique and fully symmetric architecture, which effectively eliminates the asymmetry and extra parasitics, and ensures a uniform FTR across all modes. This article is organized as follows. <xref ref-type="sec" rid="sec2">Section II</xref> presents the structure of the proposed VCO and the operating principles of the four modes. <xref ref-type="sec" rid="sec3">Section III</xref> discusses the symmetry of the design and its optimization of performance. <xref ref-type="sec" rid="sec4">Section IV</xref> presents the measurement results and <xref ref-type="sec" rid="sec5">Section V</xref> draws the conclusion.</p>
+</sec>
+<sec id="sec2">
+<label>II.</label>
+<title>Proposed Quad-Mode Operation Utilizing MR Technique</title>
+<sec id="sec2a">
+<label>A.</label>
+<title>Triple-Mode Operating Principle</title>
+<p>Dual-core dual-mode VCO serves as the foundational architecture for multi-core multi-mode VCO designs, as shown in <xref ref-type="fig" rid="fig2">Fig. 2</xref>. By controlling the phases of the two coupled inductors through the mode switches <inline-formula><tex-math notation="LaTeX">$S_{O}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$S_{E}$</tex-math></inline-formula>, two effective inductances are achieved, thereby realizing two operation modes, namely odd mode and even mode. <xref ref-type="fig" rid="fig3">Fig. 3</xref> shows the quad-core triple-mode configuration derived from the dual-core dual-mode structure. It simply connects four single VCO cores through mode switches, with the key difference that the inductors of the four cores are mutually coupled with each other. Besides, to ensure symmetry among the cores, the coupling coefficients between adjacent inductors and those between the opposite inductors are equal, resulting in the relationship as follows:
+<disp-formula id="deqn3-deqn4"><tex-math notation="LaTeX">\begin{align*} {k_{1}} &amp; = {k_{2}} = {k_{3}} = {k_{4}} = {k_{\text {adj}}} \tag {3}\\ {k_{5}} &amp; = {k_{6}} = {k_{\text {opp}}}. \tag {4}\end{align*}</tex-math></disp-formula>
+<fig id="fig2">
+<label>Fig. 2.</label>
+<caption><p>Operating principle of dual-core dual-mode VCO.</p></caption>
+<graphic xlink:href="qin2-3657757.eps"/>
+</fig>
+<fig id="fig3">
+<label>Fig. 3.</label>
+<caption><p>Configuration of the quad-core triple-mode VCO.</p></caption>
+<graphic xlink:href="qin3-3657757.eps"/>
+</fig>
+</p>
+<p>The sixteen mode switches (<inline-formula><tex-math notation="LaTeX">$S_{i,j}$</tex-math></inline-formula>) are employed to connect the corresponding two ports (<inline-formula><tex-math notation="LaTeX">$P_{i}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$P_{j}$</tex-math></inline-formula>). By changing the current directions of the tank inductors in each core through the mode switches, the proposed VCO can operate in three resonant modes. The three operation modes are described as follows.
+<list list-type="ordered">
+<list-item>
+<label>1)</label>
+<p>In mode-L, as shown in <xref ref-type="fig" rid="fig4">Fig. 4(a)</xref>, the current directions of four tank inductors are all in-phase, with the switches <inline-formula><tex-math notation="LaTeX">$S_{1,3}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{1,5}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{2,4}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{2,6}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{3,7}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{4,8}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{5,7}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$S_{6,8}$</tex-math></inline-formula> turned on. Thus, the voltages at ports <inline-formula><tex-math notation="LaTeX">$P_{1,3,5,7}$</tex-math></inline-formula> are in phase, as are those at <inline-formula><tex-math notation="LaTeX">$P_{2,4,6,8}$</tex-math></inline-formula>. The equivalent inductance of each core is expressed as follows:
+<disp-formula id="deqn5"><tex-math notation="LaTeX">\begin{align*} {L_{\text {mode},L}} = \left ({{1 + {k_{\text {adj}}} + {k_{\text {adj}}} + {k_{\text {opp}}}}}\right )L = L + 2{M_{\text {adj}}} + {M_{\text {opp}}} \tag {5}\end{align*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$M_{\text {adj}}=k_{\text {adj}}L$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$M_{\text {opp}}=k_{\text {opp}}L$</tex-math></inline-formula>.</p>
+</list-item>
+<list-item>
+<label>2)</label>
+<p>In mode-M, as illustrated in <xref ref-type="fig" rid="fig4">Fig. 4(b)</xref>, the currents in the adjacent cores of any given core are either in-phase or anti-phase, whereas the current in the opposite core is strictly anti-phase. In this mode, switches <inline-formula><tex-math notation="LaTeX">$S_{1,4}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{1,5}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{2,3}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{2,6}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{3,7}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{4,8}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{5,8}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$S_{6,7}$</tex-math></inline-formula> are turned on, leading to ports <inline-formula><tex-math notation="LaTeX">$P_{1,4,5,8}$</tex-math></inline-formula> (as well as <inline-formula><tex-math notation="LaTeX">$P_{2,3,6,7}$</tex-math></inline-formula>) connected together. Specifically, for core-1, the magnetic influence from core-2 and -3 cancels out, and only core-4 contributes a mutual inductance of <inline-formula><tex-math notation="LaTeX">$-M_{\text {opp}}$</tex-math></inline-formula>. Thus, the equivalent inductance of core-1 is expressed as follows:
+<disp-formula id="deqn6"><tex-math notation="LaTeX">\begin{equation*} {L_{\text {mode},M}} = \left ({{1 - {k_{\text {adj}}} + {k_{\text {adj}}} - {k_{\text {opp}}}}}\right )L = L - {M_{\text {opp}}}. \tag {6}\end{equation*}</tex-math></disp-formula></p>
+<p>Apart from core-1, it can be observed that the equivalent inductances for other three cores are also equal to <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},M}$</tex-math></inline-formula>. Additionally, since <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},L}$</tex-math></inline-formula> is larger than <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},M}$</tex-math></inline-formula>, the operating frequency of mode-L is lower.</p>
+</list-item>
+<list-item>
+<label>3)</label>
+<p>In mode-H, as shown in <xref ref-type="fig" rid="fig4">Fig. 4(c)</xref>, the currents in adjacent cores are anti-phase, whereas those in opposite cores are in-phase, with the switches <inline-formula><tex-math notation="LaTeX">$S_{1,4}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{1,6}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{2,3}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{2,5}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{3,8}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{4,7}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{5,8}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$S_{6,7}$</tex-math></inline-formula> turned on. Each core experiences mutual inductances of <inline-formula><tex-math notation="LaTeX">$-2M_{\text {adj}}$</tex-math></inline-formula> from its two adjacent cores and <inline-formula><tex-math notation="LaTeX">$M_{\text {opp}}$</tex-math></inline-formula> from the opposite core, resulting in the equivalent inductance seen from each core being
+<disp-formula id="deqn7"><tex-math notation="LaTeX">\begin{equation*} {L_{\text {mode},H}} = \left ({{1 - 2{k_{\text {adj}}} + {k_{\text {opp}}}}}\right )L = L -2{M_{\text {adj}}} + {M_{\text {opp}}}. \tag {7}\end{equation*}</tex-math></disp-formula></p>
+<p>Since <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},M}{\,}-{\,}L_{\text {mode},H}$</tex-math></inline-formula> is equal to <inline-formula><tex-math notation="LaTeX">$2(M_{\text {adj}}{\,}-{\,}M_{\text {opp}})$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$M_{\text {adj}}$</tex-math></inline-formula> is set larger than <inline-formula><tex-math notation="LaTeX">$M_{\text {opp}}$</tex-math></inline-formula> in this design, mode-M is thus operating at a lower frequency.</p>
+</list-item>
+<list-item>
+<label>4)</label>
+<p>In mode-N, as shown in <xref ref-type="fig" rid="fig4">Fig. 4(d)</xref>, the current in any given core is anti-phase with other three cores, with the switches <inline-formula><tex-math notation="LaTeX">$S_{1,4}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{1,6}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{2,3}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{2,5}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{3,8}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{4,7}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$S_{5,8}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$S_{6,7}$</tex-math></inline-formula> turned on. Based on the current direction in each core, the effective inductance of each core can be derived as <inline-formula><tex-math notation="LaTeX">$L{\,}+{\,}M_{\text {opp}}$</tex-math></inline-formula> for core-1 and -4, <inline-formula><tex-math notation="LaTeX">$L{\,}+{\,}2M_{\text {adj}}{\,}{\,}-{\,}{\,}M_{\text {opp}}$</tex-math></inline-formula> for core-2, and <inline-formula><tex-math notation="LaTeX">$L{\,}{\,}-{\,}{\,}2M_{\text {adj}}{\,}{\,}-{\,}{\,}M_{\text {opp}}$</tex-math></inline-formula> for core-3. Unlike the other three modes, where the effective inductor for each core is identical, the inductance seen from each core in this mode is varied, leading to significant frequency mismatches among four cores. In a multi-core VCO, all cores should be typically designed to be identical to ensure balanced operation. This mismatch in inductance will lead to unequal current distribution among the cores, which in turn causes imbalances in the waveforms among VCO cores. Then the current will flowthrough the lossy switches in order to equalize the energy of the resonators, thereby forcing the VCO to oscillate at the same frequency. This process, however, degrades the tank <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> and renders the theoretical 6 dB PN optimization from the quad-core operation unachievable. Therefore, this mode is abandoned.</p>
+<p>In summary, three distinct equivalent inductance values are realized through a fully symmetrical transformer network composed of four mutually coupled inductors. However, since the difference <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},L}{\,}-{\,}L_{\text {mode},M}$</tex-math></inline-formula> exceeds <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},M}{\,}-{\,}L_{\text {mode},H}$</tex-math></inline-formula> by <inline-formula><tex-math notation="LaTeX">$4M_{\text {opp}}$</tex-math></inline-formula>, achieving continuous frequency tuning between mode-M and -H may result in a frequency gap between mode-L and -M. Therefore, an additional mode inserted between mode-L and -M is required, which should minimally affect other modes.</p>
+</list-item>
+</list>
+<fig id="fig4">
+<label>Fig. 4.</label>
+<caption><p>Operating principle of the quad-core triple-mode VCO. (a) Mode-L. (b) Mode-M. (c) Mode-H. (d) Mode-N.</p></caption>
+<graphic xlink:href="qin4-3657757.eps"/>
+</fig>
+</p>
+</sec>
+<sec id="sec2b">
+<label>B.</label>
+<title>Quad-Mode Operating Principle</title>
+<p>Based on the triple-mode transformer in <xref ref-type="fig" rid="fig3">Fig. 3</xref>, a switched inductor is embedded within the four tank inductors, as shown in <xref ref-type="fig" rid="fig5">Fig. 5</xref>, thereby creating one additional mode. The switched inductor operates in two different states, depending on its connection state.
+<list list-type="ordered">
+<list-item>
+<label>1)</label>
+<p>1) When the switched inductor <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> is turned off, three distinct modes-mode-1, -3, and -4, as shown in <xref ref-type="fig" rid="fig6">Fig. 6(a), (c), and (d)</xref>, operate following the same principle as the original triple-mode configuration, corresponding to mode-L, -M, and -H, respectively.</p>
+</list-item>
+<list-item>
+<label>2)</label>
+<p>When <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> is turned on, the induced current in <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> is canceled in mode-M and -H by two opposing currents from the four tank inductors. Therefore, turning on the switch <inline-formula><tex-math notation="LaTeX">$S_{Ls}$</tex-math></inline-formula> does not affect the operating frequencies of mode-M and -H. In mode-L, however, the currents in the four tank inductors are aligned in the same direction, so the induced current in <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> cannot be canceled. Consequently, an additional operation mode, denoted as mode-2, is inserted between mode-1 and -3, which is implemented by controlling <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> through the mode-L configuration, as shown in <xref ref-type="fig" rid="fig6">Fig. 6(b)</xref>.</p>
+</list-item>
+</list>
+<fig id="fig5">
+<label>Fig. 5.</label>
+<caption><p>Structure of the proposed quad-core quad-mode VCO.</p></caption>
+<graphic xlink:href="qin5-3657757.eps"/>
+</fig>
+<fig id="fig6">
+<label>Fig. 6.</label>
+<caption><p>Operating principle of the proposed quad-core quad-mode VCO. (a) Mode-1. (b) Mode-2. (c) Mode-3. (d) Mode-4.</p></caption>
+<graphic xlink:href="qin6-3657757.eps"/>
+</fig>
+</p>
+<p>Since the switched inductor is controlled by an NMOS switch (<inline-formula><tex-math notation="LaTeX">$S_{Ls}$</tex-math></inline-formula>), it should be noted that due to the non-ideal characteristics of the switch, it can be equivalent to an 
+<sc>on
+</sc>
+-resistance (<inline-formula><tex-math notation="LaTeX">$r_{\text {on} }$</tex-math></inline-formula>) when turned on, and as two parasitic capacitances (<inline-formula><tex-math notation="LaTeX">$C_{\text {off} }$</tex-math></inline-formula>) to ground when turned off, as shown in <xref ref-type="fig" rid="fig7">Fig. 7</xref>. The presence of <inline-formula><tex-math notation="LaTeX">$r_{\text {on} }$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$C_{\text {off} }$</tex-math></inline-formula> will affect the equivalent inductance in each operation mode, which can be analyzed using a simplified lumped model of the switched-inductor-based quad-mode transformer, as shown in <xref ref-type="fig" rid="fig8">Fig. 8</xref>.
+<list list-type="ordered">
+<list-item>
+<label>1)</label>
+<p>When the switch <inline-formula><tex-math notation="LaTeX">$S_{Ls}$</tex-math></inline-formula> is turned on corresponding to mode-2, the switched inductor is connected in series with the 
+<sc>on
+</sc>
+-resistance <inline-formula><tex-math notation="LaTeX">$r_{\text {on} }$</tex-math></inline-formula>, as shown in <xref ref-type="fig" rid="fig8">Fig. 8(a)</xref>. The electrical parameters&#x2013;namely <inline-formula><tex-math notation="LaTeX">$k_{\text {adj}}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$k_{\text {opp}}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$L$</tex-math></inline-formula>&#x2013;will be affected by <inline-formula><tex-math notation="LaTeX">$r_{\text {on} }$</tex-math></inline-formula>, resulting in modified values denoted as <inline-formula><tex-math notation="LaTeX">$k_{\text {adj},\text {on} }$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$k_{\text {opp},\text {on} }$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$L_{\text {on}}$</tex-math></inline-formula>, respectively. The modified parameter <inline-formula><tex-math notation="LaTeX">$k_{\text {adj},\text {on} }$</tex-math></inline-formula> can be derived based on <xref ref-type="fig" rid="fig8">Fig. 8(a)</xref> by analyzing <inline-formula><tex-math notation="LaTeX">$Z_{12}=V_{1}/I_{2}$</tex-math></inline-formula> under the condition <inline-formula><tex-math notation="LaTeX">$I_{1}=I_{3}=I_{4}=0$</tex-math></inline-formula>, while <inline-formula><tex-math notation="LaTeX">$I_{\text {sw}}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$I_{2}$</tex-math></inline-formula> provide current excitations. According to the mutual inductance voltage equation <xref ref-type="bibr" rid="ref25">[25]</xref>, the voltage <inline-formula><tex-math notation="LaTeX">$V_{1}$</tex-math></inline-formula> can be written as follows:
+<disp-formula id="deqn8"><tex-math notation="LaTeX">\begin{equation*} {V_{1}} = s{M_{\text {adj}}}{I_{2}} + s{M_{\text {sw}}}{I_{\text {sw}}} \tag {8}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$M_{\text {sw}}=k_{\text {sw}}(LL_{\text {sw}})^{1/2}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$s={jw}$</tex-math></inline-formula>.</p>
+<p>As the 
+<sc>on
+</sc>
+-resistance <inline-formula><tex-math notation="LaTeX">$r_{\text {on} }$</tex-math></inline-formula> effectively connects both ends of the switched inductor, the Kirchhoff&#x2019;s voltage law (KVL) equation can be derived as follows:
+<disp-formula id="deqn9"><tex-math notation="LaTeX">\begin{equation*} 0 = s{L_{\text {sw}}}{I_{\text {sw}}} + s{M_{\text {sw}}} {I_{2}} + r_{\text {on} }{I_{\text {sw}}}. \tag {9}\end{equation*}</tex-math></disp-formula></p>
+<p>From <xref ref-type="disp-formula" rid="deqn8">(8)</xref> and <xref ref-type="disp-formula" rid="deqn9">(9)</xref>, <inline-formula><tex-math notation="LaTeX">$Z_{12}$</tex-math></inline-formula> can be derived as follows:
+<disp-formula id="deqn10"><tex-math notation="LaTeX">\begin{equation*} Z_{12} = s{M_{\text {adj},\text {on} }} = s\left ({{{M_{\text {adj}}} - \frac {sM_{\text {sw}}^{2}}{s{L_{\text {sw}}} + {r_{\text {on} }}}}}\right ). \tag {10}\end{equation*}</tex-math></disp-formula></p>
+<p>It can be seen from <xref ref-type="disp-formula" rid="deqn10">(10)</xref> that the presence of <inline-formula><tex-math notation="LaTeX">$r_{\text {on} }$</tex-math></inline-formula> leads to variation in the mutual inductance <inline-formula><tex-math notation="LaTeX">$M_{\text {adj}}$</tex-math></inline-formula> between adjacent cores, where the modified value <inline-formula><tex-math notation="LaTeX">$M_{\text {adj},\text {on} }$</tex-math></inline-formula> can be expressed as follows:
+<disp-formula id="deqn11"><tex-math notation="LaTeX">\begin{equation*} {M_{\text {adj},\text {on} }} = {M_{\text {adj}}} - \frac {sM_{\text {sw}}^{2}}{s{L_{\text {sw}}} + {r_{\text {on} }}}. \tag {11}\end{equation*}</tex-math></disp-formula></p>
+<p>Similarly, <inline-formula><tex-math notation="LaTeX">$M_{\text {opp},\text {on} }$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$L_{\text {on} }$</tex-math></inline-formula> can be derived as follows:
+<disp-formula id="deqn12-deqn13"><tex-math notation="LaTeX">\begin{align*} {M_{\text {opp},\text {on} }} = {M_{\text {opp}}} - \frac {sM_{\text {sw}}^{2}}{s{L_{\text {sw}}} + {r_{\text {on} }}} \tag {12}\\ {L_{\text {on} }} = L - \frac {sM_{\text {sw}}^{2}}{s{L_{\text {sw}}} + {r_{\text {on} }}}. \tag {13}\end{align*}</tex-math></disp-formula></p>
+<p>Consequently, the equivalent inductance in mode-2 can be derived as follows:
+<disp-formula id="deqn14"><tex-math notation="LaTeX">\begin{equation*} {L_{\text {mode},2}} = L + 2{M_{\text {adj}}} + {M_{\text {opp}}} - \frac {4sM_{\text {sw}}^{2}}{s{L_{\text {sw}}} + {r_{\text {on} }}}. \tag {14}\end{equation*}</tex-math></disp-formula></p>
+<p>As long as the size of the switch <inline-formula><tex-math notation="LaTeX">$S_{Ls}$</tex-math></inline-formula> is sufficiently large, its 
+<sc>on
+</sc>
+-resistance <inline-formula><tex-math notation="LaTeX">$r_{\text {on} }$</tex-math></inline-formula> can be neglected and the difference in equivalent inductances between mode-1 and -2 becomes <inline-formula><tex-math notation="LaTeX">$4k_{\text {sw}}^{2}L$</tex-math></inline-formula>. Therefore, by adjusting the spacing between <inline-formula><tex-math notation="LaTeX">$L$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula>, the coupling coefficient <inline-formula><tex-math notation="LaTeX">$k_{\text {sw}}$</tex-math></inline-formula> can be controlled, enabling the separation of <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},2}$</tex-math></inline-formula> from <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},1}$</tex-math></inline-formula>, and allowing mode-2 to fill the frequency gap between mode-1 and -3.</p>
+</list-item>
+<list-item>
+<label>2)</label>
+<p>When the switch <inline-formula><tex-math notation="LaTeX">$S_{Ls}$</tex-math></inline-formula> is turned off corresponding to mode-1, -3, and -4, the switched inductor is connected in series with the parasitic capacitance <inline-formula><tex-math notation="LaTeX">$C_{\text {off} }$</tex-math></inline-formula>, as shown in <xref ref-type="fig" rid="fig8">Fig. 8(b)</xref>. Similar to the previous analysis, the only difference lies in replacing <inline-formula><tex-math notation="LaTeX">$r_{\text {on} }$</tex-math></inline-formula> with <inline-formula><tex-math notation="LaTeX">$2/({sC}_{\text {off} })$</tex-math></inline-formula>. Thus, the equivalent modified <inline-formula><tex-math notation="LaTeX">$M_{\text {adj},\text {off} }$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$M_{\text {opp},\text {off} }$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$L_{\text {off} }$</tex-math></inline-formula> can be expressed as follows:
+<disp-formula id="deqn15-deqn17"><tex-math notation="LaTeX">\begin{align*} {M_{\text {adj},\text {off} }} &amp; = {M_{\text {adj}}} - \frac {{s^{2}}M_{\text {sw}}^{2}{C_{\text {off} }}}{{s^{2}}{L_{\text {sw}}}{C_{\text {off} }} + 2} \tag {15}\\ {M_{\text {opp},\text {off} }} &amp; = {M_{\text {opp}}} - \frac {{s^{2}}M_{\text {sw}}^{2}{C_{\text {off} }}}{{s^{2}}{L_{\text {sw}}}{C_{\text {off} }} + 2} \tag {16}\\ {L_{\text {off} }} &amp; = L - \frac {{s^{2}}M_{\text {sw}}^{2}{C_{\text {off} }}}{{s^{2}}{L_{\text {sw}}}{C_{\text {off} }} + 2}. \tag {17}\end{align*}</tex-math></disp-formula></p>
+<p>As a result, the equivalent inductances in mode-1, -3, and -4 can be expressed as follows:
+<disp-formula id="deqn18-deqn20"><tex-math notation="LaTeX">\begin{align*} {L_{\text {mode},1}} &amp; = L + 2{M_{\text {adj}}} + {M_{\text {opp}}} - \frac {4{s^{2}}M_{\text {sw}}^{2}{C_{\text {off} }}}{{s^{2}}{L_{\text {sw}}}{C_{\text {off} }} + 2} \\ &amp; \approx L + 2{M_{\text {adj}}} + {M_{\text {opp}}} \tag {18}\\ {L_{\text {mode},3}} &amp; = L_{\text {off} } - {M_{\text {opp},\text {off} }} = L - {M_{\text {opp}}} \tag {19}\\ {L_{\text {mode},4}} &amp; = L_{\text {off} } - 2{M_{\text {adj},\text {off} }} + {M_{\text {opp},\text {off} }} \\ &amp; = L - 2{M_{\text {adj}}} + {M_{\text {opp}}}. \tag {20}\end{align*}</tex-math></disp-formula></p>
+<p>In <xref ref-type="disp-formula" rid="deqn18-deqn20">(18)</xref>, the last term is a minor factor and can be neglected. Therefore, the equivalent inductance in mode-1 remains approximately unchanged compared to <xref ref-type="disp-formula" rid="deqn5">(5)</xref>. In mode-3 and -4, the equivalent inductances remain consistent with <xref ref-type="disp-formula" rid="deqn6">(6)</xref> and <xref ref-type="disp-formula" rid="deqn7">(7)</xref>, respectively, as indicated in <xref ref-type="disp-formula" rid="deqn18-deqn20">(19) and (20)</xref>. In other words, the equivalent inductances in mode-1, -3, and -4 are rarely affected by the switched inductor. In mode-1, the result comes from an expression approximation, while in mode-3 and -4, it can be explained by the fact that the currents induced in <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> by the surrounding tank inductors cancel each other out, which means that <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> is transparent in mode-1, -3, and -4.</p>
+</list-item>
+</list>
+<fig id="fig7">
+<label>Fig. 7.</label>
+<caption><p>NMOS switch of the switched inductor and its equivalent circuits in 
+<sc>on
+</sc> and 
+<sc>off
+</sc> states.</p></caption>
+<graphic xlink:href="qin7-3657757.eps"/>
+</fig>
+<fig id="fig8">
+<label>Fig. 8.</label>
+<caption><p>Simplified lumped model of the proposed transformer with the switch <inline-formula><tex-math notation="LaTeX">$S_{Ls}$</tex-math></inline-formula> in (a) 
+<sc>on
+</sc> and (b) 
+<sc>off
+</sc> states.</p></caption>
+<graphic xlink:href="qin8-3657757.eps"/>
+</fig>
+</p>
+</sec>
+<sec id="sec2c">
+<label>C.</label>
+<title>Proposed Transformer Tank</title>
+<p><xref ref-type="fig" rid="fig9">Fig. 9(a)</xref> shows the layout of the proposed transformer, which consists of four identical single-coil tank inductors (<inline-formula><tex-math notation="LaTeX">$L_{\text {tank}}$</tex-math></inline-formula>) and an extra switched inductor (<inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula>), intertwined in a center-symmetric manner. The coupling coefficients are identical among any pairs of adjacent inductors, any pairs of opposite inductors, and between each tank inductor and the switched inductor, denoted as <inline-formula><tex-math notation="LaTeX">$k_{\text {adj}}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$k_{\text {opp}}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$k_{\text {sw}}$</tex-math></inline-formula>, respectively. To mitigate the area overhead of the multi-core structure, the transformer efficiently concentrates the magnetic flux within the inductor coils, maximizing flux utilization. The switched inductor is placed in the middle of the tank inductors and tightly coupled with other coils. Both the tank inductors and the switched inductor have the width of <inline-formula><tex-math notation="LaTeX">$8~\mu $</tex-math></inline-formula>m. Additionally, to ensure that <inline-formula><tex-math notation="LaTeX">$k_{\text {adj}}\gt k_{\text {opp}}$</tex-math></inline-formula>, the coil spacing between adjacent tank inductors is set to <inline-formula><tex-math notation="LaTeX">$3~\mu $</tex-math></inline-formula>m, while the spacing between opposite tank inductors is set as <inline-formula><tex-math notation="LaTeX">$25~\mu $</tex-math></inline-formula>m. As shown in <xref ref-type="fig" rid="fig9">Fig. 9(b)</xref>, EM simulation results show that the self-inductance and <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> factor of the tank inductors are 645 pH and 13 at 10 GHz, respectively, while those of the switched inductor are 630 pH and 15. The adjacent and opposite coupling coefficients, <inline-formula><tex-math notation="LaTeX">$k_{\text {adj}}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$k_{\text {opp}}$</tex-math></inline-formula>, are found to be 0.44 and 0.3 at 10 GHz, respectively. Besides, the coupling coefficient <inline-formula><tex-math notation="LaTeX">$k_{\text {sw}}$</tex-math></inline-formula> between the switched inductor and the tank inductors is 0.49 at 10 GHz.
+<fig id="fig9">
+<label>Fig. 9.</label>
+<caption><p>(a) Transformer structure of the proposed quad-core quad-mode VCO. (b) Its simulated parameters obtained from EM simulations.</p></caption>
+<graphic xlink:href="qin9-3657757.eps"/>
+</fig>
+</p>
+<p><xref ref-type="fig" rid="fig10">Fig. 10</xref> illustrates the magnetic flux of the proposed quad-mode operation, along with the simulated equivalent inductance and equivalent <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> factor. <xref ref-type="fig" rid="fig10">Fig. 10(a) and (b)</xref> corresponds to the cases of mode-1 and -2, where the magnetic fluxes among all tank inductors are mutually reinforced. In mode-1, the switched inductor <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> is disconnected and the equivalent inductance is equal to <xref ref-type="disp-formula" rid="deqn18-deqn20">(18)</xref>. In mode-2, when <inline-formula><tex-math notation="LaTeX">$S_{Ls}$</tex-math></inline-formula> is shorted, an induced current flowing through <inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula> generates opposite magnetic flux. The equivalent inductance is thus equated to <xref ref-type="disp-formula" rid="deqn14">(14)</xref>. In <xref ref-type="fig" rid="fig10">Fig. 10(c) and (d)</xref>, corresponding to mode-3 and -4, the magnetic fluxes in any two cores are anti-phased with those in the other two cores. Mode-4 follows <xref ref-type="disp-formula" rid="deqn18-deqn20">(20)</xref>. For mode-3, <xref ref-type="disp-formula" rid="deqn18-deqn20">(19)</xref> becomes inaccurate since magnetic coupling breaks the left&#x2013;right symmetry of the spiral halves. Consequently, the differential analysis needs to include the tap inductance, and the expression for <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},3}$</tex-math></inline-formula> should be updated accordingly.
+<fig id="fig10">
+<label>Fig. 10.</label>
+<caption><p>Coil currents, magnetic field distribution and simulated effective <inline-formula><tex-math notation="LaTeX">$L$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> in (a) mode-1, (b) mode-2, (c) mode-3 and (d) mode-4.</p></caption>
+<graphic xlink:href="qin10-3657757.eps"/>
+</fig>
+</p>
+<p><xref ref-type="fig" rid="fig11">Fig. 11(a)</xref> shows the quad-mode transformer for mode-3 with the switched inductor off, where <inline-formula><tex-math notation="LaTeX">${k_{\text {adj},\text {off} }} = {M_{\text {adj},\text {off} }}/{L_{\text {off} }}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">${k_{\text {opp},\text {off} }} = {M_{\text {opp},\text {off} }}/{L_{\text {off} }}$</tex-math></inline-formula>. From the perspective of core-1, we split the inductor <inline-formula><tex-math notation="LaTeX">$L_{\text {off} }$</tex-math></inline-formula> at its geometric center into two equal halves and retain only the couplings relevant to core-1, as shown in <xref ref-type="fig" rid="fig11">Fig. 11(b)</xref>. To preserve the total mutual coupling for core-1, the coefficients satisfy <inline-formula><tex-math notation="LaTeX">$k_{1}{\,}+{\,}k_{2}{\,}={\,}\sqrt {2}k_{\text {adj},\text {off} }$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$k_{3}{\,}+{\,}k_{4}{\,}={\,}\sqrt {2}k_{\text {opp},\text {off} }$</tex-math></inline-formula>. Further inspection of the transformer layout in <xref ref-type="fig" rid="fig9">Fig. 9(a)</xref> shows that <inline-formula><tex-math notation="LaTeX">$k_{1}\lt k_{2}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$k_{3}=k_{4}$</tex-math></inline-formula>. Under these conditions, the equivalent inductances of the left and right halves are obtained as follows:
+<disp-formula id="deqn21-deqn22"><tex-math notation="LaTeX">\begin{align*} {L_{\text {left}}} &amp; = \frac {L_{\text {off} }}{2} - {k_{1}}\sqrt {{L_{\text {off} }} \cdot \frac {L_{\text {off} }}{2}} \\ &amp; \quad + {k_{2}}\sqrt {{L_{\text {off} }} \cdot \frac {L_{\text {off} }}{2}} - \frac {1}{2}{M_{\text {opp},\text {off} }} \tag {21}\\ {L_{\text {right}}} &amp; =\frac {L_{\text {off} }}{2} - {k_{2}}\sqrt {{L_{\text {off} }} \cdot \frac {L_{\text {off} }}{2}} \\ &amp; \quad + {k_{1}}\sqrt {{L_{\text {off} }} \cdot \frac {L_{\text {off} }}{2}} - \frac {1}{2}{M_{\text {opp},\text {off} }}. \tag {22}\end{align*}</tex-math></disp-formula>
+<fig id="fig11">
+<label>Fig. 11.</label>
+<caption><p>Circuit equivalence for the mode-3 transformer with the switched inductor off.</p></caption>
+<graphic xlink:href="qin11-3657757.eps"/>
+</fig>
+</p>
+<p>Since <inline-formula><tex-math notation="LaTeX">$L_{\text {left}}\neq L_{\text {right}}$</tex-math></inline-formula>, a current (<inline-formula><tex-math notation="LaTeX">$i_{t}$</tex-math></inline-formula>) flows into the tap inductor, as shown in <xref ref-type="fig" rid="fig11">Fig. 11(c)</xref>. Applying a differential excitation of <inline-formula><tex-math notation="LaTeX">$+V/2$</tex-math></inline-formula> at <inline-formula><tex-math notation="LaTeX">$P_{1}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$-V/2$</tex-math></inline-formula> at <inline-formula><tex-math notation="LaTeX">$P_{2}$</tex-math></inline-formula>, the effective inductance of mode-3 is obtained as follows:
+<disp-formula id="deqn23"><tex-math notation="LaTeX">\begin{align*} {L_{\text {mode},3,\text {revised}}} &amp; = \frac {V}{\frac {1}{2}\left ({{{i_{\text {left}}} + {i_{\text {right}}}}}\right )} \\ &amp; = \frac {4\left ({{{L_{\text {left}}}{L_{\text {right}}} + {L_{\text {left}}}{L_{t}} + {L_{\text {right}}}{L_{t}}}}\right )}{{L_{1}} + {L_{2}} + 4{L_{t}}}. \tag {23}\end{align*}</tex-math></disp-formula></p>
+<p>In the limiting cases, the results are intuitive. When the tap path is open (<inline-formula><tex-math notation="LaTeX">${L_{t}} \to \infty $</tex-math></inline-formula>), the effective inductance becomes <inline-formula><tex-math notation="LaTeX">$L_{\text {left}}{\,}+{\,}L_{\text {right}}$</tex-math></inline-formula>. When the tap is ideally grounded (<inline-formula><tex-math notation="LaTeX">${L_{t}} \to 0$</tex-math></inline-formula>), <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},3,\text {revised}}$</tex-math></inline-formula> approaches <inline-formula><tex-math notation="LaTeX">$4L_{\text {left}}L_{\text {right}}/(L_{\text {left}}{\,}+{\,}L_{\text {right}})$</tex-math></inline-formula>. For the symmetric case <inline-formula><tex-math notation="LaTeX">$L_{\text {left}}{\,}={\,}L_{\text {right}}$</tex-math></inline-formula>, we always have <inline-formula><tex-math notation="LaTeX">$L_{\text {mode},3,\text {revised}}=2L_{\text {left}}{\,}={\,}2L_{\text {right}}$</tex-math></inline-formula> independent of <inline-formula><tex-math notation="LaTeX">$L_{t}$</tex-math></inline-formula>.</p>
+<p>Owing to the tap inductor, mode-3 shows a smaller effective inductance. The revised effective inductance of mode-3 is 21 pH lower than the original, as shown in <xref ref-type="fig" rid="fig12">Fig. 12</xref>.
+<fig id="fig12">
+<label>Fig. 12.</label>
+<caption><p>Comparison of mode-3 effective inductance: original versus revised.</p></caption>
+<graphic xlink:href="qin12-3657757.eps"/>
+</fig>
+</p>
+<p>The simulated equivalent inductance and <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> factor are 1298 pH and 16 at 5 GHz in mode-1, 782 pH and 8.5 at 7 GHz in mode-2, 429 pH and 10.1 at 10 GHz in mode-3, and 272 pH and 8.2 at 13 GHz in mode-4, as shown in <xref ref-type="fig" rid="fig10">Fig. 10</xref>. It can be observed that the equivalent inductance decreases progressively from mode-1 to -4.</p>
+</sec>
+</sec>
+<sec id="sec3">
+<label>III.</label>
+<title>Design and Analysis of The Proposed Quad-Core Quad-Mode VCO</title>
+<sec id="sec3a">
+<label>A.</label>
+<title>Proposed VCO Design</title>
+<p><xref ref-type="fig" rid="fig13">Fig. 13(a)</xref> shows the schematic of the proposed quad-core quad-mode VCO, which consists of four identical single-core VCOs, an embedded switched inductor (<inline-formula><tex-math notation="LaTeX">$L_{\text {sw}}$</tex-math></inline-formula>) and a mode-switching (SW) array. The active cores (Core-1, -2, -3, and -4), each composed of cross-coupled transistors, a tail resistor array, a pair of varactors and 6-bit SCA, are identical. The tail resistor array, shown in the bottom-left of <xref ref-type="fig" rid="fig13">Fig. 13(a)</xref>, consists of a bypass path and a 13-bit programmable resistor bank. It is added to tune the core transconductance <inline-formula><tex-math notation="LaTeX">$G_{m}$</tex-math></inline-formula> versus frequency so that the excess loop gain <inline-formula><tex-math notation="LaTeX">$G_{X}=G_{m}R_{T}$</tex-math></inline-formula> (with <inline-formula><tex-math notation="LaTeX">$R_{T}$</tex-math></inline-formula> the tank&#x2019;s equivalent parallel resistance) remains moderate, which in turn limits flicker noise up-conversion <xref ref-type="bibr" rid="ref26">[26]</xref>. The 6-bit SCA, shown in the top-left of <xref ref-type="fig" rid="fig13">Fig. 13(a)</xref>, and the MOS varactors provide coarse tuning and continuous fine tuning, respectively. The varactor is implemented using a thick-oxide device, with dimensions of <inline-formula><tex-math notation="LaTeX">$W/L=32/0.4\ \mu \text {m}$</tex-math></inline-formula>. As the bias increases from 0 to 2.5 V, the varactor capacitance decreases from 35.7 to 15.2 fF (<inline-formula><tex-math notation="LaTeX">$\Delta C=20.5\ {\text {fF}}$</tex-math></inline-formula>) with <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> larger than 29. The SCA exhibits an LSB of 7.7 fF, thereby enabling fine and continuous frequency tuning. With a high <inline-formula><tex-math notation="LaTeX">$C_{\max }/C_{\min }$</tex-math></inline-formula> ratio preserved and <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> kept moderate, the total capacitance ranges from 191.9 to 732.1 fF, and <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> remains above 24 at 10 GHz. Each core is connected to its respective inductor ports in a center-symmetric manner, ensuring uniform coupling and balanced performance across all modes.
+<fig id="fig13">
+<label>Fig. 13.</label>
+<caption><p>(a) Detailed implementation of the proposed quad-core quad-mode VCO. (b) Mode configuration truth table (1 =<italic>switch on</italic>, 0 =<italic>switch off</italic>).</p></caption>
+<graphic xlink:href="qin13-3657757.eps"/>
+</fig>
+</p>
+<p>Furthermore, to maintain uniform capacitive loading at each port, the SW array is designed with four identical sub-arrays, all positioned at the center of the transformer symmetrically. Each sub-array contains four switches and there are a total of sixteen switches in all. An additional switch is positioned along the routing of the switched inductor to control its on/off state. As discussed above, eight switches need to be turned on and another eight switches need to be turned off in each mode. The switch on-off states in each mode are shown in <xref ref-type="fig" rid="fig13">Fig. 13(b)</xref>. As observed, these switches are divided into five groups and are controlled by 5-bit control bits, respectively. In mode-1, Groups-1 and -2 are activated; in mode-2, Groups-1, -2, and -5 are active. Mode-3 enables Group-1 and -3, whereas mode-4 enables Group-3 and -4. Unless otherwise specified, all other switch groups remain disabled.</p>
+<p>Given the careful consideration of the symmetry of the inductive, capacitive, active, and other elements in the quad-core quad-mode VCO, the mismatches among VCO cores are significantly minimized, allowing the four single-core VCOs to be well synchronized and achieve optimized PN in all modes.</p>
+</sec>
+<sec id="sec3b">
+<label>B.</label>
+<title>Avoiding Mode Ambiguity</title>
+<p>It is known that when the transconductance pairs are sufficiently large, the oscillator operates at the frequency where the tank impedance provides sufficiently high amplitude with zero phase. When no mode switches are added or the switch size is too small [i.e., large 
+<sc>on
+</sc>
+-resistance (<inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula>)], multiple frequency points with high impedance amplitude and zero phase may exist. As a result, the operating frequency of the oscillator is not uniquely defined, resulting in mode ambiguity.</p>
+<p>Due to the symmetrical property of the proposed transformer, the tank impedance seen from node pairs <inline-formula><tex-math notation="LaTeX">$P_{1}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$P_{2}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$P_{3}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$P_{4}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$P_{5}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$P_{6}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$P_{7}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$P_{8}$</tex-math></inline-formula> is identical. <xref ref-type="fig" rid="fig14">Fig. 14</xref> shows the simulated magnitude and phase responses of the tank impedance seen from the node pair <inline-formula><tex-math notation="LaTeX">$P_{1}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$P_{2}$</tex-math></inline-formula> in the four operation modes, as <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> is reduced from 425 to <inline-formula><tex-math notation="LaTeX">$25~\Omega $</tex-math></inline-formula>. When <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> is 225/<inline-formula><tex-math notation="LaTeX">$425~\Omega $</tex-math></inline-formula>, as shown by the blue/green dotted curve in <xref ref-type="fig" rid="fig14">Fig. 14</xref>, each mode exhibits at least two frequency points where the tank impedance has a sufficiently high peak and a zero phase. This implies that the oscillator has the potential to oscillate either at the frequency with the expected maximum <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> value or concurrently at multiple resonance frequencies, which are highly undesirable.
+<fig id="fig14">
+<label>Fig. 14.</label>
+<caption><p>Simulated magnitude and phase response of the tank impedance under different <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> for (a) mode-1, (b) mode-2, (c) mode-3, and (d) mode-4.</p></caption>
+<graphic xlink:href="qin14-3657757.eps"/>
+</fig>
+</p>
+<p>To avoid the issues associated with ambiguous modes, it is necessary to reduce <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> by increasing the size of the mode switches. As shown by the solid red curves in <xref ref-type="fig" rid="fig14">Fig. 14</xref>, when <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> is reduced to <inline-formula><tex-math notation="LaTeX">$25~\Omega $</tex-math></inline-formula>, each mode exhibits a uniquely defined resonant frequency.</p>
+</sec>
+<sec id="sec3c">
+<label>C.</label>
+<title>Effect of Mismatches Among Cores</title>
+<p>While ideal synchronization assumes identical oscillation frequencies among the cores, practical implementations often suffer from frequency mismatches caused by device variations and layout asymmetries. These mismatches introduce phase errors and amplitude reduction, ultimately degrading the PN performance <xref ref-type="bibr" rid="ref21">[21]</xref>, <xref ref-type="bibr" rid="ref27">[27]</xref>. Therefore, accurately characterizing and mitigating inter-core mismatches are essential to fully unlock the potential of multi-core VCO designs.</p>
+<p>The proposed design makes every effort to ensure symmetry among the four VCO cores, including the transformer tank, SW array, VCO cores and layout routings. As presented in <xref ref-type="fig" rid="fig9">Fig. 9(a)</xref>, each single tank inductor is identical and arranged in a centrally symmetric layout. Additionally, the SW array, consisting of sixteen switches, is also arranged in a center-symmetric configuration, as illustrated in <xref ref-type="fig" rid="fig15">Fig. 15</xref>. That is to say, each port (<inline-formula><tex-math notation="LaTeX">$P_{1-8}$</tex-math></inline-formula>) is identically connected to four switches to ensure that the parasitics induced by the switches is the same across all ports. Moreover, each VCO core is connected to the SW array by identical routings, and synchronized with other three cores directly through the SW array, thus further reducing frequency mismatches and mitigating its impact on the VCO performance.
+<fig id="fig15">
+<label>Fig. 15.</label>
+<caption><p>Center-symmetric layout of mode-switching array.</p></caption>
+<graphic xlink:href="qin15-3657757.eps"/>
+</fig>
+</p>
+<p>However, due to the presence of the switched inductor, as shown in <xref ref-type="fig" rid="fig9">Fig. 9(a)</xref>, the effective inductances seen by core-2 and -3 slightly differs from that of core-1 and -4. As a result, the natural oscillation frequencies of core-2 (<inline-formula><tex-math notation="LaTeX">$f_{2}$</tex-math></inline-formula>) and core-3 (<inline-formula><tex-math notation="LaTeX">$f_{3}$</tex-math></inline-formula>) deviate slightly from those of core-1 (<inline-formula><tex-math notation="LaTeX">$f_{1}$</tex-math></inline-formula>) and core-4 (<inline-formula><tex-math notation="LaTeX">$f_{4}$</tex-math></inline-formula>), introducing mismatches in the system. Despite the mismatch, the four oscillator cores may still achieve frequency locking and oscillate at a common frequency located between <inline-formula><tex-math notation="LaTeX">$f_{1}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$f_{2}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$f_{3}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$f_{4}$</tex-math></inline-formula>. As a result, the cores operate off-resonance, such that <inline-formula><tex-math notation="LaTeX">$\angle Y_{T,i}\neq 0$</tex-math></inline-formula>, where <inline-formula><tex-math notation="LaTeX">$Y_{T,i}$</tex-math></inline-formula> denotes the tank admittance corresponding to core-i, and is given by
+<disp-formula id="deqn24"><tex-math notation="LaTeX">\begin{align*} {Y_{T,i}} &amp; = \frac {1}{R_{T}} + j\frac {Q}{R_{T}}\left ({{\frac {f_{\text {osc}}}{f_{i}} - \frac {f_{i}}{f_{\text {osc}}}}}\right ) \\ &amp; \cong \frac {1}{R_{T}} + j\frac {2Q}{R_{T}}\frac {{f_{\text {osc}}} - {f_{i}}}{f_{i}} \\ &amp; = \frac {1}{R_{T}} + j\frac {2{K_{i}}}{R_{T}},\quad i = 1,2,3,4 \tag {24}\end{align*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$R_{T}$</tex-math></inline-formula> is the equivalent parallel resistance of the tank, and <inline-formula><tex-math notation="LaTeX">$K_{i}=Q \cdot (f_{\text {osc}}{\,}-{\,}f_{i})/f_{i}$</tex-math></inline-formula>, with <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$f_{\text {osc}}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$f_{i}$</tex-math></inline-formula> representing the quality factor of the tank, the oscillation frequency, and the resonance frequency of core-i, respectively. This approximation holds when <inline-formula><tex-math notation="LaTeX">$\delta f_{i}=f_{\text {osc}}{\,}-{\,}f_{i}\ll f_{i}$</tex-math></inline-formula>. Follow the analysis in <xref ref-type="bibr" rid="ref27">[27]</xref>, the proposed VCO is modeled in <xref ref-type="fig" rid="fig16">Fig. 16</xref>. Here, <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> denotes the 
+<sc>on
+</sc>
+-resistance of the mode switch. Assuming equal amplitudes, the tank voltage of each core is written as <inline-formula><tex-math notation="LaTeX">$V_{T,i}={Ae}^{j\theta _{i}}=\alpha A_{0}e^{j\theta _{i}}$</tex-math></inline-formula>, where <inline-formula><tex-math notation="LaTeX">$A_{0}$</tex-math></inline-formula> denotes the amplitude in the absence of mismatch, <inline-formula><tex-math notation="LaTeX">$\alpha $</tex-math></inline-formula> represents the amplitude reduction factor due to mismatch, and <inline-formula><tex-math notation="LaTeX">$\theta _{i}$</tex-math></inline-formula> is the voltage phase corresponding to core-i.
+<fig id="fig16">
+<label>Fig. 16.</label>
+<caption><p><inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula>-coupled equivalent circuit of the proposed VCO.</p></caption>
+<graphic xlink:href="qin16-3657757.eps"/>
+</fig>
+</p>
+<p>Due to layout symmetry, the switched inductor has an identical effect on core-1 and -4, leading to <inline-formula><tex-math notation="LaTeX">$Y_{T,1}=Y_{T,4}$</tex-math></inline-formula>, and consequently <inline-formula><tex-math notation="LaTeX">$\theta _{1}=\theta _{4}$</tex-math></inline-formula>. For simplicity, we assume that <inline-formula><tex-math notation="LaTeX">$\theta _{1}=\theta _{4}=0$</tex-math></inline-formula> as the reference phase. Through derivation presented in the <xref ref-type="app" rid="app1">Appendix</xref>, the following results are obtained as:
+<disp-formula id="deqn25-deqn27"><tex-math notation="LaTeX">\begin{align*} {\theta _{2}} &amp; = - {\sin ^{ - 1}}\left ({{{K_{2}}r}}\right ) \tag {25}\\ \alpha &amp; = \frac {r + 2\sqrt {1 - {{\left ({{{K_{2}}r}}\right )}^{2}}} + 2}{4rK_{2}^{2} + r + 4} \tag {26}\\ {K_{2}}&amp; = \frac {1}{2}Q\frac {{f_{1}} - {f_{2}}}{f_{2}} = - \frac {1}{2}Q\frac {\Delta f}{f_{2}} \tag {27}\end{align*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$r=R_{\text {on} }/R_{T}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\Delta f/f_{2}$</tex-math></inline-formula> represents the frequency mismatch between core-1 (core-4) and core-2 (core-3).</p>
+<p>Based on <xref ref-type="disp-formula" rid="deqn25-deqn27">(25)&#x2013;(27)</xref>, the variations of amplitude reduction (<inline-formula><tex-math notation="LaTeX">$20\log {\alpha }$</tex-math></inline-formula>) and phase mismatch (<inline-formula><tex-math notation="LaTeX">$\theta =\theta _{2}-\theta _{1}$</tex-math></inline-formula>) with respect to the frequency mismatch (<inline-formula><tex-math notation="LaTeX">$\Delta f/f_{2}$</tex-math></inline-formula>) can be compared as a function of <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula>, as shown in <xref ref-type="fig" rid="fig17">Fig. 17</xref>. As <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> and the frequency mismatch increase, the amplitude reduction becomes more significant, and the phase deviation between cores also increases. When <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> becomes sufficiently large, the multi-core system can no longer maintain frequency locking, which corresponds to the point where the curves terminate as &#x201C;lose locking,&#x201D; as shown in <xref ref-type="fig" rid="fig17">Fig. 17</xref>.
+<fig id="fig17">
+<label>Fig. 17.</label>
+<caption><p>Calculated (a) amplitude reduction and (b) phase mismatch over <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> under different frequency mismatches with <inline-formula><tex-math notation="LaTeX">$Q=15$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$R_{p}=150\ \Omega $</tex-math></inline-formula>.</p></caption>
+<graphic xlink:href="qin17-3657757.eps"/>
+</fig>
+</p>
+<p>In the proposed design, the asymmetry caused by the switched inductor introduces frequency mismatches of approximately 2.4%, 2.1%, 0.2%, and 1.3% in mode-1, -2, -3, and -4, respectively, obtained from EM simulations. The PN degradation of each mode is affected by amplitude reduction (<inline-formula><tex-math notation="LaTeX">$\alpha $</tex-math></inline-formula>) and phase mismatch (<inline-formula><tex-math notation="LaTeX">$\theta $</tex-math></inline-formula>), where their combined effect can be approximated as <inline-formula><tex-math notation="LaTeX">$30\log {\alpha }$</tex-math></inline-formula> <xref ref-type="bibr" rid="ref27">[27]</xref>. Accordingly, <xref ref-type="fig" rid="fig18">Fig. 18</xref> shows the PN degradation versus <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> for the four modes. It is observed that the PN of mode-1 degrades more severely than that of other modes. However, with a relatively small 
+<sc>on
+</sc>
+-resistance (<inline-formula><tex-math notation="LaTeX">$25~\Omega $</tex-math></inline-formula>) and a 2.4% frequency mismatch, the PN degradation in mode-1 is only about 0.02 dB, indicating that the asymmetry induced by the switched inductor has a minimal impact on the overall PN performance, thereby effectively approaching full symmetry.
+<fig id="fig18">
+<label>Fig. 18.</label>
+<caption><p>Calculated PN degradation over <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> in different modes (mode-1: <inline-formula><tex-math notation="LaTeX">$Q_{1}=16$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$f_{1}=5\ \text {GHz}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$L_{1}=1298\ \text {pH}$</tex-math></inline-formula>; mode-2: <inline-formula><tex-math notation="LaTeX">$Q_{2}=8.9$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$f_{2}=8\ \text {GHz}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$L_{2}=786\ \text {pH}$</tex-math></inline-formula>; mode-3: <inline-formula><tex-math notation="LaTeX">$Q_{3}=10.1$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$f_{3}=10\ \text {GHz}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$L_{3}=429\ \text {pH}$</tex-math></inline-formula>; mode-4: <inline-formula><tex-math notation="LaTeX">$Q_{4}=8.5$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$f_{4}=14\ \text {GHz}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$L_{4}=272\ \text {pH}$</tex-math></inline-formula>).</p></caption>
+<graphic xlink:href="qin18-3657757.eps"/>
+</fig>
+</p>
+<p>Process variations and some other non-idealities can also introduce mismatches across oscillator cores, which in turn lead to frequency mismatches. To evaluate the impact of process variations and other non-idealities on the PN performance, frequency mismatches are deliberately introduced among the VCO cores by changing the per-core tank capacitance for simulations, covering six cases, as shown in <xref ref-type="fig" rid="fig19">Fig. 19</xref>. <xref ref-type="fig" rid="fig19">Fig. 19(a)</xref> illustrates a single-core mismatch, where only Core-1 is perturbed by adding 100, 200, or 300 fF; Cores-2/3/4 remain nominal. <xref ref-type="fig" rid="fig19">Fig. 19(b) and (c)</xref> evaluate two-core perturbations: (b) Cores-1/2 are perturbed together by adding 100, 200, or 300 fF, while (c) repeats the test of (b) on the opposite pair (Cores-1/4); the other two cores remain nominal. <xref ref-type="fig" rid="fig19">Fig. 19(d) and (e)</xref> address mismatches among three frequencies: (d) Cores-1/2 remain nominal while Core-3 has 150 fF (10% mismatch) added and Core-4 is swept over 100, 200, and 300 fF; (e) repeats the test of (d) with the perturbed cores exchanged. In <xref ref-type="fig" rid="fig19">Fig. 19(f)</xref>, Core-2 remains nominal; Core-1 and Core-3 have 50 fF (4% mismatch) and 150 fF (10% mismatch) added, respectively, while Core-4 is swept over 100, 200, and 300 fF.
+<fig id="fig19">
+<label>Fig. 19.</label>
+<caption><p>Impact of frequency mismatches on FoM degradation.</p></caption>
+<graphic xlink:href="qin19-3657757.eps"/>
+</fig>
+</p>
+<p>Thanks to the well-synchronized properties and low switching resistance <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula>, the impact of frequency mismatches on figure-of-merit (FoM) degradation remains minimal. Monte Carlo shows an approximate 9% (<inline-formula><tex-math notation="LaTeX">$\pm 3\sigma $</tex-math></inline-formula>) frequency mismatch. Therefore, the FoM is evaluated under a conservative 10% mismatch, yielding a penalty of <inline-formula><tex-math notation="LaTeX">$\leq 1.6$</tex-math></inline-formula> dB in mode-1 and &lt;0.5 dB in the other modes.</p>
+</sec>
+<sec id="sec3d">
+<label>D.</label>
+<title>PN Analysis</title>
+<p>Having discussed the effect of frequency mismatch on PN, we now examine the influence of <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> on PN in the absence of frequency mismatch. Following the derivation in <xref ref-type="bibr" rid="ref29">[29]</xref>, the PN expression for a symmetrical quad-core VCO is given by
+<disp-formula id="deqn28"><tex-math notation="LaTeX">\begin{equation*} \mathcal {L}_{\text {quad-core}}\left ({{\Delta \omega }}\right ) = 10\log \left ({{F\frac {4kT{{\left |{{Z_{\text {eq}}}}\right |}^{2}}}{V_{0}^{2}{R_{T}}}}}\right ) \tag {28}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$F$</tex-math></inline-formula> is the device excess noise factor, <inline-formula><tex-math notation="LaTeX">$T$</tex-math></inline-formula> is the absolute temperature, <inline-formula><tex-math notation="LaTeX">$V_{0}$</tex-math></inline-formula> is the oscillation amplitude and <inline-formula><tex-math notation="LaTeX">$R_{T}$</tex-math></inline-formula> is the equivalent parallel resistance of the tank. <inline-formula><tex-math notation="LaTeX">$|Z_{\text {eq}}|^{2}$</tex-math></inline-formula> can be denoted by
+<disp-formula id="deqn29"><tex-math notation="LaTeX">\begin{equation*} {\big | {Z_{\text {eq}}} \big |^{2}} = \frac {1}{4}{\big | {{Z_{T}}\left ({{\Delta \omega }}\right )} \big |^{2}}\frac {16R_{\text {on} }^{2} + {{\big | {{Z_{T}}\left ({{\Delta \omega }}\right )} \big |}^{2}}}{4R_{\text {on} }^{2} + {{\big | {{Z_{T}}\left ({{\Delta \omega }}\right )} \big |}^{2}}} \tag {29}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$Z_{T}(\Delta \omega)$</tex-math></inline-formula> represents the tank impedance and can be given by
+<disp-formula id="deqn30"><tex-math notation="LaTeX">\begin{equation*} {\left |{{{Z_{T}}\left ({{\Delta \omega }}\right )}}\right |} = \left |{{\frac {1}{2}\frac {{R_{T}}{\omega _{0}}}{Q \cdot \Delta \omega }}}\right | \tag {30}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$\omega _{0}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\Delta \omega $</tex-math></inline-formula> are the oscillation frequency and the offset frequency, respectively, and <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> is the equivalent quality factor of the tank. Substituting <xref ref-type="disp-formula" rid="deqn29">(29)</xref> and <xref ref-type="disp-formula" rid="deqn30">(30)</xref> into <xref ref-type="disp-formula" rid="deqn28">(28)</xref> yields
+<disp-formula id="deqn31"><tex-math notation="LaTeX">\begin{equation*} \mathcal {L}_{\text {quad-core}}\left ({{\Delta \omega }}\right )=\mathcal {L}\left ({{\Delta \omega }}\right )\cdot m. \tag {31}\end{equation*}</tex-math></disp-formula></p>
+<p>Comparing <xref ref-type="disp-formula" rid="deqn31">(31)</xref> with <xref ref-type="disp-formula" rid="deqn1">(1)</xref>, it is evident that <xref ref-type="disp-formula" rid="deqn31">(31)</xref> contains an additional factor <inline-formula><tex-math notation="LaTeX">$m$</tex-math></inline-formula>, expressed as follows:
+<disp-formula id="deqn32"><tex-math notation="LaTeX">\begin{equation*} m = \frac {1}{4}\frac {16R_{\text {on} }^{2} + {{\left |{{{Z_{T}}\left ({{\Delta \omega }}\right )}}\right |}^{2}}}{4R_{\text {on} }^{2} + {{\left |{{{Z_{T}}\left ({{\Delta \omega }}\right )}}\right |}^{2}}}. \tag {32}\end{equation*}</tex-math></disp-formula></p>
+<p>It can be observed that both <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\Delta \omega $</tex-math></inline-formula> have an impact on the PN improvement. When <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> is much smaller than <inline-formula><tex-math notation="LaTeX">$Z_{T}(\Delta \omega)$</tex-math></inline-formula>, the value of <inline-formula><tex-math notation="LaTeX">$m$</tex-math></inline-formula> is approximately 1/4 and the PN is improved by approximately 6 dB compared to a single-core VCO. On the other hand, in the case when <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }$</tex-math></inline-formula> is much larger than <inline-formula><tex-math notation="LaTeX">$Z_{T}(\Delta \omega)$</tex-math></inline-formula> (i.e., <inline-formula><tex-math notation="LaTeX">$m{\,}\approx {\,}1$</tex-math></inline-formula>), the PN approaches that of a single-core VCO, indicating that the four oscillator cores are no longer frequency-locked and instead operate as independent free-running oscillators. <xref ref-type="fig" rid="fig20">Fig. 20</xref> illustrates the calculated PN degradation of the proposed VCO with <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }=25\ \Omega $</tex-math></inline-formula> across all four modes as a function of frequency offsets, based on <xref ref-type="disp-formula" rid="deqn28">(28)</xref>. The PN degradation is nearly zero, thus a near-6 dB PN reduction is still achieved. Relatively speaking, mode-1 exhibits the most severe degradation, but even at a 100 MHz offset, the degradation is less than 0.035 dB, which demonstrates excellent synchronization performance of the proposed quad-core VCO.
+<fig id="fig20">
+<label>Fig. 20.</label>
+<caption><p>PN degradation of the proposed VCO for <inline-formula><tex-math notation="LaTeX">$R_{\text {on} }=25\ \Omega $</tex-math></inline-formula>, based on <xref ref-type="disp-formula" rid="deqn28">(28)</xref>.</p></caption>
+<graphic xlink:href="qin20-3657757.eps"/>
+</fig>
+</p>
+</sec>
+</sec>
+<sec id="sec4">
+<label>IV.</label>
+<title>Measurement Results</title>
+<p>The proposed quad-core quad-mode VCO is implemented in 65 nm bulk CMOS with a core chip area of 0.152 mm<sup>2</sup>, as shown in <xref ref-type="fig" rid="fig21">Fig. 21</xref>. <xref ref-type="fig" rid="fig22">Fig. 22</xref> shows the measured PN at 4.28, 8.66, 11.57, and 15.07 GHz, respectively, from four distinct modes. The measured FTR is 113.2% (4.21&#x2013;15.18 GHz), with the frequency in each mode ranging from 4.21 to 6.24 GHz, 5.62 to 8.66 GHz, 7.52 to 11.6 GHz, and 10.01 to 15.18 GHz, respectively, as shown in <xref ref-type="fig" rid="fig23">Fig. 23</xref>. In each mode, the tuning voltage ranges from 0 to 2.5 V. It&#x2019;s worth noting that the minimum frequency overlap between two adjacent modes is 10.5%, which further validates the robustness of the wide bandwidth. We further report the VCO gain <inline-formula><tex-math notation="LaTeX">$K_{\text {VCO}}$</tex-math></inline-formula> on this plot at <inline-formula><tex-math notation="LaTeX">$V_{\text {tune}}=1.2\ V$</tex-math></inline-formula>. <xref ref-type="fig" rid="fig24">Fig. 24(a) and (b)</xref> show the measured PN, FoM and <inline-formula><tex-math notation="LaTeX">$\text {FoM}_{T}$</tex-math></inline-formula> over the whole FTR, respectively, where the PN is from −108.8 to −120.3 dBc/Hz and −130.7 to −141.4 dBc/Hz at 1 and 10 MHz offsets while the FoM and <inline-formula><tex-math notation="LaTeX">$\text {FoM}_{T}$</tex-math></inline-formula> vary from 180.0 to 190.5 dBc/Hz and 201.1 to 211.6 dBc/Hz at a 10 MHz offset.
+<fig id="fig21">
+<label>Fig. 21.</label>
+<caption><p>Chip micrograph of the proposed quad-core quad-mode VCO.</p></caption>
+<graphic xlink:href="qin21-3657757.eps"/>
+</fig>
+<fig id="fig22">
+<label>Fig. 22.</label>
+<caption><p>Measured PN performance of each mode.</p></caption>
+<graphic xlink:href="qin22-3657757.eps"/>
+</fig>
+<fig id="fig23">
+<label>Fig. 23.</label>
+<caption><p>Measured FTR in four modes.</p></caption>
+<graphic xlink:href="qin23-3657757.eps"/>
+</fig>
+<fig id="fig24">
+<label>Fig. 24.</label>
+<caption><p>Measured (a) PN over the FTR and (b) FoM and <inline-formula><tex-math notation="LaTeX">$\text {FoM}_{T}$</tex-math></inline-formula> over the FTR.</p></caption>
+<graphic xlink:href="qin24-3657757.eps"/>
+</fig>
+</p>
+<p>The tank&#x2019;s effective parallel resistance <inline-formula><tex-math notation="LaTeX">$R_{T}$</tex-math></inline-formula> varies by mode, owing to variations in <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> across modes. Since mode-1 exhibits the largest <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> and thus the largest <inline-formula><tex-math notation="LaTeX">$R_{T}$</tex-math></inline-formula>, it requires the smallest <inline-formula><tex-math notation="LaTeX">$g_{m}$</tex-math></inline-formula> and hence the lowest current consumption, while the higher frequency and lower <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> modes require more. In the proposed design, a programmable tail resistor array is used to adjust the current. In mode-1, a larger tail resistor is used to moderate <inline-formula><tex-math notation="LaTeX">$g_{m}$</tex-math></inline-formula>, while smaller resistors are employed in modes-2 and -4 to allow higher <inline-formula><tex-math notation="LaTeX">$g_{m}$</tex-math></inline-formula>. The VCO consumes 1.44 to 14.12 mW power under a VDD of 0.4 V, with mode-1: 1.44&#x2013;3.27 mW; mode-2: 9.51&#x2013;13.46 mW; mode-3: 11.14&#x2013;14.10 mW; and mode-4: 12.63&#x2013;14.12 mW. Although the 0.4 V low supply voltage helps reduce intrinsic power consumption of the VCO, an on-chip regulator is typically required to suppress noise and improve the power supply rejection ratio (PSRR), which results in additional power overhead. Across different modes, the <inline-formula><tex-math notation="LaTeX">$K_{\text {push}}$</tex-math></inline-formula> of the proposed VCO is measured to range from 126 to 297 MHz/V. Since spur level depends on the PSRR, an on-chip regulator with high PSRR is required to keep spurs low. Although magnetic coupling brings <inline-formula><tex-math notation="LaTeX">$Q$</tex-math></inline-formula> variations, the tail resistor array ensures the robust start-up and also suppresses flicker noise up-conversion across a wide FTR. This effect is reflected in the 1/f<sup>3</sup> PN corners in each mode, which span 35&#x2013;220 kHz (mode-1), 130&#x2013;210 kHz (mode-2), 180&#x2013;600 kHz (mode-3), and 90&#x2013;750 kHz (mode-4). A lower corner frequency indicates more effective suppression of flicker noise up-conversion. Thanks to the tail resistor, the normalized PN (to 1 GHz) shows good flatness with minimal variations across the whole FTR, as shown in <xref ref-type="fig" rid="fig24">Fig. 24(a)</xref>. Moreover, <xref ref-type="fig" rid="fig25">Fig. 25</xref> shows that the proposed VCO exhibits the best overall performance in view of FoM and FTR, and the best FoM<sub>TA</sub> in similar operating frequencies. The results are compared with state-of-the-art wideband VCOs in <xref ref-type="table" rid="table1">Table I</xref>, where the proposed VCO exhibits the largest FTR and the largest FTR overlap facilitated by MR technique, validating the robustness of the ultra-wide bandwidth.
+<table-wrap id="table1">
+<label>TABLE I</label>
+<caption><title>Performance Summary and Comparison With State-of-the-Art Oscillators</title></caption>
+<graphic xlink:href="qin.t1-3657757.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="8"/>
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>This work</th>
+<th>L. Chao JSSC&#x2019;23 <xref ref-type="bibr" rid="ref21">[21]</xref></th>
+<th>Y. Shu ISSCC&#x2019;20 <xref ref-type="bibr" rid="ref18">[18]</xref></th>
+<th>J. Gong ISSCC&#x2019;22 <xref ref-type="bibr" rid="ref15">[15]</xref></th>
+<th>O. El-Aassar JSSC&#x2019;21 <xref ref-type="bibr" rid="ref14">[14]</xref></th>
+<th>Z. Kang ISSCC&#x2019;24 <xref ref-type="bibr" rid="ref28">[28]</xref></th>
+<th>H. Ge ISSCC&#x2019;24 <xref ref-type="bibr" rid="ref22">[22]</xref></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Topology</td>
+<td>Quad-core Quad-mode</td>
+<td>Quad-core Quad-mode</td>
+<td>Quad-core Quad-mode</td>
+<td>Dual-core Tri-mode</td>
+<td>Dual-core Tri-mode</td>
+<td>Single core Dual-mode</td>
+<td>Quad-core Quad-mode</td>
+</tr>
+<tr>
+<td>Technology</td>
+<td>65-nm CMOS</td>
+<td>65-nm CMOS</td>
+<td>40-nm CMOS</td>
+<td>22-nm FinFET</td>
+<td>22-nm FDSOI</td>
+<td>40-nm CMOS</td>
+<td>65-nm CMOS</td>
+</tr>
+<tr>
+<td>Techniques<xref ref-type="table-fn" rid="table1-fn2">#</xref></td>
+<td>M</td>
+<td>M</td>
+<td>M+E</td>
+<td>M+E</td>
+<td>M+E</td>
+<td>/</td>
+<td>M+E</td>
+</tr>
+<tr>
+<td>Frequency [GHz]</td>
+<td>4.21 to 15.18</td>
+<td>12.1 to 32</td>
+<td>18.6 to 40.1</td>
+<td>7.1 to 16.8</td>
+<td>8 to 17</td>
+<td>8.9 to 21.9</td>
+<td>13.7 to 41.5</td>
+</tr>
+<tr>
+<td>TR [%]</td>
+<td>113.2</td>
+<td>90.2</td>
+<td>73.2</td>
+<td>80.6</td>
+<td>72</td>
+<td>84.4</td>
+<td>101</td>
+</tr>
+<tr>
+<td>FTR Overlap<xref ref-type="table-fn" rid="table1-fn3">^</xref>
+ [%]</td>
+<td>10.5 to 14.7</td>
+<td>0.6 to 2.5</td>
+<td>4.1 to 5.0</td>
+<td>7.6 to 9.7</td>
+<td>2.2 to 4.4<xref ref-type="table-fn" rid="table1-fn1">*</xref></td>
+<td>2.0</td>
+<td>3.0 to 5.4</td>
+</tr>
+<tr>
+<td>PN@10MHz [dBc/Hz]</td>
+<td>-130.7 to -141.4</td>
+<td>-122.1 to -126.7</td>
+<td>-122.7 to -130.3</td>
+<td>-128.7 to -137.9</td>
+<td>-134.7 to -143.1</td>
+<td>-131.1 to -138.6</td>
+<td>-124.4 to -133.2</td>
+</tr>
+<tr>
+<td>FoM@10MHz [dBc/Hz]</td>
+<td>180.0 to 190.5</td>
+<td>177.4 to 181.7</td>
+<td>183.0 to 186.3</td>
+<td>185.1 to 187.6</td>
+<td>180.7 to 191.7</td>
+<td>184.8 to 190.5</td>
+<td>184.4 to 194.0</td>
+</tr>
+<tr>
+<td>FoM<sub>T</sub>@10MHz [dBc/Hz]</td>
+<td>201.1 to 211.6</td>
+<td>194.3 to 200.8</td>
+<td>200.3 to 203.6</td>
+<td>203.2 to 205.7</td>
+<td>197.8 to 208.8</td>
+<td>203.3 to 209.0</td>
+<td>204.5 to 214.1</td>
+</tr>
+<tr>
+<td>FoM<sub>TA</sub>@10MHz [dBc/Hz]</td>
+<td>209.3 to 219.8</td>
+<td>205.2 to 211.7</td>
+<td>211.3 to 214.6</td>
+<td>216.2 to 218.7</td>
+<td>201.9 to 212.9</td>
+<td>213.3 to 219.0</td>
+<td>213.0 to 222.6</td>
+</tr>
+<tr>
+<td><inline-formula><tex-math notation="LaTeX">$1/f^{3}$</tex-math></inline-formula> PN corner [kHz]</td>
+<td>35 to 750</td>
+<td>/</td>
+<td>220 to 620</td>
+<td>460 to 1600</td>
+<td>3000</td>
+<td>200 to 750</td>
+<td>280 to 1300</td>
+</tr>
+<tr>
+<td>V<sub>DD</sub> [V]</td>
+<td>0.4</td>
+<td>0.8</td>
+<td>1.1</td>
+<td>1.1</td>
+<td>0.45</td>
+<td>0.45</td>
+<td>0.4/0.55</td>
+</tr>
+<tr>
+<td>Power [mW]</td>
+<td>1.44 to 14.12</td>
+<td>5.6 to 22.5</td>
+<td>9 to 15</td>
+<td>5.5 to 13.5</td>
+<td>17 to 33</td>
+<td>5.6 to 14.8</td>
+<td>2 to 8.8</td>
+</tr>
+<tr>
+<td>Core Area [mm<sup>2</sup>]</td>
+<td>0.152</td>
+<td>0.08</td>
+<td>0.08</td>
+<td>0.05</td>
+<td>0.39</td>
+<td>0.1</td>
+<td>0.14</td>
+</tr>
+</tbody>
+</table>
+<table-wrap-foot>
+<fn id="table1-fn1">
+<label><sup>*</sup></label>
+<p>Estimated from Figures.</p>
+</fn>
+<fn id="table1-fn2">
+<label><sup>#</sup></label>
+<p>M refers to magnetically reconfigurable technique. E refers to electric coupling via added capacitors to change the effective capacitance.</p>
+</fn>
+<fn id="table1-fn3">
+<label><sup>^</sup></label>
+<p>FTR Overlap=2*(f<sub>max,mode,n</sub>-f<sub>min,mode,n+1</sub>)/(f<sub>max,mode,n</sub>+f<sub>min,mode,n+1</sub>)</p>
+<p>FoM=| PN|+20log10(f<sub>0</sub>/<inline-formula><tex-math notation="LaTeX">$\Delta $</tex-math></inline-formula>f)-10log10(P<sub>dc</sub>/1mW). FoM<sub>T</sub>=FoM+20log10(FTR[%]/10) FoM<sub>TA</sub> =FoM<sub>T</sub>+10log10(1mm<sup>2</sup>/Area)</p>
+</fn>
+</table-wrap-foot>
+</table-wrap>
+<fig id="fig25">
+<label>Fig. 25.</label>
+<caption><p>Comparison of (a) FoM over the FTR and (b) FoM<sub>TA</sub> over the frequency at a 10 MHz offset with recently reported wideband VCOs.</p></caption>
+<graphic xlink:href="qin25-3657757.eps"/>
+</fig>
+</p>
+</sec>
+<sec id="sec5">
+<label>V.</label>
+<title>Conclusion</title>
+<p>In this article, we present a quad-core quad-mode VCO featuring MR technique and fully symmetrical topology. By changing the current directions of the tank inductors via the mode-switching array and incorporating the switched inductor, four distinct inductance values are realized, enabling quad-mode operation without electrical coupling. Besides, with careful consideration of the symmetry in the inductive, capacitive, and active elements, as well as the routing layout, mismatches among the VCO cores are significantly minimized, resulting in optimized PN performance. The VCO achieves an FTR of 113.2% (4.21-to-15.18 GHz), a peak <inline-formula><tex-math notation="LaTeX">$\text {FoM}_{T}$</tex-math></inline-formula> of 211.6 dBc/Hz and a peak FoM<sub>TA</sub> of 220.5 dBc/Hz at a 10 MHz offset.</p>
+</sec>
+</body>
+<back>
+<app-group>
+<app id="app1">
+<title>Appendix</title>
+<p>In <xref ref-type="fig" rid="fig16">Fig. 16</xref>, the current relations at the blue-highlighted nodes satisfy Kirchhoff&#x2019;s current law (KCL), as expressed by
+<disp-formula id="deqn33-deqn36"><tex-math notation="LaTeX">\begin{align*} &amp; {I_{{Gm},1}} + {I_{B,1}} - {I_{B,2}} = {I_{T,1}} \tag {33}\\ &amp; {I_{{Gm},2}} + {I_{B,4}} - {I_{B,1}} = {I_{T,2}} \tag {34}\\ &amp; {I_{{Gm},3}} + {I_{B,2}} - {I_{B,3}} = {I_{T,3}} \tag {35}\\ &amp; {I_{{Gm},4}} + {I_{B,3}} - {I_{B,4}} = {I_{T,4}} \tag {36}\end{align*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">${I_{B,1}} = ({V_{T,2}} {\,}-{\,}{V_{T,1}})/{R_{\mathrm {{on}}}}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">${I_{T,1}} = {V_{T,1}}{Y_{T,1}}$</tex-math></inline-formula>. The other parameters can be derived in similar manner.</p>
+<p>For simplicity, we assume that <inline-formula><tex-math notation="LaTeX">$|I_{{Gm},1}|{\,}={\,}|I_{{Gm},2}|{\,}={\,}|I_{{Gm},3}|{\,}={\,}|I_{{Gm},4}|{\,}={\,}1$</tex-math></inline-formula>, which accordingly implies that <inline-formula><tex-math notation="LaTeX">$A_{0}=R_{T}$</tex-math></inline-formula>. Moreover, <inline-formula><tex-math notation="LaTeX">$I_{{Gm},i}$</tex-math></inline-formula> is in phase with <inline-formula><tex-math notation="LaTeX">$V_{T,i}$</tex-math></inline-formula>. Substituting the parameters (<inline-formula><tex-math notation="LaTeX">$I_{{Gm},2}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$I_{B,4}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$I_{B,1}$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$I_{T,2}$</tex-math></inline-formula>) into <xref ref-type="disp-formula" rid="deqn33-deqn36">(34)</xref>, we obtain
+<disp-formula id="deqn37"><tex-math notation="LaTeX">\begin{equation*} {e^{j{\theta _{2}}}} + \frac {\alpha }{r}\left ({{2 - 2{e^{j{\theta _{2}}}}}}\right ) = \alpha \left ({{e^{j{\theta _{2}}}}}\right )\left ({{1 + j2{K_{2}}}}\right ) \tag {37}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$r=R_{\text {on} }/R_{T}$</tex-math></inline-formula>. Equating the real and imaginary parts on both sides of <xref ref-type="disp-formula" rid="deqn37">(37)</xref>, we obtain
+<disp-formula id="deqn38-deqn39"><tex-math notation="LaTeX">\begin{align*} \frac {2\alpha }{r}\left ({{1 - \cos {\theta _{2}}}}\right ) + \cos {\theta _{2}} &amp; = \alpha \cos {\theta _{2}} - 2\alpha {K_{2}}\sin {\theta _{2}} \tag {38}\\ \left ({{1 - \frac {2\alpha }{r}}}\right )\sin {\theta _{2}} &amp; = \alpha \sin {\theta _{2}} + 2\alpha {K_{2}}\cos {\theta _{2}}. \tag {39}\end{align*}</tex-math></disp-formula></p>
+<p>Solving <xref ref-type="disp-formula" rid="deqn38-deqn39">(38)</xref> and <xref ref-type="disp-formula" rid="deqn38-deqn39">(39)</xref> yields <inline-formula><tex-math notation="LaTeX">$\theta _{2}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\alpha $</tex-math></inline-formula> as given in <xref ref-type="disp-formula" rid="deqn25-deqn27">(25)</xref> and <xref ref-type="disp-formula" rid="deqn25-deqn27">(26)</xref>.</p>
+<p>Using the same approach to calculate <xref ref-type="disp-formula" rid="deqn33-deqn36">(35)</xref> and comparing the corresponding results of <inline-formula><tex-math notation="LaTeX">$\theta _{3}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\alpha $</tex-math></inline-formula> with <xref ref-type="disp-formula" rid="deqn25-deqn27">(25)</xref> and <xref ref-type="disp-formula" rid="deqn25-deqn27">(26)</xref>, we obtain <inline-formula><tex-math notation="LaTeX">$K_{2}=K_{3}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\theta _{2}=\theta _{3}$</tex-math></inline-formula>. The above solutions are valid when the condition <inline-formula><tex-math notation="LaTeX">$|K_{2}r|{\,}\le {\,}1$</tex-math></inline-formula> is satisfied.</p>
+<p>Similarly, solving the imaginary part of <xref ref-type="disp-formula" rid="deqn33-deqn36">(33)</xref>, we obtain
+<disp-formula id="deqn40"><tex-math notation="LaTeX">\begin{equation*} \frac {\alpha }{r}\left ({{\sin {\theta _{2}} + \sin {\theta _{3}}}}\right ) = 2\alpha {K_{1}}. \tag {40}\end{equation*}</tex-math></disp-formula></p>
+<p>Substituting <xref ref-type="disp-formula" rid="deqn25-deqn27">(25)</xref> into <xref ref-type="disp-formula" rid="deqn40">(40)</xref>, it can be derived that
+<disp-formula id="deqn41"><tex-math notation="LaTeX">\begin{equation*} - \left ({{{K_{2}} + {K_{3}}}}\right ) = 2{K_{1}}. \tag {41}\end{equation*}</tex-math></disp-formula></p>
+<p>Based on <xref ref-type="disp-formula" rid="deqn41">(41)</xref>, and noting that <inline-formula><tex-math notation="LaTeX">$K_{1}=K_{4}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$K_{2}=K_{3}$</tex-math></inline-formula>, it can be approximated that <inline-formula><tex-math notation="LaTeX">$f_{\text {osc}}{\,}\approx {\,}(f_{1}{\,}+{\,}f_{2}{\,}+{\,}f_{3}{\,}+{\,}f_{4})/4$</tex-math></inline-formula>, which is consistent with the result in <xref ref-type="bibr" rid="ref27">[27]</xref>. Accordingly, by substituting <inline-formula><tex-math notation="LaTeX">$f_{\text {osc}}$</tex-math></inline-formula> into <inline-formula><tex-math notation="LaTeX">$K_{2}$</tex-math></inline-formula>, it can be rewritten as <xref ref-type="disp-formula" rid="deqn25-deqn27">(27)</xref>.</p>
+</app>
+</app-group>
+<ref-list>
+<title>
+References
+</title>
+<ref id="ref1">
+<label>
+[1]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Qin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Xue
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Che
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Microwave LC oscillators: Multimode switching techniques
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Microw. Mag.
+</source>
+, vol. 
+<volume>
+24
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+63
+</fpage>
+&#x2013;
+<lpage>
+81
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref2">
+<label>
+[2]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Demirkan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S. P.
+</given-names> 
+<surname>
+Bruss
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R. R.
+</given-names> 
+<surname>
+Spencer
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Design of wide tuning-range CMOS VCOs using switched coupled-inductors
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+43
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+1156
+</fpage>
+&#x2013;
+<lpage>
+1163
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2008
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref3">
+<label>
+[3]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Yin
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+H. C.
+</given-names> 
+<surname>
+Luong
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 57.5-to-90.1GHz magnetically-tuned multi-mode CMOS VCO
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+Proc. IEEE Custom Integr. Circuits Conf.
+</source>
+, 
+<conf-date>
+Sep. 2012
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+4
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref4">
+<label>
+[4]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S.-L.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+K.-H.
+</given-names> 
+<surname>
+Chen
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Chin
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A dual-resonant mode 10/22-GHz VCO with a novel inductive switching approach
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+60
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+2165
+</fpage>
+&#x2013;
+<lpage>
+2177
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2012
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref5">
+<label>
+[5]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D. B.
+</given-names> 
+<surname>
+Leeson
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A simple model of feedback oscillator noise spectrum
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+Proc. IEEE
+</source>
+, vol. 
+<volume>
+54
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+329
+</fpage>
+&#x2013;
+<lpage>
+330
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+1966
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref6">
+<label>
+[6]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+E.
+</given-names> 
+<surname>
+Afshari
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A distributed dual-band LC oscillator based on mode switching
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Microw. Theory Techn.
+</source>
+, vol. 
+<volume>
+59
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+99
+</fpage>
+&#x2013;
+<lpage>
+107
+</lpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2011
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref7">
+<label>
+[7]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.-H.
+</given-names> 
+<surname>
+Hung
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Gharpurey
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 57-to-75 GHz dual-mode wide-band reconfigurable oscillator in 65 nm CMOS
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+Proc. IEEE Radio Freq. Integr. Circuits Symp.
+</source>
+, 
+<conf-date>
+Jun. 2014
+</conf-date>
+, pp. 
+<fpage>
+261
+</fpage>
+&#x2013;
+<lpage>
+264
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref8">
+<label>
+[8]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Peng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Yin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.-I.
+</given-names> 
+<surname>
+Mak
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R. P.
+</given-names> 
+<surname>
+Martins
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Low-phase-noise wideband mode-switching quad-core-coupled mm-Wave VCO using a single-center-tapped switched inductor
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+53
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, pp. 
+<fpage>
+3232
+</fpage>
+&#x2013;
+<lpage>
+3242
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2018
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref9">
+<label>
+[9]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Bhat
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+N.
+</given-names> 
+<surname>
+Krishnapura
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 25-to-38GHz, 195dB FoMT LC QVCO in 65 nm LP CMOS using a 4-port dual-mode resonator for 5G radios
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers
+</source>
+, 
+<conf-date>
+Feb. 2019
+</conf-date>
+, pp. 
+<fpage>
+412
+</fpage>
+&#x2013;
+<lpage>
+414
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref10">
+<label>
+[10]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Analysis and design of a dual-mode VCO with inherent mode compensation enabling a 7.9&#x2013;14.3-GHz 85-fs-rms jitter PLL
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+58
+</volume>
+, no. 
+<issue>
+8
+</issue>
+, pp. 
+<fpage>
+2252
+</fpage>
+&#x2013;
+<lpage>
+2266
+</lpage>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref11">
+<label>
+[11]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Ge
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Jia
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Deng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Ma
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Chi
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 194.9dBc/Hz FoM and 6.8-to-11.6GHz quad-core dual-mode class-F VCO featuring wideband flicker noise suppression
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+Proc. IEEE Custom Integr. Circuits Conf. (CICC)
+</source>
+, 
+<conf-date>
+Apr. 2024
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+2
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref12">
+<label>
+[12]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Batabyal
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R. H.
+</given-names> 
+<surname>
+Zele
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S. K.
+</given-names> 
+<surname>
+Khyalia
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 0.065 mm
+<sup>
+2
+</sup>
+ inductive coupling based dual core mm-wave VCO with 183 dBc/Hz FoM
+<sub>
+T
+</sub>
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers
+</source>
+, 
+<conf-date>
+Feb. 2024
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+13
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref13">
+<label>
+[13]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zhao
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 12.9-to-24 GHz dual-mode multi-coil VCO achieving 199.2 dBc/Hz peak FoM
+<sub>
+T
+</sub>
+ in 65-nm CMOS
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Circuits Syst. II, Exp. Briefs
+</source>
+, vol. 
+<volume>
+71
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+2604
+</fpage>
+&#x2013;
+<lpage>
+2608
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref14">
+<label>
+[14]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+O.
+</given-names> 
+<surname>
+El-Aassar
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+G. M.
+</given-names> 
+<surname>
+Rebeiz
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Octave-tuning dual-core folded VCO leveraging a triple-mode switch-less tertiary magnetic loop
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+56
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+1475
+</fpage>
+&#x2013;
+<lpage>
+1486
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref15">
+<label>
+[15]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Gong
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Patra
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Enthoven
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+van Staveren
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Sebastiano
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Babaie
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 0.049mm
+<sup>
+2
+</sup>
+ 7.1-to-16.8GHz dual-core triple-mode VCO achieving 200dB FoM
+<sub>
+A
+</sub>
+ in 22 nm FinFET
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers
+</source>
+, vol. 
+<volume>
+65
+</volume>
+, 
+<conf-date>
+Feb. 2022
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+3
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref16">
+<label>
+[16]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Peng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Huo
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Yin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R. P.
+</given-names> 
+<surname>
+Martins
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+P. I.
+</given-names> 
+<surname>
+Mak
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A switchless dual-core triple-mode VCO achieving 7.1-to-15.7 GHz frequency tuning range and 202.1 dBc/Hz peak FoM at 3.7 Kelvin
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+Proc. IEEE Radio Freq. Integr. Circuits Symp. (RFIC)
+</source>
+, 
+<conf-date>
+Jun. 2024
+</conf-date>
+, pp. 
+<fpage>
+243
+</fpage>
+&#x2013;
+<lpage>
+246
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref17">
+<label>
+[17]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Lin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Jia
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Deng
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Chi
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+An 18.5-to-36.5 GHz 206.8 dBc/Hz FoM
+<sub>
+T
+</sub>
+ quad-core triple-mode VCO with automatic-mode-tracking output buffers
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+Proc. IEEE Radio Freq. Integr. Circuits Symp. (RFIC)
+</source>
+, 
+<conf-date>
+Jun. 2024
+</conf-date>
+, pp. 
+<fpage>
+87
+</fpage>
+&#x2013;
+<lpage>
+90
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref18">
+<label>
+[18]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Shu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H. J.
+</given-names> 
+<surname>
+Qian
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Luo
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+17.4 A 18.6-to-40.1GHz 201.7dBc/Hz FoM
+<sub>
+T
+</sub>
+ multi-core oscillator using E-M mixed-coupling resonance boosting
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers
+</source>
+, 
+<conf-date>
+Feb. 2020
+</conf-date>
+, pp. 
+<fpage>
+272
+</fpage>
+&#x2013;
+<lpage>
+274
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref19">
+<label>
+[19]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Deng
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+An 8.2-to-21.5 GHz dual-core quad-mode orthogonal-coupled VCO with concurrently dual-output using parallel 8-shaped resonator
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+Proc. IEEE Custom Integr. Circuits Conf. (CICC)
+</source>
+, 
+<conf-date>
+Apr. 2021
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+2
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref20">
+<label>
+[20]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Wan
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 20.65-to-40.55 GHz dual-core quad-mode VCO with mode-independent transformer-switching technique in 65-nm CMOS
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Circuits Syst. II, Exp. Briefs
+</source>
+, vol. 
+<volume>
+70
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, pp. 
+<fpage>
+4073
+</fpage>
+&#x2013;
+<lpage>
+4077
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref21">
+<label>
+[21]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Guo
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Qin
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Q.
+</given-names> 
+<surname>
+Xue
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A wideband mode-switching quad-core VCO using compact multi-mode magnetically coupled LC network
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+58
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+14
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref22">
+<label>
+[22]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Ge
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Jia
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Deng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Ma
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Chi
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 13.7- to-41.5GHz 214.1dBc/Hz FoM
+<sub>
+T
+</sub>
+ quad-core quad-mode VCO using an oscillation-mode-splitting technique
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers
+</source>
+, vol. 
+<volume>
+67
+</volume>
+, 
+<conf-date>
+Feb. 2024
+</conf-date>
+, pp. 
+<fpage>
+356
+</fpage>
+&#x2013;
+<lpage>
+358
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref23">
+<label>
+[23]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Fan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zhao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Gao
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Geng
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 4.5-to-13.5-GHz single-transformer quad-mode VCO with 202.5-dBc/Hz FoM
+<sub>
+T
+</sub>
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Microw. Wireless Technol. Lett.
+</source>
+, vol. 
+<volume>
+34
+</volume>
+, no. 
+<issue>
+11
+</issue>
+, pp. 
+<fpage>
+1271
+</fpage>
+&#x2013;
+<lpage>
+1274
+</lpage>
+, 
+<month>
+Nov.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref24">
+<label>
+[24]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Kim
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Kim
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Jeon
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+An octave tuning-range frequency generator integrating a quad-core VCO using quad-mode coupled dual-path inductor with a wideband ILFD
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+60
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+13
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref25">
+<label>
+[25]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Qin
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Ma
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Comparison of different multi-winding transformer models in multi-port AC-coupled converter application
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+Proc. 47th Annu. Conf. IEEE Ind. Electron. Soc.
+</source>
+, 
+<conf-date>
+Oct. 2021
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+6
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref26">
+<label>
+[26]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Shu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H. J.
+</given-names> 
+<surname>
+Qian
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Luo
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A 2-D mode-switching quad-core oscillator using E-M mixed-coupling resonance boosting
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+56
+</volume>
+, no. 
+<issue>
+6
+</issue>
+, pp. 
+<fpage>
+1711
+</fpage>
+&#x2013;
+<lpage>
+1721
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref27">
+<label>
+[27]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Iotti
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Mazzanti
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+F.
+</given-names> 
+<surname>
+Svelto
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Insights into phase-noise scaling in switch-coupled multi-core LC VCOs for E-band adaptive modulation links
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE J. Solid-State Circuits
+</source>
+, vol. 
+<volume>
+52
+</volume>
+, no. 
+<issue>
+7
+</issue>
+, pp. 
+<fpage>
+1703
+</fpage>
+&#x2013;
+<lpage>
+1718
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2017
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref28">
+<label>
+[28]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Kang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Yu
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+19.3 An 8.9-to-21.9GHz single-core oscillator with reconfigurable class-F&#x2013;1 and enhanced-colpitts dual-mode operation achieving 209dBc/Hz FoM
+<sub>
+T
+</sub>
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers
+</source>
+, 
+<conf-date>
+Feb. 2024
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+3
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref29">
+<label>
+[29]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+S. A.-R.
+</given-names> 
+<surname>
+Ahmadi-Mehr
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Tohidian
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R. B.
+</given-names> 
+<surname>
+Staszewski
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Analysis and design of a multi-core oscillator for ultra-low phase noise
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Circuits Syst. I, Reg. Papers
+</source>
+, vol. 
+<volume>
+63
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+529
+</fpage>
+&#x2013;
+<lpage>
+539
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2016
+</year>
+.
+</mixed-citation>
+</ref>
+</ref-list>
+<bio-group>
+<bio id="bio1">
+<graphic xlink:href="huang-3657757.tif"/>
+<p><xref ref-type="contrib" rid="contrib1">Shijin Huang</xref> (Graduate Student Member, IEEE) received the B.Sc. degree in information engineering from Guangdong University of Technology, Guangzhou, China, in 2021. He is currently pursuing the Ph.D. degree with the School of Microelectronics, South China University of Technology, Guangzhou.
+</p>
+<p>
+His research interests include RF/millimeter-wave integrated circuits and systems.</p>
+</bio>
+<bio id="bio2">
+<graphic xlink:href="qin-3657757.tif"/>
+<p><xref ref-type="contrib" rid="contrib2">Pei Qin</xref> (Member, IEEE) received the B.Sc. degree in electronic science and technology from the University of Electronic Science and Technology of China, Chengdu, China, in 2010, and the Ph.D. degree in electronic engineering from the City University of Hong Kong, Hong Kong, in October 2016.
+</p>
+<p>
+From November 2016 to February 2022, she was a Senior IC Design Engineer with HiSilicon, Shenzhen, China, with a focus on all digital phase-locked loop (ADPLL) IC design. In March 2022, she joined South China University of Technology, Guangzhou, China, where she is currently an Associate Professor. Her research interests include analog/RF front-end and phase-locked loop (PLL) integrated circuit design.</p>
+</bio>
+<bio id="bio3">
+<graphic xlink:href="yi-3657757.tif"/>
+<p><xref ref-type="contrib" rid="contrib3">Xiang Yi</xref> (Senior Member, IEEE) received the B.E. degree from the Huazhong University of Science and Technology (HUST), Wuhan, China, in 2006, the M.S. degree from South China University of Technology (SCUT), Guangzhou, China, in 2009, and the Ph.D. degree from Nanyang Technological University (NTU), Singapore, in 2014.
+</p>
+<p>
+He is currently a Professor with SCUT. Before that, he was a Post-Doctoral Fellow with the Massachusetts Institute of Technology (MIT), Cambridge, MA, USA. His research interests include radio frequency (RF), millimeter-wave (mm-wave), and terahertz (THz)-frequency synthesizers and transceiver systems.
+</p>
+<p>
+Dr. Yi was a recipient of the IEEE International Solid-State Circuits Conference (ISSCC) Silkroad Award and the IEEE Solid-State Circuits Society (SSCS) Travel Grant Award in 2013. He is a technical reviewer of several IEEE journals and conferences.</p>
+</bio>
+<bio id="bio4">
+<graphic xlink:href="zhu-3657757.tif"/>
+<p><xref ref-type="contrib" rid="contrib4">Haoshen Zhu</xref> (Member, IEEE) received the B.E. degree in electrical engineering from Wuhan University of Technology, Wuhan, China, in 2009, and the Ph.D. degree in electronics engineering from the City University of Hong Kong, Hong Kong, in 2015.
+</p>
+<p>
+In 2015, he joined RDA Microelectronics, Shanghai, China, as a Senior MEMS Design Engineer. From 2015 to 2017, he was a Research Fellow with the University of Michigan, Ann Arbor, MI, USA. Then, he was a Caltech Post-Doctoral Scholar with the NASA Jet Propulsion Laboratory, Pasadena, CA, USA. Since 2018, he has been an Associate Professor with the School of Electronics and Information Engineering, South China University of Technology, Guangzhou, China. He has authored or co-authored over 40 journal articles and conference papers. His research interests include RF MEMS devices, integrated circuits, and microsystems for RF, timing, and sensing applications.
+</p>
+<p>
+Dr. Zhu has served as a reviewer for several journals and a TPC Member or the Session Chair for various conferences. He currently serves as an Associate Editor for 
+<italic>
+International Journal of Microwave and Wireless Technologies
+</italic>
+.</p>
+</bio>
+<bio id="bio5">
+<graphic xlink:href="wu-3657757.tif"/>
+<p><xref ref-type="contrib" rid="contrib5">Liang Wu</xref> (Member, IEEE) received the B.S. and M.S. degrees in materials science from Fudan University, Shanghai, China, in 2004 and 2007, respectively, and the Ph.D. degree in electronic and computer engineering from The Hong Kong University of Science and Technology, Hong Kong, in 2012.
+</p>
+<p>
+From 2013 to 2015, he was a Research Assistant Professor with the Department of Electronic and Computer Engineering, The Hong Kong University of Science and Technology. He was also the Deputy Director of the HKUST-Qualcomm Joint Innovation and Research Laboratory, The Hong Kong University of Science and Technology. From 2015 to 2018, he was a Senior Research Fellow with the State Key Laboratory of Millimeter Waves, City University of Hong Kong, Hong Kong. In 2018, he was a Principal Engineer with Hong Kong Applied Science and Technology Research Institute, Hong Kong, for half a year. Since November 2018, he has been an Assistant Professor with the School of Science and Engineering, The Chinese University of Hong Kong, Shenzhen, China. Upon the founding of Guangdong-Hong Kong-Macao Joint Laboratory for Millimeter-Wave and Terahertz, The Chinese University of Hong Kong, in January 2024, he began as the Co-Director. He has authored or co-authored over 60 journals articles and conference papers. His research interests focus on radio frequency (RF)/millimeter-wave/terahertz integrated circuits, and systems with applications in the areas of short-range wireless communication and the Internet of Everything.</p>
+</bio>
+<bio id="bio6">
+<graphic xlink:href="xue-3657757.tif"/>
+<p><xref ref-type="contrib" rid="contrib6">Quan Xue</xref> (Fellow, IEEE) received the B.S., M.S., and Ph.D. degrees in electronic engineering from the University of Electronic Science and Technology of China (UESTC), Chengdu, China, in 1988, 1990, and 1993, respectively.
+</p>
+<p>
+In 1993, he joined UESTC as a Lecturer, where he became a Professor in 1997. From 1997 to 1998, he was a Research Associate and then a Research Fellow with The Chinese University of Hong Kong, Hong Kong. In 1999, he joined the City University of Hong Kong (CityU), Hong Kong, where he was the Chair Professor of microwave engineering from 2013 to 2017. He was the Associate Vice President of Innovation Advancement and China Office, CityU, from 2011 to 2015, the Director of the Information and Communication Technology Center (ICTC), Hong Kong, and the Deputy Director of the State Key Laboratory of Millimeter Waves, Hong Kong. He is currently the Dean of the School of Electronic and Information Engineering, South China University of Technology, Guangzhou, China. He has authored or co-authored over 350 internationally refereed journal articles and over 170 international conference papers. He is a co-inventor of five granted Chinese patents and 27 granted U.S. patents (five of them have been licensed), in addition to 29 filed patents. His current research interests include microwave/millimeter wave/terahertz passive components, active components, antenna, microwave monolithic integrated circuits, and radio frequency integrated circuits.
+</p>
+<p>
+Dr. Xue served as an Administrative Committee (AdCom) Member for the IEEE Microwave Theory and Techniques Society (MTT-S) from 2011 to 2013. He was a recipient of the 2017 H. A. Wheeler Paper Award of the IEEE Antenna and Propagation Society. He was an Associate Editor of <sc>IEEE Transactions on Microwave Theory and Techniques</sc> from 2010 to 2013, <sc>IEEE Transactions on Industrial Electronics</sc> from 2010 to 2015, and <sc>IEEE Transactions on Antennas and Propagation</sc> from 2016 to 2017. He was an Editor of <italic>International Journal of Antennas and Propagation</italic> from 2010 to 2013.</p>
+</bio>
+</bio-group>
+</back>
+</article>

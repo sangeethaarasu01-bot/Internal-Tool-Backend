@@ -574,6 +574,8 @@ def _attach_figure_captions(
 def build_semantic_document(
     raw: ExtractionResult,
     processed: list[ProcessedBlock],
+    *,
+    include_tagged_output: bool = True,
 ) -> SemanticDocument:
     body_font = _median_body_size(processed)
     title_threshold = _title_font_threshold(processed)
@@ -1198,7 +1200,8 @@ def build_semantic_document(
         unknown=unknown,
         completeness=completeness,
     )
-    document.tagged_output = render_semantic_document(document)
+    if include_tagged_output:
+        document.tagged_output = render_semantic_document(document)
     return document
 
 

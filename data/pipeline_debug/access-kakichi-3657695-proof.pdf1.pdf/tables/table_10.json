@@ -1,0 +1,722 @@
+{
+  "table_id": "table_10",
+  "page_number": 7,
+  "row_count": 69,
+  "column_count": 8,
+  "rows": [
+    [
+      "Y.Kakichietal.:Real-TimeCapableOptimalEnergyManagementStrategyforaHybridWheelLoader",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "FIGURE9. Normalizedefficiencymapsofelectricmachines(left:P2,right:Fro",
+      "ntED",
+      "U).Theisoline",
+      "saren",
+      "orm",
+      "alized",
+      "",
+      ""
+    ],
+    [
+      "suchthat100correspondstothemaximumefficiency.",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "whereQ representsthebatterycapacity.Thebatterypower Thepowerof bat",
+      "the",
+      "P2EMisex",
+      "presse",
+      "da",
+      "safunct",
+      "ionofthe",
+      "ICE"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "iscalculatedasthesumofallelectricalpowerconsumption torqueM u ICE",
+      "sin",
+      "g(2)andth",
+      "efollo",
+      "wi",
+      "ngrelati",
+      "onship.",
+      ""
+    ],
+    [
+      "using(2)asfollows: (cid:2)",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "=",
+      "M p",
+      "ump,req−M",
+      ", ICE",
+      "hy",
+      "bridmo",
+      "de",
+      ""
+    ],
+    [
+      "= + + M",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "(12)"
+    ],
+    [
+      "P P P P (8) EM bat EM EDU aux",
+      "M",
+      ", ,",
+      "",
+      "el",
+      "ectricm",
+      "ode",
+      ""
+    ],
+    [
+      "",
+      "p",
+      "umpreq",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "where P represents the electrical power required for aux Here, M ,",
+      "",
+      "represents",
+      "the e",
+      "sti",
+      "mated re",
+      "quired p",
+      "ump"
+    ],
+    [
+      "pump",
+      "req",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "auxiliary components and is modeled as a constant power torque. The e",
+      "stim",
+      "ation algor",
+      "ithm",
+      "wil",
+      "l be ex",
+      "plained i",
+      "n the"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "consumptionforbothDC-DCconvertersinthispaper.",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "followingsub",
+      "sect",
+      "ion.Noteth",
+      "atthec",
+      "on",
+      "trolinpu",
+      "tM is ICE",
+      "zero"
+    ],
+    [
+      "inelectricmo",
+      "de;",
+      "therefore,th",
+      "ebatt",
+      "ery",
+      "SOCch",
+      "angeiss",
+      "olely"
+    ],
+    [
+      "IV. OPTIMALENERGYMANAGEMENTSTRATEGY",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "determinedby",
+      "the",
+      "cycleinfor",
+      "matio",
+      "n.",
+      "",
+      "",
+      ""
+    ],
+    [
+      "A. DP-PMPFORMULATION",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "The objective of the energy management strategy is to",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "minimize fuel consumption over a given mission cycle by",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "optimizing two control inputs: the ICE start-stop decision",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "andtheICEtorquesetpoint.Thefirstcontrolinput,theICE",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "start-stopdecision,affectstheoperatingmodeofthevehicle",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "throughthefollowingdynamics:",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "( + )= ( )+ ( )",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "ss k 1 ss k u k (9) ICE ⎧ICE ss",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "⎪⎨−1 ICEturnoff",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "FIGURE10. Equi",
+      "valen",
+      "tcircuitmode",
+      "lofbat",
+      "ter.",
+      "",
+      "",
+      ""
+    ],
+    [
+      "u ss(k)= ⎪0 Donothing (10)",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "⎩",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "1 ICEstart",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "A classic",
+      "Dy",
+      "namic Prog",
+      "ramm",
+      "in",
+      "g (DP)",
+      "problem",
+      "can"
+    ],
+    [
+      "( )",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Here, ss k represents the ICE state at time step be formulate ICE",
+      "d to",
+      "determine",
+      "the c",
+      "on",
+      "trol inp",
+      "uts that",
+      "min-"
+    ],
+    [
+      "=",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "k, where ss 1 indicates that the ICE is on, and imize the to ICE",
+      "tal",
+      "fuel consu",
+      "mptio",
+      "n",
+      "over th",
+      "e given",
+      "mis-"
+    ],
+    [
+      "= ( )",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "ss 0 indicates that it is off. The variable u k sion cycle, w ICE ss",
+      "hile",
+      "considerin",
+      "g the",
+      "IC",
+      "E state",
+      "(9) and",
+      "SOC"
+    ],
+    [
+      "denotestheICEstart-stopcontrolinput.Theadditionalfuel dynamics(11",
+      ")as",
+      "follows:",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "(cid:10) consumption required to start the ICE is considered when opt",
+      "",
+      "(cid:11)",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "( )= ˙ J ξ i(k),s",
+      "s ICE",
+      ",j(k)",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "u k 1andisrepresentedbym (k). k ss s",
+      "(cid:12)",
+      "(cid:10)",
+      "",
+      "",
+      "(cid:11)",
+      "",
+      ""
+    ],
+    [
+      "= min",
+      "m˙",
+      "k,M",
+      "(k),s",
+      "s",
+      ",(k) ·",
+      "(cid:6)t",
+      ""
+    ],
+    [
+      "Theotherdynamicsconsideredintheoptimalcontrolprob- ∈",
+      "f",
+      "uel ICE",
+      "",
+      "IC",
+      "E j",
+      "",
+      ""
+    ],
+    [
+      "ξ MICE,uss U",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "(cid:13)"
+    ],
+    [
+      "lem are the battery SOC . By substituting (8) into (7) and",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "+m˙ s(k,u then discretizing the equation, the following discrete-time",
+      "(k ss",
+      "))·(cid:6)t +J k",
+      "opt (ξ +1",
+      "(k",
+      "+1),ss",
+      "(k + ICE",
+      "1))"
+    ],
+    [
+      "representationofthebatterySOCisobtained:",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "(13)"
+    ],
+    [
+      "(cid:6)t opt",
+      "(cid:10)",
+      "",
+      "(cid:11)",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "ξ(k +1)−ξ(k)=− · Here, J · · k",
+      "ξ ( i",
+      "k),ss ICE,j(",
+      "k) r",
+      "epr",
+      "esents t",
+      "he cost-t",
+      "o-go"
+    ],
+    [
+      "(cid:8) (cid:3) 2R i Q bat (cid:9) functionattim",
+      "est",
+      "epk,where",
+      "indice",
+      "si",
+      "andjcor",
+      "respondt",
+      "othe"
+    ],
+    [
+      "− 2 − · · ( )+ + positionsofth",
+      "eb",
+      "atterySOC",
+      "andIC",
+      "E",
+      "stateont",
+      "hediscre",
+      "tized"
+    ],
+    [
+      "U U 4R [P M P P ] OC OC i EM ICE EDU aux",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "grid,respectiv",
+      "ely.",
+      "Thecost-to",
+      "-gofu",
+      "nct",
+      "ionmus",
+      "tbecomp",
+      "uted"
+    ],
+    [
+      "(11) backwardacc",
+      "ordi",
+      "ngto(13),",
+      "fromt",
+      "he",
+      "endoft",
+      "hecyclet",
+      "othe"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "VOLUME14,2026",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "7"
+    ]
+  ],
+  "bbox": null,
+  "id": "table_10",
+  "caption": "TABLE 2. Operational constraints considered in the proposed energy management strategy.",
+  "subtitle": null,
+  "headers": [
+    "Y.Kakichietal.:Real-TimeCapableOptimalEnergyManagementStrategyforaHybridWheelLoader",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "raw_text": null,
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.82,
+    "status": "structured",
+    "engine": "pdfplumber-text",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

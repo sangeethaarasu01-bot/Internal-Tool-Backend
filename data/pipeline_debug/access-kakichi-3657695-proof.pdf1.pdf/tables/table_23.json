@@ -1,0 +1,82 @@
+{
+  "table_id": "table_23",
+  "page_number": 13,
+  "row_count": 4,
+  "column_count": 9,
+  "rows": [
+    [
+      "Ref.",
+      "Operation Frequency",
+      "Impedance Bandwidth",
+      "Size (λ0)",
+      "Profile (λ0)",
+      "Method of Suppression",
+      "Gain In-Band (dBi)",
+      "Freq. Selectivity (dB/GHz)",
+      "Gain Suppression"
+    ],
+    [
+      "[1] L. Franckx, A. Van Hyfte, and D. Vandenbroucke, ‘‘Study in view",
+      "of the revision of directive 97/68/EC on non-road mobile machinery",
+      "(NRMM)—An emissions inventory and impact assessment,’’ Publica-",
+      "tions Ofﬁce Eur. Union, Luxembourg, Tech. Rep., 2010, Accessed:",
+      "Jan. 21, 2026. [Online]. Available: https://op.europa.eu/en/publication-",
+      "detail/-/publication/60e67ef3-f68f-42d0-ba3f-afb053704359/language-en",
+      "",
+      "",
+      ""
+    ],
+    [
+      "[2] J. Deere. 944 X-Tier. Accessed: Mar. 13, 2025. [Online]. Available: https://",
+      "www.deere.com/en/loaders/wheel-loaders/large-wheel-loaders/944-x-",
+      "wheel-loader/",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "[3] Hitachi",
+      "Construction",
+      "Machinery",
+      "Japan.",
+      "Hybrid",
+      "Machine",
+      "Series.",
+      "Accessed: Mar. 13, 2025. [Online]. Available: https://japan.hitachi-",
+      "kenki.co.jp/products/industry/general/hybrid/"
+    ]
+  ],
+  "bbox": [
+    316.3291015625,
+    450.63848876953125,
+    557.544677734375,
+    737.1304321289062
+  ],
+  "id": "table_23",
+  "caption": "Table 7 summarizes the test results for the V-cycle. The",
+  "subtitle": null,
+  "headers": [
+    "Ref.",
+    "Operation Frequency",
+    "Impedance Bandwidth",
+    "Size (λ0)",
+    "Profile (λ0)",
+    "Method of Suppression",
+    "Gain In-Band (dBi)",
+    "Freq. Selectivity (dB/GHz)",
+    "Gain Suppression"
+  ],
+  "raw_text": "strategy is capable of real-time operation. The test results with\nthe hybrid wheel loader conﬁrmed that the presented control\nstrategy can improve the BSFC of the ICE in both the V-cycle\nand the combined cycle by using the ICE in areas with higher\nefﬁciency. However, due to the varying workloads during\ntesting, it is difﬁcult to evaluate the overall fuel consumption\nbeneﬁts.\nThe proposed approach relies on correct state detection\nto trigger optimization based on predicted power demand.\nIn practical implementation, when state detection conﬁdence\nis insufﬁcient or misclassiﬁcation is detected, the controller\nintentionally disables the DP–PMP optimization and falls\nback to a conservative baseline strategy, such as a rule-\nbased controller or adaptive ECMS. This fallback mechanism\nensures robust and safe operation under uncertain or unfore-\nseen conditions, while preserving the beneﬁts of optimization\nwhen reliable predictions are available.\nFuture research could focus on analyzing the potential\nfor reducing raw pollutant emissions through reduced tran-\nsient ICE operation, thanks to hybridization. Furthermore, the\nintegration of emission control into the optimization control\nframework to investigate the optimal concept for exhaust\naftertreatment systems is another area for future studies.\nIn addition, the provision of future scenarios through the\nnetworking of machines and their management as a ﬂeet on\nthe construction site is another research focus.\nACKNOWLEDGMENT\nThe authors would like to express their sincere gratitude to\nYanmar Compact Germany GmbH for their support in facili-\ntating the conversion of the powertrain and assisting with the\ntesting process.\nREFERENCES\n[1] L. Franckx, A. Van Hyfte, and D. Vandenbroucke, ‘‘Study in view\tof the revision of directive 97/68/EC on non-road mobile machinery\t(NRMM)—An emissions inventory and impact assessment,’’ Publica-\ttions Ofﬁce Eur. Union, Luxembourg, Tech. Rep., 2010, Accessed:\tJan. 21, 2026. [Online]. Available: https://op.europa.eu/en/publication-\tdetail/-/publication/60e67ef3-f68f-42d0-ba3f-afb053704359/language-en\n[2] J. Deere. 944 X-Tier. Accessed: Mar. 13, 2025. [Online]. Available: https://\twww.deere.com/en/loaders/wheel-loaders/large-wheel-loaders/944-x-\twheel-loader/\n[3] Hitachi\tConstruction\tMachinery\tJapan.\tHybrid\tMachine\tSeries.\tAccessed: Mar. 13, 2025. [Online]. Available: https://japan.hitachi-\tkenki.co.jp/products/industry/general/hybrid/\tVOLUME 14, 2026\t15",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.9,
+    "status": "structured",
+    "engine": "caption-text-fallback",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

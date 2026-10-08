@@ -1,0 +1,122 @@
+{
+  "table_id": "table_1",
+  "page": 4,
+  "caption_bbox": [
+    316.3294677734375,
+    68.3723373413086,
+    542.0985717773438,
+    77.4734115600586
+  ],
+  "region_y_top": 82.4734115600586,
+  "region_y_bottom": 692.0,
+  "next_element_type": "END_OF_PAGE",
+  "next_element_y0": null,
+  "text_blocks_in_region": [
+    {
+      "bbox": [
+        317.32550048828125,
+        303.2550354003906,
+        549.2037963867188,
+        314.839111328125
+      ],
+      "preview": "D. OPERATOR INTERFACE AND OPERATING STRATEGIES",
+      "line_count": 1
+    },
+    {
+      "bbox": [
+        316.3293762207031,
+        315.21026611328125,
+        557.5615234375,
+        399.4546203613281
+      ],
+      "preview": "FOR PARALLEL-SERIES HYBRID SYSTEM",
+      "line_count": 7
+    },
+    {
+      "bbox": [
+        326.29248046875,
+        401.3486022949219,
+        557.5387573242188,
+        412.9355773925781
+      ],
+      "preview": "1) Low ef\ufb01ciency in the working hydraulic system:",
+      "line_count": 2
+    },
+    {
+      "bbox": [
+        340.5684814453125,
+        413.30419921875,
+        557.5586547851562,
+        472.6498107910156
+      ],
+      "preview": "the hydraulic pump is coupled with the drivetrain via",
+      "line_count": 5
+    },
+    {
+      "bbox": [
+        326.29248046875,
+        473.07720947265625,
+        557.5428466796875,
+        484.6641845703125
+      ],
+      "preview": "2) High operator workload:",
+      "line_count": 2
+    },
+    {
+      "bbox": [
+        340.5684814453125,
+        485.0328063964844,
+        557.5546875,
+        556.3340454101562
+      ],
+      "preview": "ing hydraulic pumps, the accelerator pedal position",
+      "line_count": 6
+    },
+    {
+      "bbox": [
+        326.29150390625,
+        558.2289428710938,
+        557.5429077148438,
+        569.7561645507812
+      ],
+      "preview": "Fig.",
+      "line_count": 3
+    },
+    {
+      "bbox": [
+        316.3294982910156,
+        570.1835327148438,
+        557.5506591796875,
+        617.5745849609375
+      ],
+      "preview": "the parallel-series hybrid wheel loader. Unlike conventional",
+      "line_count": 4
+    },
+    {
+      "bbox": [
+        326.29150390625,
+        618.001953125,
+        557.5430908203125,
+        629.5291748046875
+      ],
+      "preview": "Since the propulsion system is decoupled from the working",
+      "line_count": 1
+    },
+    {
+      "bbox": [
+        316.3294982910156,
+        629.95654296875,
+        557.5475463867188,
+        737.1226196289062
+      ],
+      "preview": "hydraulic system, the accelerator pedal position is solely used",
+      "line_count": 9
+    }
+  ],
+  "rows_after_clustering": 10,
+  "columns_after_clustering": 2,
+  "rows_removed_as_body_text": 0,
+  "final_rows": 10,
+  "final_columns": 2,
+  "content_validation_error": null
+}

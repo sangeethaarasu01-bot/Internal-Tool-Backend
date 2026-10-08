@@ -1,0 +1,776 @@
+{
+  "pages": [
+    {
+      "page_number": 1,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 0,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 0,
+        "ocr-grid": 0,
+        "candidates_before_merge": 0,
+        "candidates_after_merge": 0,
+        "rejected": 0,
+        "emitted": 0
+      },
+      "candidates": []
+    },
+    {
+      "page_number": 2,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 2,
+        "pymupdf": 0,
+        "pdfplumber": 2,
+        "borderless-grid": 1,
+        "ocr-grid": 0,
+        "candidates_before_merge": 5,
+        "candidates_after_merge": 3,
+        "rejected": 2,
+        "emitted": 3
+      },
+      "candidates": [
+        {
+          "bbox": [
+            316.3296203613281,
+            28.443706512451172,
+            557.563232421875,
+            414.3521423339844
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 31,
+          "column_count": 6
+        },
+        {
+          "bbox": [
+            318.71999999999997,
+            446.4,
+            553.92,
+            514.3199999999999
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 4,
+          "column_count": 4
+        },
+        {
+          "bbox": [
+            319.92,
+            572.64,
+            555.12,
+            588.0
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 3,
+          "column_count": 2
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 0,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 1,
+        "ocr-grid": 0,
+        "candidates_before_merge": 1,
+        "candidates_after_merge": 1,
+        "rejected": 0,
+        "emitted": 1
+      },
+      "candidates": [
+        {
+          "bbox": [
+            55.41859436035156,
+            28.443706512451172,
+            296.6447448730469,
+            749.6309204101562
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 54,
+          "column_count": 5
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "detection": {
+        "captions": 1,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 1,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 0,
+        "ocr-grid": 0,
+        "candidates_before_merge": 1,
+        "candidates_after_merge": 1,
+        "rejected": 0,
+        "emitted": 1
+      },
+      "candidates": [
+        {
+          "bbox": [
+            325.2,
+            96.24,
+            549.36,
+            270.71999999999997
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "accept",
+          "reason": null,
+          "quality_score": 0.0,
+          "row_count": 10,
+          "column_count": 2
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 2,
+        "pymupdf": 0,
+        "pdfplumber": 1,
+        "borderless-grid": 0,
+        "ocr-grid": 0,
+        "candidates_before_merge": 3,
+        "candidates_after_merge": 2,
+        "rejected": 1,
+        "emitted": 2
+      },
+      "candidates": [
+        {
+          "bbox": [
+            36.0,
+            36.0,
+            292.0,
+            756.0
+          ],
+          "engine": "pdfplumber",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 3,
+          "column_count": 3
+        },
+        {
+          "bbox": [
+            115.92,
+            78.0,
+            488.4,
+            186.72
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 2,
+          "column_count": 3
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 0,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 1,
+        "ocr-grid": 0,
+        "candidates_before_merge": 1,
+        "candidates_after_merge": 1,
+        "rejected": 0,
+        "emitted": 1
+      },
+      "candidates": [
+        {
+          "bbox": [
+            316.3287048339844,
+            28.443706512451172,
+            557.546142578125,
+            749.6309204101562
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 32,
+          "column_count": 6
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 1,
+        "pymupdf": 0,
+        "pdfplumber": 2,
+        "borderless-grid": 2,
+        "ocr-grid": 0,
+        "candidates_before_merge": 5,
+        "candidates_after_merge": 3,
+        "rejected": 2,
+        "emitted": 3
+      },
+      "candidates": [
+        {
+          "bbox": [
+            316.3297424316406,
+            228.83056640625,
+            557.5452270507812,
+            386.21551513671875
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "no_caption_match",
+          "quality_score": 0.5685314685314686,
+          "row_count": 11,
+          "column_count": 2
+        },
+        {
+          "bbox": [
+            115.2146987915039,
+            28.443706512451172,
+            292.15911865234375,
+            237.1993408203125
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 2,
+          "column_count": 5
+        },
+        {
+          "bbox": [
+            316.56,
+            430.56,
+            557.52,
+            546.48
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 4,
+          "column_count": 4
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 1,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 1,
+        "ocr-grid": 0,
+        "candidates_before_merge": 2,
+        "candidates_after_merge": 2,
+        "rejected": 0,
+        "emitted": 2
+      },
+      "candidates": [
+        {
+          "bbox": [
+            88.08,
+            355.68,
+            267.59999999999997,
+            440.15999999999997
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 8,
+          "column_count": 2
+        },
+        {
+          "bbox": [
+            316.32952880859375,
+            28.443706512451172,
+            557.5546875,
+            749.630859375
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 57,
+          "column_count": 6
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "detection": {
+        "captions": 1,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 1,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 0,
+        "ocr-grid": 0,
+        "candidates_before_merge": 1,
+        "candidates_after_merge": 1,
+        "rejected": 0,
+        "emitted": 1
+      },
+      "candidates": [
+        {
+          "bbox": [
+            71.28,
+            96.0,
+            541.4399999999999,
+            234.48
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "accept",
+          "reason": null,
+          "quality_score": 0.0,
+          "row_count": 9,
+          "column_count": 2
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 1,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 2,
+        "ocr-grid": 0,
+        "candidates_before_merge": 3,
+        "candidates_after_merge": 2,
+        "rejected": 1,
+        "emitted": 2
+      },
+      "candidates": [
+        {
+          "bbox": [
+            55.420570373535156,
+            68.0716781616211,
+            296.63592529296875,
+            748.6110229492188
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "bbox_too_tall",
+          "quality_score": 0.0,
+          "row_count": 57,
+          "column_count": 2
+        },
+        {
+          "bbox": [
+            316.3306579589844,
+            28.443706512451172,
+            557.5452880859375,
+            307.16448974609375
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 22,
+          "column_count": 6
+        }
+      ]
+    },
+    {
+      "page_number": 11,
+      "detection": {
+        "captions": 2,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 2,
+        "pymupdf": 0,
+        "pdfplumber": 1,
+        "borderless-grid": 0,
+        "ocr-grid": 0,
+        "candidates_before_merge": 3,
+        "candidates_after_merge": 2,
+        "rejected": 1,
+        "emitted": 2
+      },
+      "candidates": [
+        {
+          "bbox": [
+            137.76,
+            300.0,
+            513.36,
+            349.2
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "accept",
+          "reason": null,
+          "quality_score": 0.0,
+          "row_count": 6,
+          "column_count": 6
+        },
+        {
+          "bbox": [
+            55.68,
+            560.64,
+            540.72,
+            644.88
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "accept",
+          "reason": null,
+          "quality_score": 0.0,
+          "row_count": 4,
+          "column_count": 4
+        }
+      ]
+    },
+    {
+      "page_number": 12,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 2,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 1,
+        "ocr-grid": 0,
+        "candidates_before_merge": 3,
+        "candidates_after_merge": 3,
+        "rejected": 0,
+        "emitted": 3
+      },
+      "candidates": [
+        {
+          "bbox": [
+            152.16,
+            424.56,
+            286.32,
+            500.88
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 4,
+          "column_count": 2
+        },
+        {
+          "bbox": [
+            115.44,
+            508.56,
+            232.79999999999998,
+            539.28
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 3,
+          "column_count": 2
+        },
+        {
+          "bbox": [
+            316.32965087890625,
+            28.443706512451172,
+            557.5613403320312,
+            749.6309204101562
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 57,
+          "column_count": 6
+        }
+      ]
+    },
+    {
+      "page_number": 13,
+      "detection": {
+        "captions": 2,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 3,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 0,
+        "ocr-grid": 0,
+        "candidates_before_merge": 3,
+        "candidates_after_merge": 3,
+        "rejected": 0,
+        "emitted": 3
+      },
+      "candidates": [
+        {
+          "bbox": [
+            63.36,
+            462.96,
+            285.59999999999997,
+            501.35999999999996
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "accept",
+          "reason": null,
+          "quality_score": 0.0,
+          "row_count": 3,
+          "column_count": 3
+        },
+        {
+          "bbox": [
+            55.44,
+            626.88,
+            279.84,
+            729.36
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "accept",
+          "reason": null,
+          "quality_score": 0.0,
+          "row_count": 5,
+          "column_count": 2
+        },
+        {
+          "bbox": [
+            57.839999999999996,
+            203.76,
+            268.32,
+            291.36
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 2,
+          "column_count": 4
+        }
+      ]
+    },
+    {
+      "page_number": 14,
+      "detection": {
+        "captions": 2,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 2,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 0,
+        "ocr-grid": 0,
+        "candidates_before_merge": 2,
+        "candidates_after_merge": 2,
+        "rejected": 0,
+        "emitted": 2
+      },
+      "candidates": [
+        {
+          "bbox": [
+            92.39999999999999,
+            290.15999999999997,
+            534.72,
+            411.35999999999996
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "accept",
+          "reason": null,
+          "quality_score": 0.0,
+          "row_count": 8,
+          "column_count": 6
+        },
+        {
+          "bbox": [
+            92.39999999999999,
+            457.2,
+            534.72,
+            563.76
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "accept",
+          "reason": null,
+          "quality_score": 0.0,
+          "row_count": 7,
+          "column_count": 6
+        }
+      ]
+    },
+    {
+      "page_number": 15,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 1,
+        "pymupdf": 0,
+        "pdfplumber": 1,
+        "borderless-grid": 0,
+        "ocr-grid": 0,
+        "candidates_before_merge": 2,
+        "candidates_after_merge": 1,
+        "rejected": 1,
+        "emitted": 1
+      },
+      "candidates": [
+        {
+          "bbox": [
+            36.0,
+            36.0,
+            292.0,
+            756.0
+          ],
+          "engine": "pdfplumber",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 6,
+          "column_count": 5
+        }
+      ]
+    },
+    {
+      "page_number": 16,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 1,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 1,
+        "ocr-grid": 0,
+        "candidates_before_merge": 2,
+        "candidates_after_merge": 2,
+        "rejected": 0,
+        "emitted": 2
+      },
+      "candidates": [
+        {
+          "bbox": [
+            318.85394287109375,
+            28.443706512451172,
+            557.5516357421875,
+            376.72808837890625
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 36,
+          "column_count": 6
+        },
+        {
+          "bbox": [
+            316.8,
+            497.03999999999996,
+            557.52,
+            552.48
+          ],
+          "engine": "img2table",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 3,
+          "column_count": 3
+        }
+      ]
+    },
+    {
+      "page_number": 17,
+      "detection": {
+        "captions": 0,
+        "camelot-lattice": 0,
+        "camelot-stream": 0,
+        "img2table": 0,
+        "pymupdf": 0,
+        "pdfplumber": 0,
+        "borderless-grid": 1,
+        "ocr-grid": 0,
+        "candidates_before_merge": 1,
+        "candidates_after_merge": 1,
+        "rejected": 0,
+        "emitted": 1
+      },
+      "candidates": [
+        {
+          "bbox": [
+            55.420860290527344,
+            28.443706512451172,
+            294.64923095703125,
+            184.7050323486328
+          ],
+          "engine": "borderless-grid",
+          "bound_caption": null,
+          "decision": "phantom",
+          "reason": "phantom_grid",
+          "quality_score": 0.0,
+          "row_count": 14,
+          "column_count": 5
+        }
+      ]
+    }
+  ]
+}

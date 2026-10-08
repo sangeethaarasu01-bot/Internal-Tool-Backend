@@ -1,0 +1,1156 @@
+{
+  "source_pdf": "access-kakichi-3657695-proof.pdf1.pdf",
+  "extraction_timestamp": "2026-10-07T17:38:38.965669+00:00",
+  "page_count": 17,
+  "table_count": 8,
+  "tables": [
+    {
+      "table_id": "table_1",
+      "page_number": 4,
+      "caption": "TABLE 1.",
+      "caption_confidence": 0.9,
+      "headers": [],
+      "rows": [
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ]
+      ],
+      "row_count": 10,
+      "column_count": 2,
+      "bbox": [
+        325.2,
+        96.24,
+        549.36,
+        270.71999999999997
+      ],
+      "raw_text": "\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t",
+      "extraction_quality": {
+        "confidence": 0.343,
+        "status": "partial",
+        "engine": "img2table",
+        "caption_detected": true,
+        "warnings": [
+          "moderate_empty_cell_ratio",
+          "empty_table_content"
+        ]
+      }
+    },
+    {
+      "table_id": "table_2",
+      "page_number": 9,
+      "caption": "TABLE 2.",
+      "caption_confidence": 0.9,
+      "headers": [],
+      "rows": [
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ]
+      ],
+      "row_count": 9,
+      "column_count": 2,
+      "bbox": [
+        71.28,
+        96.0,
+        541.4399999999999,
+        234.48
+      ],
+      "raw_text": "\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t",
+      "extraction_quality": {
+        "confidence": 0.343,
+        "status": "partial",
+        "engine": "img2table",
+        "caption_detected": true,
+        "warnings": [
+          "moderate_empty_cell_ratio",
+          "empty_table_content"
+        ]
+      }
+    },
+    {
+      "table_id": "table_3",
+      "page_number": 11,
+      "caption": "TABLE 3.",
+      "caption_confidence": 0.9,
+      "headers": [],
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "row_count": 6,
+      "column_count": 6,
+      "bbox": [
+        137.76,
+        300.0,
+        513.36,
+        349.2
+      ],
+      "raw_text": "\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t",
+      "extraction_quality": {
+        "confidence": 0.343,
+        "status": "partial",
+        "engine": "img2table",
+        "caption_detected": true,
+        "warnings": [
+          "moderate_empty_cell_ratio",
+          "empty_table_content"
+        ]
+      }
+    },
+    {
+      "table_id": "table_4",
+      "page_number": 11,
+      "caption": "TABLE 4.",
+      "caption_confidence": 0.9,
+      "headers": [],
+      "rows": [
+        [
+          "strategy does not deviate signiﬁcantly from the target value.",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Consequently, the battery SOC remains close to the target",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "value at the end of each loading cycle.",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Compared to the rule-based strategy, which is calibrated",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "to keep the ICE on during the V-cycle, the DP-PMP-based",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "strategy uses the ICE more effectively by combining electric",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "operation, while keeping the battery SOC around the tar-",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "l h",
+          "h l",
+          "l d",
+          "f h",
+          "i l"
+        ]
+      ],
+      "row_count": 8,
+      "column_count": 5,
+      "bbox": [
+        55.420677185058594,
+        558.2313232421875,
+        296.635009765625,
+        641.91455078125
+      ],
+      "raw_text": "strategy does not deviate signiﬁcantly from the target value.\t\t\t\t\nConsequently, the battery SOC remains close to the target\t\t\t\t\nvalue at the end of each loading cycle.\t\t\t\t\nCompared to the rule-based strategy, which is calibrated\t\t\t\t\nto keep the ICE on during the V-cycle, the DP-PMP-based\t\t\t\t\nstrategy uses the ICE more effectively by combining electric\t\t\t\t\noperation, while keeping the battery SOC around the tar-\t\t\t\t\nl h\th l\tl d\tf h\ti l",
+      "extraction_quality": {
+        "confidence": 0.22672999999999996,
+        "status": "rejected",
+        "engine": "borderless-grid",
+        "caption_detected": true,
+        "warnings": []
+      }
+    },
+    {
+      "table_id": "table_5",
+      "page_number": 13,
+      "caption": "TABLE 5.",
+      "caption_confidence": 0.9,
+      "headers": [],
+      "rows": [
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "row_count": 3,
+      "column_count": 3,
+      "bbox": [
+        63.36,
+        462.96,
+        285.59999999999997,
+        501.35999999999996
+      ],
+      "raw_text": "\t\t\n\t\t\n\t\t",
+      "extraction_quality": {
+        "confidence": 0.343,
+        "status": "partial",
+        "engine": "img2table",
+        "caption_detected": true,
+        "warnings": [
+          "moderate_empty_cell_ratio",
+          "empty_table_content"
+        ]
+      }
+    },
+    {
+      "table_id": "table_6",
+      "page_number": 13,
+      "caption": "TABLE 6.",
+      "caption_confidence": 0.9,
+      "headers": [],
+      "rows": [
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ]
+      ],
+      "row_count": 5,
+      "column_count": 2,
+      "bbox": [
+        55.44,
+        626.88,
+        279.84,
+        729.36
+      ],
+      "raw_text": "\t\n\t\n\t\n\t\n\t",
+      "extraction_quality": {
+        "confidence": 0.343,
+        "status": "partial",
+        "engine": "img2table",
+        "caption_detected": true,
+        "warnings": [
+          "moderate_empty_cell_ratio",
+          "empty_table_content"
+        ]
+      }
+    },
+    {
+      "table_id": "table_7",
+      "page_number": 14,
+      "caption": "TABLE 7.",
+      "caption_confidence": 0.9,
+      "headers": [],
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "row_count": 8,
+      "column_count": 6,
+      "bbox": [
+        92.39999999999999,
+        290.15999999999997,
+        534.72,
+        411.35999999999996
+      ],
+      "raw_text": "\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t",
+      "extraction_quality": {
+        "confidence": 0.343,
+        "status": "partial",
+        "engine": "img2table",
+        "caption_detected": true,
+        "warnings": [
+          "moderate_empty_cell_ratio",
+          "empty_table_content"
+        ]
+      }
+    },
+    {
+      "table_id": "table_8",
+      "page_number": 14,
+      "caption": "TABLE 8.",
+      "caption_confidence": 0.9,
+      "headers": [],
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "row_count": 7,
+      "column_count": 6,
+      "bbox": [
+        92.39999999999999,
+        457.2,
+        534.72,
+        563.76
+      ],
+      "raw_text": "\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t",
+      "extraction_quality": {
+        "confidence": 0.343,
+        "status": "partial",
+        "engine": "img2table",
+        "caption_detected": true,
+        "warnings": [
+          "moderate_empty_cell_ratio",
+          "empty_table_content"
+        ]
+      }
+    }
+  ],
+  "extraction_summary": {
+    "total_detected": 30,
+    "total_emitted": 8,
+    "total_rejected": 22,
+    "phantom_dropped": 22,
+    "rejected_reasons": {
+      "phantom_grid": 20,
+      "no_caption_match": 1,
+      "bbox_too_tall": 1
+    },
+    "engine_candidate_counts": {
+      "borderless-grid": 11,
+      "pdfplumber": 7,
+      "img2table": 20
+    },
+    "per_page": [
+      {
+        "page_number": 1,
+        "captions": 0,
+        "candidates_from_detection": 0,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 2,
+        "captions": 0,
+        "candidates_from_detection": 3,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 3,
+        "captions": 0,
+        "candidates_from_detection": 1,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 4,
+        "captions": 1,
+        "candidates_from_detection": 1,
+        "emitted_before_dedup": 1,
+        "emitted": 1,
+        "caption_labels": [
+          "TABLE 1."
+        ]
+      },
+      {
+        "page_number": 5,
+        "captions": 0,
+        "candidates_from_detection": 2,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 6,
+        "captions": 0,
+        "candidates_from_detection": 1,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 7,
+        "captions": 0,
+        "candidates_from_detection": 3,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 8,
+        "captions": 0,
+        "candidates_from_detection": 2,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 9,
+        "captions": 1,
+        "candidates_from_detection": 1,
+        "emitted_before_dedup": 1,
+        "emitted": 1,
+        "caption_labels": [
+          "TABLE 2."
+        ]
+      },
+      {
+        "page_number": 10,
+        "captions": 0,
+        "candidates_from_detection": 2,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 11,
+        "captions": 2,
+        "candidates_from_detection": 2,
+        "emitted_before_dedup": 2,
+        "emitted": 2,
+        "caption_labels": [
+          "TABLE 3.",
+          "TABLE 4."
+        ]
+      },
+      {
+        "page_number": 12,
+        "captions": 0,
+        "candidates_from_detection": 3,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 13,
+        "captions": 2,
+        "candidates_from_detection": 3,
+        "emitted_before_dedup": 2,
+        "emitted": 2,
+        "caption_labels": [
+          "TABLE 5.",
+          "TABLE 6."
+        ]
+      },
+      {
+        "page_number": 14,
+        "captions": 2,
+        "candidates_from_detection": 2,
+        "emitted_before_dedup": 2,
+        "emitted": 2,
+        "caption_labels": [
+          "TABLE 7.",
+          "TABLE 8."
+        ]
+      },
+      {
+        "page_number": 15,
+        "captions": 0,
+        "candidates_from_detection": 1,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 16,
+        "captions": 0,
+        "candidates_from_detection": 2,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      },
+      {
+        "page_number": 17,
+        "captions": 0,
+        "candidates_from_detection": 1,
+        "emitted_before_dedup": 0,
+        "emitted": 0,
+        "caption_labels": []
+      }
+    ],
+    "caption_warnings": []
+  },
+  "debug_audit_path": "data\\output_test_debug\\detection_audit.json",
+  "figure_count": 20,
+  "figures": [
+    {
+      "figure_id": "figure_1",
+      "page_number": 2,
+      "caption": "FIGURE 1. Schematic of conventional wheel loader powertrain.",
+      "caption_bbox": [
+        316.3301086425781,
+        595.7723999023438,
+        523.4779663085938,
+        604.8734741210938
+      ],
+      "figure_bbox": [
+        256.3301086425781,
+        315.77239990234375,
+        583.4779663085938,
+        590.7723999023438
+      ],
+      "image_path": "figures/fig_1.png",
+      "width": 1364,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_2",
+      "page_number": 3,
+      "caption": "FIGURE 2. Schematic top view of the V-cycle.",
+      "caption_bbox": [
+        316.3301086425781,
+        384.2700500488281,
+        463.64080810546875,
+        393.3711242675781
+      ],
+      "figure_bbox": [
+        256.3301086425781,
+        104.27005004882812,
+        523.6408081054688,
+        379.2700500488281
+      ],
+      "image_path": "figures/fig_2.png",
+      "width": 1114,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_3",
+      "page_number": 4,
+      "caption": "FIGURE 3. Vehicle speed, cylinder stroke measurements, and a\ncomparison of the hydraulic oil flow rate request with the actual supply\nfrom the pump during the V-cycle, as measured on a conventional wheel\nloader.",
+      "caption_bbox": [
+        55.41996765136719,
+        362.24310302734375,
+        292.7940979003906,
+        396.4080505371094
+      ],
+      "figure_bbox": [
+        36.0,
+        82.24310302734375,
+        332.7940979003906,
+        303.2550354003906
+      ],
+      "image_path": "figures/fig_3.png",
+      "width": 1237,
+      "height": 922,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_4",
+      "page_number": 5,
+      "caption": "FIGURE 4. Combined cycle, consisting of V-cycle and driving phase.",
+      "caption_bbox": [
+        111.15736389160156,
+        347.625,
+        330.9765930175781,
+        356.72607421875
+      ],
+      "figure_bbox": [
+        71.15736389160156,
+        67.625,
+        370.9765930175781,
+        342.625
+      ],
+      "image_path": "figures/fig_4.png",
+      "width": 1250,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_5",
+      "page_number": 5,
+      "caption": "FIGURE 5. Schematic of parallel-series hybrid wheel loader powertrain.",
+      "caption_bbox": [
+        55.420204162597656,
+        538.3861694335938,
+        289.5918884277344,
+        547.4872436523438
+      ],
+      "figure_bbox": [
+        36.0,
+        356.72607421875,
+        329.5918884277344,
+        498.2862548828125
+      ],
+      "image_path": "figures/fig_5.png",
+      "width": 1224,
+      "height": 591,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_6",
+      "page_number": 5,
+      "caption": "FIGURE 6. Parallel hybrid system control concept.",
+      "caption_bbox": [
+        316.33026123046875,
+        498.2862548828125,
+        479.20001220703125,
+        507.3873291015625
+      ],
+      "figure_bbox": [
+        276.33026123046875,
+        356.72607421875,
+        519.2000122070312,
+        493.2862548828125
+      ],
+      "image_path": "figures/fig_6.png",
+      "width": 1013,
+      "height": 570,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_7",
+      "page_number": 4,
+      "caption": "Fig. 7. shows the new operator interface developed for",
+      "caption_bbox": [
+        326.29150390625,
+        558.2289428710938,
+        557.5429077148438,
+        569.7561645507812
+      ],
+      "figure_bbox": [
+        266.29150390625,
+        278.22894287109375,
+        617.5429077148438,
+        553.2289428710938
+      ],
+      "image_path": "figures/fig_7.png",
+      "width": 1441,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_8",
+      "page_number": 6,
+      "caption": "FIGURE 8. ICE fuel consumption characteristics (Y-axis scale not shown\nfor confidentiality).",
+      "caption_bbox": [
+        55.42023468017578,
+        636.4515380859375,
+        289.3199157714844,
+        653.8795776367188
+      ],
+      "figure_bbox": [
+        88.38066101074219,
+        489.973876953125,
+        263.7566833496094,
+        629.4138793945312
+      ],
+      "image_path": "figures/fig_8.png",
+      "width": 731,
+      "height": 582,
+      "extraction_engine": "pymupdf_vector_cluster"
+    },
+    {
+      "figure_id": "figure_9",
+      "page_number": 7,
+      "caption": "FIGURE 9. Normalized efficiency maps of electric machines (left: P2, right: Front EDU). The isolines are normalized\nsuch that 100 corresponds to the maximum efficiency.",
+      "caption_bbox": [
+        115.2146987915039,
+        228.76083374023438,
+        489.4736022949219,
+        246.18882751464844
+      ],
+      "figure_bbox": [
+        75.2146987915039,
+        37.328582763671875,
+        529.4736022949219,
+        223.76083374023438
+      ],
+      "image_path": "figures/fig_9.png",
+      "width": 1894,
+      "height": 778,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_10",
+      "page_number": 7,
+      "caption": "FIGURE 10. Equivalent circuit model of batter.",
+      "caption_bbox": [
+        316.3301696777344,
+        511.8632507324219,
+        467.28204345703125,
+        520.9642944335938
+      ],
+      "figure_bbox": [
+        256.3301696777344,
+        231.86325073242188,
+        527.2820434570312,
+        506.8632507324219
+      ],
+      "image_path": "figures/fig_10.png",
+      "width": 1130,
+      "height": 1146,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_11",
+      "page_number": 8,
+      "caption": "FIGURE 11. DP-PMP calculation flowchart.",
+      "caption_bbox": [
+        55.42058563232422,
+        516.5993041992188,
+        195.17884826660156,
+        525.7003784179688
+      ],
+      "figure_bbox": [
+        36.0,
+        272.03125,
+        235.17884826660156,
+        511.59930419921875
+      ],
+      "image_path": "figures/fig_11.png",
+      "width": 830,
+      "height": 999,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_12",
+      "page_number": 9,
+      "caption": "FIGURE 12. Optimization-based controller architecture.",
+      "caption_bbox": [
+        111.8445816040039,
+        396.8240661621094,
+        293.1470947265625,
+        405.9251403808594
+      ],
+      "figure_bbox": [
+        71.8445816040039,
+        116.82406616210938,
+        333.1470947265625,
+        391.8240661621094
+      ],
+      "image_path": "figures/fig_12.png",
+      "width": 1090,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_13",
+      "page_number": 10,
+      "caption": "FIGURE 13. Scenario-to-go.",
+      "caption_bbox": [
+        316.330078125,
+        452.9671630859375,
+        406.39874267578125,
+        462.0682373046875
+      ],
+      "figure_bbox": [
+        256.330078125,
+        172.9671630859375,
+        466.39874267578125,
+        447.9671630859375
+      ],
+      "image_path": "figures/fig_13.png",
+      "width": 876,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_14",
+      "page_number": 11,
+      "caption": "FIGURE 14. Optimization-based controller architecture.",
+      "caption_bbox": [
+        98.67977905273438,
+        360.3980407714844,
+        279.9822692871094,
+        369.4991149902344
+      ],
+      "figure_bbox": [
+        58.679779052734375,
+        80.39804077148438,
+        319.9822692871094,
+        355.3980407714844
+      ],
+      "image_path": "figures/fig_14.png",
+      "width": 1090,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_15",
+      "page_number": 12,
+      "caption": "FIGURE 15. Simulation results for the V-cycle with rule-based control\nstrategy and DP-PMP based control strategy. The initial and target battery\nSOC is 70%.",
+      "caption_bbox": [
+        55.42060089111328,
+        384.3840637207031,
+        295.87030029296875,
+        410.1802062988281
+      ],
+      "figure_bbox": [
+        -4.579399108886719,
+        104.38406372070312,
+        355.87030029296875,
+        379.3840637207031
+      ],
+      "image_path": "figures/fig_15.png",
+      "width": 1483,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_16",
+      "page_number": 12,
+      "caption": "FIGURE 16. Sankey diagram of the hybrid wheel loader during the\nV-cycle: The bold values after the arrows represent the DP-PMP results,\nnormalized to the fuel power of the rule-based strategy.",
+      "caption_bbox": [
+        55.42060089111328,
+        649.2355346679688,
+        288.1500244140625,
+        675.0316772460938
+      ],
+      "figure_bbox": [
+        -4.579399108886719,
+        369.23553466796875,
+        348.1500244140625,
+        644.2355346679688
+      ],
+      "image_path": "figures/fig_16.png",
+      "width": 1451,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_17",
+      "page_number": 13,
+      "caption": "FIGURE 17. Simulation results for the combined cycle with rule-based\ncontrol strategy and DP-PMP based control strategy. The initial and target\nbattery SOC is 70%.",
+      "caption_bbox": [
+        55.42060089111328,
+        384.90106201171875,
+        296.0167236328125,
+        410.69720458984375
+      ],
+      "figure_bbox": [
+        -4.579399108886719,
+        104.90106201171875,
+        356.0167236328125,
+        379.90106201171875
+      ],
+      "image_path": "figures/fig_17.png",
+      "width": 1484,
+      "height": 1146,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_18",
+      "page_number": 14,
+      "caption": "FIGURE 18. Comparison of the ICE operating points during the combined cycle, with 100 isoline corresponding to the best\nefficiency range.",
+      "caption_bbox": [
+        96.37969207763672,
+        228.96072387695312,
+        496.04559326171875,
+        246.3887176513672
+      ],
+      "figure_bbox": [
+        56.37969207763672,
+        37.328582763671875,
+        536.0455932617188,
+        223.96072387695312
+      ],
+      "image_path": "figures/fig_18.png",
+      "width": 2000,
+      "height": 779,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_19",
+      "page_number": 15,
+      "caption": "FIGURE 19. Optimization calculation in combined cycle.",
+      "caption_bbox": [
+        55.420616149902344,
+        273.7606201171875,
+        238.48043823242188,
+        282.8616943359375
+      ],
+      "figure_bbox": [
+        36.0,
+        37.328582763671875,
+        278.4804382324219,
+        268.7606201171875
+      ],
+      "image_path": "figures/fig_19.png",
+      "width": 1011,
+      "height": 965,
+      "extraction_engine": "pymupdf_pixmap"
+    },
+    {
+      "figure_id": "figure_20",
+      "page_number": 15,
+      "caption": "FIGURE 20. Comparison of average BSFC for rule-based strategy (RB) and\noptimization-based strategy (DP-PMP).",
+      "caption_bbox": [
+        55.42064666748047,
+        428.6280212402344,
+        296.2880554199219,
+        446.0560607910156
+      ],
+      "figure_bbox": [
+        -4.579353332519531,
+        148.62802124023438,
+        356.2880554199219,
+        423.6280212402344
+      ],
+      "image_path": "figures/fig_20.png",
+      "width": 1485,
+      "height": 1147,
+      "extraction_engine": "pymupdf_pixmap"
+    }
+  ]
+}

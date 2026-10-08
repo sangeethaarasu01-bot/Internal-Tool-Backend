@@ -23,6 +23,34 @@ STANDALONE_REFERENCE_LABEL_RE = re.compile(r"^\[\d+\]$")
 _REFERENCE_LABEL_AT_START_RE = re.compile(r"^(\[\d+\])\s*(.*)$", re.DOTALL)
 _AUTHOR_BIOGRAPHIES_HEADING_RE = re.compile(r"^author(?:\s+biograph|\s+information)", re.IGNORECASE)
 _EXCLUDED_REFERENCE_CLASSIFICATIONS = frozenset({"FOOTER", "RUNNING_HEADER", "PAGE_NUMBER"})
+_BIBLIOGRAPHY_AUTHOR_START_RE = re.compile(
+    r"^\[\d+\]\s*(?:[A-Z]\.\s+[A-Za-z'\-]+|[A-Z][A-Za-z]+,\s)",
+)
+_EQUATION_CROSSREF_BODY_RE = re.compile(
+    r"(?:rewritten as|substituting|can be derived|it can be rewritten)\s*\(\d+\)",
+    re.IGNORECASE,
+)
+
+
+def is_plausible_bibliography_entry(raw_text: str) -> bool:
+    """Reject inline equation cross-refs that start with ``[N]`` but are not bibliography."""
+    normalized = normalize_text(raw_text)
+    if not REFERENCE_LABEL_NUMBER_RE.match(normalized):
+        return False
+    body = REFERENCE_LABEL_NUMBER_RE.sub("", normalized, count=1).strip()
+    if not body:
+        return False
+    if _EQUATION_CROSSREF_BODY_RE.search(body):
+        return False
+    if re.match(r"^\.?\s*Accordingly,", body, re.IGNORECASE):
+        return False
+    if _BIBLIOGRAPHY_AUTHOR_START_RE.match(normalized):
+        return True
+    if re.search(r"\b(?:IEEE|Proc\.|vol\.|pp\.|doi:)\b", body, re.IGNORECASE):
+        return True
+    if looks_like_reference_entry(normalized) and len(body) > 35 and "," in body:
+        return True
+    return False
 
 
 class ReferenceParsingError(ValueError):

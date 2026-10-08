@@ -1,0 +1,21 @@
+{
+  "table_id": "table_2",
+  "page": 9,
+  "caption_bbox": [
+    55.42060089111328,
+    68.3724594116211,
+    355.8531188964844,
+    77.4735336303711
+  ],
+  "region_y_top": 82.4735336303711,
+  "region_y_bottom": 391.8240661621094,
+  "next_element_type": "FIGURE",
+  "next_element_y0": 396.8240661621094,
+  "text_blocks_in_region": [],
+  "rows_after_clustering": 9,
+  "columns_after_clustering": 2,
+  "rows_removed_as_body_text": 0,
+  "final_rows": 9,
+  "final_columns": 2,
+  "content_validation_error": null
+}

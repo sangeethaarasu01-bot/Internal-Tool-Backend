@@ -169,6 +169,20 @@ async def get_extraction_text(extraction_id: str):
     return doc["result"]
 
 
+@router.get("/{extraction_id}/phase1")
+async def get_extraction_phase1(extraction_id: str):
+    """Phase 1 normalized document IR (no LLM). Inspect before semantic mapping."""
+    doc = extractions_col().find_one({"_id": _oid(extraction_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Extraction not found")
+    _require_completed_extraction(doc)
+    phase1 = doc.get("phase1") or (doc.get("result") or {}).get("phase1")
+    if not phase1:
+        raise HTTPException(status_code=404, detail="Phase 1 document not available for this extraction")
+    debug_paths = doc.get("phase1_debug_paths")
+    return {"phase1": phase1, "debug_artifact_paths": debug_paths}
+
+
 @router.post("/{extraction_id}/template", response_model=TemplateUploadResponse)
 async def upload_extraction_template(
     extraction_id: str,

@@ -1,0 +1,253 @@
+{
+  "table_id": "table_19",
+  "page_number": 16,
+  "row_count": 20,
+  "column_count": 9,
+  "rows": [
+    [
+      "Ref.",
+      "Operation Frequency",
+      "Impedance Bandwidth",
+      "Size (λ0)",
+      "Profile (λ0)",
+      "Method of Suppression",
+      "Gain In-Band (dBi)",
+      "Freq. Selectivity (dB/GHz)",
+      "Gain Suppression"
+    ],
+    [
+      "[4]",
+      "KobelcoConstructionMachinery.HybridExcavator(ConventionalModel Information)SK200H[SK210HLC].Accessed:Mar.13,2025.[Online]. Available: https://www.kobelco-kenki.co.jp/products/shovel/SK200H- 10.html?_gl=1*hiv120*_ga*MjA1Nzg5MzIxOS4xNzA4MzQ0OTUx*_ ga_Y4XSMPGQ92*MTcwODM0NDk1MC4xLjEuMTcwODM0NTEw Mi40NC4wLjA.&_ga=2.99431837.2030818322.1708344951-20578932 19.1708344951",
+      "[23] [24]",
+      "F.Y.Wang,J.Zhang, wheelloaderintypic pp.526–529, Dec. 149.526. W.Ma,Y.Zhang,C. sumptionofwheello Eng.,vol.2015,pp.1",
+      "R.F.Sun,an alworkcyc 2011, doi: Liu,andS.W adersinthe –12,Oct.20",
+      "dF.Yu,‘‘Analysi le,’’Appl.Mech. 10.4028/www.s ang,‘‘Prediction V-typeloadingc 15,doi:10.1155/",
+      "sonthe Mater., cientific method ycle,’’M 2015/53",
+      "perform vols.1 .net/am ofthef ath.P 8176.",
+      "ance 48–14 m.14 uelco roble"
+    ],
+    [
+      "[5]",
+      "KomatsuLtd.HB205(LC)-3Hybrid.Accessed:Mar.13,2025.[Online]. Available: https://kcsj.komatsu/products/construction_machine/excavator _01/hb205-3",
+      "[25]",
+      "R.Filla,‘‘Optimizin loadingcycles,’’inP 2013,pp.3–5.",
+      "gthetraject roc.13thSc",
+      "oryofawheello andin.Int.Conf.",
+      "aderwo FluidP",
+      "rking ower(",
+      "insh SICFP"
+    ],
+    [
+      "[6]",
+      "W. Zhang, J. Wang, S. Du, H. Ma, W. Zhao, and H. Li, ‘‘Energy management strategies for hybrid construction machinery: Evolution, classification,comparisonandfuturetrends,’’Energies,vol.12,no.10, p.2024,May2019,doi:10.3390/en12102024.",
+      "[26]",
+      "N.Gadiyar,J.Vand denseelectricmachin IEEETrans.Ind.Ap 10.1109/TIA.2023.33",
+      "eVen,and etechnology pl.,vol.60, 35890.",
+      "E.L.Severson,‘ foroff-highwayv no.2,pp.3062–",
+      "‘Evaluat ehiclee 3074,M",
+      "ionof lectrifi ar.20",
+      "torqu cation 24,d"
+    ],
+    [
+      "[7]",
+      "H.-A.Trinh,H.V.A.Truong,T.C.Do,M.H.Nguyen,V.D.Phan,and K.K.Ahn,‘‘Optimization-basedenergymanagementstrategiesforhybrid constructionmachinery:Areview,’’EnergyRep.,vol.8,pp.6035–6057, Nov.2022,doi:10.1016/j.egyr.2022.04.050.",
+      "[27]",
+      "M. Lindgren and on exhaust emiss Biosystems Eng., 10.1016/j.biosystems",
+      "P.-A. Hanss ions from vol. 87, n eng.2003.10",
+      "on, ‘‘Effects of two non-roa o. 1, pp.57–6 .001.",
+      "transie d dies 6, Jan",
+      "nt co el e . 200",
+      "nditio ngines 4, d"
+    ],
+    [
+      "[8]",
+      "J.Choi,H.Kim,S.Yu,andK.Yi,‘‘Developmentofintegratedcontroller foracompoundhybridexcavator,’’J.Mech.Sci.Technol.,vol.25,no.6, pp.1557–1563,Jun.2011,doi:10.1007/s12206-011-0333-z.",
+      "[28] [29]",
+      "L. Guzzella and A Germany:Springer,2 C. L. Sabharwal, ‘‘",
+      ". Sciarretta, 005. Blended roo",
+      "Vehicle Propul t finding algorith",
+      "sion Sy m outp",
+      "stems. erform",
+      "Berli s bise"
+    ],
+    [
+      "[9]",
+      "X.Zeng,N.Yang,Y.Peng,Y.Zhang,andJ.Wang,‘‘Researchonenergy saving control strategy of parallel hybrid loader,’’ Autom. Construct., vol.38,pp.100–108,Mar.2014,doi:10.1016/j.autcon.2013.11.007.",
+      "[30]",
+      "tionandregulafalsi Nov.2019,doi:10.33 N.D.Dixit,‘‘Comp",
+      "algorithms,’ 90/math711 arisionofnu",
+      "’Mathematics,v 1118. mericalaccuracy",
+      "ol.7,n ofbise",
+      "o.11, ction,",
+      "p.111 Newt"
+    ],
+    [
+      "[10]",
+      "S.Yoo,S.An,C.-G.Park,andN.Kim,‘‘Designandcontrolofhybrid electricpowersystemforahydraulicallyactuatedexcavator,’’SAEInt. J. Commercial Vehicles, vol. 2, no. 2, pp.264–273, Oct. 2009, doi: 10.4271/2009-01-2927.",
+      "[31]",
+      "raphson,falsi-positio no.12,pp.3733–374 J. Schaub, M. Ehrly hybridpowertrainco",
+      "nandsecant 5,Feb.2022 , S. Ghetti, nceptsforoff",
+      "methods,’’Adv. ,doi:10.37418/a Y. Kakichi, and -highwayapplica",
+      "Math.,S msj.10.1 T. Ko tions,’’i",
+      "ci.J., 2.13. ssioris nHeav",
+      "vol.1 , ‘‘Mi y-Dut"
+    ],
+    [
+      "[11]",
+      "D.P.Bertsekas,DynamicProgrammingandOptimalControl,vol.1,3rd ed.,Belmont,MA,USA:AthenaScientific,2005.",
+      "",
+      ",On-undOff-Highwa SpringerVieweg,202",
+      "y-Motoren2 1,doi:10.1",
+      "020,J.Liebl,Ed., 007/978-3-658-34",
+      "Wiesba 362-0_5",
+      "den,G .",
+      "erman"
+    ],
+    [
+      "[12]",
+      "H.Kim,J.Choi,andK.Yi,‘‘Developmentofsupervisorycontrolstrategy foroptimizedfuelconsumptionofthecompoundhybridexcavator,’’Proc. Inst. Mech. Engineers, Part D, J. Automobile Eng., vol. 226, no. 12, pp.1652–1666,Dec.2012,doi:10.1177/0954407012447019.",
+      "[32]",
+      "Y.Kakichi,S.Pischin series hybrid powert On- und Off-Highwa Wiesbaden,Germany",
+      "ger,J.Schau rain concept y-Motoren :Springer",
+      "b,A.Müller,and for a wheel loa 2023. HDENGI 2 Vieweg,2025,do",
+      "R.Kaw der,’’ in 022, A. i:10.10",
+      "ano,‘‘ Heav Heint 07/978",
+      "Parall y-Dut zel, E -3-65"
+    ],
+    [
+      "[13]",
+      "H.Kim,S.Yoo,S.Cho,andK.Yi,‘‘Hybridcontrolalgorithmforfuel consumption of a compound hybrid excavator,’’ Autom. Construction, vol.68,pp.1–10,Aug.2016,doi:10.1016/j.autcon.2016.03.017.",
+      "",
+      "46538-4_10.",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "[14]",
+      "C. S. Teodorescu, S. Vandenplas, B. Depraetere, K. Shariatmadar, T. Vyncke, J. Duflou, and A. Nowé, ‘‘An ECMS-based powertrain con- trol of a parallel hybrid electric forklift,’’ in Proc. 21st Int. Conf. Syst.Theory,ControlComput.(ICSTCC),Oct.2017,pp.763–770,doi: 10.1109/ICSTCC.2017.8107129.",
+      "",
+      "",
+      "YUKI KAK",
+      "ICHI received",
+      "the M.",
+      "Sc. de",
+      "gree"
+    ],
+    [
+      "[15]",
+      "I. Shafikhani and J. Åslund, ‘‘Analytical solution to equivalent con- sumptionminimizationstrategyforserieshybridelectricvehicles,’’IEEE Trans. Veh. Technol., vol. 70, no. 3, pp.2124–2137, Mar. 2021, doi: 10.1109/TVT.2021.3059205.",
+      "",
+      "",
+      "aerospace Tokyo, Tok pursuing th University.",
+      "engineering from yo, Japan, in 2 e Ph.D. degree HeiswithYanm",
+      "The 014. H with R arHold",
+      "Unive e is c WTH ingsC",
+      "rsity urrent Aach o.,Lt"
+    ],
+    [
+      "[16]",
+      "R. Schmid, J. Buerger, and N. Bajcinca, ‘‘Energy management for series-productionplug-in-hybridelectricvehiclesbasedonpredictiveDP- PMP,’’Automatisierungstechnik,vol.69,no.1,pp.52–64,Jan.2021,doi: 10.1515/auto-2020-0025.",
+      "",
+      "",
+      "whereheis tric powertr to this, he",
+      "involvedinthe ains for industri was a Research",
+      "develop al appli er at R",
+      "ment cation WTH",
+      "ofele s. Pri Aach"
+    ],
+    [
+      "[17]",
+      "V. Ngo, T. Hofman, M. Steinbuch, and A. Serrarens, ‘‘Optimal con- trol of the gearshift command for hybrid electric vehicles,’’ IEEE Trans. Veh. Technol., vol. 61, no. 8, pp.3531–3543, Oct. 2012, doi: 10.1109/TVT.2012.2207922.",
+      "",
+      "",
+      "University, estsinclude off-highway",
+      "from2019to20 optimizationand vehiclesandsy",
+      "24.His predict stems.",
+      "researc iveco",
+      "hinte ntrolf"
+    ],
+    [
+      "[18]",
+      "M. Razi, N. Murgovski, T. McKelvey, and T. Wik, ‘‘Predictive energy management of hybrid electric vehicles via multi-layer control,’’ IEEE Trans. Veh. Technol., vol. 70, no. 7, pp.6485–6499, Jul. 2021, doi: 10.1109/TVT.2021.3081346.",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "[19]",
+      "V. Ngo, T. Hofman, M. Steinbuch, and A. Serrarens, ‘‘Predictive gear shiftcontrolforaparallelhybridelectricvehicle,’’inProc.IEEEVehi- cle Power Propuls. Conf., Chicago, IL, USA, Sep. 2011, pp.1–6, doi: 10.1109/VPPC.2011.6043185.",
+      "",
+      "",
+      "JOSCHKA Ph.D. degr RWTH Aa",
+      "SCHAUB recei ees in mechanic chen University,",
+      "ved the al engi in 20",
+      "Diplo neerin 10 an",
+      "ma a g fro d 201"
+    ],
+    [
+      "[20]",
+      "S. Alpsten and H. Eklund, ‘‘Design of an ergonomic control lever for wheel loader attachments,’’ M.S. thesis, Dept. Product Produc- tion Development, Chalmers Univ. Technol., Gothenburg, Sweden, 2012.",
+      "",
+      "",
+      "respectively agerforcon wherehefo",
+      ".Heiscurrently trolsofFEVEu cusesoncontrol",
+      "theDep ropeG system",
+      "artme mbH, devel",
+      "ntMa Aache opme"
+    ],
+    [
+      "[21]",
+      "X. Li, G. Wang, Z. Yao, and J. Qu, ‘‘Dynamic model and validation of an articulated steering wheel loader on slopes and over obstacles,’’ Vehicle Syst. Dyn., vol. 51, no. 9, pp.1305–1323, Sep. 2013, doi: 10.1080/00423114.2013.800893.",
+      "",
+      "",
+      "formotor,h thisrole,he University, trolfunctio",
+      "ybrid,andfuelce wasaResearch from2010to201 ndevelopmentf",
+      "llpowe eratR 4,speci ordiese",
+      "rtrains WTH alizing lengi",
+      ".Befo Aach inco nesa"
+    ],
+    [
+      "[22]",
+      "B.Shamah,M.D.Wagner,S.Moorehead,J.Teza,D.Wettergreen,and W.L.Whittaker,‘‘Steeringandcontrolofapassivelyarticulatedrobot,’’ inProc.SPIE,vol.4571,2001,pp.1–2.",
+      "aftert opme artific",
+      "reatmentsystems.H ntforcomplexpowe ialintelligence,and",
+      "isresearchi rtrainsyste predictivec",
+      "nterestsinclude ms,energymana ontrolforvariou",
+      "control gement, sapplic",
+      "system applic ations",
+      "deve ation ."
+    ]
+  ],
+  "bbox": null,
+  "id": "table_19",
+  "caption": "TABLE 7. Summary of V-cycle measurements (8 loading cycles).",
+  "subtitle": null,
+  "headers": [
+    "Ref.",
+    "Operation Frequency",
+    "Impedance Bandwidth",
+    "Size (λ0)",
+    "Profile (λ0)",
+    "Method of Suppression",
+    "Gain In-Band (dBi)",
+    "Freq. Selectivity (dB/GHz)",
+    "Gain Suppression"
+  ],
+  "raw_text": null,
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.8433108108108108,
+    "status": "structured",
+    "engine": "pdfplumber-text",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

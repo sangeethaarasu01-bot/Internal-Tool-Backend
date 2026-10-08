@@ -21,6 +21,7 @@ from app.services.ocr_detector import (
     document_requires_ocr,
     page_requires_ocr,
 )
+from app.services.layout.column_classifier import annotate_page_columns
 from app.services.table_extractor import extract_tables_from_page
 
 EXTRACTION_ENGINE = "pymupdf"
@@ -53,7 +54,7 @@ def extract_text_layout(file_path: str, original_filename: str | None = None) ->
         ocr_applied = False
         for page_index in range(doc.page_count):
             page_result, page_ocr = _extract_page(doc[page_index], page_index + 1)
-            pages.append(page_result)
+            pages.append(annotate_page_columns(page_result))
             ocr_applied = ocr_applied or page_ocr
 
         char_counts = [page.text_char_count for page in pages]

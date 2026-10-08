@@ -359,9 +359,13 @@ def test_empty_page(tmp_path: Path) -> None:
 def test_ieee_pdf_reference_not_footer() -> None:
     raw = extract_text_layout(str(IEEE_PDF))
     structure = process_document_structure(raw)
-    p7_b19 = next(b for b in structure.blocks if b.block_id == "p7_b19")
-    assert p7_b19.classification == "REFERENCE_TEXT"
-    assert p7_b19.exclude_from_content is False
+    p7_ref = next(
+        b
+        for b in structure.blocks
+        if b.page_number == 7 and "gallic acid" in (b.text or "").lower()
+    )
+    assert p7_ref.classification == "REFERENCE_TEXT"
+    assert p7_ref.exclude_from_content is False
 
 
 @pytest.mark.skipif(not IEEE_PDF.exists(), reason="IEEE proof PDF not in uploads")

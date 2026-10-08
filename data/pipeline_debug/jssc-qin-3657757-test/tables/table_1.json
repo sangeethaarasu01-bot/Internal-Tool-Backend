@@ -1,0 +1,203 @@
+{
+  "table_id": "table_1",
+  "page_number": 12,
+  "row_count": 14,
+  "column_count": 9,
+  "rows": [
+    [
+      "",
+      "This work",
+      "L. Chao JSSC'23 [21]",
+      "Y. Shu ISSCC'20 [18]",
+      "J. Gong ISSCC'22 [15]",
+      "O. El-Aassar JSSC'21 [14]",
+      "Z. Kang ISSCC'24 [28]",
+      "H. Ge ISSCC'24 [22]",
+      ""
+    ],
+    [
+      "Topology",
+      "Quad-core Quad-mode",
+      "Quad-core Quad-mode",
+      "Quad-core Quad-mode",
+      "Dual-core Tri-mode",
+      "Dual-core Tri-mode",
+      "Single core Dual-mode",
+      "Quad-core Quad-mode",
+      ""
+    ],
+    [
+      "Technology",
+      "65-nm CMOS",
+      "65-nm CMOS",
+      "40-nm CMOS",
+      "22-nm FinFET",
+      "22-nm FDSOI",
+      "40-nm CMOS",
+      "65-nm CMOS",
+      ""
+    ],
+    [
+      "Techniques#",
+      "M",
+      "M",
+      "M+E",
+      "M+E",
+      "M+E",
+      "",
+      "M+E",
+      ""
+    ],
+    [
+      "Frequency [GHz]",
+      "4.21 to 15.18",
+      "",
+      "18.6 to 40.1",
+      "7.1 to 16.8",
+      "",
+      "8.9 to 21.9",
+      "13.7 to 41.5",
+      ""
+    ],
+    [
+      "TR [%]",
+      "113.2",
+      "90.2",
+      "73.2",
+      "80.6",
+      "72",
+      "84.4",
+      "101",
+      ""
+    ],
+    [
+      "FTROverlap[%]",
+      "10.5 to 14.7",
+      "0.6 to 2.5",
+      "4.1 to 5.0",
+      "7.6 to 9.7",
+      "2.2 to 4.4*",
+      "2.0",
+      "3.0 to 5.4",
+      ""
+    ],
+    [
+      "PN@10MHz [dBc/Hz]",
+      "-130.7 to -141.4",
+      "-122.1 to -126.7",
+      "-122.7 to -130.3",
+      "-128.7 to -137.9",
+      "-134.7 to -143.1",
+      "-131.1 to -138.6",
+      "-124.4 to -133.2",
+      ""
+    ],
+    [
+      "FoM@10MHz [dBc/Hz]",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "FoM_T@10MHz [dBc/Hz]",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "FoM_TA@10MHz [dBc/Hz]",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "1/f^3 PN corner [kHz]",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "VDD [V]",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Power [mW]",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Core Area [mm^2]",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "bbox": [
+    73.45800018310547,
+    405.24755859375,
+    541.1910400390625,
+    565.24755859375
+  ],
+  "id": "table_1",
+  "caption": "TABLE I",
+  "subtitle": null,
+  "headers": [
+    "",
+    "This work",
+    "L. Chao JSSC'23 [21]",
+    "Y. Shu ISSCC'20 [18]",
+    "J. Gong ISSCC'22 [15]",
+    "O. El-Aassar JSSC'21 [14]",
+    "Z. Kang ISSCC'24 [28]",
+    "H. Ge ISSCC'24 [22]",
+    ""
+  ],
+  "raw_text": "Topology Technology Techniques# Frequency [GHz]\tThis work Quad-core Quad-mode 65-nm CMOS M 4.21 to 15.18\tL. Chao JSSC'23 [21] Quad-core Quad-mode 65-nm CMOS M 12.1 to 32\tPERFORMANCESUMMARYANDCOMPARISONWITHSTATE-OF-THE-ARTOSCILLATORS Y. Shu ISSCC'20[18] Quad-core Quad-mode 40-nm CMOS M+E 18.6 to 40.1\tJ. Gong ISSCC'22 [15] Dual-core Tri-mode 22-nm FinFET M+E 7.1 to 16.8\tO.El-Aassar JSSC'21 [14] Dual-core Tri-mode 22-nm FDSOI M+E 8 to 17\tZ. Kang ISSCC'24[28] Single core Dual-mode 40-nm CMOS / 8.9 to 21.9\tH. Ge ISSCC'24[22] Quad-core Quad-mode 65-nm CMOS M+E 13.7 to 41.5\nTR [%]\t113.2\t90.2\t73.2\t80.6\t72\t84.4\t101\nFTROverlap[%]\t10.5 to 14.7\t0.6 to 2.5\t4.1 to 5.0\t7.6 to 9.7\t2.2 to 4.4*\t2.0\t3.0 to 5.4\nPN@10MHz\t-130.7 to\t-122.1 to\t-122.7 to\t-128.7 to\t-134.7 to\t-131.1 to\t-124.4 to\n[dBc/Hz]\t-141.4\t-126.7\t-130.3\t-137.9\t-143.1\t-138.6\t-133.2",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.8037037037037037,
+    "status": "structured",
+    "engine": "raw-page-table",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

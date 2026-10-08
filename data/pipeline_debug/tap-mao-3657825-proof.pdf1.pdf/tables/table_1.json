@@ -1,0 +1,159 @@
+{
+  "table_id": "table_1",
+  "page_number": 4,
+  "row_count": 11,
+  "column_count": 9,
+  "rows": [
+    [
+      "Ref.",
+      "Operation Frequency",
+      "Impedance Bandwidth",
+      "Size (3o²)",
+      "Profile (20)",
+      "Method of Suppression",
+      "Gain In-Band (dBi)",
+      "Freq. Selectivity (dB/GHz)",
+      "Gain Suppression"
+    ],
+    [
+      "[26]",
+      "2.9 GHz",
+      "27.5%",
+      "0.33*0.32",
+      "1",
+      "filter integrated",
+      "2.5",
+      "30",
+      "10 dB@4.5fo"
+    ],
+    [
+      "[28]",
+      "2.25 GHz",
+      "49%",
+      "1.05*1.05",
+      "0.25",
+      "filter integrated",
+      "7.9",
+      "42",
+      "13 dB@4f"
+    ],
+    [
+      "[31]",
+      "5.44 GHz",
+      "19.7%",
+      "0.66*0.66",
+      "0.1",
+      "resonator loading",
+      "7.4",
+      "60",
+      "23 dB@2.3fo"
+    ],
+    [
+      "[32]",
+      "2.35 GHz",
+      "56%",
+      "0.4*0.4",
+      "0.28",
+      "resonator loading",
+      "8.3",
+      "170",
+      "18.4 dB@1.9fo"
+    ],
+    [
+      "[29]",
+      "2.38 GHz",
+      "5.6%",
+      "",
+      "0.02",
+      "resonatorintegrated",
+      "9.7",
+      "200",
+      "25 dB@2.2fo"
+    ],
+    [
+      "[27]",
+      "2.45 GHz",
+      "3.2%",
+      "",
+      "0.02",
+      "resonatorintegrated",
+      "2",
+      "220",
+      "12.6 dB@6.4fo"
+    ],
+    [
+      "[33]",
+      "3.55GHz",
+      "13.3%",
+      "0.54*0.54",
+      "0.08",
+      "hybrid feed",
+      "8.1",
+      "60",
+      "18 dB@1.7fo"
+    ],
+    [
+      "[30]",
+      "2.45 GHz",
+      "9%",
+      "0.65*0.65",
+      "0.05",
+      "slot loading",
+      "6.7",
+      "50",
+      "16.7 dB@4fo"
+    ],
+    [
+      "[34]",
+      "2.3 GHz",
+      "50.8%",
+      "0.46*0.46",
+      "0.28",
+      "slotloading+filter",
+      "8",
+      "130",
+      "24.8 dB@4.8fo"
+    ],
+    [
+      "Prop.",
+      "2.65 GHz",
+      "18.8%",
+      "0.37*0.37",
+      "0.06",
+      "resonatorloading+ metasurface",
+      "8.5",
+      "220",
+      "24 dB@2.2fo; 18 dB@3.5fo"
+    ]
+  ],
+  "bbox": [
+    47.816062927246094,
+    68.5687026977539,
+    561.1000366210938,
+    228.5687026977539
+  ],
+  "id": "table_1",
+  "caption": "TABLE I",
+  "subtitle": "COMPARISON WITH OTHER HARMONIC SUPPRESSION FILTERING ANTENNAS",
+  "headers": [
+    "Ref.",
+    "Operation Frequency",
+    "Impedance Bandwidth",
+    "Size (3o²)",
+    "Profile (20)",
+    "Method of Suppression",
+    "Gain In-Band (dBi)",
+    "Freq. Selectivity (dB/GHz)",
+    "Gain Suppression"
+  ],
+  "raw_text": "Ref. [26] [28] [31] [32]\tOperation Frequency 2.9 GHz 2.25 GHz 5.44 GHz 2.35 GHz\tImpedance Bandwidth 27.5% 49% 19.7% 56%\tSize (3o²) 0.33*0.32 1.05*1.05 0.66*0.66 0.4*0.4\tProfile (20) 1 0.25 0.1 0.28\tCOMPARISONWITHOTHERHARMONICSUPPRESSIONFILTERINGANTENNAS MethodofSuppression filter integrated filter integrated resonator loading resonator loading\tGainIn-Band (dBi) 2.5 7.9 7.4 8.3\tFreq.Selectivity (dB/GHz) 30 42 60 170\tGain Suppression 10 dB@4.5fo 13 dB@4f 23 dB@2.3fo 18.4 dB@1.9fo\n[29]\t2.38 GHz\t5.6%\t\t0.02\tresonatorintegrated\t9.7\t200\t25 dB@2.2fo\n[27]\t2.45 GHz\t3.2%\t\t0.02\tresonatorintegrated\t2\t220\t12.6 dB@6.4fo\n[33]\t3.55GHz\t13.3%\t0.54*0.54\t0.08\thybrid feed\t8.1\t60\t18 dB@1.7fo\n[30]\t2.45 GHz\t9%\t0.65*0.65\t0.05\tslot loading\t6.7\t50\t16.7 dB@4fo\n[34]\t2.3 GHz\t50.8%\t0.46*0.46\t0.28\tslotloading+filter\t8\t130\t24.8 dB@4.8fo",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.967037037037037,
+    "status": "structured",
+    "engine": "raw-page-table",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

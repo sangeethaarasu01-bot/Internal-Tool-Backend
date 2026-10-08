@@ -1,0 +1,42 @@
+{
+  "table_id": "table_4",
+  "page": 11,
+  "caption_bbox": [
+    316.33013916015625,
+    540.6693115234375,
+    469.7508239746094,
+    549.7703857421875
+  ],
+  "region_y_top": 554.7703857421875,
+  "region_y_bottom": 692.0,
+  "next_element_type": "END_OF_PAGE",
+  "next_element_y0": null,
+  "text_blocks_in_region": [
+    {
+      "bbox": [
+        326.2930908203125,
+        665.8318481445312,
+        557.5444946289062,
+        677.3590698242188
+      ],
+      "preview": "While Table",
+      "line_count": 3
+    },
+    {
+      "bbox": [
+        316.3291015625,
+        677.7864990234375,
+        557.543701171875,
+        737.1331176757812
+      ],
+      "preview": "the DP-PMP strategy, Table",
+      "line_count": 7
+    }
+  ],
+  "rows_after_clustering": 10,
+  "columns_after_clustering": 2,
+  "rows_removed_as_body_text": 0,
+  "final_rows": 10,
+  "final_columns": 2,
+  "content_validation_error": null
+}

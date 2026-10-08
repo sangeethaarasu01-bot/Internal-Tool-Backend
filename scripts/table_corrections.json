@@ -1,0 +1,91 @@
+{
+  "p4_ocr0": {
+    "caption": "TABLE 1. Specifications of main components of hybrid wheel loader.",
+    "headers": ["Component", "Specification"],
+    "rows": [
+      ["Component", "Specification"],
+      ["Engine", "Diesel, 3.319 L, 4-cylinder; Net power 51.6 kW; Maximum torque 296 Nm"],
+      ["P2 electric machine", "Torque: 500 (Peak) / 213 (Cont.) Nm; Power: 190 (Peak) / 91 (Cont.) kW"],
+      ["EDU", "Front: 220 (Peak) / 135 (Cont.) kW; Rear: 157 (Peak) / 93 (Cont.) kW"],
+      ["HV battery", "Nominal voltage 345.6 V; Nominal capacity 75.6 Ah"],
+      ["Control valve", "Pressure compensated valve"],
+      ["DC-DC converter", "HV-12V converter; HV-48V converter"]
+    ]
+  },
+  "p9_ocr0": {
+    "caption": "TABLE 2. Operational constraints considered in the proposed energy management strategy.",
+    "headers": ["Operational constraint", "Handling in the proposed EMS"],
+    "rows": [
+      ["Operational constraint", "Handling in the proposed EMS"],
+      ["SOC bounds", "Battery SOC is constrained within predefined minimum and maximum limits during operation, while the terminal SOC condition is enforced via equivalence factor iteration."],
+      ["Battery current / power limits", "Battery and electric machine power are limited by inverter and hardware constraints and are respected in the control allocation."],
+      ["Start-stop wear / comfort", "ICE start–stop decisions are constrained to discrete vehicle state transitions, which enforces a minimum on/off duration at the state level."],
+      ["Thermal constraints", "Thermal operation is constrained to the validated operating envelope of the demonstrator; thermal dynamics are not explicitly optimized and are assumed to remain within safe limits."]
+    ]
+  },
+  "p11_ocr1": {
+    "caption": "TABLE 3. Comparison of SOC-corrected fuel consumption in the V-cycle.",
+    "headers": ["Strategy", "Fuel consumption / g", "Improvements / %"],
+    "rows": [
+      ["Strategy", "Fuel consumption / g", "Improvements / %"],
+      ["Rule-based", "579.1", "-"],
+      ["DP-PMP", "560.3", "3.3"]
+    ]
+  },
+  "p11_ocr2": {
+    "caption": "TABLE 4. Operational trade-offs in the V-cycle.",
+    "headers": ["Metric", "Rule-based", "DP-PMP"],
+    "rows": [
+      ["Metric", "Rule-based", "DP-PMP"],
+      ["SOC-corrected fuel consumption / g", "579.1", "560.3"],
+      ["Battery energy throughput / kWh", "1.48", "2.07"],
+      ["ICE start events / -", "0", "9"]
+    ]
+  },
+  "p13_ocr0": {
+    "caption": "TABLE 5. Comparison of SOC-corrected fuel consumption in the combined cycle.",
+    "headers": ["Strategy", "Fuel consumption / g", "Improvements / %"],
+    "rows": [
+      ["Strategy", "Fuel consumption / g", "Improvements / %"],
+      ["Rule-based", "607.5", "-"],
+      ["DP-PMP", "583.2", "4.0"]
+    ]
+  },
+  "p13_ocr1": {
+    "caption": "TABLE 6. Operational trade-offs in the combined cycle.",
+    "headers": ["Metric", "Rule-based", "DP-PMP"],
+    "rows": [
+      ["Metric", "Rule-based", "DP-PMP"],
+      ["SOC-corrected fuel consumption / g", "607.5", "583.2"],
+      ["Battery energy throughput / kWh", "1.37", "1.99"],
+      ["ICE start events / -", "3", "3"]
+    ]
+  },
+  "p14_ocr0": {
+    "caption": "TABLE 7. Summary of V-cycle measurements (8 loading cycles).",
+    "headers": ["Test", "Fuel / g", "ΔSOC / %", "SOC corrected fuel / g", "Work / kWh", "BSFC / (g/kWh)"],
+    "rows": [
+      ["Test", "Fuel / g", "ΔSOC / %", "SOC corrected fuel / g", "Work / kWh", "BSFC / (g/kWh)"],
+      ["RB 1", "591.1", "0.957", "542.8", "1.326", "218.5"],
+      ["RB 2", "575.8", "0.857", "532.6", "1.363", "217.6"],
+      ["RB 3", "508.8", "0.490", "484.1", "1.241", "218.7"],
+      ["RB 4", "584.4", "0.484", "559.9", "1.318", "218.8"],
+      ["DP-PMP 1", "598.2", "0.698", "563.0", "1.435", "216.2"],
+      ["DP-PMP 2", "490.3", "-0.827", "532.0", "1.319", "217.8"],
+      ["DP-PMP 3", "538.5", "-1.849", "631.8", "1.613", "216.5"]
+    ]
+  },
+  "p14_ocr1": {
+    "caption": "TABLE 8. Summary of the combined cycle measurements.",
+    "headers": ["Test", "Fuel / g", "ΔSOC / %", "SOC corrected fuel / g", "Work / kWh", "BSFC / (g/kWh)"],
+    "rows": [
+      ["Test", "Fuel / g", "ΔSOC / %", "SOC corrected fuel / g", "Work / kWh", "BSFC / (g/kWh)"],
+      ["RB 1", "626.1", "-1.146", "683.8", "1.798", "217.8"],
+      ["RB 2", "641.7", "-0.984", "691.3", "1.908", "217.4"],
+      ["RB 3", "530.7", "-2.879", "675.9", "1.725", "222.6"],
+      ["DP-PMP 1", "722.8", "1.025", "671.2", "1.788", "215.9"],
+      ["DP-PMP 2", "529.5", "-3.176", "689.6", "1.885", "216.9"],
+      ["DP-PMP 3", "633.5", "-0.542", "660.8", "1.767", "216.1"]
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "table_id": "table_6",
+  "page": 13,
+  "caption_bbox": [
+    55.420597076416016,
+    426.8420104980469,
+    296.6332702636719,
+    444.2700500488281
+  ],
+  "region_y_top": 449.2700500488281,
+  "region_y_bottom": 620.1475219726562,
+  "next_element_type": "TABLE",
+  "next_element_y0": 625.1475219726562,
+  "text_blocks_in_region": [
+    {
+      "bbox": [
+        55.42060089111328,
+        530.3635864257812,
+        296.647705078125,
+        601.6687622070312
+      ],
+      "preview": "than in the V-cycle. This is because the combined cycle has",
+      "line_count": 6
+    }
+  ],
+  "rows_after_clustering": 10,
+  "columns_after_clustering": 3,
+  "rows_removed_as_body_text": 0,
+  "final_rows": 10,
+  "final_columns": 3,
+  "content_validation_error": null
+}

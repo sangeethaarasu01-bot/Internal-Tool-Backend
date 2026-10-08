@@ -5,6 +5,7 @@ from __future__ import annotations
 from app.services.layout.semantic_patterns import (
     author_running_header_prefix,
     extract_leading_roman_section_heading,
+    is_reference_like_heading,
     is_roman_section_heading,
     matches_author_running_header_prefix,
     order_authors_with_corresponding,
@@ -59,3 +60,38 @@ def test_split_section_label_and_title_for_roman_sections() -> None:
 
 def test_split_section_label_and_title_for_letter_subsections() -> None:
     assert split_section_label_and_title("A. DPV Responses") == ("A.", "DPV Responses")
+
+
+def test_reference_like_heading_rejects_bibliography_line() -> None:
+    line = "W. L. Whittaker, \u2018\u2018Steering and control of a passively articulated robot,\u2019\u2019"
+    assert is_reference_like_heading(line) is True
+    assert is_reference_like_heading("A. CONVENTIONAL POWERTRAIN") is False
+
+
+def test_embedded_letter_subsection_in_roman_block() -> None:
+    from app.models.document_structure import ProcessedBlock
+    from app.services.layout.document_pipeline import _build_structure, _parse_embedded_letter_subsection
+
+    block = ProcessedBlock(
+        block_id="p2_b7",
+        page_number=2,
+        reading_order_index=0,
+        column="LEFT",
+        classification="SECTION",
+        confidence=0.9,
+        exclude_from_content=False,
+        exclusion_reason=None,
+        bbox=[50.0, 40.0, 300.0, 80.0],
+        text="II. PARALLEL-SERIES HYBRID SYSTEM\nA. CONVENTIONAL POWERTRAIN",
+        block_type="text",
+        dominant_font="Helvetica",
+        dominant_font_size=10.0,
+        is_bold=True,
+    )
+    heading, body, _ = _parse_embedded_letter_subsection(block.text, block)
+    assert heading == "A. CONVENTIONAL POWERTRAIN"
+    assert body is None
+    sections, _, _, _ = _build_structure([block])
+    headings = [section.heading for section in sections]
+    assert "II. PARALLEL-SERIES HYBRID SYSTEM" in headings
+    assert "A. CONVENTIONAL POWERTRAIN" in headings

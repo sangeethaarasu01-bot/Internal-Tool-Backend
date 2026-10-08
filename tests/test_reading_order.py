@@ -16,7 +16,7 @@ def _text_block(block_id: str, text: str, bbox: list[float]) -> TextBlock:
     )
 
 
-def test_order_page_blocks_interleaves_columns_by_row() -> None:
+def test_order_page_blocks_reads_left_column_before_right() -> None:
     blocks = [
         _text_block("l1", "Left top", [40, 100, 250, 120]),
         _text_block("l2", "Left bottom", [40, 300, 250, 320]),
@@ -29,7 +29,8 @@ def test_order_page_blocks_interleaves_columns_by_row() -> None:
         height=800,
         text_char_count=sum(len(block.text) for block in blocks),
         requires_ocr=False,
+        columns=2,
         blocks=blocks,
     )
     ordered = order_page_blocks(page)
-    assert [block.block_id for block in ordered] == ["l1", "r1", "l2", "r2"]
+    assert [block.block_id for block in ordered] == ["l1", "l2", "r1", "r2"]

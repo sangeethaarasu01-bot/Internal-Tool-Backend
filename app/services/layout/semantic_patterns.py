@@ -24,7 +24,10 @@ FIGURE_CAPTION_SPLIT_RE = re.compile(
     re.IGNORECASE,
 )
 FIGURE_REFERENCE_RE = re.compile(r"\bfig(?:ure)?\.?\s*(\d+)\b", re.IGNORECASE)
-TABLE_CAPTION_RE = re.compile(r"^table\s+[IVX\d]+", re.IGNORECASE)
+TABLE_CAPTION_RE = re.compile(
+    r"^table\s+(?:(?:[IVX]+)\.?(?:\s+[A-Z]|\s*$)|(?:\d+)\.\s+[A-Z])",
+    re.IGNORECASE,
+)
 TABLE_CONTINUATION_KNOWN_RE = re.compile(
     r"^(?:OPERATIONAL STATISTICS|COMPARATIVE PERFORMANCE|HPLC VALUES|PRECURSORS FOR)$",
     re.IGNORECASE,
@@ -84,6 +87,25 @@ MIN_FIGURE_HEIGHT = 8.0
 MIN_FIGURE_AREA = 800.0
 MAX_HEADING_WORDS = 14
 MAX_SUBSECTION_CHARS = 90
+_MIN_HEADING_CHARS = 3
+_MAX_HEADING_CHARS = 220
+_REFERENCE_LIKE_HEADING_RE = re.compile(
+    r"(?:"
+    r"\bdoi:\s*10\.|"
+    r"https?://|"
+    r"\[Online\]\.\s*Available:|"
+    r"\bvol\.\s*\d+.*\bpp\.\s*\d+|"
+    r"\bProc\.\s+[A-Z]|"
+    r"^\[\d+\]\s"
+    r")",
+    re.IGNORECASE,
+)
+_AUTHOR_TITLE_HEADING_RE = re.compile(
+    r"^[A-Z][A-Za-z.\-]*(?:\s+[A-Z][A-Za-z.\-]*){0,6},\s*[\"'‘“]",
+)
+_AUTHOR_INITIALS_COMMA_RE = re.compile(
+    r"^[A-Z]\.\s+(?:[A-Z]\.\s+)*[A-Z][A-Za-z\-']+,\s",
+)
 
 
 def normalize_text(text: str) -> str:
@@ -142,6 +164,28 @@ def extract_leading_roman_section_heading(text: str) -> str | None:
 
 def is_roman_section_heading(text: str) -> bool:
     return extract_leading_roman_section_heading(text) is not None
+
+
+def is_reference_like_heading(text: str, *, in_references: bool = False) -> bool:
+    """Reject bibliography lines misclassified as section headings."""
+    line = first_line(text)
+    if len(line.strip()) < _MIN_HEADING_CHARS:
+        return True
+    if len(line) > _MAX_HEADING_CHARS:
+        return True
+    if in_references:
+        return True
+    if REFERENCE_LABEL_RE.match(line):
+        return True
+    if _REFERENCE_LIKE_HEADING_RE.search(line):
+        return True
+    if _AUTHOR_TITLE_HEADING_RE.match(line):
+        return True
+    if _AUTHOR_INITIALS_COMMA_RE.match(line):
+        return True
+    if CITATION_RE.search(line) and ("''" in line or '""' in line or "‘‘" in line):
+        return True
+    return False
 
 
 def is_letter_subsection_heading(text: str, block: ProcessedBlock | None = None) -> bool:

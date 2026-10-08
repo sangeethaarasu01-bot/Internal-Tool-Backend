@@ -85,6 +85,8 @@ class SectionNode(BaseModel):
     heading_block_ids: list[str] = Field(default_factory=list)
     level: int = 1
     page_number: int
+    parent_heading: str | None = None
+    spatial_key: list[float] | None = None
     items: list[StructuredItem] = Field(default_factory=list)
     content_source_block_ids: list[str] = Field(default_factory=list)
 

@@ -1,0 +1,1332 @@
+AUTHOR QUERIES
+AUTHOR PLEASE ANSWER ALL QUERIES
+PLEASE NOTE: We cannot accept new source ﬁles as corrections for your article. If possible, please annotate the
+PDF proof we have sent you with your corrections and upload it via the Author Gateway. Alternatively, you may send
+us your corrections in list format. You may also upload revised graphics via the Author Gateway.
+Carefully check the page proofs (and coordinate with all authors); additional changes or updates WILL NOT
+be accepted after the article is published online/print in its ﬁnal form. Please check author names and afﬁliations,
+funding, as well as the overall article for any errors prior to sending in your author proof corrections.
+AQ:1 = According to our records, Shijin Huang is listed as a Graduate Student
+Member, IEEE. However, the ﬁles provided list them as a Student
+Member, IEEE. Please verify.
+AQ:2 = Please conﬁrm or add details for any funding or ﬁnancial support for the
+research of this article.
+AQ:3 = Please conﬁrm whether the edits made in the current afﬁliation of all the
+authors are correct.
+AQ:4 = Please provide the descriptions of part labels (a)–(c) in Fig. 11 and (a)–(f)
+in Fig. 19.
+AQ:5 = Please provide a better quality image of Fig. 22, if available, as the current
+version is very pixelated.
+IEEE JOURNAL OF SOLID-STATE CIRCUITS
+1
+A 4.21-to-15.18 GHz Magnetically Reconﬁgurable
+and Fully Symmetrical Quad-Core Quad-Mode
+VCO
+Shijin Huang , Graduate Student Member, IEEE, Pei Qin , Member, IEEE, Xiang Yi , Senior Member, IEEE,
+Haoshen Zhu , Member, IEEE, Liang Wu , Member, IEEE, and Quan Xue , Fellow, IEEE
+quadrature amplitude modulation (QAM), voltage-controlled
+oscillators (VCOs) are required to maintain low phase noise
+(PN). However, achieving wide bandwidth and low PN simul-
+taneously remains a signiﬁcant challenge for VCO designs.
+Abstract— This work proposes a wideband low phase noise
+(PN) quad-core quad-mode voltage-controlled oscillator (VCO)
+which features magnetically reconﬁgurable (MR) technique and
+fully symmetrical architecture. The MR technique, realized
+through a transformer-based tank integrating an embedded
+switched inductor, leverages varying core excitation currents to
+achieve four distinct equivalent inductances, thereby enabling
+quad-mode operation. This approach avoids the frequency tuning
+range (FTR) compromise encountered when using capacitive
+tuning elements in multi-mode tanks. Furthermore, the fully sym-
+metrical characteristics of the inductive, capacitive, and active
+elements, along with the routing layout, minimize mismatches
+among the VCO cores, ensuring effective synchronization of
+the four single-core VCOs and optimizing the PN in quad-core
+operation. The proposed quad-core quad-mode VCO achieves an
+FTR of 113.2% (4.21 to 15.18 GHz), a PN of −141.4 dBc/Hz at
+a 10 MHz offset from 4.28 GHz, a peak ﬁgure-of-merit (FoM) of
+190.5 dBc/Hz, a peak FoMT of 211.6 dBc/Hz and a peak FoMTA
+of 220.5 dBc/Hz at a 10 MHz offset.
+Compared to the scheme that uses multiple individual
+VCOs for multi-band operation, mode-switching technique
+summarized in [1] provides a more efﬁcient solution, enabling
+multi-band coverage with reduced area and lower power con-
+sumption. The switched-inductors or switched-transformers
+techniques are favorable to achieve wide bandwidth by utiliz-
+ing multiple effective inductance values [2], [3], [4]. Although
+these techniques can broaden the bandwidth effectively in a
+simple manner, the ON-resistance of the switches degrades the
+Q factor of the tank, thus signiﬁcantly deteriorating the PN.
+Recently, coupling multiple VCO cores operating at different
+modes via mode switches has been demonstrated to be a
+promising method to simultaneously achieve low PN and wide
+FTR.
+Index Terms— Magnetically reconﬁgurable (MR), phase noise
+(PN), quad-core, quad-mode, voltage-controlled oscillator (VCO),
+wide frequency tuning range (FTR).
+Based on Leeson’s PN model [5], the PN can be expressed
+as follows:
+ FkT RT
+2
+ ω0
+I. INTRODUCTION
+L(ω) = 10 log
+(1)
+T
+V 2
+0 Q2
+ω
+O MEET the requirements on multi-standard and multi-
+application scenarios in 5G communications, a local
+where k is Boltzmann’s constant, T is the absolute tempera-
+ture, F is the device excess noise factor, V0 is the oscillation
+amplitude, RT is the tank resistance, and Q is the tank
+quality factor. Coupling N VCO cores results in a 10logN
+dB PN reduction, as RT in (1) is reduced by a factor of
+oscillator (LO) with wide frequency tuning range (FTR)
+is urgently desired. Besides, with the increasing demand
+for signal purity in high-order modulation schemes such as
+Received 2 September 2025; revised 4 November 2025 and 8 December
+N while other parameters remain ﬁxed. However, this PN
+2025; accepted 20 January 2026. This article was approved by Associate
+Editor Wanghua Wu. This work was supported in part by the National Natural
+Science Foundation of China under Grant 62301224, Grant U23A20288, and
+Grant 62271210; and in part by the Natural Science Foundation of Guang-
+dong Province under Grant 2023B0303000008 and Grant 2024A1515011982.
+(Corresponding author: Pei Qin.)
+performance improvement comes at the cost of an N-fold
+increase in power consumption. By utilizing mode switches
+among the multiple VCO cores, multiple operation modes
+can be generated, extending the FTR without incurring switch
+losses.
+Shijin Huang, Pei Qin, Xiang Yi, and Haoshen Zhu are with Guangdong
+Provincial Key Laboratory of Millimeter-Wave and Terahertz and the School
+of Microelectronics, South China University of Technology, Guangzhou
+510641, China (e-mail: qinpei7777@scut.edu.cn).
+Dual-mode VCOs have been widely reported [6], [7], [8],
+[9], [10], [11], [12], [13], which employ either magnetically
+reconﬁgurable (MR) inductance (denoted “M”) or electric cou-
+pling via added capacitors to change the effective capacitance
+(denoted “E”) to realize dual-mode operation. While an octave
+tuning range can theoretically be divided or multiplied to
+target any frequency band, dual-mode VCOs typically struggle
+to achieve full octave coverage due to practical limitations.
+As a result, triple-mode [14], [15], [16], [17] or even quad-
+mode VCOs [18], [19], [20], [21], [22], [23], [24] have
+Liang Wu is with the School of Science and Engineering (SSE) and
+Guangdong-Hong Kong-Macao Joint Laboratory for Millimeter-Wave and
+Terahertz, The Chinese University of Hong Kong, Shenzhen, Guangdong
+518172, China.
+Quan
+Xue
+is
+with
+Guangdong
+Provincial
+Key
+Laboratory
+of
+Millimeter-Wave and Terahertz and the School of Electronic and Information
+Engineering, South China University of Technology, Guangzhou 510641,
+China.
+0018-9200 © 2026 IEEE. All rights reserved, including rights for text and data mining, and training of artiﬁcial intelligence
+and similar technologies. Personal use is permitted, but republication/redistribution requires IEEE permission.
+See https://www.ieee.org/publications/rights/index.html for more information.
+2
+IEEE JOURNAL OF SOLID-STATE CIRCUITS
+Fig. 1.
+(a) Uniform FTR in each mode. (b) Nonuniform FTR in each mode.
+gained popularity. In order to expand the number of operation
+modes, MR technique is typically combined with electric
+coupling. However, the latter introduces substantial parasitic
+capacitance, which increases Cmin and consequently reduces
+the FTR, expressed as follows:
+√Cmax/Cmin −1
+√Cmax/Cmin + 1
+(2)
+FTR = 2 ×
+where Cmin and Cmax denote the minimum and maximum val-
+ues of the tank capacitance, respectively. Thus, MR technique
+is favored in those multi-core multi-mode VCO designs.
+In multi-core multi-mode VCOs, transformer-based res-
+onant tanks are preferred for their design ﬂexibility and
+area efﬁciency. However, as the number of operation modes
+increases, transformer design becomes challenging and the
+coupling network becomes complex, both of which tend to
+introduce asymmetries across VCO cores. As a result, the
+asymmetry induced by transformers or even other components
+inevitably introduces frequency mismatches in multi-core
+operation, which theoretically degrade the PN performance.
+Therefore, a fully symmetrical architecture in multi-core multi-
+mode VCOs are preferred to eliminate the negative impact on
+the PN performance.
+A substantial number of state-of-the-art triple-mode or
+quad-mode VCOs have been proposed in recent years. A dual-
+core triple-mode VCO with a wide FTR of 80.6% and a PN of
+−137.9 dBc/Hz at a 10 MHz offset from 7.15 GHz is proposed
+by using Electrical-Magnetic (E-M) mixed coupling in [15].
+However, the asymmetrical inductance seen from each core
+causes inter-core mismatches that degrades the PN. Moreover,
+the inclusion of additional mode switches and switched capac-
+itor arrays (SCAs) impose extra parasitics, thus reducing the
+FTR. A quad-core quad-mode VCO in [22] achieves an FTR
+of 101% and a PN of −133.2 dBc/Hz at a 10 MHz offset
+from 13.7 GHz by using E-M mixed coupling, whereas the
+issue of asymmetrical inductance persists, and the parasitics
+from electric coupling capacitors negatively impact the FTR.
+Additionally, the non-uniformity of the FTR across each mode
+is also undesirable. With the same total FTR, a uniform FTR
+Fig. 2.
+Operating principle of dual-core dual-mode VCO.
+in each mode yields roughly equal overlaps between adjacent
+modes, as shown in Fig. 1(a). In contrast, a nonuniform FTR
+makes the overlaps highly uneven, as shown in Fig. 1(b).
+This gives rise to two concerns. First, large differences in
+overlap make the band-decision thresholds difﬁcult to unify
+and require additional algorithm adaptation, which increases
+system complexity. Second, under PVT variations, the smaller
+overlap is more likely to shrink and create a frequency gap
+between adjacent modes. Other works still suffer from these
+issues [18], [21]. In summary, although multi-core multi-
+mode VCOs have demonstrated superior performance in terms
+of FTR and PN, issues such as asymmetrical inductance,
+parasitic-induced FTR reduction, and nonuniform FTR still
+persist, ultimately degrading the overall performance of the
+VCOs.
+To surmount these issues, this work proposes a quad-
+core quad-mode VCO that achieves ultra-wide bandwidth and
+low PN by employing MR technique and fully symmetric
+architecture, which effectively eliminates the asymmetry and
+extra parasitics, and ensures a uniform FTR across all modes.
+This article is organized as follows. Section II presents the
+structure of the proposed VCO and the operating principles
+of the four modes. Section III discusses the symmetry of
+the design and its optimization of performance. Section IV
+presents the measurement results and Section V draws the
+conclusion.
+II. PROPOSED QUAD-MODE OPERATION UTILIZING MR
+TECHNIQUE
+A. Triple-Mode Operating Principle
+Dual-core dual-mode VCO serves as the foundational archi-
+tecture for multi-core multi-mode VCO designs, as shown
+in Fig. 2. By controlling the phases of the two coupled
+inductors through the mode switches SO and SE, two effective
+inductances are achieved, thereby realizing two operation
+modes, namely odd mode and even mode. Fig. 3 shows the
+quad-core triple-mode conﬁguration derived from the dual-
+core dual-mode structure. It simply connects four single VCO
+cores through mode switches, with the key difference that
+HUANG et al.: 4.21-TO-15.18 GHz MR AND FULLY SYMMETRICAL QUAD-CORE QUAD-MODE VCO
+3
+Fig. 3.
+Conﬁguration of the quad-core triple-mode VCO.
+the inductors of the four cores are mutually coupled with
+each other. Besides, to ensure symmetry among the cores,
+the coupling coefﬁcients between adjacent inductors and those
+between the opposite inductors are equal, resulting in the
+relationship as follows:
+k1 = k2 = k3 = k4 = kadj
+(3)
+k5 = k6 = kopp.
+(4)
+The sixteen mode switches (Si, j) are employed to connect
+the corresponding two ports (Pi, Pj). By changing the current
+directions of the tank inductors in each core through the mode
+switches, the proposed VCO can operate in three resonant
+modes. The three operation modes are described as follows.
+1) In mode-L, as shown in Fig. 4(a), the current directions
+of four tank inductors are all in-phase, with the switches
+S1,3, S1,5, S2,4, S2,6, S3,7, S4,8, S5,7, and S6,8 turned on.
+Thus, the voltages at ports P1,3,5,7 are in phase, as are
+those at P2,4,6,8. The equivalent inductance of each core
+is expressed as follows:
+
+
+Lmode,L =
+L = L + 2Madj + Mopp
+1 + kadj + kadj + kopp
+(5)
+where Madj = kadjL and Mopp = koppL.
+2) In mode-M, as illustrated in Fig. 4(b), the currents in
+the adjacent cores of any given core are either in-phase
+or anti-phase, whereas the current in the opposite core
+is strictly anti-phase. In this mode, switches S1,4, S1,5,
+S2,3, S2,6, S3,7, S4,8, S5,8, and S6,7 are turned on, leading
+to ports P1,4,5,8 (as well as P2,3,6,7) connected together.
+Speciﬁcally, for core-1, the magnetic inﬂuence from
+core-2 and -3 cancels out, and only core-4 contributes
+a mutual inductance of −Mopp. Thus, the equivalent
+inductance of core-1 is expressed as follows:
+
+
+L = L −Mopp. (6)
+1 −kadj + kadj −kopp
+Lmode,M =
+Apart from core-1, it can be observed that the equiv-
+alent inductances for other three cores are also equal
+to Lmode,M. Additionally, since Lmode,L is larger than
+Lmode,M, the operating frequency of mode-L is lower.
+3) In mode-H, as shown in Fig. 4(c), the currents in
+adjacent cores are anti-phase, whereas those in opposite
+cores are in-phase, with the switches S1,4, S1,6, S2,3, S2,5,
+S3,8, S4,7, S5,8, and S6,7 turned on. Each core experiences
+mutual inductances of −2Madj from its two adjacent
+cores and Mopp from the opposite core, resulting in the
+equivalent inductance seen from each core being
+
+
+Lmode,H =
+L = L −2Madj + Mopp.
+1 −2kadj + kopp
+(7)
+Since Lmode,M −Lmode,H is equal to 2(Madj −Mopp)
+and Madj is set larger than Mopp in this design, mode-M
+is thus operating at a lower frequency.
+4) In mode-N, as shown in Fig. 4(d), the current in any
+given core is anti-phase with other three cores, with the
+switches S1,4, S1,6, S2,3, S2,5, S3,8, S4,7, S5,8, and S6,7
+turned on. Based on the current direction in each core,
+the effective inductance of each core can be derived as
+L + Mopp for core-1 and -4, L + 2Madj −Mopp for
+core-2, and L −2Madj −Mopp for core-3. Unlike the
+other three modes, where the effective inductor for each
+core is identical, the inductance seen from each core
+in this mode is varied, leading to signiﬁcant frequency
+mismatches among four cores. In a multi-core VCO,
+all cores should be typically designed to be identical to
+ensure balanced operation. This mismatch in inductance
+will lead to unequal current distribution among the
+cores, which in turn causes imbalances in the waveforms
+among VCO cores. Then the current will ﬂowthrough
+the lossy switches in order to equalize the energy of
+the resonators, thereby forcing the VCO to oscillate at
+the same frequency. This process, however, degrades the
+tank Q and renders the theoretical 6 dB PN optimization
+from the quad-core operation unachievable. Therefore,
+this mode is abandoned.
+In summary, three distinct equivalent inductance values
+are realized through a fully symmetrical transformer
+network composed of four mutually coupled inductors.
+However, since the difference Lmode,L −Lmode,M exceeds
+Lmode,M −Lmode,H by 4Mopp, achieving continuous
+frequency tuning between mode-M and -H may result
+in a frequency gap between mode-L and -M. Therefore,
+an additional mode inserted between mode-L and -M is
+required, which should minimally affect other modes.
+B. Quad-Mode Operating Principle
+Based on the triple-mode transformer in Fig. 3, a switched
+inductor is embedded within the four tank inductors, as shown
+in Fig. 5, thereby creating one additional mode. The switched
+inductor operates in two different states, depending on its
+connection state.
+1) 1) When the switched inductor Lsw is turned off, three
+distinct modes-mode-1, -3, and -4, as shown in Fig. 6(a),
+(c), and (d), operate following the same principle as
+the original triple-mode conﬁguration, corresponding to
+mode-L, -M, and -H, respectively.
+2) When Lsw is turned on, the induced current in Lsw is
+canceled in mode-M and -H by two opposing currents
+from the four tank inductors. Therefore, turning on the
+switch SLs does not affect the operating frequencies of
+4
+IEEE JOURNAL OF SOLID-STATE CIRCUITS
+Fig. 4.
+Operating principle of the quad-core triple-mode VCO. (a) Mode-L. (b) Mode-M. (c) Mode-H. (d) Mode-N.
+Fig. 5.
+Structure of the proposed quad-core quad-mode VCO.
+mode-M and -H. In mode-L, however, the currents in the
+four tank inductors are aligned in the same direction,
+so the induced current in Lsw cannot be canceled.
+Consequently, an additional operation mode, denoted as
+mode-2, is inserted between mode-1 and -3, which is
+implemented by controlling Lsw through the mode-L
+conﬁguration, as shown in Fig. 6(b).
+Since the switched inductor is controlled by an NMOS
+switch (SLs), it should be noted that due to the non-ideal
+characteristics of the switch, it can be equivalent to an
+ON-resistance (rON) when turned on, and as two parasitic
+capacitances (COFF) to ground when turned off, as shown in
+Fig. 7. The presence of rON and COFF will affect the equivalent
+inductance in each operation mode, which can be analyzed
+using a simpliﬁed lumped model of the switched-inductor-
+based quad-mode transformer, as shown in Fig. 8.
+1) When the switch SLs is turned on corresponding to
+mode-2, the switched inductor is connected in series
+with the ON-resistance rON, as shown in Fig. 8(a). The
+electrical parameters–namely kadj, kopp and L–will be
+affected by rON, resulting in modiﬁed values denoted
+as kadj,ON, kopp,ON and Lon, respectively. The modiﬁed
+parameter kadj,ON can be derived based on Fig. 8(a)
+by analyzing Z12 = V1/I2 under the condition I1 =
+I3
+=
+I4
+=
+0, while Isw and I2 provide current
+excitations. According to the mutual inductance voltage
+equation [25], the voltage V1 can be written as follows:
+V1 = sMadjI2 + sMswIsw
+(8)
+where Msw = ksw(LLsw)1/2 and s = jw.
+As the ON-resistance rON effectively connects both ends
+of the switched inductor, the Kirchhoff’s voltage law
+(KVL) equation can be derived as follows:
+0 = sLswIsw + sMswI2 + rONIsw.
+(9)
+From (8) and (9), Z12 can be derived as follows:
+	
+
+Madj −
+sM2
+sw
+.
+(10)
+Z12 = sMadj,ON = s
+sLsw + rON
+It can be seen from (10) that the presence of rON leads to
+variation in the mutual inductance Madj between adjacent
+cores, where the modiﬁed value Madj,ON can be expressed
+as follows:
+Madj,ON = Madj −
+sM2
+sw
+.
+(11)
+sLsw + rON
+Similarly, Mopp,ON and L ON can be derived as follows:
+Mopp,ON = Mopp −
+sM2
+sw
+(12)
+sLsw + rON
+HUANG et al.: 4.21-TO-15.18 GHz MR AND FULLY SYMMETRICAL QUAD-CORE QUAD-MODE VCO
+5
+Fig. 6.
+Operating principle of the proposed quad-core quad-mode VCO. (a) Mode-1. (b) Mode-2. (c) Mode-3. (d) Mode-4.
+Fig. 7.
+NMOS switch of the switched inductor and its equivalent circuits in
+ON and OFF states.
+Fig. 8.
+Simpliﬁed lumped model of the proposed transformer with the switch
+SLs in (a) ON and (b) OFF states.
+L ON = L −
+sM2
+sw
+.
+(13)
+sLsw + rON
+Consequently, the equivalent inductance in mode-2 can
+be derived as follows:
+Lmode,2 = L + 2Madj + Mopp −
+4sM2
+sw
+.
+(14)
+sLsw + rON
+Fig. 9. (a) Transformer structure of the proposed quad-core quad-mode VCO.
+(b) Its simulated parameters obtained from EM simulations.
+As long as the size of the switch SLs is sufﬁciently
+large, its ON-resistance rON can be neglected and the
+difference in equivalent inductances between mode-1
+and -2 becomes 4k2
+swL. Therefore, by adjusting the
+spacing between L and Lsw, the coupling coefﬁcient
+ksw can be controlled, enabling the separation of Lmode,2
+from Lmode,1, and allowing mode-2 to ﬁll the frequency
+gap between mode-1 and -3.
+be expressed as follows:
+Madj,OFF = Madj −
+s2M2
+swCOFF
+s2LswCOFF + 2
+(15)
+2) When the switch SLs is turned off corresponding to
+mode-1, -3, and -4, the switched inductor is connected
+in series with the parasitic capacitance COFF, as shown
+in Fig. 8(b). Similar to the previous analysis, the only
+difference lies in replacing rON with 2/(sC OFF). Thus,
+the equivalent modiﬁed Madj,OFF, Mopp,OFF and L OFF can
+Mopp,OFF = Mopp −
+s2M2
+swCOFF
+s2LswCOFF + 2
+(16)
+L OFF = L −
+s2M2
+swCOFF
+s2LswCOFF + 2.
+(17)
+6
+IEEE JOURNAL OF SOLID-STATE CIRCUITS
+Fig. 10.
+Coil currents, magnetic ﬁeld distribution and simulated effective L and Q in (a) mode-1, (b) mode-2, (c) mode-3 and (d) mode-4.
+Fig. 11.
+Circuit equivalence for the mode-3 transformer with the switched inductor off.
+= L −2Madj + Mopp.
+(20)
+In (18), the last term is a minor factor and can be
+neglected. Therefore, the equivalent inductance in mode-
+1 remains approximately unchanged compared to (5).
+In mode-3 and -4, the equivalent inductances remain
+consistent with (6) and (7), respectively, as indicated
+in (19) and (20). In other words, the equivalent induc-
+tances in mode-1, -3, and -4 are rarely affected by the
+switched inductor. In mode-1, the result comes from an
+expression approximation, while in mode-3 and -4, it can
+be explained by the fact that the currents induced in Lsw
+by the surrounding tank inductors cancel each other out,
+which means that Lsw is transparent in mode-1, -3, and
+-4.
+Fig. 12.
+Comparison of mode-3 effective inductance: original versus revised.
+C. Proposed Transformer Tank
+As a result, the equivalent inductances in mode-1, -3,
+and -4 can be expressed as follows:
+Fig. 9(a) shows the layout of the proposed transformer,
+which consists of four identical single-coil tank inductors
+(Ltank) and an extra switched inductor (Lsw), intertwined
+in a center-symmetric manner. The coupling coefﬁcients are
+identical among any pairs of adjacent inductors, any pairs of
+opposite inductors, and between each tank inductor and the
+switched inductor, denoted as kadj, kopp, and ksw, respectively.
+To mitigate the area overhead of the multi-core structure, the
+Lmode,1 = L + 2Madj + Mopp −
+4s2M2
+swCOFF
+s2LswCOFF + 2
+≈L + 2Madj + Mopp
+(18)
+Lmode,3 = L OFF −Mopp,OFF = L −Mopp
+(19)
+Lmode,4 = L OFF −2Madj,OFF + Mopp,OFF
+HUANG et al.: 4.21-TO-15.18 GHz MR AND FULLY SYMMETRICAL QUAD-CORE QUAD-MODE VCO
+7
+Fig. 13.
+(a) Detailed implementation of the proposed quad-core quad-mode
+VCO. (b) Mode conﬁguration truth table (1=switch on, 0=switch off).
+transformer efﬁciently concentrates the magnetic ﬂux within
+the inductor coils, maximizing ﬂux utilization. The switched
+inductor is placed in the middle of the tank inductors and
+tightly coupled with other coils. Both the tank inductors and
+the switched inductor have the width of 8 μm. Additionally,
+to ensure that kadj > kopp, the coil spacing between adjacent
+tank inductors is set to 3 μm, while the spacing between
+opposite tank inductors is set as 25 μm. As shown in Fig. 9(b),
+EM simulation results show that the self-inductance and Q
+factor of the tank inductors are 645 pH and 13 at 10 GHz,
+respectively, while those of the switched inductor are 630 pH
+and 15. The adjacent and opposite coupling coefﬁcients, kadj
+and kopp, are found to be 0.44 and 0.3 at 10 GHz, respectively.
+Besides, the coupling coefﬁcient ksw between the switched
+inductor and the tank inductors is 0.49 at 10 GHz.
+Fig. 10 illustrates the magnetic ﬂux of the proposed
+quad-mode operation, along with the simulated equivalent
+inductance and equivalent Q factor. Fig. 10(a) and (b) cor-
+responds to the cases of mode-1 and -2, where the magnetic
+ﬂuxes among all tank inductors are mutually reinforced.
+In mode-1, the switched inductor Lsw is disconnected and
+the equivalent inductance is equal to (18). In mode-2, when
+SLs is shorted, an induced current ﬂowing through Lsw gen-
+erates opposite magnetic ﬂux. The equivalent inductance is
+thus equated to (14). In Fig. 10(c) and (d), corresponding
+to mode-3 and -4, the magnetic ﬂuxes in any two cores
+are anti-phased with those in the other two cores. Mode-
+4 follows (20). For mode-3, (19) becomes inaccurate since
+magnetic coupling breaks the left–right symmetry of the spiral
+halves. Consequently, the differential analysis needs to include
+the tap inductance, and the expression for Lmode,3 should be
+updated accordingly.
+Fig. 11(a) shows the quad-mode transformer for mode-3
+with the switched inductor off, where kadj,OFF = Madj,OFF/L OFF
+and kopp,OFF = Mopp,OFF/L OFF. From the perspective of core-
+1, we split the inductor L OFF at its geometric center into two
+equal halves and retain only the couplings relevant to core-1,
+as shown in Fig. 11(b). To preserve the total mutual coupling
+for core-1, the coefﬁcients satisfy k1 + k2 =
+√
+2kadj,OFF and
+√
+k3 + k4 =
+2kopp,OFF. Further inspection of the transformer
+layout in Fig. 9(a) shows that k1 < k2 and k3 = k4. Under
+these conditions, the equivalent inductances of the left and
+right halves are obtained as follows:
+
+
+Lleft = L OFF
+L OFF · L OFF
+2
+−k1
+2
+
+
+2
+−1
+L OFF · L OFF
+2 Mopp,OFF
+(21)
++ k2
+
+
+Lright = L OFF
+L OFF · L OFF
+2
+−k2
+2
+
+
+2
+−1
+L OFF · L OFF
+2 Mopp,OFF.
+(22)
++ k1
+Since Lleft ̸= Lright, a current (it) ﬂows into the tap inductor,
+as shown in Fig. 11(c). Applying a differential excitation of
++V/2 at P1 and −V/2 at P2, the effective inductance of mode-
+3 is obtained as follows:
+Lmode,3,revised =
+V
+
+
+1
+2
+ileft + iright
+
+
+LleftLright + LleftLt + LrightLt
+= 4
+.
+(23)
+L1 + L2 + 4Lt
+In the limiting cases, the results are intuitive. When the tap
+path is open (Lt →∞), the effective inductance becomes
+Lleft + Lright. When the tap is ideally grounded (Lt →0),
+Lmode,3,revised approaches 4LleftLright/(Lleft + Lright). For the
+symmetric case Lleft = Lright, we always have Lmode,3,revised =
+2Lleft = 2Lright independent of Lt.
+Owing to the tap inductor, mode-3 shows a smaller effective
+inductance. The revised effective inductance of mode-3 is
+21 pH lower than the original, as shown in Fig. 12.
+The simulated equivalent inductance and Q factor are
+1298 pH and 16 at 5 GHz in mode-1, 782 pH and 8.5 at 7 GHz
+in mode-2, 429 pH and 10.1 at 10 GHz in mode-3, and
+272 pH and 8.2 at 13 GHz in mode-4, as shown in Fig. 10.
+It can be observed that the equivalent inductance decreases
+progressively from mode-1 to -4.
+III. DESIGN AND ANALYSIS OF THE PROPOSED
+QUAD-CORE QUAD-MODE VCO
+A. Proposed VCO Design
+Fig. 13(a) shows the schematic of the proposed quad-core
+quad-mode VCO, which consists of four identical single-core
+8
+IEEE JOURNAL OF SOLID-STATE CIRCUITS
+Fig. 14.
+Simulated magnitude and phase response of the tank impedance under different RON for (a) mode-1, (b) mode-2, (c) mode-3, and (d) mode-4.
+VCOs, an embedded switched inductor (Lsw) and a mode-
+switching (SW) array. The active cores (Core-1, -2, -3, and
+-4), each composed of cross-coupled transistors, a tail resistor
+array, a pair of varactors and 6-bit SCA, are identical. The
+tail resistor array, shown in the bottom-left of Fig. 13(a),
+consists of a bypass path and a 13-bit programmable resistor
+bank. It is added to tune the core transconductance Gm versus
+frequency so that the excess loop gain G X = Gm RT (with
+RT the tank’s equivalent parallel resistance) remains moderate,
+which in turn limits ﬂicker noise up-conversion [26]. The 6-
+bit SCA, shown in the top-left of Fig. 13(a), and the MOS
+varactors provide coarse tuning and continuous ﬁne tuning,
+respectively. The varactor is implemented using a thick-oxide
+device, with dimensions of W/L = 32/0.4 μm. As the bias
+increases from 0 to 2.5 V, the varactor capacitance decreases
+from 35.7 to 15.2 fF (C = 20.5 fF) with Q larger than
+29. The SCA exhibits an LSB of 7.7 fF, thereby enabling
+ﬁne and continuous frequency tuning. With a high Cmax/Cmin
+ratio preserved and Q kept moderate, the total capacitance
+ranges from 191.9 to 732.1 fF, and Q remains above 24 at
+10 GHz. Each core is connected to its respective inductor ports
+in a center-symmetric manner, ensuring uniform coupling and
+balanced performance across all modes.
+Furthermore, to maintain uniform capacitive loading at each
+port, the SW array is designed with four identical sub-arrays,
+all positioned at the center of the transformer symmetrically.
+Each sub-array contains four switches and there are a total
+of sixteen switches in all. An additional switch is positioned
+along the routing of the switched inductor to control its on/off
+state. As discussed above, eight switches need to be turned on
+and another eight switches need to be turned off in each mode.
+The switch on-off states in each mode are shown in Fig. 13(b).
+As observed, these switches are divided into ﬁve groups and
+are controlled by 5-bit control bits, respectively. In mode-1,
+Groups-1 and -2 are activated; in mode-2, Groups-1, -2, and -5
+are active. Mode-3 enables Group-1 and -3, whereas mode-4
+enables Group-3 and -4. Unless otherwise speciﬁed, all other
+switch groups remain disabled.
+Given the careful consideration of the symmetry of the
+inductive, capacitive, active, and other elements in the quad-
+core quad-mode VCO, the mismatches among VCO cores are
+signiﬁcantly minimized, allowing the four single-core VCOs to
+be well synchronized and achieve optimized PN in all modes.
+B. Avoiding Mode Ambiguity
+It is known that when the transconductance pairs are sufﬁ-
+ciently large, the oscillator operates at the frequency where the
+tank impedance provides sufﬁciently high amplitude with zero
+phase. When no mode switches are added or the switch size is
+too small [i.e., large ON-resistance (RON)], multiple frequency
+points with high impedance amplitude and zero phase may
+exist. As a result, the operating frequency of the oscillator is
+not uniquely deﬁned, resulting in mode ambiguity.
+Due to the symmetrical property of the proposed trans-
+former, the tank impedance seen from node pairs P1 and
+P2, P3 and P4, P5 and P6, P7 and P8 is identical. Fig. 14
+shows the simulated magnitude and phase responses of the
+tank impedance seen from the node pair P1 and P2 in the four
+operation modes, as RON is reduced from 425 to 25 . When
+RON is 225/425 , as shown by the blue/green dotted curve
+in Fig. 14, each mode exhibits at least two frequency points
+where the tank impedance has a sufﬁciently high peak and a
+zero phase. This implies that the oscillator has the potential to
+oscillate either at the frequency with the expected maximum
+Q value or concurrently at multiple resonance frequencies,
+which are highly undesirable.
+To avoid the issues associated with ambiguous modes, it is
+necessary to reduce RON by increasing the size of the mode
+switches. As shown by the solid red curves in Fig. 14, when
+RON is reduced to 25 , each mode exhibits a uniquely deﬁned
+resonant frequency.
+HUANG et al.: 4.21-TO-15.18 GHz MR AND FULLY SYMMETRICAL QUAD-CORE QUAD-MODE VCO
+9
+Fig. 15.
+Center-symmetric layout of mode-switching array.
+C. Effect of Mismatches Among Cores
+While ideal synchronization assumes identical oscillation
+frequencies among the cores, practical implementations often
+suffer from frequency mismatches caused by device variations
+and layout asymmetries. These mismatches introduce phase
+errors and amplitude reduction, ultimately degrading the PN
+performance [21], [27]. Therefore, accurately characterizing
+and mitigating inter-core mismatches are essential to fully
+unlock the potential of multi-core VCO designs.
+The proposed design makes every effort to ensure symmetry
+among the four VCO cores, including the transformer tank,
+SW
+array, VCO cores and layout routings. As presented in
+Fig. 9(a), each single tank inductor is identical and arranged
+in a centrally symmetric layout. Additionally, the SW array,
+consisting of sixteen switches, is also arranged in a center-
+symmetric conﬁguration, as illustrated in Fig. 15. That is to
+say, each port (P1−8) is identically connected to four switches
+to ensure that the parasitics induced by the switches is the
+same across all ports. Moreover, each VCO core is connected
+to the SW array by identical routings, and synchronized with
+other three cores directly through the SW array, thus further
+reducing frequency mismatches and mitigating its impact on
+the VCO performance.
+However, due to the presence of the switched inductor,
+as shown in Fig. 9(a), the effective inductances seen by core-
+2 and -3 slightly differs from that of core-1 and -4. As a
+result, the natural oscillation frequencies of core-2 ( f2) and
+core-3 ( f3) deviate slightly from those of core-1 ( f1) and
+core-4 ( f4), introducing mismatches in the system. Despite the
+mismatch, the four oscillator cores may still achieve frequency
+locking and oscillate at a common frequency located between
+f1, f2, f3 and f4. As a result, the cores operate off-resonance,
+such that ̸ YT,i ̸= 0, where YT,i denotes the tank admittance
+corresponding to core-i, and is given by
+ fosc
+	
+YT,i = 1
++ j Q
+−
+fi
+RT
+RT
+fi
+fosc
+fosc −fi
++ j 2Q
+∼= 1
+RT
+RT
+fi
+Fig. 16.
+RON-coupled equivalent circuit of the proposed VCO.
+Fig. 17.
+Calculated (a) amplitude reduction and (b) phase mismatch over
+RON under different frequency mismatches with Q = 15 and Rp = 150 .
+= 1
++ j 2Ki
+,
+i = 1, 2, 3, 4
+(24)
+RT
+RT
+where RT is the equivalent parallel resistance of the tank, and
+Ki = Q · ( fosc −fi)/fi, with Q, fosc, and fi representing
+the quality factor of the tank, the oscillation frequency, and
+the resonance frequency of core-i, respectively. This approx-
+imation holds when δfi =
+fosc −fi ≪
+fi. Follow the
+analysis in [27], the proposed VCO is modeled in Fig. 16.
+Here, RON denotes the ON-resistance of the mode switch.
+Assuming equal amplitudes, the tank voltage of each core
+is written as VT,i = Ae jθi = αA0e jθi, where A0 denotes
+the amplitude in the absence of mismatch, α represents the
+amplitude reduction factor due to mismatch, and θi is the
+voltage phase corresponding to core-i.
+Due to layout symmetry, the switched inductor has an
+identical effect on core-1 and -4, leading to YT,1 = YT,4,
+and consequently θ1 = θ4. For simplicity, we assume that
+θ1 = θ4 = 0 as the reference phase. Through derivation
+presented in the Appendix, the following results are obtained
+as:
+θ2 = −sin−1(K2r)
+(25)
+
+1 −(K2r)2 + 2
+α = r + 2
+2 + r + 4
+(26)
+4r K 2
+2 Q f1 −f2
+2 Q f
+K2 = 1
+= −1
+(27)
+f2
+f2
+10
+IEEE JOURNAL OF SOLID-STATE CIRCUITS
+Fig. 18.
+Calculated PN degradation over RON in different modes (mode-1:
+Q1 = 16, f1 = 5 GHz, L1 = 1298 pH; mode-2: Q2 = 8.9, f2 = 8 GHz,
+L2 = 786 pH; mode-3: Q3 = 10.1, f3 = 10 GHz, L3 = 429 pH; mode-4:
+Q4 = 8.5, f4 = 14 GHz, L4 = 272 pH).
+where r = RON/RT and f/f2 represents the frequency
+mismatch between core-1 (core-4) and core-2 (core-3).
+Based on (25)–(27), the variations of amplitude reduction
+(20logα) and phase mismatch (θ = θ2−θ1) with respect to the
+frequency mismatch (f/f2) can be compared as a function of
+RON, as shown in Fig. 17. As RON and the frequency mismatch
+increase, the amplitude reduction becomes more signiﬁcant,
+and the phase deviation between cores also increases. When
+RON becomes sufﬁciently large, the multi-core system can no
+longer maintain frequency locking, which corresponds to the
+point where the curves terminate as “lose locking,” as shown
+in Fig. 17.
+In the proposed design, the asymmetry caused by the
+switched inductor introduces frequency mismatches of approx-
+imately 2.4%, 2.1%, 0.2%, and 1.3% in mode-1, -2, -3,
+and -4, respectively, obtained from EM simulations. The PN
+degradation of each mode is affected by amplitude reduction
+(α) and phase mismatch (θ), where their combined effect
+can be approximated as 30 log α [27]. Accordingly, Fig. 18
+shows the PN degradation versus RON for the four modes.
+It is observed that the PN of mode-1 degrades more severely
+than that of other modes. However, with a relatively small
+ON-resistance (25 ) and a 2.4% frequency mismatch, the PN
+degradation in mode-1 is only about 0.02 dB, indicating that
+the asymmetry induced by the switched inductor has a minimal
+impact on the overall PN performance, thereby effectively
+approaching full symmetry.
+Process variations and some other non-idealities can also
+introduce mismatches across oscillator cores, which in turn
+lead to frequency mismatches. To evaluate the impact of pro-
+cess variations and other non-idealities on the PN performance,
+frequency mismatches are deliberately introduced among the
+VCO cores by changing the per-core tank capacitance for
+simulations, covering six cases, as shown in Fig. 19. Fig. 19(a)
+illustrates a single-core mismatch, where only Core-1 is per-
+turbed by adding 100, 200, or 300 fF; Cores-2/3/4 remain
+nominal. Fig. 19(b) and (c) evaluate two-core perturbations:
+(b) Cores-1/2 are perturbed together by adding 100, 200, or
+300 fF, while (c) repeats the test of (b) on the opposite pair
+(Cores-1/4); the other two cores remain nominal. Fig. 19(d)
+and (e) address mismatches among three frequencies: (d)
+Cores-1/2 remain nominal while Core-3 has 150 fF (10%
+mismatch) added and Core-4 is swept over 100, 200, and
+300 fF; (e) repeats the test of (d) with the perturbed cores
+exchanged. In Fig. 19(f), Core-2 remains nominal; Core-1 and
+Core-3 have 50 fF (4% mismatch) and 150 fF (10% mismatch)
+added, respectively, while Core-4 is swept over 100, 200, and
+300 fF.
+Thanks to the well-synchronized properties and low switch-
+ing resistance RON, the impact of frequency mismatches on
+ﬁgure-of-merit (FoM) degradation remains minimal. Monte
+Carlo shows an approximate 9% (±3σ) frequency mismatch.
+Therefore, the FoM is evaluated under a conservative 10%
+mismatch, yielding a penalty of ≤1.6 dB in mode-1 and
+<0.5 dB in the other modes.
+D. PN Analysis
+Having discussed the effect of frequency mismatch on PN,
+we now examine the inﬂuence of RON on PN in the absence
+of frequency mismatch. Following the derivation in [29], the
+PN expression for a symmetrical quad-core VCO is given by
+
+
+2
+Zeq
+F 4kT
+Lquad-core(ω) = 10 log
+(28)
+V 2
+0 RT
+where F is the device excess noise factor, T is the absolute
+temperature, V0 is the oscillation amplitude and RT is the
+equivalent parallel resistance of the tank. |Zeq|2 can be denoted
+by
+ZT (ω)
+2
+2 16R2
+ON +
+2 = 1
+Zeq
+ZT (ω)
+2
+(29)
+ZT (ω)
+4
+4R2
+ON +
+where ZT (ω) represents the tank impedance and can be
+given by
+
+
+(30)
+1
+2
+RT ω0
+|ZT (ω)| =
+Q · ω
+where ω0 and ω are the oscillation frequency and the offset
+frequency, respectively, and Q is the equivalent quality factor
+of the tank. Substituting (29) and (30) into (28) yields
+Lquad-core(ω) = L(ω) · m.
+(31)
+Comparing (31) with (1), it is evident that (31) contains an
+additional factor m, expressed as follows:
+ON + |ZT (ω)|2
+16R2
+m = 1
+ON + |ZT (ω)|2 .
+(32)
+4R2
+4
+It can be observed that both RON and ω have an impact
+on the PN improvement. When RON is much smaller than
+ZT (ω), the value of m is approximately 1/4 and the PN
+is improved by approximately 6 dB compared to a single-
+core VCO. On the other hand, in the case when RON is much
+larger than ZT (ω) (i.e., m ≈1), the PN approaches that of
+a single-core VCO, indicating that the four oscillator cores are
+no longer frequency-locked and instead operate as independent
+HUANG et al.: 4.21-TO-15.18 GHz MR AND FULLY SYMMETRICAL QUAD-CORE QUAD-MODE VCO
+11
+Fig. 19.
+Impact of frequency mismatches on FoM degradation.
+TABLE I
+PERFORMANCE SUMMARY AND COMPARISON WITH STATE-OF-THE-ART OSCILLATORS
+12
+IEEE JOURNAL OF SOLID-STATE CIRCUITS
+Fig. 20.
+PN degradation of the proposed VCO for RON = 25 , based
+on (28).
+Fig. 21.
+Chip micrograph of the proposed quad-core quad-mode VCO.
+free-running oscillators. Fig. 20 illustrates the calculated PN
+degradation of the proposed VCO with RON = 25  across
+all four modes as a function of frequency offsets, based
+on (28). The PN degradation is nearly zero, thus a near-
+6 dB PN reduction is still achieved. Relatively speaking,
+mode-1 exhibits the most severe degradation, but even at
+a 100 MHz offset, the degradation is less than 0.035 dB,
+which demonstrates excellent synchronization performance of
+the proposed quad-core VCO.
+IV. MEASUREMENT RESULTS
+The proposed quad-core quad-mode VCO is implemented
+in 65 nm bulk CMOS with a core chip area of 0.152 mm2,
+as shown in Fig. 21. Fig. 22 shows the measured PN at 4.28,
+8.66, 11.57, and 15.07 GHz, respectively, from four distinct
+modes. The measured FTR is 113.2% (4.21–15.18 GHz), with
+the frequency in each mode ranging from 4.21 to 6.24 GHz,
+5.62 to 8.66 GHz, 7.52 to 11.6 GHz, and 10.01 to 15.18 GHz,
+respectively, as shown in Fig. 23. In each mode, the tuning
+voltage ranges from 0 to 2.5 V. It’s worth noting that the
+minimum frequency overlap between two adjacent modes is
+10.5%, which further validates the robustness of the wide
+bandwidth. We further report the VCO gain KVCO on this
+plot at Vtune = 1.2 V . Fig. 24(a) and (b) show the measured
+PN, FoM and FoMT over the whole FTR, respectively, where
+the PN is from −108.8 to −120.3 dBc/Hz and −130.7 to
+−141.4 dBc/Hz at 1 and 10 MHz offsets while the FoM
+and FoMT vary from 180.0 to 190.5 dBc/Hz and 201.1 to
+211.6 dBc/Hz at a 10 MHz offset.
+The tank’s effective parallel resistance RT varies by mode,
+owing to variations in Q across modes. Since mode-1 exhibits
+the largest Q and thus the largest RT , it requires the smallest
+gm and hence the lowest current consumption, while the
+higher frequency and lower Q modes require more. In the
+proposed design, a programmable tail resistor array is used
+to adjust the current. In mode-1, a larger tail resistor is
+used to moderate gm, while smaller resistors are employed
+in modes-2 and -4 to allow higher gm. The VCO consumes
+1.44 to 14.12 mW power under a VDD of 0.4 V, with
+mode-1: 1.44–3.27 mW; mode-2: 9.51–13.46 mW; mode-3:
+11.14–14.10 mW; and mode-4: 12.63–14.12 mW. Although
+the 0.4 V low supply voltage helps reduce intrinsic power
+consumption of the VCO, an on-chip regulator is typically
+required to suppress noise and improve the power supply
+rejection ratio (PSRR), which results in additional power
+overhead. Across different modes, the Kpush of the proposed
+VCO is measured to range from 126 to 297 MHz/V. Since
+spur level depends on the PSRR, an on-chip regulator with
+high PSRR is required to keep spurs low. Although magnetic
+coupling brings Q variations, the tail resistor array ensures the
+robust start-up and also suppresses ﬂicker noise up-conversion
+across a wide FTR. This effect is reﬂected in the 1/f3 PN
+corners in each mode, which span 35–220 kHz (mode-1), 130–
+210 kHz (mode-2), 180–600 kHz (mode-3), and 90–750 kHz
+(mode-4). A lower corner frequency indicates more effective
+suppression of ﬂicker noise up-conversion. Thanks to the tail
+resistor, the normalized PN (to 1 GHz) shows good ﬂatness
+with minimal variations across the whole FTR, as shown in
+Fig. 24(a). Moreover, Fig. 25 shows that the proposed VCO
+exhibits the best overall performance in view of FoM and
+FTR, and the best FoMTA in similar operating frequencies. The
+results are compared with state-of-the-art wideband VCOs in
+Table I, where the proposed VCO exhibits the largest FTR and
+the largest FTR overlap facilitated by MR technique, validating
+the robustness of the ultra-wide bandwidth.
+V. CONCLUSION
+In this article, we present a quad-core quad-mode VCO
+featuring MR technique and fully symmetrical topology.
+By changing the current directions of the tank inductors
+via the mode-switching array and incorporating the switched
+inductor, four distinct inductance values are realized, enabling
+quad-mode operation without electrical coupling. Besides,
+with careful consideration of the symmetry in the inductive,
+capacitive, and active elements, as well as the routing layout,
+mismatches among the VCO cores are signiﬁcantly minimized,
+resulting in optimized PN performance. The VCO achieves
+an FTR of 113.2% (4.21-to-15.18 GHz), a peak FoMT of
+211.6 dBc/Hz and a peak FoMTA of 220.5 dBc/Hz at a 10 MHz
+offset.
+APPENDIX
+In Fig. 16, the current relations at the blue-highlighted nodes
+satisfy Kirchhoff’s current law (KCL), as expressed by
+IGm,1 + IB,1 −IB,2 = IT,1
+(33)
+HUANG et al.: 4.21-TO-15.18 GHz MR AND FULLY SYMMETRICAL QUAD-CORE QUAD-MODE VCO
+13
+Fig. 22.
+Measured PN performance of each mode.
+Fig. 23.
+Measured FTR in four modes.
+Fig. 24.
+Measured (a) PN over the FTR and (b) FoM and FoMT over the
+FTR.
+IGm,2 + IB,4 −IB,1 = IT,2
+(34)
+IGm,3 + IB,2 −IB,3 = IT,3
+(35)
+Fig. 25.
+Comparison of (a) FoM over the FTR and (b) FoMTA over the
+frequency at a 10 MHz offset with recently reported wideband VCOs.
+IGm,4 + IB,3 −IB,4 = IT,4
+(36)
+where IB,1 = (VT,2 −VT,1)/Ron and IT,1 = VT,1YT,1. The
+other parameters can be derived in similar manner.
+For simplicity, we assume that |IGm,1|
+=
+|IGm,2|
+=
+|IGm,3|
+=
+|IGm,4|
+=
+1, which accordingly implies that
+A0 = RT . Moreover, IGm,i is in phase with VT,i. Substituting
+the parameters (IGm,2, IB,4, IB,1, and IT,2) into (34), we obtain
+
+2 −2e jθ2
+
+e jθ2
+e jθ2 + α
+(1 + j2K2)
+(37)
+= α
+r
+where r = RON/RT . Equating the real and imaginary parts on
+both sides of (37), we obtain
+2α
+r (1 −cos θ2) + cos θ2 = α cos θ2 −2αK2 sin θ2
+(38)
+	
+
+1 −2α
+sin θ2 = α sin θ2 + 2αK2 cos θ2.
+(39)
+r
+Solving (38) and (39) yields θ2 and α as given in (25)
+and (26).
+14
+IEEE JOURNAL OF SOLID-STATE CIRCUITS
+Using the same approach to calculate (35) and comparing
+the corresponding results of θ3 and α with (25) and (26),
+we obtain K2 = K3 and θ2 = θ3. The above solutions are
+valid when the condition |K2r| ≤1 is satisﬁed.
+Similarly, solving the imaginary part of (33), we obtain
+α
+r (sin θ2 + sin θ3) = 2αK1.
+(40)
+Substituting (25) into (40), it can be derived that
+−(K2 + K3) = 2K1.
+(41)
+Based on (41), and noting that K1 = K4 and K2 = K3,
+it can be approximated that fosc ≈( f1 + f2 + f3 + f4)/4,
+which is consistent with the result in [27]. Accordingly,
+by substituting fosc into K2, it can be rewritten as (27).
+REFERENCES
+[1] P. Qin, Q. Xue, and W. Che, “Microwave LC oscillators: Multimode
+switching techniques,” IEEE Microw. Mag., vol. 24, no. 4, pp. 63–81,
+Apr. 2023.
+[2] M. Demirkan, S. P. Bruss, and R. R. Spencer, “Design of wide
+tuning-range CMOS VCOs using switched coupled-inductors,” IEEE J.
+Solid-State Circuits, vol. 43, no. 5, pp. 1156–1163, May 2008.
+[3] J. Yin and H. C. Luong, “A 57.5-to-90.1GHz magnetically-tuned multi-
+mode CMOS VCO,” in Proc. IEEE Custom Integr. Circuits Conf.,
+Sep. 2012, pp. 1–4.
+[4] S.-L. Liu, K.-H. Chen, and A. Chin, “A dual-resonant mode 10/22-GHz
+VCO with a novel inductive switching approach,” IEEE Trans. Microw.
+Theory Techn., vol. 60, no. 7, pp. 2165–2177, Jul. 2012.
+[5] D. B. Leeson, “A simple model of feedback oscillator noise spectrum,”
+Proc. IEEE, vol. 54, no. 2, pp. 329–330, Feb. 1966.
+[6] G. Li and E. Afshari, “A distributed dual-band LC oscillator based on
+mode switching,” IEEE Trans. Microw. Theory Techn., vol. 59, no. 1,
+pp. 99–107, Jan. 2011.
+[7] C.-H. Hung and R. Gharpurey, “A 57-to-75 GHz dual-mode wide-band
+reconﬁgurable oscillator in 65 nm CMOS,” in Proc. IEEE Radio Freq.
+Integr. Circuits Symp., Jun. 2014, pp. 261–264.
+[8] Y. Peng, J. Yin, P.-I. Mak, and R. P. Martins, “Low-phase-noise
+wideband mode-switching quad-core-coupled mm-Wave VCO using a
+single-center-tapped switched inductor,” IEEE J. Solid-State Circuits,
+vol. 53, no. 11, pp. 3232–3242, Nov. 2018.
+[9] A. Bhat and N. Krishnapura, “A 25-to-38GHz, 195dB FoMT LC QVCO
+in 65 nm LP CMOS using a 4-port dual-mode resonator for 5G radios,”
+in IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers,
+Feb. 2019, pp. 412–414.
+[10] Y. Wang et al., “Analysis and design of a dual-mode VCO with inherent
+mode compensation enabling a 7.9–14.3-GHz 85-fs-rms jitter PLL,”
+IEEE J. Solid-State Circuits, vol. 58, no. 8, pp. 2252–2266, Aug. 2023.
+[11] H. Ge, H. Jia, W. Deng, R. Ma, and B. Chi, “A 194.9dBc/Hz FoM and
+6.8-to-11.6GHz quad-core dual-mode class-F VCO featuring wideband
+ﬂicker noise suppression,” in Proc. IEEE Custom Integr. Circuits Conf.
+(CICC), Apr. 2024, pp. 1–2.
+[12] A.
+Batabyal,
+R.
+H.
+Zele,
+S.
+K.
+Khyalia,
+and
+H.
+Wang,
+“A
+0.065 mm2 inductive coupling based dual core mm-wave VCO with
+183 dBc/Hz FoMT ,” in IEEE Int. Solid-State Circuits Conf. (ISSCC)
+Dig. Tech. Papers, Feb. 2024, pp. 1–13.
+[13] Y. Zhao et al., “A 12.9-to-24 GHz dual-mode multi-coil VCO achieving
+199.2 dBc/Hz peak FoMT in 65-nm CMOS,” IEEE Trans. Circuits Syst.
+II, Exp. Briefs, vol. 71, no. 5, pp. 2604–2608, May 2024.
+[14] O. El-Aassar and G. M. Rebeiz, “Octave-tuning dual-core folded VCO
+leveraging a triple-mode switch-less tertiary magnetic loop,” IEEE J.
+Solid-State Circuits, vol. 56, no. 5, pp. 1475–1486, May 2021.
+[15] J. Gong, B. Patra, L. Enthoven, J. van Staveren, F. Sebastiano, and
+M. Babaie, “A 0.049mm2 7.1-to-16.8GHz dual-core triple-mode VCO
+achieving 200dB FoMA in 22 nm FinFET,” in IEEE Int. Solid-State Cir-
+cuits Conf. (ISSCC) Dig. Tech. Papers, vol. 65, Feb. 2022, pp. 1–3.
+[16] Y. Wu, Y. Peng, B. Huo, J. Yin, R. P. Martins, and P. I. Mak,
+“A switchless dual-core triple-mode VCO achieving 7.1-to-15.7 GHz
+frequency tuning range and 202.1 dBc/Hz peak FoM at 3.7 Kelvin,”
+in Proc. IEEE Radio Freq. Integr. Circuits Symp. (RFIC), Jun. 2024,
+pp. 243–246.
+[17] Z. Lin, H. Jia, W. Deng, and B. Chi, “An 18.5-to-36.5 GHz 206.8 dBc/Hz
+FoMT quad-core triple-mode VCO with automatic-mode-tracking output
+buffers,” in Proc. IEEE Radio Freq. Integr. Circuits Symp. (RFIC),
+Jun. 2024, pp. 87–90.
+[18] Y. Shu, H. J. Qian, and X. Luo, “17.4 A 18.6-to-40.1GHz 201.7dBc/Hz
+FoMT multi-core oscillator using E-M mixed-coupling resonance boost-
+ing,” in IEEE Int. Solid-State Circuits Conf. (ISSCC) Dig. Tech. Papers,
+Feb. 2020, pp. 272–274.
+[19] W. Deng et al., “An 8.2-to-21.5 GHz dual-core quad-mode orthogonal-
+coupled VCO with concurrently dual-output using parallel 8-shaped
+resonator,” in Proc. IEEE Custom Integr. Circuits Conf. (CICC),
+Apr. 2021, pp. 1–2.
+[20] J. Wan et al., “A 20.65-to-40.55 GHz dual-core quad-mode VCO
+with mode-independent transformer-switching technique in 65-nm
+CMOS,” IEEE Trans. Circuits Syst. II, Exp. Briefs, vol. 70, no. 11,
+pp. 4073–4077, Nov. 2023.
+[21] C. Li, J. Guo, P. Qin, and Q. Xue, “A wideband mode-switching
+quad-core VCO using compact multi-mode magnetically coupled LC
+network,” IEEE J. Solid-State Circuits, vol. 58, no. 7, pp. 1–14,
+Jul. 2023.
+[22] H. Ge, H. Jia, W. Deng, R. Ma, Z. Wang, and B. Chi, “A 13.7-
+to-41.5GHz 214.1dBc/Hz FoMT quad-core quad-mode VCO using an
+oscillation-mode-splitting technique,” in IEEE Int. Solid-State Circuits
+Conf. (ISSCC) Dig. Tech. Papers, vol. 67, Feb. 2024, pp. 356–358.
+[23] C. Fan, Y. Zhao, G. Gao, and L. Geng, “A 4.5-to-13.5-GHz single-
+transformer quad-mode VCO with 202.5-dBc/Hz FoMT ,” IEEE Microw.
+Wireless Technol. Lett., vol. 34, no. 11, pp. 1271–1274, Nov. 2024.
+[24] H. Kim, S. Kim, and S. Jeon, “An octave tuning-range frequency gen-
+erator integrating a quad-core VCO using quad-mode coupled dual-path
+inductor with a wideband ILFD,” IEEE J. Solid-State Circuits, vol. 60,
+no. 5, pp. 1–13, May 2025.
+[25] H. Qin, H. Zhang, M. Liu, and C. Ma, “Comparison of different
+multi-winding transformer models in multi-port AC-coupled converter
+application,” in Proc. 47th Annu. Conf. IEEE Ind. Electron. Soc.,
+Oct. 2021, pp. 1–6.
+[26] Y. Shu, H. J. Qian, and X. Luo, “A 2-D mode-switching quad-core
+oscillator using E-M mixed-coupling resonance boosting,” IEEE J. Solid-
+State Circuits, vol. 56, no. 6, pp. 1711–1721, Jun. 2021.
+[27] L. Iotti, A. Mazzanti, and F. Svelto, “Insights into phase-noise scaling
+in switch-coupled multi-core LC VCOs for E-band adaptive modulation
+links,” IEEE J. Solid-State Circuits, vol. 52, no. 7, pp. 1703–1718,
+Jul. 2017.
+[28] Z. Kang, C. Yu, and L. Wu, “19.3 An 8.9-to-21.9GHz single-core oscil-
+lator with reconﬁgurable class-F–1 and enhanced-colpitts dual-mode
+operation achieving 209dBc/Hz FoMT ,” in IEEE Int. Solid-State Circuits
+Conf. (ISSCC) Dig. Tech. Papers, Feb. 2024, pp. 1–3.
+[29] S. A.-R. Ahmadi-Mehr, M. Tohidian, and R. B. Staszewski, “Analysis
+and design of a multi-core oscillator for ultra-low phase noise,” IEEE
+Trans. Circuits Syst. I, Reg. Papers, vol. 63, no. 4, pp. 529–539,
+Apr. 2016.
+Shijin Huang (Graduate Student Member, IEEE)
+received the B.Sc. degree in information engineer-
+ing from Guangdong University of Technology,
+Guangzhou, China, in 2021. He is currently pursuing
+the Ph.D. degree with the School of Microelec-
+tronics, South China University of Technology,
+Guangzhou.
+His research interests include RF/millimeter-wave
+integrated circuits and systems.
+HUANG et al.: 4.21-TO-15.18 GHz MR AND FULLY SYMMETRICAL QUAD-CORE QUAD-MODE VCO
+15
+Pei Qin (Member, IEEE) received the B.Sc. degree
+in electronic science and technology from the Uni-
+versity of Electronic Science and Technology of
+China, Chengdu, China, in 2010, and the Ph.D.
+degree in electronic engineering from the City Uni-
+versity of Hong Kong, Hong Kong, in October
+2016.
+From November 2016 to February 2022, she
+was a Senior IC Design Engineer with HiSili-
+con, Shenzhen, China, with a focus on all digital
+phase-locked loop (ADPLL) IC design. In March
+2022, she joined South China University of Technology, Guangzhou, China,
+where she is currently an Associate Professor. Her research interests include
+analog/RF front-end and phase-locked loop (PLL) integrated circuit design.
+Xiang Yi (Senior Member, IEEE) received the B.E.
+degree from the Huazhong University of Science
+and Technology (HUST), Wuhan, China, in 2006,
+the M.S. degree from South China University of
+Technology (SCUT), Guangzhou, China, in 2009,
+and the Ph.D. degree from Nanyang Technological
+University (NTU), Singapore, in 2014.
+He is currently a Professor with SCUT. Before
+that, he was a Post-Doctoral Fellow with the
+Massachusetts Institute of Technology (MIT), Cam-
+bridge, MA, USA. His research interests include
+radio frequency (RF), millimeter-wave (mm-wave), and terahertz (THz)-
+frequency synthesizers and transceiver systems.
+Dr. Yi was a recipient of the IEEE International Solid-State Circuits Con-
+ference (ISSCC) Silkroad Award and the IEEE Solid-State Circuits Society
+(SSCS) Travel Grant Award in 2013. He is a technical reviewer of several
+IEEE journals and conferences.
+Haoshen Zhu (Member, IEEE) received the B.E.
+degree in electrical engineering from Wuhan Uni-
+versity of Technology, Wuhan, China, in 2009, and
+the Ph.D. degree in electronics engineering from
+the City University of Hong Kong, Hong Kong,
+in 2015.
+In
+2015,
+he
+joined
+RDA
+Microelectronics,
+Shanghai, China, as a Senior MEMS Design Engi-
+neer. From 2015 to 2017, he was a Research Fellow
+with the University of Michigan, Ann Arbor, MI,
+USA. Then, he was a Caltech Post-Doctoral Scholar
+with the NASA Jet Propulsion Laboratory, Pasadena, CA, USA. Since 2018,
+he has been an Associate Professor with the School of Electronics and
+Information Engineering, South China University of Technology, Guangzhou,
+China. He has authored or co-authored over 40 journal articles and conference
+papers. His research interests include RF MEMS devices, integrated circuits,
+and microsystems for RF, timing, and sensing applications.
+Dr. Zhu has served as a reviewer for several journals and a TPC Member or
+the Session Chair for various conferences. He currently serves as an Associate
+Editor for International Journal of Microwave and Wireless Technologies.
+Liang
+Wu
+(Member, IEEE) received the B.S.
+and M.S. degrees in materials science from Fudan
+University, Shanghai, China, in 2004 and 2007,
+respectively, and the Ph.D. degree in electronic
+and computer engineering from The Hong Kong
+University of Science and Technology, Hong Kong,
+in 2012.
+From 2013 to 2015, he was a Research Assistant
+Professor with the Department of Electronic and
+Computer Engineering, The Hong Kong University
+of Science and Technology. He was also the Deputy
+Director of the HKUST-Qualcomm Joint Innovation and Research Laboratory,
+The Hong Kong University of Science and Technology. From 2015 to 2018,
+he was a Senior Research Fellow with the State Key Laboratory of Millimeter
+Waves, City University of Hong Kong, Hong Kong. In 2018, he was a Prin-
+cipal Engineer with Hong Kong Applied Science and Technology Research
+Institute, Hong Kong, for half a year. Since November 2018, he has been
+an Assistant Professor with the School of Science and Engineering, The
+Chinese University of Hong Kong, Shenzhen, China. Upon the founding
+of Guangdong-Hong Kong-Macao Joint Laboratory for Millimeter-Wave and
+Terahertz, The Chinese University of Hong Kong, in January 2024, he began
+as the Co-Director. He has authored or co-authored over 60 journals articles
+and conference papers. His research interests focus on radio frequency
+(RF)/millimeter-wave/terahertz integrated circuits, and systems with applica-
+tions in the areas of short-range wireless communication and the Internet of
+Everything.
+Quan Xue (Fellow, IEEE) received the B.S., M.S.,
+and Ph.D. degrees in electronic engineering from the
+University of Electronic Science and Technology of
+China (UESTC), Chengdu, China, in 1988, 1990,
+and 1993, respectively.
+In 1993, he joined UESTC as a Lecturer, where
+he became a Professor in 1997. From 1997 to 1998,
+he was a Research Associate and then a Research
+Fellow with The Chinese University of Hong Kong,
+Hong Kong. In 1999, he joined the City University
+of Hong Kong (CityU), Hong Kong, where he was
+the Chair Professor of microwave engineering from 2013 to 2017. He was
+the Associate Vice President of Innovation Advancement and China Ofﬁce,
+CityU, from 2011 to 2015, the Director of the Information and Communication
+Technology Center (ICTC), Hong Kong, and the Deputy Director of the
+State Key Laboratory of Millimeter Waves, Hong Kong. He is currently the
+Dean of the School of Electronic and Information Engineering, South China
+University of Technology, Guangzhou, China. He has authored or co-authored
+over 350 internationally refereed journal articles and over 170 international
+conference papers. He is a co-inventor of ﬁve granted Chinese patents and
+27 granted U.S. patents (ﬁve of them have been licensed), in addition to
+29 ﬁled patents. His current research interests include microwave/millimeter
+wave/terahertz passive components, active components, antenna, microwave
+monolithic integrated circuits, and radio frequency integrated circuits.
+Dr. Xue served as an Administrative Committee (AdCom) Member for the
+IEEE Microwave Theory and Techniques Society (MTT-S) from 2011 to 2013.
+He was a recipient of the 2017 H. A. Wheeler Paper Award of the
+IEEE Antenna and Propagation Society. He was an Associate Editor
+of IEEE TRANSACTIONS ON MICROWAVE THEORY AND TECHNIQUES
+from 2010 to 2013, IEEE TRANSACTIONS ON INDUSTRIAL ELECTRONICS
+from 2010 to 2015, and IEEE TRANSACTIONS ON ANTENNAS AND PROP-
+AGATION from 2016 to 2017. He was an Editor of International Journal of
+Antennas and Propagation from 2010 to 2013.

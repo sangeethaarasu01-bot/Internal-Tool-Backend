@@ -31,6 +31,7 @@ class TextBlock(BaseModel):
     bbox: BBox
     text: str
     lines: list[TextLine] = Field(default_factory=list)
+    column_id: int | None = None
 
 
 class ExtractedTable(BaseModel):
@@ -48,6 +49,7 @@ class PageExtraction(BaseModel):
     height: float
     text_char_count: int
     requires_ocr: bool
+    columns: int = 1
     blocks: list[TextBlock] = Field(default_factory=list)
     tables: list[ExtractedTable] = Field(default_factory=list)
 

@@ -1,0 +1,132 @@
+{
+  "table_id": "table_16",
+  "page_number": 13,
+  "row_count": 9,
+  "column_count": 9,
+  "rows": [
+    [
+      "Ref.",
+      "Operation Frequency",
+      "Impedance Bandwidth",
+      "Size (λ0)",
+      "Profile (λ0)",
+      "Method of Suppression",
+      "Gain In-Band (dBi)",
+      "Freq. Selectivity (dB/GHz)",
+      "Gain Suppression"
+    ],
+    [
+      "surements and to evaluate fuel consumption benefits based",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "solelyonSOC-correctedfuelconsumption,whichissubject",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "toconsiderablevariations.",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "One way to evaluate fuel efficiency is by comparing the",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "BSFC of the ICE, as both control strategies aim to operate",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "theICEinhigherefficiencyareas.TheBSFCwithDP-PMPis",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "lowerthanthatwiththerule-basedstrategyoverall.Inpartic-",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "ular,theaverageBSFCwithDP-PMPis216.8g/kWh,which",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "bbox": null,
+  "id": "table_16",
+  "caption": "TABLE 5. Comparison of soc-corrected fuel consumption in the combined",
+  "subtitle": null,
+  "headers": [
+    "Ref.",
+    "Operation Frequency",
+    "Impedance Bandwidth",
+    "Size (λ0)",
+    "Profile (λ0)",
+    "Method of Suppression",
+    "Gain In-Band (dBi)",
+    "Freq. Selectivity (dB/GHz)",
+    "Gain Suppression"
+  ],
+  "raw_text": null,
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.82,
+    "status": "structured",
+    "engine": "pdfplumber-text",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

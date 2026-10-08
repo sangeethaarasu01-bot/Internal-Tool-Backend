@@ -1,0 +1,2938 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:ali="http://www.niso.org/schemas/ali/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" article-type="research" content-type="orig-research" dtd-version="2.0" lifecycle="final" open-access="no" peer-reviewed="yes" xml:lang="eng" specific-use="proof">
+<!--Article Processing Date: 01/26/2026-->
+<!--Vendor Name: DCL-->
+<!--IEEE XML JATS Tagging Guidelines version: v20241024-->
+<!--IEEE Math Coding Requirements and Guidelines for Vendors version: v2.4-->
+<!--new_sw_ran-->
+<front>
+<journal-meta>
+<journal-id journal-id-type="ieee">0074700</journal-id>
+<journal-id journal-id-type="acronym">TCE</journal-id>
+<journal-id journal-id-type="coden">ITCEDA</journal-id>
+<journal-title-group>
+<journal-title>IEEE Transactions on Consumer Electronics</journal-title>
+</journal-title-group>
+<issn publication-format="print">0098-3063</issn>
+<issn publication-format="online">1558-4127</issn>
+<publisher>
+<publisher-name>IEEE</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="doi">10.1109/TCE.2026.3658363</article-id>
+<article-id pub-id-type="manuscript">TCE-2025-04-1269</article-id>
+<xplore-article-id></xplore-article-id>
+<xplore-issue></xplore-issue>
+<xplore-pub-id></xplore-pub-id>
+<article-categories>
+<assembly-group sequence="0"></assembly-group>
+</article-categories>
+<title-group>
+<article-title>Split Multi-Task Federated Learning for Battery Health and Capacity Estimation in Electric Vehicles</article-title>
+</title-group>
+<contrib-group>
+<contrib id="contrib1" primary="yes" ieee-member-type="Member" corresp="yes" contrib-type="author">
+<contrib-id contrib-id-type="orcid">0000-0001-7605-4660</contrib-id>
+<name-alternatives>
+<string-name specific-use="display"><given-names>Abdelaziz</given-names>
+<surname>
+Amara Korba
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Abdelaziz</given-names>
+<surname>
+Amara Korba
+</surname>
+</string-name>
+</name-alternatives>
+<email>abdelaziz.amarakorba@gutech.edu.om</email>
+<xref ref-type="aff" rid="aff1"></xref>
+</contrib>
+<contrib id="contrib2" primary="no" ieee-member-type="Member" corresp="no" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Mouhamed</given-names>
+<surname>
+Amine Bouchiha
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Mouhamed</given-names>
+<surname>
+Amine Bouchiha
+</surname>
+</string-name>
+</name-alternatives>
+<email>mbouchiha@telecom-sudparis.eu</email>
+<xref ref-type="aff" rid="aff2"></xref>
+</contrib>
+<contrib id="contrib3" primary="no" ieee-member-type="Senior_Member" corresp="no" contrib-type="author">
+<name-alternatives>
+<string-name specific-use="display"><given-names>Yacine</given-names>
+<surname>
+Ghamri-Doudane
+</surname>
+</string-name>
+<string-name specific-use="index"><given-names>Yacine</given-names>
+<surname>
+Ghamri-Doudane
+</surname>
+</string-name>
+</name-alternatives>
+<email>yacine.ghamri@univ-lr.fr</email>
+<xref ref-type="aff" rid="aff3"></xref>
+</contrib>
+<author-comment>
+<p><italic>(Corresponding author: Abdelaziz Amara Korba.)</italic></p></author-comment>
+</contrib-group>
+<aff id="aff1">
+<institution-wrap>
+<institution content-type="department">Department of Computer Science</institution>
+<institution content-type="institution">German University of Technology in Oman (GUtech)</institution>
+</institution-wrap>
+<city>Muscat</city>
+<country>Oman</country>
+</aff>
+<aff id="aff2">
+<institution-wrap><institution content-type="institution">SAMOVAR, T&#x00E9;l&#x00E9;com SudParis</institution></institution-wrap>
+<city>Paris</city>
+<country>France</country>
+</aff>
+<aff id="aff3">
+<institution-wrap>
+<institution content-type="institution">L3i, La Rochelle University</institution>
+<institution-id content-type="institution" institution-id-type="ringgold">27018</institution-id>
+</institution-wrap>
+<city>La Rochelle</city>
+<country>France</country>
+</aff>
+<pub-date date-type="cover" iso-8601-date="2026" pub-type="print" publication-format="pdf">
+<year>2026</year>
+</pub-date>
+<fpage>1</fpage>
+<lpage>0</lpage>
+<history>
+<date date-type="receiveddate" iso-8601-date="2025-04-29">
+<day>29</day>
+<month>04</month>
+<year>2025</year>
+</date>
+<date date-type="reviseddate1" iso-8601-date="2025-12-26">
+<day>26</day>
+<month>12</month>
+<year>2025</year>
+</date>
+<date date-type="reviseddate2" iso-8601-date="2026-01-12">
+<day>12</day>
+<month>01</month>
+<year>2026</year>
+</date>
+<date date-type="accepteddate" iso-8601-date="2026-01-23">
+<day>23</day>
+<month>01</month>
+<year>2026</year>
+</date>
+</history>
+<self-uri content-type="xml">tce-amarakorba-3658363.xml</self-uri>
+<self-uri content-type="print">tce-amarakorba-3658363.pdf</self-uri>
+<self-uri content-type="online">tce-amarakorba-3658363-x.pdf</self-uri>
+<abstract>
+<p>The rapid adoption of electric vehicles (EVs) has heightened the need for advanced diagnostic frameworks to ensure the safety, reliability, and longevity of battery systems. Batteries, as the cornerstone of EV performance, are susceptible to capacity degradation, thermal instability, and anomalies that compromise efficiency and safety. Traditional diagnostic approaches, relying on physics-based models and heuristic thresholds, often fail to address the complexity and variability of real-world EV operations, necessitating scalable, efficient, and privacy-preserving solutions. This paper presents a Split Multi-Task Federated Learning (SMTFL) framework that leverages a Transformer-based architecture to address the dual challenges of battery health anomaly detection and capacity estimation. By combining the efficiency of split learning with the collaborative benefits of federated learning, the proposed system enables EVs to train and share partial model updates while retaining sensitive data locally. Experimental results on a recent large-scale EV dataset demonstrate the superior performance of the SMTFL framework, achieving an accuracy of 98.9% for battery health anomaly detection and a mean absolute error (MAE) of 0.32 Ah for capacity estimation, corresponding to a relative error of approximately 1.80%, significantly outperforming state-of-the-art approaches. By training a single model for both tasks and performing computations during charging sessions, the framework minimizes energy consumption and computational overhead, ensuring practicality for large-scale deployment in real-world EV systems.</p>
+</abstract>
+<kwd-group kwd-group-type="AuthorFree">
+<kwd>Electric vehicle</kwd>
+<kwd>battery state of health</kwd>
+<kwd>state of charge (SOC)</kwd>
+<kwd>battery management system (BMS)</kwd>
+<kwd>split federated learning</kwd>
+<kwd>transformer</kwd>
+</kwd-group>
+<funding-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>OPEVA Project funded by Chips Joint Undertaking (Chips JU) from European Union&#x2019;s Horizon Europe Programme and the National Authorities (France, Czechia, Italy, Portugal, T&#x00FC;rkiye, and Switzerland)</institution></institution-wrap></funding-source>
+<award-id>101097267</award-id>
+</award-group>
+<award-group><funding-source>
+<institution-wrap>
+<institution>Project funded by BPI France through France 2030 Program on &#x201C;Embedded AI,&#x201D; France</institution></institution-wrap></funding-source>
+</award-group>
+<funding-statement>This work was supported in part by the OPEVA Project funded by Chips Joint Undertaking (Chips JU) from European Union&#x2019;s Horizon Europe Programme and the National Authorities (France, Czechia, Italy, Portugal, T&#x00FC;rkiye, and Switzerland) under Grant 101097267; and in part by the Project funded by BPI France through France 2030 Program on &#x201C;Embedded AI,&#x201D; France.</funding-statement>
+</funding-group>
+<counts>
+<fig-count count="6"/>
+<table-count count="7"/>
+<equation-count count="182"/>
+<ref-count count="29"/>
+<page-count count="13"/>
+</counts>
+</article-meta>
+</front>
+<body>
+<sec id="sec1">
+<label>I.</label>
+<title>Introduction</title>
+<p>The widespread adoption of electric vehicles (EVs) has brought new challenges in ensuring the safety, reliability, and performance of their battery systems. As the central energy source, batteries directly impact key aspects such as vehicle range, lifespan, and overall efficiency. However, they remain highly susceptible to issues such as capacity degradation, thermal instability, and lithium plating, which can compromise both safety and performance. These challenges highlight the urgent need for advanced diagnostic frameworks capable of accurately monitoring battery health and estimating remaining capacity under diverse and dynamic real-world conditions.</p>
+<p>In this work, we distinguish between battery health anomaly detection and capacity estimation, two related yet distinct diagnostic tasks. Following established battery diagnostics conventions <xref ref-type="bibr" rid="ref1">[1]</xref>, State of Health (SoH) refers to the overall degradation of the battery (often expressed as a percentage of initial capacity), whereas capacity estimation quantifies the absolute remaining charge in ampere-hours (Ah). Accordingly, we frame health monitoring as a binary anomaly detection task (normal vs. anomalous conditions such as lithium plating or thermal runaway), and capacity estimation as a regression task.</p>
+<p>The complexity of battery diagnostics stems from the highly variable operating environments of EVs <xref ref-type="bibr" rid="ref2">[2]</xref>, which involve fluctuating charging and discharging cycles, environmental conditions, and aging effects. Traditional methods, such as physics-based models or predefined threshold-based diagnostics, struggle to adapt to such real-world complexities, often leading to suboptimal performance. Moreover, the integration of EVs into connected vehicular networks introduces additional constraints, including the need for scalable solutions that can handle large data volumes while preserving data privacy.</p>
+<p>Machine learning has emerged as a powerful tool for battery diagnostics, leveraging multivariate time-series data to identify anomalies and predict capacity trends <xref ref-type="bibr" rid="ref2">[2]</xref>, <xref ref-type="bibr" rid="ref3">[3]</xref>, <xref ref-type="bibr" rid="ref4">[4]</xref>. However, deploying these models in distributed electric vehicle (EV) fleets presents several critical challenges. EVs, with their limited processing power and memory, cannot feasibly train or host complex machine learning models locally. Furthermore, transferring raw battery data to centralized servers raises significant privacy concerns, particularly within large-scale vehicular networks. This necessitates solutions that safeguard sensitive information while enabling effective model training. The variability in battery usage patterns and operational conditions across EVs further complicates the creation of generalized models, as the heterogeneous data demands robust approaches to maintain predictive accuracy. Additionally, the exponential growth in the number of EVs calls for scalable frameworks capable of efficiently handling model updates and managing communication overhead between EV clients and parameter servers. To be practical, such solutions must also align with existing EV infrastructure, exploiting idle periods, such as charging sessions, for computational tasks without compromising the energy and operational requirements of the EVs.</p>
+<p>To address these challenges, this paper introduces a Split Federated Learning framework combined with a multi-task transformer-based model designed to address two critical tasks: battery health anomaly detection and capacity estimation. The framework uses a unified approach, leveraging a single model for both tasks, which simplifies deployment and reduces operational complexity. This approach eliminates the need for training and maintaining separate models for each task, resulting in significant practical and computational benefits.</p>
+<p>The proposed framework employs a hierarchical federated learning architecture that integrates EVs, edge servers at charging stations, and a global server in the cloud. By using federated learning principles, sensitive data remains localized at the EV level, safeguarding privacy while enabling collaborative training across distributed nodes. Furthermore, the hierarchical design coordinates learning across multiple levels, ensuring model consistency and scalability. The use of split learning further enhances the system&#x2019;s efficiency by dividing the model into segments, with only the initial layers being trained locally on the EV, while the rest are processed on the edge server. This design minimizes computational demands on EVs, making the framework suitable for resource-constrained devices. Another critical advantage of this approach is the optimization of training sessions during the EV&#x2019;s charging periods. By performing training while the EV is connected to the charging station, the framework avoids depleting the battery for computational tasks, preserving energy for essential functionalities. These design considerations make the proposed solution practical and efficient, aligning with the energy and privacy requirements of modern EV systems.</p>
+<p>To summarize, the main contributions of this paper are:
+<list list-type="bullet">
+<list-item>
+<label>&#x2022;</label>
+<p>Developing a single model capable of performing both battery health and capacity estimation. This unified approach, facilitated by split learning, simplifies deployment, reduces complexity, and enhances energy efficiency by allowing EVs to train only a portion of the model locally while offloading the remaining computations to the edge server. This minimizes computational demands on EVs and ensures scalability for real-world applications.</p>
+</list-item>
+<list-item>
+<label>&#x2022;</label>
+<p>Introducing a privacy-preserving and scalable federated learning architecture that integrates differential privacy mechanisms to protect sensitive data. The framework facilitates seamless collaboration among EVs, edge servers at charging stations, and a global parameter server, ensuring efficient training across EVs while maintaining model consistency and safeguarding sensitive data within the EVs.</p>
+</list-item>
+<list-item>
+<label>&#x2022;</label>
+<p>Demonstrating the practicality and effectiveness of the proposed solution through rigorous validation on a recent and realistic, large-scale EV dataset, achieving superior performance over state-of-the-art methods for both battery health anomaly detection and capacity estimation tasks.</p>
+</list-item>
+</list>
+</p>
+<p>The remainder of this paper is organized as follows: <xref ref-type="sec" rid="sec2">Section II</xref> reviews the related work. <xref ref-type="sec" rid="sec3">Section III</xref> details the development and operation of the proposed framework. <xref ref-type="sec" rid="sec4">Section IV</xref> presents the performance evaluation results along with a comparative analysis against state-of-the-art (SOTA) approaches. Finally, <xref ref-type="sec" rid="sec5">Section V</xref> concludes the paper.</p>
+</sec>
+<sec id="sec2">
+<label>II.</label>
+<title>Related Work</title>
+<p>Battery diagnostics and capacity estimation are critical research areas for ensuring the safety, reliability, and operational efficiency of electric vehicles (EVs). Early approaches often relied on statistical models and traditional machine learning techniques, such as statistical distribution analysis and canonical algorithms, to diagnose faults and detect anomalies <xref ref-type="bibr" rid="ref5">[5]</xref>, <xref ref-type="bibr" rid="ref6">[6]</xref>. More recently, Li et al. <xref ref-type="bibr" rid="ref7">[7]</xref> review artificial neural network (ANN) approaches for state-of-health (SoH) estimation and remaining useful life (RUL) prediction, discussing battery aging mechanisms, available datasets, and ANN architectures, and outlining key challenges related to deployment feasibility and model interpretability.</p>
+<p>Sultan et al. <xref ref-type="bibr" rid="ref8">[8]</xref></p>
+<p>propose an active cell balancing system to address imbalanced state of charge (SoC) in EV lithium-ion battery packs caused by cell inconsistencies. The study evaluates seven machine learning models for predicting battery lifespan and remaining useful life (RUL). Das et al. <xref ref-type="bibr" rid="ref9">[9]</xref> estimate the state of health (SoH) of lithium-ion batteries in electric vehicles using machine learning algorithms like KNN, SVR, DT, and RF, based on direct battery measurements (voltage, current, temperature). The study proposes collaboration with hardware manufacturers for better battery health monitoring systems.</p>
+<p>The advent of deep learning introduced advanced models <xref ref-type="bibr" rid="ref10">[10]</xref>, such as long short-term memory (LSTM) networks, capable of capturing temporal dependencies and improving anomaly detection in battery systems <xref ref-type="bibr" rid="ref6">[6]</xref>, <xref ref-type="bibr" rid="ref11">[11]</xref>. However, the development of robust deep learning methods hinges on the availability of large-scale, publicly accessible datasets. In response, recent advancements in EV battery research have produced datasets tailored to various tasks, including anomaly detection, capacity estimation, and remaining useful life (RUL) prediction. For instance, datasets such as Sultan et al. <xref ref-type="bibr" rid="ref8">[8]</xref> and HUST <xref ref-type="bibr" rid="ref12">[12]</xref> focus on controlled experimental conditions, while large-scale datasets like EVBattery <xref ref-type="bibr" rid="ref1">[1]</xref> provide diverse real-world charging data. Additionally, specialized datasets address manufacturing defects through CT scans <xref ref-type="bibr" rid="ref13">[13]</xref> or explore capacity estimation using voltage relaxation profiles <xref ref-type="bibr" rid="ref14">[14]</xref>.</p>
+<p>Xiong et al. <xref ref-type="bibr" rid="ref15">[15]</xref> propose a lithium-ion battery health prognosis method using real-world BMS in electric vehicles. The approach combines partial charge voltage curves as health indicators with a moving-window-based RUL prediction model. While the method is well-suited for many applications, its reliance on linear degradation models may present challenges when applied to batteries exhibiting complex degradation patterns.</p>
+<p>Deng et al. <xref ref-type="bibr" rid="ref16">[16]</xref> propose a rapid health estimation framework for in-service EV battery packs that combines a digital-twin model based on an equivalent-circuit representation, feature extraction from short charging segments, and deep convolutional neural networks with transfer learning and domain adaptation to cope with limited labeled field data. Han et al. <xref ref-type="bibr" rid="ref17">[17]</xref> emphasize the significance of dynamically reconfigurable battery management systems (RBSs) for enhancing fault tolerance, improving charge and temperature balancing, and achieving greater energy efficiency and operational flexibility. While the proposed approach offers valuable advancements, the implementation of RBSs may encounter challenges such as the computational demands of optimization algorithms, increased hardware design requirements, and practical considerations like managing transient behaviors during switch operations.</p>
+<p>Liu et al. <xref ref-type="bibr" rid="ref18">[18]</xref> tackle the challenge of battery state of health (SoH) estimation under limited sample conditions by introducing a refined composite multiscale discrete sine entropy (RCMDSE) algorithm. Similarly, Kumari et al. <xref ref-type="bibr" rid="ref19">[19]</xref> propose a hybrid approach for estimating state of charge, health, and temperature (SoC, SoH, SoT). Their method combines an emperor penguin-based residual network-110 (R110) with bidirectional long short-term memory (BLSTM) networks. This approach demonstrates significant promise, achieving high accuracy on EV drive cycles simulated in MATLAB. However, the reliance on advanced optimization techniques, such as simulated annealing, may limit its real-time applicability in resource-constrained environments. Kant et al., <xref ref-type="bibr" rid="ref20">[20]</xref> proposed a method that integrates a bidirectional recurrent neural network and long-short-term memory (biRNN-LSTM) to improve the prediction of the state of health (SoH) by identifying complex patterns and improving accuracy.</p>
+<p>Despite notable advancements in battery diagnostics and capacity estimation, several limitations persist within the state of the art. Approaches targeting complex degradation behaviors often fail to capture nonlinear dynamics <xref ref-type="bibr" rid="ref8">[8]</xref>, while recent innovations <xref ref-type="bibr" rid="ref17">[17]</xref>, <xref ref-type="bibr" rid="ref19">[19]</xref> face challenges related to computational overhead, limiting real-time applicability in resource-constrained EV. Many methods rely on datasets generated under controlled laboratory conditions <xref ref-type="bibr" rid="ref6">[6]</xref>, <xref ref-type="bibr" rid="ref11">[11]</xref>, restricting their generalizability to diverse real-world scenarios. Moreover, existing techniques often assume that EV data can be centrally collected, overlooking critical privacy concerns.</p>
+<p>Federated learning (FL) has recently gained traction as a distributed training paradigm in a variety of application domains. For instance, Wu et al. <xref ref-type="bibr" rid="ref21">[21]</xref> employ federated deep reinforcement learning to perform multi-objective optimization in STAR-RIS-aided satellite&#x2013;aerial&#x2013;ground integrated networks (SAGINs). In the context of battery health monitoring and state-of-health (SoH) estimation, several studies <xref ref-type="bibr" rid="ref22">[22]</xref>, <xref ref-type="bibr" rid="ref23">[23]</xref>, <xref ref-type="bibr" rid="ref24">[24]</xref> have leveraged FL-based designs. Abbaraju and Kundu <xref ref-type="bibr" rid="ref22">[22]</xref> propose a federated ensemble learning (FEL) approach that combines federated learning and ensemble learning to enhance SoH estimation. Their solution relies on an LSTM model that is updated after each trip, leveraging heterogeneous data sources such as traffic conditions and weather. Wang et al. <xref ref-type="bibr" rid="ref23">[23]</xref> introduce an adaptive multi-personalized federated learning (AMFL) algorithm that refines SoH estimation by dynamically adjusting local models through personalized layers and client clustering while incorporating a differential privacy mechanism. Similarly, Wong et al. <xref ref-type="bibr" rid="ref24">[24]</xref> develop a decentralized federated learning approach for Li-ion battery SoH forecasting, featuring an improved client selection strategy and real-world validation experiments.</p>
+<p>Despite notable progress, existing battery diagnostic methods exhibit several limitations. Model-based approaches often rely on simplified linear degradation assumptions <xref ref-type="bibr" rid="ref15">[15]</xref>, failing to capture complex real-world aging dynamics. Federated learning (FL) methods for SoH estimation <xref ref-type="bibr" rid="ref22">[22]</xref>, <xref ref-type="bibr" rid="ref23">[23]</xref>, <xref ref-type="bibr" rid="ref24">[24]</xref> reduce data centralization but impose significant computational burdens on resource-constrained EVs and lack energy-efficient training schedules, which could impact battery autonomy. Moreover, they typically focus on a single task (e.g., SoH estimation), requiring separate models for different diagnostics and increasing system complexity. Many methods are also evaluated on controlled laboratory datasets <xref ref-type="bibr" rid="ref6">[6]</xref>, <xref ref-type="bibr" rid="ref11">[11]</xref>, limiting their applicability to diverse real-world conditions.</p>
+<p>To address these gaps, we propose a Split Multi-Task Federated Learning (SMTFL) framework that: <xref ref-type="disp-formula" rid="deqn1">(1)</xref> employs a Transformer-based encoder to model nonlinear temporal dependencies; <xref ref-type="disp-formula" rid="deqn2">(2)</xref> reduces on-device computation by offloading heavy layers to edge infrastructure via split learning, where only early layers are trained locally; <xref ref-type="disp-formula" rid="deqn3">(3)</xref> incorporates differential privacy mechanisms to protect sensitive battery data during model updates; <xref ref-type="disp-formula" rid="deqn4">(4)</xref> unifies battery health anomaly detection and capacity estimation into a single model, eliminating the need for separate, task-specific models and optimizing parameter efficiency; <xref ref-type="disp-formula" rid="deqn5-deqn6">(5)</xref> schedules training exclusively during charging sessions to preserve EV battery life; and <xref ref-type="disp-formula" rid="deqn5-deqn6">(6)</xref> is validated on the large-scale real-world EVBattery dataset <xref ref-type="bibr" rid="ref1">[1]</xref> to ensure practical relevance. This innovative framework effectively balances scalability, privacy preservation, and computational efficiency, addressing the key challenges identified in the state of the art.</p>
+</sec>
+<sec id="sec3">
+<label>III.</label>
+<title>SMTFL Framework</title>
+<p>Our framework integrates split learning and federated architectures for battery health monitoring, balancing local computation with global performance while incorporating differential privacy. The following sections detail the architectural components, including the split Transformer model, privacy-preserving training protocol, and federated coordination strategy.</p>
+<sec id="sec3a">
+<label>A.</label>
+<title>System Model</title>
+<p>The proposed system employs a hierarchical federated learning architecture that integrates three primary components: electric vehicles (EVs) as clients, edge servers deployed at charging stations, and a global parameter server in the cloud. The workflow is designed to ensure synchronization, prevent version conflicts, and facilitate efficient and scalable model training. <xref ref-type="fig" rid="fig1">Figure 1</xref> illustrates the interactions and hierarchical structure among these components. At the start of each global round, the cloud server distributes the global model to edge servers located within charging stations, which then propagate it to connected EVs. Each edge server collects model updates from EVs during a station-level Aggregation Time Window (ATW), performs local aggregation, and forwards the result to the cloud server. The cloud operates within a longer Synchronization Window (SW) to gather updates from all edge servers, execute global aggregation, and redistribute the refined model.
+<fig id="fig1">
+<label>Fig. 1.</label>
+<caption><p>System design. Top: the split Transformer architecture with lightweight local layers on EVs and heavier layers on edge servers. Bottom: hierarchical aggregation where edge servers aggregate local updates from multiple EVs, and a cloud server aggregates edge updates for global model refinement.</p></caption>
+<graphic xlink:href="amara1-3658363.eps"/>
+</fig>
+</p>
+<p>The SMTFL framework leverages Power Line Communication (PLC) over the charging cable, standardized in ISO 15118 <xref ref-type="bibr" rid="ref25">[25]</xref>, to transmit model updates and intermediate representations (smashed data) between EVs and edge servers. This approach eliminates separate communication hardware, reduces system complexity, and enhances security by utilizing the naturally isolated channel of the charging cable. The physical connection serves a dual purpose: power transfer and data exchange. Communication is secured with mutual Transport Layer Security (TLS) 1.3 <xref ref-type="bibr" rid="ref26">[26]</xref>, ensuring confidentiality, integrity, and authenticity. Charging stations communicate with the cloud server via standard Internet connections (e.g., fiber, 4G/5G), enabling reliable transmission of aggregated updates and global model distribution.</p>
+<sec id="sec3a1">
+<label>1)</label>
+<title>EV Participation in FL Rounds:</title>
+<p>To accurately estimate the number of EVs connected to a charging station during a given Aggregation Time Window (ATW), we propose a mathematical model incorporating key variables: the arrival rate of EVs (<inline-formula><tex-math notation="LaTeX">$\lambda _{EV}$</tex-math></inline-formula>), the average session duration (<inline-formula><tex-math notation="LaTeX">$T_{session}$</tex-math></inline-formula>), and the station&#x2019;s capacity (<inline-formula><tex-math notation="LaTeX">$N_{max}$</tex-math></inline-formula>). The goal is to determine the number of EVs utilizing the station within the ATW while accounting for constraints such as the limited number of charging points and varying levels of station utilization.</p>
+<p>The arrival of EVs at a charging station is modeled as a Poisson process with average arrival rate <inline-formula><tex-math notation="LaTeX">$\lambda _{EV}$</tex-math></inline-formula> (EVs per unit time). During an ATW of duration <inline-formula><tex-math notation="LaTeX">$T_{ATW}$</tex-math></inline-formula>, the total expected arrivals is <inline-formula><tex-math notation="LaTeX">$N_{arrivals} = \lambda _{EV} \cdot T_{ATW}$</tex-math></inline-formula>. The actual number of EVs simultaneously connected during the ATW is influenced by <inline-formula><tex-math notation="LaTeX">$T_{session}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$N_{max}$</tex-math></inline-formula>, and an occupation factor <inline-formula><tex-math notation="LaTeX">$\rho $</tex-math></inline-formula> (fraction of charging points typically in use):
+<disp-formula><tex-math notation="LaTeX">\begin{equation*} N_{connected} = \min \left ({{\rho \cdot \frac {T_{session}}{T_{ATW}} \cdot N_{arrivals}, N_{max}}}\right ).\end{equation*}</tex-math></disp-formula></p>
+<p>When the station is underutilized, <inline-formula><tex-math notation="LaTeX">$N_{connected}$</tex-math></inline-formula> is limited by arrival rate and session duration; when saturated, it is capped by <inline-formula><tex-math notation="LaTeX">$N_{max}$</tex-math></inline-formula>. The total number of EVs utilizing the station during the ATW, denoted <inline-formula><tex-math notation="LaTeX">$N_{EV}$</tex-math></inline-formula>, combines these effects:
+<disp-formula><tex-math notation="LaTeX">\begin{equation*} N_{EV} = \min \left ({{\lambda _{EV} \cdot T_{ATW}, N_{max} \cdot \frac {T_{ATW}}{T_{session}}}}\right ).\end{equation*}</tex-math></disp-formula></p>
+<p>This formulation ensures the total is bounded by both arrival rate and station capacity for concurrent charging sessions.</p>
+<p>In practice, EVs may not complete local training or transmit updates simultaneously within an ATW due to varying computational loads or intermittent connectivity. The edge server aggregates all updates received by the window&#x2019;s deadline; EVs that miss the cutoff participate in the subsequent ATW. The subsequent SW at the cloud level provides additional buffering, allowing edge servers to forward aggregated models without requiring strict synchronization. Moreover, if an EV disconnects prematurely, it can resume training in a later session by downloading the latest global model. This design ensures robust operation under realistic, asynchronous update patterns and connectivity variations, making the system practical for real-world deployment.</p>
+</sec>
+<sec id="sec3a2">
+<label>2)</label>
+<title>EV-Level Operations:</title>
+<p>When an EV connects to a charging station, it downloads the client-side portion (first two Transformer layers) of the global model. Using local battery data, the EV performs forward and backward passes in coordination with the edge server to update its local layers. Throughout this process, differential privacy mechanisms are applied to both activations and weight updates. After completing local training, the EV transmits its updated and privacy-preserving client-side weights to the edge server for aggregation.</p>
+</sec>
+<sec id="sec3a3">
+<label>3)</label>
+<title>Edge-Level Operations:</title>
+<p>Each charging station is equipped with an edge server that coordinates local training and performs intermediate aggregation. Operating within a fixed Aggregation Time Window (ATW), the edge server collects and aggregates client-side weight updates from connected EVs. If no EVs connect during an ATW, aggregation is skipped to conserve resources. The edge server also trains the server-side layers using smashed data received from EVs. Once the ATW ends, the edge server transmits the locally updated model (aggregated client-side weights and updated server-side layers) to the global server during the Synchronization Window (SW).</p>
+</sec>
+<sec id="sec3a4">
+<label>4)</label>
+<title>Cloud-Level Operations:</title>
+<p>At the cloud level, the server acts as a global parameter server, operating within a longer SW to ensure all edge servers have sufficient time to transmit their aggregated models. The cloud server collects and integrates model updates from all active edge servers, performs global aggregation, and then redistributes the updated global model back to the charging stations. Stations subsequently provide the updated model to EVs upon their next connections, closing the federated learning loop.</p>
+</sec>
+</sec>
+<sec id="sec3b">
+<label>B.</label>
+<title>Prediction Model Architecture</title>
+<p>The prediction model employs a Transformer encoder to process multivariate time-series data, performing two critical tasks in parallel: battery health anomaly detection (binary classification) and capacity estimation (regression). The Transformer encoder is selected for its superior ability to capture long-range temporal dependencies, which are essential for accurate battery diagnostics. The model comprises six encoder layers, each containing a multi-head self-attention mechanism and a feed-forward network. In our split learning configuration, the architecture is divided at a precise boundary: the first two encoder layers form the client-side (EV) component, while the remaining four layers, along with global pooling and task-specific heads, constitute the server-side (edge) component. This split follows established privacy&#x2013;complexity trade-offs in split learning <xref ref-type="bibr" rid="ref27">[27]</xref>: early layers extract low-level features with minimal privacy risk, while deeper, computationally intensive layers are offloaded to the edge server. During operation, the EV processes raw data through the first two layers, producing intermediate activations (smashed data) of dimension <monospace>[batch_size, sequence_length=128, d_model=64]</monospace>, which are transmitted to the edge server.</p>
+<p>We now detail the model components: input representation, Transformer encoder, and task-specific heads.</p>
+<sec id="sec3b1">
+<label>1)</label>
+<title>Input Representation:</title>
+<p>The input sequence <inline-formula><tex-math notation="LaTeX">$x \in \mathbb {R}^{T \times d}$</tex-math></inline-formula>, where <inline-formula><tex-math notation="LaTeX">$T$</tex-math></inline-formula> is the sequence length and <inline-formula><tex-math notation="LaTeX">$d$</tex-math></inline-formula> is the number of features, is projected into a higher-dimensional latent space using a trainable embedding layer:
+<disp-formula id="deqn1"><tex-math notation="LaTeX">\begin{equation*} x' = W_{\text {embed}} \cdot x + b_{\text {embed}}, \tag {1}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$W_{\text {embed}} \in \mathbb {R}^{d \times d_{\text {model}}}$</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$b_{\text {embed}} \in \mathbb {R}^{d_{\text {model}}}$</tex-math></inline-formula>.</p>
+<p>To encode temporal dependencies, a positional encoding is added:
+<disp-formula id="deqn2"><tex-math notation="LaTeX">\begin{align*} \text {PE}(t, 2i) &amp; = \sin \left ({{\frac {t}{C^{\frac {2i}{d_{\text {model}}}}}}}\right ), \\ \text {PE}(t, 2i+1) &amp; = \cos \left ({{\frac {t}{C^{\frac {2i}{d_{\text {model}}}}}}}\right ), \tag {2}\end{align*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$C$</tex-math></inline-formula> is a scaling constant set to 10000.</p>
+<p>The positional encoding introduces a unique set of sinusoidal patterns for each position in the sequence, enabling the model to distinguish between different time steps. The choice of <inline-formula><tex-math notation="LaTeX">$C = 10000$</tex-math></inline-formula> is based on empirical evidence from the original Transformer model, ensuring that the positional encoding covers a broad spectrum of positional relationships while maintaining numerical stability.</p>
+<p>The resulting input <inline-formula><tex-math notation="LaTeX">$z = x' + \text {PE}$</tex-math></inline-formula> retains both the feature and temporal information, preparing it for sequential processing by the Transformer encoder.</p>
+</sec>
+<sec id="sec3b2">
+<label>2)</label>
+<title>Transformer Encoder:</title>
+<p>The Transformer encoder processes the input <inline-formula><tex-math notation="LaTeX">$z$</tex-math></inline-formula> through multiple layers of multi-head self-attention and feed-forward networks. The self-attention mechanism allows the model to capture both local and global dependencies in the sequence:
+<disp-formula id="deqn3"><tex-math notation="LaTeX">\begin{equation*} \text {Attention}(Q, K, V) = \text {softmax}\left ({{\frac {QK^{\top }}{\sqrt {d_{k}}}}}\right )V, \tag {3}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$Q = W_{Q} z$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$K = W_{K} z$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$V = W_{V} z$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$W_{Q}, W_{K}, W_{V} \in \mathbb {R}^{d_{\text {model}} \times d_{k}}$</tex-math></inline-formula> are trainable projection matrices.</p>
+<p>The output of the Transformer encoder, <inline-formula><tex-math notation="LaTeX">$h \in \mathbb {R}^{T \times d_{\text {model}}}$</tex-math></inline-formula>, is pooled to obtain a global representation:
+<disp-formula id="deqn4"><tex-math notation="LaTeX">\begin{equation*} h_{\text {pooled}} = \frac {1}{T} \sum _{t=1}^{T} h_{t}. \tag {4}\end{equation*}</tex-math></disp-formula></p>
+</sec>
+<sec id="sec3b3">
+<label>3)</label>
+<title>Task-Specific Heads:</title>
+<p>The global representation <inline-formula><tex-math notation="LaTeX">$h_{\text {pooled}}$</tex-math></inline-formula> is processed by two task-specific heads:
+<disp-formula id="deqn5-deqn6"><tex-math notation="LaTeX">\begin{align*} y_{\text {anomaly}} &amp; = \sigma (W_{\text {class}} \cdot h_{\text {pooled}} + b_{\text {class}}), \tag {5}\\ y_{\text {regression}} &amp; = W_{\text {reg}} \cdot h_{\text {pooled}} + b_{\text {reg}}, \tag {6}\end{align*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$\sigma $</tex-math></inline-formula> is the sigmoid activation function for binary classification. <inline-formula><tex-math notation="LaTeX">$W_{\text {class}}, W_{\text {reg}}, b_{\text {class}}, b_{\text {reg}}$</tex-math></inline-formula> are trainable parameters for the anomaly detection and capacity estimation tasks, respectively.</p>
+</sec>
+</sec>
+<sec id="sec3c">
+<label>C.</label>
+<title>Split Federated Training</title>
+<p>The client-side model processes raw battery data locally, transforming it into intermediate representations (smashed data). To preserve privacy, Gaussian noise is added to the smashed data before transmission, ensuring differential privacy. The noisy smashed data are then sent to the edge server, which completes the forward pass using its layers, computes the multi-task loss, and backpropagates gradients through its own layers and back to the smashed data. These gradients are returned to the EV, which uses them to update its local layers via backpropagation. After completing a fixed number of local epochs, the EV uploads its updated client-side weights, again applying differential privacy by adding Gaussian noise, to the edge server for aggregation. This design reduces the computational load on EVs while safeguarding data privacy and ensuring scalable, distributed training.</p>
+<p>Formally, for an EV client <inline-formula><tex-math notation="LaTeX">$k$</tex-math></inline-formula>, the local model processes the input data <inline-formula><tex-math notation="LaTeX">$x_{k}$</tex-math></inline-formula> to produce smashed data:
+<disp-formula id="deqn7"><tex-math notation="LaTeX">\begin{equation*} h_{\text {client}, k} = f_{\text {client}}(x_{k}; \theta _{\text {client}, k}), \tag {7}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$f_{\text {client}}$</tex-math></inline-formula> is the client-side model parameterized by <inline-formula><tex-math notation="LaTeX">$\theta _{\text {client}, k}$</tex-math></inline-formula>. Before transmission, noise is added to ensure <inline-formula><tex-math notation="LaTeX">$(\epsilon, \delta)$</tex-math></inline-formula>-differential privacy:
+<disp-formula id="deqn8"><tex-math notation="LaTeX">\begin{equation*} \tilde {h}_{\text {client}, k} = h_{\text {client}, k} + \mathcal {N}(0, \sigma ^{2}_{\text {smashed}} I). \tag {8}\end{equation*}</tex-math></disp-formula>The server completes the forward pass and computes predictions:
+<disp-formula id="deqn9"><tex-math notation="LaTeX">\begin{equation*} y_{k} = f_{\text {server}}(\tilde {h}_{\text {client}, k}; \theta _{\text {server}}), \tag {9}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$f_{\text {server}}$</tex-math></inline-formula> is the server-side model parameterized by <inline-formula><tex-math notation="LaTeX">$\theta _{\text {server}}$</tex-math></inline-formula>.</p>
+<p>The edge server computes the multi-task loss:
+<disp-formula id="deqn10"><tex-math notation="LaTeX">\begin{equation*} \mathcal {L}_{k} = \alpha \cdot \mathcal {L}_{\text {anomaly}, k} + \beta \cdot \mathcal {L}_{\text {regression}, k}, \tag {10}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$\alpha $</tex-math></inline-formula> and <inline-formula><tex-math notation="LaTeX">$\beta $</tex-math></inline-formula> are task-balancing coefficients, and <inline-formula><tex-math notation="LaTeX">$\mathcal {L}_{\text {anomaly}, k}$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$\mathcal {L}_{\text {regression}, k}$</tex-math></inline-formula> are the losses for anomaly detection and capacity estimation, respectively.</p>
+<p>During backpropagation, the server computes gradients with respect to the smashed data:
+<disp-formula id="deqn11"><tex-math notation="LaTeX">\begin{equation*} \nabla _{\tilde {h}_{\text {client}, k}} \mathcal {L}_{k} = \frac {\partial \mathcal {L}_{k}}{\partial \tilde {h}_{\text {client}, k}}, \tag {11}\end{equation*}</tex-math></disp-formula>and returns them to the client. The client then updates its local model:
+<disp-formula id="deqn12"><tex-math notation="LaTeX">\begin{equation*} \theta _{\text {client}, k} \gets \theta _{\text {client}, k} - \eta \nabla _{\theta _{\text {client}, k}} \mathcal {L}_{k}, \tag {12}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$\eta $</tex-math></inline-formula> is the learning rate.</p>
+<p>After a fixed number of local epochs, the client adds Gaussian noise to its updated weights for additional privacy protection:
+<disp-formula id="deqn13"><tex-math notation="LaTeX">\begin{equation*} \tilde {\theta }_{\text {client}, k} = \theta _{\text {client}, k} + \mathcal {N}(0, \sigma ^{2}_{\text {weights}} I), \tag {13}\end{equation*}</tex-math></disp-formula>and sends <inline-formula><tex-math notation="LaTeX">$\tilde {\theta }_{\text {client}, k}$</tex-math></inline-formula> to the edge server. The edge server aggregates updates from multiple EVs to form a regional model:
+<disp-formula id="deqn14"><tex-math notation="LaTeX">\begin{equation*} \theta _{\text {global}} = \frac {1}{K} \sum _{k=1}^{K} \tilde {\theta }_{\text {client}, k}. \tag {14}\end{equation*}</tex-math></disp-formula>This regional model is transmitted to the cloud server for global aggregation along with updates from other edge servers. After global aggregation, the cloud server redistributes the updated model to all edge servers, which then distribute it to EVs, ensuring model consistency across the network.</p>
+<p>To address dataset heterogeneity among EVs and stabilize training, we incorporate a proximal term in the local objective, as in FedProx <xref ref-type="bibr" rid="ref28">[28]</xref>:
+<disp-formula id="deqn15"><tex-math notation="LaTeX">\begin{equation*} \mathcal {L}_{\mathrm {proximal},k} = \mathcal {L}_{k} + \frac {\mu }{2}\left \|{{\theta _{k} - \theta _{\mathrm {global}}}}\right \|_{2}^{2}, \tag {15}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$\mu $</tex-math></inline-formula> controls the contribution of the regularization term and <inline-formula><tex-math notation="LaTeX">$\theta _{k}$</tex-math></inline-formula> denotes the local model parameters of client <inline-formula><tex-math notation="LaTeX">$k$</tex-math></inline-formula>.</p>
+<p><xref ref-type="algorithm" rid="alg1">Algorithm 1</xref> offers a comprehensive description of the split federated training process, detailing its implementation at both the EV and ES levels.
+<algorithm id="alg1">
+<label>Algorithm 1</label>
+<title>SMTFL Training</title>
+<alg-item rule="none"><p><graphic xlink:href="amara6-3658363.eps"/></p></alg-item>
+</algorithm></p>
+</sec>
+<sec id="sec3d">
+<label>D.</label>
+<title>Security and Privacy Analysis</title>
+<p>Given the sensitivity of battery operational data, this section establishes our comprehensive security framework.</p>
+<sec id="sec3d1">
+<label>1)</label>
+<title>Threat Model:</title>
+<p>Our framework considers two primary adversary classes:
+<list list-type="bullet">
+<list-item>
+<label>&#x2022;</label>
+<p><bold>External Network Adversaries</bold>: Third parties capable of intercepting communications between EVs and edge servers, including potential PLC channel eavesdropping despite physical isolation.</p>
+</list-item>
+<list-item>
+<label>&#x2022;</label>
+<p><bold>Honest-but-Curious Edge Servers</bold>: Edge servers that follow the protocol but attempt to infer sensitive information. These adversaries could leverage split learning vulnerabilities, such as analyzing smashed data to reconstruct raw inputs or infer properties of the training data.</p>
+</list-item>
+</list>
+</p>
+</sec>
+<sec id="sec3d2">
+<label>2)</label>
+<title>Security Framework Implementation:</title>
+<p>Our multi-layered protection addresses these threats:
+<list list-type="bullet">
+<list-item>
+<label>&#x2022;</label>
+<p><bold>Secure Communication Protocol</bold>: TLS 1.3 with mutual authentication ensures confidentiality, integrity, and authenticity.</p>
+</list-item>
+<list-item>
+<label>&#x2022;</label>
+<p><bold>Differential Privacy for Smashed Data and Gradients</bold>: We apply Gaussian noise to both smashed data and model updates, providing <inline-formula><tex-math notation="LaTeX">$(\epsilon, \delta)$</tex-math></inline-formula>-differential privacy guarantees. This follows DP-SGD <xref ref-type="bibr" rid="ref29">[29]</xref>:
+<disp-formula id="deqn16"><tex-math notation="LaTeX">\begin{equation*} \tilde {g} = \frac {1}{B} \sum _{i=1}^{B} \text {clip}(g_{i}, C) + \mathcal {N}(0, \sigma ^{2} C^{2} I) \tag {16}\end{equation*}</tex-math></disp-formula>where <inline-formula><tex-math notation="LaTeX">$B$</tex-math></inline-formula> is the batch size, <inline-formula><tex-math notation="LaTeX">$g_{i}$</tex-math></inline-formula> the per-sample gradient, <inline-formula><tex-math notation="LaTeX">$C$</tex-math></inline-formula> the clipping threshold bounding each gradient&#x2019;s <inline-formula><tex-math notation="LaTeX">$L_{2}$</tex-math></inline-formula> norm, <inline-formula><tex-math notation="LaTeX">$\sigma $</tex-math></inline-formula> the noise multiplier controlling privacy-utility trade-off, and <inline-formula><tex-math notation="LaTeX">$I$</tex-math></inline-formula> the identity matrix. The noise is calibrated to balance privacy and utility.</p>
+</list-item>
+<list-item>
+<label>&#x2022;</label>
+<p><bold>Architectural and Aggregation-Based Privacy</bold>: The split boundary after two Transformer layers ensures smashed data are abstract features rather than raw measurements <xref ref-type="bibr" rid="ref27">[27]</xref>. Additionally, hierarchical federated aggregation with FedProx provides statistical obfuscation by mixing updates from multiple EVs.</p>
+</list-item>
+</list>
+</p>
+</sec>
+</sec>
+</sec>
+<sec id="sec4">
+<label>IV.</label>
+<title>Performance Evaluation</title>
+<p>In this section, we evaluate the effectiveness of the proposed framework using the EVBattery dataset <xref ref-type="bibr" rid="ref1">[1]</xref>. We first introduce the dataset and experimental setup, then present performance under constant and dynamic participation scenarios for both tasks. Subsequently, we provide a detailed complexity analysis of our framework. Finally, we compare and discuss our approach against state-of-the-art (SOTA) methods.</p>
+<sec id="sec4a">
+<label>A.</label>
+<title>EVBattery Dataset</title>
+<p>We evaluate our framework using the EVBattery dataset <xref ref-type="bibr" rid="ref1">[1]</xref>, a large-scale real-world benchmark for EV battery diagnostics. The dataset comprises charging snippets collected under diverse conditions&#x2014;including fast/slow charging and varying temperatures&#x2014;from three anonymized manufacturers. Each record contains 128-step time-series of eight features (voltage, current, temperature, SOC, etc.) and meta-information (vehicle ID, mileage, snippet index). Binary health labels (0: normal, 1: anomaly) and continuous capacity labels (28.28&#x2013;46.23 Ah) accompany each sample. A full description is given in <xref ref-type="table" rid="table1">Table I</xref>; additional dataset specifics are available in the original publication <xref ref-type="bibr" rid="ref1">[1]</xref>.
+<table-wrap id="table1">
+<label>TABLE I</label>
+<caption><title>EV Battery Dataset Description</title></caption>
+<graphic xlink:href="amara.t1-3658363.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="2"/>
+</colgroup>
+<thead>
+<tr>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2">Time-Series Data</td>
+</tr>
+<tr>
+<td>Time-steps</td>
+<td>128 per charging snippet</td>
+</tr>
+<tr>
+<td>Features</td>
+<td><inline-formula><tex-math notation="LaTeX">$\text {V}_{\text {avg}}$</tex-math></inline-formula> (avg. voltage), <inline-formula><tex-math notation="LaTeX">$\text {I}_{\text {charge}}$</tex-math></inline-formula> (current), <inline-formula><tex-math notation="LaTeX">$\text {V}_{\text {max/min}}$</tex-math></inline-formula> (voltage extremes), <inline-formula><tex-math notation="LaTeX">$\text {T}_{\text {max/min}}$</tex-math></inline-formula> (temperature extremes), SOC, timestamp</td>
+</tr>
+<tr>
+<td colspan="2">Meta-Information</td>
+</tr>
+<tr>
+<td>Vehicle ID</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>Mileage</td>
+<td>At recording time</td>
+</tr>
+<tr>
+<td>Snippet index</td>
+<td>Position in dataset</td>
+</tr>
+<tr>
+<td>Health label</td>
+<td>Binary: 1=anomaly, 0=normal</td>
+</tr>
+<tr>
+<td>Capacity label</td>
+<td>Continuous (28.28&#x2013;46.23 Ah)</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+<p>The dataset was prepared from raw <monospace>.pkl</monospace> files containing multivariate time-series data and metadata. Sequences were converted into NumPy arrays, and entries with missing or invalid values were discarded. Valid capacity labels (non-zero) were retained as regression targets, while anomaly labels were encoded as binary values (0: normal, 1: anomalies such as lithium plating or thermal runaway). For normalization, all time-series features were standardized per feature (zero mean, unit variance) using a <monospace>StandardScaler</monospace> fitted exclusively on the training set. Capacity labels were similarly normalized. The cleaned dataset contained no missing values. To preserve real-world conditions, the natural class imbalance was maintained for anomaly detection; in Non-IID splits, each client was guaranteed at least three-batch-size samples per class to prevent extreme skew, without any synthetic resampling. This approach ensures a realistic evaluation of the model under practical data distributions.</p>
+</sec>
+<sec id="sec4b">
+<label>B.</label>
+<title>Implementation &amp; Experimental Results</title>
+<p>The architectural details and hyperparameters of the Transformer model are summarized in <xref ref-type="table" rid="table2">Table II</xref>. The model was implemented in Python 3.9 using the PyTorch 2.0 deep learning framework. It comprises a stack of six encoder layers, each consisting of an 8-head self-attention mechanism and a feed-forward network with 128-dimensional hidden states. The input data is projected into a 64-dimensional embedding space and enriched with sinusoidal positional encodings to retain temporal information. The loss function combines binary cross-entropy for anomaly detection and mean squared error for capacity estimation to ensure effective training across tasks. For privacy protection, Gaussian differential privacy was applied with noise scale <inline-formula><tex-math notation="LaTeX">$\sigma =0.3$</tex-math></inline-formula>, gradient norm bound <inline-formula><tex-math notation="LaTeX">$C=2.0$</tex-math></inline-formula>, and <inline-formula><tex-math notation="LaTeX">$\delta =10^{-5}$</tex-math></inline-formula>. Additionally, smashed data were perturbed with Gaussian noise of standard deviation 0.01 before transmission. All experiments were conducted on a workstation equipped with an NVIDIA RTX A6000 GPU with 48 GB of memory.
+<table-wrap id="table2">
+<label>TABLE II</label>
+<caption><title>Model Hyperparameters</title></caption>
+<graphic xlink:href="amara.t2-3658363.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="2"/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transformer layers (client/server)</td>
+<td>2/4</td>
+</tr>
+<tr>
+<td>Attention heads</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Embedding dimension (<inline-formula><tex-math notation="LaTeX">$d_{\text {model}}$</tex-math></inline-formula>)</td>
+<td>64</td>
+</tr>
+<tr>
+<td>FFN dimension</td>
+<td>128</td>
+</tr>
+<tr>
+<td>Dropout rate</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>Activation</td>
+<td>ReLU</td>
+</tr>
+<tr>
+<td>Learning rate</td>
+<td><inline-formula><tex-math notation="LaTeX">$10^{-4}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td>Batch size</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Local epochs</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Optimizer</td>
+<td>Adam (<inline-formula><tex-math notation="LaTeX">$\beta _{1}=0.9$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$\beta _{2}=0.999$</tex-math></inline-formula>)</td>
+</tr>
+<tr>
+<td>Anomaly loss</td>
+<td>Binary Cross-Entropy</td>
+</tr>
+<tr>
+<td>Capacity loss</td>
+<td>Mean Squared Error</td>
+</tr>
+<tr>
+<td>Aggregation method</td>
+<td>FedProx</td>
+</tr>
+<tr>
+<td>Client selection</td>
+<td>Poisson process</td>
+</tr>
+<tr>
+<td>DP noise scale (<inline-formula><tex-math notation="LaTeX">$\sigma $</tex-math></inline-formula>)</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>DP gradient norm (<inline-formula><tex-math notation="LaTeX">$C$</tex-math></inline-formula>)</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>DP delta (<inline-formula><tex-math notation="LaTeX">$\delta $</tex-math></inline-formula>)</td>
+<td>1e-5</td>
+</tr>
+<tr>
+<td>Smashed data noise</td>
+<td>0.01</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+<p>To simulate realistic federated learning scenarios where data distributions vary across clients, we implement a <italic>label-skew</italic> partitioning strategy for Non-IID (Non-Independent and Non-Identically Distributed) experiments. Each EV client is assigned a dominant class (class 0, normal samples) while ensuring a minimum of <inline-formula><tex-math notation="LaTeX">$3 \times $</tex-math></inline-formula> batch size samples from the minority class (class 1, anomalies). This approach creates heterogeneous local data distributions, reflecting real-world conditions where certain EV clients may observe more frequent anomalies than others. <xref ref-type="table" rid="table3">Table III</xref> presents the resulting sample distribution across 20 EVs for a representative run, clearly showing the label-skew while maintaining the minimum-sample constraint for both classes.
+<table-wrap id="table3">
+<label>TABLE III</label>
+<caption><title>Non-IID Sample Distribution Across 20 EVs</title></caption>
+<graphic xlink:href="amara.t3-3658363.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="6"/>
+</colgroup>
+<thead>
+<tr>
+<th>EV</th>
+<th>Normal</th>
+<th>Anomaly</th>
+<th>EV</th>
+<th>Normal</th>
+<th>Anomaly</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>416</td>
+<td>192</td>
+<td>11</td>
+<td>1152</td>
+<td>480</td>
+</tr>
+<tr>
+<td>2</td>
+<td>672</td>
+<td>288</td>
+<td>12</td>
+<td>576</td>
+<td>192</td>
+</tr>
+<tr>
+<td>3</td>
+<td>544</td>
+<td>352</td>
+<td>13</td>
+<td>800</td>
+<td>416</td>
+</tr>
+<tr>
+<td>4</td>
+<td>576</td>
+<td>480</td>
+<td>14</td>
+<td>416</td>
+<td>256</td>
+</tr>
+<tr>
+<td>5</td>
+<td>384</td>
+<td>256</td>
+<td>15</td>
+<td>768</td>
+<td>480</td>
+</tr>
+<tr>
+<td>6</td>
+<td>128</td>
+<td>128</td>
+<td>16</td>
+<td>576</td>
+<td>128</td>
+</tr>
+<tr>
+<td>7</td>
+<td>480</td>
+<td>352</td>
+<td>17</td>
+<td>832</td>
+<td>672</td>
+</tr>
+<tr>
+<td>8</td>
+<td>320</td>
+<td>256</td>
+<td>18</td>
+<td>1888</td>
+<td>896</td>
+</tr>
+<tr>
+<td>9</td>
+<td>608</td>
+<td>512</td>
+<td>19</td>
+<td>1248</td>
+<td>1184</td>
+</tr>
+<tr>
+<td>10</td>
+<td>608</td>
+<td>416</td>
+<td>20</td>
+<td>3552</td>
+<td>1856</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+<p>We validate our evaluation using 5-fold cross-validation. To ensure robust assessment, the folds are constructed with a strict temporal order: within each fold, the training data strictly precedes the test data in time, eliminating temporal data leakage. Additionally, we ensure that no EV client (identified by unique vehicle IDs) is shared between the training and test sets of any fold, preventing cross-client leakage and guaranteeing complete isolation between model development and evaluation data.</p>
+<p>Task 1 (Anomaly Detection) is evaluated using accuracy, precision, recall, F1-score, and AUROC (which measures the classifier&#x2019;s ability to distinguish between classes across thresholds):</p>
+<p>Task 1 (Anomaly Detection) is evaluated using accuracy, precision, recall, F1-score, and AUROC (which measures the classifier&#x2019;s ability to distinguish between classes across thresholds):
+<disp-formula><tex-math notation="LaTeX">\begin{align*} \text {Accuracy} &amp; = \frac {TP+TN}{TP+TN+FP+FN}, \\ \text {Precision} &amp; = \frac {TP}{TP+FP}, \\ \text {Recall} &amp; =\frac {TP}{TP+FN}, \\ \text {F1-Score} &amp; = \frac {2TP}{2TP+FP+FN}.\end{align*}</tex-math></disp-formula>Task 2 (Capacity Estimation), formulated as a regression task, is evaluated using Mean Absolute Error (MAE), Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and Normalized Root Mean Squared Error (NRMSE):
+<disp-formula><tex-math notation="LaTeX">\begin{align*} \text {MAE} &amp; = \frac {1}{N}\sum _{i=1}^{N}\bigl |y_{i}-\hat {y}_{i}\bigr |, \\ \text {MSE} &amp; = \frac {1}{N}\sum _{i=1}^{N}\bigl (y_{i}-\hat {y}_{i}\bigr )^{2}, \\ \text {RMSE} &amp; = \sqrt {\text {MSE}}, \\ \text {NRMSE} &amp; =\frac {\text {RMSE}}{y_{\max }-y_{\min }}.\end{align*}</tex-math></disp-formula></p>
+<p>We evaluate two experimental configurations: <bold>constant participation</bold>, ensuring a minimum of <inline-formula><tex-math notation="LaTeX">$N$</tex-math></inline-formula> EVs per round, and <bold>dynamic participation</bold>, which encompasses two distinct regimes&#x2014;low participation (simulating off-peak conditions) and high participation (simulating urban peak hours). These scenarios provide a comprehensive assessment of model convergence, scalability, and adaptability under varying participation dynamics.</p>
+<sec id="sec4b1">
+<label>1)</label>
+<title>Performance Under Constant EV Participation:</title>
+<p><xref ref-type="table" rid="table4">Table IV</xref> presents the 5-fold cross-validation results. Anomaly detection accuracy remains consistently high (0.988&#x2013;0.991), while capacity estimation shows stable performance with MAE ranging 0.312&#x2013;0.338 Ah and NRMSE 0.055&#x2013;0.059. The low standard deviations (Accuracy: ±0.001, MAE: ±0.013 Ah, NRMSE: ±0.002) confirm that the model does not overfit to specific data subsets and generalizes well.
+<table-wrap id="table4">
+<label>TABLE IV</label>
+<caption><title>5-Fold Cross-Validation Results (Non-IID)</title></caption>
+<graphic xlink:href="amara.t4-3658363.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="9"/>
+</colgroup>
+<thead>
+<tr>
+<th>Fold</th>
+<th>Accuracy.</th>
+<th>Recall.</th>
+<th>Precision</th>
+<th>F1-Score</th>
+<th>MAE</th>
+<th>MSE</th>
+<th>RMSE</th>
+<th>NRMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fold 1</td>
+<td>0.989</td>
+<td>0.979</td>
+<td>0.991</td>
+<td>0.985</td>
+<td>0.322</td>
+<td>0.415</td>
+<td>0.645</td>
+<td>0.055</td>
+</tr>
+<tr>
+<td>Fold 2</td>
+<td>0.991</td>
+<td>0.984</td>
+<td>0.992</td>
+<td>0.988</td>
+<td>0.311</td>
+<td>0.430</td>
+<td>0.656</td>
+<td>0.056</td>
+</tr>
+<tr>
+<td>Fold 3</td>
+<td>0.989</td>
+<td>0.978</td>
+<td>0.992</td>
+<td>0.985</td>
+<td>0.329</td>
+<td>0.458</td>
+<td>0.677</td>
+<td>0.058</td>
+</tr>
+<tr>
+<td>Fold 4</td>
+<td>0.988</td>
+<td>0.978</td>
+<td>0.990</td>
+<td>0.984</td>
+<td>0.346</td>
+<td>0.525</td>
+<td>0.725</td>
+<td>0.061</td>
+</tr>
+<tr>
+<td>Fold 5</td>
+<td>0.990</td>
+<td>0.981</td>
+<td>0.992</td>
+<td>0.986</td>
+<td>0.316</td>
+<td>0.410</td>
+<td>0.640</td>
+<td>0.055</td>
+</tr>
+<tr>
+<td>Mean ± Std</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.989~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.980~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.991~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.986~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.325~\pm ~0.01$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.448~\pm ~0.05$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.668~\pm ~0.03$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.057~\pm ~0.00$</tex-math></inline-formula></td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+<p><xref ref-type="fig" rid="fig2">Figure 2</xref> depicts the progression of prediction model loss across successive training rounds. A steady and continuous decline in loss is evident, culminating in stabilization after approximately 80 rounds. <xref ref-type="table" rid="table5">Table V</xref> presents a comprehensive performance analysis of the model across different training phases, considering both IID (Independent and Identically Distributed) and Non-IID distributions with a constant participation of 20 EV clients. The results in <xref ref-type="table" rid="table5">Table V</xref> indicate a consistent improvement in both tasks as training progresses. For battery health anomaly detection, accuracy increases from 0.97 in the early rounds to 0.99 in the final phase, with the F1-score reaching 0.99 (IID) and 0.98 (Non-IID). Convergence is observed around the 80th training round, beyond which performance gains become marginal.
+<table-wrap id="table5">
+<label>TABLE V</label>
+<caption><title>Model Performance Analysis Across Tasks</title></caption>
+<graphic xlink:href="amara.t5-3658363.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="10"/>
+</colgroup>
+<thead>
+<tr>
+<th>Tasks</th>
+<th>Metric</th>
+<th colspan="2">Early Rounds (1-20)</th>
+<th colspan="2">Mid Rounds (21-80)</th>
+<th colspan="2">Final Rounds (81-100)</th>
+<th colspan="2">Final Results</th>
+</tr>
+<tr>
+<th></th>
+<th></th>
+<th>IID</th>
+<th>Non-IID</th>
+<th>IID</th>
+<th>Non-IID</th>
+<th>IID</th>
+<th>Non-IID</th>
+<th>IID</th>
+<th>Non-IID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="4">Task 1: Detection</td>
+<td>Accuracy</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.97~\pm ~0.02$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.96~\pm ~0.03$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.99~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.98~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.99~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.99~\pm ~0.00$</tex-math></inline-formula></td>
+<td>0.99</td>
+<td>0.99</td>
+</tr>
+<tr>
+<td>Recall</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.93~\pm ~0.04$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.91~\pm ~0.05$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.98~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.97~\pm ~0.01$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.98~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.98~\pm ~0.00$</tex-math></inline-formula></td>
+<td>0.98</td>
+<td>0.98</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.98~\pm ~0.03$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.97~\pm ~0.04$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.99~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.99~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.99~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.99~\pm ~0.00$</tex-math></inline-formula></td>
+<td>0.99</td>
+<td>0.99</td>
+</tr>
+<tr>
+<td>F1-Score</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.95~\pm ~0.03$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.94~\pm ~0.04$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.98~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.98~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.99~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.98~\pm ~0.00$</tex-math></inline-formula></td>
+<td>0.99</td>
+<td>0.98</td>
+</tr>
+<tr>
+<td rowspan="4">Task 2: Prediction</td>
+<td>MAE</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.43~\pm ~0.04$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.43~\pm ~0.04$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.35~\pm ~0.02$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.35~\pm ~0.02$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.32~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.32~\pm ~0.00$</tex-math></inline-formula></td>
+<td>0.31</td>
+<td>0.32</td>
+</tr>
+<tr>
+<td>MSE</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.63~\pm ~0.07$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.63~\pm ~0.07$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.47~\pm ~0.04$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.48~\pm ~0.03$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.41~\pm ~0.01$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.44~\pm ~0.01$</tex-math></inline-formula></td>
+<td>0.40</td>
+<td>0.45</td>
+</tr>
+<tr>
+<td>RMSE</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.79~\pm ~0.04$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.79~\pm ~0.04$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.69~\pm ~0.03$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.69~\pm ~0.02$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.64~\pm ~0.01$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.66~\pm ~0.01$</tex-math></inline-formula></td>
+<td>0.63</td>
+<td>0.67</td>
+</tr>
+<tr>
+<td>NRMSE</td>
+<td><inline-formula><tex-math notation="LaTeX">$0.07~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.07~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.06~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.06~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.06~\pm ~0.00$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$0.06~\pm ~0.00$</tex-math></inline-formula></td>
+<td>0.05</td>
+<td>0.06</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+<fig id="fig2">
+<label>Fig. 2.</label>
+<caption><p>Global loss over rounds.</p></caption>
+<graphic xlink:href="amara2-3658363.eps"/>
+</fig>
+</p>
+<p>The normalized RMSE (with respect to the total capacity range) decreases from an initial value of 0.07 to 0.05 under IID conditions and 0.06 under Non-IID conditions after convergence (see <xref ref-type="table" rid="table5">Table V</xref>). The final MAE reaches 0.31 Ah (IID) and 0.32 Ah (Non-IID). Considering the battery capacity range of <inline-formula><tex-math notation="LaTeX">$\mathrm {28.28~Ah}~\text {to}~\mathrm {46.23~Ah}$</tex-math></inline-formula>, this represents a relative error of approximately 1.7 % to 1.8 % of the total capacity span. For an average energy consumption of 0.2 Ah/km, this MAE translates to a driving-range uncertainty of only <inline-formula><tex-math notation="LaTeX">$\mathrm {1.55~km}~\text {to}~\mathrm {1.60~km}$</tex-math></inline-formula>. These results, stable after approximately 80 rounds and robust to heterogeneous data distributions, confirm the framework&#x2019;s accuracy and reliability for real-time remaining driving range estimation in electric vehicles.</p>
+</sec>
+<sec id="sec4b2">
+<label>2)</label>
+<title>Performance Under Dynamic EV Participation:</title>
+<p><xref ref-type="fig" rid="fig3">Figure 3</xref> illustrates the number of EVs participating in the training process across different rounds. The high-density scenario maintains a higher and more stable participation (15&#x2013;30 EVs), while the low-density scenario fluctuates between 3 and 15 EVs, reflecting variations in EV availability.
+<fig id="fig3">
+<label>Fig. 3.</label>
+<caption><p>Number of participating EVs per training round under high-density and low-density scenarios.</p></caption>
+<graphic xlink:href="amara3-3658363.eps"/>
+</fig>
+</p>
+<p>As expected, a constant and stable participation yields the best performance, as evidenced by the results in <xref ref-type="table" rid="table6">Table VI</xref>. Although this scenario is rare in practice, it establishes a solid baseline. Under <bold>high-density</bold> conditions, simulating urban environments with heavy traffic, performance remains exceptionally close to the ideal, with an anomaly-detection accuracy of 98.95% (Non-IID) and a capacity-estimation MAE of 0.3394 Ah, confirming that the framework can operate at a near-optimal level in dense EV networks.
+<table-wrap id="table6">
+<label>TABLE VI</label>
+<caption><title>Performance Metrics for Anomaly Detection and Capacity Estimation Across Different Scenarios</title></caption>
+<graphic xlink:href="amara.t6-3658363.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="10"/>
+</colgroup>
+<thead>
+<tr>
+<th colspan="2"></th>
+<th colspan="5">Task 1: Anomaly Detection</th>
+<th colspan="3">Task 2: Capacity Estimation</th>
+</tr>
+<tr>
+<th>EV Participation</th>
+<th>Dist</th>
+<th>Accuracy</th>
+<th>Recall</th>
+<th>Precision</th>
+<th>F1-score</th>
+<th>AUROC</th>
+<th>MAE</th>
+<th>MSE</th>
+<th>NRMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2">High (<inline-formula><tex-math notation="LaTeX">$\lambda _{EV} = 20$</tex-math></inline-formula>)</td>
+<td>IID</td>
+<td>0.9888</td>
+<td>0.9800</td>
+<td>0.9897</td>
+<td>0.9848</td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.9994}$</tex-math></inline-formula></td>
+<td>0.3369</td>
+<td>0.5100</td>
+<td>0.0605</td>
+</tr>
+<tr>
+<td>Non-IID</td>
+<td>0.9895</td>
+<td>0.9816</td>
+<td>0.9901</td>
+<td>0.9859</td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.9994}$</tex-math></inline-formula></td>
+<td>0.3394</td>
+<td>0.4983</td>
+<td>0.0598</td>
+</tr>
+<tr>
+<td rowspan="2">Low (<inline-formula><tex-math notation="LaTeX">$\lambda _{EV} = 5$</tex-math></inline-formula>)</td>
+<td>IID</td>
+<td>0.9876</td>
+<td>0.9804</td>
+<td>0.9860</td>
+<td>0.9832</td>
+<td>0.9992</td>
+<td>0.3530</td>
+<td>0.5322</td>
+<td>0.0618</td>
+</tr>
+<tr>
+<td>Non-IID</td>
+<td>0.9850</td>
+<td>0.9747</td>
+<td>0.9847</td>
+<td>0.9797</td>
+<td>0.9989</td>
+<td>0.3616</td>
+<td>0.5497</td>
+<td>0.0628</td>
+</tr>
+<tr>
+<td rowspan="2">Constant</td>
+<td>IID</td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.9908}$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.9836}$</tex-math></inline-formula></td>
+<td>0.9913</td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.9875}$</tex-math></inline-formula></td>
+<td>0.9990</td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.3139}$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.3994}$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.0542}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td>Non-IID</td>
+<td>0.9889</td>
+<td>0.9763</td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.9938}$</tex-math></inline-formula></td>
+<td>0.9849</td>
+<td><inline-formula><tex-math notation="LaTeX">$\boldsymbol {0.9994}$</tex-math></inline-formula></td>
+<td>0.3216</td>
+<td>0.4458</td>
+<td>0.0572</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+<p>Conversely, the <bold>low-density</bold> scenario, representative of rural areas or off-peak periods, leads to a measurable but limited drop in performance. For anomaly detection, accuracy decreases slightly to 98.50% (F1-score = 97.97%), corresponding to a reduction of 0.58 percentage points. Capacity estimation is more affected, with the MAE rising to 0.3616 Ah (NRMSE = 0.0628), which represents an approximate <bold>15.2%</bold> relative increase compared to the ideal-case MAE (0.3139 Ah). This modest degradation is further illustrated in <xref ref-type="fig" rid="fig4">Figures 4d</xref>, <xref ref-type="fig" rid="fig4">4e</xref> and <xref ref-type="fig" rid="fig4">4f</xref>, which plot the evolution of MAE, MSE, and RMSE across the training rounds. The curves confirm that, despite higher round-to-round variability, the error metrics remain bounded and converge to values consistent with those reported in <xref ref-type="table" rid="table6">Table VI</xref>. Nevertheless, even under this challenging configuration, the results remain excellent and operationally viable: anomaly detection retains an accuracy above 98.5% and capacity estimation exhibits a mean absolute error below 0.37 Ah, which corresponds to an uncertainty of less than 2 km in remaining range (assuming a consumption of 0.2 Ah/km). This demonstrates the robustness of the SMTFL framework in the face of realistic participation fluctuations in electric-vehicle fleets.
+<fig id="fig4">
+<label>Fig. 4.</label>
+<caption><p>Performance metrics visualized for different rounds and configurations.</p></caption>
+<graphic xlink:href="amara4-3658363.eps"/>
+</fig>
+</p>
+</sec>
+</sec>
+<sec id="sec4c">
+<label>C.</label>
+<title>System Complexity Analysis</title>
+<p>We analyze the computational, communication, and memory complexity of the proposed SMTFL framework to assess its feasibility for deployment in resource-constrained EV environments.</p>
+<sec id="sec4c1">
+<label>1)</label>
+<title>Computational Complexity:</title>
+<p>To evaluate the computational complexity of our SMTFL framework, we calculate the Floating-Point Operations (FLOPs) required for training both the client-side and server-side models.</p>
+<p>The client-side model has <inline-formula><tex-math notation="LaTeX">$P_{\text {client}} = 67,\!520$</tex-math></inline-formula> parameters (embedding: <inline-formula><tex-math notation="LaTeX">$576 +2$</tex-math></inline-formula> transformer layers: <inline-formula><tex-math notation="LaTeX">$2 \times 33,\!472 = 66,\!944$</tex-math></inline-formula>). The server-side model has <inline-formula><tex-math notation="LaTeX">$P_{\text {server}} = 134,\!018$</tex-math></inline-formula> parameters (4 transformer layers: <inline-formula><tex-math notation="LaTeX">$4 \times 33,\!472 = 133,\!888 +$</tex-math></inline-formula> classification head: 65 + regression head: 65). Each transformer layer consists of multi-head attention (<inline-formula><tex-math notation="LaTeX">$16,\!640$</tex-math></inline-formula> parameters), feed-forward network (<inline-formula><tex-math notation="LaTeX">$16,\!576$</tex-math></inline-formula>), and two LayerNorm layers (256).</p>
+<p>The self-attention mechanism, which dominates computational cost, has quadratic complexity with respect to sequence length <inline-formula><tex-math notation="LaTeX">$L$</tex-math></inline-formula>. For each transformer layer, the dominant FLOPs per sample per epoch come from computing the query-key product and the attention-weighted value aggregation, each requiring approximately <inline-formula><tex-math notation="LaTeX">$2L^{2}d$</tex-math></inline-formula> operations per forward pass. Accounting for both forward and backward passes, the total FLOPs per sample per layer is approximately <inline-formula><tex-math notation="LaTeX">$12L^{2}d$</tex-math></inline-formula>.</p>
+<p>Given <inline-formula><tex-math notation="LaTeX">$L = 128$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$d = 64$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$N_{\text {samples}} = 768$</tex-math></inline-formula> (median value across the Non-IID distribution shown in <xref ref-type="table" rid="table3">Table III</xref>), and <inline-formula><tex-math notation="LaTeX">$E = 10$</tex-math></inline-formula> (number of local epochs), the FLOPs per client update are calculated as follows:</p>
+<p>- <bold>Client side</bold> (2 transformer layers):
+<disp-formula><tex-math notation="LaTeX">\begin{equation*} \text {FLOPs}_{\text {client}} \!\approx \!2 \!\times \! 12 L^{2} d \!\times \! N_{\text {samples}} \times E \!=\! 1.93 \times 10^{11} \text {FLOPs}.\end{equation*}</tex-math></disp-formula></p>
+<p>- <bold>Server side</bold> (4 transformer layers):
+<disp-formula><tex-math notation="LaTeX">\begin{equation*} \text {FLOPs}_{\text {server}} \!\approx \! 4 \!\times \! 12 L^{2} d \!\times \! N_{\text {samples}} \times E \!=\! 3.86 \times 10^{11} \text {FLOPs}.\end{equation*}</tex-math></disp-formula></p>
+<p>If the entire model were trained locally, the total computational load per client update would be:
+<disp-formula><tex-math notation="LaTeX">\begin{equation*} \text {FLOPs}_{\text {total}} \!= \!\text {FLOPs}_{\text {client}}\! +\! \text {FLOPs}_{\text {server}}\! \approx 5.79 \times 10^{11} \text {FLOPs}.\end{equation*}</tex-math></disp-formula></p>
+<p>Our split learning design offloads the server-side computation to edge infrastructure, thereby shifting approximately:
+<disp-formula><tex-math notation="LaTeX">\begin{equation*} \frac {\text {FLOPs}_{\text {server}}}{\text {FLOPs}_{\text {total}}} \approx 66.7\%\end{equation*}</tex-math></disp-formula>of the computational burden from the EV client to the edge server. This reduction aligns with the proportion of transformer layers executed on the server (4 out of 6 layers). Moreover, without multi-task learning, training two separate models for anomaly detection and capacity estimation would approximately double the computational requirements. Thus, our split multi-task design achieves two key efficiencies: (1) it significantly reduces on-device computation by offloading about two-thirds of the computational load to the edge server, and (2) it eliminates the need for training and maintaining separate task-specific models, further conserving resources. This substantial reduction in on-device computation time and energy consumption makes the framework particularly suitable for resource-constrained EVs during charging sessions.</p>
+</sec>
+<sec id="sec4c2">
+<label>2)</label>
+<title>Communication and Energy Overhead:</title>
+<p>Our framework leverages Power Line Communication (PLC) during charging sessions, utilizing the existing power line infrastructure without requiring additional network resources and eliminating separate wireless transmission energy costs. The communication load per training round consists of uploading intermediate activations (smashed data) and downloading gradients, each approximately 1 MB per batch (<inline-formula><tex-math notation="LaTeX">$B=32$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$T=128$</tex-math></inline-formula>, <inline-formula><tex-math notation="LaTeX">$d_{\text {model}}=64$</tex-math></inline-formula>), plus 0.4 MB for client-side model updates, totaling ~2.4 MB per round. Over 20 rounds (achieving 96% accuracy and 0.43 MAE), an EV exchanges about 48 MB, orders of magnitude less than transmitting raw battery time-series data (~100 MB). Energy overhead is supplied by the grid; with an embedded GPU (e.g., NVIDIA Jetson AGX Orin, 30 W peak) and ~10 s per round, each round consumes 0.083 Wh. A 20-round session thus uses 1.66 Wh, which is less than 0.02% of a typical fast-charging session (10 kWh). Consequently, the framework introduces negligible communication and energy overhead while preserving the EV&#x2019;s primary function.</p>
+</sec>
+</sec>
+<sec id="sec4d">
+<label>D.</label>
+<title>Comparative Analysis</title>
+<p>We evaluate our framework against both centralized and federated baselines to contextualize its performance. Although battery health anomaly detection and capacity estimation have been studied in the literature, to the best of our knowledge, only <xref ref-type="bibr" rid="ref1">[1]</xref> utilized the EVBattery dataset, enabling a direct comparison. Notably, the authors of <xref ref-type="bibr" rid="ref1">[1]</xref> employed multiple machine learning methods, providing a valuable opportunity to benchmark our solution against various approaches. However, their work did not incorporate federated learning (FL). Therefore, we implemented FL-based baselines (LSTM, BiLSTM, GRU) to compare our solution against FL methods as well. <xref ref-type="fig" rid="fig5">Figure 5</xref> illustrates the performance comparison of our solution with centralized ML models from <xref ref-type="bibr" rid="ref1">[1]</xref> for both tasks: AUROC for Task 1 (battery health anomaly detection) and RMSE for Task 2 (battery capacity estimation). These metrics were not selected arbitrarily but were adopted because <xref ref-type="bibr" rid="ref1">[1]</xref> exclusively relied on them, ensuring a consistent and meaningful comparison.
+<fig id="fig5">
+<label>Fig. 5.</label>
+<caption><p>Comparison with centralized ML models.</p></caption>
+<graphic xlink:href="amara5-3658363.eps"/>
+</fig>
+</p>
+<p>The AUROC scores demonstrate a clear improvement achieved by the proposed models (MTFL and SMTFL). While traditional methods such as AE, Deep SVDD, and LSTMAD exhibit moderate performance, our models significantly outperform them, reaching an AUROC of 99.9%, marking a substantial advancement in battery health anomaly detection. For the capacity estimation task, evaluated through RMSE, the proposed models also show superior performance. Baseline methods such as Random Forest, XGBoost, and GCNN achieve RMSE values ranging from 1.39 to 1.42, indicating limitations in accurately predicting capacity under complex conditions. In contrast, the proposed models achieve RMSE values of 0.64 and 0.66, respectively, significantly reducing the prediction error. The strong performance of SMTFL can be attributed to its ability to effectively capture multivariate temporal dependencies and feature interactions, leveraging the advanced Transformer-based architecture integrated into the federated learning framework.</p>
+<p><xref ref-type="table" rid="table7">Table VII</xref> summarizes the performance under non-IID data distribution. Baseline models (FL-LSTM, FL-BiLSTM, FL-GRU) yield accuracies around 0.96&#x2013;0.97 and MAEs around 0.46&#x2013;0.48. Our FL-Transformer (non-split) notably improves both tasks (accuracy 0.988, MAE 0.326). The proposed SMTFL (split) achieves the best accuracy (0.989), F1-score (0.985), and MAE (0.322), while the non-split variant attains the lowest RMSE (0.647). The slight increase in RMSE for the split model may reflect the added noise from the split process. Our SMTFL framework not only unifies anomaly detection and capacity estimation within a single model while offloading heavy computation to the edge, but also delivers superior performance compared to recurrent baselines, demonstrating the effectiveness of the Transformer architecture with split learning in federated multi-task settings.
+<table-wrap id="table7">
+<label>TABLE VII</label>
+<caption><title>Comparison With FL Baseline Models</title></caption>
+<graphic xlink:href="amara.t7-3658363.eps"/>
+<table rules="all" frame="box" cellpadding="5">
+<colgroup>
+<col span="5"/>
+</colgroup>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>F1-Score</th>
+<th>MAE</th>
+<th>RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="5">Baseline models</td>
+</tr>
+<tr>
+<td>FL-LSTM</td>
+<td>0.963</td>
+<td>0.948</td>
+<td>0.478</td>
+<td>0.831</td>
+</tr>
+<tr>
+<td>FL-Bi-LSTM</td>
+<td>0.965</td>
+<td>0.951</td>
+<td>0.456</td>
+<td>0.812</td>
+</tr>
+<tr>
+<td>FL-GRU</td>
+<td>0.966</td>
+<td>0.953</td>
+<td>0.463</td>
+<td>0.817</td>
+</tr>
+<tr>
+<td colspan="5">Our approach</td>
+</tr>
+<tr>
+<td>MTFL (non-split)</td>
+<td>0.988</td>
+<td>0.984</td>
+<td>0.326</td>
+<td><inline-formula><tex-math notation="LaTeX">$\mathbf {0.647}$</tex-math></inline-formula></td>
+</tr>
+<tr>
+<td>SMTFL (split)</td>
+<td><inline-formula><tex-math notation="LaTeX">$\mathbf {0.989}$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$\mathbf {0.985}$</tex-math></inline-formula></td>
+<td><inline-formula><tex-math notation="LaTeX">$\mathbf {0.322}$</tex-math></inline-formula></td>
+<td>0.668</td>
+</tr>
+</tbody>
+</table>
+</table-wrap>
+</p>
+</sec>
+</sec>
+<sec id="sec5">
+<label>V.</label>
+<title>Conclusion and Future Work</title>
+<p>This paper introduced a Split Multi-Task Federated Learning (SMTFL) framework for joint battery health anomaly detection and capacity estimation in electric vehicles (EVs). The proposed approach combines a Transformer-based encoder with a split federated architecture to achieve state-of-the-art performance while addressing critical challenges in scalability, privacy, and energy efficiency. Experimental results demonstrate that our framework outperforms existing methods, achieving an accuracy of 98.9% for anomaly detection and a MAE of 0.32 for capacity estimation. These results validate the model&#x2019;s capability to capture complex temporal dependencies and feature interactions across both tasks. By enabling EVs to train a single unified model locally and offloading heavy computations to edge servers, the SMTFL framework significantly reduces on-device resource requirements. Moreover, privacy is preserved through differential privacy mechanisms and split learning, while training is scheduled exclusively during charging sessions to minimize energy overhead. Collectively, these attributes make the SMTFL framework a practical and efficient solution for large-scale, privacy-aware EV battery diagnostics. Future work will focus on extending the framework to additional battery management system (BMS) tasks, such as predicting battery lifespan and identifying specific component failures. We also plan to explore adaptive split points that dynamically adjust the computation offloading based on device capabilities and network conditions, as well as design more sophisticated multitask models that integrate a broader set of BMS functions without compromising efficiency.</p>
+</sec>
+</body>
+<back>
+<ack>
+<title>Acknowledgment</title>
+<p>The views and opinions expressed are, however, those of the author(s) only and do not necessarily reflect those of European Union or Chips JU. Neither European Union nor the granting authority can be held responsible for them.</p>
+</ack>
+<ref-list>
+<title>
+References
+</title>
+<ref id="ref1">
+<label>
+[1]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+He
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+EVBattery: A large-scale electric vehicle dataset for battery health and capacity estimation
+</article-title>
+,&#x201D; 
+<year>
+2022
+</year>
+, 
+<source>
+arXiv:2201.12358
+</source>
+.
+</mixed-citation>
+</ref>
+<ref id="ref2">
+<label>
+[2]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Moulik
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A. K.
+</given-names> 
+<surname>
+Dubey
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A. M.
+</given-names> 
+<surname>
+Ali
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A battery modeling technique based on fusion of hybrid and adaptive algorithms for real-time applications in pure EVs
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Intell. Transp. Syst.
+</source>
+, vol. 
+<volume>
+24
+</volume>
+, no. 
+<issue>
+3
+</issue>
+, pp. 
+<fpage>
+2760
+</fpage>
+&#x2013;
+<lpage>
+2771
+</lpage>
+, 
+<month>
+Mar.
+</month> 
+<year>
+2023
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref3">
+<label>
+[3]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+I.
+</given-names> 
+<surname>
+Saba
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Ullah
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Tariq
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Advancing electric vehicle battery analysis with digital twins in intelligent transportation systems
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Intell. Transp. Syst.
+</source>
+, vol. 
+<volume>
+25
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, pp. 
+<fpage>
+12141
+</fpage>
+&#x2013;
+<lpage>
+12150
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref4">
+<label>
+[4]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+An adaptive battery capacity estimation method suitable for random charging voltage range in electric vehicles
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Ind. Electron.
+</source>
+, vol. 
+<volume>
+69
+</volume>
+, no. 
+<issue>
+9
+</issue>
+, pp. 
+<fpage>
+9121
+</fpage>
+&#x2013;
+<lpage>
+9132
+</lpage>
+, 
+<month>
+Sep.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref5">
+<label>
+[5]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Hong
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Yao
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Fault prognosis of battery system based on accurate voltage abnormity prognosis using long short-term memory neural networks
+</article-title>
+,&#x201D; 
+<source>
+Appl. Energy
+</source>
+, vol. 
+<volume>
+251
+</volume>
+, 
+<month>
+Oct.
+</month> 
+<year>
+2019
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+113381
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref6">
+<label>
+[6]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+D.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Battery fault diagnosis for electric vehicles based on voltage abnormality by combining the long short-term memory neural network and the equivalent circuit model
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Power Electron.
+</source>
+, vol. 
+<volume>
+36
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+1303
+</fpage>
+&#x2013;
+<lpage>
+1315
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref7">
+<label>
+[7]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Grosu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Hou
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Ilolov
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Xiang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Applying neural network to health estimation and lifetime prediction of lithium-ion batteries
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Transport. Electrific.
+</source>
+, vol. 
+<volume>
+11
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, pp. 
+<fpage>
+4224
+</fpage>
+&#x2013;
+<lpage>
+4248
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref8">
+<label>
+[8]
+</label>
+<mixed-citation publication-type="report" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y. A.
+</given-names> 
+<surname>
+Sultan
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A. A.
+</given-names> 
+<surname>
+Eladl
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M. A.
+</given-names> 
+<surname>
+Hassan
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+S. A.
+</given-names> 
+<surname>
+Gamel
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Enhancing electric vehicle battery lifespan: Integrating active balancing and machine learning for precise RUL estimation
+</article-title>
+,&#x201D; 
+<source>
+Sci. Rep.
+</source>
+, vol. 
+<volume>
+15
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, p. 
+<fpage>
+777
+</fpage>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref9">
+<label>
+[9]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+K.
+</given-names> 
+<surname>
+Das
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Kumar
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Krishna
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Analyzing electric vehicle battery health performance using supervised machine learning
+</article-title>
+,&#x201D; 
+<source>
+Renew. Sustain. Energy Rev.
+</source>
+, vol. 
+<volume>
+189
+</volume>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2024
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+113967
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref10">
+<label>
+[10]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M. M.
+</given-names> 
+<surname>
+Dif
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M. A.
+</given-names> 
+<surname>
+Bouchiha
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A. A.
+</given-names> 
+<surname>
+Korba
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Ghamri-Doudane
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Towards trustworthy agentic IoEV: AI agents for explainable cyberthreat mitigation and state analytics
+</article-title>
+,&#x201D; in 
+<source specific-use="IEEE">
+Proc. IEEE 50th Conf. Local Comput. Netw. (LCN)
+</source>
+, 
+<conf-date>
+Oct. 2025
+</conf-date>
+, pp. 
+<fpage>
+1
+</fpage>
+&#x2013;
+<lpage>
+10
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref11">
+<label>
+[11]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zheng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Lu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Gao
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Han
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Feng
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Ouyang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Micro-short-circuit cell fault identification method for lithium-ion battery packs based on mutual information
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Ind. Electron.
+</source>
+, vol. 
+<volume>
+68
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+4373
+</fpage>
+&#x2013;
+<lpage>
+4381
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2021
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref12">
+<label>
+[12]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Ma
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Real-time personalized health status prediction of lithium-ion batteries using deep transfer learning
+</article-title>
+,&#x201D; 
+<source>
+Energy Environ. Sci.
+</source>
+, vol. 
+<volume>
+15
+</volume>
+, no. 
+<issue>
+10
+</issue>
+, pp. 
+<fpage>
+4083
+</fpage>
+&#x2013;
+<lpage>
+4094
+</lpage>
+, 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref13">
+<label>
+[13]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Condon
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A dataset of over one thousand computed tomography scans of battery cells
+</article-title>
+,&#x201D; 
+<source>
+Data Brief
+</source>
+, vol. 
+<volume>
+55
+</volume>
+, 
+<month>
+Aug.
+</month> 
+<year>
+2024
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+110614
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref14">
+<label>
+[14]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Zhu
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Data-driven capacity estimation of commercial lithium-ion batteries from voltage relaxation
+</article-title>
+,&#x201D; 
+<source>
+Nature Commun.
+</source>
+, vol. 
+<volume>
+13
+</volume>
+, no. 
+<issue>
+1
+</issue>
+, p. 
+<fpage>
+2261
+</fpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2022
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref15">
+<label>
+[15]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Xiong
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Zhang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+He
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Peng
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Pecht
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Lithium-ion battery health prognosis based on a real battery management system used in electric vehicles
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Veh. Technol.
+</source>
+, vol. 
+<volume>
+68
+</volume>
+, no. 
+<issue>
+5
+</issue>
+, pp. 
+<fpage>
+4110
+</fpage>
+&#x2013;
+<lpage>
+4121
+</lpage>
+, 
+<month>
+May
+</month> 
+<year>
+2019
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref16">
+<label>
+[16]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Deng
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Xu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+X.
+</given-names> 
+<surname>
+Hu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Zhou
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Rapid health estimation of in-service battery packs based on limited labels and domain adaptation
+</article-title>
+,&#x201D; 
+<source>
+J. Energy Chem.
+</source>
+, vol. 
+<volume>
+89
+</volume>
+, pp. 
+<fpage>
+345
+</fpage>
+&#x2013;
+<lpage>
+354
+</lpage>
+, 
+<month>
+Feb.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref17">
+<label>
+[17]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+W.
+</given-names> 
+<surname>
+Han
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Wik
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Kersten
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Dong
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+C.
+</given-names> 
+<surname>
+Zou
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Next-generation battery management systems: Dynamic reconfiguration
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Ind. Electron. Mag.
+</source>
+, vol. 
+<volume>
+14
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+20
+</fpage>
+&#x2013;
+<lpage>
+31
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2020
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref18">
+<label>
+[18]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Liu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+J.
+</given-names> 
+<surname>
+Ding
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Y.
+</given-names> 
+<surname>
+Cai
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+B.
+</given-names> 
+<surname>
+Luo
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+L.
+</given-names> 
+<surname>
+Yao
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+Z.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A battery SOH estimation method based on entropy domain features and semi-supervised learning under limited sample conditions
+</article-title>
+,&#x201D; 
+<source>
+J. Energy Storage
+</source>
+, vol. 
+<volume>
+106
+</volume>
+, 
+<month>
+Jan.
+</month> 
+<year>
+2025
+</year>
+, Art. no. 
+<pub-id pub-id-type="publisher-id">
+114822
+</pub-id>
+.
+</mixed-citation>
+</ref>
+<ref id="ref19">
+<label>
+[19]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Kumari
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+N.
+</given-names> 
+<surname>
+Kumar
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Hybrid optimized deep learning approach for prediction of battery state of charge, state of health and state of temperature
+</article-title>
+,&#x201D; 
+<source>
+Electr. Eng.
+</source>
+, vol. 
+<volume>
+106
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+1283
+</fpage>
+&#x2013;
+<lpage>
+1290
+</lpage>
+, 
+<month>
+Apr.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref20">
+<label>
+[20]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Kant
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Kumar
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+S.
+</given-names> 
+<surname>
+Sihag
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Prediction of electric vehicle battery state of health estimation using a hybrid deep learning mechanism
+</article-title>
+,&#x201D; 
+<source>
+Int. J. Green Energy
+</source>
+, vol. 
+<volume>
+22
+</volume>
+, no. 
+<issue>
+10
+</issue>
+, pp. 
+<fpage>
+2065
+</fpage>
+&#x2013;
+<lpage>
+2078
+</lpage>
+, 
+<month>
+Jul.
+</month> 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref21">
+<label>
+[21]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Wu
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Federated learning in STAR-RIS aided SAGINs
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Commun. Standards Mag.
+</source>
+, vol. 
+<volume>
+9
+</volume>
+, no. 
+<issue>
+2
+</issue>
+, pp. 
+<fpage>
+23
+</fpage>
+&#x2013;
+<lpage>
+29
+</lpage>
+, 
+<month>
+Jun.
+</month> 
+<year>
+2025
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref22">
+<label>
+[22]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Abbaraju
+</surname>
+</string-name> 
+and 
+<string-name>
+<given-names>
+S. K.
+</given-names> 
+<surname>
+Kundu
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+A novel federated &amp; ensembled learning-based battery state-of-health estimation for connected electric vehicles
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Open J. Intell. Transp. Syst.
+</source>
+, vol. 
+<volume>
+5
+</volume>
+, pp. 
+<fpage>
+445
+</fpage>
+&#x2013;
+<lpage>
+453
+</lpage>
+, 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref23">
+<label>
+[23]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Wang
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+Z. Y.
+</given-names> 
+<surname>
+Dong
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+H.
+</given-names> 
+<surname>
+Xiong
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Adaptive multipersonalized federated learning for state of health estimation of multiple batteries
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Internet Things J.
+</source>
+, vol. 
+<volume>
+11
+</volume>
+, no. 
+<issue>
+24
+</issue>
+, pp. 
+<fpage>
+39994
+</fpage>
+&#x2013;
+<lpage>
+40008
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref24">
+<label>
+[24]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+K. L.
+</given-names> 
+<surname>
+Wong
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Tse
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+S.-K.
+</given-names> 
+<surname>
+Tang
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+G.
+</given-names> 
+<surname>
+Pau
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Decentralized deep-learning approach for lithium-ion batteries state of health forecasting using federated learning
+</article-title>
+,&#x201D; 
+<source specific-use="IEEE">
+IEEE Trans. Transport. Electrific.
+</source>
+, vol. 
+<volume>
+10
+</volume>
+, no. 
+<issue>
+4
+</issue>
+, pp. 
+<fpage>
+8199
+</fpage>
+&#x2013;
+<lpage>
+8212
+</lpage>
+, 
+<month>
+Dec.
+</month> 
+<year>
+2024
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref25">
+<label>
+[25]
+</label>
+<mixed-citation publication-type="standard" publication-format="print">
+<std><source>
+Road Vehicles&#x2014;Vehicle to Grid Communication Interface
+</source>
+, Standard <std-organization>ISO</std-organization> 
+<pub-id pub-id-type="std-designation">15118</pub-id></std>
+, <year>2022</year>.
+</mixed-citation>
+</ref>
+<ref id="ref26">
+<label>
+[26]
+</label>
+<mixed-citation publication-type="book" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+E.
+</given-names> 
+<surname>
+Rescorla
+</surname>
+</string-name>
+</person-group>
+, 
+<source>
+The Transport Layer Security (TLS) Protocol Version 1.3
+</source>
+, document RFC 8446, 
+<year>
+2018
+</year>
+.
+</mixed-citation>
+</ref>
+<ref id="ref27">
+<label>
+[27]
+</label>
+<mixed-citation publication-type="periodical" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+P.
+</given-names> 
+<surname>
+Vepakomma
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+O.
+</given-names> 
+<surname>
+Gupta
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Swedish
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+R.
+</given-names> 
+<surname>
+Raskar
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Split learning for health: Distributed deep learning without sharing raw patient data
+</article-title>
+,&#x201D; 
+<year>
+2018
+</year>
+, 
+<source>
+arXiv:1812.00564
+</source>
+.
+</mixed-citation>
+</ref>
+<ref id="ref28">
+<label>
+[28]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+T.
+</given-names> 
+<surname>
+Li
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A. K.
+</given-names> 
+<surname>
+Sahu
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Zaheer
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Sanjabi
+</surname>
+</string-name>
+, 
+<string-name>
+<given-names>
+A.
+</given-names> 
+<surname>
+Talwalkar
+</surname>
+</string-name>
+, and 
+<string-name>
+<given-names>
+V.
+</given-names> 
+<surname>
+Smith
+</surname>
+</string-name>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Federated optimization in heterogeneous networks
+</article-title>
+,&#x201D; in 
+<source>
+Proc. 3rd Mach. Learn. Syst. Conf.
+</source>
+, 
+<conf-date>
+2020
+</conf-date>
+, pp. 
+<fpage>
+429
+</fpage>
+&#x2013;
+<lpage>
+450
+</lpage>
+.
+</mixed-citation>
+</ref>
+<ref id="ref29">
+<label>
+[29]
+</label>
+<mixed-citation publication-type="confproc" publication-format="print">
+<person-group person-group-type="author">
+<string-name>
+<given-names>
+M.
+</given-names> 
+<surname>
+Abadi
+</surname>
+</string-name> 
+<etal></etal>
+</person-group>
+, 
+&#x201C;
+<article-title>
+Deep learning with differential privacy
+</article-title>
+,&#x201D; in 
+<source>
+Proc. ACM SIGSAC Conf. Comput. Commun. Security
+</source>
+, 
+<conf-date>
+2016
+</conf-date>
+, pp. 
+<fpage>
+308
+</fpage>
+&#x2013;
+<lpage>
+318
+</lpage>
+.
+</mixed-citation>
+</ref>
+</ref-list>
+</back>
+</article>

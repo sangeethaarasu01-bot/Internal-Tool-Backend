@@ -62,8 +62,16 @@ class Settings(BaseSettings):
     def schemas_dir(self) -> Path:
         return self.DATA_DIR / "schemas"
 
+    @property
+    def pipeline_debug_dir(self) -> Path:
+        return self.DATA_DIR / "pipeline_debug"
+
+    PIPELINE_WRITE_DEBUG_ARTIFACTS: bool = os.getenv(
+        "PIPELINE_WRITE_DEBUG_ARTIFACTS", "true"
+    ).lower() in ("1", "true", "yes")
+
     def ensure_data_dirs(self) -> None:
-        for d in (self.uploads_dir, self.outputs_dir, self.schemas_dir):
+        for d in (self.uploads_dir, self.outputs_dir, self.schemas_dir, self.pipeline_debug_dir):
             d.mkdir(parents=True, exist_ok=True)
 
     def resolve_llm_model(self, role: str) -> str:

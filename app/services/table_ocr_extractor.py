@@ -232,6 +232,28 @@ def _ocr_table_region(
     return _ocr_items_to_grid(result)
 
 
+def ocr_table_grid_for_bbox(
+    page: pymupdf.Page,
+    bbox: list[float],
+    *,
+    extend_bottom: float = 0.0,
+    engine=None,
+) -> list[list[str]] | None:
+    """OCR a table region; optionally extend the bottom edge to capture tail rows."""
+    if len(bbox) < 4:
+        return None
+    ocr = engine if engine is not None else _ocr_engine()
+    if ocr is None:
+        return None
+    x0, y0, x1, y1 = (float(bbox[0]), float(bbox[1]), float(bbox[2]), float(bbox[3]))
+    if extend_bottom > 0:
+        y1 = min(float(page.rect.height), y1 + extend_bottom)
+    rect = pymupdf.Rect(x0, y0, x1, y1)
+    if rect.width < 60 or rect.height < 20:
+        return None
+    return _ocr_table_region(page, rect, ocr)
+
+
 def extract_ocr_tables_from_page(
     page: pymupdf.Page,
     page_number: int,

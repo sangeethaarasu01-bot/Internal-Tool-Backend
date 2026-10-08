@@ -1,0 +1,32 @@
+{
+  "table_id": "table_8",
+  "page": 14,
+  "caption_bbox": [
+    55.42060089111328,
+    431.47216796875,
+    245.3009796142578,
+    440.5732421875
+  ],
+  "region_y_top": 445.5732421875,
+  "region_y_bottom": 692.0,
+  "next_element_type": "END_OF_PAGE",
+  "next_element_y0": null,
+  "text_blocks_in_region": [
+    {
+      "bbox": [
+        55.420589447021484,
+        592.0267333984375,
+        296.6537170410156,
+        735.056640625
+      ],
+      "preview": "is 0.7% lower compared to the average BSFC with the rule-",
+      "line_count": 18
+    }
+  ],
+  "rows_after_clustering": 8,
+  "columns_after_clustering": 4,
+  "rows_removed_as_body_text": 1,
+  "final_rows": 8,
+  "final_columns": 4,
+  "content_validation_error": null
+}
