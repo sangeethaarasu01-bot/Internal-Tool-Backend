@@ -51,3 +51,5 @@ class GenerateXmlResponse(BaseModel):
     xml_content: str
     warnings: list[str] = Field(default_factory=list)
     unmapped_content_count: int = 0
+    storage_mode: str | None = None
+    book_manifest: dict[str, Any] | None = None

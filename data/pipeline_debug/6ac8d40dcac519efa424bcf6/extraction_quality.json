@@ -1,0 +1,77 @@
+{
+  "pdf_document_kind": "text_based",
+  "page_count": 13,
+  "extracted_character_count": 62010,
+  "invalid_character_report": {
+    "invalid_character_occurrences": 2,
+    "distinct_code_points": [
+      2
+    ],
+    "occurrences_by_code": {
+      "U+0002": 2
+    },
+    "characters_removed_for_xml": 2,
+    "affected_pages": [
+      {
+        "page_number": 6,
+        "invalid_character_count": 2,
+        "code_points": [
+          2
+        ],
+        "occurrences_by_code": {
+          "U+0002": 2
+        }
+      }
+    ],
+    "raw_character_count": 62349,
+    "normalized_character_count": 62347,
+    "origin_hint": "Control characters appear in PyMuPDF get_text('dict') output before Phase 1 XML sanitization. They are common near mathematical notation when PDF fonts/CMaps map glyphs to C0 control code points; they are not introduced by the legacy XML generator.",
+    "xml_sanitization_warning_source": "Log line 'Invalid XML character(s) removed' is emitted by app.utils.xml_text.sanitize_xml_text (via escape_xml_text) when building structure.semantic.tagged_output in app.services.layout.semantic_renderer.",
+    "warnings": [
+      "Control characters appear in PyMuPDF get_text('dict') output before Phase 1 XML sanitization. They are common near mathematical notation when PDF fonts/CMaps map glyphs to C0 control code points; they are not introduced by the legacy XML generator.",
+      "Log line 'Invalid XML character(s) removed' is emitted by app.utils.xml_text.sanitize_xml_text (via escape_xml_text) when building structure.semantic.tagged_output in app.services.layout.semantic_renderer.",
+      "Detected 2 XML-illegal control character occurrence(s) across 1 page(s); 2 character(s) would be stripped for XML intermediate output (raw extract preserved separately)."
+    ]
+  },
+  "text_quality": {
+    "retention_ratio": 0.9932107724560555,
+    "unclassified_ratio": 0.0021432398642614752,
+    "multi_column_page_numbers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "reading_order_engine": "layout_column_interleave"
+  },
+  "empty_page_numbers": [],
+  "low_text_page_numbers": [],
+  "requires_ocr": false,
+  "ocr_applied": true,
+  "text_retention_ratio": 0.9932107724560555,
+  "unclassified_char_ratio": 0.0021432398642614752,
+  "detected_section_count": 17,
+  "detected_table_count": 0,
+  "tables_extracted": 0,
+  "tables_structured": 0,
+  "detected_reference_count": 71,
+  "figure_count": 10,
+  "figures_extracted": 10,
+  "caption_count": 12,
+  "equation_count": 1,
+  "inline_equation_count": 12,
+  "control_character_count": 2,
+  "warnings": [
+    "Control characters appear in PyMuPDF get_text('dict') output before Phase 1 XML sanitization. They are common near mathematical notation when PDF fonts/CMaps map glyphs to C0 control code points; they are not introduced by the legacy XML generator.",
+    "Log line 'Invalid XML character(s) removed' is emitted by app.utils.xml_text.sanitize_xml_text (via escape_xml_text) when building structure.semantic.tagged_output in app.services.layout.semantic_renderer.",
+    "Detected 2 XML-illegal control character occurrence(s) across 1 page(s); 2 character(s) would be stripped for XML intermediate output (raw extract preserved separately)."
+  ]
+}

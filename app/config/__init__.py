@@ -61,6 +61,8 @@ class Settings(BaseSettings):
     )
     EXTRACTION_STEP4_MAX_SECONDS: float = float(os.getenv("EXTRACTION_STEP4_MAX_SECONDS", "300"))
     EXTRACTION_TABLE_PAGE_WORKERS: int = int(os.getenv("EXTRACTION_TABLE_PAGE_WORKERS", "4"))
+    # MongoDB BSON document limit is 16 MiB; cap stored subdocuments below that.
+    MONGODB_MAX_PAYLOAD_BYTES: int = int(os.getenv("MONGODB_MAX_PAYLOAD_BYTES", str(14 * 1024 * 1024)))
 
     @property
     def uploads_dir(self) -> Path:

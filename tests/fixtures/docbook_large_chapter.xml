@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
+  <info>
+    <title>Payload Split Fixture</title>
+    <biblioid class="doi">10.5040/9798216520177</biblioid>
+  </info>
+  <chapter xml:id="ch-main" label="1">
+    <title>Oversized Chapter</title>
+    <para>Introduction.</para>
+    <section xml:id="sec-1"><title>Section 1</title><para>AAAA</para></section>
+    <section xml:id="sec-2"><title>Section 2</title><para>BBBB</para></section>
+    <section xml:id="sec-3"><title>Section 3</title><para>CCCC</para></section>
+    <section xml:id="sec-4"><title>Section 4</title><para>DDDD</para></section>
+  </chapter>
+</book>

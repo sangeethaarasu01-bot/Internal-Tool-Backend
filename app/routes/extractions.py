@@ -39,7 +39,13 @@ from app.services.llm.providers.base import LLMConfigurationError
 from app.services.llm.providers.factory import is_llm_configured
 from app.services.llm_semantic_mapper import SemanticMappingError, map_semantic_content
 from app.services.scope_resolver import InvalidScopeError
-from app.services.output_format import OutputFormatError
+from app.services.docbook_book_storage import (
+    STORAGE_MODE_CHUNKED,
+    generated_xml_record_for_chunked_book,
+    reassemble_stored_book,
+    write_book_chunks,
+)
+from app.services.output_format import OUTPUT_DOCBOOK_5, OutputFormatError
 from app.services.xml_generator import XmlGenerationError
 from app.services.xml_output_router import generate_output_xml
 
@@ -474,21 +480,49 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
     except XmlGenerationError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
-    if resolved_output_format == "docbook_5":
+    book_manifest: dict | None = None
+    response_xml = xml_content
+
+    if resolved_output_format == OUTPUT_DOCBOOK_5:
         warnings.append(
             "DocBook output preserves the uploaded book template structure; "
             "PDF chapter merge is not applied on this path."
         )
+        try:
+            write_result = write_book_chunks(extraction_id, xml_content)
+        except Exception as exc:
+            logger.exception("DocBook chapter storage failed for %s", extraction_id)
+            raise HTTPException(
+                status_code=500,
+                detail=f"DocBook chapter storage failed: {exc}",
+            ) from exc
+        if not write_result.all_ok:
+            failed = [w.document_id for w in write_result.writes if not w.ok]
+            raise HTTPException(
+                status_code=503,
+                detail=f"DocBook chapter writes failed for: {', '.join(failed[:8])}",
+            )
+        book_manifest = write_result.manifest
+        generated_record = generated_xml_record_for_chunked_book(
+            scope=resolved_scope,
+            mapping_source=mapping_source,
+            prompt_version=prompt_version,
+            warnings=warnings,
+            manifest=book_manifest,
+            write_result=write_result,
+        )
+        response_xml = reassemble_stored_book(extraction_id, book_manifest)
+    else:
+        generated_record = {
+            "scope": resolved_scope,
+            "mapping_source": mapping_source,
+            "prompt_version": prompt_version,
+            "output_format": resolved_output_format,
+            "xml_content": xml_content,
+            "warnings": warnings,
+            "generated_at": utcnow(),
+        }
 
-    generated_record = {
-        "scope": resolved_scope,
-        "mapping_source": mapping_source,
-        "prompt_version": prompt_version,
-        "output_format": resolved_output_format,
-        "xml_content": xml_content,
-        "warnings": warnings,
-        "generated_at": utcnow(),
-    }
     try:
         extractions_col().update_one(
             {"_id": doc["_id"]},
@@ -503,9 +537,11 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
         mapping_source=mapping_source,
         prompt_version=prompt_version,
         output_format=resolved_output_format,
-        xml_content=xml_content,
-        warnings=warnings,
+        xml_content=response_xml,
+        warnings=generated_record.get("warnings") or warnings,
         unmapped_content_count=unmapped_count,
+        book_manifest=book_manifest,
+        storage_mode=generated_record.get("storage_mode"),
     )
 
 
@@ -518,7 +554,21 @@ async def download_extraction_xml(extraction_id: str):
 
     generated = doc.get("generated_xml") or {}
     xml_content = generated.get("xml_content")
-    if not xml_content:
+    if generated.get("storage_mode") == STORAGE_MODE_CHUNKED:
+        manifest = generated.get("book_manifest")
+        if not manifest or not generated.get("chapter_write_ok"):
+            raise HTTPException(
+                status_code=404,
+                detail="Chunked DocBook output is incomplete. Regenerate XML.",
+            )
+        try:
+            xml_content = reassemble_stored_book(extraction_id, manifest)
+        except Exception as exc:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Could not reassemble DocBook chapters: {exc}",
+            ) from exc
+    elif not xml_content:
         raise HTTPException(
             status_code=404,
             detail="No generated XML found. Call POST /generate-xml first.",

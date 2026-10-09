@@ -17,6 +17,7 @@ from app.pipeline.debug_artifacts import write_phase1_debug_bundle
 from app.pipeline.phase1.build_document import build_extracted_document
 from app.pipeline.phase1.extraction_build_options import ExtractionBuildOptions
 from app.services.layout.document_pipeline import build_full_extraction_result
+from app.services.extraction_mongo_payload import compact_extraction_result_for_mongo
 from app.services.text_extractor import PdfValidationError, extract_text_layout
 
 logger = logging.getLogger(__name__)
@@ -138,7 +139,8 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
             progress=90,
         )
         result_payload = full.model_dump()
-        result_payload["phase1"] = phase1_doc.model_dump()
+        phase1_dump = phase1_doc.model_dump()
+        result_payload["phase1"] = phase1_dump
 
         debug_paths: dict[str, str] | None = None
         if settings.PIPELINE_WRITE_DEBUG_ARTIFACTS:
@@ -149,25 +151,29 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
                 full_extraction=full,
             )
 
-        col.update_one(
-            {"_id": oid},
-            {
-                "$set": {
-                    "status": "completed",
-                    "result": result_payload,
-                    "phase1": phase1_doc.model_dump(),
-                    "page_count": full.document.page_count,
-                    "requires_ocr": full.document.requires_ocr,
-                    "ocr_applied": full.document.ocr_applied,
-                    "phase1_debug_paths": debug_paths,
-                    "error_message": None,
-                    "completed_at": datetime.now(timezone.utc),
-                    "current_step": "Extraction complete",
-                    "progress": 100,
-                    "step4_partial": build_options.partial_step4,
-                }
-            },
+        mongo_result, mongo_phase1, mongo_flags = compact_extraction_result_for_mongo(
+            result_payload,
+            phase1_dump,
         )
+
+        update_fields: dict = {
+            "status": "completed",
+            "result": mongo_result,
+            "phase1": mongo_phase1,
+            "page_count": full.document.page_count,
+            "requires_ocr": full.document.requires_ocr,
+            "ocr_applied": full.document.ocr_applied,
+            "phase1_debug_paths": debug_paths,
+            "error_message": None,
+            "completed_at": datetime.now(timezone.utc),
+            "current_step": "Extraction complete",
+            "progress": 100,
+            "step4_partial": build_options.partial_step4,
+        }
+        if mongo_flags:
+            update_fields["phase1_storage_flags"] = mongo_flags
+
+        col.update_one({"_id": oid}, {"$set": update_fields})
         logger.info("Extraction %s completed (%s pages)", extraction_id, full.document.page_count)
     except PdfValidationError as exc:
         logger.warning("Extraction %s invalid PDF: %s", extraction_id, exc)

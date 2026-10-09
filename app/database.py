@@ -82,6 +82,11 @@ def extractions_col() -> Collection:
     return get_db()["extractions"]
 
 
+def book_documents_col() -> Collection:
+    """Per-chapter DocBook fragments keyed by extraction_id + document_id."""
+    return get_db()["book_documents"]
+
+
 def ensure_indexes() -> None:
     conversions_col().create_index([("created_at", DESCENDING)])
     conversions_col().create_index([("status", ASCENDING)])
@@ -90,6 +95,11 @@ def ensure_indexes() -> None:
     extractions_col().create_index([("status", ASCENDING)])
     extractions_col().create_index([("filename", ASCENDING)])
     extractions_col().create_index([("original_filename", ASCENDING)])
+    book_documents_col().create_index([("extraction_id", ASCENDING)])
+    book_documents_col().create_index(
+        [("extraction_id", ASCENDING), ("document_id", ASCENDING)],
+        unique=True,
+    )
     get_db()["llm_calls"].create_index([("document_id", ASCENDING)])
     get_db()["llm_calls"].create_index([("timestamp", DESCENDING)])
 
