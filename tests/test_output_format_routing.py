@@ -73,8 +73,19 @@ def test_docbook_template_with_jats_output_rejected() -> None:
 
 def test_jats_generator_still_rejects_docbook_template_directly() -> None:
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    with pytest.raises(XmlGenerationError, match="IEEE JATS XML generation requires"):
+    with pytest.raises(XmlGenerationError, match="got <book>"):
         generate_jats_xml(DOCBOOK_FIXTURE, mapping)
+
+
+def test_stale_empty_schema_auto_uses_book_file_not_jats() -> None:
+    mapping = SemanticMappingBody(front={}, body=[], back={})
+    xml, fmt = generate_output_xml(
+        DOCBOOK_FIXTURE,
+        {},
+        mapping,
+        output_format="auto",
+    )
+    assert fmt == OUTPUT_DOCBOOK_5
 
 
 def test_article_template_routes_to_jats() -> None:

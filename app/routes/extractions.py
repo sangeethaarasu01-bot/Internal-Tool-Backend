@@ -42,10 +42,19 @@ from app.services.scope_resolver import InvalidScopeError
 from app.services.docbook_book_storage import (
     STORAGE_MODE_CHUNKED,
     generated_xml_record_for_chunked_book,
+    persist_full_book_xml_file,
     reassemble_stored_book,
     write_book_chunks,
 )
-from app.services.output_format import OUTPUT_DOCBOOK_5, OutputFormatError
+from app.services.docbook_book_chunking import DocBookChunkingError
+from app.services.generate_xml_guards import (
+    JatsArticleRequiredError,
+    JatsTransformTooLargeError,
+    assert_jats_article_template_root,
+    assert_jats_transform_payload_under_limit,
+    is_jats_article_required_message,
+)
+from app.services.output_format import OUTPUT_DOCBOOK_5, OUTPUT_IEEE_JATS, OutputFormatError, resolve_output_format
 from app.services.xml_generator import XmlGenerationError
 from app.services.xml_output_router import generate_output_xml
 
@@ -365,6 +374,19 @@ async def semantic_map_extraction(extraction_id: str, body: SemanticMapRequest):
 @router.post("/{extraction_id}/generate-xml", response_model=GenerateXmlResponse)
 async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
     """Generate XML from scoped IR + uploaded template (JATS article or DocBook book)."""
+    try:
+        return await _generate_extraction_xml_impl(extraction_id, body)
+    except HTTPException:
+        raise
+    except Exception as exc:
+        logger.exception("generate-xml unhandled failure for %s", extraction_id)
+        raise HTTPException(
+            status_code=500,
+            detail=f"XML generation failed: {exc}",
+        ) from exc
+
+
+async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlRequest):
     logger.info(
         "generate-xml started for %s (use_llm=%s, llm_fallback=%s, scope=%s, output_format=%s)",
         extraction_id,
@@ -469,6 +491,26 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
     mapping_body = fill_back_references_from_ir(mapping_body, filtered_ir)
 
     try:
+        resolved_output_format = resolve_output_format(
+            body.output_format,
+            template_schema,
+            template_path=template_path,
+        )
+    except OutputFormatError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    if resolved_output_format == OUTPUT_IEEE_JATS:
+        try:
+            assert_jats_article_template_root(template_path)
+            assert_jats_transform_payload_under_limit(template_path, mapping_body)
+        except JatsArticleRequiredError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+        except JatsTransformTooLargeError as exc:
+            raise HTTPException(status_code=413, detail=str(exc)) from exc
+        except FileNotFoundError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    try:
         xml_content, resolved_output_format = generate_output_xml(
             template_path,
             template_schema,
@@ -478,7 +520,19 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
     except OutputFormatError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except XmlGenerationError as exc:
-        raise HTTPException(status_code=500, detail=str(exc)) from exc
+        message = str(exc)
+        if is_jats_article_required_message(message):
+            raise HTTPException(status_code=422, detail=message) from exc
+        if "too large" in message.lower():
+            raise HTTPException(status_code=413, detail=message) from exc
+        logger.exception("generate-xml JATS/DocBook transform failed for %s", extraction_id)
+        raise HTTPException(status_code=500, detail=message) from exc
+    except MemoryError as exc:
+        logger.exception("generate-xml MemoryError for %s", extraction_id)
+        raise HTTPException(
+            status_code=413,
+            detail="Document too large for JATS transform. Chunk by <chapter> before retrying.",
+        ) from exc
 
     book_manifest: dict | None = None
     response_xml = xml_content
@@ -490,8 +544,15 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
         )
         try:
             write_result = write_book_chunks(extraction_id, xml_content)
+        except DocBookChunkingError as exc:
+            logger.exception("DocBook chapter split failed for %s", extraction_id)
+            detail = str(exc)
+            status = 413 if "exceeds" in detail.lower() or "too large" in detail.lower() else 422
+            raise HTTPException(status_code=status, detail=detail) from exc
         except Exception as exc:
             logger.exception("DocBook chapter storage failed for %s", extraction_id)
+            if "too large" in str(exc).lower():
+                raise HTTPException(status_code=413, detail=str(exc)) from exc
             raise HTTPException(
                 status_code=500,
                 detail=f"DocBook chapter storage failed: {exc}",
@@ -503,6 +564,7 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
                 detail=f"DocBook chapter writes failed for: {', '.join(failed[:8])}",
             )
         book_manifest = write_result.manifest
+        full_book_path = persist_full_book_xml_file(extraction_id, xml_content)
         generated_record = generated_xml_record_for_chunked_book(
             scope=resolved_scope,
             mapping_source=mapping_source,
@@ -511,7 +573,8 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
             manifest=book_manifest,
             write_result=write_result,
         )
-        response_xml = reassemble_stored_book(extraction_id, book_manifest)
+        generated_record["full_book_xml_path"] = full_book_path
+        response_xml = xml_content
     else:
         generated_record = {
             "scope": resolved_scope,

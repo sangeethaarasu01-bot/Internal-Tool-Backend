@@ -142,9 +142,33 @@ def _classify_kind(local: str) -> ChunkKind:
     return "other"
 
 
-def _serialize_fragment(element: etree._Element) -> str:
+def _book_namespace_map(root: etree._Element) -> dict[str | None, str]:
+    """Collect namespace declarations needed to round-trip book subtrees (e.g. xlink)."""
+    nsmap: dict[str | None, str] = {None: DOCBOOK_NS}
+    if root.nsmap:
+        for prefix, uri in root.nsmap.items():
+            nsmap[prefix] = uri
+    xlink_ns = "http://www.w3.org/1999/xlink"
+    for el in root.iter():
+        for attr_name in el.attrib:
+            if attr_name.startswith("{http://www.w3.org/1999/xlink}"):
+                nsmap["xlink"] = xlink_ns
+            elif attr_name.startswith("xlink:"):
+                nsmap["xlink"] = xlink_ns
+    return nsmap
+
+
+def _serialize_fragment(element: etree._Element, nsmap: dict[str | None, str]) -> str:
+    """Serialize a book subtree with inherited namespace declarations on the fragment root."""
+    copied = etree.fromstring(etree.tostring(element))
+    existing = copied.nsmap or {}
+    for prefix, uri in nsmap.items():
+        if prefix is None:
+            continue
+        if prefix not in existing:
+            copied.set(f"xmlns:{prefix}", uri)
     return serialize_lxml_tree(
-        element,
+        copied,
         xml_declaration=True,
         encoding="UTF-8",
         pretty_print=True,
@@ -199,7 +223,7 @@ def _split_by_sections(
                 wrapper.append(etree.fromstring(etree.tostring(node)))
         for node in batch:
             wrapper.append(etree.fromstring(etree.tostring(node)))
-        return len(_serialize_fragment(wrapper).encode("utf-8"))
+        return len(_serialize_fragment(wrapper, nsmap).encode("utf-8"))
 
     for section in sections:
         trial = current_batch + [section]
@@ -221,7 +245,7 @@ def _split_by_sections(
                 wrapper.append(etree.fromstring(etree.tostring(node)))
         for node in batch:
             wrapper.append(etree.fromstring(etree.tostring(node)))
-        frag = _serialize_fragment(wrapper)
+        frag = _serialize_fragment(wrapper, nsmap)
         payload = len(frag.encode("utf-8"))
         if not payload_within_limit(payload, limit=max_bytes):
             raise DocBookChunkingError(
@@ -255,7 +279,7 @@ def _make_chunk(
     max_bytes: int,
     nsmap: dict[str, str],
 ) -> list[BookChunk]:
-    frag = _serialize_fragment(element)
+    frag = _serialize_fragment(element, nsmap)
     payload = len(frag.encode("utf-8"))
     if payload_within_limit(payload, limit=max_bytes):
         return [
@@ -383,10 +407,7 @@ def chunk_docbook_book_xml(
     metadata = parse_result.metadata
     book_id = derive_book_id(metadata, extraction_id)
 
-    nsmap: dict[str, str] = {None: DOCBOOK_NS}
-    for prefix, uri in (root.nsmap or {}).items():
-        if prefix is not None:
-            nsmap[prefix] = uri
+    nsmap = _book_namespace_map(root)
 
     hierarchy_nodes: dict[str, HierarchyNode] = {}
     chunks: list[BookChunk] = []
@@ -485,9 +506,21 @@ def reassemble_book_xml_from_chunks(manifest: dict[str, Any], chunks_by_id: dict
     if not units:
         raise DocBookChunkingError("Manifest has no units.")
 
+    reassemble_nsmap: dict[str | None, str] = {None: DOCBOOK_NS}
+    for unit in units:
+        frag = chunks_by_id.get(unit["document_id"])
+        if not frag:
+            continue
+        try:
+            probe = etree.fromstring(frag.encode("utf-8"))
+        except etree.XMLSyntaxError:
+            continue
+        for prefix, uri in (probe.nsmap or {}).items():
+            reassemble_nsmap[prefix] = uri
+
     book = etree.Element(
         f"{{{DOCBOOK_NS}}}book",
-        nsmap={None: DOCBOOK_NS},
+        nsmap=reassemble_nsmap,
         version="5.0",
     )
     handled_split_parents: set[str] = set()

@@ -100,7 +100,7 @@ def test_invalid_root_rejected(tmp_path: Path) -> None:
 
 def test_jats_generation_rejects_docbook_template() -> None:
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    with pytest.raises(XmlGenerationError, match="IEEE JATS XML generation requires"):
+    with pytest.raises(XmlGenerationError, match="got <book>"):
         generate_jats_xml(DOCBOOK_FIXTURE, mapping)
 
 

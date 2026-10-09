@@ -10,6 +10,7 @@ from typing import Any
 from pymongo.collection import Collection
 from pymongo.errors import PyMongoError
 
+from app.config import settings
 from app.database import book_documents_col
 from app.services.docbook_book_chunking import (
     BookChunk,
@@ -27,6 +28,22 @@ from app.services.mongo_bson_limits import (
 logger = logging.getLogger(__name__)
 
 STORAGE_MODE_CHUNKED = "chapter_chunked"
+
+
+def persist_full_book_xml_file(extraction_id: str, book_xml: str) -> str:
+    """Write the full generated book XML to disk for download / preview fallback."""
+    out_dir = settings.outputs_dir / "book_exports" / extraction_id
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / "book.xml"
+    out_path.write_text(book_xml.lstrip("\ufeff"), encoding="utf-8")
+    return str(out_path)
+
+
+def load_full_book_xml_file(extraction_id: str) -> str | None:
+    path = settings.outputs_dir / "book_exports" / extraction_id / "book.xml"
+    if not path.is_file():
+        return None
+    return path.read_text(encoding="utf-8")
 
 
 @dataclass
@@ -158,6 +175,9 @@ def load_chunk_xml_map(extraction_id: str, *, col: Collection | None = None) -> 
 
 
 def reassemble_stored_book(extraction_id: str, manifest: dict[str, Any]) -> str:
+    on_disk = load_full_book_xml_file(extraction_id)
+    if on_disk:
+        return on_disk
     chunks_by_id = load_chunk_xml_map(extraction_id)
     return reassemble_book_xml_from_chunks(manifest, chunks_by_id)
 

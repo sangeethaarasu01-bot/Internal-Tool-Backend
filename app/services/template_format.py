@@ -97,9 +97,9 @@ def require_jats_article_template(element: etree._Element) -> TemplateRootInfo:
     """Ensure the template is an IEEE JATS article skeleton (for JATS XML generation)."""
     info = classify_template_root(element)
     if info.template_format != IEEE_JATS_ARTICLE:
+        from app.services.generate_xml_guards import jats_requires_article_detail
+
         raise UnsupportedTemplateRootError(
-            f"IEEE JATS XML generation requires an <article> template. "
-            f"This file is a {info.description}, which is valid for template upload "
-            f"and schema parsing but cannot be used as an IEEE JATS output skeleton."
+            jats_requires_article_detail(info.local_name)
         )
     return info

@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
+from app.services.generate_xml_guards import effective_template_format
 from app.services.template_format import DOCBOOK_5_BOOK, IEEE_JATS_ARTICLE
 
 OUTPUT_AUTO = "auto"
@@ -40,7 +42,12 @@ def default_output_for_template(template_format: str) -> str:
     return OUTPUT_IEEE_JATS
 
 
-def resolve_output_format(requested: str, template_schema: dict[str, Any] | None) -> str:
+def resolve_output_format(
+    requested: str,
+    template_schema: dict[str, Any] | None,
+    *,
+    template_path: str | Path | None = None,
+) -> str:
     """Map API ``output_format`` (including ``auto``) to a concrete generator id."""
     normalized = (requested or OUTPUT_AUTO).strip().lower()
     if normalized not in REQUESTED_OUTPUT_FORMATS:
@@ -49,7 +56,10 @@ def resolve_output_format(requested: str, template_schema: dict[str, Any] | None
             f"Unknown output_format '{requested}'. Supported request values: {supported}."
         )
 
-    template_format = template_format_from_schema(template_schema)
+    if template_path is not None:
+        template_format = effective_template_format(template_schema, template_path)
+    else:
+        template_format = template_format_from_schema(template_schema)
 
     if normalized == OUTPUT_AUTO:
         return default_output_for_template(template_format)
