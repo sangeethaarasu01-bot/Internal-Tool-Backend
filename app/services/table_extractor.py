@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 import pymupdf
@@ -10,6 +11,25 @@ from app.models.extraction import ExtractedTable, TextBlock
 from app.services.table_ocr_extractor import extract_ocr_tables_from_page
 
 _STRATEGIES = (None, "lines", "lines_strict")
+_FAST_STRATEGIES = (None,)
+_TABLE_HINT_RE = re.compile(r"\bTABLE\s+[\dIVXLC]+", re.IGNORECASE)
+_GRID_HINT_RE = re.compile(r"^\s*[\d\.\[\]]+\s+[\d\.\-]+", re.MULTILINE)
+
+
+def page_might_have_table(blocks: list[TextBlock]) -> bool:
+    """Cheap heuristic to skip heavy find_tables() on prose-only pages."""
+    for block in blocks:
+        text = (block.text or "").strip()
+        if not text:
+            continue
+        head = text[:240]
+        if _TABLE_HINT_RE.search(head):
+            return True
+        if "|" in head and head.count("|") >= 2:
+            return True
+        if _GRID_HINT_RE.search(head):
+            return True
+    return False
 
 
 def _clean_cell(value: Any) -> str:
@@ -37,11 +57,16 @@ def _table_from_pymupdf(page: pymupdf.Page, page_number: int, table, index: int)
     )
 
 
-def _extract_pymupdf_tables(page: pymupdf.Page, page_number: int) -> list[ExtractedTable]:
+def _extract_pymupdf_tables(
+    page: pymupdf.Page,
+    page_number: int,
+    *,
+    strategies: tuple[str | None, ...] = _STRATEGIES,
+) -> list[ExtractedTable]:
     tables: list[ExtractedTable] = []
     seen_bboxes: list[list[float]] = []
 
-    for strategy in _STRATEGIES:
+    for strategy in strategies:
         try:
             finder = page.find_tables(strategy=strategy) if strategy else page.find_tables()
             raw_tables = finder.tables if finder else []
@@ -76,12 +101,18 @@ def extract_tables_from_page(
     page: pymupdf.Page,
     page_number: int,
     blocks: list[TextBlock] | None = None,
+    *,
+    fast: bool = False,
 ) -> tuple[list[ExtractedTable], bool]:
     """Return table grids detected on a single page and whether OCR was used."""
-    tables = _extract_pymupdf_tables(page, page_number)
+    if fast and blocks is not None and not page_might_have_table(blocks):
+        return [], False
+
+    strategies = _FAST_STRATEGIES if fast else _STRATEGIES
+    tables = _extract_pymupdf_tables(page, page_number, strategies=strategies)
     ocr_applied = False
 
-    if blocks:
+    if blocks and not fast:
         ocr_tables = extract_ocr_tables_from_page(page, page_number, blocks)
         for ocr_table in ocr_tables:
             if ocr_table.bbox and any(_bbox_similar(ocr_table.bbox, existing.bbox or []) for existing in tables if existing.bbox):

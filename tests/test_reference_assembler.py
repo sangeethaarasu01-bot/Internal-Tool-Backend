@@ -9,14 +9,15 @@ from app.models.semantic_mapping import MappedSemanticNode, SemanticMappingBody
 from app.services.layout.document_pipeline import process_document_structure
 from app.services.xml_generator import generate_jats_xml
 from app.utils.reference_assembler import (
+    AssembledReference,
     ReferenceParsingError,
     assemble_references_from_blocks,
     assemble_references_from_buffer,
+    deduplicate_assembled_references,
     parse_reference_number,
     reference_block_sort_key,
     sort_reference_section_blocks,
     validate_reference_sequence,
-    AssembledReference,
 )
 from tests.test_semantic_document import _block, _page, _raw
 
@@ -118,6 +119,32 @@ def test_column_major_sort_reads_left_column_before_right_column() -> None:
 
     refs = assemble_references_from_blocks(blocks, validate=True)
     assert [parse_reference_number(ref.label) for ref in refs] == [1, 2, 3, 4]
+
+
+def test_deduplicate_references_keeps_last_occurrence() -> None:
+    refs = [
+        AssembledReference(25, "[25]", "[25] Body citation false positive", [], [5], None, 0.5),
+        AssembledReference(25, "[25]", "[25] Real bibliography entry, IEEE, 2020.", [], [100], None, 0.9),
+        AssembledReference(26, "[26]", "[26] Another entry.", [], [100], None, 0.9),
+    ]
+    deduped = deduplicate_assembled_references(refs)
+    assert [ref.reference_number for ref in deduped] == [25, 26]
+    assert "Real bibliography" in deduped[0].raw_text
+    assembled = assemble_references_from_blocks(
+        [
+            _processed_block("p5_b1", "[1] Body citation false positive.", page_number=5, y0=100),
+            _processed_block(
+                "p100_b1",
+                "[1] Real bibliography entry, IEEE, 2020.",
+                page_number=100,
+                y0=100,
+            ),
+            _processed_block("p100_b2", "[2] Another entry.", page_number=100, y0=120),
+        ],
+        validate=True,
+    )
+    assert len(assembled) == 2
+    assert "Real bibliography" in assembled[0].text
 
 
 def test_validate_reference_sequence_rejects_gaps_and_duplicates() -> None:

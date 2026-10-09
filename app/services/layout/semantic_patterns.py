@@ -46,7 +46,10 @@ IEEE_LICENSE_FOOTER_RE = re.compile(
     re.IGNORECASE,
 )
 CORRESPONDING_RE = re.compile(r"corresponding author", re.IGNORECASE)
-REFERENCE_HEADING_RE = re.compile(r"^references(?:\s*[:\-–—])?\s*$", re.IGNORECASE)
+REFERENCE_HEADING_RE = re.compile(
+    r"^(?:references|bibliography)(?:\s*[:\-–—])?\s*$",
+    re.IGNORECASE,
+)
 ACKNOWLEDGMENT_RE = re.compile(r"^acknowledgment", re.IGNORECASE)
 JOURNAL_HEADER_RE = re.compile(r"IEEE\s+SENSORS\s+JOURNAL", re.IGNORECASE)
 CITATION_RE = re.compile(r"(?:\[\d+\]|doi:\s*10\.|vol\.\s*\d+)", re.IGNORECASE)

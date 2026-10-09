@@ -194,6 +194,19 @@ def log_reference_diagnostics(
         )
 
 
+def deduplicate_assembled_references(
+    references: list[AssembledReference],
+) -> list[AssembledReference]:
+    """Keep one entry per ``[N]``; later items win (prefer end-of-document bibliography)."""
+    by_number: dict[int, AssembledReference] = {}
+    for ref in references:
+        number = ref.reference_number
+        if number in by_number:
+            logger.info("Removed duplicate reference [%s]", number)
+        by_number[number] = ref
+    return [by_number[number] for number in sorted(by_number)]
+
+
 def validate_reference_sequence(references: list[AssembledReference]) -> None:
     """Ensure references are contiguous ``1..N`` in layout reading order without duplicates."""
     if not references:
@@ -305,7 +318,6 @@ def collect_reference_section_blocks(
         line = first_line(block.text or "")
         if REFERENCE_HEADING_RE.match(line):
             heading_page = block.page_number
-            break
 
     if heading_page is None:
         return []
@@ -485,7 +497,9 @@ def assemble_references_from_blocks(
 
     section_start = min(block.page_number for block in blocks)
     section_end = max(block.page_number for block in blocks)
-    assembled = _assemble_from_layout_ordered_blocks(blocks, confidence=confidence)
+    assembled = deduplicate_assembled_references(
+        _assemble_from_layout_ordered_blocks(blocks, confidence=confidence)
+    )
     log_reference_diagnostics(
         assembled,
         section_start_page=section_start,

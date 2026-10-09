@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel, Field
 
+from app.models.docbook_template import DocBookBookMetadata, DocBookStructureNode
+
 
 class RootAttributeSpec(BaseModel):
     """Specification for a root-element attribute."""
@@ -42,6 +44,10 @@ class TemplateSchema(BaseModel):
     template_name: str
     template_source: str
     root_tag: str = "article"
+    template_format: str = "ieee_jats_article"
+    root_namespace: str | None = None
+    docbook_metadata: DocBookBookMetadata | None = None
+    docbook_structure: DocBookStructureNode | None = None
     root_attributes: dict[str, RootAttributeSpec] = Field(default_factory=dict)
     tags: dict[str, TagSpec] = Field(default_factory=dict)
     section_boundaries: dict[str, SectionBoundarySpec] = Field(default_factory=dict)

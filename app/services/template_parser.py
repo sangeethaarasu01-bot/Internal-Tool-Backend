@@ -21,6 +21,12 @@ from app.models.template_schema import (
     TagSpec,
     TemplateSchema,
 )
+from app.services.docbook_template import parse_docbook_book_tree
+from app.services.template_format import (
+    DOCBOOK_5_BOOK,
+    UnsupportedTemplateRootError,
+    classify_template_root,
+)
 
 XLINK_HREF = "{http://www.w3.org/1999/xlink}href"
 XML_LANG = "{http://www.w3.org/XML/1998/namespace}lang"
@@ -377,7 +383,14 @@ class TemplateParser:
         known = self._load_known_tags()
         tree = etree.parse(str(self.template_path))
         root = tree.getroot()
-        root_name = _local_name(root.tag)
+        try:
+            root_info = classify_template_root(root)
+        except UnsupportedTemplateRootError:
+            raise
+        root_name = root_info.local_name
+        docbook_parse = None
+        if root_info.template_format == DOCBOOK_5_BOOK:
+            docbook_parse = parse_docbook_book_tree(root)
 
         parent_instances: dict[str, list[dict[str, int]]] = defaultdict(list)
         attributes: dict[str, set[str]] = defaultdict(set)
@@ -458,18 +471,38 @@ class TemplateParser:
             )
 
         root_attributes = self._build_root_attributes(known, root_attr_values)
-        section_boundaries = {
-            section: SectionBoundarySpec(
-                direct_children=list(section_direct[section]),
-                descendants=sorted(section_descendants[section]),
+        if root_info.template_format == DOCBOOK_5_BOOK:
+            book_children = sorted(
+                {_local_name(child.tag) for child in root if isinstance(child.tag, str)}
             )
-            for section in SECTION_ROOTS
-        }
-        scope_markers = {
-            "front": ["front"],
-            "back": ["back"],
-            "full": list(SECTION_ROOTS),
-        }
+            section_boundaries = {
+                "book": SectionBoundarySpec(
+                    direct_children=book_children,
+                    descendants=sorted(
+                        tag
+                        for tag in observed_parent_tags
+                        if tag not in {"book", "info"}
+                    ),
+                )
+            }
+            scope_markers = {
+                "front": ["part"],
+                "back": ["bibliolist"],
+                "full": ["book"],
+            }
+        else:
+            section_boundaries = {
+                section: SectionBoundarySpec(
+                    direct_children=list(section_direct[section]),
+                    descendants=sorted(section_descendants[section]),
+                )
+                for section in SECTION_ROOTS
+            }
+            scope_markers = {
+                "front": ["front"],
+                "back": ["back"],
+                "full": list(SECTION_ROOTS),
+            }
         required_paths = self._infer_required_paths(path_counts, tags, known)
         known_attributes = self._merge_known_attributes(known, attributes)
         llm_hints = self._build_llm_hints()
@@ -480,10 +513,18 @@ class TemplateParser:
         if hints.get("llm_hints"):
             llm_hints = LlmHints(**{**llm_hints.model_dump(), **hints["llm_hints"]})
 
+        template_name = known.get("template_name", "IEEE_JATS_2.0")
+        if root_info.template_format == DOCBOOK_5_BOOK:
+            template_name = "DocBook_5.0"
+
         return TemplateSchema(
-            template_name=known.get("template_name", "IEEE_JATS_2.0"),
+            template_name=template_name,
             template_source=str(self.template_path),
             root_tag=root_name,
+            template_format=root_info.template_format,
+            root_namespace=root_info.namespace_uri,
+            docbook_metadata=docbook_parse.metadata if docbook_parse else None,
+            docbook_structure=docbook_parse.structure if docbook_parse else None,
             root_attributes=root_attributes,
             tags=tags,
             section_boundaries=section_boundaries,

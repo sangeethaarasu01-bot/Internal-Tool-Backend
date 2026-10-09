@@ -49,6 +49,18 @@ class Settings(BaseSettings):
     )
     # When true, billing/auth/rate-limit errors use deterministic offline LLM mocks
     LLM_FALLBACK_MOCK: bool = True
+    # Large PDFs: faster per-page table pass during layout extract (step 2)
+    EXTRACTION_LARGE_PDF_PAGE_THRESHOLD: int = int(
+        os.getenv("EXTRACTION_LARGE_PDF_PAGE_THRESHOLD", "60")
+    )
+    EXTRACTION_TABLE_PAGE_TIMEOUT_SEC: float = float(
+        os.getenv("EXTRACTION_TABLE_PAGE_TIMEOUT_SEC", "5")
+    )
+    EXTRACTION_FIGURE_PAGE_TIMEOUT_SEC: float = float(
+        os.getenv("EXTRACTION_FIGURE_PAGE_TIMEOUT_SEC", "10")
+    )
+    EXTRACTION_STEP4_MAX_SECONDS: float = float(os.getenv("EXTRACTION_STEP4_MAX_SECONDS", "300"))
+    EXTRACTION_TABLE_PAGE_WORKERS: int = int(os.getenv("EXTRACTION_TABLE_PAGE_WORKERS", "4"))
 
     @property
     def uploads_dir(self) -> Path:

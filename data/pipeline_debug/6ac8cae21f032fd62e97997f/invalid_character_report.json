@@ -1,0 +1,259 @@
+{
+  "invalid_character_occurrences": 119,
+  "distinct_code_points": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    29,
+    30
+  ],
+  "occurrences_by_code": {
+    "U+0002": 11,
+    "U+0003": 4,
+    "U+0004": 2,
+    "U+0005": 2,
+    "U+0006": 15,
+    "U+0007": 1,
+    "U+0008": 3,
+    "U+000B": 39,
+    "U+000C": 3,
+    "U+000E": 8,
+    "U+000F": 4,
+    "U+0010": 1,
+    "U+0011": 1,
+    "U+0012": 4,
+    "U+0013": 1,
+    "U+0014": 1,
+    "U+0015": 2,
+    "U+0016": 4,
+    "U+0017": 4,
+    "U+0018": 1,
+    "U+001D": 4,
+    "U+001E": 4
+  },
+  "characters_removed_for_xml": 119,
+  "affected_pages": [
+    {
+      "page_number": 2,
+      "invalid_character_count": 2,
+      "code_points": [
+        2
+      ],
+      "occurrences_by_code": {
+        "U+0002": 2
+      }
+    },
+    {
+      "page_number": 3,
+      "invalid_character_count": 3,
+      "code_points": [
+        3,
+        4,
+        5
+      ],
+      "occurrences_by_code": {
+        "U+0004": 1,
+        "U+0003": 1,
+        "U+0005": 1
+      }
+    },
+    {
+      "page_number": 4,
+      "invalid_character_count": 5,
+      "code_points": [
+        2,
+        6,
+        7
+      ],
+      "occurrences_by_code": {
+        "U+0006": 2,
+        "U+0002": 2,
+        "U+0007": 1
+      }
+    },
+    {
+      "page_number": 5,
+      "invalid_character_count": 31,
+      "code_points": [
+        2,
+        5,
+        8,
+        11,
+        12,
+        14
+      ],
+      "occurrences_by_code": {
+        "U+000B": 22,
+        "U+0008": 2,
+        "U+000C": 2,
+        "U+0005": 1,
+        "U+000E": 3,
+        "U+0002": 1
+      }
+    },
+    {
+      "page_number": 6,
+      "invalid_character_count": 12,
+      "code_points": [
+        3,
+        4,
+        6,
+        8,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "occurrences_by_code": {
+        "U+0012": 1,
+        "U+000C": 1,
+        "U+0008": 1,
+        "U+000F": 1,
+        "U+0011": 1,
+        "U+0010": 1,
+        "U+0003": 1,
+        "U+000E": 1,
+        "U+0004": 1,
+        "U+0013": 1,
+        "U+0014": 1,
+        "U+0006": 1
+      }
+    },
+    {
+      "page_number": 7,
+      "invalid_character_count": 3,
+      "code_points": [
+        15,
+        18,
+        21
+      ],
+      "occurrences_by_code": {
+        "U+000F": 1,
+        "U+0012": 1,
+        "U+0015": 1
+      }
+    },
+    {
+      "page_number": 8,
+      "invalid_character_count": 5,
+      "code_points": [
+        2,
+        6,
+        21,
+        22,
+        23
+      ],
+      "occurrences_by_code": {
+        "U+0015": 1,
+        "U+0002": 1,
+        "U+0006": 1,
+        "U+0016": 1,
+        "U+0017": 1
+      }
+    },
+    {
+      "page_number": 9,
+      "invalid_character_count": 8,
+      "code_points": [
+        6,
+        14,
+        15,
+        18,
+        24
+      ],
+      "occurrences_by_code": {
+        "U+0006": 1,
+        "U+0018": 1,
+        "U+000F": 2,
+        "U+0012": 2,
+        "U+000E": 2
+      }
+    },
+    {
+      "page_number": 10,
+      "invalid_character_count": 20,
+      "code_points": [
+        2,
+        11,
+        14,
+        29,
+        30
+      ],
+      "occurrences_by_code": {
+        "U+0002": 4,
+        "U+001D": 3,
+        "U+001E": 3,
+        "U+000B": 8,
+        "U+000E": 2
+      }
+    },
+    {
+      "page_number": 11,
+      "invalid_character_count": 22,
+      "code_points": [
+        3,
+        6,
+        11,
+        22,
+        23
+      ],
+      "occurrences_by_code": {
+        "U+0003": 2,
+        "U+000B": 6,
+        "U+0016": 2,
+        "U+0017": 2,
+        "U+0006": 10
+      }
+    },
+    {
+      "page_number": 12,
+      "invalid_character_count": 8,
+      "code_points": [
+        2,
+        11,
+        22,
+        23,
+        29,
+        30
+      ],
+      "occurrences_by_code": {
+        "U+001D": 1,
+        "U+001E": 1,
+        "U+0002": 1,
+        "U+000B": 3,
+        "U+0016": 1,
+        "U+0017": 1
+      }
+    }
+  ],
+  "raw_character_count": 69894,
+  "normalized_character_count": 69775,
+  "origin_hint": "Control characters appear in PyMuPDF get_text('dict') output before Phase 1 XML sanitization. They are common near mathematical notation when PDF fonts/CMaps map glyphs to C0 control code points; they are not introduced by the legacy XML generator.",
+  "xml_sanitization_warning_source": "Log line 'Invalid XML character(s) removed' is emitted by app.utils.xml_text.sanitize_xml_text (via escape_xml_text) when building structure.semantic.tagged_output in app.services.layout.semantic_renderer.",
+  "warnings": [
+    "Control characters appear in PyMuPDF get_text('dict') output before Phase 1 XML sanitization. They are common near mathematical notation when PDF fonts/CMaps map glyphs to C0 control code points; they are not introduced by the legacy XML generator.",
+    "Log line 'Invalid XML character(s) removed' is emitted by app.utils.xml_text.sanitize_xml_text (via escape_xml_text) when building structure.semantic.tagged_output in app.services.layout.semantic_renderer.",
+    "Detected 119 XML-illegal control character occurrence(s) across 11 page(s); 119 character(s) would be stripped for XML intermediate output (raw extract preserved separately)."
+  ]
+}

@@ -266,6 +266,8 @@ def _image_bboxes_on_page(page: pymupdf.Page) -> list[list[float]]:
         for xref, *_rest in page.get_images(full=True):
             for rect in page.get_image_rects(xref):
                 bb = [float(rect.x0), float(rect.y0), float(rect.x1), float(rect.y1)]
+                if (bb[2] - bb[0]) < 50 or (bb[3] - bb[1]) < 50:
+                    continue
                 key = tuple(round(v, 1) for v in bb)
                 if key in seen:
                     continue
@@ -394,6 +396,8 @@ def extract_figures(
     figures_dir: Path | None = None,
 
     path_prefix: str = "figures",
+
+    render_images: bool = True,
 
 ) -> list[ExtractedFigure]:
 
@@ -562,7 +566,7 @@ def extract_figures(
             xref = matched.region.xref
             engine = _engine_label(matched.region.source)
 
-            if figures_dir is not None:
+            if figures_dir is not None and render_images:
 
                 rel_path = f"{path_prefix}/{file_stem}.png"
 
@@ -743,7 +747,7 @@ def _legacy_orphan_images(
 
                 rel_path: str | None = None
 
-                if figures_dir is not None:
+                if figures_dir is not None and render_images:
 
                     rel_path = f"{path_prefix}/{file_stem}.png"
 

@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "stage": "phase1_pdf_extraction",
+  "artifacts": {
+    "original_pdf": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\original.pdf",
+    "phase1_document": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\phase1_document.json",
+    "raw_extracted_text": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\raw_extracted_text.txt",
+    "normalized_extracted_text": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\normalized_extracted_text.txt",
+    "extracted_raw_text": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\extracted_raw_text.txt",
+    "invalid_character_report": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\invalid_character_report.json",
+    "extraction_quality": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\extraction_quality.json",
+    "layout_extraction": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\layout_extraction.json",
+    "tables_dir": "data\\pipeline_debug\\6ac8d119cac519efa424bcf5\\tables"
+  }
+}

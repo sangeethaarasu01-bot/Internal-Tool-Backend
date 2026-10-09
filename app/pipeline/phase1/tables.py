@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
+from collections.abc import Callable
 from pathlib import Path
 import pdfplumber
 import pymupdf
@@ -2060,31 +2061,74 @@ def _filter_and_rank_tables(
     return processed
 
 
+def _enrich_tables_from_raw_pages_only(
+    raw: ExtractionResult,
+    captions: list[CaptionCandidate],
+    *,
+    assets_dir: Path | None = None,
+) -> list[ExtractedTableSummary]:
+    """Fast path: PyMuPDF grids already on ``raw.pages`` (no pdfplumber/camelot)."""
+    tables: list[ExtractedTableSummary] = []
+    table_index = 0
+    for page in raw.pages:
+        for table in page.tables:
+            table_index += 1
+            table_id = table.table_id or f"table_{table_index}"
+            rows = [list(row) for row in table.rows]
+            tables.append(
+                _build_table_record(
+                    table_id=table_id,
+                    page_number=page.page_number,
+                    rows=rows,
+                    bbox=table.bbox,
+                    captions=captions,
+                    raw=raw,
+                    assets_dir=assets_dir,
+                    engine="pymupdf",
+                )
+            )
+    return tables
+
+
 def enrich_tables(
     raw: ExtractionResult,
     captions: list[CaptionCandidate],
     *,
     pdf_path: Path | None = None,
     assets_dir: Path | None = None,
+    fast_mode: bool = False,
+    skip_heavy_pipeline: bool = False,
 ) -> list[ExtractedTableSummary]:
     """Build extended table records (Camelot/img2table pipeline when PDF path is set)."""
+    if fast_mode or skip_heavy_pipeline:
+        logger.info(
+            "enrich_tables fast_mode=%s skip_heavy=%s pages=%s",
+            fast_mode,
+            skip_heavy_pipeline,
+            raw.document.page_count,
+        )
+        if skip_heavy_pipeline:
+            return _enrich_tables_from_raw_pages_only(raw, captions, assets_dir=assets_dir)
     if assets_dir is not None:
         assets_dir.mkdir(parents=True, exist_ok=True)
         for stale in assets_dir.glob("table_*.json"):
             stale.unlink(missing_ok=True)
     if pdf_path is not None and pdf_path.is_file():
         if not any(page.tables for page in raw.pages):
-            raw = extract_tables_from_pdf_path(pdf_path, raw)
+            raw = extract_tables_from_pdf_path(pdf_path, raw, fast_mode=fast_mode)
         if not _uses_roman_comparison_table_mode(captions):
             return _enrich_arabic_numbered_tables(
                 raw,
                 captions,
-                pdf_path=pdf_path,
+                pdf_path=pdf_path if not fast_mode else None,
                 assets_dir=assets_dir,
             )
+        if fast_mode:
+            return _enrich_tables_from_raw_pages_only(raw, captions, assets_dir=assets_dir)
         candidates: list[ExtractedTableSummary] = []
         candidates.extend(_tables_from_generic_pipeline(pdf_path, assets_dir=assets_dir))
-        candidates.extend(_pdfplumber_text_pass_whole_document(pdf_path))
+        if raw.document.page_count <= 40:
+            candidates.extend(_pdfplumber_text_pass_whole_document(pdf_path))
         candidates.extend(
             _tables_from_raw_pages(raw, captions, assets_dir=assets_dir, start_index=len(candidates))
         )
@@ -2158,21 +2202,99 @@ def enrich_tables(
     return tables
 
 
-def extract_tables_from_pdf_path(pdf_path: Path, raw: ExtractionResult) -> ExtractionResult:
+def _extract_tables_for_page_model(
+    pdf_path: Path,
+    page_number: int,
+    blocks: list,
+    *,
+    fast_mode: bool,
+    page_timeout_sec: float,
+) -> tuple[list, bool]:
+    from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
+
+    from app.services.table_extractor import extract_tables_from_page, page_might_have_table
+
+    block_models = list(blocks)
+    if fast_mode and not page_might_have_table(block_models):
+        return [], False
+
+    def _run() -> tuple[list, bool]:
+        doc = pymupdf.open(str(pdf_path))
+        try:
+            page = doc[page_number - 1]
+            return extract_tables_from_page(
+                page,
+                page_number,
+                block_models,
+                fast=fast_mode,
+            )
+        finally:
+            doc.close()
+
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        future = pool.submit(_run)
+        try:
+            return future.result(timeout=page_timeout_sec)
+        except FuturesTimeout:
+            logger.warning("Table extraction timeout on page %s (%.1fs)", page_number, page_timeout_sec)
+            return [], False
+
+
+def extract_tables_from_pdf_path(
+    pdf_path: Path,
+    raw: ExtractionResult,
+    *,
+    fast_mode: bool = False,
+    page_timeout_sec: float = 5.0,
+    page_progress: Callable[[int, int], None] | None = None,
+    max_workers: int = 4,
+    should_abort: Callable[[], bool] | None = None,
+) -> ExtractionResult:
     """Re-run table detection on an open PDF when page tables are empty (optional helper)."""
     if any(page.tables for page in raw.pages):
         return raw
-    doc = pymupdf.open(str(pdf_path))
-    try:
-        pages = list(raw.pages)
-        for page_model in pages:
-            page = doc[page_model.page_number - 1]
-            from app.services.table_extractor import extract_tables_from_page
 
-            tables, ocr = extract_tables_from_page(page, page_model.page_number, page_model.blocks)
+    pages = list(raw.pages)
+    total = len(pages)
+    ocr_applied = raw.document.ocr_applied
+
+    def _process_page(page_model) -> tuple[int, list, bool]:
+        tables, ocr = _extract_tables_for_page_model(
+            pdf_path,
+            page_model.page_number,
+            page_model.blocks,
+            fast_mode=fast_mode,
+            page_timeout_sec=page_timeout_sec,
+        )
+        return page_model.page_number, tables, ocr
+
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    workers = max(1, min(max_workers, 4))
+    if workers == 1 or total < 8:
+        for index, page_model in enumerate(pages):
+            if should_abort and should_abort():
+                logger.warning("Table PDF pass aborted early (deadline)")
+                break
+            if page_progress and (index == 0 or (index + 1) % 10 == 0 or index + 1 == total):
+                page_progress(page_model.page_number, total)
+            _, tables, ocr = _process_page(page_model)
             page_model.tables = tables
-            if ocr:
-                raw.document.ocr_applied = True
-        return raw.model_copy(update={"pages": pages})
-    finally:
-        doc.close()
+            ocr_applied = ocr_applied or ocr
+    else:
+        page_by_num = {p.page_number: p for p in pages}
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {pool.submit(_process_page, pm): pm for pm in pages}
+            done = 0
+            for future in as_completed(futures):
+                if should_abort and should_abort():
+                    logger.warning("Table PDF pass aborted early (deadline)")
+                    break
+                done += 1
+                page_number, tables, ocr = future.result()
+                page_by_num[page_number].tables = tables
+                ocr_applied = ocr_applied or ocr
+                if page_progress and (done == 1 or done % 10 == 0 or done == total):
+                    page_progress(page_number, total)
+
+    return raw.model_copy(update={"pages": pages, "document": raw.document.model_copy(update={"ocr_applied": ocr_applied})})

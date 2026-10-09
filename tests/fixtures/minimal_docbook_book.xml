@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
+  <info>
+    <title>Test Book</title>
+    <subtitle>Test Subtitle</subtitle>
+    <authorgroup>
+      <author>
+        <personname>
+          <firstname>Ada</firstname>
+          <surname>Lovelace</surname>
+        </personname>
+      </author>
+      <author>
+        <personname>
+          <firstname>Grace</firstname>
+          <surname>Hopper</surname>
+        </personname>
+      </author>
+    </authorgroup>
+    <biblioset role="publisher">
+      <publisher>
+        <publishername>Test Publisher</publishername>
+      </publisher>
+    </biblioset>
+    <copyright>
+      <year>2025</year>
+      <holder>Test Holder</holder>
+    </copyright>
+    <biblioid class="isbn" role="hardback">978-0-000-00000-0</biblioid>
+    <biblioid class="doi">10.0000/testbook</biblioid>
+  </info>
+  <part role="front" label="I">
+    <preface>
+      <title>Preface</title>
+      <para>Front matter text.</para>
+    </preface>
+  </part>
+  <chapter label="1">
+    <title>Chapter One</title>
+    <section>
+      <title>Section A</title>
+      <para>Body paragraph.</para>
+    </section>
+    <sidebar>
+      <para>Sidebar note.</para>
+    </sidebar>
+    <section role="bibliography">
+      <title>References</title>
+      <bibliolist>
+        <bibliomixed>[1] Sample chapter reference.</bibliomixed>
+      </bibliolist>
+    </section>
+  </chapter>
+</book>

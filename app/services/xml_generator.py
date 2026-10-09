@@ -6,9 +6,12 @@ IEEE JATS XML using the uploaded client template as the structural skeleton.
 
 from __future__ import annotations
 
+import logging
 import re
 from pathlib import Path
 from typing import Any
+
+logger = logging.getLogger(__name__)
 
 from lxml import etree
 
@@ -22,9 +25,11 @@ from app.utils.text_utils import dehyphenate_line_breaks, infer_drop_cap_letter
 from app.utils.reference_assembler import (
     AssembledReference,
     ReferenceParsingError,
+    deduplicate_assembled_references,
     reference_number_from_mapping_node,
     validate_reference_sequence,
 )
+from app.services.template_format import UnsupportedTemplateRootError, require_jats_article_template
 from app.utils.reference_citation_builder import populate_structured_mixed_citation
 from app.utils.xml_serializer import serialize_lxml_tree
 from app.utils.xml_text import normalize_person_name_text, sanitize_xml_text, set_lxml_attr, set_lxml_text
@@ -544,8 +549,29 @@ def _assembled_references_from_mapping(
     return assembled
 
 
+def _deduplicate_mapping_reference_list(
+    references: list[MappedSemanticNode | dict[str, Any]],
+) -> list[MappedSemanticNode | dict[str, Any]]:
+    if not references:
+        return references
+    by_number: dict[int, MappedSemanticNode | dict[str, Any]] = {}
+    for index, reference in enumerate(references):
+        mapped = _as_mapped(reference)
+        number = reference_number_from_mapping_node(
+            mapped,
+            text=_text_of(mapped),
+            label=mapped.label,
+            fallback=index + 1,
+        )
+        if number in by_number:
+            logger.info("Removed duplicate reference [%s]", number)
+        by_number[number] = reference
+    return [by_number[number] for number in sorted(by_number)]
+
+
 def _validate_mapping_references(references: list[MappedSemanticNode | dict[str, Any]]) -> None:
-    validate_reference_sequence(_assembled_references_from_mapping(references))
+    assembled = deduplicate_assembled_references(_assembled_references_from_mapping(references))
+    validate_reference_sequence(assembled)
 
 
 def _append_reference(parent: etree._Element, node: MappedSemanticNode | dict[str, Any], index: int) -> None:
@@ -785,6 +811,8 @@ def _apply_back_matter(article: etree._Element, back: dict[str, Any]) -> None:
     if not references:
         return
 
+    references = _deduplicate_mapping_reference_list(references)
+
     ref_list = back_el.find("ref-list")
     if ref_list is None:
         ref_list = etree.SubElement(back_el, "ref-list")
@@ -830,8 +858,10 @@ def generate_jats_xml(
         raise XmlGenerationError(f"Invalid template XML: {exc}") from exc
 
     article = tree.getroot()
-    if article.tag != "article":
-        raise XmlGenerationError("Template root element must be <article>")
+    try:
+        require_jats_article_template(article)
+    except UnsupportedTemplateRootError as exc:
+        raise XmlGenerationError(str(exc)) from exc
 
     _apply_front_matter(article, body.front)
 

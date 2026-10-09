@@ -181,7 +181,7 @@ def semantic_document_to_paper(semantic: SemanticDocument) -> PaperData:
 
 def extract_paper_via_layout(pdf_path: Path) -> PaperData:
     """High-quality PDF → PaperData using reading order + semantic classification."""
-    raw = extract_text_layout(str(pdf_path), pdf_path.name)
+    raw = extract_text_layout(str(pdf_path), original_filename=pdf_path.name)
     raw = _trim_extraction_result(raw)
     structure = process_document_structure(raw)
     semantic = structure.semantic

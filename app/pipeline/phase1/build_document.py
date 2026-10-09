@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 from app.models.document_structure import DocumentStructureResult, ProcessedBlock
 from app.models.extracted_document import (
@@ -22,7 +25,9 @@ from app.services.layout.semantic_signals import _is_author_bio
 from app.utils.reference_assembler import (
     _assemble_from_layout_ordered_blocks,
     collect_reference_section_blocks,
+    deduplicate_assembled_references,
     is_plausible_bibliography_entry,
+    parse_reference_number,
 )
 from app.pipeline.phase1.figures import extract_figures
 from app.pipeline.phase1.layout_hints import (
@@ -49,6 +54,9 @@ from app.services.layout.semantic_patterns import (
     is_roman_section_heading,
     normalize_text,
 )
+from app.config import settings
+from app.pipeline.phase1.extraction_build_options import ExtractionBuildOptions
+from app.pipeline.phase1.tables import extract_tables_from_pdf_path
 
 
 def _heading_kind_for_block(block: ProcessedBlock, body_font: float | None) -> str:
@@ -188,7 +196,8 @@ def _link_captions(
 
 
 def _build_book_references(structure: DocumentStructureResult) -> list[ExtractedReferenceItem]:
-    refs: list[ExtractedReferenceItem] = []
+    by_number: dict[int, ExtractedReferenceItem] = {}
+    unnumbered: list[ExtractedReferenceItem] = []
     for item in structure.references:
         text = (item.text or "").strip()
         if not text:
@@ -199,14 +208,20 @@ def _build_book_references(structure: DocumentStructureResult) -> list[Extracted
             continue
         if not looks_like_book_chapter_reference_line(text):
             continue
-        refs.append(
-            ExtractedReferenceItem(
-                text=text,
-                page_number=item.page_number,
-                source_block_ids=list(item.source_block_ids),
-            )
+        entry = ExtractedReferenceItem(
+            text=text,
+            page_number=item.page_number,
+            source_block_ids=list(item.source_block_ids),
         )
-    return refs
+        number = parse_reference_number(text)
+        if number is None:
+            unnumbered.append(entry)
+            continue
+        if number in by_number:
+            logger.info("Removed duplicate reference [%s]", number)
+        by_number[number] = entry
+    ordered = [by_number[number] for number in sorted(by_number)]
+    return ordered + unnumbered
 
 
 def _build_references(structure: DocumentStructureResult) -> list[ExtractedReferenceItem]:
@@ -220,15 +235,12 @@ def _build_references(structure: DocumentStructureResult) -> list[ExtractedRefer
     )
     if not section_blocks:
         return []
-    assembled = _assemble_from_layout_ordered_blocks(section_blocks)
-    by_number: dict[int, object] = {}
-    for ref in assembled:
-        if not is_plausible_bibliography_entry(ref.raw_text):
-            continue
-        existing = by_number.get(ref.reference_number)
-        if existing is None or len(ref.raw_text) > len(existing.raw_text):
-            by_number[ref.reference_number] = ref
-    ordered = [by_number[number] for number in sorted(by_number) if number >= 1]
+    assembled = deduplicate_assembled_references(
+        _assemble_from_layout_ordered_blocks(section_blocks)
+    )
+    ordered = [
+        ref for ref in assembled if ref.reference_number >= 1 and is_plausible_bibliography_entry(ref.raw_text)
+    ]
     return [
         ExtractedReferenceItem(
             text=ref.raw_text,
@@ -341,8 +353,15 @@ def build_extracted_document(
     structure: DocumentStructureResult | None = None,
     pdf_path: Path | None = None,
     bundle_dir: Path | None = None,
+    options: ExtractionBuildOptions | None = None,
 ) -> ExtractedDocument:
     """Compose Phase 1 IR from raw PyMuPDF extraction (no LLM calls)."""
+    opts = options or ExtractionBuildOptions()
+    page_count = raw.document.page_count
+    auto_fast = page_count >= settings.EXTRACTION_LARGE_PDF_PAGE_THRESHOLD
+    fast_mode = opts.fast_tables_figures or auto_fast
+    skip_assets = opts.skip_tables_figures
+
     structure = structure or process_document_structure(raw, include_tagged_output=False)
     processed_by_id = {block.block_id: block for block in structure.blocks}
     body_font = _median_body_font(structure.blocks)
@@ -353,19 +372,62 @@ def build_extracted_document(
     captions = build_caption_records(caption_candidates)
     tables_dir = bundle_dir / "tables" if bundle_dir else None
     figures_dir = bundle_dir / "figures" if bundle_dir else None
-    tables = enrich_tables(
-        raw,
-        caption_candidates,
-        pdf_path=pdf_path,
-        assets_dir=tables_dir,
-    )
-    figures = extract_figures(
-        pdf_path or Path("__missing__.pdf"),
-        raw,
-        caption_candidates,
-        figures_dir=figures_dir,
-        path_prefix="figures",
-    ) if pdf_path else []
+
+    def _page_progress(current: int, total: int) -> None:
+        if opts.page_progress:
+            opts.page_progress(
+                current,
+                total,
+                f"Processed page {current}/{total} (tables)",
+            )
+
+    working_raw = raw
+    partial = opts.partial_step4
+    if skip_assets:
+        tables = []
+        figures = []
+    else:
+        if (
+            pdf_path is not None
+            and pdf_path.is_file()
+            and not any(page.tables for page in raw.pages)
+            and not partial
+            and not opts.step4_timed_out()
+        ):
+            working_raw = extract_tables_from_pdf_path(
+                pdf_path,
+                raw,
+                fast_mode=fast_mode,
+                page_timeout_sec=opts.table_page_timeout_sec,
+                page_progress=_page_progress,
+                max_workers=settings.EXTRACTION_TABLE_PAGE_WORKERS,
+                should_abort=opts.step4_timed_out,
+            )
+            if opts.step4_timed_out():
+                partial = True
+                opts.partial_step4 = True
+        elif opts.step4_timed_out():
+            partial = True
+            opts.partial_step4 = True
+
+        use_fast = fast_mode or partial
+        tables = enrich_tables(
+            working_raw,
+            caption_candidates,
+            pdf_path=pdf_path if not use_fast else None,
+            assets_dir=tables_dir,
+            fast_mode=use_fast,
+            skip_heavy_pipeline=partial,
+        )
+        render_images = not use_fast and not settings.LIGHT_PDF_EXTRACT
+        figures = extract_figures(
+            pdf_path or Path("__missing__.pdf"),
+            working_raw,
+            caption_candidates,
+            figures_dir=figures_dir if render_images else None,
+            path_prefix="figures",
+            render_images=render_images,
+        ) if pdf_path else []
     equations = extract_equations(structure.blocks)
     inline_equation_count = count_inline_math_occurrences(structure.blocks)
     _link_captions(captions, tables, figures)
@@ -381,6 +443,14 @@ def build_extracted_document(
     raw_text = join_ordered_block_text(raw)
     normalized_text = strip_illegal_xml_chars(raw_text)
     invalid_report = scan_text_fidelity(raw, normalized_text=normalized_text)
+    quality_warnings = list(invalid_report.warnings)
+    if opts.partial_step4:
+        quality_warnings.append(
+            "Step 4 exceeded time budget; saved partial table/figure results (fast mode)."
+        )
+    if skip_assets:
+        quality_warnings.append("Tables and figures skipped per extraction request.")
+
     quality = _quality(
         raw,
         structure,
@@ -394,7 +464,7 @@ def build_extracted_document(
         multi_column,
         inline_equation_count=inline_equation_count,
         invalid_character_report=invalid_report,
-        extra_warnings=invalid_report.warnings,
+        extra_warnings=quality_warnings,
     )
 
     return ExtractedDocument(

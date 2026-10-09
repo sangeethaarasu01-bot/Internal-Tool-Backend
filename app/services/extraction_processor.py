@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -14,6 +15,7 @@ from app.config import settings
 from app.database import extractions_col
 from app.pipeline.debug_artifacts import write_phase1_debug_bundle
 from app.pipeline.phase1.build_document import build_extracted_document
+from app.pipeline.phase1.extraction_build_options import ExtractionBuildOptions
 from app.services.layout.document_pipeline import build_full_extraction_result
 from app.services.text_extractor import PdfValidationError, extract_text_layout
 
@@ -39,7 +41,14 @@ def _set_progress(
 def process_extraction(extraction_id: str, file_path: str, original_filename: str) -> None:
     col = extractions_col()
     oid = ObjectId(extraction_id)
-    logger.info("Extraction %s background task started", extraction_id)
+    doc_meta = col.find_one({"_id": oid}) or {}
+    skip_tables_figures = bool(doc_meta.get("skip_tables_figures"))
+
+    logger.info(
+        "Extraction %s background task started (skip_tables_figures=%s)",
+        extraction_id,
+        skip_tables_figures,
+    )
 
     _set_progress(
         col,
@@ -69,11 +78,41 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
         )
         full = build_full_extraction_result(raw, include_tagged_output=False)
 
+        step4_start = time.monotonic()
+        step4_deadline = step4_start + settings.EXTRACTION_STEP4_MAX_SECONDS
+        page_total = raw.document.page_count
+
+        def on_page_progress(current: int, total: int, detail: str) -> None:
+            sub_pct = int(18 * current / max(total, 1))
+            _set_progress(
+                col,
+                oid,
+                extraction_id,
+                step=f"Step 4/5: {detail}",
+                progress=70 + sub_pct,
+            )
+            if current % 10 == 0 or current == total:
+                logger.info(
+                    "Extraction %s Step 4/5: %s (%s/%s pages)",
+                    extraction_id,
+                    detail,
+                    current,
+                    total,
+                )
+
+        build_options = ExtractionBuildOptions(
+            skip_tables_figures=skip_tables_figures,
+            fast_tables_figures=page_total >= settings.EXTRACTION_LARGE_PDF_PAGE_THRESHOLD,
+            table_page_timeout_sec=settings.EXTRACTION_TABLE_PAGE_TIMEOUT_SEC,
+            page_progress=on_page_progress,
+            step4_deadline=step4_deadline,
+        )
+
         _set_progress(
             col,
             oid,
             extraction_id,
-            step="Step 4/5: Tables and figures",
+            step=f"Step 4/5: Tables and figures (0/{page_total} pages)",
             progress=70,
         )
         debug_dir = settings.pipeline_debug_dir / extraction_id
@@ -82,7 +121,14 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
             structure=full.structure,
             pdf_path=Path(file_path),
             bundle_dir=debug_dir,
+            options=build_options,
         )
+
+        if build_options.partial_step4:
+            logger.warning(
+                "Extraction %s: Step 4 timeout, partial results saved",
+                extraction_id,
+            )
 
         _set_progress(
             col,
@@ -118,6 +164,7 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
                     "completed_at": datetime.now(timezone.utc),
                     "current_step": "Extraction complete",
                     "progress": 100,
+                    "step4_partial": build_options.partial_step4,
                 }
             },
         )

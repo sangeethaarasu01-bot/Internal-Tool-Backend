@@ -36,6 +36,10 @@ class GenerateXmlRequest(BaseModel):
     scope: str = "full"
     use_llm: bool = False
     llm_fallback: bool = True
+    output_format: str = Field(
+        default="auto",
+        description="auto | ieee_jats | docbook_5 (epub_3/onix_3 not implemented)",
+    )
 
 
 class GenerateXmlResponse(BaseModel):
@@ -43,6 +47,7 @@ class GenerateXmlResponse(BaseModel):
     scope: str
     mapping_source: str
     prompt_version: str | None = None
+    output_format: str
     xml_content: str
     warnings: list[str] = Field(default_factory=list)
     unmapped_content_count: int = 0

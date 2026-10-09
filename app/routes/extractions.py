@@ -9,7 +9,7 @@ from datetime import datetime
 import aiofiles
 from bson import ObjectId
 from bson.errors import InvalidId
-from fastapi import APIRouter, BackgroundTasks, File, HTTPException, UploadFile
+from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile
 from pymongo.errors import PyMongoError
 
 from app.database import extractions_col, mongo_connect_error, utcnow
@@ -39,7 +39,9 @@ from app.services.llm.providers.base import LLMConfigurationError
 from app.services.llm.providers.factory import is_llm_configured
 from app.services.llm_semantic_mapper import SemanticMappingError, map_semantic_content
 from app.services.scope_resolver import InvalidScopeError
-from app.services.xml_generator import XmlGenerationError, generate_jats_xml
+from app.services.output_format import OutputFormatError
+from app.services.xml_generator import XmlGenerationError
+from app.services.xml_output_router import generate_output_xml
 
 logger = logging.getLogger(__name__)
 
@@ -97,6 +99,7 @@ def _require_completed_extraction(doc: dict) -> None:
 async def start_extraction(
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
+    skip_tables_figures: bool = Form(False),
 ):
     """Save the PDF for extraction only. Does not create a conversions record."""
     filename = file.filename or "document.pdf"
@@ -139,6 +142,7 @@ async def start_extraction(
         "completed_at": None,
         "scope": "full",
         "template": None,
+        "skip_tables_figures": skip_tables_figures,
     }
     try:
         inserted = extractions_col().insert_one(doc)
@@ -354,13 +358,14 @@ async def semantic_map_extraction(extraction_id: str, body: SemanticMapRequest):
 
 @router.post("/{extraction_id}/generate-xml", response_model=GenerateXmlResponse)
 async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
-    """Generate IEEE JATS XML from scoped IR + uploaded template (optional LLM mapping)."""
+    """Generate XML from scoped IR + uploaded template (JATS article or DocBook book)."""
     logger.info(
-        "generate-xml started for %s (use_llm=%s, llm_fallback=%s, scope=%s)",
+        "generate-xml started for %s (use_llm=%s, llm_fallback=%s, scope=%s, output_format=%s)",
         extraction_id,
         body.use_llm,
         body.llm_fallback,
         body.scope,
+        body.output_format,
     )
     doc = extractions_col().find_one({"_id": _oid(extraction_id)})
     if not doc:
@@ -458,14 +463,28 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
     mapping_body = fill_back_references_from_ir(mapping_body, filtered_ir)
 
     try:
-        xml_content = generate_jats_xml(template_path, mapping_body)
+        xml_content, resolved_output_format = generate_output_xml(
+            template_path,
+            template_schema,
+            mapping_body,
+            output_format=body.output_format,
+        )
+    except OutputFormatError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
     except XmlGenerationError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+    if resolved_output_format == "docbook_5":
+        warnings.append(
+            "DocBook output preserves the uploaded book template structure; "
+            "PDF chapter merge is not applied on this path."
+        )
 
     generated_record = {
         "scope": resolved_scope,
         "mapping_source": mapping_source,
         "prompt_version": prompt_version,
+        "output_format": resolved_output_format,
         "xml_content": xml_content,
         "warnings": warnings,
         "generated_at": utcnow(),
@@ -483,6 +502,7 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
         scope=resolved_scope,
         mapping_source=mapping_source,
         prompt_version=prompt_version,
+        output_format=resolved_output_format,
         xml_content=xml_content,
         warnings=warnings,
         unmapped_content_count=unmapped_count,

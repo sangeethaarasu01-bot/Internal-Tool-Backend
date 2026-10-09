@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pymupdf
 
+from app.config import settings
 from app.models.extraction import (
     DocumentInfo,
     DocumentMetadata,
@@ -16,12 +17,12 @@ from app.models.extraction import (
     TextLine,
     TextSpan,
 )
+from app.services.layout.column_classifier import annotate_page_columns
 from app.services.ocr_detector import (
     classify_pages,
     document_requires_ocr,
     page_requires_ocr,
 )
-from app.services.layout.column_classifier import annotate_page_columns
 from app.services.table_extractor import extract_tables_from_page
 
 EXTRACTION_ENGINE = "pymupdf"
@@ -50,10 +51,20 @@ def extract_text_layout(file_path: str, original_filename: str | None = None) ->
             raise PdfValidationError("PDF has no pages")
 
         filename = original_filename or path.name
+        fast_tables = (
+            settings.LIGHT_PDF_EXTRACT
+            or doc.page_count >= settings.EXTRACTION_LARGE_PDF_PAGE_THRESHOLD
+        )
+        defer_tables_to_step4 = doc.page_count >= settings.EXTRACTION_LARGE_PDF_PAGE_THRESHOLD
         pages: list[PageExtraction] = []
         ocr_applied = False
         for page_index in range(doc.page_count):
-            page_result, page_ocr = _extract_page(doc[page_index], page_index + 1)
+            page_result, page_ocr = _extract_page(
+                doc[page_index],
+                page_index + 1,
+                fast_tables=fast_tables,
+                skip_tables=defer_tables_to_step4,
+            )
             pages.append(annotate_page_columns(page_result))
             ocr_applied = ocr_applied or page_ocr
 
@@ -112,7 +123,13 @@ def _clean_meta(value: object) -> str | None:
     return text or None
 
 
-def _extract_page(page: pymupdf.Page, page_number: int) -> tuple[PageExtraction, bool]:
+def _extract_page(
+    page: pymupdf.Page,
+    page_number: int,
+    *,
+    fast_tables: bool = False,
+    skip_tables: bool = False,
+) -> tuple[PageExtraction, bool]:
     payload = page.get_text("dict")
     width = float(payload.get("width") or page.rect.width)
     height = float(payload.get("height") or page.rect.height)
@@ -121,7 +138,15 @@ def _extract_page(page: pymupdf.Page, page_number: int) -> tuple[PageExtraction,
     for block_index, raw_block in enumerate(payload.get("blocks") or []):
         blocks.append(_extract_block(raw_block, page_number, block_index))
 
-    tables, ocr_applied = extract_tables_from_page(page, page_number, blocks)
+    if skip_tables:
+        tables, ocr_applied = [], False
+    else:
+        tables, ocr_applied = extract_tables_from_page(
+            page,
+            page_number,
+            blocks,
+            fast=fast_tables,
+        )
     text = "".join(block.text for block in blocks)
     char_count = len(text)
     return (

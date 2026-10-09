@@ -14,6 +14,7 @@ from lxml import etree
 
 from app.database import utcnow
 from app.services.scope_resolver import InvalidScopeError, resolve_scope
+from app.services.template_format import UnsupportedTemplateRootError
 from app.services.template_parser import TemplateParser
 
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
@@ -39,7 +40,10 @@ def parse_template_xml(template_path: Path) -> dict[str, Any]:
     except etree.XMLSyntaxError as exc:
         raise ExtractionWorkflowError(f"Invalid XML template: {exc}") from exc
 
-    schema = TemplateParser(template_path).parse()
+    try:
+        schema = TemplateParser(template_path).parse()
+    except UnsupportedTemplateRootError as exc:
+        raise ExtractionWorkflowError(str(exc)) from exc
     return schema.model_dump(mode="json")
 
 
