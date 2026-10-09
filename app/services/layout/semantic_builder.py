@@ -63,6 +63,14 @@ from app.services.layout.list_detection import (
     union_bbox,
 )
 from app.services.layout.semantic_renderer import render_semantic_document
+from app.services.layout.book_metadata import (
+    BookExtractionContext,
+    is_rejected_book_title_candidate,
+)
+from app.services.layout.book_patterns import (
+    looks_like_book_chapter_reference_line,
+    parse_book_section_heading,
+)
 from app.services.layout.semantic_signals import classify_semantic_type
 from app.services.layout.table_grid_builder import (
     collect_table_blocks_after_caption,
@@ -576,7 +584,9 @@ def build_semantic_document(
     processed: list[ProcessedBlock],
     *,
     include_tagged_output: bool = True,
+    book_ctx: BookExtractionContext | None = None,
 ) -> SemanticDocument:
+    book_mode = bool(book_ctx and book_ctx.is_book)
     body_font = _median_body_size(processed)
     title_threshold = _title_font_threshold(processed)
 
@@ -587,7 +597,9 @@ def build_semantic_document(
 
     for block in processed:
         text = normalize_text(block.text)
-        if REFERENCE_HEADING_RE.match(first_line(text)):
+        if book_mode and parse_book_section_heading(text):
+            in_references = False
+        elif REFERENCE_HEADING_RE.match(first_line(text)):
             in_references = True
 
         sem_type, confidence, reason = classify_semantic_type(
@@ -597,6 +609,7 @@ def build_semantic_document(
             title_font_threshold=title_threshold,
             title_bottom_y=title_bottom,
             in_body=in_body,
+            book_mode=book_mode,
         )
         typed.append((block, sem_type, confidence, reason))
         if sem_type == "SECTION" and not in_references:
@@ -620,6 +633,11 @@ def build_semantic_document(
             break
 
     front = SemanticFrontMatter()
+    if book_mode and book_ctx:
+        if book_ctx.title:
+            front.title = _element("TITLE", book_ctx.title, [], 0.95)
+        if book_ctx.author:
+            front.authors.append(_element("AUTHOR", book_ctx.author, [], 0.95))
     body = SemanticBody()
     back = SemanticBackMatter()
     unknown: list[IRNode] = []
@@ -765,6 +783,9 @@ def build_semantic_document(
             continue
 
         if sem_type == "TITLE":
+            if book_mode and front.title is not None:
+                i += 1
+                continue
             flush_paragraph()
             flush_list()
             flush_reference()
@@ -785,6 +806,9 @@ def build_semantic_document(
             continue
 
         if sem_type == "AUTHOR":
+            if book_mode and front.authors:
+                i += 1
+                continue
             flush_paragraph()
             flush_list()
             group = [block]
@@ -886,18 +910,31 @@ def build_semantic_document(
             and not _is_author_bio(normalize_text(block.text))
             and not REFERENCE_HEADING_RE.match(first_line(block.text))
         ):
-            flush_paragraph()
-            flush_list()
-            reference_buffer.append((block, normalize_text(block.text), confidence))
-            _mark_mapped(mapped_ids, block)
-            i += 1
-            continue
+            ref_text = normalize_text(block.text)
+            if book_mode and not looks_like_book_chapter_reference_line(ref_text):
+                sem_type = "PARAGRAPH"
+            else:
+                flush_paragraph()
+                flush_list()
+                reference_buffer.append((block, ref_text, confidence))
+                _mark_mapped(mapped_ids, block)
+                i += 1
+                continue
 
         if sem_type == "SECTION":
             flush_paragraph()
             flush_list()
             flush_reference()
+            if book_mode:
+                in_references = False
+                reference_section_active = False
             text = normalize_text(block.text)
+            if book_mode:
+                parsed = parse_book_section_heading(text)
+                if parsed:
+                    push_section(parsed.heading, block, parsed.level, confidence)
+                    i += 1
+                    continue
             if text.upper().startswith("ACKNOWLEDGMENT"):
                 ack_heading, ack_body = split_acknowledgment(text)
                 push_section(ack_heading, block, 1, confidence)
@@ -933,6 +970,11 @@ def build_semantic_document(
             flush_paragraph()
             flush_list()
             text = normalize_text(block.text)
+            if book_mode and not looks_like_book_chapter_reference_line(text):
+                element = _element("PARAGRAPH", text, [block], confidence)
+                add_content(element, [block])
+                i += 1
+                continue
             entries = split_reference_entries(text)
             if len(entries) > 1:
                 flush_reference()
@@ -1127,7 +1169,7 @@ def build_semantic_document(
     flush_paragraph()
     flush_list()
     flush_reference()
-    if back.reference_list is not None:
+    if back.reference_list is not None and not book_mode:
         block_sem_types = {
             block.block_id: sem_type for block, sem_type, _, _, _ in enriched
         }

@@ -314,6 +314,8 @@ def classify_content_block(
     body_font_size: float,
     author_header_prefixes: list[str] | None = None,
     running_footer_pages: dict[str, set[int]] | None = None,
+    *,
+    book_mode: bool = False,
 ) -> FilterDecision:
     text = (block.text or "").strip()
     if not text:
@@ -368,7 +370,9 @@ def classify_content_block(
     if TABLE_CAPTION_RE.match(flat):
         return FilterDecision("CAPTION", False, None, 0.85)
 
-    section_kind = _classify_heading(text, flat, size, is_bold, body_font_size, col)
+    section_kind = _classify_heading(
+        text, flat, size, is_bold, body_font_size, col, book_mode=book_mode
+    )
     if section_kind == "SECTION":
         return FilterDecision("SECTION", False, None, 0.85)
     if section_kind == "SUBSECTION":
@@ -390,7 +394,15 @@ def _classify_heading(
     is_bold: bool,
     body_font_size: float,
     column: str,
+    *,
+    book_mode: bool = False,
 ) -> str | None:
+    if book_mode:
+        from app.services.layout.book_patterns import parse_book_section_heading
+
+        if parse_book_section_heading(text):
+            return "SECTION"
+
     if extract_leading_roman_section_heading(text):
         return "SECTION"
 

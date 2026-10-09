@@ -799,3 +799,22 @@ ValueError: Validation failed: ['Broken xref: rid=ref20 has no matching id', 'Br
 ), using heuristic plan
 2026-10-08 19:47:02.122 | INFO     | app.agent.converter_agent:run:82 - Stage mapping plan: 2 entries
 2026-10-08 19:47:02.135 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-09 12:36:08.252 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-09 13:39:46.989 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-09 13:42:28.997 | INFO     | app.api.upload:upload_files:48 - Upload job 97b0249e-4562-4011-b3d3-0b114cc004f4: saved PDF 9798216211488_web.pdf (2532993 bytes)
+2026-10-09 13:42:29.012 | INFO     | app.api.upload:upload_files:84 - Upload job 97b0249e-4562-4011-b3d3-0b114cc004f4 ready in 0.02s
+2026-10-09 13:44:53.034 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:191 - Layout PDF extract: title=Overcoming Student Apathy: Succeeding with All Learners authors=1 sections=7 paras=488
+2026-10-09 13:44:57.088 | INFO     | app.agent.converter_agent:run:58 - Stage PDF IR: title=Overcoming Student Apathy: Succeeding with All Learners authors=1 sections=7 refs=0
+2026-10-09 13:44:58.620 | WARNING  | app.agent.semantic_matcher:match:90 - Semantic matching LLM failed (Gemini API error 403: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+), using heuristic plan
+2026-10-09 13:44:58.623 | INFO     | app.agent.converter_agent:run:82 - Stage mapping plan: 2 entries
+2026-10-09 14:10:30.484 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-09 14:39:57.856 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-09 14:59:12.505 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-09 15:00:00.683 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started

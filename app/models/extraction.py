@@ -100,6 +100,8 @@ class ExtractionRecord(BaseModel):
     filename: str
     original_filename: str
     status: str
+    progress: int = 0
+    current_step: str | None = None
     page_count: int | None = None
     requires_ocr: bool | None = None
     ocr_applied: bool = False

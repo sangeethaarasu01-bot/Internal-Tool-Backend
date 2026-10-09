@@ -31,6 +31,11 @@ from app.services.layout.semantic_patterns import (
     normalize_text,
     split_section_and_body,
 )
+from app.services.layout.book_metadata import BookExtractionContext, detect_book_document
+from app.services.layout.book_patterns import (
+    looks_like_book_chapter_reference_line,
+    parse_book_section_heading,
+)
 from app.services.layout.text_filter import (
     build_page_number_candidates,
     build_running_footer_candidates,
@@ -57,6 +62,7 @@ def process_document_structure(
     running_footers = build_running_footer_candidates(raw)
     page_numbers = build_page_number_candidates(raw)
     author_header_prefixes = collect_author_running_header_prefixes(raw)
+    book_ctx = detect_book_document(raw)
 
     ordered_pairs = order_document_blocks(raw.pages)
     page_by_number = {page.page_number: page for page in raw.pages}
@@ -72,7 +78,11 @@ def process_document_structure(
         page = page_by_number[page_number]
         column = classify_block_column(block, page.width)
         text = (block.text or "").strip()
-        if REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(first_line(text)):
+        if book_ctx.is_book and parse_book_section_heading(text):
+            in_references = False
+        elif REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(
+            first_line(text)
+        ):
             in_references = True
 
         decision = classify_content_block(
@@ -86,6 +96,7 @@ def process_document_structure(
             body_font_size,
             author_header_prefixes,
             running_footers,
+            book_mode=book_ctx.is_book,
         )
 
         if decision.classification in {"BODY_TEXT", "UNKNOWN_TEXT"} and len(text) > 20:
@@ -112,12 +123,34 @@ def process_document_structure(
         )
 
     completeness = _build_completeness_report(raw, processed_blocks)
-    sections, paragraphs, references, unknown_items = _build_structure(processed_blocks)
+    sections, paragraphs, references, unknown_items = _build_structure(
+        processed_blocks,
+        book_ctx=book_ctx,
+    )
+    if not book_ctx.is_book:
+        chapter_like = sum(
+            1
+            for section in sections
+            if section.level == 1
+            and (
+                section.heading.lower().startswith("chapter ")
+                or section.heading.lower().startswith("intermission ")
+            )
+        )
+        if chapter_like >= 5 and len(raw.pages) >= 40:
+            from app.services.layout.book_metadata import _extract_metadata_from_raw
+
+            book_ctx = _extract_metadata_from_raw(raw)
+            sections, paragraphs, references, unknown_items = _build_structure(
+                processed_blocks,
+                book_ctx=book_ctx,
+            )
     stats = _build_stats(processed_blocks, sections, paragraphs, references, unknown_items)
     semantic = build_semantic_document(
         raw,
         processed_blocks,
         include_tagged_output=include_tagged_output,
+        book_ctx=book_ctx,
     )
 
     return DocumentStructureResult(
@@ -130,6 +163,12 @@ def process_document_structure(
         completeness=completeness,
         structure_stats=stats,
         semantic=semantic,
+        publication_document_type=book_ctx.publication_document_type,
+        book_title=book_ctx.title,
+        book_author=book_ctx.author,
+        book_publisher=book_ctx.publisher,
+        book_year=book_ctx.year,
+        book_isbn=book_ctx.isbn,
     )
 
 
@@ -205,8 +244,11 @@ def _section_heading_level(
     text: str,
     *,
     in_references: bool = False,
+    book_mode: bool = False,
 ) -> int | None:
     line = first_line(text)
+    if book_mode and parse_book_section_heading(text):
+        return 1
     if is_reference_like_heading(text, in_references=in_references):
         return None
     if block.classification == "SUBSECTION":
@@ -257,7 +299,17 @@ def _parse_embedded_letter_subsection(
     return heading, body or None, lines[:1]
 
 
-def _section_heading_text(block: ProcessedBlock, text: str, level: int) -> str:
+def _section_heading_text(
+    block: ProcessedBlock,
+    text: str,
+    level: int,
+    *,
+    book_mode: bool = False,
+) -> str:
+    if book_mode:
+        parsed = parse_book_section_heading(text)
+        if parsed:
+            return parsed.heading
     if level == 1:
         split_heading = extract_leading_roman_section_heading(text)
         if split_heading:
@@ -281,7 +333,10 @@ def _is_caption_like_block(block: ProcessedBlock, text: str) -> bool:
 
 def _build_structure(
     processed: list[ProcessedBlock],
+    *,
+    book_ctx: BookExtractionContext | None = None,
 ) -> tuple[list[SectionNode], list[StructuredItem], list[StructuredItem], list[StructuredItem]]:
+    book_mode = bool(book_ctx and book_ctx.is_book)
     paragraphs: list[StructuredItem] = []
     references: list[StructuredItem] = []
     unknown_items: list[StructuredItem] = []
@@ -303,16 +358,22 @@ def _build_structure(
         if not text and block.block_type != "image":
             continue
 
-        if REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(
+        if book_mode and parse_book_section_heading(text):
+            in_references = False
+        elif REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(
             first_line(text)
         ):
             in_references = True
             continue
 
-        heading_level = _section_heading_level(block, text, in_references=in_references)
+        heading_level = _section_heading_level(
+            block, text, in_references=in_references, book_mode=book_mode
+        )
         if heading_level is not None:
             in_references = False
-            heading = _section_heading_text(block, text, heading_level)
+            heading = _section_heading_text(
+                block, text, heading_level, book_mode=book_mode
+            )
             parent = None
             if heading_level == 1:
                 last_roman_heading = heading
@@ -449,7 +510,9 @@ def _build_structure(
         if not text and block.block_type != "image":
             continue
 
-        if REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(
+        if book_mode and parse_book_section_heading(text):
+            in_references = False
+        elif REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(
             first_line(text)
         ):
             in_references = True
@@ -470,8 +533,11 @@ def _build_structure(
         )
 
         if in_references:
-            references.append(item)
-            continue
+            if book_mode and not looks_like_book_chapter_reference_line(text):
+                pass
+            else:
+                references.append(item)
+                continue
 
         section_index = _assign_section_index(block)
         target = heading_nodes[section_index] if section_index is not None else None

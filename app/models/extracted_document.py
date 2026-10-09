@@ -7,6 +7,8 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 PdfDocumentKind = Literal["text_based", "scanned_image_based", "mixed", "unknown"]
+PublicationDocumentType = Literal["research_paper", "book", "review", "unknown"]
+ExtractedDocumentKind = Literal["text_based", "scanned_image_based", "mixed", "unknown", "book"]
 
 HeadingKind = Literal[
     "heading_candidate",
@@ -216,9 +218,13 @@ class ExtractedDocument(BaseModel):
 
     schema_version: str = "1.1.0"
     source_filename: str
-    document_type: PdfDocumentKind = "unknown"
+    document_type: ExtractedDocumentKind = "unknown"
+    publication_document_type: PublicationDocumentType = "research_paper"
     title: str | None = None
     authors: list[str] = Field(default_factory=list)
+    publisher: str | None = None
+    publication_year: int | None = None
+    isbn: str | None = None
     pages: list[ExtractedPage] = Field(default_factory=list)
     sections: list[ExtractedSection] = Field(default_factory=list)
     tables: list[ExtractedTableSummary] = Field(default_factory=list)

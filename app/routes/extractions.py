@@ -36,6 +36,7 @@ from app.services.ir_semantic_adapter import (
     ir_to_semantic_mapping,
 )
 from app.services.llm.providers.base import LLMConfigurationError
+from app.services.llm.providers.factory import is_llm_configured
 from app.services.llm_semantic_mapper import SemanticMappingError, map_semantic_content
 from app.services.scope_resolver import InvalidScopeError
 from app.services.xml_generator import XmlGenerationError, generate_jats_xml
@@ -65,6 +66,8 @@ def _serialize(doc: dict, include_result: bool = False) -> dict:
         "filename": doc.get("original_filename") or doc.get("filename"),
         "original_filename": doc.get("original_filename"),
         "status": doc.get("status"),
+        "progress": doc.get("progress", 0),
+        "current_step": doc.get("current_step"),
         "page_count": doc.get("page_count"),
         "requires_ocr": doc.get("requires_ocr"),
         "ocr_applied": doc.get("ocr_applied", False),
@@ -125,6 +128,8 @@ async def start_extraction(
         "file_path": file_path,
         "file_size": round(file_size / (1024 * 1024), 2),
         "status": "queued",
+        "progress": 0,
+        "current_step": "Queued",
         "result": None,
         "page_count": None,
         "requires_ocr": None,
@@ -390,8 +395,16 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
     mapping_source = "ir_adapter"
     prompt_version: str | None = None
     unmapped_count = 0
+    use_llm = body.use_llm
+    if use_llm and not is_llm_configured():
+        logger.warning(
+            "LLM not configured for %s; using heuristic IR adapter (no API key)",
+            extraction_id,
+        )
+        use_llm = False
+        warnings.append("LLM not configured. Using heuristic IR adapter.")
 
-    if body.use_llm:
+    if use_llm:
         try:
             mapping_result = map_semantic_content(
                 document_id=extraction_id,

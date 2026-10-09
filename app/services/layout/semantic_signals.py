@@ -79,6 +79,7 @@ def classify_semantic_type(
     title_font_threshold: float,
     title_bottom_y: float,
     in_body: bool = False,
+    book_mode: bool = False,
 ) -> tuple[str, float, str | None]:
     """Return (semantic_type, confidence, unknown_reason)."""
     text = normalize_text(block.text)
@@ -111,6 +112,12 @@ def classify_semantic_type(
     if ACKNOWLEDGMENT_RE.match(line):
         return "SECTION", 0.88, None
 
+    if book_mode:
+        from app.services.layout.book_patterns import parse_book_section_heading
+
+        if parse_book_section_heading(text):
+            return "SECTION", 0.93, "book_chapter"
+
     if _is_author_bio(text):
         return "PARAGRAPH", 0.76, "author_bio"
 
@@ -132,11 +139,17 @@ def classify_semantic_type(
     if AFFILIATION_RE.search(text) and block.page_number == 1:
         return "AFFILIATION", 0.82, None
 
-    if is_author_candidate(block, title_bottom_y):
+    if not book_mode and is_author_candidate(block, title_bottom_y):
         return "AUTHOR", 0.86, None
 
-    if is_title_candidate(block, title_font_threshold):
+    if not book_mode and is_title_candidate(block, title_font_threshold):
         return "TITLE", 0.87, None
+
+    if book_mode and is_title_candidate(block, title_font_threshold):
+        from app.services.layout.book_metadata import is_rejected_book_title_candidate
+
+        if not is_rejected_book_title_candidate(text):
+            return "TITLE", 0.87, None
 
     if FIGURE_CAPTION_RE.match(line):
         return "FIGURE_CAPTION", 0.88, None

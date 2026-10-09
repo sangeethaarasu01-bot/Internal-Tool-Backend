@@ -39,7 +39,16 @@ from app.utils.xml_text import strip_illegal_xml_chars
 from app.services.layout.block_metrics import block_font_metrics
 from app.services.layout.document_pipeline import process_document_structure
 from app.services.layout.reading_order import order_document_blocks
-from app.services.layout.semantic_patterns import is_roman_section_heading, normalize_text
+from app.services.layout.book_metadata import (
+    is_rejected_book_title_candidate,
+    normalize_book_author_name,
+)
+from app.services.layout.book_patterns import looks_like_book_chapter_reference_line
+from app.services.layout.semantic_patterns import (
+    REFERENCE_HEADING_RE,
+    is_roman_section_heading,
+    normalize_text,
+)
 
 
 def _heading_kind_for_block(block: ProcessedBlock, body_font: float | None) -> str:
@@ -178,7 +187,31 @@ def _link_captions(
                 break
 
 
+def _build_book_references(structure: DocumentStructureResult) -> list[ExtractedReferenceItem]:
+    refs: list[ExtractedReferenceItem] = []
+    for item in structure.references:
+        text = (item.text or "").strip()
+        if not text:
+            continue
+        if REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(
+            normalize_text(text.split("\n", 1)[0])
+        ):
+            continue
+        if not looks_like_book_chapter_reference_line(text):
+            continue
+        refs.append(
+            ExtractedReferenceItem(
+                text=text,
+                page_number=item.page_number,
+                source_block_ids=list(item.source_block_ids),
+            )
+        )
+    return refs
+
+
 def _build_references(structure: DocumentStructureResult) -> list[ExtractedReferenceItem]:
+    if structure.publication_document_type == "book":
+        return _build_book_references(structure)
     block_sem_types = {block.block_id: block.classification for block in structure.blocks}
     section_blocks = collect_reference_section_blocks(
         structure.blocks,
@@ -207,6 +240,16 @@ def _build_references(structure: DocumentStructureResult) -> list[ExtractedRefer
 
 
 def _front_matter_from_semantic(structure: DocumentStructureResult) -> tuple[str | None, list[str]]:
+    if structure.publication_document_type == "book":
+        title = structure.book_title
+        if title and is_rejected_book_title_candidate(title):
+            title = None
+        authors: list[str] = []
+        if structure.book_author:
+            normalized = normalize_book_author_name(structure.book_author)
+            if normalized:
+                authors = [normalized]
+        return title, authors
     semantic = structure.semantic
     if not semantic:
         return None, []
@@ -333,14 +376,15 @@ def build_extracted_document(
     references = _build_references(structure)
     multi_column = multi_column_pages(raw, structure.blocks)
     title, authors = _front_matter_from_semantic(structure)
-    kind = classify_pdf_document_kind(raw)
+    pdf_kind = classify_pdf_document_kind(raw)
+    document_type = "book" if structure.publication_document_type == "book" else pdf_kind
     raw_text = join_ordered_block_text(raw)
     normalized_text = strip_illegal_xml_chars(raw_text)
     invalid_report = scan_text_fidelity(raw, normalized_text=normalized_text)
     quality = _quality(
         raw,
         structure,
-        kind,
+        pdf_kind,
         tables,
         figures,
         equations,
@@ -355,9 +399,13 @@ def build_extracted_document(
 
     return ExtractedDocument(
         source_filename=raw.document.filename,
-        document_type=kind,
+        document_type=document_type,
+        publication_document_type=structure.publication_document_type,
         title=title,
         authors=authors,
+        publisher=structure.book_publisher,
+        publication_year=structure.book_year,
+        isbn=structure.book_isbn,
         pages=pages,
         sections=sections,
         tables=tables,
