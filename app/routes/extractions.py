@@ -47,6 +47,15 @@ from app.services.docbook_book_storage import (
     write_book_chunks,
 )
 from app.services.docbook_book_chunking import DocBookChunkingError
+from app.services.identity_gates import (
+    IdentityMismatchError,
+    log_processing_stage,
+    verify_post_generation_identity,
+    verify_pre_generation_identity,
+)
+from app.services.output_naming import safe_output_xml_filename
+from app.services.source_identity import build_source_identity_from_extraction_doc
+from app.utils.hashing import sha256_file
 from app.services.generate_xml_guards import (
     JatsArticleRequiredError,
     JatsTransformTooLargeError,
@@ -140,10 +149,13 @@ async def start_extraction(
     async with aiofiles.open(file_path, "wb") as out_file:
         await out_file.write(content)
 
+    source_pdf_sha256 = sha256_file(file_path)
+
     doc = {
         "filename": safe_name,
         "original_filename": filename,
         "file_path": file_path,
+        "source_pdf_sha256": source_pdf_sha256,
         "file_size": round(file_size / (1024 * 1024), 2),
         "status": "queued",
         "progress": 0,
@@ -249,7 +261,10 @@ async def upload_extraction_template(
     try:
         extractions_col().update_one(
             {"_id": doc["_id"]},
-            {"$set": {"template": template_record}},
+            {
+                "$set": {"template": template_record},
+                "$unset": {"generated_xml": ""},
+            },
         )
     except PyMongoError as exc:
         raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
@@ -378,6 +393,8 @@ async def generate_extraction_xml(extraction_id: str, body: GenerateXmlRequest):
         return await _generate_extraction_xml_impl(extraction_id, body)
     except HTTPException:
         raise
+    except IdentityMismatchError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
     except Exception as exc:
         logger.exception("generate-xml unhandled failure for %s", extraction_id)
         raise HTTPException(
@@ -510,6 +527,31 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
         except FileNotFoundError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
 
+    source_identity = build_source_identity_from_extraction_doc({**doc, "_id": extraction_id})
+    output_filename = safe_output_xml_filename(
+        extraction_id=extraction_id,
+        original_pdf_filename=doc.get("original_filename"),
+    )
+    log_processing_stage(
+        "generate_xml_context",
+        extraction_id=extraction_id,
+        source_pdf_sha256=source_identity.source_pdf_sha256,
+        template_id=template.get("template_id"),
+        scope=resolved_scope,
+        output_format=resolved_output_format,
+        output_storage_key=output_filename,
+    )
+    try:
+        verify_pre_generation_identity(
+            extraction_id=extraction_id,
+            source=source_identity,
+            template=template,
+            template_path=template_path,
+            output_format=resolved_output_format,
+        )
+    except IdentityMismatchError:
+        raise
+
     try:
         xml_content, resolved_output_format = generate_output_xml(
             template_path,
@@ -533,6 +575,18 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
             status_code=413,
             detail="Document too large for JATS transform. Chunk by <chapter> before retrying.",
         ) from exc
+
+    expected_root = "book" if resolved_output_format == OUTPUT_DOCBOOK_5 else "article"
+    try:
+        verify_post_generation_identity(
+            extraction_id=extraction_id,
+            source=source_identity,
+            xml_content=xml_content,
+            output_format=resolved_output_format,
+            expected_root=expected_root,
+        )
+    except IdentityMismatchError:
+        raise
 
     book_manifest: dict | None = None
     response_xml = xml_content
@@ -586,6 +640,11 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
             "generated_at": utcnow(),
         }
 
+    generated_record["extraction_id"] = extraction_id
+    generated_record["source_pdf_sha256"] = source_identity.source_pdf_sha256
+    generated_record["output_filename"] = output_filename
+    generated_record["identity_verified"] = True
+
     try:
         extractions_col().update_one(
             {"_id": doc["_id"]},
@@ -605,6 +664,7 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
         unmapped_content_count=unmapped_count,
         book_manifest=book_manifest,
         storage_mode=generated_record.get("storage_mode"),
+        output_filename=output_filename,
     )
 
 
@@ -616,6 +676,22 @@ async def download_extraction_xml(extraction_id: str):
         raise HTTPException(status_code=404, detail="Extraction not found")
 
     generated = doc.get("generated_xml") or {}
+    if not generated:
+        raise HTTPException(
+            status_code=404,
+            detail="No generated XML found. Call POST /generate-xml first.",
+        )
+    if not generated.get("identity_verified"):
+        raise HTTPException(
+            status_code=404,
+            detail="No verified generated XML for this extraction. Regenerate XML.",
+        )
+    if generated.get("extraction_id") and generated.get("extraction_id") != extraction_id:
+        raise HTTPException(
+            status_code=409,
+            detail="Generated XML belongs to a different extraction job.",
+        )
+
     xml_content = generated.get("xml_content")
     if generated.get("storage_mode") == STORAGE_MODE_CHUNKED:
         manifest = generated.get("book_manifest")
@@ -637,8 +713,9 @@ async def download_extraction_xml(extraction_id: str):
             detail="No generated XML found. Call POST /generate-xml first.",
         )
 
-    filename = (doc.get("original_filename") or doc.get("filename") or "document.pdf").replace(
-        ".pdf", ".xml"
+    filename = generated.get("output_filename") or safe_output_xml_filename(
+        extraction_id=extraction_id,
+        original_pdf_filename=doc.get("original_filename"),
     )
     from fastapi.responses import Response
 

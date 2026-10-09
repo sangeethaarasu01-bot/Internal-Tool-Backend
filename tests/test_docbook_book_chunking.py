@@ -48,7 +48,7 @@ def test_mongodb_limit_is_sixteen_mebibytes() -> None:
 def test_minimal_book_manifest_metadata_and_order() -> None:
     xml = MINIMAL.read_text(encoding="utf-8")
     manifest, chunks = chunk_docbook_book_xml(xml, extraction_id="ext-1")
-    assert manifest.book_id == "10.0000/testbook"
+    assert manifest.book_id == "ext-1"
     assert manifest.title == "Test Book"
     assert manifest.authors == ["Ada Lovelace", "Grace Hopper"]
     assert manifest.doi == "10.0000/testbook"
@@ -66,7 +66,7 @@ def test_front_matter_and_chapter_ids_follow_book_id() -> None:
     xml = MINIMAL.read_text(encoding="utf-8")
     manifest, chunks = chunk_docbook_book_xml(xml, extraction_id="ext-1")
     for chunk in chunks:
-        assert chunk.document_id.startswith(manifest.book_id)
+        assert chunk.document_id.startswith(manifest.book_id + "/")
 
 
 def test_section_split_when_payload_cap_low() -> None:
@@ -76,7 +76,7 @@ def test_section_split_when_payload_cap_low() -> None:
         extraction_id="ext-large",
         max_payload_bytes=400,
     )
-    assert manifest.book_id == "10.5040/9798216520177"
+    assert manifest.book_id == "ext-large"
     split = [c for c in chunks if c.split_parent_id]
     assert len(split) >= 2
     for chunk in split:

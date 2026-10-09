@@ -120,11 +120,10 @@ def _slug_id(value: str) -> str:
 
 
 def derive_book_id(metadata: DocBookBookMetadata, extraction_id: str) -> str:
-    if metadata.doi:
-        return metadata.doi.strip()
-    title = (metadata.title or "").strip()
-    if title:
-        return _slug_id(title)
+    """
+    Job-scoped book id for chapter storage (never a bare publisher DOI shared across jobs).
+    """
+    _ = metadata
     return extraction_id
 
 

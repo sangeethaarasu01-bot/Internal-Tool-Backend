@@ -18,6 +18,7 @@ from app.pipeline.phase1.build_document import build_extracted_document
 from app.pipeline.phase1.extraction_build_options import ExtractionBuildOptions
 from app.services.layout.document_pipeline import build_full_extraction_result
 from app.services.extraction_mongo_payload import compact_extraction_result_for_mongo
+from app.services.source_identity import build_source_identity_from_extraction_doc
 from app.services.text_extractor import PdfValidationError, extract_text_layout
 
 logger = logging.getLogger(__name__)
@@ -172,6 +173,17 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
         }
         if mongo_flags:
             update_fields["phase1_storage_flags"] = mongo_flags
+
+        preview_doc = {
+            "_id": str(oid),
+            "original_filename": original_filename,
+            "source_pdf_sha256": doc_meta.get("source_pdf_sha256"),
+            "phase1": mongo_phase1,
+            "page_count": full.document.page_count,
+        }
+        update_fields["source_identity"] = build_source_identity_from_extraction_doc(
+            preview_doc
+        ).to_dict()
 
         col.update_one({"_id": oid}, {"$set": update_fields})
         logger.info("Extraction %s completed (%s pages)", extraction_id, full.document.page_count)

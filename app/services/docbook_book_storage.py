@@ -235,4 +235,5 @@ def generated_xml_record_for_chunked_book(
         "warnings": extra_warnings,
         "generated_at": datetime.now(timezone.utc),
         "chapter_write_ok": write_result.all_ok,
+        "identity_verified": False,
     }

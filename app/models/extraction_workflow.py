@@ -53,3 +53,4 @@ class GenerateXmlResponse(BaseModel):
     unmapped_content_count: int = 0
     storage_mode: str | None = None
     book_manifest: dict[str, Any] | None = None
+    output_filename: str | None = None
