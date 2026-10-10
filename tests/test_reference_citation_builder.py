@@ -159,8 +159,7 @@ def test_generate_jats_xml_back_matter_ref_list_structure(tmp_path: Path) -> Non
     assert refs[0].find("mixed-citation/collab") is not None
 
 
-def test_template_refs_preserved_when_mapping_has_no_references() -> None:
+def test_template_refs_not_copied_when_mapping_has_no_references() -> None:
     mapping = SemanticMappingBody(front={}, body=[], back={})
     xml = generate_jats_xml(FIXTURE_TEMPLATE, mapping)
-    assert "<ref id=" in xml
-    assert "<mixed-citation>" in xml
+    assert "<ref id=" not in xml

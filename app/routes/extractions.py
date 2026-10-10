@@ -279,7 +279,7 @@ async def create_template_from_source(extraction_id: str):
             {"_id": doc["_id"]},
             {
                 "$set": {"template": template_record},
-                "$unset": {"generated_xml": ""},
+                "$unset": {"generated_xml": "", "semantic_mapping": ""},
             },
         )
     except PyMongoError as exc:
@@ -316,7 +316,12 @@ async def get_extraction_text(extraction_id: str):
     if not doc:
         raise HTTPException(status_code=404, detail="Extraction not found")
     _require_completed_extraction(doc)
-    return doc["result"]
+    result = dict(doc.get("result") or {})
+    # Large extractions store phase1 at document root (result.phase1 may be omitted for BSON size).
+    phase1 = doc.get("phase1") or result.get("phase1")
+    if phase1 and not result.get("phase1"):
+        result["phase1"] = phase1
+    return result
 
 
 @router.get("/{extraction_id}/phase1")
@@ -414,7 +419,7 @@ async def upload_extraction_template(
             {"_id": doc["_id"]},
             {
                 "$set": {"template": template_record},
-                "$unset": {"generated_xml": ""},
+                "$unset": {"generated_xml": "", "semantic_mapping": ""},
             },
         )
     except PyMongoError as exc:
@@ -661,16 +666,12 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
                 "XML was generated using deterministic extraction instead."
             )
     else:
-        cached = doc.get("semantic_mapping")
-        if cached and cached.get("mapping"):
-            mapping_body = cached["mapping"]
-            mapping_source = "cached_llm" if cached.get("prompt_version") else "cached"
-            prompt_version = cached.get("prompt_version")
-            warnings.extend(cached.get("warnings") or [])
-            unmapped_count = len(cached.get("unmapped_content") or [])
-        else:
-            mapping_body = ir_to_semantic_mapping(filtered_ir)
-            warnings.append("Generated using deterministic IR adapter (no LLM). Set use_llm=true for template-aware LLM mapping.")
+        mapping_body = ir_to_semantic_mapping(filtered_ir)
+        mapping_source = "ir_adapter"
+        warnings.append(
+            "Generated using deterministic IR adapter (no LLM). "
+            "Set use_llm=true for template-aware LLM mapping."
+        )
 
     mapping_body = ensure_semantic_mapping_body(mapping_body)
     mapping_body = fill_back_references_from_ir(mapping_body, filtered_ir)

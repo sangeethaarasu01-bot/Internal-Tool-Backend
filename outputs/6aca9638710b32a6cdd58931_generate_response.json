@@ -1,0 +1,14 @@
+{
+  "document_id": "6aca9638710b32a6cdd58931",
+  "scope": "full",
+  "mapping_source": "ir_adapter",
+  "prompt_version": null,
+  "output_format": "ieee_jats",
+  "warnings": [
+    "Generated using deterministic IR adapter (no LLM). Set use_llm=true for template-aware LLM mapping."
+  ],
+  "unmapped_content_count": 0,
+  "storage_mode": null,
+  "book_manifest": null,
+  "output_filename": "access-kakichi-3657695-proof.pdf1_6aca9638710b.xml"
+}

@@ -1,0 +1,66 @@
+{
+  "table_id": "table_2",
+  "page_number": 9,
+  "row_count": 2,
+  "column_count": 17,
+  "rows": [
+    [
+      "SOC bounds",
+      "Operational constraint Battery current / power limits Start-stop wear/ comfort Thermal constraints",
+      "",
+      "",
+      "",
+      "factor iteration.",
+      "remain within safe limits.",
+      "Handling in the proposed EMS",
+      "and are respected in the control allocation.",
+      "enforces a minimum on/off duration at the state level.",
+      "Thermal operation is constrained to the validated operating envelope of the",
+      "Battery SOC is constrained within predefined minimum and maximum limits during operation, while the terminal SOC condition is enforced via equivalence Battery and electric machine power are limited by inverter and hardware constraints ICE start-stop decisions are constrained to discrete vehicle state transitions, which demonstrator; thermal dynamics are not explicitly optimized and are assumed to",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "100ms Gear Vehicle speed Joystick",
+      "State detection",
+      "Zk",
+      "100ms",
+      "Scenario coordinator Ppump,z,Qpump,z,PEDU,z",
+      "",
+      "Sc",
+      "100 ms",
+      "Sc,Tr Power / flow prediction",
+      "Ppump,Sc Qpump,Sc PEDU,SC",
+      "",
+      "DP-PMP",
+      "SSopt",
+      "10 ms 100ms",
+      "Start- Stop Control",
+      "bIcE"
+    ]
+  ],
+  "bbox": [
+    15.420600891113281,
+    79.4735336303711,
+    547.8609619140625,
+    359.4735336303711
+  ],
+  "id": "table_2",
+  "caption": "TABLE 2. Operational constraints considered in the proposed energy management strategy.",
+  "subtitle": null,
+  "headers": [],
+  "raw_text": "SOC bounds\tOperational constraint Battery current / power limits Start-stop wear/ comfort Thermal constraints\t\t\t\tfactor iteration.\tremain within safe limits.\tHandling in the proposed EMS\tand are respected in the control allocation.\tenforces a minimum on/off duration at the state level.\tThermal operation is constrained to the validated operating envelope of the\tBattery SOC is constrained within predefined minimum and maximum limits during operation, while the terminal SOC condition is enforced via equivalence Battery and electric machine power are limited by inverter and hardware constraints ICE start-stop decisions are constrained to discrete vehicle state transitions, which demonstrator; thermal dynamics are not explicitly optimized and are assumed to\t\t\t\t\t\n\t100ms Gear Vehicle speed Joystick\tState detection\tZk\t100ms\tScenario coordinator Ppump,z,Qpump,z,PEDU,z\t\tSc\t100 ms\tSc,Tr Power / flow prediction\tPpump,Sc Qpump,Sc PEDU,SC\t\tDP-PMP\tSSopt\t10 ms 100ms\tStart- Stop Control\tbIcE",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.866764705882353,
+    "status": "structured",
+    "engine": "pymupdf",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

@@ -161,6 +161,16 @@ def strip_body_example_content(root: etree._Element) -> None:
                 body.remove(child)
 
 
+def strip_template_for_semantic_mapping(root: etree._Element) -> None:
+    """Remove sample publication text before deterministic IR → JATS merge.
+
+    Keeps journal-meta and structural shells; body prose is cleared separately
+    in :func:`app.services.xml_generator.generate_jats_xml`.
+    """
+    strip_article_meta_example_content(root)
+    strip_back_example_content(root)
+
+
 def strip_back_example_content(root: etree._Element) -> None:
     for back in _find_by_local_tag(root, "back"):
         for ref_list in _find_by_local_tag(back, "ref-list"):

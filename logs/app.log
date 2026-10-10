@@ -900,3 +900,46 @@ ValueError: Validation failed: ['Broken xref: rid=ref20 has no matching id', 'Br
 2026-10-10 20:28:43.094 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
 2026-10-10 20:37:40.762 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
 2026-10-10 20:37:43.844 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:40:53.113 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 22:09:41.817 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 22:44:26.748 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 23:39:54.119 | INFO     | app.api.upload:upload_files:48 - Upload job cb0813d4-bfa1-4e2e-8f41-118ad2bf1a1e: saved PDF sample.pdf (0 bytes)
+2026-10-10 23:39:54.152 | INFO     | app.api.upload:upload_files:84 - Upload job cb0813d4-bfa1-4e2e-8f41-118ad2bf1a1e ready in 0.04s
+2026-10-10 23:39:56.966 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:191 - Layout PDF extract: title=Deep Learning for Breast Cancer Diagnosis Using Mammography authors=7 sections=7 paras=12
+2026-10-10 23:42:25.178 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash tokens_in=6 tokens_out=3 cost=$0.0000 duration=0.00s
+2026-10-10 23:42:49.195 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:191 - Layout PDF extract: title=Deep Learning for Breast Cancer Diagnosis Using Mammography authors=7 sections=7 paras=12
+2026-10-10 23:42:49.305 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-10 23:42:49.312 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-10 23:43:09.203 | INFO     | app.llm.client:complete:97 - LLM complete provider=anthropic model=mock tokens_in=391 tokens_out=64 cost=$0.0000 duration=0.45s
+2026-10-10 23:43:09.204 | INFO     | app.llm.client:complete:97 - LLM complete provider=anthropic model=mock tokens_in=385 tokens_out=64 cost=$0.0000 duration=0.00s
+2026-10-10 23:43:09.205 | INFO     | app.llm.client:complete:97 - LLM complete provider=anthropic model=mock tokens_in=387 tokens_out=64 cost=$0.0000 duration=0.00s
+2026-10-10 23:43:55.266 | INFO     | app.llm.client:complete:97 - LLM complete provider=anthropic model=gemini-2.5-flash tokens_in=835 tokens_out=90 cost=$0.0000 duration=0.00s
+2026-10-10 23:44:46.904 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-10 23:44:51.925 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 23:56:11.140 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 23:59:20.465 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 00:43:52.862 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 00:46:18.460 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 00:48:16.534 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 00:52:09.242 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 00:52:34.733 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 00:58:30.992 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:08:12.168 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:09:11.766 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:16:53.018 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:51:28.744 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:51:39.098 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:52:47.312 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:53:13.343 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:53:16.862 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:53:20.468 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:53:25.461 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:53:29.256 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:53:29.822 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:53:33.481 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:53:33.924 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:55:27.365 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-11 01:55:27.371 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-11 01:55:56.159 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:55:59.836 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 01:59:22.060 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started

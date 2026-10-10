@@ -30,6 +30,7 @@ from app.utils.reference_assembler import (
     validate_reference_sequence,
 )
 from app.services.template_format import UnsupportedTemplateRootError, require_jats_article_template
+from app.utils.template_skeleton import strip_template_for_semantic_mapping
 from app.utils.reference_citation_builder import populate_structured_mixed_citation
 from app.utils.xml_serializer import serialize_lxml_tree
 from app.utils.xml_text import normalize_person_name_text, sanitize_xml_text, set_lxml_attr, set_lxml_text
@@ -783,6 +784,54 @@ def _apply_front_matter(article: etree._Element, front: dict[str, Any]) -> None:
                 log_context={"semantic_type": "keywords", "source": "-", "field": "kwd"},
             )
 
+    authors_data = front.get("authors") or []
+    if authors_data:
+        contrib_group = article_meta.find("contrib-group")
+        if contrib_group is None:
+            contrib_group = etree.SubElement(article_meta, "contrib-group")
+        for child in list(contrib_group):
+            if child.tag == "contrib":
+                contrib_group.remove(child)
+        for index, author_data in enumerate(authors_data, start=1):
+            _append_author_contrib(contrib_group, author_data, index)
+
+
+def _append_author_contrib(
+    contrib_group: etree._Element,
+    author_data: MappedSemanticNode | dict[str, Any],
+    index: int,
+) -> None:
+    name_text = _text_of(author_data, "author").strip()
+    if not name_text:
+        return
+    parts = name_text.split()
+    contrib = etree.SubElement(
+        contrib_group,
+        "contrib",
+        attrib={"contrib-type": "author", "id": f"contrib{index}"},
+    )
+    string_name = etree.SubElement(contrib, "string-name")
+    if len(parts) >= 2:
+        given = etree.SubElement(string_name, "given-names")
+        set_lxml_text(
+            given,
+            parts[0],
+            log_context={"semantic_type": "author", "source": "-", "field": "given-names"},
+        )
+        surname = etree.SubElement(string_name, "surname")
+        set_lxml_text(
+            surname,
+            " ".join(parts[1:]),
+            log_context={"semantic_type": "author", "source": "-", "field": "surname"},
+        )
+    else:
+        surname = etree.SubElement(string_name, "surname")
+        set_lxml_text(
+            surname,
+            name_text,
+            log_context={"semantic_type": "author", "source": "-", "field": "surname"},
+        )
+
 
 def _normalize_person_name_elements(article: etree._Element) -> None:
     """Strip surrounding whitespace from front-matter author name fields in the template."""
@@ -862,6 +911,8 @@ def generate_jats_xml(
         require_jats_article_template(article)
     except UnsupportedTemplateRootError as exc:
         raise XmlGenerationError(str(exc)) from exc
+
+    strip_template_for_semantic_mapping(article)
 
     _apply_front_matter(article, body.front)
 

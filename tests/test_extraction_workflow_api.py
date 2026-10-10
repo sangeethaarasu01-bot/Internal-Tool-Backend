@@ -76,6 +76,31 @@ def completed_doc(extraction_id: str) -> dict:
     }
 
 
+@patch("app.routes.extractions.extractions_col")
+def test_get_text_merges_root_phase1_when_omitted_from_result(
+    mock_col: MagicMock,
+    extraction_id: str,
+    completed_doc: dict,
+) -> None:
+    from bson import ObjectId
+
+    oid = ObjectId(extraction_id)
+    completed_doc["_id"] = oid
+    completed_doc["result"] = {"structure": completed_doc["result"]["structure"]}
+    completed_doc["phase1"] = {
+        "title": "Book",
+        "tables": [{"table_id": "t1"}],
+        "figures": [{"figure_id": "f1"}],
+    }
+    mock_col.return_value.find_one.return_value = completed_doc
+
+    response = client.get(f"/api/extractions/{extraction_id}/text")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["phase1"]["tables"][0]["table_id"] == "t1"
+    assert data["phase1"]["figures"][0]["figure_id"] == "f1"
+
+
 def test_parse_template_xml_valid_fixture() -> None:
     schema = parse_template_xml(FIXTURE_XML)
     assert schema["root_tag"] == "article"
