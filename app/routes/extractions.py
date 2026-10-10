@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+import shutil
 from datetime import datetime
 
 import aiofiles
@@ -39,6 +40,7 @@ from app.services.llm.providers.base import LLMConfigurationError
 from app.services.llm.providers.factory import is_llm_configured
 from app.services.llm_semantic_mapper import SemanticMappingError, map_semantic_content
 from app.services.scope_resolver import InvalidScopeError
+from app.services.docbook_template_from_source import build_docbook_template_xml_from_phase1
 from app.services.docbook_book_storage import (
     STORAGE_MODE_CHUNKED,
     generated_xml_record_for_chunked_book,
@@ -55,6 +57,7 @@ from app.services.identity_gates import (
 )
 from app.services.output_naming import safe_output_xml_filename
 from app.services.source_identity import build_source_identity_from_extraction_doc
+from app.services.source_identity import build_template_identity
 from app.utils.hashing import sha256_file
 from app.services.generate_xml_guards import (
     JatsArticleRequiredError,
@@ -184,8 +187,119 @@ async def start_extraction(
         "extraction_id": extraction_id,
         "status": "queued",
         "filename": filename,
+        "source_pdf_sha256": source_pdf_sha256,
         "message": "Extraction started",
     }
+
+
+def _clear_template_storage(extraction_id: str) -> None:
+    storage_dir = template_storage_dir(extraction_id)
+    if storage_dir.is_dir():
+        shutil.rmtree(storage_dir, ignore_errors=True)
+    storage_dir.mkdir(parents=True, exist_ok=True)
+
+
+@router.delete("/{extraction_id}/template")
+async def clear_extraction_template(extraction_id: str):
+    """Remove bound template and generated output for this job (fixes stale template binding)."""
+    doc = extractions_col().find_one({"_id": _oid(extraction_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Extraction not found")
+    _clear_template_storage(extraction_id)
+    try:
+        extractions_col().update_one(
+            {"_id": doc["_id"]},
+            {
+                "$unset": {
+                    "template": "",
+                    "generated_xml": "",
+                    "semantic_mapping": "",
+                }
+            },
+        )
+    except PyMongoError as exc:
+        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+    log_processing_stage(
+        "template_cleared",
+        extraction_id=extraction_id,
+        source_pdf_sha256=doc.get("source_pdf_sha256"),
+    )
+    return {"extraction_id": extraction_id, "cleared": True}
+
+
+@router.post("/{extraction_id}/template/from-source", response_model=TemplateUploadResponse)
+async def create_template_from_source(extraction_id: str):
+    """
+    Generate a fresh DocBook template from this job's Phase 1 metadata only.
+
+    Use when no publisher template is available or a prior template was rejected (409).
+    """
+    doc = extractions_col().find_one({"_id": _oid(extraction_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Extraction not found")
+    _require_completed_extraction(doc)
+
+    phase1 = doc.get("phase1") or (doc.get("result") or {}).get("phase1")
+    if not phase1:
+        raise HTTPException(status_code=409, detail="Phase 1 metadata not available yet.")
+
+    _clear_template_storage(extraction_id)
+    xml_content = build_docbook_template_xml_from_phase1(phase1)
+    storage_dir = template_storage_dir(extraction_id)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{timestamp}_from_source_metadata.xml"
+    file_path = storage_dir / filename
+    file_path.write_text(xml_content, encoding="utf-8")
+
+    try:
+        schema = parse_template_xml(file_path)
+    except ExtractionWorkflowError as exc:
+        if file_path.exists():
+            file_path.unlink()
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+    job_id = str(doc["_id"])
+    template_identity = build_template_identity(
+        {"template_schema": schema, "original_filename": filename},
+        str(file_path),
+    ).to_dict()
+    template_record = build_template_record(
+        template_path=file_path,
+        original_filename=filename,
+        schema=schema,
+        bound_extraction_id=job_id,
+        bound_source_pdf_sha256=doc.get("source_pdf_sha256"),
+        template_content_sha256=sha256_file(file_path),
+        template_identity=template_identity,
+    )
+    template_record["generated_from_source"] = True
+
+    try:
+        extractions_col().update_one(
+            {"_id": doc["_id"]},
+            {
+                "$set": {"template": template_record},
+                "$unset": {"generated_xml": ""},
+            },
+        )
+    except PyMongoError as exc:
+        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+
+    log_processing_stage(
+        "template_from_source",
+        extraction_id=job_id,
+        source_pdf_sha256=doc.get("source_pdf_sha256"),
+        template_id=template_record["template_id"],
+        identity_result=template_identity.get("title") or "-",
+    )
+
+    return TemplateUploadResponse(
+        document_id=job_id,
+        template_id=template_record["template_id"],
+        original_filename=filename,
+        created_at=template_record["created_at"],
+        template_schema=schema,
+    )
 
 
 @router.get("/{extraction_id}")
@@ -237,6 +351,7 @@ async def upload_extraction_template(
     if not content:
         raise HTTPException(status_code=400, detail="Template XML file is empty")
 
+    _clear_template_storage(extraction_id)
     storage_dir = template_storage_dir(extraction_id)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     safe_name = f"{timestamp}_{os.path.basename(filename)}"
@@ -252,10 +367,59 @@ async def upload_extraction_template(
             file_path.unlink()
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
+    extraction_id = str(doc["_id"])
+    source_identity = build_source_identity_from_extraction_doc({**doc, "_id": extraction_id})
+    template_identity = build_template_identity(
+        {"template_schema": schema, "original_filename": filename},
+        str(file_path),
+    ).to_dict()
+    content_sha = sha256_file(file_path)
+
+    try:
+        resolved_format = resolve_output_format(
+            "auto",
+            schema,
+            template_path=file_path,
+        )
+        if resolved_format == OUTPUT_DOCBOOK_5:
+            verify_pre_generation_identity(
+                extraction_id=extraction_id,
+                source=source_identity,
+                template={
+                    "template_schema": schema,
+                    "original_filename": filename,
+                },
+                template_path=str(file_path),
+                output_format=resolved_format,
+            )
+    except IdentityMismatchError as exc:
+        if file_path.exists():
+            file_path.unlink()
+        logger.warning(
+            "template_upload_rejected extraction_id=%s source_sha=%s template_file=%s detail=%s",
+            extraction_id,
+            (source_identity.source_pdf_sha256 or "-")[:16],
+            filename,
+            exc,
+        )
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+
     template_record = build_template_record(
         template_path=file_path,
         original_filename=filename,
         schema=schema,
+        bound_extraction_id=extraction_id,
+        bound_source_pdf_sha256=doc.get("source_pdf_sha256"),
+        template_content_sha256=content_sha,
+        template_identity=template_identity,
+    )
+
+    log_processing_stage(
+        "template_bound",
+        extraction_id=extraction_id,
+        source_pdf_sha256=source_identity.source_pdf_sha256,
+        template_id=template_record["template_id"],
+        identity_result=template_identity.get("title") or "-",
     )
 
     try:
@@ -427,6 +591,23 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
         )
     if not os.path.exists(template_path):
         raise HTTPException(status_code=400, detail="Template file is missing on disk. Re-upload the template.")
+
+    bound_job = template.get("bound_extraction_id")
+    if bound_job and str(bound_job) != extraction_id:
+        raise HTTPException(
+            status_code=409,
+            detail=(
+                f"Template is bound to a different extraction job ({bound_job}). "
+                "Upload the template again for this PDF."
+            ),
+        )
+    bound_sha = template.get("bound_source_pdf_sha256")
+    doc_sha = doc.get("source_pdf_sha256")
+    if bound_sha and doc_sha and bound_sha != doc_sha:
+        raise HTTPException(
+            status_code=409,
+            detail="Template was uploaded for a different revision of this PDF. Re-upload the template.",
+        )
 
     try:
         scope_result = apply_scope_to_extraction(

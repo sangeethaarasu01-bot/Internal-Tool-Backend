@@ -99,6 +99,21 @@ def test_output_filename_uses_job_not_doi() -> None:
 
 
 @pytest.mark.skipif(not PASTORAL_PHASE1.is_file(), reason="Pastoral fixture missing")
+def test_build_template_record_binds_job_and_hash() -> None:
+    from app.services.extraction_workflow import build_template_record
+
+    rec = build_template_record(
+        template_path=Path("t.xml"),
+        original_filename="t.xml",
+        schema={"root_tag": "book"},
+        bound_extraction_id="job-1",
+        bound_source_pdf_sha256="sha-1",
+        template_content_sha256="sha-t",
+    )
+    assert rec["bound_extraction_id"] == "job-1"
+    assert rec["bound_source_pdf_sha256"] == "sha-1"
+
+
 def test_sequential_identity_records_differ() -> None:
     pastoral = build_source_identity_from_extraction_doc(
         _extraction_doc(PASTORAL_PHASE1, "job-a"),

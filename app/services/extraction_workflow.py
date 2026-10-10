@@ -52,15 +52,26 @@ def build_template_record(
     template_path: Path,
     original_filename: str,
     schema: dict[str, Any],
+    bound_extraction_id: str,
+    bound_source_pdf_sha256: str | None,
+    template_content_sha256: str | None = None,
+    template_identity: dict | None = None,
 ) -> dict[str, Any]:
     """Build a template sub-document for MongoDB storage."""
-    return {
+    record: dict = {
         "template_id": uuid.uuid4().hex,
         "original_filename": original_filename,
         "file_path": str(template_path),
         "template_schema": schema,
         "created_at": utcnow(),
+        "bound_extraction_id": bound_extraction_id,
+        "bound_source_pdf_sha256": bound_source_pdf_sha256,
     }
+    if template_content_sha256:
+        record["template_content_sha256"] = template_content_sha256
+    if template_identity:
+        record["template_identity"] = template_identity
+    return record
 
 
 def template_storage_dir(extraction_id: str) -> Path:
