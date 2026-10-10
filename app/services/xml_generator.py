@@ -30,7 +30,9 @@ from app.utils.reference_assembler import (
     validate_reference_sequence,
 )
 from app.services.template_format import UnsupportedTemplateRootError, require_jats_article_template
+from app.services.author_deduplication import author_dedup_key, clean_author_display_name
 from app.utils.template_skeleton import strip_template_for_semantic_mapping
+from app.utils.xml_helpers import xml_local_name
 from app.utils.reference_citation_builder import populate_structured_mixed_citation
 from app.utils.xml_serializer import serialize_lxml_tree
 from app.utils.xml_text import normalize_person_name_text, sanitize_xml_text, set_lxml_attr, set_lxml_text
@@ -494,26 +496,89 @@ def _compact_sec_id(sec_id: str) -> str:
     return sec_id.replace(" ", "").lower()
 
 
-def _make_section_id(mapped: MappedSemanticNode, parent_sec_id: str | None) -> str:
-    label = (mapped.label or "").strip()
-    roman = _roman_section_index(label)
-    if roman is not None:
-        return f"sec{roman}"
+class _SectionIdAllocator:
+    """Allocate unique ``sec`` ids (IEEE Roman sections and nested suffixes)."""
 
-    if parent_sec_id is None:
-        return "sec1"
+    def __init__(self) -> None:
+        self._used: set[str] = set()
 
-    compact_parent = _compact_sec_id(parent_sec_id)
+    def _reserve(self, sec_id: str) -> str:
+        candidate = sec_id
+        if candidate in self._used:
+            base = re.match(r"^(sec\d+)", candidate)
+            root = base.group(1) if base else "sec"
+            index = 1
+            while True:
+                candidate = f"{root}{index}"
+                if candidate not in self._used:
+                    break
+                index += 1
+        self._used.add(candidate)
+        return candidate
 
-    letter = _letter_subsection_suffix(label)
-    if letter:
-        return f"{compact_parent}{letter.lower()}"
+    def allocate(self, mapped: MappedSemanticNode, parent_sec_id: str | None) -> str:
+        label = (mapped.label or "").strip()
+        roman = _roman_section_index(label)
+        if roman is not None:
+            return self._reserve(f"sec{roman}")
 
-    number = _numbered_subsection_suffix(label)
-    if number:
-        return f"{compact_parent}{number}"
+        if parent_sec_id is None:
+            index = 1
+            while f"sec{index}" in self._used:
+                index += 1
+            return self._reserve(f"sec{index}")
 
-    return f"{compact_parent}1"
+        compact_parent = _compact_sec_id(parent_sec_id)
+
+        letter = _letter_subsection_suffix(label)
+        if letter:
+            return self._reserve(f"{compact_parent}{letter.lower()}")
+
+        number = _numbered_subsection_suffix(label)
+        if number:
+            return self._reserve(f"{compact_parent}{number}")
+
+        return self._reserve(f"{compact_parent}1")
+
+
+_ACK_SECTION_RE = re.compile(r"^acknowledg", re.I)
+
+
+def _is_acknowledgment_section(node: MappedSemanticNode | dict[str, Any]) -> bool:
+    mapped = _as_mapped(node)
+    if mapped.semantic_type not in _SECTION_SEMANTIC_TYPES:
+        return False
+    title = (mapped.text or "").strip()
+    return bool(_ACK_SECTION_RE.match(title))
+
+
+def _acknowledgment_text_from_section(node: MappedSemanticNode | dict[str, Any]) -> str:
+    mapped = _as_mapped(node)
+    parts: list[str] = []
+    for child in mapped.children:
+        child_mapped = _as_mapped(child)
+        if child_mapped.semantic_type == "paragraph":
+            text = _text_of(child_mapped).strip()
+            if text:
+                parts.append(text)
+    return "\n\n".join(parts)
+
+
+def _partition_acknowledgment_sections(
+    nodes: list[MappedSemanticNode | dict[str, Any]],
+) -> tuple[list[MappedSemanticNode | dict[str, Any]], str | None]:
+    body_nodes: list[MappedSemanticNode | dict[str, Any]] = []
+    ack_parts: list[str] = []
+    for node in nodes:
+        if _is_acknowledgment_section(node):
+            ack_text = _acknowledgment_text_from_section(node)
+            if ack_text:
+                ack_parts.append(ack_text)
+            continue
+        body_nodes.append(node)
+    if not ack_parts:
+        return nodes, None
+    return body_nodes, "\n\n".join(ack_parts)
 
 
 def _reference_citation_text(mapped: MappedSemanticNode) -> str:
@@ -602,10 +667,12 @@ def _append_section(
     parent_sec_id: str | None,
     template_graphics: dict[str, str] | None = None,
     template_formula_ids: dict[str, str] | None = None,
+    section_ids: _SectionIdAllocator | None = None,
 ) -> None:
     mapped = _as_mapped(node)
     ctx = _log_context_for(mapped, "section")
-    sec_id = _make_section_id(mapped, parent_sec_id)
+    allocator = section_ids or _SectionIdAllocator()
+    sec_id = allocator.allocate(mapped, parent_sec_id)
 
     if parent_sec_id and sec_id == parent_sec_id:
         if parent.tag == "sec":
@@ -622,6 +689,7 @@ def _append_section(
             parent_sec_id=parent_sec_id,
             template_graphics=template_graphics,
             template_formula_ids=template_formula_ids,
+            section_ids=allocator,
         )
         return
 
@@ -634,6 +702,7 @@ def _append_section(
                 parent_sec_id=None,
                 template_graphics=template_graphics,
                 template_formula_ids=template_formula_ids,
+                section_ids=allocator,
             )
             return
 
@@ -651,6 +720,7 @@ def _append_section(
         parent_sec_id=sec_id,
         template_graphics=template_graphics,
         template_formula_ids=template_formula_ids,
+        section_ids=allocator,
     )
 
 
@@ -661,6 +731,7 @@ def _append_mapped_node(
     parent_sec_id: str | None = None,
     template_graphics: dict[str, str] | None = None,
     template_formula_ids: dict[str, str] | None = None,
+    section_ids: _SectionIdAllocator | None = None,
 ) -> int:
     mapped = _as_mapped(node)
     semantic_type = mapped.semantic_type
@@ -672,6 +743,7 @@ def _append_mapped_node(
             parent_sec_id,
             template_graphics=template_graphics,
             template_formula_ids=template_formula_ids,
+            section_ids=section_ids,
         )
         return ref_index
     if semantic_type == "paragraph":
@@ -721,8 +793,10 @@ def _append_mapped_nodes(
     parent_sec_id: str | None = None,
     template_graphics: dict[str, str] | None = None,
     template_formula_ids: dict[str, str] | None = None,
+    section_ids: _SectionIdAllocator | None = None,
 ) -> None:
     ref_index = 1
+    allocator = section_ids or _SectionIdAllocator()
     for node in nodes:
         ref_index = _append_mapped_node(
             parent,
@@ -731,6 +805,7 @@ def _append_mapped_nodes(
             parent_sec_id=parent_sec_id,
             template_graphics=template_graphics,
             template_formula_ids=template_formula_ids,
+            section_ids=allocator,
         )
 
 
@@ -792,16 +867,30 @@ def _apply_front_matter(article: etree._Element, front: dict[str, Any]) -> None:
         for child in list(contrib_group):
             if child.tag == "contrib":
                 contrib_group.remove(child)
-        for index, author_data in enumerate(authors_data, start=1):
-            _append_author_contrib(contrib_group, author_data, index)
+        seen_keys: set[str] = set()
+        index = 0
+        for author_data in authors_data:
+            name_text = clean_author_display_name(_text_of(author_data, "author").strip())
+            if not name_text:
+                continue
+            key = author_dedup_key(name_text)
+            if key in seen_keys:
+                continue
+            seen_keys.add(key)
+            index += 1
+            _append_author_contrib(contrib_group, author_data, index, name_override=name_text)
 
 
 def _append_author_contrib(
     contrib_group: etree._Element,
     author_data: MappedSemanticNode | dict[str, Any],
     index: int,
+    *,
+    name_override: str | None = None,
 ) -> None:
-    name_text = _text_of(author_data, "author").strip()
+    name_text = clean_author_display_name(
+        (name_override or _text_of(author_data, "author")).strip()
+    )
     if not name_text:
         return
     parts = name_text.split()
@@ -850,22 +939,73 @@ def _normalize_person_name_elements(article: etree._Element) -> None:
         )
 
 
-def _apply_back_matter(article: etree._Element, back: dict[str, Any]) -> None:
-    references = back.get("references") or []
+def _apply_acknowledgment(article: etree._Element, acknowledgment: str | None) -> None:
+    if not acknowledgment or not acknowledgment.strip():
+        return
     back_el = article.find("back")
     if back_el is None:
-        if not references:
-            return
         back_el = etree.SubElement(article, "back")
+    ack = back_el.find("ack")
+    if ack is None:
+        ack = etree.SubElement(back_el, "ack")
+    for child in list(ack):
+        ack.remove(child)
+    paragraph = etree.SubElement(ack, "p")
+    set_lxml_text(
+        paragraph,
+        acknowledgment.strip(),
+        log_context={"semantic_type": "acknowledgment", "source": "-", "field": "p"},
+    )
+
+
+def _ref_list_ref_nodes(article: etree._Element) -> list[etree._Element]:
+    return article.xpath(
+        "//*[local-name()='back']/*[local-name()='ref-list']/*[local-name()='ref']"
+    )
+
+
+def _find_back_ref_list(back_el: etree._Element) -> etree._Element:
+    ref_lists = back_el.xpath("*[local-name()='ref-list']")
+    if ref_lists:
+        return ref_lists[0]
+    return etree.SubElement(back_el, "ref-list")
+
+
+def _prepare_mapping_back_references(
+    body: SemanticMappingBody,
+    ir: dict[str, Any] | None,
+    phase1: dict[str, Any] | None,
+) -> SemanticMappingBody:
+    """Merge Phase 1 / IR bibliography into the mapping used for ``<ref-list>``."""
+    from app.services.ir_semantic_adapter import fill_back_references_from_ir
+    from app.services.phase1_reference_bridge import merge_phase1_references_into_ir
+
+    merged_ir = merge_phase1_references_into_ir(ir or {}, phase1)
+    return fill_back_references_from_ir(body, merged_ir)
+
+
+def _apply_back_matter(article: etree._Element, back: dict[str, Any]) -> int | None:
+    """Populate back matter.
+
+    Returns the number of ``<ref>`` nodes written when bibliography is replaced,
+    or ``None`` when existing ``<ref-list>`` content is left unchanged.
+    """
+    references = back.get("references") or []
+    acknowledgment = back.get("acknowledgment")
+    back_el = article.find("back")
+    if back_el is None:
+        if not references and not acknowledgment:
+            return None
+        back_el = etree.SubElement(article, "back")
+    if acknowledgment:
+        _apply_acknowledgment(article, str(acknowledgment))
+
     if not references:
-        return
+        return None
 
-    references = _deduplicate_mapping_reference_list(references)
-
-    ref_list = back_el.find("ref-list")
-    if ref_list is None:
-        ref_list = etree.SubElement(back_el, "ref-list")
-    if ref_list.find("title") is None:
+    ref_list = _find_back_ref_list(back_el)
+    title_nodes = ref_list.xpath("*[local-name()='title']")
+    if not title_nodes:
         title = etree.SubElement(ref_list, "title")
         set_lxml_text(
             title,
@@ -873,8 +1013,11 @@ def _apply_back_matter(article: etree._Element, back: dict[str, Any]) -> None:
             log_context={"semantic_type": "reference_list", "source": "-", "field": "title"},
         )
     for child in list(ref_list):
-        if child.tag == "ref":
+        if xml_local_name(child) == "ref":
             ref_list.remove(child)
+
+    references = _deduplicate_mapping_reference_list(references)
+
     try:
         _validate_mapping_references(references)
     except ReferenceParsingError as exc:
@@ -884,11 +1027,38 @@ def _apply_back_matter(article: etree._Element, back: dict[str, Any]) -> None:
         ) from exc
     for index, reference in enumerate(references, start=1):
         _append_reference(ref_list, reference, index)
+    return len(references)
+
+
+def _sync_ref_count_to_ref_list(
+    article: etree._Element,
+    *,
+    reference_count: int | None = None,
+) -> None:
+    """Set ``ref-count`` to match ``<ref-list>`` (written count or live DOM count)."""
+    count = reference_count
+    if count is None:
+        count = len(_ref_list_ref_nodes(article))
+
+    article_meta_nodes = article.xpath("//*[local-name()='front']/*[local-name()='article-meta']")
+    if not article_meta_nodes:
+        return
+    article_meta = article_meta_nodes[0]
+    counts_nodes = article_meta.xpath("*[local-name()='counts']")
+    counts = counts_nodes[0] if counts_nodes else etree.SubElement(article_meta, "counts")
+    ref_count_nodes = counts.xpath("*[local-name()='ref-count']")
+    ref_count_el = ref_count_nodes[0] if ref_count_nodes else etree.SubElement(counts, "ref-count")
+    ref_count_el.set("count", str(count))
 
 
 def generate_jats_xml(
     template_path: str | Path,
     mapping: SemanticMappingBody | dict[str, Any],
+    *,
+    phase1: dict[str, Any] | None = None,
+    source_filename: str | None = None,
+    ir: dict[str, Any] | None = None,
+    source: Any | None = None,
 ) -> str:
     """Generate IEEE JATS XML using a client template skeleton and semantic mapping."""
     path = Path(template_path)
@@ -899,6 +1069,8 @@ def generate_jats_xml(
         body = mapping
     else:
         body = SemanticMappingBody.model_validate(mapping.get("mapping", mapping))
+
+    body = _prepare_mapping_back_references(body, ir, phase1)
 
     try:
         parser = etree.XMLParser(remove_blank_text=True)
@@ -916,8 +1088,24 @@ def generate_jats_xml(
 
     _apply_front_matter(article, body.front)
 
+    from app.services.jats_metadata_overlay import (
+        apply_jats_metadata_overlay,
+        build_jats_metadata_overlay,
+        build_source_figure_graphics,
+    )
+
     template_graphics = _extract_template_figure_graphics(article)
+    source_graphics = build_source_figure_graphics(
+        source_filename=source_filename,
+        phase1=phase1,
+    )
+    figure_graphics = source_graphics or template_graphics
     template_formula_ids = _extract_template_display_formula_ids(article)
+
+    body_nodes, acknowledgment = _partition_acknowledgment_sections(list(body.body))
+    back_matter = dict(body.back)
+    if acknowledgment:
+        back_matter["acknowledgment"] = acknowledgment
 
     body_el = article.find("body")
     if body_el is not None:
@@ -925,13 +1113,31 @@ def generate_jats_xml(
             body_el.remove(child)
         _append_mapped_nodes(
             body_el,
-            list(body.body),
-            template_graphics=template_graphics,
+            body_nodes,
+            template_graphics=figure_graphics,
             template_formula_ids=template_formula_ids,
         )
 
-    _apply_back_matter(article, body.back)
+    overlay = build_jats_metadata_overlay(
+        phase1=phase1,
+        ir=ir,
+        mapping=body,
+        source=source,
+    )
+    apply_jats_metadata_overlay(
+        article,
+        overlay=overlay,
+        mapping=body,
+        phase1=phase1,
+    )
+
+    reference_count = _apply_back_matter(article, back_matter)
     _normalize_person_name_elements(article)
+
+    from app.utils.jats_empty_prune import prune_empty_jats_elements
+
+    prune_empty_jats_elements(article)
+    _sync_ref_count_to_ref_list(article, reference_count=reference_count)
 
     return serialize_lxml_tree(
         article,
@@ -945,9 +1151,11 @@ def generate_jats_xml(
 def generate_jats_xml_from_ir(
     template_path: str | Path,
     ir: dict[str, Any],
+    *,
+    phase1: dict[str, Any] | None = None,
 ) -> str:
     """Convenience: Stage 1 IR → mapping → JATS XML without LLM."""
     from app.services.ir_semantic_adapter import ir_to_semantic_mapping
 
     mapping = ir_to_semantic_mapping(ir)
-    return generate_jats_xml(template_path, mapping)
+    return generate_jats_xml(template_path, mapping, phase1=phase1, ir=ir)

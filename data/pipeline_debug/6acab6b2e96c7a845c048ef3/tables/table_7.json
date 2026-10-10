@@ -1,0 +1,92 @@
+{
+  "table_id": "table_7",
+  "page_number": 14,
+  "row_count": 8,
+  "column_count": 6,
+  "rows": [
+    [
+      "",
+      "Fuel / g",
+      "△SOC / %",
+      "SOC corrected fuel / g",
+      "Work / kWh",
+      "BSFC / (g/kWh)"
+    ],
+    [
+      "RB 1",
+      "591.1",
+      "0.957",
+      "542.8",
+      "1.326",
+      "218.5"
+    ],
+    [
+      "RB 2",
+      "575.8",
+      "0.857",
+      "532.6",
+      "1.363",
+      "217.6"
+    ],
+    [
+      "RB 3",
+      "508.8",
+      "0.490",
+      "484.1",
+      "1.241",
+      "218.7"
+    ],
+    [
+      "RB 4",
+      "584.4",
+      "0.484",
+      "559.9",
+      "1.318",
+      "218.8"
+    ],
+    [
+      "DP-PMP 1",
+      "598.2",
+      "0.698",
+      "563.0",
+      "1.435",
+      "216.2"
+    ],
+    [
+      "DP-PMP 2",
+      "490.3",
+      "-0.827",
+      "532.0",
+      "1.319",
+      "217.8"
+    ],
+    [
+      "DP-PMP 3",
+      "538.5",
+      "-1.849",
+      "631.8",
+      "1.613",
+      "216.5"
+    ]
+  ],
+  "bbox": [
+    15.420692443847656,
+    275.2176818847656,
+    540.77001953125,
+    435.2176818847656
+  ],
+  "id": "table_7",
+  "caption": "TABLE 7. Summary of V-cycle measurements (8 loading cycles).",
+  "subtitle": null,
+  "headers": [],
+  "raw_text": "\tFuel / g\t△SOC / %\tSOC corrected fuel / g\tWork / kWh\tBSFC / (g/kWh)\nRB 1\t591.1\t0.957\t542.8\t1.326\t218.5\nRB 2\t575.8\t0.857\t532.6\t1.363\t217.6\nRB 3\t508.8\t0.490\t484.1\t1.241\t218.7\nRB 4\t584.4\t0.484\t559.9\t1.318\t218.8\nDP-PMP 1\t598.2\t0.698\t563.0\t1.435\t216.2\nDP-PMP 2\t490.3\t-0.827\t532.0\t1.319\t217.8\nDP-PMP 3\t538.5\t-1.849\t631.8\t1.613\t216.5",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.9727083333333333,
+    "status": "structured",
+    "engine": "pymupdf",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

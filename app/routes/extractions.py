@@ -36,6 +36,7 @@ from app.services.ir_semantic_adapter import (
     fill_back_references_from_ir,
     ir_to_semantic_mapping,
 )
+from app.services.phase1_reference_bridge import merge_phase1_references_into_ir
 from app.services.llm.providers.base import LLMConfigurationError
 from app.services.llm.providers.factory import is_llm_configured
 from app.services.llm_semantic_mapper import SemanticMappingError, map_semantic_content
@@ -614,6 +615,8 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
 
     resolved_scope = scope_result["resolved_scope"]
     filtered_ir = scope_result["filtered_ir"]
+    phase1_doc = doc.get("phase1") or (doc.get("result") or {}).get("phase1")
+    filtered_ir = merge_phase1_references_into_ir(filtered_ir, phase1_doc)
     warnings: list[str] = []
     mapping_source = "ir_adapter"
     prompt_version: str | None = None
@@ -725,6 +728,8 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
             mapping_body,
             output_format=body.output_format,
             source=source_identity,
+            phase1=phase1_doc,
+            ir=filtered_ir,
         )
     except OutputFormatError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc

@@ -7,7 +7,7 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-from app.models.document_structure import DocumentStructureResult, ProcessedBlock
+from app.models.document_structure import DocumentStructureResult, ProcessedBlock, StructuredItem
 from app.models.extracted_document import (
     ExtractedDocument,
     ExtractedPage,
@@ -224,22 +224,42 @@ def _build_book_references(structure: DocumentStructureResult) -> list[Extracted
     return ordered + unnumbered
 
 
-def _build_references(structure: DocumentStructureResult) -> list[ExtractedReferenceItem]:
-    if structure.publication_document_type == "book":
-        return _build_book_references(structure)
-    block_sem_types = {block.block_id: block.classification for block in structure.blocks}
-    section_blocks = collect_reference_section_blocks(
-        structure.blocks,
-        block_sem_types,
-        is_author_bio=_is_author_bio,
-    )
+def _structured_items_to_reference_blocks(items: list[StructuredItem]) -> list[ProcessedBlock]:
+    blocks: list[ProcessedBlock] = []
+    for order, item in enumerate(items):
+        text = (item.text or "").strip()
+        if not text:
+            continue
+        if REFERENCE_HEADING_RE.match(normalize_text(text)) or REFERENCE_HEADING_RE.match(
+            normalize_text(text.split("\n", 1)[0])
+        ):
+            continue
+        block_id = item.source_block_ids[0] if item.source_block_ids else f"structure_ref_{order}"
+        blocks.append(
+            ProcessedBlock(
+                block_id=block_id,
+                page_number=int(item.page_number or 1),
+                reading_order_index=order,
+                column="FULL_WIDTH",
+                classification="REFERENCE_TEXT",
+                bbox=list(item.bbox or [0.0, 0.0, 0.0, 0.0]),
+                text=text,
+                block_type="paragraph",
+            )
+        )
+    return blocks
+
+
+def _references_from_assembled_blocks(section_blocks: list[ProcessedBlock]) -> list[ExtractedReferenceItem]:
     if not section_blocks:
         return []
     assembled = deduplicate_assembled_references(
         _assemble_from_layout_ordered_blocks(section_blocks)
     )
     ordered = [
-        ref for ref in assembled if ref.reference_number >= 1 and is_plausible_bibliography_entry(ref.raw_text)
+        ref
+        for ref in assembled
+        if ref.reference_number >= 1 and is_plausible_bibliography_entry(ref.raw_text)
     ]
     return [
         ExtractedReferenceItem(
@@ -249,6 +269,32 @@ def _build_references(structure: DocumentStructureResult) -> list[ExtractedRefer
         )
         for ref in ordered
     ]
+
+
+def _build_references(structure: DocumentStructureResult) -> list[ExtractedReferenceItem]:
+    if structure.publication_document_type == "book":
+        return _build_book_references(structure)
+    block_sem_types = {block.block_id: block.classification for block in structure.blocks}
+    section_blocks = collect_reference_section_blocks(
+        structure.blocks,
+        block_sem_types,
+        is_author_bio=_is_author_bio,
+    )
+    references = _references_from_assembled_blocks(section_blocks)
+    source = "layout_section_blocks"
+    if not references and structure.references:
+        fallback_blocks = _structured_items_to_reference_blocks(structure.references)
+        references = _references_from_assembled_blocks(fallback_blocks)
+        source = "structure_references_fallback"
+    logger.info(
+        "[phase1] Reference detection assembled_count=%d structure_items=%d "
+        "section_block_count=%d source=%s",
+        len(references),
+        len(structure.references or []),
+        len(section_blocks),
+        source,
+    )
+    return references
 
 
 def _front_matter_from_semantic(structure: DocumentStructureResult) -> tuple[str | None, list[str]]:

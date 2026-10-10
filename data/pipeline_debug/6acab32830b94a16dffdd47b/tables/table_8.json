@@ -1,0 +1,92 @@
+{
+  "table_id": "table_8",
+  "page_number": 14,
+  "row_count": 8,
+  "column_count": 6,
+  "rows": [
+    [
+      "",
+      "Fuel / g",
+      "△SOC / %",
+      "SOC corrected fuel / g",
+      "Work/kWh",
+      "BSFC / (g/kWh)"
+    ],
+    [
+      "RB 1",
+      "626.1",
+      "-1.146",
+      "683.8",
+      "1.798",
+      "217.8"
+    ],
+    [
+      "RB 2",
+      "641.7",
+      "-0.984",
+      "691.3",
+      "1.908",
+      "217.4"
+    ],
+    [
+      "RB 3",
+      "530.7",
+      "-2.879",
+      "675.9",
+      "1.725",
+      "222.6"
+    ],
+    [
+      "DP-PMP 1",
+      "722.8",
+      "1.025",
+      "671.2",
+      "1.788",
+      "215.9"
+    ],
+    [
+      "DP-PMP 2",
+      "529.5",
+      "-3.176",
+      "689.6",
+      "1.885",
+      "216.9"
+    ],
+    [
+      "DP-PMP 3",
+      "633.5",
+      "-0.542",
+      "660.8",
+      "1.767",
+      "216.1"
+    ],
+    [
+      "",
+      "is O.7%lower compared to the average BSFC with the rule-",
+      "",
+      "",
+      "Of particular note is that the third measurement with",
+      ""
+    ]
+  ],
+  "bbox": [
+    15.420600891113281,
+    442.5732421875,
+    540.77001953125,
+    602.5732421875
+  ],
+  "id": "table_8",
+  "caption": "TABLE 8. Summary of the combined cycle measurements.",
+  "subtitle": null,
+  "headers": [],
+  "raw_text": "\tFuel / g\t△SOC / %\tSOC corrected fuel / g\tWork/kWh\tBSFC / (g/kWh)\nRB 1\t626.1\t-1.146\t683.8\t1.798\t217.8\nRB 2\t641.7\t-0.984\t691.3\t1.908\t217.4\nRB 3\t530.7\t-2.879\t675.9\t1.725\t222.6\nDP-PMP 1\t722.8\t1.025\t671.2\t1.788\t215.9\nDP-PMP 2\t529.5\t-3.176\t689.6\t1.885\t216.9\nDP-PMP 3\t633.5\t-0.542\t660.8\t1.767\t216.1\n\tis O.7%lower compared to the average BSFC with the rule-\t\t\tOf particular note is that the third measurement with\t",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.9435416666666666,
+    "status": "structured",
+    "engine": "pymupdf",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

@@ -943,3 +943,26 @@ ValueError: Validation failed: ['Broken xref: rid=ref20 has no matching id', 'Br
 2026-10-11 01:55:56.159 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
 2026-10-11 01:55:59.836 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
 2026-10-11 01:59:22.060 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:07:45.911 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:07:49.947 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:07:59.844 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:08:03.223 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:08:06.417 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:11:50.363 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:22:15.997 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:26:28.894 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:36:51.931 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:36:58.724 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:37:08.812 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:37:15.070 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:37:28.892 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:44:08.455 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:44:11.417 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:45:57.911 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-11 02:51:53.516 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:57:54.681 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:58:01.958 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 02:58:06.847 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 03:04:10.419 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 03:13:43.979 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-11 03:31:13.589 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started

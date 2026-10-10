@@ -314,17 +314,26 @@ def collect_reference_section_blocks(
     """Collect bibliography blocks from the REFERENCES page through author bios."""
     ordered = sorted(processed, key=lambda block: block.reading_order_index)
     heading_page: int | None = None
+    heading_reading_order: int | None = None
     for block in ordered:
         line = first_line(block.text or "")
         if REFERENCE_HEADING_RE.match(line):
             heading_page = block.page_number
+            heading_reading_order = block.reading_order_index
+            break
 
-    if heading_page is None:
+    if heading_page is None or heading_reading_order is None:
+        logger.info(
+            "[phase1] Reference heading not found (blocks=%d)",
+            len(processed),
+        )
         return []
 
     collected: list[ProcessedBlock] = []
     for block in ordered:
         if block.page_number < heading_page:
+            continue
+        if block.page_number == heading_page and block.reading_order_index <= heading_reading_order:
             continue
 
         text = block.text or ""
@@ -357,7 +366,16 @@ def collect_reference_section_blocks(
 
         collected.append(block)
 
-    return sort_reference_section_blocks(collected)
+    sorted_blocks = sort_reference_section_blocks(collected)
+    logger.info(
+        "[phase1] Reference section blocks heading_page=%s heading_order=%s "
+        "candidate_count=%d ref_pages=%s",
+        heading_page,
+        heading_reading_order,
+        len(sorted_blocks),
+        sorted({block.page_number for block in sorted_blocks}),
+    )
+    return sorted_blocks
 
 
 def _label_at_block_start(text: str) -> tuple[int, str] | None:

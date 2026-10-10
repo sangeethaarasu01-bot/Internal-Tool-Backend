@@ -1,0 +1,64 @@
+{
+  "table_id": "table_3",
+  "page_number": 11,
+  "row_count": 6,
+  "column_count": 4,
+  "rows": [
+    [
+      "npar-",
+      "",
+      "Fuel consumption / g",
+      "Improvements / %"
+    ],
+    [
+      "with",
+      "Rule-based",
+      "579.1",
+      ""
+    ],
+    [
+      "con-",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "DP-PMP",
+      "560.3",
+      "3.3"
+    ],
+    [
+      "g the",
+      "",
+      "",
+      ""
+    ],
+    [
+      "rmed",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "bbox": [
+    276.3302001953125,
+    447.63922119140625,
+    590.0985107421875,
+    538.6693115234375
+  ],
+  "id": "table_3",
+  "caption": "TABLE 3. Comparison of soc-corrected fuel consumption in the V-cycle.",
+  "subtitle": null,
+  "headers": [],
+  "raw_text": "npar-\t\tFuel consumption / g\tImprovements / %\nwith\tRule-based\t579.1\t\ncon-\t\t\t\n\tDP-PMP\t560.3\t3.3\ng the\t\t\t\nrmed\t\t\t",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.805,
+    "status": "structured",
+    "engine": "pymupdf",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

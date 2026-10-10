@@ -25,10 +25,21 @@ logger = logging.getLogger(__name__)
 def run_jats_xml_transform(
     template_path: str | Path,
     mapping: SemanticMappingBody | dict[str, Any],
+    *,
+    phase1: dict[str, Any] | None = None,
+    ir: dict[str, Any] | None = None,
+    source: SourceIdentityRecord | None = None,
 ) -> str:
     """Run IEEE JATS generation with full exception logging for operations diagnostics."""
     try:
-        return generate_jats_xml(template_path, mapping)
+        return generate_jats_xml(
+            template_path,
+            mapping,
+            phase1=phase1,
+            source_filename=source.source_filename if source else None,
+            ir=ir,
+            source=source,
+        )
     except XmlGenerationError:
         raise
     except UnsupportedTemplateRootError as exc:
@@ -50,6 +61,8 @@ def generate_output_xml(
     *,
     output_format: str = "auto",
     source: SourceIdentityRecord | None = None,
+    phase1: dict[str, Any] | None = None,
+    ir: dict[str, Any] | None = None,
 ) -> tuple[str, str, DocBookMetadataOverlayResult | None]:
     """
     Return ``(xml_content, resolved_output_format)``.
@@ -77,7 +90,13 @@ def generate_output_xml(
         return xml_content, resolved, overlay
 
     if resolved == OUTPUT_IEEE_JATS:
-        xml_content = run_jats_xml_transform(path, mapping)
+        xml_content = run_jats_xml_transform(
+            path,
+            mapping,
+            phase1=phase1,
+            ir=ir,
+            source=source,
+        )
         return xml_content, resolved, None
 
     raise OutputFormatError(f"No generator registered for output format '{resolved}'.")

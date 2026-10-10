@@ -9,6 +9,7 @@ from __future__ import annotations
 from typing import Any
 
 from app.models.semantic_mapping import MappedInlineElement, MappedSemanticNode, SemanticMappingBody
+from app.services.author_deduplication import deduplicate_mapped_authors
 
 _IR_TYPE_TO_SEMANTIC = {
     "title": "metadata",
@@ -123,13 +124,14 @@ def ir_to_semantic_mapping(ir: dict[str, Any]) -> SemanticMappingBody:
     if keywords:
         front["keywords"] = keywords.model_dump(mode="json")
 
-    authors = [
-        mapped.model_dump(mode="json")
+    author_nodes = [
+        mapped
         for author in front_raw.get("authors") or []
         if (mapped := _ir_node_to_mapped(author)) is not None
     ]
-    if authors:
-        front["authors"] = authors
+    deduped_authors = deduplicate_mapped_authors(author_nodes)
+    if deduped_authors:
+        front["authors"] = [node.model_dump(mode="json") for node in deduped_authors]
 
     affiliations = [
         mapped.model_dump(mode="json")
