@@ -899,3 +899,4 @@ ValueError: Validation failed: ['Broken xref: rid=ref20 has no matching id', 'Br
 2026-10-10 20:28:43.090 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
 2026-10-10 20:28:43.094 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
 2026-10-10 20:37:40.762 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:37:43.844 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
