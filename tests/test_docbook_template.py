@@ -108,7 +108,7 @@ def test_router_auto_selects_docbook_for_book_template() -> None:
     schema = {"template_format": "docbook_5_book", "root_tag": "book"}
     mapping = SemanticMappingBody(front={}, body=[], back={})
     assert resolve_output_format("auto", schema) == OUTPUT_DOCBOOK_5
-    xml, fmt = generate_output_xml(DOCBOOK_FIXTURE, schema, mapping, output_format="auto")
+    xml, fmt, _overlay = generate_output_xml(DOCBOOK_FIXTURE, schema, mapping, output_format="auto")
     assert fmt == OUTPUT_DOCBOOK_5
     assert "Test Book" in xml
 

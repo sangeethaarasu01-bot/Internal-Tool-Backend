@@ -118,6 +118,23 @@ def compact_ir_for_llm(ir: dict[str, Any]) -> dict[str, Any]:
     return {"front": compact_front, "body": compact_body, "back": compact_back}
 
 
+def compact_template_schema_for_mongo(schema: dict[str, Any]) -> dict[str, Any]:
+    """
+    Shrink template_schema before embedding on an extraction document.
+
+    Full template XML remains on disk at template.file_path; structure tree is not
+    needed for generation and can push large book jobs toward the 16MB BSON limit.
+    """
+    compact = dict(schema)
+    compact.pop("docbook_structure", None)
+    tags = compact.get("tags")
+    if isinstance(tags, dict) and len(tags) > 250:
+        trimmed = {k: tags[k] for k in list(tags)[:250]}
+        compact["tags"] = trimmed
+        compact["tags_truncated_for_storage"] = True
+    return compact
+
+
 def compact_template_schema_for_llm(schema: dict[str, Any]) -> dict[str, Any]:
     """Send only template structure hints to the LLM, not the full tag dictionary."""
     return {

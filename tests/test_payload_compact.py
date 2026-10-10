@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from app.services.llm.payload_compact import compact_ir_for_llm, compact_template_schema_for_llm
+from app.services.llm.payload_compact import (
+    compact_ir_for_llm,
+    compact_template_schema_for_llm,
+    compact_template_schema_for_mongo,
+)
 
 
 def test_compact_ir_strips_layout_metadata() -> None:
@@ -39,3 +43,15 @@ def test_compact_template_schema_keeps_structure_only() -> None:
     assert compact["template_name"] == "IEEE"
     assert "p" in compact["tag_names"]
     assert "tags" not in compact
+
+
+def test_compact_template_schema_for_mongo_drops_docbook_structure() -> None:
+    schema = {
+        "template_name": "DocBook_5.0",
+        "root_tag": "book",
+        "docbook_structure": {"tag": "book", "children": [{"tag": "chapter"}]},
+        "tags": {"para": {"allowed_children": []}},
+    }
+    compact = compact_template_schema_for_mongo(schema)
+    assert "docbook_structure" not in compact
+    assert compact["tags"]["para"]

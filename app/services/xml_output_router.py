@@ -8,6 +8,8 @@ from typing import Any
 
 from app.models.semantic_mapping import SemanticMappingBody
 from app.services.docbook_generator import DocBookGenerationError, generate_docbook_book_xml
+from app.services.docbook_metadata_overlay import DocBookMetadataOverlayResult
+from app.services.source_identity import SourceIdentityRecord
 from app.services.output_format import (
     OUTPUT_DOCBOOK_5,
     OUTPUT_IEEE_JATS,
@@ -47,7 +49,8 @@ def generate_output_xml(
     mapping: SemanticMappingBody | dict[str, Any],
     *,
     output_format: str = "auto",
-) -> tuple[str, str]:
+    source: SourceIdentityRecord | None = None,
+) -> tuple[str, str, DocBookMetadataOverlayResult | None]:
     """
     Return ``(xml_content, resolved_output_format)``.
 
@@ -62,7 +65,7 @@ def generate_output_xml(
 
     if resolved == OUTPUT_DOCBOOK_5:
         try:
-            xml_content = generate_docbook_book_xml(path)
+            xml_content, overlay = generate_docbook_book_xml(path, source=source)
         except DocBookGenerationError as exc:
             raise XmlGenerationError(str(exc)) from exc
         except MemoryError as exc:
@@ -71,10 +74,10 @@ def generate_output_xml(
                 "Document too large to load as a single book XML. "
                 "Use chapter-level DocBook output or reduce template size."
             ) from exc
-        return xml_content, resolved
+        return xml_content, resolved, overlay
 
     if resolved == OUTPUT_IEEE_JATS:
         xml_content = run_jats_xml_transform(path, mapping)
-        return xml_content, resolved
+        return xml_content, resolved, None
 
     raise OutputFormatError(f"No generator registered for output format '{resolved}'.")

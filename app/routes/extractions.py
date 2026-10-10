@@ -13,7 +13,7 @@ from bson.errors import InvalidId
 from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile
 from pymongo.errors import PyMongoError
 
-from app.database import extractions_col, mongo_connect_error, utcnow
+from app.database import extractions_col, mongo_user_error, utcnow
 from app.models.extraction_workflow import (
     GenerateXmlRequest,
     GenerateXmlResponse,
@@ -179,7 +179,7 @@ async def start_extraction(
     except PyMongoError as exc:
         if os.path.exists(file_path):
             os.remove(file_path)
-        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+        raise HTTPException(status_code=503, detail=mongo_user_error(exc))
 
     extraction_id = str(inserted.inserted_id)
     background_tasks.add_task(process_extraction, extraction_id, file_path, filename)
@@ -218,7 +218,7 @@ async def clear_extraction_template(extraction_id: str):
             },
         )
     except PyMongoError as exc:
-        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+        raise HTTPException(status_code=503, detail=mongo_user_error(exc))
     log_processing_stage(
         "template_cleared",
         extraction_id=extraction_id,
@@ -283,7 +283,7 @@ async def create_template_from_source(extraction_id: str):
             },
         )
     except PyMongoError as exc:
-        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+        raise HTTPException(status_code=503, detail=mongo_user_error(exc))
 
     log_processing_stage(
         "template_from_source",
@@ -375,34 +375,21 @@ async def upload_extraction_template(
     ).to_dict()
     content_sha = sha256_file(file_path)
 
-    try:
-        resolved_format = resolve_output_format(
-            "auto",
-            schema,
-            template_path=file_path,
-        )
-        if resolved_format == OUTPUT_DOCBOOK_5:
-            verify_pre_generation_identity(
-                extraction_id=extraction_id,
-                source=source_identity,
-                template={
-                    "template_schema": schema,
-                    "original_filename": filename,
-                },
-                template_path=str(file_path),
-                output_format=resolved_format,
-            )
-    except IdentityMismatchError as exc:
-        if file_path.exists():
-            file_path.unlink()
-        logger.warning(
-            "template_upload_rejected extraction_id=%s source_sha=%s template_file=%s detail=%s",
-            extraction_id,
-            (source_identity.source_pdf_sha256 or "-")[:16],
-            filename,
-            exc,
-        )
-        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    resolved_format = resolve_output_format(
+        "auto",
+        schema,
+        template_path=file_path,
+    )
+    verify_pre_generation_identity(
+        extraction_id=extraction_id,
+        source=source_identity,
+        template={
+            "template_schema": schema,
+            "original_filename": filename,
+        },
+        template_path=str(file_path),
+        output_format=resolved_format,
+    )
 
     template_record = build_template_record(
         template_path=file_path,
@@ -431,7 +418,7 @@ async def upload_extraction_template(
             },
         )
     except PyMongoError as exc:
-        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+        raise HTTPException(status_code=503, detail=mongo_user_error(exc))
 
     return TemplateUploadResponse(
         document_id=extraction_id,
@@ -468,7 +455,7 @@ async def apply_extraction_scope(extraction_id: str, body: ScopeRequest):
             {"$set": {"scope": resolved_scope}},
         )
     except PyMongoError as exc:
-        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+        raise HTTPException(status_code=503, detail=mongo_user_error(exc))
 
     template_schema = scope_result.get("filtered_template_schema")
     has_template = bool((doc.get("template") or {}).get("template_schema"))
@@ -538,7 +525,7 @@ async def semantic_map_extraction(extraction_id: str, body: SemanticMapRequest):
             },
         )
     except PyMongoError as exc:
-        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+        raise HTTPException(status_code=503, detail=mongo_user_error(exc))
 
     return SemanticMapResponse(
         document_id=extraction_id,
@@ -656,7 +643,7 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
                     {"$set": {"scope": resolved_scope, "semantic_mapping": semantic_record}},
                 )
             except PyMongoError as exc:
-                raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+                raise HTTPException(status_code=503, detail=mongo_user_error(exc))
         except LLMConfigurationError as exc:
             raise HTTPException(status_code=503, detail=str(exc)) from exc
         except SemanticMappingError as exc:
@@ -722,23 +709,21 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
         output_format=resolved_output_format,
         output_storage_key=output_filename,
     )
-    try:
-        verify_pre_generation_identity(
-            extraction_id=extraction_id,
-            source=source_identity,
-            template=template,
-            template_path=template_path,
-            output_format=resolved_output_format,
-        )
-    except IdentityMismatchError:
-        raise
+    verify_pre_generation_identity(
+        extraction_id=extraction_id,
+        source=source_identity,
+        template=template,
+        template_path=template_path,
+        output_format=resolved_output_format,
+    )
 
     try:
-        xml_content, resolved_output_format = generate_output_xml(
+        xml_content, resolved_output_format, docbook_overlay = generate_output_xml(
             template_path,
             template_schema,
             mapping_body,
             output_format=body.output_format,
+            source=source_identity,
         )
     except OutputFormatError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
@@ -777,6 +762,8 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
             "DocBook output preserves the uploaded book template structure; "
             "PDF chapter merge is not applied on this path."
         )
+        if docbook_overlay and docbook_overlay.warnings:
+            warnings.extend(docbook_overlay.warnings)
         try:
             write_result = write_book_chunks(extraction_id, xml_content)
         except DocBookChunkingError as exc:
@@ -832,7 +819,7 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
             {"$set": {"scope": resolved_scope, "generated_xml": generated_record}},
         )
     except PyMongoError as exc:
-        raise HTTPException(status_code=503, detail=mongo_connect_error(exc))
+        raise HTTPException(status_code=503, detail=mongo_user_error(exc))
 
     return GenerateXmlResponse(
         document_id=extraction_id,

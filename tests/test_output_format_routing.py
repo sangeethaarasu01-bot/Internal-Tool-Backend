@@ -39,7 +39,7 @@ def test_template_format_detection_article() -> None:
 def test_docbook_auto_routes_to_docbook_generator() -> None:
     schema = {"template_format": "docbook_5_book", "root_tag": "book"}
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    xml, fmt = generate_output_xml(
+    xml, fmt, _overlay = generate_output_xml(
         DOCBOOK_FIXTURE,
         schema,
         mapping,
@@ -54,7 +54,7 @@ def test_docbook_auto_routes_to_docbook_generator() -> None:
 def test_docbook_explicit_output_does_not_invoke_jats() -> None:
     schema = {"template_format": "docbook_5_book", "root_tag": "book"}
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    xml, fmt = generate_output_xml(
+    xml, fmt, _overlay = generate_output_xml(
         DOCBOOK_FIXTURE,
         schema,
         mapping,
@@ -79,7 +79,7 @@ def test_jats_generator_still_rejects_docbook_template_directly() -> None:
 
 def test_stale_empty_schema_auto_uses_book_file_not_jats() -> None:
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    xml, fmt = generate_output_xml(
+    xml, fmt, _overlay = generate_output_xml(
         DOCBOOK_FIXTURE,
         {},
         mapping,
@@ -91,7 +91,7 @@ def test_stale_empty_schema_auto_uses_book_file_not_jats() -> None:
 def test_article_template_routes_to_jats() -> None:
     schema = {"template_format": "ieee_jats_article", "root_tag": "article"}
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    xml, fmt = generate_output_xml(
+    xml, fmt, _overlay = generate_output_xml(
         JATS_FIXTURE,
         schema,
         mapping,

@@ -886,3 +886,16 @@ ValueError: Validation failed: ['Broken xref: rid=ref20 has no matching id', 'Br
 2026-10-09 19:12:44.752 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
 2026-10-09 19:12:55.815 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
 2026-10-09 19:12:57.218 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:12:08.068 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:12:45.396 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:23:10.244 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:25:20.309 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:25:25.746 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:25:34.693 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:25:54.498 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-10 20:25:54.503 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-10 20:25:54.550 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-10 20:27:44.490 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-10 20:28:43.090 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-10 20:28:43.094 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-10 20:37:40.762 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started

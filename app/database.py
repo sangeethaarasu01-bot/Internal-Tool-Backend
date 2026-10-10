@@ -30,6 +30,46 @@ def uses_local_mongo() -> bool:
     return "localhost" in MONGODB_URI or "127.0.0.1" in MONGODB_URI
 
 
+def mongo_user_error(exc: Exception | None = None) -> str:
+    """Human-readable message for any PyMongo failure (connection or write)."""
+    if exc is None:
+        return mongo_connect_error()
+    name = type(exc).__name__
+    detail = (str(exc) or "").strip()
+    lower = detail.lower()
+
+    if name in {"ServerSelectionTimeoutError", "NetworkTimeout", "ConnectionFailure", "ConfigurationError"}:
+        return mongo_connect_error(exc)
+
+    if name == "OperationFailure" or "operationfailure" in lower:
+        if "larger than" in lower or "16777216" in detail or "too large" in lower:
+            return (
+                "MongoDB could not save this extraction update: the document would exceed "
+                "Atlas's 16MB per-document limit (often after uploading a large book template "
+                "on top of a large PDF extraction). "
+                f"Server detail: {detail[:480]}"
+            )
+        if "auth" in lower or "authentication" in lower or "bad auth" in lower:
+            return (
+                "MongoDB authentication failed. Verify MONGODB_URI user, password, and database name. "
+                f"Detail: {detail[:400]}"
+            )
+        return (
+            "MongoDB rejected the database operation (OperationFailure). "
+            "This is not always caused by Network Access / IP allowlisting — "
+            "check the server detail below and Atlas cluster status (not paused). "
+            f"Detail: {detail[:500]}"
+        )
+
+    if name == "DocumentTooLarge":
+        return (
+            "MongoDB document too large to store. "
+            f"Detail: {detail[:400]}"
+        )
+
+    return mongo_connect_error(exc)
+
+
 def mongo_connect_error(exc: Exception | None = None) -> str:
     kind = f" ({type(exc).__name__})" if exc else ""
     detail = str(exc) if exc else ""

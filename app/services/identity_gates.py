@@ -100,33 +100,26 @@ def verify_pre_generation_identity(
     template_path: str,
     output_format: str,
 ) -> None:
-    """Abort when the uploaded template clearly belongs to a different work than the PDF."""
+    """
+    Log when sample template publication metadata differs from the PDF.
+
+    Cross-publication templates are allowed; output identity is validated after generation.
+    """
     if output_format not in {OUTPUT_DOCBOOK_5, OUTPUT_IEEE_JATS}:
         return
 
     template_identity = build_template_identity(template, template_path)
-    if output_format == OUTPUT_DOCBOOK_5:
-        if not source.title and not source.isbn:
-            logger.warning(
-                "identity_gate_skip extraction_id=%s reason=weak_source_metadata",
-                extraction_id,
-            )
-            return
-        conflicts = compare_source_to_template(source, template_identity)
-        if conflicts:
-            log_processing_stage(
-                "pre_generation_identity_reject",
-                extraction_id=extraction_id,
-                source_pdf_sha256=source.source_pdf_sha256,
-                template_id=template_identity.template_id,
-                output_format=output_format,
-                identity_result=_conflict_detail(conflicts),
-            )
-            raise IdentityMismatchError(
-                f"{IDENTITY_MISMATCH_MESSAGE} (job {extraction_id}): {_conflict_detail(conflicts)}",
-                extraction_id=extraction_id,
-                conflicts=conflicts,
-            )
+    conflicts = compare_source_to_template(source, template_identity)
+    if conflicts:
+        log_processing_stage(
+            "pre_generation_template_metadata_differs",
+            extraction_id=extraction_id,
+            source_pdf_sha256=source.source_pdf_sha256,
+            template_id=template_identity.template_id,
+            output_format=output_format,
+            identity_result=_conflict_detail(conflicts),
+        )
+        return
     log_processing_stage(
         "pre_generation_identity_ok",
         extraction_id=extraction_id,

@@ -34,7 +34,7 @@ def test_empty_schema_routes_book_file_to_docbook_auto() -> None:
 
 def test_empty_schema_book_file_does_not_invoke_jats_generator() -> None:
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    xml, fmt = generate_output_xml(
+    xml, fmt, _overlay = generate_output_xml(
         DOCBOOK_FIXTURE,
         {},
         mapping,

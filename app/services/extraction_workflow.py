@@ -13,6 +13,7 @@ from bson.errors import InvalidId
 from lxml import etree
 
 from app.database import utcnow
+from app.services.llm.payload_compact import compact_template_schema_for_mongo
 from app.services.scope_resolver import InvalidScopeError, resolve_scope
 from app.services.template_format import UnsupportedTemplateRootError
 from app.services.template_parser import TemplateParser
@@ -62,7 +63,7 @@ def build_template_record(
         "template_id": uuid.uuid4().hex,
         "original_filename": original_filename,
         "file_path": str(template_path),
-        "template_schema": schema,
+        "template_schema": compact_template_schema_for_mongo(schema),
         "created_at": utcnow(),
         "bound_extraction_id": bound_extraction_id,
         "bound_source_pdf_sha256": bound_source_pdf_sha256,
