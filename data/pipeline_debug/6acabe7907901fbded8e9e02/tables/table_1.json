@@ -1,0 +1,87 @@
+{
+  "table_id": "table_1",
+  "page_number": 12,
+  "row_count": 13,
+  "column_count": 2,
+  "rows": [
+    [
+      "han",
+      "distribution. Baseline models (FL-LSTM, FL-BiLSTM, FL-"
+    ],
+    [
+      "eak)",
+      "GRU)yieldaccuraciesaround0.96-0.97andMAEsaround"
+    ],
+    [
+      "20-",
+      "0.46-0.48. Our FL-Transformer (non-split) notably improves"
+    ],
+    [
+      "%of",
+      "both tasks (accuracy 0.988, MAE 0.326). The proposed"
+    ],
+    [
+      "the",
+      "SMTFL (split) achieves the best accuracy (0.989), F1-score"
+    ],
+    [
+      "ergy",
+      "(0.985), and MAE (0.322), while the non-split variant attains"
+    ],
+    [
+      "",
+      "the lowest RMSE (O.647). The slight increase in RMSE for the"
+    ],
+    [
+      "",
+      "split model may reflect the added noise from the split process."
+    ],
+    [
+      "",
+      "Our SMTFL framework not only unifies anomaly detection"
+    ],
+    [
+      "and",
+      "and capacity estimation within a single model while offloading"
+    ],
+    [
+      "",
+      "heavy computation to the edge, but also delivers superior"
+    ],
+    [
+      "ough",
+      "performance compared to recurrent baselines, demonstrating"
+    ],
+    [
+      "have",
+      "the effectiveness of the Transformer architecture with split"
+    ],
+    [
+      "dge, irect",
+      "learning in federated multi-task settings."
+    ]
+  ],
+  "bbox": [
+    281.3669128417969,
+    365.2878723144531,
+    602.4619140625,
+    542.8353271484375
+  ],
+  "id": "table_1",
+  "caption": "Table VII summarizes the performance under non-IID data",
+  "subtitle": null,
+  "headers": [
+    "han",
+    "distribution. Baseline models (FL-LSTM, FL-BiLSTM, FL-"
+  ],
+  "raw_text": "han\tdistribution. Baseline models (FL-LSTM, FL-BiLSTM, FL-\neak)\tGRU)yieldaccuraciesaround0.96-0.97andMAEsaround\n20-\t0.46-0.48. Our FL-Transformer (non-split) notably improves\n%of\tboth tasks (accuracy 0.988, MAE 0.326). The proposed\nthe\tSMTFL (split) achieves the best accuracy (0.989), F1-score\nergy\t(0.985), and MAE (0.322), while the non-split variant attains\n\tthe lowest RMSE (O.647). The slight increase in RMSE for the\n\tsplit model may reflect the added noise from the split process.\n\tOur SMTFL framework not only unifies anomaly detection\nand\tand capacity estimation within a single model while offloading\n\theavy computation to the edge, but also delivers superior\nough\tperformance compared to recurrent baselines, demonstrating\nhave\tthe effectiveness of the Transformer architecture with split\ndge, irect\tlearning in federated multi-task settings.",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.93,
+    "status": "structured",
+    "engine": "pymupdf",
+    "caption_detected": true,
+    "structured_grid": true,
+    "warnings": []
+  }
+}

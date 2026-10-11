@@ -1,0 +1,136 @@
+{
+  "table_id": "table_1",
+  "page_number": 4,
+  "row_count": 9,
+  "column_count": 10,
+  "rows": [
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Diesel, 3.319 L, 4-cylinder",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Engine",
+      "",
+      "",
+      "Net power 51.6 kW"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Lift==Tilt",
+      "P2 electric",
+      "Torque: 500 (Peak) / 213 (Cont.) Nm",
+      "Maximum torque 296 Nm",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "machine",
+      "Power: 190 (Peak) / 91 (Cont.) kW",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "EDU",
+      "Front: 220 (Peak) / 135 (Cont.) kW Power: 157 (Peak) / 93 (Cont.) kW",
+      "",
+      ""
+    ],
+    [
+      "A",
+      "B",
+      "C",
+      "Actual- D",
+      "",
+      "-Request",
+      "HV battery",
+      "",
+      "Nominal voltage 345.6 V Nominal capacity 75.6 Ah",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Control valve",
+      "",
+      "Pressure compensated valve",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "DC-DC",
+      "",
+      "",
+      "HV-12V converter"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "Lift......-Tilt---Steering",
+      "",
+      "converter",
+      "",
+      "",
+      "HV-48V converter"
+    ]
+  ],
+  "bbox": [
+    93.26168823242188,
+    79.4734115600586,
+    582.0985717773438,
+    301.2550354003906
+  ],
+  "id": "table_1",
+  "caption": "TABLE 1. Specifications of main components of hybrid wheel loader.",
+  "subtitle": null,
+  "headers": [],
+  "raw_text": "\t\t\t\t\t\t\t\tDiesel, 3.319 L, 4-cylinder\t\n\t\t\t\t\t\tEngine\t\t\tNet power 51.6 kW\n\t\t\t\t\tLift==Tilt\tP2 electric\tTorque: 500 (Peak) / 213 (Cont.) Nm\tMaximum torque 296 Nm\t\n\t\t\t\t\t\tmachine\tPower: 190 (Peak) / 91 (Cont.) kW\t\t\n\t\t\t\t\t\tEDU\tFront: 220 (Peak) / 135 (Cont.) kW Power: 157 (Peak) / 93 (Cont.) kW\t\t\nA\tB\tC\tActual- D\t\t-Request\tHV battery\t\tNominal voltage 345.6 V Nominal capacity 75.6 Ah\t\n\t\t\t\t\t\tControl valve\t\tPressure compensated valve\t\n\t\t\t\t\t\tDC-DC\t\t\tHV-12V converter\n\t\t\t\tLift......-Tilt---Steering\t\tconverter\t\t\tHV-48V converter",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.7272222222222222,
+    "status": "partial",
+    "engine": "pymupdf",
+    "caption_detected": true,
+    "structured_grid": false,
+    "warnings": []
+  }
+}

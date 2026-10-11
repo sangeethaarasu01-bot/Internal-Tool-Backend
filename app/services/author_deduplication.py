@@ -6,6 +6,7 @@ import re
 
 from app.models.semantic_mapping import MappedSemanticNode
 from app.services.layout.semantic_patterns import parse_author_names
+from app.utils.proof_pdf import is_plausible_author_name
 
 _TRAILING_AFFILIATION_MARK_RE = re.compile(r"\s+\d+\s*$")
 _INCOMPLETE_PAREN_RE = re.compile(r"\s*\([^)]*$")
@@ -53,7 +54,7 @@ def deduplicate_author_names(names: list[str]) -> list[str]:
         for candidate in parse_author_names(raw) or ([raw] if raw else []):
             clean = clean_author_display_name(candidate)
             key = author_dedup_key(clean)
-            if len(key) < 4:
+            if len(key) < 4 or not is_plausible_author_name(clean):
                 continue
             existing = best.get(key)
             if existing is None or _author_display_score(clean) > _author_display_score(existing):

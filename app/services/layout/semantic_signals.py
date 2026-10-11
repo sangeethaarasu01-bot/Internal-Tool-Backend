@@ -7,6 +7,12 @@ import re
 from app.models.document_structure import ProcessedBlock
 
 from app.services.layout.list_detection import is_likely_heading_not_list, parse_list_marker
+from app.utils.proof_pdf import (
+    is_author_queries_heading,
+    is_plausible_author_name,
+    is_proof_cover_fragment,
+)
+
 from app.services.layout.semantic_patterns import (
     ABSTRACT_RE,
     ACKNOWLEDGMENT_RE,
@@ -139,10 +145,17 @@ def classify_semantic_type(
     if AFFILIATION_RE.search(text) and block.page_number == 1:
         return "AFFILIATION", 0.82, None
 
+    if is_proof_cover_fragment(text):
+        return "UNKNOWN_TEXT", 0.25, "proof_cover"
+
     if not book_mode and is_author_candidate(block, title_bottom_y):
-        return "AUTHOR", 0.86, None
+        if is_plausible_author_name(first_line(text)) or is_plausible_author_name(text):
+            return "AUTHOR", 0.86, None
+        return "PARAGRAPH", 0.5, "implausible_author_candidate"
 
     if not book_mode and is_title_candidate(block, title_font_threshold):
+        if is_proof_cover_fragment(text) or is_author_queries_heading(text):
+            return "UNKNOWN_TEXT", 0.25, "proof_cover_title"
         return "TITLE", 0.87, None
 
     if book_mode and is_title_candidate(block, title_font_threshold):

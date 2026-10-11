@@ -122,6 +122,10 @@ def process_document_structure(
             )
         )
 
+    from app.utils.proof_pdf import apply_author_query_cover_exclusions
+
+    processed_blocks = apply_author_query_cover_exclusions(raw, processed_blocks)
+
     completeness = _build_completeness_report(raw, processed_blocks)
     sections, paragraphs, references, unknown_items = _build_structure(
         processed_blocks,

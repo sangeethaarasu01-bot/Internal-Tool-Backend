@@ -219,8 +219,10 @@ def _build_list_element(
 
 
 def _parse_keywords(text: str) -> tuple[str, list[str]]:
+    from app.utils.front_matter_recovery import parse_index_terms_keywords
+
     cleaned = KEYWORDS_RE.sub("", text).strip(" —-–:")
-    keywords = [part.strip() for part in re.split(r",\s*", cleaned) if part.strip()]
+    keywords = parse_index_terms_keywords(text)
     return cleaned, keywords
 
 
@@ -826,7 +828,11 @@ def build_semantic_document(
             )
             if not author_names:
                 author_names = [author_blob]
+            from app.utils.proof_pdf import is_plausible_author_name
+
             for author_name in author_names:
+                if not is_plausible_author_name(author_name):
+                    continue
                 element = _element("AUTHOR", author_name, group, confidence)
                 front.authors.append(element)
                 mapped_ids.update(element.source_block_ids)
@@ -868,25 +874,66 @@ def build_semantic_document(
             continue
 
         if sem_type == "ABSTRACT":
+            from app.utils.front_matter_recovery import (
+                is_abstract_continuation_text,
+                strip_abstract_label,
+            )
+
             flush_paragraph()
-            text = normalize_text(block.text)
+            group = [block]
+            while i + 1 < len(enriched):
+                nxt, nxt_type, nxt_confidence, _, _ = enriched[i + 1]
+                if nxt_type in {"KEYWORDS", "SECTION", "REFERENCE_LIST", "TITLE"}:
+                    break
+                nxt_text = normalize_text(nxt.text)
+                if KEYWORDS_RE.match(nxt_text) or is_roman_section_heading(nxt_text):
+                    break
+                if nxt_type == "ABSTRACT" or (
+                    nxt_type in {"PARAGRAPH", "UNKNOWN_TEXT", "BODY_TEXT"}
+                    and is_abstract_continuation_text(nxt_text)
+                ):
+                    i += 1
+                    group.append(nxt)
+                    confidence = max(confidence, nxt_confidence)
+                    continue
+                break
+            merged_ids: list[str] = []
+            pages: list[int] = []
+            for item in group:
+                merged_ids.extend(_expand_block_ids(item))
+                pages.append(item.page_number)
+            text = strip_abstract_label(_merge_text(group))
             front.abstract = build_abstract(
                 text,
-                source_block_ids=_expand_block_ids(block),
-                page_numbers=[block.page_number],
-                bbox=block.bbox,
+                source_block_ids=merged_ids,
+                page_numbers=pages,
+                bbox=group[0].bbox,
                 confidence=confidence,
             )
-            _mark_mapped(mapped_ids, block)
+            for item in group:
+                _mark_mapped(mapped_ids, item)
             i += 1
             continue
 
         if sem_type == "KEYWORDS":
+            from app.utils.front_matter_recovery import is_keywords_continuation
+
             flush_paragraph()
-            text = normalize_text(block.text)
+            group = [block]
+            while i + 1 < len(enriched):
+                nxt, nxt_type, nxt_confidence, _, _ = enriched[i + 1]
+                if nxt_type in {"ABSTRACT", "AUTHOR", "AFFILIATION", "SECTION", "TITLE"}:
+                    break
+                if not is_keywords_continuation(nxt.text or ""):
+                    break
+                i += 1
+                group.append(nxt)
+                confidence = max(confidence, nxt_confidence)
+            text = _merge_text(group)
             _, kw = _parse_keywords(text)
-            front.keywords = _element("KEYWORDS", text, [block], confidence, keywords=kw)
-            _mark_mapped(mapped_ids, block)
+            front.keywords = _element("KEYWORDS", text, group, confidence, keywords=kw)
+            for item in group:
+                _mark_mapped(mapped_ids, item)
             i += 1
             continue
 
@@ -1234,6 +1281,46 @@ def build_semantic_document(
         by_text = {author.text: author for author in front.authors}
         front.authors = [by_text[name] for name in ordered_names if name in by_text]
 
+    from app.utils.proof_pdf import (
+        is_author_queries_heading,
+        is_plausible_author_name,
+        is_proof_cover_fragment,
+    )
+
+    title_text = (front.title.text or "") if front.title else ""
+    if front.title and (is_author_queries_heading(title_text) or is_proof_cover_fragment(title_text)):
+        front.title = None
+
+    if front.authors:
+        front.authors = [
+            author
+            for author in front.authors
+            if is_plausible_author_name(author.text or "")
+        ]
+
+    if front.title is None:
+        for _block, sem_type, confidence, _reason, _marker in enriched:
+            if sem_type != "TITLE" or _block.exclude_from_content:
+                continue
+            candidate = _merge_text([_block])
+            if candidate and not is_author_queries_heading(candidate):
+                front.title = _element("TITLE", candidate, [_block], confidence)
+                mapped_ids.update(front.title.source_block_ids)
+                break
+
+    if front.title is None:
+        from app.utils.front_matter_recovery import recover_article_title
+
+        recovered = recover_article_title(
+            processed,
+            title_threshold,
+            can_merge_title=_can_merge_title,
+        )
+        if recovered:
+            candidate, blocks, confidence = recovered
+            front.title = _element("TITLE", candidate, blocks, confidence)
+            mapped_ids.update(front.title.source_block_ids)
+
     completeness = _semantic_completeness(raw, processed, mapped_ids, unknown, layout_objects)
     document = SemanticDocument(
         front=front,
@@ -1242,6 +1329,9 @@ def build_semantic_document(
         unknown=unknown,
         completeness=completeness,
     )
+    from app.services.front_matter_consolidation import consolidate_semantic_front_matter
+
+    consolidate_semantic_front_matter(document)
     if include_tagged_output:
         document.tagged_output = render_semantic_document(document)
     return document

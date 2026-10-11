@@ -588,8 +588,10 @@ def is_title_candidate(block: ProcessedBlock, title_font_threshold: float) -> bo
 
 
 def is_author_candidate(block: ProcessedBlock, title_bottom_y: float) -> bool:
+    from app.utils.proof_pdf import is_proof_cover_fragment
+
     text = normalize_text(block.text)
-    if not text or block.exclude_from_content:
+    if not text or block.exclude_from_content or is_proof_cover_fragment(text):
         return False
     if block.bbox[1] < title_bottom_y - 5:
         return False

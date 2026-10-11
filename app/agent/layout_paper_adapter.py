@@ -14,6 +14,7 @@ from app.services.layout.document_pipeline import process_document_structure
 from app.services.layout.semantic_patterns import parse_author_names, split_section_label_and_title
 from app.services.text_extractor import extract_text_layout
 from app.utils.logger import logger
+from app.utils.proof_pdf import is_plausible_author_name
 from app.utils.template_skeleton import is_boilerplate_text
 from app.utils.text_utils import drop_cap_letter_from_ir
 
@@ -68,7 +69,12 @@ def _authors_from_front(semantic: SemanticDocument) -> list[Author]:
             continue
         for name in parse_author_names(raw):
             name = name.strip()
-            if not name or len(name) < 4 or is_boilerplate_text(name):
+            if (
+                not name
+                or len(name) < 4
+                or is_boilerplate_text(name)
+                or not is_plausible_author_name(name)
+            ):
                 continue
             if len(name) > 120:
                 continue

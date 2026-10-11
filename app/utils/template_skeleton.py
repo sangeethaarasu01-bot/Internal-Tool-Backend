@@ -71,7 +71,9 @@ _P_BLOCK_IN_PARAGRAPH = frozenset(
 )
 
 _BOILERPLATE_RE = re.compile(
-    r"please note|author gateway|annotate the pdf|cannot accept new source",
+    r"please note|author gateway|annotate the pdf|cannot accept new source|"
+    r"queries regarding authors|author name spelling|corresponding author query|"
+    r"proof only|not for distribution|ieee staff",
     re.I,
 )
 

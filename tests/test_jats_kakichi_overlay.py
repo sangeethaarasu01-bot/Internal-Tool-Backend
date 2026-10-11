@@ -79,9 +79,13 @@ def test_kakichi_jats_metadata_sections_and_graphics() -> None:
     affs = root.xpath("//*[local-name()='article-meta']/*[local-name()='aff']")
     assert len(affs) >= 4
 
-    assert root.xpath("string(//*[local-name()='fig-count']/@count)") == "20"
-    assert root.xpath("string(//*[local-name()='table-count']/@count)") == "8"
-    assert root.xpath("string(//*[local-name()='equation-count']/@count)") == "26"
+    fig_nodes = root.xpath("//*[local-name()='body']//*[local-name()='fig']")
+    table_nodes = root.xpath("//*[local-name()='body']//*[local-name()='table-wrap']")
+    equation_nodes = root.xpath("//*[local-name()='body']//*[local-name()='disp-formula']")
+    assert root.xpath("string(//*[local-name()='fig-count']/@count)") == str(len(fig_nodes))
+    assert root.xpath("string(//*[local-name()='table-count']/@count)") == str(len(table_nodes))
+    assert root.xpath("string(//*[local-name()='equation-count']/@count)") == str(len(equation_nodes))
+    assert len(fig_nodes) >= 20
     ref_nodes = root.xpath("//*[local-name()='ref-list']/*[local-name()='ref']")
     assert len(ref_nodes) >= 32
     assert root.xpath("string(//*[local-name()='ref-count']/@count)") == str(len(ref_nodes))

@@ -41,7 +41,17 @@ def _node_text(node: dict[str, Any]) -> str | None:
             parts.append(str(item["value"]))
         elif item.get("latex"):
             parts.append(str(item["latex"]))
-    return "".join(parts) if parts else None
+    if parts:
+        return "".join(parts)
+    child_texts: list[str] = []
+    for child in node.get("children") or []:
+        if isinstance(child, dict):
+            child_value = _node_text(child)
+            if child_value:
+                child_texts.append(child_value)
+    if child_texts:
+        return " ".join(child_texts)
+    return None
 
 
 def _inline_elements(node: dict[str, Any]) -> list[MappedInlineElement]:
@@ -68,6 +78,9 @@ def _ir_node_to_mapped(node: dict[str, Any] | None) -> MappedSemanticNode | None
         metadata["drop_cap_letter"] = detection_reason.split(":", 1)[1]
     if node.get("list_type"):
         metadata["list_type"] = node.get("list_type")
+    ir_keywords = node.get("keywords")
+    if isinstance(ir_keywords, list) and ir_keywords:
+        metadata["keywords"] = [str(item).strip() for item in ir_keywords if str(item).strip()]
 
     return MappedSemanticNode(
         semantic_type=semantic_type,
@@ -109,6 +122,9 @@ def _section_to_mapped(section: dict[str, Any]) -> MappedSemanticNode:
 
 def ir_to_semantic_mapping(ir: dict[str, Any]) -> SemanticMappingBody:
     """Build a :class:`SemanticMappingBody` from partitioned Stage 1 IR."""
+    from app.services.front_matter_consolidation import repair_ir_front_matter
+
+    repair_ir_front_matter(ir)
     front_raw = ir.get("front") or {}
     front: dict[str, Any] = {}
 

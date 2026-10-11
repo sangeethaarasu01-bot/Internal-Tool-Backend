@@ -21,6 +21,10 @@ DATE_HISTORY_RE = re.compile(
 VOLUME_LINE_RE = re.compile(r"VOLUME\s+(\d+)\s*,\s*(\d{4})", re.I)
 ARTICLE_NUM_RE = re.compile(r"(\d{7})")
 IEEE_ACCESS_RE = re.compile(r"\bIEEE\s+Access\b", re.I)
+IEEE_TCE_RE = re.compile(
+    r"consumer\s+electronics|ieee\s+trans(?:actions)?\.?\s+on\s+consumer|10\.1109/tce\.",
+    re.I,
+)
 NUMBERED_AFF_RE = re.compile(r"(?<!\d)(\d)(?=[A-Za-z])")
 NUMBERED_EQUATION_RE = re.compile(r"(?<![\d.])\((\d{1,3})\)(?![\d])")
 
@@ -53,6 +57,19 @@ def _header_text(phase1: dict[str, Any] | None) -> str:
     if pages and isinstance(pages[0], dict):
         return str(pages[0].get("raw_page_text") or "")
     return ""
+
+
+def _phase1_lead_text(phase1: dict[str, Any] | None, max_pages: int = 3) -> str:
+    """First pages of PDF text for journal / DOI / manuscript detection."""
+    header = _header_text(phase1)
+    if header.strip():
+        return header
+    pages = (phase1 or {}).get("pages") or []
+    chunks: list[str] = []
+    for page in pages[:max_pages]:
+        if isinstance(page, dict):
+            chunks.append(str(page.get("raw_page_text") or page.get("normalized_text") or ""))
+    return "\n".join(chunks)
 
 
 def _parse_history(header: str) -> dict[str, str]:
@@ -104,6 +121,12 @@ def _infer_manuscript_id(
             year = vol.group(2)
         if article_number and year:
             return f"ACCESS-{year}-{article_number}"
+    if IEEE_TCE_RE.search(header) or (
+        source_filename and re.search(r"(?:^|[-_])tce[-_]", source_filename.lower())
+    ):
+        ms = re.search(r"\b(TCE-\d{4}-\d{2}-\d{3,6})\b", header[:8000], re.I)
+        if ms:
+            return ms.group(1).upper()
     return None
 
 
@@ -121,6 +144,33 @@ def _infer_doi(
         return None
     if IEEE_ACCESS_RE.search(header) or (source_filename and "access-" in source_filename.lower()):
         return f"10.1109/ACCESS.{year}.{article_number}"
+    if IEEE_TCE_RE.search(header) or (
+        source_filename and re.search(r"(?:^|[-_])tce[-_]", source_filename.lower())
+    ):
+        return f"10.1109/TCE.{year}.{article_number}"
+    return None
+
+
+def _journal_title_from_pdf_signals(
+    header: str,
+    source_filename: str | None = None,
+) -> str | None:
+    """PDF-first journal title; overrides template / mis-parsed IR headers."""
+    parsed_doi = _parse_doi(header)
+    if parsed_doi:
+        from_doi = lookup_ieee_journal(doi=parsed_doi)
+        if from_doi:
+            return from_doi.title
+    if IEEE_TCE_RE.search(header):
+        return "IEEE Transactions on Consumer Electronics"
+    if IEEE_ACCESS_RE.search(header):
+        return "IEEE Access"
+    if source_filename:
+        lowered = source_filename.lower()
+        if re.search(r"(?:^|[-_])tce[-_]", lowered):
+            return "IEEE Transactions on Consumer Electronics"
+        if "access-" in lowered:
+            return "IEEE Access"
     return None
 
 
@@ -129,6 +179,10 @@ def _detect_journal_title(
     ir: dict[str, Any] | None,
     source_filename: str | None = None,
 ) -> str | None:
+    from_pdf = _journal_title_from_pdf_signals(header, source_filename)
+    if from_pdf:
+        return from_pdf
+
     front = (ir or {}).get("front") or {}
     journal = front.get("journal_header")
     if isinstance(journal, dict):
@@ -136,10 +190,13 @@ def _detect_journal_title(
         for item in journal.get("elements") or []:
             text += str(item.get("value") or "")
         text = text.strip()
-        if text and "consumer electronics" not in text.lower():
+        if text:
+            mapped = lookup_ieee_journal(journal_title=text)
+            if mapped:
+                return mapped.title
+            if "consumer electronics" in text.lower():
+                return "IEEE Transactions on Consumer Electronics"
             return text
-    if IEEE_ACCESS_RE.search(header):
-        return "IEEE Access"
     if VOLUME_LINE_RE.search(header) and source_filename and "access-" in source_filename.lower():
         return "IEEE Access"
     return None
@@ -200,7 +257,7 @@ def build_jats_metadata_overlay(
     mapping: SemanticMappingBody,
     source: SourceIdentityRecord | None = None,
 ) -> JatsMetadataOverlayResult:
-    header = _header_text(phase1)
+    header = _phase1_lead_text(phase1)
     stats = _phase1_stats(phase1)
     volume = VOLUME_LINE_RE.search(header)
     publication_year = source.publication_year if source else None

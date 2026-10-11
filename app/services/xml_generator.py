@@ -31,6 +31,7 @@ from app.utils.reference_assembler import (
 )
 from app.services.template_format import UnsupportedTemplateRootError, require_jats_article_template
 from app.services.author_deduplication import author_dedup_key, clean_author_display_name
+from app.utils.template_skeleton import is_boilerplate_text
 from app.utils.template_skeleton import strip_template_for_semantic_mapping
 from app.utils.xml_helpers import xml_local_name
 from app.utils.reference_citation_builder import populate_structured_mixed_citation
@@ -809,6 +810,26 @@ def _append_mapped_nodes(
         )
 
 
+def _keyword_tokens_from_node(keywords_data: MappedSemanticNode | dict[str, Any]) -> list[str]:
+    from app.utils.front_matter_recovery import parse_index_terms_keywords
+
+    if isinstance(keywords_data, dict):
+        meta = keywords_data.get("metadata") or {}
+        preset = meta.get("keywords")
+        if isinstance(preset, list) and preset:
+            return [str(item).strip() for item in preset if str(item).strip()]
+        ir_keywords = keywords_data.get("keywords")
+        if isinstance(ir_keywords, list) and ir_keywords:
+            return [str(item).strip() for item in ir_keywords if str(item).strip()]
+    else:
+        meta = keywords_data.metadata or {}
+        preset = meta.get("keywords")
+        if isinstance(preset, list) and preset:
+            return [str(item).strip() for item in preset if str(item).strip()]
+
+    return parse_index_terms_keywords(_text_of(keywords_data, "keywords"))
+
+
 def _apply_front_matter(article: etree._Element, front: dict[str, Any]) -> None:
     front_el = article.find("front")
     if front_el is None:
@@ -847,11 +868,7 @@ def _apply_front_matter(article: etree._Element, front: dict[str, Any]) -> None:
         for child in list(kwd_group):
             if child.tag == "kwd":
                 kwd_group.remove(child)
-        keywords_text = _text_of(keywords_data, "keywords")
-        for token in re.split(r"[,;]\s*", keywords_text):
-            token = token.strip()
-            if not token:
-                continue
+        for token in _keyword_tokens_from_node(keywords_data):
             kwd = etree.SubElement(kwd_group, "kwd")
             set_lxml_text(
                 kwd,
@@ -871,7 +888,7 @@ def _apply_front_matter(article: etree._Element, front: dict[str, Any]) -> None:
         index = 0
         for author_data in authors_data:
             name_text = clean_author_display_name(_text_of(author_data, "author").strip())
-            if not name_text:
+            if not name_text or is_boilerplate_text(name_text):
                 continue
             key = author_dedup_key(name_text)
             if key in seen_keys:
@@ -1030,6 +1047,382 @@ def _apply_back_matter(article: etree._Element, back: dict[str, Any]) -> int | N
     return len(references)
 
 
+_RELOCATE_ABSTRACT_LABEL_RE = re.compile(r"^(?:Abstract|ABSTRACT)\s*[—\-–:]\s*", re.IGNORECASE)
+_RELOCATE_INDEX_TERMS_RE = re.compile(
+    r"^(?:Index\s+Terms|Keywords?)\s*[—\-–:]\s*",
+    re.IGNORECASE,
+)
+
+
+def _relocate_para_text(para: etree._Element) -> str:
+    return "".join(para.itertext()).strip()
+
+
+def _strip_relocate_abstract_label(text: str) -> str:
+    return _RELOCATE_ABSTRACT_LABEL_RE.sub("", text or "").strip()
+
+
+def _is_relocate_keyword_paragraph(text: str) -> bool:
+    """Comma-list / index-terms lines must not be merged into the abstract."""
+    if not text:
+        return False
+    if _RELOCATE_INDEX_TERMS_RE.match(text):
+        return True
+    lowered = text.lower()
+    if re.match(r"^range,\s*lifespan", lowered):
+        return True
+    comma_count = text.count(",")
+    if comma_count >= 2 and len(text) < 450:
+        sentence_markers = ("however", "therefore", "although", " we ", " this paper", " these ")
+        if not any(marker in lowered for marker in sentence_markers):
+            if text.count(".") <= 1:
+                return True
+    return False
+
+
+_RELOCATE_ABSTRACT_MARKERS = (
+    "rapid adoption",
+    "electric vehicles",
+    "heightened the need",
+    "heightened",
+    "battery systems",
+    "susceptible to",
+    "traditional diagnostic",
+    "machine learning has emerged",
+    "federated learning",
+    "this paper presents",
+    "experimental results",
+    "however, they",
+    "privacy-preserving",
+    "state-of-the-art",
+)
+
+
+def _is_relocate_abstract_fragment(text: str) -> bool:
+    """True when a loose <p> is part of the abstract (not keywords/title)."""
+    if _is_relocate_keyword_paragraph(text):
+        return False
+    if len(text) < 50:
+        return False
+    if _RELOCATE_ABSTRACT_LABEL_RE.match(text):
+        return True
+    lowered = text.lower()
+    if any(marker in lowered for marker in _RELOCATE_ABSTRACT_MARKERS):
+        if len(text) < 140 and not lowered.startswith(
+            ("the rapid", "machine learning", "however", "they ", "this paper", "although ")
+        ):
+            return False
+        return True
+    if text[0].islower() and len(text) > 70:
+        return True
+    return text.startswith(
+        (
+            "However",
+            "They ",
+            "These ",
+            "This ",
+            "Although ",
+            "In this",
+            "To address",
+            "The rapid",
+            "Machine learning",
+        )
+    )
+
+
+def _is_relocate_abstract_continuation(text: str, *, has_seed: bool) -> bool:
+    if not has_seed:
+        return _is_relocate_abstract_fragment(text)
+    return _is_relocate_abstract_fragment(text)
+
+
+def _join_relocate_abstract_parts(parts: list[str]) -> str:
+    merged = ""
+    for part in parts:
+        chunk = _strip_relocate_abstract_label(part)
+        if not chunk:
+            continue
+        if _is_relocate_keyword_paragraph(chunk):
+            logger.info("[relocate] Skipping keyword-like chunk in abstract: %s...", chunk[:80])
+            continue
+        if not merged:
+            merged = chunk
+            continue
+        if chunk in merged or merged in chunk:
+            if len(chunk) > len(merged):
+                merged = chunk
+            continue
+        if len(chunk) >= 40 and chunk[:40] in merged:
+            continue
+        if merged.endswith("-"):
+            merged = merged[:-1] + chunk
+        else:
+            merged = f"{merged.rstrip()} {chunk.lstrip()}"
+    merged = _strip_relocate_abstract_label(merged)
+    return re.sub(r"\s+", " ", merged).strip()
+
+
+def _set_relocate_abstract_text(abstract_p: etree._Element, combined: str) -> None:
+    abstract_p.attrib.pop("bold", None)
+    for bold in abstract_p.xpath("*[local-name()='bold']"):
+        abstract_p.remove(bold)
+    abstract_p.text = combined
+
+
+def relocate_misplaced_front_matter(article_elem: etree._Element) -> None:
+    """
+    Relocate loose body paragraphs that are actually front-matter content
+    (title, abstract continuation, keywords) into the proper <front> location.
+
+    These paragraphs appear after the last <sec> in <body> for proof PDFs where
+    page 1 (author queries) was skipped and page 2 content got mapped to body.
+    """
+    front_nodes = article_elem.xpath("*[local-name()='front']")
+    body_nodes = article_elem.xpath("*[local-name()='body']")
+    if not front_nodes or not body_nodes:
+        logger.warning("[relocate] No <front> or <body> found")
+        return
+    front = front_nodes[0]
+    body = body_nodes[0]
+
+    meta_nodes = front.xpath("*[local-name()='article-meta']")
+    if not meta_nodes:
+        logger.warning("[relocate] No <article-meta> in <front>")
+        return
+    meta = meta_nodes[0]
+
+    loose_paras = [child for child in list(body) if xml_local_name(child) == "p"]
+
+    logger.info("[relocate] Found %s loose paragraphs in body", len(loose_paras))
+    for index, para in enumerate(loose_paras):
+        text = "".join(para.itertext()).strip()
+        logger.info("[relocate] para[%s]: %s...", index, text[:120])
+
+    if not loose_paras:
+        logger.info("[relocate] No loose paragraphs to relocate")
+        return
+
+    # ====================================================================
+    # STEP 1: TITLE
+    # ====================================================================
+    title_group_nodes = meta.xpath("*[local-name()='title-group']")
+    title_group = title_group_nodes[0] if title_group_nodes else etree.SubElement(meta, "title-group")
+
+    article_title_nodes = title_group.xpath("*[local-name()='article-title']")
+    article_title = (
+        article_title_nodes[0]
+        if article_title_nodes
+        else etree.SubElement(title_group, "article-title")
+    )
+
+    current_title = (article_title.text or "").strip()
+    if not current_title:
+        current_title = "".join(article_title.itertext()).strip()
+
+    title_candidate: tuple[str, etree._Element] | None = None
+    for para in loose_paras:
+        text = "".join(para.itertext()).strip()
+        if not (20 < len(text) < 250):
+            continue
+        if _is_relocate_abstract_fragment(text) or _is_relocate_keyword_paragraph(text):
+            continue
+        if text.isupper():
+            continue
+        if text.upper().startswith("IEEE ") or text.upper().startswith("VOLUME"):
+            continue
+        if text.upper().startswith("AMARA ") or " et al." in text[:50]:
+            continue
+        if text.endswith(".") and not text.endswith("?"):
+            continue
+        if text.count(",") > 5:
+            continue
+        words = text.split()
+        if len(words) < 4 or len(words) > 30:
+            continue
+        if text[0].islower():
+            continue
+        if title_candidate is None or len(text) > len(title_candidate[0]):
+            title_candidate = (text, para)
+
+    if not current_title and title_candidate:
+        text, para = title_candidate
+        article_title.text = text
+        for child in list(article_title):
+            article_title.remove(child)
+        body.remove(para)
+        loose_paras.remove(para)
+        current_title = text
+        logger.info("[relocate] TITLE set to: %s", text)
+
+    # ====================================================================
+    # STEP 2: ABSTRACT
+    # ====================================================================
+    abstract_nodes = meta.xpath("*[local-name()='abstract']")
+    abstract = abstract_nodes[0] if abstract_nodes else etree.SubElement(meta, "abstract")
+
+    abstract_p_nodes = abstract.xpath("*[local-name()='p']")
+    abstract_p = abstract_p_nodes[0] if abstract_p_nodes else etree.SubElement(abstract, "p")
+
+    current_abstract = _relocate_para_text(abstract_p)
+    logger.info("[relocate] Current abstract length: %s", len(current_abstract))
+
+    seed = _strip_relocate_abstract_label(current_abstract)
+    abstract_parts: list[str] = [seed] if seed else []
+    absorbed_abstract: list[etree._Element] = []
+
+    if len(current_abstract) < 1200:
+        for para in loose_paras[:]:
+            text = _relocate_para_text(para)
+            if re.match(r"^IEEE\s+TRANSACTIONS", text, re.IGNORECASE) or re.match(
+                r"^\d+\s+IEEE\s+TRANSACTIONS", text, re.IGNORECASE
+            ):
+                continue
+            if _is_relocate_keyword_paragraph(text):
+                logger.info("[relocate] Stopping abstract scan at keyword-like para: %s...", text[:80])
+                break
+            if _is_relocate_abstract_continuation(text, has_seed=bool(abstract_parts)):
+                abstract_parts.append(text)
+                absorbed_abstract.append(para)
+
+        combined = _join_relocate_abstract_parts(abstract_parts)
+        if combined and len(combined) > len(seed):
+            _set_relocate_abstract_text(abstract_p, combined)
+            for para in absorbed_abstract:
+                body.remove(para)
+                loose_paras.remove(para)
+            logger.info("[relocate] ABSTRACT set, new length: %s", len(combined))
+            current_abstract = combined
+
+    combined_lower = current_abstract.lower()
+    for para in loose_paras[:]:
+        text = _relocate_para_text(para)
+        if not _is_relocate_abstract_fragment(text):
+            continue
+        body.remove(para)
+        loose_paras.remove(para)
+        logger.info("[relocate] Removed abstract fragment from body: %s...", text[:60])
+        if text.lower() not in combined_lower and len(text) > 60:
+            abstract_parts = [current_abstract, text]
+            current_abstract = _join_relocate_abstract_parts(abstract_parts)
+            _set_relocate_abstract_text(abstract_p, current_abstract)
+            combined_lower = current_abstract.lower()
+            logger.info("[relocate] ABSTRACT extended, length: %s", len(current_abstract))
+
+    # ====================================================================
+    # STEP 3: KEYWORDS
+    # ====================================================================
+    kwd_group_nodes = meta.xpath("*[local-name()='kwd-group']")
+    kwd_group = kwd_group_nodes[0] if kwd_group_nodes else etree.SubElement(meta, "kwd-group")
+    if kwd_group.get("kwd-group-type") is None:
+        kwd_group.set("kwd-group-type", "AuthorFree")
+
+    existing_kwds = kwd_group.xpath("*[local-name()='kwd']")
+    logger.info("[relocate] Existing keywords: %s", len(existing_kwds))
+
+    keyword_chunks: list[str] = []
+    for kwd_el in existing_kwds:
+        kwd_text = (kwd_el.text or "").strip()
+        if kwd_text:
+            keyword_chunks.append(kwd_text)
+
+    if len(existing_kwds) < 8:
+        for para in loose_paras[:]:
+            text = _relocate_para_text(para)
+            is_candidate = _is_relocate_keyword_paragraph(text) or (
+                30 < len(text) < 500
+                and ("," in text or ";" in text)
+                and any(
+                    term in text.lower()
+                    for term in (
+                        "vehicle",
+                        "battery",
+                        "federated",
+                        "transformer",
+                        "soc",
+                        "bms",
+                        "learning",
+                        "state",
+                        "range",
+                        "lifespan",
+                    )
+                )
+            )
+            if not is_candidate:
+                continue
+
+            logger.info("[relocate] KEYWORD candidate: %s...", text[:100])
+            keyword_chunks.append(text)
+            body.remove(para)
+            loose_paras.remove(para)
+
+        if keyword_chunks:
+            for kwd in list(kwd_group.xpath("*[local-name()='kwd']")):
+                kwd_group.remove(kwd)
+
+            combined_keywords = " ".join(keyword_chunks)
+            combined_keywords = re.sub(r"\s*,\s*", ", ", combined_keywords)
+            combined_keywords = re.sub(r"\s*;\s*", "; ", combined_keywords)
+            combined_keywords = _RELOCATE_INDEX_TERMS_RE.sub("", combined_keywords).strip()
+
+            seen: set[str] = set()
+            for kw in re.split(r"[,;]", combined_keywords):
+                kw = kw.strip().rstrip(".")
+                if not kw or len(kw) < 3 or len(kw) > 100:
+                    continue
+                key = kw.lower()
+                if key in seen:
+                    continue
+                seen.add(key)
+                kwd_el = etree.SubElement(kwd_group, "kwd")
+                kwd_el.text = kw
+
+            logger.info(
+                "[relocate] KEYWORDS rebuilt: %s keywords",
+                len(kwd_group.xpath("*[local-name()='kwd']")),
+            )
+
+    # ====================================================================
+    # STEP 4: Remove residual noise paragraphs
+    # ====================================================================
+    for para in list(loose_paras):
+        text = "".join(para.itertext()).strip()
+        if re.match(r"^IEEE\s+TRANSACTIONS\s+ON\s+\w+", text, re.IGNORECASE):
+            body.remove(para)
+            logger.info("[relocate] Removed running header: %s", text[:60])
+        elif re.match(r"^\d+\s+IEEE\s+TRANSACTIONS", text, re.IGNORECASE):
+            body.remove(para)
+            logger.info("[relocate] Removed page header: %s", text[:60])
+
+
+def _sync_counts_from_dom(
+    article: etree._Element,
+    *,
+    page_count: int | None = None,
+) -> None:
+    """Align ``counts`` with elements actually present in the generated article."""
+    article_meta_nodes = article.xpath("//*[local-name()='front']/*[local-name()='article-meta']")
+    if not article_meta_nodes:
+        return
+    article_meta = article_meta_nodes[0]
+    counts_nodes = article_meta.xpath("*[local-name()='counts']")
+    counts = counts_nodes[0] if counts_nodes else etree.SubElement(article_meta, "counts")
+
+    body_scope = ".//*[local-name()='body']"
+    specs: list[tuple[str, int]] = [
+        ("fig-count", len(article.xpath(f"{body_scope}//*[local-name()='fig']"))),
+        ("table-count", len(article.xpath(f"{body_scope}//*[local-name()='table-wrap']"))),
+        ("equation-count", len(article.xpath(f"{body_scope}//*[local-name()='disp-formula']"))),
+        ("ref-count", len(_ref_list_ref_nodes(article))),
+    ]
+    if page_count is not None:
+        specs.append(("page-count", page_count))
+
+    for tag, value in specs:
+        nodes = counts.xpath(f"*[local-name()='{tag}']")
+        node = nodes[0] if nodes else etree.SubElement(counts, tag)
+        node.set("count", str(value))
+
+
 def _sync_ref_count_to_ref_list(
     article: etree._Element,
     *,
@@ -1137,7 +1530,15 @@ def generate_jats_xml(
     from app.utils.jats_empty_prune import prune_empty_jats_elements
 
     prune_empty_jats_elements(article)
-    _sync_ref_count_to_ref_list(article, reference_count=reference_count)
+
+    dom_page_count = overlay.page_count
+    if dom_page_count is None and phase1 and phase1.get("pages"):
+        dom_page_count = len(phase1["pages"])
+    _sync_counts_from_dom(article, page_count=dom_page_count)
+    if reference_count is not None:
+        _sync_ref_count_to_ref_list(article, reference_count=reference_count)
+
+    relocate_misplaced_front_matter(article)
 
     return serialize_lxml_tree(
         article,

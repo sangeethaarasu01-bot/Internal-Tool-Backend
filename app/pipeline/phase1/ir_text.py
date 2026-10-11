@@ -16,4 +16,9 @@ def ir_node_plain_text(node: IRNode | None) -> str:
             parts.append(element.latex or "")
     if parts:
         return "".join(parts).strip()
+    if node.children:
+        child_parts = [ir_node_plain_text(child) for child in node.children]
+        child_parts = [part for part in child_parts if part]
+        if child_parts:
+            return " ".join(child_parts).strip()
     return (node.latex or node.text or "").strip()

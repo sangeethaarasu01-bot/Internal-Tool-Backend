@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 from dataclasses import dataclass
 
 
@@ -59,6 +61,10 @@ def lookup_ieee_journal(
         for prefix, key in DOI_PREFIX_TO_KEY.items():
             if lowered.startswith(prefix):
                 return IEEE_JOURNALS_BY_KEY.get(key)
-    if source_filename and "access-" in source_filename.lower():
-        return IEEE_JOURNALS_BY_KEY[_normalize_journal_key("IEEE Access")]
+    if source_filename:
+        lowered = source_filename.lower()
+        if "access-" in lowered:
+            return IEEE_JOURNALS_BY_KEY[_normalize_journal_key("IEEE Access")]
+        if re.search(r"(?:^|[-_])tce[-_]", lowered) or lowered.startswith("tce-"):
+            return IEEE_JOURNALS_BY_KEY[_normalize_journal_key("IEEE Transactions on Consumer Electronics")]
     return None
