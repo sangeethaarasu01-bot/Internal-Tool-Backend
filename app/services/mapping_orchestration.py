@@ -45,9 +45,13 @@ class MappingResolutionResult:
     llm_succeeded: bool = False
 
 
-def build_heuristic_semantic_mapping(ir: dict[str, Any]) -> SemanticMappingBody:
+def build_heuristic_semantic_mapping(
+    ir: dict[str, Any],
+    *,
+    processed_blocks: list[Any] | None = None,
+) -> SemanticMappingBody:
     """Deterministic IR → semantic mapping (heuristic mode)."""
-    return ir_to_semantic_mapping(ir)
+    return ir_to_semantic_mapping(ir, processed_blocks=processed_blocks)
 
 
 def finalize_mapping_for_xml(
@@ -67,6 +71,7 @@ def resolve_semantic_mapping_for_generate_xml(
     filtered_template_schema: dict[str, Any] | None,
     use_llm: bool,
     llm_fallback: bool,
+    processed_blocks: list[Any] | None = None,
 ) -> MappingResolutionResult:
     """
     Choose heuristic or LLM mapping without modifying extraction or XML generators.
@@ -87,7 +92,10 @@ def resolve_semantic_mapping_for_generate_xml(
         warnings.append("LLM not configured. Using heuristic IR adapter.")
 
     if not use_llm:
-        mapping_body = build_heuristic_semantic_mapping(filtered_ir)
+        mapping_body = build_heuristic_semantic_mapping(
+            filtered_ir,
+            processed_blocks=processed_blocks,
+        )
         warnings.append(_HEURISTIC_HINT)
         return MappingResolutionResult(
             mapping_body=mapping_body,
@@ -126,7 +134,10 @@ def resolve_semantic_mapping_for_generate_xml(
             extraction_id,
             exc,
         )
-        mapping_body = build_heuristic_semantic_mapping(filtered_ir)
+        mapping_body = build_heuristic_semantic_mapping(
+            filtered_ir,
+            processed_blocks=processed_blocks,
+        )
         warnings.append(_LLM_FALLBACK_HINT)
         return MappingResolutionResult(
             mapping_body=mapping_body,

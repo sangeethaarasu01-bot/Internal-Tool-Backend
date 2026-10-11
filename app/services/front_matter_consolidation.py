@@ -7,7 +7,6 @@ from typing import Any
 
 from app.models.semantic_document import SemanticBody, SemanticDocument, SemanticFrontMatter
 from app.pipeline.phase1.ir_text import ir_node_plain_text
-from app.services.ir_builder import build_abstract
 from app.services.layout.semantic_patterns import (
     ABSTRACT_RE,
     KEYWORDS_RE,
@@ -16,7 +15,9 @@ from app.services.layout.semantic_patterns import (
     normalize_text,
 )
 from app.utils.front_matter_recovery import (
+    append_abstract_segment_to_front,
     is_keywords_continuation,
+    is_post_keywords_abstract_fragment,
     is_running_header_noise,
     parse_index_terms_keywords,
     recover_article_title,
@@ -43,26 +44,6 @@ def _node_plain(node: dict[str, Any] | None) -> str:
         if child_text:
             parts.append(child_text)
     return normalize_text(" ".join(parts))
-
-
-def _append_abstract_segment(front: SemanticFrontMatter, segment: str) -> None:
-    segment = strip_abstract_label(segment)
-    if not segment.strip():
-        return
-    existing = strip_abstract_label(ir_node_plain_text(front.abstract)) if front.abstract else ""
-    combined = strip_abstract_label(f"{existing} {segment}".strip()) if existing else segment
-    combined = re.sub(r"\s+", " ", combined).strip()
-    block_ids: list[str] = []
-    pages: list[int] = []
-    if front.abstract:
-        block_ids.extend(front.abstract.source_block_ids or [])
-        pages.extend(front.abstract.page_numbers or [])
-    front.abstract = build_abstract(
-        combined,
-        source_block_ids=block_ids,
-        page_numbers=pages or [1],
-        confidence=0.86,
-    )
 
 
 def _merge_keywords_segment(front: SemanticFrontMatter, segment: str) -> None:
@@ -109,10 +90,12 @@ def _classify_loose_paragraph(
     title_text = ir_node_plain_text(front.title) if front.title else ""
     if title_text and _title_matches(text, title_text):
         return "drop"
-    if KEYWORDS_RE.match(text) or (front.keywords and is_keywords_continuation(text)):
-        return "keywords"
     if ABSTRACT_RE.match(text):
         return "abstract"
+    if front.abstract and is_post_keywords_abstract_fragment(text):
+        return "abstract"
+    if KEYWORDS_RE.match(text) or (front.keywords and is_keywords_continuation(text)):
+        return "keywords"
     if front.abstract and not keywords_closed and not KEYWORDS_RE.match(text):
         if (
             not is_roman_section_heading(text)
@@ -155,7 +138,7 @@ def consolidate_semantic_front_matter(document: SemanticDocument) -> None:
                 front.title = _element("TITLE", text, [], 0.84)
             continue
         if action == "abstract":
-            _append_abstract_segment(front, text)
+            append_abstract_segment_to_front(front, text)
             continue
         if action == "keywords":
             _merge_keywords_segment(front, text)
@@ -166,12 +149,19 @@ def consolidate_semantic_front_matter(document: SemanticDocument) -> None:
     body.loose_paragraphs = kept
 
 
-def repair_ir_front_matter(ir: dict[str, Any]) -> dict[str, Any]:
+def repair_ir_front_matter(
+    ir: dict[str, Any],
+    *,
+    processed_blocks: list[Any] | None = None,
+) -> dict[str, Any]:
     """Idempotent IR repair before semantic mapping."""
+    from app.utils.front_matter_recovery import (
+        coerce_processed_blocks,
+        recover_abstract_tail_from_unmapped_blocks,
+    )
+
     body = ir.get("body") or {}
     loose = list(body.get("loose_paragraphs") or [])
-    if not loose:
-        return ir
 
     front_dict = dict(ir.get("front") or {})
     keywords_closed = bool(front_dict.get("keywords"))
@@ -212,13 +202,17 @@ def repair_ir_front_matter(ir: dict[str, Any]) -> dict[str, Any]:
             proxy.title = _element("TITLE", text, [], 0.84)
             continue
         if action == "abstract":
-            _append_abstract_segment(proxy, text)
+            append_abstract_segment_to_front(proxy, text)
             continue
         if action == "keywords":
             _merge_keywords_segment(proxy, text)
             keywords_closed = True
             continue
         kept.append(node)
+
+    processed = coerce_processed_blocks(processed_blocks)
+    if processed and proxy.abstract:
+        recover_abstract_tail_from_unmapped_blocks(proxy, processed, set())
 
     proxy.sync_back()
     ir["front"] = front_dict

@@ -615,6 +615,8 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     filtered_ir = scope_result["filtered_ir"]
     phase1_doc = doc.get("phase1") or (doc.get("result") or {}).get("phase1")
     filtered_ir = merge_phase1_references_into_ir(filtered_ir, phase1_doc)
+    structure = (doc.get("result") or {}).get("structure") or {}
+    processed_blocks = structure.get("blocks")
     try:
         mapping_resolution = resolve_semantic_mapping_for_generate_xml(
             extraction_id=extraction_id,
@@ -623,6 +625,7 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
             filtered_template_schema=scope_result["filtered_template_schema"],
             use_llm=body.use_llm,
             llm_fallback=body.llm_fallback,
+            processed_blocks=processed_blocks,
         )
     except LLMConfigurationError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

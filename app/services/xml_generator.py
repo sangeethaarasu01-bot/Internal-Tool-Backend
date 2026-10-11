@@ -1100,9 +1100,16 @@ _RELOCATE_ABSTRACT_MARKERS = (
 
 def _is_relocate_abstract_fragment(text: str) -> bool:
     """True when a loose <p> is part of the abstract (not keywords/title)."""
+    from app.utils.front_matter_recovery import is_post_keywords_abstract_fragment
+
     if _is_relocate_keyword_paragraph(text):
         return False
     if len(text) < 50:
+        if is_post_keywords_abstract_fragment(text):
+            return True
+        stripped = text.strip()
+        if re.match(r"^\d", stripped) and "%" in stripped and len(stripped) >= 12:
+            return True
         return False
     if _RELOCATE_ABSTRACT_LABEL_RE.match(text):
         return True
@@ -1111,7 +1118,8 @@ def _is_relocate_abstract_fragment(text: str) -> bool:
         if len(text) < 140 and not lowered.startswith(
             ("the rapid", "machine learning", "however", "they ", "this paper", "although ")
         ):
-            return False
+            if "," not in text and "." not in text and "%" not in text:
+                return False
         return True
     if text[0].islower() and len(text) > 70:
         return True
@@ -1137,6 +1145,8 @@ def _is_relocate_abstract_continuation(text: str, *, has_seed: bool) -> bool:
 
 
 def _join_relocate_abstract_parts(parts: list[str]) -> str:
+    from app.utils.front_matter_recovery import merge_abstract_segment
+
     merged = ""
     for part in parts:
         chunk = _strip_relocate_abstract_label(part)
@@ -1154,10 +1164,10 @@ def _join_relocate_abstract_parts(parts: list[str]) -> str:
             continue
         if len(chunk) >= 40 and chunk[:40] in merged:
             continue
-        if merged.endswith("-"):
+        if merged.endswith("-") and not chunk.startswith(" "):
             merged = merged[:-1] + chunk
         else:
-            merged = f"{merged.rstrip()} {chunk.lstrip()}"
+            merged = merge_abstract_segment(merged, chunk)
     merged = _strip_relocate_abstract_label(merged)
     return re.sub(r"\s+", " ", merged).strip()
 
@@ -1301,9 +1311,10 @@ def relocate_misplaced_front_matter(article_elem: etree._Element) -> None:
         body.remove(para)
         loose_paras.remove(para)
         logger.info("[relocate] Removed abstract fragment from body: %s...", text[:60])
-        if text.lower() not in combined_lower and len(text) > 60:
-            abstract_parts = [current_abstract, text]
-            current_abstract = _join_relocate_abstract_parts(abstract_parts)
+        if text.lower() not in combined_lower:
+            from app.utils.front_matter_recovery import merge_abstract_segment
+
+            current_abstract = merge_abstract_segment(current_abstract, text)
             _set_relocate_abstract_text(abstract_p, current_abstract)
             combined_lower = current_abstract.lower()
             logger.info("[relocate] ABSTRACT extended, length: %s", len(current_abstract))

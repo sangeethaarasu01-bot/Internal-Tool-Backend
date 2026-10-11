@@ -144,19 +144,19 @@ def _should_join_wrapped_word(previous: str, current: str) -> bool:
         return False
     if previous_word.lower() in _WRAP_JOIN_STOPWORDS:
         return False
-    if (
-        len(current_word) <= 4
-        and current_word.isalpha()
-        and current_word.islower()
-        and len(previous_word) >= 3
-        and previous_word[-1].islower()
-    ):
-        return True
-    if len(previous_word) < 4:
+    if current_word.lower() in _WRAP_JOIN_STOPWORDS:
         return False
     if previous_word[-1].isalpha() and current_word[0].isalpha():
         if previous_word[-1].islower() and current_word[0].islower():
-            return True
+            pl = len(previous_word)
+            cl = len(current_word)
+            # Join broken suffixes (instru+ments, Univer+sity), not dual+challenges / split+learning.
+            if cl <= 5 and pl > cl:
+                return True
+            if cl <= 3 and pl >= 2:
+                return True
+            if pl <= 3 and cl >= 4:
+                return True
     return False
 
 

@@ -120,11 +120,15 @@ def _section_to_mapped(section: dict[str, Any]) -> MappedSemanticNode:
     )
 
 
-def ir_to_semantic_mapping(ir: dict[str, Any]) -> SemanticMappingBody:
+def ir_to_semantic_mapping(
+    ir: dict[str, Any],
+    *,
+    processed_blocks: list[Any] | None = None,
+) -> SemanticMappingBody:
     """Build a :class:`SemanticMappingBody` from partitioned Stage 1 IR."""
     from app.services.front_matter_consolidation import repair_ir_front_matter
 
-    repair_ir_front_matter(ir)
+    repair_ir_front_matter(ir, processed_blocks=processed_blocks)
     front_raw = ir.get("front") or {}
     front: dict[str, Any] = {}
 

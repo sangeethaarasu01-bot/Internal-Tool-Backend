@@ -875,7 +875,9 @@ def build_semantic_document(
 
         if sem_type == "ABSTRACT":
             from app.utils.front_matter_recovery import (
+                is_abstract_closing_fragment,
                 is_abstract_continuation_text,
+                is_abstract_statistical_continuation,
                 strip_abstract_label,
             )
 
@@ -890,7 +892,11 @@ def build_semantic_document(
                     break
                 if nxt_type == "ABSTRACT" or (
                     nxt_type in {"PARAGRAPH", "UNKNOWN_TEXT", "BODY_TEXT"}
-                    and is_abstract_continuation_text(nxt_text)
+                    and (
+                        is_abstract_continuation_text(nxt_text)
+                        or is_abstract_statistical_continuation(nxt_text)
+                        or is_abstract_closing_fragment(nxt_text)
+                    )
                 ):
                     i += 1
                     group.append(nxt)
@@ -1330,7 +1336,9 @@ def build_semantic_document(
         completeness=completeness,
     )
     from app.services.front_matter_consolidation import consolidate_semantic_front_matter
+    from app.utils.front_matter_recovery import recover_abstract_tail_from_unmapped_blocks
 
+    recover_abstract_tail_from_unmapped_blocks(front, processed, mapped_ids)
     consolidate_semantic_front_matter(document)
     if include_tagged_output:
         document.tagged_output = render_semantic_document(document)
