@@ -2,10 +2,15 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from pathlib import Path
-
 from lxml import etree
 
+from app.models.semantic_mapping import SemanticMappingBody
+from app.services.docbook_body_merge import (
+    DocBookBodyMergeResult,
+    apply_pdf_body_to_docbook_book,
+)
 from app.services.docbook_metadata_overlay import (
     DocBookMetadataOverlayResult,
     apply_pdf_metadata_to_docbook_book,
@@ -19,16 +24,24 @@ class DocBookGenerationError(ValueError):
     """DocBook book XML could not be produced."""
 
 
+@dataclass
+class DocBookGenerationResult:
+    metadata: DocBookMetadataOverlayResult
+    body: DocBookBodyMergeResult
+
+
 def generate_docbook_book_xml(
     template_path: str | Path,
     *,
     source: SourceIdentityRecord | None = None,
-) -> tuple[str, DocBookMetadataOverlayResult]:
+    mapping: SemanticMappingBody | dict | None = None,
+    ir: dict | None = None,
+) -> tuple[str, DocBookGenerationResult]:
     """
     Produce DocBook 5.0 book XML from the uploaded template skeleton.
 
-    Preserves template structure and chapter bodies; when ``source`` is provided,
-    book-level ``<info>`` publication fields are taken from the current PDF extraction.
+    Book-level ``<info>`` comes from the PDF when ``source`` is set. Chapter and
+    part narrative is rebuilt from ``mapping`` / ``ir`` when the PDF body is present.
     """
     path = Path(template_path)
     if not path.is_file():
@@ -53,6 +66,10 @@ def generate_docbook_book_xml(
     if source is not None:
         overlay = apply_pdf_metadata_to_docbook_book(root, source)
 
+    body_merge = apply_pdf_body_to_docbook_book(root, mapping, ir=ir)
+    if body_merge.warnings:
+        overlay.warnings.extend(body_merge.warnings)
+
     xml = serialize_lxml_tree(
         root,
         xml_declaration=True,
@@ -60,4 +77,4 @@ def generate_docbook_book_xml(
         pretty_print=True,
         doctype=tree.docinfo.doctype if tree.docinfo.doctype else None,
     )
-    return xml, overlay
+    return xml, DocBookGenerationResult(metadata=overlay, body=body_merge)

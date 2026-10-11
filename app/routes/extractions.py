@@ -722,7 +722,7 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     )
 
     try:
-        xml_content, resolved_output_format, docbook_overlay = generate_output_xml(
+        xml_content, resolved_output_format, docbook_result = generate_output_xml(
             template_path,
             template_schema,
             mapping_body,
@@ -764,12 +764,16 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     response_xml = xml_content
 
     if resolved_output_format == OUTPUT_DOCBOOK_5:
-        warnings.append(
-            "DocBook output preserves the uploaded book template structure; "
-            "PDF chapter merge is not applied on this path."
-        )
-        if docbook_overlay and docbook_overlay.warnings:
-            warnings.extend(docbook_overlay.warnings)
+        if docbook_result:
+            if docbook_result.metadata.warnings:
+                warnings.extend(docbook_result.metadata.warnings)
+            if docbook_result.body.warnings:
+                warnings.extend(docbook_result.body.warnings)
+            if not docbook_result.body.applied:
+                warnings.append(
+                    "DocBook chapter bodies were not rebuilt from the PDF "
+                    "(empty IR body or merge skipped)."
+                )
         try:
             write_result = write_book_chunks(extraction_id, xml_content)
         except DocBookChunkingError as exc:

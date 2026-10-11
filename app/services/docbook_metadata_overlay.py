@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from dataclasses import dataclass, field
 
 from lxml import etree
@@ -34,13 +35,16 @@ def _set_text(element: etree._Element, text: str) -> None:
 
 
 def _remove_publication_identifiers(info: etree._Element) -> None:
+    for biblioset in list(info.findall(f"{{{DOCBOOK_NS}}}biblioset")):
+        if (biblioset.get("role") or "").lower() == "isbns":
+            info.remove(biblioset)
     for biblioid in list(info.iter(f"{{{DOCBOOK_NS}}}biblioid")):
         if biblioid.getparent() is None:
             continue
         kind = (biblioid.get("class") or "").lower()
         if kind in {"isbn", "doi", "isbn13", "isbn10"}:
             parent = biblioid.getparent()
-            if parent is not None and xml_local_name(parent) == "info":
+            if parent is not None:
                 parent.remove(biblioid)
 
 
@@ -80,33 +84,60 @@ def _replace_authorgroup(info: etree._Element, authors: list[str]) -> None:
     info.append(authorgroup)
 
 
-def _update_publisher_name(info: etree._Element, publisher: str | None) -> None:
+def _looks_like_imprint_name(name: str) -> bool:
+    lowered = name.lower()
+    return bool(
+        re.search(
+            r"\b(books|press|publishers?|publishing|inc\.?|ltd\.?|llc)\b",
+            lowered,
+        )
+    )
+
+
+def _copyright_holder_from_source(source: SourceIdentityRecord) -> str | None:
+    for name in source.authors or []:
+        cleaned = str(name).strip()
+        if cleaned and _looks_like_imprint_name(cleaned):
+            return cleaned
+    people = [str(a).strip() for a in (source.authors or []) if str(a).strip()]
+    if len(people) == 1:
+        return people[0]
+    if len(people) > 1:
+        return ", ".join(people[:4])
+    publisher = (source.publisher or "").strip()
+    return publisher or None
+
+
+def _replace_publisher_biblioset(info: etree._Element, publisher: str | None) -> None:
+    """Drop template imprint URLs/addresses; keep a minimal publisher block from the PDF."""
+    for biblioset in list(info.findall(f"{{{DOCBOOK_NS}}}biblioset")):
+        if biblioset.get("role") in {None, "publisher"}:
+            info.remove(biblioset)
     if not publisher:
         return
-    for biblioset in info.iter(f"{{{DOCBOOK_NS}}}biblioset"):
-        if biblioset.get("role") not in {None, "publisher"}:
-            continue
-        for pub in biblioset.iter(f"{{{DOCBOOK_NS}}}publisher"):
-            name_el = _direct_child(pub, "publishername")
-            if name_el is not None:
-                _set_text(name_el, publisher)
-                return
-        misc = biblioset.find(f".//{{{DOCBOOK_NS}}}bibliomisc[@role='imprint']")
-        if misc is not None:
-            _set_text(misc, publisher)
-            return
+    biblioset = etree.SubElement(info, f"{{{DOCBOOK_NS}}}biblioset", attrib={"role": "publisher"})
+    pub = etree.SubElement(biblioset, f"{{{DOCBOOK_NS}}}publisher")
+    name_el = etree.SubElement(pub, f"{{{DOCBOOK_NS}}}publishername")
+    _set_text(name_el, publisher.strip())
 
 
-def _update_copyright_year(info: etree._Element, year: int | None) -> None:
-    if year is None:
+def _update_copyright(info: etree._Element, source: SourceIdentityRecord) -> None:
+    year = source.publication_year
+    holder = _copyright_holder_from_source(source)
+    if year is None and not holder:
         return
     copyright_el = _direct_child(info, "copyright")
     if copyright_el is None:
         copyright_el = etree.SubElement(info, f"{{{DOCBOOK_NS}}}copyright")
-    year_el = _direct_child(copyright_el, "year")
-    if year_el is None:
+    else:
+        for child in list(iter_element_children(copyright_el)):
+            copyright_el.remove(child)
+    if year is not None:
         year_el = etree.SubElement(copyright_el, f"{{{DOCBOOK_NS}}}year")
-    _set_text(year_el, str(year))
+        _set_text(year_el, str(year))
+    if holder:
+        holder_el = etree.SubElement(copyright_el, f"{{{DOCBOOK_NS}}}holder")
+        _set_text(holder_el, holder)
 
 
 def _update_pubdate(info: etree._Element, year: int | None) -> None:
@@ -114,6 +145,35 @@ def _update_pubdate(info: etree._Element, year: int | None) -> None:
         return
     for pubdate in info.findall(f"{{{DOCBOOK_NS}}}pubdate"):
         _set_text(pubdate, str(year))
+
+
+def _strip_template_marketing_from_info(info: etree._Element) -> None:
+    """Remove sample-book covers, blurbs, and CIP blocks when PDF metadata replaces <info>."""
+    for local_name in (
+        "cover",
+        "legalnotice",
+        "abstract",
+        "keywordset",
+        "printhistory",
+        "revhistory",
+    ):
+        for child in list(info.findall(f"{{{DOCBOOK_NS}}}{local_name}")):
+            info.remove(child)
+    for biblioid in list(info.findall(f"{{{DOCBOOK_NS}}}biblioid")):
+        kind = (biblioid.get("class") or "").lower()
+        if kind == "other":
+            info.remove(biblioid)
+    title_el = _direct_child(info, "title")
+    if title_el is not None and "sortas" in title_el.attrib:
+        del title_el.attrib["sortas"]
+
+
+def _sync_book_root_id(book: etree._Element, isbn: str | None) -> None:
+    if not isbn:
+        return
+    digits = re.sub(r"[^0-9]", "", isbn.strip())
+    if len(digits) >= 10:
+        book.set("{http://www.w3.org/XML/1998/namespace}id", f"b-{digits}")
 
 
 def _append_isbn(info: etree._Element, isbn: str | None) -> None:
@@ -158,10 +218,12 @@ def apply_pdf_metadata_to_docbook_book(
         _clear_subtitle(info)
     if source.authors:
         _replace_authorgroup(info, list(source.authors))
-    _update_publisher_name(info, source.publisher)
-    _update_copyright_year(info, source.publication_year)
+    _replace_publisher_biblioset(info, source.publisher)
+    _update_copyright(info, source)
     _update_pubdate(info, source.publication_year)
     _append_isbn(info, source.isbn)
+    _strip_template_marketing_from_info(info)
+    _sync_book_root_id(book, source.isbn)
 
     result.applied = True
     logger.info(

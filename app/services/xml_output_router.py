@@ -8,7 +8,7 @@ from typing import Any
 
 from app.models.semantic_mapping import SemanticMappingBody
 from app.services.docbook_generator import DocBookGenerationError, generate_docbook_book_xml
-from app.services.docbook_metadata_overlay import DocBookMetadataOverlayResult
+from app.services.docbook_generator import DocBookGenerationResult
 from app.services.source_identity import SourceIdentityRecord
 from app.services.output_format import (
     OUTPUT_DOCBOOK_5,
@@ -63,7 +63,7 @@ def generate_output_xml(
     source: SourceIdentityRecord | None = None,
     phase1: dict[str, Any] | None = None,
     ir: dict[str, Any] | None = None,
-) -> tuple[str, str, DocBookMetadataOverlayResult | None]:
+) -> tuple[str, str, DocBookGenerationResult | None]:
     """
     Return ``(xml_content, resolved_output_format)``.
 
@@ -78,7 +78,12 @@ def generate_output_xml(
 
     if resolved == OUTPUT_DOCBOOK_5:
         try:
-            xml_content, overlay = generate_docbook_book_xml(path, source=source)
+            xml_content, docbook_result = generate_docbook_book_xml(
+                path,
+                source=source,
+                mapping=mapping,
+                ir=ir,
+            )
         except DocBookGenerationError as exc:
             raise XmlGenerationError(str(exc)) from exc
         except MemoryError as exc:
@@ -87,7 +92,7 @@ def generate_output_xml(
                 "Document too large to load as a single book XML. "
                 "Use chapter-level DocBook output or reduce template size."
             ) from exc
-        return xml_content, resolved, overlay
+        return xml_content, resolved, docbook_result
 
     if resolved == OUTPUT_IEEE_JATS:
         xml_content = run_jats_xml_transform(

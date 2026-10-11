@@ -17,11 +17,14 @@ from app.services.identity_gates import (
 from app.services.output_format import OUTPUT_DOCBOOK_5
 from app.services.source_identity import build_source_identity_from_extraction_doc
 from app.services.template_format import DOCBOOK_NS
+from app.services.extraction_workflow import ir_from_extraction_result
+from app.services.ir_semantic_adapter import ir_to_semantic_mapping
 from app.services.xml_output_router import generate_output_xml
 from app.models.semantic_mapping import SemanticMappingBody
 
 ROOT = Path(__file__).resolve().parent.parent
 PASTORAL_PHASE1 = ROOT / "data" / "pipeline_debug" / "6ac8d8accac519efa424bcf8" / "phase1_document.json"
+PASTORAL_LAYOUT = ROOT / "data" / "pipeline_debug" / "6acae32dbff2db96245fc3e5" / "layout_extraction.json"
 MARSHALL_PHASE1 = ROOT / "data" / "pipeline_debug" / "6ac8d119cac519efa424bcf5" / "phase1_document.json"
 MARSHALL_BOOK_XML = (
     ROOT / "data" / "outputs" / "book_exports" / "6ac8dfef308ea3940d0a59f7" / "book.xml"
@@ -68,7 +71,7 @@ def test_pastoral_pdf_marshall_template_output_metadata_from_pdf() -> None:
     source = build_source_identity_from_extraction_doc(_extraction_doc(PASTORAL_PHASE1, "job-pastoral"))
     schema = {"template_format": "docbook_5_book", "root_tag": "book"}
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    xml, fmt, overlay = generate_output_xml(
+    xml, fmt, docbook_result = generate_output_xml(
         MARSHALL_BOOK_XML,
         schema,
         mapping,
@@ -76,7 +79,7 @@ def test_pastoral_pdf_marshall_template_output_metadata_from_pdf() -> None:
         source=source,
     )
     assert fmt == OUTPUT_DOCBOOK_5
-    assert overlay is not None and overlay.applied
+    assert docbook_result is not None and docbook_result.metadata.applied
 
     root = etree.fromstring(xml.encode("utf-8"))
     meta = extract_docbook_book_metadata(root)
@@ -175,15 +178,15 @@ def test_sparse_pdf_metadata_warns_without_fabricating_title() -> None:
     )
     schema = {"template_format": "docbook_5_book", "root_tag": "book"}
     mapping = SemanticMappingBody(front={}, body=[], back={})
-    xml, _, overlay = generate_output_xml(
+    xml, _, docbook_result = generate_output_xml(
         DOCBOOK_FIXTURE,
         schema,
         mapping,
         source=source,
         output_format="auto",
     )
-    assert overlay is not None
-    assert overlay.warnings
+    assert docbook_result is not None
+    assert docbook_result.metadata.warnings
     meta = extract_docbook_book_metadata(etree.fromstring(xml.encode("utf-8")))
     assert meta.title == "Test Book"
 
