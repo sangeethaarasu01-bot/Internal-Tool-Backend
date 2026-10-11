@@ -282,6 +282,29 @@ def _is_reference_section_content_block(
     return True
 
 
+def _is_bibliography_block_before_references_heading(
+    block: ProcessedBlock,
+    text: str,
+) -> bool:
+    """
+    IEEE two-column proofs often place the right-column bibliography above the
+    REFERENCES heading in reading order. Keep those blocks when they look like
+    numbered bibliography entries, not body paragraphs.
+    """
+    if block.classification not in {"REFERENCE_TEXT", "REFERENCE"}:
+        return False
+    normalized = normalize_text(text)
+    if not normalized:
+        return False
+    if _label_at_block_start(text) is not None:
+        return True
+    if re.search(r"\[\d+\]", normalized) and (
+        looks_like_reference_entry(text) or _BIBLIOGRAPHY_AUTHOR_START_RE.search(normalized)
+    ):
+        return True
+    return False
+
+
 def _belongs_on_reference_heading_page(block: ProcessedBlock, text: str) -> bool:
     """Keep same-page bibliography blocks that appear before the REFERENCES heading."""
     normalized = normalize_text(text)
@@ -333,10 +356,12 @@ def collect_reference_section_blocks(
     for block in ordered:
         if block.page_number < heading_page:
             continue
-        if block.page_number == heading_page and block.reading_order_index <= heading_reading_order:
-            continue
 
         text = block.text or ""
+        if block.page_number == heading_page and block.reading_order_index <= heading_reading_order:
+            if not _is_bibliography_block_before_references_heading(block, text):
+                continue
+
         normalized = normalize_text(text)
         line = first_line(text)
 

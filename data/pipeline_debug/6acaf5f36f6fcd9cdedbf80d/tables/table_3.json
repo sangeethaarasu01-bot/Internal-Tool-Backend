@@ -1,0 +1,132 @@
+{
+  "table_id": "table_3",
+  "page_number": 15,
+  "row_count": 13,
+  "column_count": 6,
+  "rows": [
+    [
+      "Ref.",
+      "Features",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "[32]",
+      "",
+      "",
+      "",
+      "",
+      "Age, Tumor characteristics, Hormonal receptor statuses, Clinical and pathological"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "TNM (Tumour, Node, Metastasis) staging, and the presence of removed and positive"
+    ],
+    [
+      "",
+      "lymph nodes",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "[37]",
+      "",
+      "",
+      "Numerical features extracted from digitized images",
+      "",
+      ""
+    ],
+    [
+      "[36]",
+      "",
+      "",
+      "Ki67, Age, CT scheme, Grading, PgR, Multiple",
+      "",
+      ""
+    ],
+    [
+      "[40]",
+      "",
+      "",
+      "",
+      "Luminal A,luminal B,ERBB2 (HER2(+)), TNBC, and Unclear",
+      ""
+    ],
+    [
+      "[45]",
+      "",
+      "",
+      "",
+      "",
+      "Patient age at the time of diagnosis, tumor size (in cm), pathohistological type,"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "immunophenotype, pathohistological grade, estrogen (ER) and progesterone (PR)"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "receptor quantities (0-100), HER-2 levels (0-3), Ki-67 index (0-100), and lymph node"
+    ],
+    [
+      "",
+      "",
+      "metastasis status (o/1).",
+      "",
+      "",
+      ""
+    ],
+    [
+      "[41]",
+      "",
+      "",
+      "",
+      "",
+      "Age at menarche, the first pregnancy, age at menopause, and others. In addition, a"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "high-fat diet and determinants of body mass index (BMI), parity, breastfeeding"
+    ]
+  ],
+  "bbox": [
+    14.1700439453125,
+    101.1171875,
+    595.4255981445312,
+    289.2469482421875
+  ],
+  "id": "table_3",
+  "caption": "TABLE 4. Key features considered in studies using SHAP for explainability\nKi67= Kiel 67 (Protein), PgR= Progesterone Receptor, TNBC= Triple-Negative Breast Cancer, HER2= Human Epidermal Growth Factor Receptor 2, ERBB2=\nErythroblastic Oncogene B2, Luminal A & Luminal B= Subtype classification of breast cancer.",
+  "subtitle": null,
+  "headers": [],
+  "raw_text": "Ref.\tFeatures\t\t\t\t\n[32]\t\t\t\t\tAge, Tumor characteristics, Hormonal receptor statuses, Clinical and pathological\n\t\t\t\t\tTNM (Tumour, Node, Metastasis) staging, and the presence of removed and positive\n\tlymph nodes\t\t\t\t\n[37]\t\t\tNumerical features extracted from digitized images\t\t\n[36]\t\t\tKi67, Age, CT scheme, Grading, PgR, Multiple\t\t\n[40]\t\t\t\tLuminal A,luminal B,ERBB2 (HER2(+)), TNBC, and Unclear\t\n[45]\t\t\t\t\tPatient age at the time of diagnosis, tumor size (in cm), pathohistological type,\n\t\t\t\t\timmunophenotype, pathohistological grade, estrogen (ER) and progesterone (PR)\n\t\t\t\t\treceptor quantities (0-100), HER-2 levels (0-3), Ki-67 index (0-100), and lymph node\n\t\tmetastasis status (o/1).\t\t\t\n[41]\t\t\t\t\tAge at menarche, the first pregnancy, age at menopause, and others. In addition, a\n\t\t\t\t\thigh-fat diet and determinants of body mass index (BMI), parity, breastfeeding",
+  "merged_cells": [],
+  "extraction_quality": {
+    "confidence": 0.7197435897435898,
+    "status": "partial",
+    "engine": "pymupdf",
+    "caption_detected": true,
+    "structured_grid": false,
+    "warnings": []
+  }
+}

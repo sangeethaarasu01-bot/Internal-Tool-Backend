@@ -11,6 +11,7 @@ from lxml import etree
 from app.models.semantic_mapping import MappedSemanticNode, SemanticMappingBody
 from app.services.ir_semantic_adapter import ensure_semantic_mapping_body
 from app.services.template_format import DOCBOOK_NS
+from app.utils.book_running_headers import is_book_running_header_text
 from app.utils.xml_helpers import iter_element_children, xml_local_name
 from app.utils.xml_text import set_lxml_text
 
@@ -79,6 +80,8 @@ def _strip_book_narrative(root: etree._Element) -> int:
 def _append_paragraph(parent: etree._Element, node: MappedSemanticNode) -> None:
     text = _node_text(node)
     if not text:
+        return
+    if is_book_running_header_text(text):
         return
     para = etree.SubElement(parent, _ns("para"))
     set_lxml_text(para, text)

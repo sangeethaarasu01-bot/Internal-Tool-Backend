@@ -31,6 +31,12 @@ def test_merge_block_texts_joins_wrapped_words_without_hyphen() -> None:
     assert merge_block_texts(["instru", "ments like electronic"]) == "instruments like electronic"
     assert merge_block_texts(["a sin", "gle sensor"]) == "a single sensor"
     assert merge_block_texts(["Jadavpur Univer", "sity [7]"]) == "Jadavpur University [7]"
+    assert "occur as one" in merge_block_texts(
+        ["Several stages occur as", "one transitions from the old"]
+    )
+    assert merge_block_texts(["give up after", "repeated encounters"]) == (
+        "give up after repeated encounters"
+    )
 
 
 def test_infer_drop_cap_letter_for_researchers() -> None:

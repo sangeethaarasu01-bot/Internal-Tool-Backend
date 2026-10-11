@@ -10,6 +10,10 @@ from app.models.document_structure import BlockClassification
 from app.models.extraction import ExtractionResult, TextBlock
 from app.services.layout.block_metrics import block_font_metrics
 from app.services.layout.column_classifier import classify_block_column
+from app.utils.book_running_headers import (
+    is_book_folio_chapter_running_header,
+    is_book_running_header_text,
+)
 from app.services.layout.semantic_patterns import (
     _CORRESPONDING_AUTHOR_NAME_RE,
     _IEEE_ET_AL_HEADER_RE,
@@ -348,6 +352,21 @@ def classify_content_block(
 
     if in_references or REFERENCE_LABEL_RE.match(normalize_text(text)):
         return FilterDecision("REFERENCE_TEXT", False, None, 0.85)
+
+    if (near_top or near_bottom) and is_book_folio_chapter_running_header(text):
+        return FilterDecision(
+            classification="RUNNING_HEADER",
+            exclude_from_content=True,
+            exclusion_reason="book_folio_chapter_header",
+            confidence=0.93,
+        )
+    if book_mode and near_top and is_book_running_header_text(text):
+        return FilterDecision(
+            classification="RUNNING_HEADER",
+            exclude_from_content=True,
+            exclusion_reason="book_chapter_running_header",
+            confidence=0.9,
+        )
 
     running = is_running_header_block(
         text,

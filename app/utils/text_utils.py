@@ -25,6 +25,110 @@ def dehyphenate_line_breaks(text: str) -> str:
     return _LINE_BREAK_HYPHEN_RE.sub(r"\1\2", text)
 
 
+_WRAP_JOIN_STOPWORDS = frozenset(
+    {
+        "a",
+        "an",
+        "as",
+        "at",
+        "be",
+        "by",
+        "do",
+        "go",
+        "he",
+        "if",
+        "in",
+        "is",
+        "it",
+        "me",
+        "my",
+        "no",
+        "of",
+        "on",
+        "or",
+        "so",
+        "to",
+        "up",
+        "us",
+        "we",
+        "all",
+        "and",
+        "any",
+        "are",
+        "but",
+        "can",
+        "did",
+        "for",
+        "get",
+        "had",
+        "has",
+        "her",
+        "him",
+        "his",
+        "how",
+        "its",
+        "may",
+        "new",
+        "not",
+        "now",
+        "off",
+        "one",
+        "our",
+        "out",
+        "own",
+        "she",
+        "the",
+        "too",
+        "two",
+        "was",
+        "way",
+        "who",
+        "why",
+        "you",
+        "after",
+        "also",
+        "been",
+        "before",
+        "being",
+        "both",
+        "each",
+        "from",
+        "have",
+        "into",
+        "just",
+        "like",
+        "more",
+        "most",
+        "much",
+        "must",
+        "only",
+        "other",
+        "over",
+        "some",
+        "such",
+        "than",
+        "that",
+        "them",
+        "then",
+        "they",
+        "this",
+        "those",
+        "upon",
+        "very",
+        "were",
+        "what",
+        "when",
+        "where",
+        "which",
+        "while",
+        "will",
+        "with",
+        "your",
+        "occur",
+    }
+)
+
+
 def _should_join_wrapped_word(previous: str, current: str) -> bool:
     if not previous or not current:
         return False
@@ -38,10 +142,20 @@ def _should_join_wrapped_word(previous: str, current: str) -> bool:
         return False
     if previous_word.endswith("-") or current_word.startswith("-"):
         return False
+    if previous_word.lower() in _WRAP_JOIN_STOPWORDS:
+        return False
+    if (
+        len(current_word) <= 4
+        and current_word.isalpha()
+        and current_word.islower()
+        and len(previous_word) >= 3
+        and previous_word[-1].islower()
+    ):
+        return True
+    if len(previous_word) < 4:
+        return False
     if previous_word[-1].isalpha() and current_word[0].isalpha():
         if previous_word[-1].islower() and current_word[0].islower():
-            return True
-        if len(previous_word) >= 4 and previous_word[-1].islower() and current_word[0].islower():
             return True
     return False
 
