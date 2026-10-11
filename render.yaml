@@ -1,0 +1,16 @@
+# Render blueprint (optional). Set service Root Directory to `backend` if configuring in the dashboard instead.
+services:
+  - type: web
+    name: ieee-xml-converter-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: LIGHT_PDF_EXTRACT
+        value: "true"
+      - key: DATA_DIR
+        value: /app/data
+      - key: MAX_FILE_SIZE
+        value: "104857600"

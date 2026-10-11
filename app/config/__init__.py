@@ -38,6 +38,8 @@ class Settings(BaseSettings):
     CORS_ORIGIN_REGEX: str = r"https://.*\.vercel\.app"
     SCHEMA_CACHE_TTL_DAYS: int = 30
     MAX_PDF_PAGES: int = 40
+    # Max PDF upload size in bytes (env MAX_FILE_SIZE). Default 100 MiB for full-book PDFs.
+    MAX_FILE_SIZE: int = 100 * 1024 * 1024
     LOG_LEVEL: str = "INFO"
     # Skip heavy pdfplumber tables + figure pixmap export (required on Render 512MB)
     LIGHT_PDF_EXTRACT: bool = _default_light_pdf_extract()

@@ -11,10 +11,10 @@ from fastapi.responses import Response
 from pymongo.errors import PyMongoError
 
 from app.database import MONGODB_DB, conversions_col, mongo_connect_error, utcnow
+from app.config import settings
 from app.services.conversion_stub import reject_legacy_conversion
 
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
-MAX_FILE_SIZE = int(os.getenv("MAX_FILE_SIZE", 20 * 1024 * 1024))
 DONE_STATUSES = ["completed", "success"]
 
 router = APIRouter()
@@ -58,10 +58,10 @@ async def start_conversion(
 
     content = await file.read()
     file_size = len(content)
-    if file_size > MAX_FILE_SIZE:
+    if file_size > settings.MAX_FILE_SIZE:
         raise HTTPException(
             status_code=400,
-            detail=f"File size exceeds {MAX_FILE_SIZE / 1024 / 1024:.0f}MB limit",
+            detail=f"File size exceeds {settings.MAX_FILE_SIZE / 1024 / 1024:.0f}MB limit",
         )
 
     os.makedirs(UPLOAD_DIR, exist_ok=True)

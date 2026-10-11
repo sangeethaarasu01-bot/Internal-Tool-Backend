@@ -31,15 +31,13 @@ from app.services.extraction_workflow import (
     template_storage_dir,
     validate_extraction_object_id,
 )
-from app.services.ir_semantic_adapter import (
-    ensure_semantic_mapping_body,
-    fill_back_references_from_ir,
-    ir_to_semantic_mapping,
-)
 from app.services.phase1_reference_bridge import merge_phase1_references_into_ir
 from app.services.llm.providers.base import LLMConfigurationError
-from app.services.llm.providers.factory import is_llm_configured
 from app.services.llm_semantic_mapper import SemanticMappingError, map_semantic_content
+from app.services.mapping_orchestration import (
+    finalize_mapping_for_xml,
+    resolve_semantic_mapping_for_generate_xml,
+)
 from app.services.scope_resolver import InvalidScopeError
 from app.services.docbook_template_from_source import build_docbook_template_xml_from_phase1
 from app.services.docbook_book_storage import (
@@ -70,13 +68,13 @@ from app.services.generate_xml_guards import (
 from app.services.output_format import OUTPUT_DOCBOOK_5, OUTPUT_IEEE_JATS, OutputFormatError, resolve_output_format
 from app.services.xml_generator import XmlGenerationError
 from app.services.xml_output_router import generate_output_xml
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
-MAX_FILE_SIZE = int(os.getenv("MAX_FILE_SIZE", 20 * 1024 * 1024))
 
 
 def _oid(extraction_id: str) -> ObjectId:
@@ -136,10 +134,10 @@ async def start_extraction(
 
     content = await file.read()
     file_size = len(content)
-    if file_size > MAX_FILE_SIZE:
+    if file_size > settings.MAX_FILE_SIZE:
         raise HTTPException(
             status_code=400,
-            detail=f"File size exceeds {MAX_FILE_SIZE / 1024 / 1024:.0f}MB limit",
+            detail=f"File size exceeds {settings.MAX_FILE_SIZE / 1024 / 1024:.0f}MB limit",
         )
     if file_size == 0:
         raise HTTPException(status_code=400, detail="PDF file is empty")
@@ -617,67 +615,39 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     filtered_ir = scope_result["filtered_ir"]
     phase1_doc = doc.get("phase1") or (doc.get("result") or {}).get("phase1")
     filtered_ir = merge_phase1_references_into_ir(filtered_ir, phase1_doc)
-    warnings: list[str] = []
-    mapping_source = "ir_adapter"
-    prompt_version: str | None = None
-    unmapped_count = 0
-    use_llm = body.use_llm
-    if use_llm and not is_llm_configured():
-        logger.warning(
-            "LLM not configured for %s; using heuristic IR adapter (no API key)",
-            extraction_id,
+    try:
+        mapping_resolution = resolve_semantic_mapping_for_generate_xml(
+            extraction_id=extraction_id,
+            resolved_scope=resolved_scope,
+            filtered_ir=filtered_ir,
+            filtered_template_schema=scope_result["filtered_template_schema"],
+            use_llm=body.use_llm,
+            llm_fallback=body.llm_fallback,
         )
-        use_llm = False
-        warnings.append("LLM not configured. Using heuristic IR adapter.")
+    except LLMConfigurationError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except SemanticMappingError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
 
-    if use_llm:
+    warnings: list[str] = list(mapping_resolution.warnings)
+    mapping_source = mapping_resolution.mapping_source
+    prompt_version = mapping_resolution.prompt_version
+    unmapped_count = mapping_resolution.unmapped_count
+    if mapping_resolution.semantic_record is not None:
         try:
-            mapping_result = map_semantic_content(
-                document_id=extraction_id,
-                scope=resolved_scope,
-                ir=filtered_ir,
-                template_schema=scope_result["filtered_template_schema"],
-                max_retries=1 if body.llm_fallback else 2,
+            extractions_col().update_one(
+                {"_id": doc["_id"]},
+                {
+                    "$set": {
+                        "scope": resolved_scope,
+                        "semantic_mapping": mapping_resolution.semantic_record,
+                    }
+                },
             )
-            semantic_record = mapping_result.model_dump(mode="json")
-            mapping_body = mapping_result.mapping
-            mapping_source = "llm"
-            prompt_version = mapping_result.prompt_version
-            warnings.extend(mapping_result.warnings)
-            unmapped_count = len(mapping_result.unmapped_content)
-            try:
-                extractions_col().update_one(
-                    {"_id": doc["_id"]},
-                    {"$set": {"scope": resolved_scope, "semantic_mapping": semantic_record}},
-                )
-            except PyMongoError as exc:
-                raise HTTPException(status_code=503, detail=mongo_user_error(exc))
-        except LLMConfigurationError as exc:
-            raise HTTPException(status_code=503, detail=str(exc)) from exc
-        except SemanticMappingError as exc:
-            if not body.llm_fallback:
-                raise HTTPException(status_code=502, detail=str(exc)) from exc
-            logger.info(
-                "LLM mapping failed for %s; falling back to IR adapter: %s",
-                extraction_id,
-                exc,
-            )
-            mapping_body = ir_to_semantic_mapping(filtered_ir)
-            mapping_source = "ir_adapter_fallback"
-            warnings.append(
-                "LLM mapping failed (Claude timeout or API error). "
-                "XML was generated using deterministic extraction instead."
-            )
-    else:
-        mapping_body = ir_to_semantic_mapping(filtered_ir)
-        mapping_source = "ir_adapter"
-        warnings.append(
-            "Generated using deterministic IR adapter (no LLM). "
-            "Set use_llm=true for template-aware LLM mapping."
-        )
+        except PyMongoError as exc:
+            raise HTTPException(status_code=503, detail=mongo_user_error(exc)) from exc
 
-    mapping_body = ensure_semantic_mapping_body(mapping_body)
-    mapping_body = fill_back_references_from_ir(mapping_body, filtered_ir)
+    mapping_body = finalize_mapping_for_xml(mapping_resolution.mapping_body, filtered_ir)
 
     try:
         resolved_output_format = resolve_output_format(

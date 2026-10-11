@@ -23,6 +23,9 @@ ENV/
 
 # Uploaded PDFs and generated files
 uploads/
+data/pipeline_debug/
+data/uploads/
+data/outputs/
 
 # Local databases
 *.db
