@@ -169,10 +169,13 @@ def process_document_structure(
         semantic=semantic,
         publication_document_type=book_ctx.publication_document_type,
         book_title=book_ctx.title,
+        book_subtitle=book_ctx.subtitle,
         book_author=book_ctx.author,
         book_publisher=book_ctx.publisher,
         book_year=book_ctx.year,
         book_isbn=book_ctx.isbn,
+        book_isbns=list(book_ctx.isbns),
+        book_copyright_holder=book_ctx.copyright_holder,
     )
 
 

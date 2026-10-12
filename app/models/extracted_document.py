@@ -221,10 +221,13 @@ class ExtractedDocument(BaseModel):
     document_type: ExtractedDocumentKind = "unknown"
     publication_document_type: PublicationDocumentType = "research_paper"
     title: str | None = None
+    subtitle: str | None = None
     authors: list[str] = Field(default_factory=list)
     publisher: str | None = None
     publication_year: int | None = None
     isbn: str | None = None
+    isbns: list[str] = Field(default_factory=list)
+    copyright_holder: str | None = None
     pages: list[ExtractedPage] = Field(default_factory=list)
     sections: list[ExtractedSection] = Field(default_factory=list)
     tables: list[ExtractedTableSummary] = Field(default_factory=list)

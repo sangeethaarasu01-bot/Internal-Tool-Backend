@@ -61,10 +61,19 @@ def _set_or_create_title(info: etree._Element, title: str) -> None:
     apply_sortas_to_title_element(title_el, stripped)
 
 
-def _clear_subtitle(info: etree._Element) -> None:
-    subtitle = _direct_child(info, "subtitle")
-    if subtitle is not None:
-        info.remove(subtitle)
+def _set_or_clear_subtitle(info: etree._Element, subtitle: str | None) -> None:
+    subtitle_el = _direct_child(info, "subtitle")
+    cleaned = (subtitle or "").strip()
+    if not cleaned:
+        if subtitle_el is not None:
+            info.remove(subtitle_el)
+        return
+    if subtitle_el is None:
+        title_el = _direct_child(info, "title")
+        insert_at = list(info).index(title_el) + 1 if title_el is not None else 0
+        subtitle_el = etree.Element(f"{{{DOCBOOK_NS}}}subtitle")
+        info.insert(insert_at, subtitle_el)
+    _set_text(subtitle_el, cleaned)
 
 
 def _replace_authorgroup(info: etree._Element, authors: list[str]) -> None:
@@ -89,6 +98,9 @@ def _looks_like_imprint_name(name: str) -> bool:
 
 
 def _copyright_holder_from_source(source: SourceIdentityRecord) -> str | None:
+    explicit = (source.copyright_holder or "").strip()
+    if explicit:
+        return explicit
     for name in source.authors or []:
         cleaned = str(name).strip()
         if cleaned and _looks_like_imprint_name(cleaned):
@@ -165,11 +177,32 @@ def _sync_book_root_id(book: etree._Element, isbn: str | None) -> None:
         book.set("{http://www.w3.org/XML/1998/namespace}id", f"b-{digits}")
 
 
-def _append_isbn(info: etree._Element, isbn: str | None) -> None:
-    if not isbn:
+def _sync_isbns(info: etree._Element, isbns: list[str], primary_isbn: str | None) -> None:
+    values = [v.strip() for v in isbns if v and v.strip()]
+    if not values and primary_isbn:
+        values = [primary_isbn.strip()]
+    if not values:
         return
-    biblioid = etree.SubElement(info, f"{{{DOCBOOK_NS}}}biblioid", attrib={"class": "isbn"})
-    set_lxml_text(biblioid, isbn.strip(), log_context={"semantic_type": "metadata", "source": "-", "field": "isbn"})
+    if len(values) == 1:
+        biblioid = etree.SubElement(info, f"{{{DOCBOOK_NS}}}biblioid", attrib={"class": "isbn"})
+        set_lxml_text(
+            biblioid,
+            values[0],
+            log_context={"semantic_type": "metadata", "source": "-", "field": "isbn"},
+        )
+        return
+    biblioset = etree.SubElement(info, f"{{{DOCBOOK_NS}}}biblioset", attrib={"role": "isbns"})
+    roles = ("cloth", "electronic")
+    for index, value in enumerate(values[:4]):
+        attrs: dict[str, str] = {"class": "isbn"}
+        if index < len(roles):
+            attrs["role"] = roles[index]
+        biblioid = etree.SubElement(biblioset, f"{{{DOCBOOK_NS}}}biblioid", attrib=attrs)
+        set_lxml_text(
+            biblioid,
+            value,
+            log_context={"semantic_type": "metadata", "source": "-", "field": "isbn"},
+        )
 
 
 def apply_pdf_metadata_to_docbook_book(
@@ -194,9 +227,11 @@ def apply_pdf_metadata_to_docbook_book(
         book.insert(0, info)
 
     title = sanitize_xml_text(source.title) if source.title else None
+    subtitle = sanitize_xml_text(source.subtitle) if source.subtitle else None
     authors = [sanitize_xml_text(name) for name in (source.authors or []) if sanitize_xml_text(name)]
     publisher = sanitize_xml_text(source.publisher) if source.publisher else None
     isbn = sanitize_xml_text(source.isbn) if source.isbn else None
+    isbns = [sanitize_xml_text(v) for v in (source.isbns or []) if sanitize_xml_text(v)]
 
     has_any = bool(title or isbn or source.publication_year or authors)
     if not has_any:
@@ -209,13 +244,14 @@ def apply_pdf_metadata_to_docbook_book(
     _remove_publication_identifiers(info)
     if title:
         _set_or_create_title(info, title.strip())
-        _clear_subtitle(info)
+    if title or subtitle:
+        _set_or_clear_subtitle(info, subtitle)
     if authors:
         _replace_authorgroup(info, authors)
     _replace_publisher_biblioset(info, publisher)
     _update_copyright(info, source)
     _update_pubdate(info, source.publication_year)
-    _append_isbn(info, isbn)
+    _sync_isbns(info, isbns, isbn)
     _strip_template_marketing_from_info(info)
     _sync_book_root_id(book, isbn)
 

@@ -518,10 +518,15 @@ def build_extracted_document(
         document_type=document_type,
         publication_document_type=structure.publication_document_type,
         title=title,
+        subtitle=structure.book_subtitle if structure.publication_document_type == "book" else None,
         authors=authors,
         publisher=structure.book_publisher,
         publication_year=structure.book_year,
         isbn=structure.book_isbn,
+        isbns=list(structure.book_isbns) if structure.publication_document_type == "book" else [],
+        copyright_holder=structure.book_copyright_holder
+        if structure.publication_document_type == "book"
+        else None,
         pages=pages,
         sections=sections,
         tables=tables,

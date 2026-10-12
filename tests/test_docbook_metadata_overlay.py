@@ -101,3 +101,27 @@ def test_overlay_strips_template_publisher_links_revhistory_and_workflow_biblioi
     assert holder.strip() == "Lexington Books"
     pub = root.xpath("string(.//db:publishername)", namespaces=ns)
     assert "Rowman" in pub
+
+
+def test_overlay_sets_subtitle_and_multiple_isbns() -> None:
+    root = etree.parse(str(FIXTURE)).getroot()
+    source = SourceIdentityRecord(
+        extraction_id="x",
+        source_pdf_sha256="sha",
+        source_filename="political.pdf",
+        title="Political Poetry in the Wake of the Second Spanish Republic",
+        subtitle="Rafael Alberti, Pablo Neruda, and Nicolás Guillén",
+        authors=["Grant D. Moss"],
+        publisher="Rowman & Littlefield",
+        publication_year=2018,
+        isbn="978-1-4985-4770-3",
+        isbns=["978-1-4985-4770-3", "978-1-4985-4771-0"],
+        copyright_holder="Lexington Books",
+    )
+    apply_pdf_metadata_to_docbook_book(root, source)
+    meta = extract_docbook_book_metadata(root)
+    assert meta.subtitle and "Neruda" in meta.subtitle
+    isbn_values = [i.value for i in meta.isbns]
+    assert "978-1-4985-4770-3" in isbn_values
+    assert "978-1-4985-4771-0" in isbn_values
+    assert meta.copyright_holder == "Lexington Books"

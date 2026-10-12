@@ -150,6 +150,70 @@ def _marshall_like_book() -> ExtractionResult:
     )
 
 
+def _moss_political_poetry_title_pages() -> ExtractionResult:
+    pages = [
+        _page(
+            1,
+            [
+                _block(
+                    "p1_b0",
+                    "Political Poetry in the Wake of the Second Spanish Republic",
+                    [50, 200, 520, 240],
+                    size=22.0,
+                    bold=True,
+                ),
+                _block(
+                    "p1_b1",
+                    "Rafael Alberti, Pablo Neruda, and Nicolás Guillén",
+                    [50, 260, 520, 290],
+                    size=14.0,
+                ),
+                _block("p1_b2", "Grant D. Moss", [50, 320, 400, 345], size=12.0),
+            ],
+        ),
+        _page(
+            2,
+            [
+                _block(
+                    "p2_b0",
+                    "Published by Lexington Books\n"
+                    "An imprint of The Rowman & Littlefield Publishing Group, Inc.\n"
+                    "4501 Forbes Boulevard, Suite 200, Lanham, Maryland 20706\n"
+                    "www.rowman.com\n\n"
+                    "Copyright © 2018 by Lexington Books\n"
+                    "ISBN 978-1-4985-4770-3 (cloth : alk. paper)\n"
+                    "ISBN 978-1-4985-4771-0 (electronic)",
+                    [50, 80, 550, 400],
+                ),
+            ],
+        ),
+    ]
+    return ExtractionResult(
+        document=DocumentInfo(filename="political_poetry.pdf", page_count=len(pages), requires_ocr=False),
+        pages=pages,
+        stats=ExtractionStats(
+            total_blocks=sum(len(p.blocks) for p in pages),
+            total_lines=sum(len(b.lines) for p in pages for b in p.blocks),
+            total_chars=sum(p.text_char_count for p in pages),
+        ),
+    )
+
+
+def test_lexington_political_poetry_title_page_metadata() -> None:
+    raw = _moss_political_poetry_title_pages()
+    ctx = detect_book_document(raw)
+    assert ctx.is_book
+    assert "Second Spanish Republic" in (ctx.title or "")
+    assert "Neruda" in (ctx.subtitle or "")
+    assert "Alberti" in (ctx.subtitle or "")
+    assert ctx.author == "Grant D. Moss"
+    assert ctx.publisher == "Rowman & Littlefield"
+    assert ctx.copyright_holder == "Lexington Books"
+    assert ctx.year == 2018
+    assert len(ctx.isbns) == 2
+    assert "978-1-4985-4770-3" in ctx.isbns[0]
+
+
 def test_book_metadata_detection() -> None:
     raw = _marshall_like_book()
     ctx = detect_book_document(raw)

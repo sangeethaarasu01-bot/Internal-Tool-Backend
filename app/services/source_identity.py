@@ -17,10 +17,13 @@ class SourceIdentityRecord:
     source_pdf_sha256: str | None
     source_filename: str | None
     title: str | None = None
+    subtitle: str | None = None
     authors: list[str] = field(default_factory=list)
     publisher: str | None = None
     publication_year: int | None = None
     isbn: str | None = None
+    isbns: list[str] = field(default_factory=list)
+    copyright_holder: str | None = None
     doi: str | None = None
     page_count: int | None = None
     publication_document_type: str | None = None
@@ -116,10 +119,13 @@ def build_source_identity_from_extraction_doc(doc: dict[str, Any]) -> SourceIden
         source_pdf_sha256=doc.get("source_pdf_sha256"),
         source_filename=doc.get("original_filename") or doc.get("filename"),
         title=phase1.get("title"),
+        subtitle=phase1.get("subtitle"),
         authors=list(phase1.get("authors") or []),
         publisher=phase1.get("publisher"),
         publication_year=year_int,
         isbn=phase1.get("isbn"),
+        isbns=list(phase1.get("isbns") or []),
+        copyright_holder=phase1.get("copyright_holder"),
         doi=None,
         page_count=doc.get("page_count"),
         publication_document_type=phase1.get("publication_document_type"),

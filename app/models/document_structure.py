@@ -115,7 +115,10 @@ class DocumentStructureResult(BaseModel):
     semantic: SemanticDocument | None = None
     publication_document_type: PublicationDocumentType = "research_paper"
     book_title: str | None = None
+    book_subtitle: str | None = None
     book_author: str | None = None
     book_publisher: str | None = None
     book_year: int | None = None
     book_isbn: str | None = None
+    book_isbns: list[str] = Field(default_factory=list)
+    book_copyright_holder: str | None = None
