@@ -13,10 +13,18 @@ from app.utils.text_utils import (
 def test_dehyphenate_line_breaks_joins_split_words() -> None:
     assert dehyphenate_line_breaks("instrumen- tal means") == "instrumental means"
     assert dehyphenate_line_breaks("quality assess- ment of tea") == "quality assessment of tea"
+    assert (
+        dehyphenate_line_breaks(
+            "myths surrounding political com-mitment and poetry"
+        )
+        == "myths surrounding political commitment and poetry"
+    )
+    assert dehyphenate_line_breaks("instrumen-tal means") == "instrumental means"
 
 
 def test_dehyphenate_line_breaks_preserves_intentional_hyphens() -> None:
     assert dehyphenate_line_breaks("t-Distributed stochastic") == "t-Distributed stochastic"
+    assert dehyphenate_line_breaks("self-aware poets") == "self-aware poets"
 
 
 def test_merge_block_texts_joins_drop_cap_and_word() -> None:

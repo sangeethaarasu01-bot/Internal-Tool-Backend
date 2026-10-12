@@ -5,6 +5,40 @@ from __future__ import annotations
 import re
 
 _LINE_BREAK_HYPHEN_RE = re.compile(r"(\w)-\s+([a-z]\w*)")
+# PDF line breaks sometimes glue the suffix with no space: ``com-mitment``.
+_TIGHT_LINE_BREAK_HYPHEN_RE = re.compile(r"\b([a-z]{2,})-([a-z]{2,})\b")
+_COMPOUND_HYPHEN_PREFIXES = frozenset(
+    {
+        "all",
+        "anti",
+        "co",
+        "counter",
+        "cross",
+        "de",
+        "ex",
+        "extra",
+        "intra",
+        "inter",
+        "mid",
+        "multi",
+        "neo",
+        "non",
+        "over",
+        "post",
+        "pre",
+        "pro",
+        "re",
+        "self",
+        "semi",
+        "sub",
+        "super",
+        "trans",
+        "ultra",
+        "under",
+        "vice",
+        "well",
+    }
+)
 
 
 def normalize_text(text: str) -> str:
@@ -22,7 +56,15 @@ def dehyphenate_line_breaks(text: str) -> str:
     """Join words broken across PDF lines (``instrumen- tal`` → ``instrumental``)."""
     if not text:
         return ""
-    return _LINE_BREAK_HYPHEN_RE.sub(r"\1\2", text)
+    cleaned = _LINE_BREAK_HYPHEN_RE.sub(r"\1\2", text)
+
+    def _join_tight(match: re.Match[str]) -> str:
+        left, right = match.group(1), match.group(2)
+        if left in _COMPOUND_HYPHEN_PREFIXES:
+            return match.group(0)
+        return f"{left}{right}"
+
+    return _TIGHT_LINE_BREAK_HYPHEN_RE.sub(_join_tight, cleaned)
 
 
 _WRAP_JOIN_STOPWORDS = frozenset(

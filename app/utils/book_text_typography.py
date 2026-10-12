@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-_HYPHEN_BREAK_RE = re.compile(r"(\w)-\s+(\w)")
+from app.utils.text_utils import dehyphenate_line_breaks
 _TRAILING_PAGE_NUMBER_RE = re.compile(r"\.\s+\d{1,4}\s*$")
 _TRAILING_PAGE_NUMBER_BEFORE_PERIOD_RE = re.compile(r"(\w)\s+\d{1,4}\s*\.?\s*$")
 _INC_ABBREV_RE = re.compile(r"\bInc\b(?!\.)")
@@ -49,7 +49,7 @@ def apply_book_typography(text: str) -> str:
     if not text:
         return ""
     cleaned = text.replace("\u00ad", "")
-    cleaned = _HYPHEN_BREAK_RE.sub(r"\1\2", cleaned)
+    cleaned = dehyphenate_line_breaks(cleaned)
     cleaned = _STUCK_WORD_BOUNDARY_RE.sub(" ", cleaned)
     cleaned = _strip_trailing_page_numbers(cleaned)
     cleaned = cleaned.replace("\u2019", "'").replace("&#x27;", "'").replace("&#39;", "'")
