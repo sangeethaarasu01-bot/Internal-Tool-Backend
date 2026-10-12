@@ -61,7 +61,16 @@ def _inline_elements(node: dict[str, Any]) -> list[MappedInlineElement]:
         if item_type == "inline_math":
             elements.append(MappedInlineElement(type="inline_math", latex=item.get("latex")))
         else:
-            elements.append(MappedInlineElement(type="text", value=item.get("value")))
+            elements.append(
+                MappedInlineElement(
+                    type="text",
+                    value=item.get("value"),
+                    bold=bool(item.get("bold")),
+                    italic=bool(item.get("italic")),
+                    superscript=bool(item.get("superscript")),
+                    subscript=bool(item.get("subscript")),
+                )
+            )
     return elements
 
 

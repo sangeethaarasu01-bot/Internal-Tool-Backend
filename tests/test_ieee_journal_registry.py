@@ -15,3 +15,13 @@ def test_lookup_tce_from_title() -> None:
     journal = lookup_ieee_journal(journal_title="IEEE Transactions on Consumer Electronics")
     assert journal is not None
     assert journal.acronym == "TCE"
+
+
+def test_lookup_jssc_from_doi_and_filename() -> None:
+    journal = lookup_ieee_journal(
+        doi="10.1109/JSSC.2026.3657757",
+        source_filename="jssc-qin-3657757-proof.pdf1.pdf",
+    )
+    assert journal is not None
+    assert journal.acronym == "JSSC"
+    assert journal.coden == "IJSCBC"

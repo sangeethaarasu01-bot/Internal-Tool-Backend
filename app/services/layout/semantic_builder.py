@@ -138,9 +138,17 @@ def _element(
     resolved_detection_reason = detection_reason
     if drop_cap_letter:
         resolved_detection_reason = f"drop_cap:{drop_cap_letter}"
+    from app.utils.span_inline import inline_elements_from_source_blocks
+
+    inline_elements = inline_elements_from_source_blocks(
+        None,
+        _source_ids(blocks),
+        fallback_text=text,
+    )
     return build_ir_node(
         semantic_type,
         text,
+        inline_elements=inline_elements,
         source_block_ids=_source_ids(blocks),
         page_numbers=pages,
         bbox=bbox,
@@ -588,6 +596,9 @@ def build_semantic_document(
     include_tagged_output: bool = True,
     book_ctx: BookExtractionContext | None = None,
 ) -> SemanticDocument:
+    from app.utils.span_inline import set_extraction_raw_for_inline
+
+    set_extraction_raw_for_inline(raw)
     book_mode = bool(book_ctx and book_ctx.is_book)
     body_font = _median_body_size(processed)
     title_threshold = _title_font_threshold(processed)

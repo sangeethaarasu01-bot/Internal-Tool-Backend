@@ -35,6 +35,10 @@ class MappedInlineElement(BaseModel):
     type: str
     value: str | None = None
     latex: str | None = None
+    bold: bool = False
+    italic: bool = False
+    superscript: bool = False
+    subscript: bool = False
 
 
 class MappedSemanticNode(BaseModel):

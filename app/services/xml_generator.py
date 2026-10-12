@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 from lxml import etree
 
-from app.models.semantic_mapping import MappedSemanticNode, SemanticMappingBody
+from app.models.semantic_mapping import MappedInlineElement, MappedSemanticNode, SemanticMappingBody
 from app.utils.math_latex import (
     display_formula_id,
     format_display_math_for_ieee,
@@ -158,8 +158,12 @@ def _split_inline_text_segments(text: str) -> list[tuple[str, str]]:
     return segments if segments else [("text", text)]
 
 
-def _inline_segments_from_node(mapped: MappedSemanticNode) -> list[tuple[str, str]]:
-    segments: list[tuple[str, str]] = []
+def _inline_has_style(element: MappedInlineElement) -> bool:
+    return bool(element.bold or element.italic or element.superscript or element.subscript)
+
+
+def _inline_segments_from_node(mapped: MappedSemanticNode) -> list[tuple[str, str | MappedInlineElement]]:
+    segments: list[tuple[str, str | MappedInlineElement]] = []
     if mapped.elements:
         for element in mapped.elements:
             if element.type == "inline_math" and element.latex:
@@ -168,7 +172,10 @@ def _inline_segments_from_node(mapped: MappedSemanticNode) -> list[tuple[str, st
                 else:
                     segments.append(("latex", element.latex))
             elif element.value:
-                segments.extend(_split_inline_text_segments(element.value))
+                if _inline_has_style(element):
+                    segments.append(("styled", element))
+                else:
+                    segments.extend(_split_inline_text_segments(element.value))
         return segments
     return _split_inline_text_segments(_text_of(mapped))
 
@@ -231,14 +238,44 @@ def _append_text_with_bibliographic_xrefs(
     return last
 
 
+def _append_styled_inline_element(
+    parent: etree._Element,
+    element: MappedInlineElement,
+    ctx: dict[str, str],
+    last: etree._Element | None,
+) -> etree._Element | None:
+    value = element.value or ""
+    if element.superscript:
+        sup = etree.SubElement(parent, "sup")
+        set_lxml_text(sup, value, log_context={**ctx, "field": "inline.sup"})
+        return sup
+    if element.subscript:
+        sub = etree.SubElement(parent, "sub")
+        set_lxml_text(sub, value, log_context={**ctx, "field": "inline.sub"})
+        return sub
+    content_parent: etree._Element = parent
+    last_out = last
+    if element.bold:
+        content_parent = etree.SubElement(parent, "bold")
+        last_out = None
+    if element.italic:
+        italic_el = etree.SubElement(content_parent, "italic")
+        content_parent = italic_el
+        last_out = None
+    return _append_text_with_bibliographic_xrefs(content_parent, value, ctx, last_out)
+
+
 def _append_inline_segments(
     parent: etree._Element,
-    segments: list[tuple[str, str]],
+    segments: list[tuple[str, str | MappedInlineElement]],
     ctx: dict[str, str],
 ) -> None:
     last: etree._Element | None = None
     for segment_type, segment_value in segments:
-        if segment_type == "text":
+        if segment_type == "styled" and isinstance(segment_value, MappedInlineElement):
+            last = _append_styled_inline_element(parent, segment_value, ctx, last)
+            continue
+        if segment_type == "text" and isinstance(segment_value, str):
             last = _append_text_with_bibliographic_xrefs(parent, segment_value, ctx, last)
             continue
         if segment_type == "r_squared":
@@ -1527,6 +1564,7 @@ def generate_jats_xml(
         ir=ir,
         mapping=body,
         source=source,
+        source_filename=source_filename,
     )
     apply_jats_metadata_overlay(
         article,

@@ -8,7 +8,15 @@ from typing import Any
 
 from lxml import etree
 
-from app.constants.ieee_journals import IeeeJournalMeta, lookup_ieee_journal
+from app.constants.ieee_journals import IeeeJournalMeta, lookup_ieee_journal, match_journal_in_text
+from app.services.journal_metadata_resolver import (
+    JournalResolutionResult,
+    clear_unverified_journal_identifiers,
+    collect_journal_evidence,
+    read_template_journal_meta,
+    resolve_journal_metadata,
+    validate_against_template,
+)
 from app.models.semantic_mapping import MappedSemanticNode, SemanticMappingBody
 from app.services.source_identity import SourceIdentityRecord
 from app.utils.xml_text import set_lxml_text
@@ -20,11 +28,6 @@ DATE_HISTORY_RE = re.compile(
 )
 VOLUME_LINE_RE = re.compile(r"VOLUME\s+(\d+)\s*,\s*(\d{4})", re.I)
 ARTICLE_NUM_RE = re.compile(r"(\d{7})")
-IEEE_ACCESS_RE = re.compile(r"\bIEEE\s+Access\b", re.I)
-IEEE_TCE_RE = re.compile(
-    r"consumer\s+electronics|ieee\s+trans(?:actions)?\.?\s+on\s+consumer|10\.1109/tce\.",
-    re.I,
-)
 NUMBERED_AFF_RE = re.compile(r"(?<!\d)(\d)(?=[A-Za-z])")
 NUMBERED_EQUATION_RE = re.compile(r"(?<![\d.])\((\d{1,3})\)(?![\d])")
 
@@ -44,6 +47,8 @@ class JatsMetadataOverlayResult:
     ref_count: int | None = None
     page_count: int | None = None
     applied_fields: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    journal_evidence: list[tuple[str, str]] = field(default_factory=list)
 
 
 def _header_text(phase1: dict[str, Any] | None) -> str:
@@ -85,12 +90,20 @@ def _parse_history(header: str) -> dict[str, str]:
 def _parse_doi(header: str) -> str | None:
     abstract_pos = header.upper().find("ABSTRACT")
     search_region = header[:abstract_pos] if abstract_pos > 0 else header[:8000]
-    for match in DOI_RE.finditer(search_region):
-        candidate = match.group(0).rstrip(".;,)")
-        if "ACCESS" in candidate.upper() or "TCE" in candidate.upper() or "TIA" in candidate.upper():
-            return candidate
     match = DOI_RE.search(search_region)
     return match.group(0).rstrip(".;,)") if match else None
+
+
+def _effective_source_filename(
+    source: SourceIdentityRecord | None,
+    phase1: dict[str, Any] | None,
+    source_filename: str | None = None,
+) -> str | None:
+    if source and source.source_filename:
+        return source.source_filename
+    if phase1 and phase1.get("source_filename"):
+        return str(phase1["source_filename"])
+    return source_filename
 
 
 def _infer_article_number(source_filename: str | None, phase1: dict[str, Any] | None) -> str | None:
@@ -110,23 +123,18 @@ def _infer_manuscript_id(
     header: str,
     source_filename: str | None,
     article_number: str | None,
+    journal: IeeeJournalMeta | None = None,
 ) -> str | None:
     ms = re.search(r"\b([A-Z]{2,10}-\d{4}-\d{2}-\d{3,6})\b", header[:6000])
     if ms:
         return ms.group(1)
-    if IEEE_ACCESS_RE.search(header) or (source_filename and "access-" in source_filename.lower()):
+    if journal and article_number:
         year = None
         vol = VOLUME_LINE_RE.search(header)
         if vol:
             year = vol.group(2)
-        if article_number and year:
-            return f"ACCESS-{year}-{article_number}"
-    if IEEE_TCE_RE.search(header) or (
-        source_filename and re.search(r"(?:^|[-_])tce[-_]", source_filename.lower())
-    ):
-        ms = re.search(r"\b(TCE-\d{4}-\d{2}-\d{3,6})\b", header[:8000], re.I)
-        if ms:
-            return ms.group(1).upper()
+        if year:
+            return f"{journal.acronym}-{year}-{article_number}"
     return None
 
 
@@ -135,6 +143,7 @@ def _infer_doi(
     publication_year: int | None,
     article_number: str | None,
     source_filename: str | None,
+    journal: IeeeJournalMeta | None = None,
 ) -> str | None:
     parsed = _parse_doi(header)
     if parsed:
@@ -142,35 +151,13 @@ def _infer_doi(
     year = publication_year or 2026
     if not article_number:
         return None
-    if IEEE_ACCESS_RE.search(header) or (source_filename and "access-" in source_filename.lower()):
-        return f"10.1109/ACCESS.{year}.{article_number}"
-    if IEEE_TCE_RE.search(header) or (
-        source_filename and re.search(r"(?:^|[-_])tce[-_]", source_filename.lower())
-    ):
-        return f"10.1109/TCE.{year}.{article_number}"
-    return None
-
-
-def _journal_title_from_pdf_signals(
-    header: str,
-    source_filename: str | None = None,
-) -> str | None:
-    """PDF-first journal title; overrides template / mis-parsed IR headers."""
-    parsed_doi = _parse_doi(header)
-    if parsed_doi:
-        from_doi = lookup_ieee_journal(doi=parsed_doi)
-        if from_doi:
-            return from_doi.title
-    if IEEE_TCE_RE.search(header):
-        return "IEEE Transactions on Consumer Electronics"
-    if IEEE_ACCESS_RE.search(header):
-        return "IEEE Access"
-    if source_filename:
-        lowered = source_filename.lower()
-        if re.search(r"(?:^|[-_])tce[-_]", lowered):
-            return "IEEE Transactions on Consumer Electronics"
-        if "access-" in lowered:
-            return "IEEE Access"
+    resolved = journal or match_journal_in_text(header) or lookup_ieee_journal(
+        source_filename=source_filename,
+        doi=None,
+        journal_title=None,
+    )
+    if resolved:
+        return f"10.1109/{resolved.acronym}.{year}.{article_number}"
     return None
 
 
@@ -178,28 +165,16 @@ def _detect_journal_title(
     header: str,
     ir: dict[str, Any] | None,
     source_filename: str | None = None,
+    doi: str | None = None,
 ) -> str | None:
-    from_pdf = _journal_title_from_pdf_signals(header, source_filename)
-    if from_pdf:
-        return from_pdf
-
-    front = (ir or {}).get("front") or {}
-    journal = front.get("journal_header")
-    if isinstance(journal, dict):
-        text = journal.get("text") or ""
-        for item in journal.get("elements") or []:
-            text += str(item.get("value") or "")
-        text = text.strip()
-        if text:
-            mapped = lookup_ieee_journal(journal_title=text)
-            if mapped:
-                return mapped.title
-            if "consumer electronics" in text.lower():
-                return "IEEE Transactions on Consumer Electronics"
-            return text
-    if VOLUME_LINE_RE.search(header) and source_filename and "access-" in source_filename.lower():
-        return "IEEE Access"
-    return None
+    evidence = collect_journal_evidence(
+        header_text=header,
+        ir=ir,
+        source_filename=source_filename,
+        doi=doi,
+    )
+    resolution = resolve_journal_metadata(evidence)
+    return resolution.journal_title
 
 
 def _count_numbered_equations(text: str) -> int | None:
@@ -256,6 +231,7 @@ def build_jats_metadata_overlay(
     ir: dict[str, Any] | None,
     mapping: SemanticMappingBody,
     source: SourceIdentityRecord | None = None,
+    source_filename: str | None = None,
 ) -> JatsMetadataOverlayResult:
     header = _phase1_lead_text(phase1)
     stats = _phase1_stats(phase1)
@@ -267,20 +243,41 @@ def build_jats_metadata_overlay(
         except (TypeError, ValueError):
             publication_year = None
 
-    article_number = _infer_article_number(
-        source.source_filename if source else None,
-        phase1,
+    effective_filename = _effective_source_filename(source, phase1, source_filename)
+    article_number = _infer_article_number(effective_filename, phase1)
+    parsed_doi = _parse_doi(header)
+    evidence = collect_journal_evidence(
+        header_text=header,
+        ir=ir,
+        source_filename=effective_filename,
+        doi=parsed_doi,
     )
-    journal_title = _detect_journal_title(
+    resolution = resolve_journal_metadata(evidence)
+    journal = resolution.journal
+    journal_title = resolution.journal_title
+    doi = _infer_doi(
         header,
-        ir,
-        source.source_filename if source else None,
+        publication_year,
+        article_number,
+        effective_filename,
+        journal=journal,
     )
-    doi = _infer_doi(header, publication_year, article_number, source.source_filename if source else None)
+    if doi and not journal:
+        resolution = resolve_journal_metadata(
+            collect_journal_evidence(
+                header_text=header,
+                ir=ir,
+                source_filename=effective_filename,
+                doi=doi,
+            )
+        )
+        journal = resolution.journal
+        journal_title = resolution.journal_title
     manuscript_id = _infer_manuscript_id(
         header,
-        source.source_filename if source else None,
+        effective_filename,
         article_number,
+        journal=journal,
     )
 
     fig_count = stats.get("figure_count") or stats.get("figures_extracted")
@@ -301,14 +298,6 @@ def build_jats_metadata_overlay(
     elif source and source.page_count:
         page_count = source.page_count
 
-    journal = lookup_ieee_journal(
-        journal_title=journal_title,
-        doi=doi,
-        source_filename=source.source_filename if source else None,
-    )
-    if journal and not journal_title:
-        journal_title = journal.title
-
     return JatsMetadataOverlayResult(
         journal=journal,
         journal_title=journal_title,
@@ -320,6 +309,8 @@ def build_jats_metadata_overlay(
         equation_count=int(equation_count) if equation_count is not None else None,
         ref_count=ref_count or None,
         page_count=int(page_count) if page_count is not None else None,
+        warnings=list(resolution.warnings),
+        journal_evidence=list(resolution.evidence),
     )
 
 
@@ -570,15 +561,37 @@ def apply_jats_metadata_overlay(
     header = _header_text(phase1)
     history = _parse_history(header)
 
+    template_journal = read_template_journal_meta(article)
+    resolution = JournalResolutionResult(
+        journal=overlay.journal,
+        journal_title=overlay.journal_title,
+        evidence=list(overlay.journal_evidence),
+        warnings=list(overlay.warnings),
+    )
+    validate_against_template(resolution, template_journal)
+    overlay.warnings = resolution.warnings
+
+    front_journal_meta = front.find("journal-meta") if front is not None else None
     if overlay.journal:
         _apply_journal_meta(article, overlay.journal)
         applied.append("journal-meta")
-    elif overlay.journal_title:
-        _apply_journal_meta(
-            article,
-            lookup_ieee_journal(journal_title=overlay.journal_title, doi=overlay.doi),
+    elif overlay.journal_title and front_journal_meta is not None:
+        clear_unverified_journal_identifiers(front_journal_meta)
+        title_group = front_journal_meta.find("journal-title-group")
+        if title_group is None:
+            title_group = etree.SubElement(front_journal_meta, "journal-title-group")
+        journal_title_el = title_group.find("journal-title")
+        if journal_title_el is None:
+            journal_title_el = etree.SubElement(title_group, "journal-title")
+        set_lxml_text(
+            journal_title_el,
+            overlay.journal_title,
+            log_context={"semantic_type": "metadata", "source": "-", "field": "journal-title"},
         )
-        applied.append("journal-title")
+        applied.append("journal-title-only")
+    elif front_journal_meta is not None:
+        clear_unverified_journal_identifiers(front_journal_meta)
+        applied.append("journal-meta-cleared")
 
     if overlay.doi:
         _set_article_id(article_meta, "doi", overlay.doi)

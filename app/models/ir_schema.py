@@ -43,6 +43,10 @@ class IRTextElement(BaseModel):
 
     type: Literal["text"] = IR_INLINE_TEXT
     value: str
+    bold: bool = False
+    italic: bool = False
+    superscript: bool = False
+    subscript: bool = False
 
 
 class IRInlineMathElement(BaseModel):

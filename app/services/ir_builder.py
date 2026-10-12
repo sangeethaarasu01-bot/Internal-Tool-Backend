@@ -154,6 +154,7 @@ def build_ir_node(
     semantic_type: str,
     text: str,
     *,
+    inline_elements: list[IRTextElement | IRInlineMathElement] | None = None,
     source_block_ids: Sequence[str] | None = None,
     page_numbers: Sequence[int] | None = None,
     bbox: list[float] | None = None,
@@ -206,7 +207,10 @@ def build_ir_node(
             detection_reason=detection_reason,
         )
 
-    elements = parse_inline_elements(normalized) if normalized else []
+    if inline_elements is not None:
+        elements = inline_elements
+    else:
+        elements = parse_inline_elements(normalized) if normalized else []
 
     return IRNode(
         type=ir_type,
