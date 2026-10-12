@@ -8,6 +8,7 @@ from lxml import etree
 
 from app.utils.person_name import split_person_name
 from app.utils.xml_helpers import iter_element_children, xml_local_name
+from app.utils.xml_text import set_lxml_attr, set_lxml_text
 
 XLINK_NS = "http://www.w3.org/1999/xlink"
 XML_NS = "http://www.w3.org/XML/1998/namespace"
@@ -20,7 +21,7 @@ def snapshot_element_attributes(element: etree._Element) -> dict[str, str]:
 def apply_element_attributes(element: etree._Element, attributes: dict[str, str]) -> None:
     for key, value in attributes.items():
         if value is not None:
-            element.set(key, value)
+            set_lxml_attr(element, key, value)
 
 
 @dataclass
@@ -56,10 +57,10 @@ def _set_personname_display_name(personname: etree._Element, display_name: str, 
     personname.text = None
     if given:
         first = etree.SubElement(personname, f"{{{docbook_ns}}}firstname")
-        first.text = given
+        set_lxml_text(first, given)
     if surname:
         last = etree.SubElement(personname, f"{{{docbook_ns}}}surname")
-        last.text = surname
+        set_lxml_text(last, surname)
 
 
 def _new_author_element(

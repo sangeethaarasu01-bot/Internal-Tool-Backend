@@ -10,8 +10,10 @@ from lxml import etree
 
 from app.services.source_identity import SourceIdentityRecord
 from app.services.template_format import DOCBOOK_NS
+from app.utils.docbook_sortas import apply_sortas_to_title_element
 from app.utils.docbook_template_attrs import update_authorgroup_authors
 from app.utils.xml_helpers import iter_element_children, xml_local_name
+from app.utils.xml_text import sanitize_xml_text, set_lxml_text
 
 logger = logging.getLogger(__name__)
 
@@ -30,9 +32,9 @@ class DocBookMetadataOverlayResult:
 
 
 def _set_text(element: etree._Element, text: str) -> None:
-    element.text = text
     for child in element:
         element.remove(child)
+    set_lxml_text(element, text, log_context={"semantic_type": "metadata", "source": "-", "field": "docbook"})
 
 
 def _remove_publication_identifiers(info: etree._Element) -> None:
@@ -54,7 +56,9 @@ def _set_or_create_title(info: etree._Element, title: str) -> None:
     if title_el is None:
         title_el = etree.Element(f"{{{DOCBOOK_NS}}}title")
         info.insert(0, title_el)
-    _set_text(title_el, title)
+    stripped = title.strip()
+    _set_text(title_el, stripped)
+    apply_sortas_to_title_element(title_el, stripped)
 
 
 def _clear_subtitle(info: etree._Element) -> None:
@@ -64,12 +68,14 @@ def _clear_subtitle(info: etree._Element) -> None:
 
 
 def _replace_authorgroup(info: etree._Element, authors: list[str]) -> None:
-    if not authors:
+    people = [name.strip() for name in authors if name.strip()]
+    people = [name for name in people if not _looks_like_imprint_name(name)]
+    if not people:
         for child in list(iter_element_children(info)):
             if xml_local_name(child) == "authorgroup":
                 info.remove(child)
         return
-    update_authorgroup_authors(info, list(authors), docbook_ns=DOCBOOK_NS)
+    update_authorgroup_authors(info, people, docbook_ns=DOCBOOK_NS)
 
 
 def _looks_like_imprint_name(name: str) -> bool:
@@ -163,7 +169,7 @@ def _append_isbn(info: etree._Element, isbn: str | None) -> None:
     if not isbn:
         return
     biblioid = etree.SubElement(info, f"{{{DOCBOOK_NS}}}biblioid", attrib={"class": "isbn"})
-    biblioid.text = isbn.strip()
+    set_lxml_text(biblioid, isbn.strip(), log_context={"semantic_type": "metadata", "source": "-", "field": "isbn"})
 
 
 def apply_pdf_metadata_to_docbook_book(
@@ -187,7 +193,12 @@ def apply_pdf_metadata_to_docbook_book(
         info = etree.SubElement(book, f"{{{DOCBOOK_NS}}}info")
         book.insert(0, info)
 
-    has_any = bool(source.title or source.isbn or source.publication_year or source.authors)
+    title = sanitize_xml_text(source.title) if source.title else None
+    authors = [sanitize_xml_text(name) for name in (source.authors or []) if sanitize_xml_text(name)]
+    publisher = sanitize_xml_text(source.publisher) if source.publisher else None
+    isbn = sanitize_xml_text(source.isbn) if source.isbn else None
+
+    has_any = bool(title or isbn or source.publication_year or authors)
     if not has_any:
         result.warnings.append(
             "PDF metadata (title/ISBN/year/authors) was not extracted reliably; "
@@ -196,17 +207,17 @@ def apply_pdf_metadata_to_docbook_book(
         return result
 
     _remove_publication_identifiers(info)
-    if source.title:
-        _set_or_create_title(info, source.title.strip())
+    if title:
+        _set_or_create_title(info, title.strip())
         _clear_subtitle(info)
-    if source.authors:
-        _replace_authorgroup(info, list(source.authors))
-    _replace_publisher_biblioset(info, source.publisher)
+    if authors:
+        _replace_authorgroup(info, authors)
+    _replace_publisher_biblioset(info, publisher)
     _update_copyright(info, source)
     _update_pubdate(info, source.publication_year)
-    _append_isbn(info, source.isbn)
+    _append_isbn(info, isbn)
     _strip_template_marketing_from_info(info)
-    _sync_book_root_id(book, source.isbn)
+    _sync_book_root_id(book, isbn)
 
     result.applied = True
     logger.info(

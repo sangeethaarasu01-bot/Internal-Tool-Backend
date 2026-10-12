@@ -41,6 +41,25 @@ def test_overlay_replaces_title_isbn_and_keeps_chapter_structure() -> None:
     assert holder is not None and (holder.text or "").strip() == "Jane Editor, John Writer"
 
 
+def test_overlay_strips_control_characters_from_pdf_title() -> None:
+    root = etree.parse(str(FIXTURE)).getroot()
+    source = SourceIdentityRecord(
+        extraction_id="x",
+        source_pdf_sha256="sha",
+        source_filename="book.pdf",
+        title="Political\x06 Poetry",
+        authors=["Grant\x07 Moss"],
+        publication_year=2018,
+        isbn="978-1-4985-4770-3",
+    )
+    result = apply_pdf_metadata_to_docbook_book(root, source)
+    assert result.applied
+    xml = etree.tostring(root, encoding="unicode")
+    assert "\x06" not in xml and "\x07" not in xml
+    meta = extract_docbook_book_metadata(root)
+    assert meta.title == "Political Poetry"
+
+
 def test_overlay_strips_template_publisher_links_revhistory_and_workflow_biblioids() -> None:
     from app.services.template_format import DOCBOOK_NS
 

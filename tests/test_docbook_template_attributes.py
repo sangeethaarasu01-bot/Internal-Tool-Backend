@@ -52,7 +52,10 @@ def test_title_sortas_preserved_when_pdf_title_applied() -> None:
     )
     apply_pdf_metadata_to_docbook_book(root, source)
     title = root.xpath("db:info/db:title", namespaces=NS)[0]
-    assert title.get("sortas") == "Political and Spiritual"
+    assert title.get("sortas") != "Political and Spiritual"
+    sortas = title.get("sortas") or ""
+    assert ":" not in sortas
+    assert "Political Poetry" in sortas
     assert title.get("{http://www.w3.org/XML/1998/namespace}id") == "title-template"
     assert "Political Poetry" in (title.text or "")
 
