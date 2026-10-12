@@ -224,9 +224,14 @@ class ExtractedDocument(BaseModel):
     subtitle: str | None = None
     authors: list[str] = Field(default_factory=list)
     publisher: str | None = None
+    publisher_imprint: str | None = None
+    publisher_trade_name: str | None = None
+    author_blurb: str | None = None
+    publisher_addresses: list[dict[str, str | None]] = Field(default_factory=list)
     publication_year: int | None = None
     isbn: str | None = None
     isbns: list[str] = Field(default_factory=list)
+    isbn_roles: list[tuple[str, str]] = Field(default_factory=list)
     copyright_holder: str | None = None
     pages: list[ExtractedPage] = Field(default_factory=list)
     sections: list[ExtractedSection] = Field(default_factory=list)

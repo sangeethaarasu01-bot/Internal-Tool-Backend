@@ -521,9 +521,20 @@ def build_extracted_document(
         subtitle=structure.book_subtitle if structure.publication_document_type == "book" else None,
         authors=authors,
         publisher=structure.book_publisher,
+        publisher_imprint=structure.book_publisher_imprint
+        if structure.publication_document_type == "book"
+        else None,
+        publisher_trade_name=structure.book_publisher_trade_name
+        if structure.publication_document_type == "book"
+        else None,
+        author_blurb=structure.book_author_blurb if structure.publication_document_type == "book" else None,
+        publisher_addresses=list(structure.book_publisher_addresses)
+        if structure.publication_document_type == "book"
+        else [],
         publication_year=structure.book_year,
         isbn=structure.book_isbn,
         isbns=list(structure.book_isbns) if structure.publication_document_type == "book" else [],
+        isbn_roles=list(structure.book_isbn_roles) if structure.publication_document_type == "book" else [],
         copyright_holder=structure.book_copyright_holder
         if structure.publication_document_type == "book"
         else None,

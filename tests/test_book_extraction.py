@@ -199,19 +199,83 @@ def _moss_political_poetry_title_pages() -> ExtractionResult:
     )
 
 
+def test_title_page_on_page_four_after_copyright() -> None:
+    pages = [
+        _page(1, [_block("p1", "Copyright © 2018", [50, 80, 400, 100])]),
+        _page(2, [_block("p2", "ISBN 978-1-4985-4770-3", [50, 80, 400, 100])]),
+        _page(3, [_block("p3", "Published by Lexington Books", [50, 80, 400, 100])]),
+        _page(
+            4,
+            [
+                _block(
+                    "p4_t",
+                    "Political Poetry in the Wake\nof the Second Spanish Republic",
+                    [50, 200, 520, 260],
+                    size=22.0,
+                ),
+                _block(
+                    "p4_s",
+                    "Rafael Alberti, Pablo Neruda, and Nicolás Guillén",
+                    [50, 270, 520, 300],
+                    size=14.0,
+                ),
+                _block("p4_a", "Grant D. Moss", [50, 320, 400, 345], size=12.0),
+            ],
+        ),
+    ]
+    raw = ExtractionResult(
+        document=DocumentInfo(filename="p4_title.pdf", page_count=4, requires_ocr=False),
+        pages=pages,
+        stats=ExtractionStats(total_blocks=5, total_lines=5, total_chars=200),
+    )
+    from app.services.layout.book_metadata import extract_title_page_triplet
+
+    title, subtitle, author = extract_title_page_triplet(raw)
+    assert "Second Spanish Republic" in (title or "")
+    assert "Wake" in (title or "")
+    assert "Neruda" in (subtitle or "")
+    assert author == "Grant D. Moss"
+
+
+def test_author_name_from_about_the_author_blurb() -> None:
+    from app.services.layout.book_author_bio import extract_author_name_from_about_blurb
+
+    tail_page = _page(
+        200,
+        [
+            _block("about", "About the Author", [50, 100, 200, 120], bold=True),
+            _block(
+                "bio",
+                "Grant D. Moss is an Associate Professor of Spanish at the University of Utah. "
+                "He has published widely on modern Iberian poetry.",
+                [50, 140, 550, 220],
+            ),
+        ],
+    )
+    raw = ExtractionResult(
+        document=DocumentInfo(filename="bio.pdf", page_count=200, requires_ocr=False),
+        pages=[tail_page],
+        stats=ExtractionStats(total_blocks=2, total_lines=2, total_chars=120),
+    )
+    assert extract_author_name_from_about_blurb(raw) == "Grant D. Moss"
+
+
 def test_lexington_political_poetry_title_page_metadata() -> None:
     raw = _moss_political_poetry_title_pages()
     ctx = detect_book_document(raw)
     assert ctx.is_book
-    assert "Second Spanish Republic" in (ctx.title or "")
+    assert ctx.title == "Political Poetry in the Wake of the Second Spanish Republic"
     assert "Neruda" in (ctx.subtitle or "")
     assert "Alberti" in (ctx.subtitle or "")
     assert ctx.author == "Grant D. Moss"
-    assert ctx.publisher == "Rowman & Littlefield"
+    assert ctx.publisher_imprint == "Lexington Books"
+    assert ctx.publisher and "Rowman" in ctx.publisher and "Littlefield" in ctx.publisher
+    assert any(addr.street and "Forbes" in addr.street for addr in ctx.publisher_addresses)
     assert ctx.copyright_holder == "Lexington Books"
     assert ctx.year == 2018
     assert len(ctx.isbns) == 2
-    assert "978-1-4985-4770-3" in ctx.isbns[0]
+    assert ctx.isbn == "978-1-4985-4770-3"
+    assert ("978-1-4985-4770-3", "hardback") in ctx.isbn_roles
 
 
 def test_book_metadata_detection() -> None:
@@ -296,7 +360,7 @@ def test_title_page_fallback_strips_edition() -> None:
     # Remove CIP from page 2 so title page strategy is exercised.
     raw.pages[1].blocks[0].text = "ISBN 978-1-4758-0660-1\n© 2014 Rowman & Littlefield."
     title = extract_title_from_title_page(raw)
-    assert title == "Overcoming Student Apathy: Succeeding with All Learners"
+    assert title == "Overcoming Student Apathy"
 
 
 def test_extract_book_title_priority_chain() -> None:

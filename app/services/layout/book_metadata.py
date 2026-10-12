@@ -9,6 +9,19 @@ from typing import Literal
 from app.models.extraction import ExtractionResult
 from app.pipeline.phase1.text_fidelity import join_ordered_block_text
 from app.services.layout.semantic_patterns import normalize_text
+from app.services.layout.book_author_bio import (
+    extract_about_the_author_blurb,
+    extract_author_name_from_about_blurb,
+)
+from app.services.layout.book_publisher_address import (
+    PublisherAddress,
+    extract_publisher_addresses,
+)
+from app.utils.isbn_selection import (
+    extract_isbn_entries,
+    role_from_isbn_qualifier,
+    select_primary_isbn,
+)
 
 PublicationDocumentType = Literal["research_paper", "book", "review", "unknown"]
 
@@ -25,7 +38,7 @@ COPYRIGHT_BY_HOLDER_RE = re.compile(
     re.IGNORECASE,
 )
 IMPRINT_OF_RE = re.compile(
-    r"An imprint of\s+(?:The\s+)?([^\n.]+?)(?:\s+Publish|\s+Group|\n|\.|$)",
+    r"An imprint of\s+(.+?)(?:\s*\n|$)",
     re.IGNORECASE,
 )
 CATALOG_LINE_RE = re.compile(
@@ -118,9 +131,14 @@ class BookExtractionContext:
     subtitle: str | None = None
     author: str | None = None
     publisher: str | None = None
+    publisher_imprint: str | None = None
+    publisher_trade_name: str | None = None
+    author_blurb: str | None = None
+    publisher_addresses: tuple[PublisherAddress, ...] = ()
     year: int | None = None
     isbn: str | None = None
     isbns: tuple[str, ...] = ()
+    isbn_roles: tuple[tuple[str, str], ...] = ()
     copyright_holder: str | None = None
 
 
@@ -238,6 +256,12 @@ def is_plausible_book_author_name(name: str) -> bool:
     return bool(PERSON_NAME_RE.match(cleaned))
 
 
+def preserve_title_page_line(value: str) -> str:
+    """Normalize whitespace only; do not insert colons or re-title-case."""
+    cleaned = normalize_text(value).strip().strip(".,;")
+    return re.sub(r"\s+", " ", cleaned).strip()
+
+
 def normalize_book_title(value: str) -> str:
     cleaned = normalize_text(value).strip().strip(".,;")
     cleaned = EDITION_SUFFIX_RE.sub("", cleaned).strip()
@@ -315,18 +339,67 @@ def _is_title_page_boilerplate_line(line: str) -> bool:
     return False
 
 
-def _ordered_title_page_lines(raw: ExtractionResult, max_pages: int = 3) -> list[str]:
-    lines_out: list[str] = []
+def _page_is_copyright_imprint_page(page) -> bool:
+    text = " ".join((block.text or "") for block in page.blocks).lower()
+    signals = sum(
+        1
+        for marker in (
+            "copyright",
+            "isbn",
+            "published by",
+            "all rights reserved",
+            "library of congress",
+        )
+        if marker in text
+    )
+    return signals >= 2 and _page_word_count(page) > 40
+
+
+def _candidate_title_page_numbers(raw: ExtractionResult, scan_limit: int = 12) -> list[int]:
+    """Title pages often follow copyright (e.g. page 4); scan early pages, skip imprint-only."""
+    candidates: list[int] = []
     for page in sorted(raw.pages, key=lambda p: p.page_number):
-        if page.page_number > max_pages:
+        if page.page_number > scan_limit:
             break
+        if _page_is_copyright_imprint_page(page):
+            continue
+        if _page_word_count(page) > 120:
+            continue
+        has_title_like = False
+        for block in page.blocks:
+            block_text = _block_text_as_printed_line(block.text or "")
+            if block_text and is_valid_book_title(block_text) and not _is_title_page_boilerplate_line(
+                block_text
+            ):
+                has_title_like = True
+                break
+        if has_title_like:
+            candidates.append(page.page_number)
+    if candidates:
+        return candidates
+    return [page.page_number for page in sorted(raw.pages, key=lambda p: p.page_number)[:4]]
+
+
+def _block_text_as_printed_line(block_text: str) -> str:
+    """Join soft line breaks inside one typographic block; do not insert punctuation."""
+    parts = [line.strip() for line in block_text.splitlines() if line.strip()]
+    if not parts:
+        return ""
+    return preserve_title_page_line(" ".join(parts))
+
+
+def _ordered_title_page_blocks(raw: ExtractionResult) -> list[str]:
+    blocks_out: list[str] = []
+    for page_number in _candidate_title_page_numbers(raw):
+        page = next((p for p in raw.pages if p.page_number == page_number), None)
+        if page is None:
+            continue
         for block in sorted(page.blocks, key=lambda b: b.bbox[1]):
-            for line in (block.text or "").splitlines():
-                stripped = line.strip()
-                if not stripped or _is_title_page_boilerplate_line(stripped):
-                    continue
-                lines_out.append(stripped)
-    return lines_out
+            block_line = _block_text_as_printed_line(block.text or "")
+            if not block_line or _is_title_page_boilerplate_line(block_line):
+                continue
+            blocks_out.append(block_line)
+    return blocks_out
 
 
 def extract_title_page_triplet(
@@ -337,43 +410,60 @@ def extract_title_page_triplet(
 
     Example: book title, then poet names, then ``Grant D. Moss``.
     """
-    lines = _ordered_title_page_lines(raw)
-    for index, line in enumerate(lines):
-        line_clean = EDITION_SUFFIX_RE.sub("", line).strip()
+    blocks = _ordered_title_page_blocks(raw)
+    for index, block_line in enumerate(blocks):
+        line_clean = EDITION_SUFFIX_RE.sub("", block_line).strip()
         if line_looks_like_subject_name_list(line_clean):
             continue
         if not is_valid_book_title(line_clean):
             continue
-        title = normalize_book_title(line_clean)
+        title = preserve_title_page_line(line_clean)
         subtitle: str | None = None
         author: str | None = None
         next_index = index + 1
-        if next_index < len(lines) and line_looks_like_subject_name_list(lines[next_index]):
-            subtitle = normalize_text(lines[next_index]).strip()
+        if next_index < len(blocks) and line_looks_like_subject_name_list(blocks[next_index]):
+            subtitle = preserve_title_page_line(blocks[next_index])
             next_index += 1
-        if next_index < len(lines):
-            author = normalize_book_author_name(lines[next_index])
+        if next_index < len(blocks):
+            author = normalize_book_author_name(blocks[next_index])
         if not author:
-            for scan in range(index + 1, min(index + 5, len(lines))):
-                if line_looks_like_subject_name_list(lines[scan]):
+            for scan in range(index + 1, min(index + 5, len(blocks))):
+                if line_looks_like_subject_name_list(blocks[scan]):
                     continue
-                author = normalize_book_author_name(lines[scan])
+                author = normalize_book_author_name(blocks[scan])
                 if author:
                     break
         if subtitle:
             return title, subtitle, author
+        if author and not line_looks_like_subject_name_list(title):
+            return title, None, author
         if author:
             return None, None, author
     return None, None, None
 
 
+def _resolve_book_author(
+    raw: ExtractionResult,
+    *,
+    title_page_author: str | None,
+) -> str | None:
+    """Prefer title-page author; cross-check or fill from About the Author opener."""
+    bio_name = extract_author_name_from_about_blurb(raw)
+    title_author = normalize_book_author_name(title_page_author or "") if title_page_author else None
+    bio_author = normalize_book_author_name(bio_name or "") if bio_name else None
+
+    if title_author and bio_author:
+        if title_author.casefold() == bio_author.casefold():
+            return title_author
+        # Title page line is authoritative when it is a plausible person name.
+        if is_plausible_book_author_name(title_author):
+            return title_author
+        return bio_author
+    return title_author or bio_author
+
+
 def extract_isbn_list(text: str) -> list[str]:
-    seen: list[str] = []
-    for match in ISBN_RE.finditer(text):
-        value = match.group(1).strip()
-        if value and value not in seen:
-            seen.append(value)
-    return seen
+    return [value for value, _qual in extract_isbn_entries(text)]
 
 
 def extract_copyright_holder(text: str) -> str | None:
@@ -386,22 +476,32 @@ def extract_copyright_holder(text: str) -> str | None:
     return holder
 
 
-def extract_publisher_from_imprint(text: str) -> str | None:
+def extract_published_by_trade_name(text: str) -> str | None:
+    pub_match = re.search(r"Published by\s+([^\n.]+)", text, re.IGNORECASE)
+    if not pub_match:
+        return None
+    candidate = normalize_text(pub_match.group(1)).strip().rstrip(".,;")
+    if not candidate or "imprint" in candidate.lower():
+        return None
+    return candidate
+
+
+def extract_publisher_parent_company(text: str) -> str | None:
+    """Parent publisher from ``An imprint of …`` (full legal name when present)."""
     imprint = IMPRINT_OF_RE.search(text)
     if imprint:
         name = normalize_text(imprint.group(1)).strip().rstrip(".,;")
-        name = re.sub(r"\s+Publishing Group.*$", "", name, flags=re.IGNORECASE).strip()
         if name:
             return name.replace(" and ", " & ")
     for marker in PUBLISHER_MARKERS:
         if marker.lower() in text.lower():
             return marker.replace(" and ", " & ")
-    pub_match = re.search(r"Published by\s+([^\n.]+)", text, re.IGNORECASE)
-    if pub_match:
-        candidate = pub_match.group(1).strip()
-        if "imprint" not in candidate.lower():
-            return candidate
     return None
+
+
+def extract_publisher_from_imprint(text: str) -> str | None:
+    """Backward-compatible alias for parent publisher company."""
+    return extract_publisher_parent_company(text)
 
 
 def _line_looks_like_author_line(line: str) -> bool:
@@ -482,31 +582,24 @@ def extract_title_from_title_page(raw: ExtractionResult) -> str | None:
         for index, line in enumerate(primary_lines):
             line_clean = EDITION_SUFFIX_RE.sub("", line).strip()
             if ":" in line_clean and is_valid_book_title(line_clean):
-                candidate = normalize_book_title(line_clean)
+                candidate = preserve_title_page_line(line_clean)
                 score = 5.0 + _block_dominant_font_size(page.blocks[0] if page.blocks else None)
                 if best is None or score > best[0]:
                     best = (score, candidate)
                 continue
+            if is_valid_book_title(line_clean):
+                candidate = preserve_title_page_line(line_clean)
+                score = 4.5 + _block_dominant_font_size(page.blocks[0] if page.blocks else None)
+                if best is None or score > best[0]:
+                    best = (score, candidate)
             if index + 1 < len(primary_lines):
                 next_line = EDITION_SUFFIX_RE.sub("", primary_lines[index + 1]).strip()
                 if line_looks_like_subject_name_list(next_line):
-                    candidate = normalize_book_title(line_clean)
+                    candidate = preserve_title_page_line(line_clean)
                     score = 6.5
                     if best is None or score > best[0]:
                         best = (score, candidate)
                     break
-                if (
-                    2 <= len(line_clean.split()) <= 12
-                    and 2 <= len(next_line.split()) <= 14
-                    and ":" not in line_clean
-                ):
-                    combined = f"{line_clean}: {next_line}"
-                    if is_valid_book_title(combined):
-                        candidate = normalize_book_title(combined)
-                        score = 6.0
-                        if best is None or score > best[0]:
-                            best = (score, candidate)
-                        break
 
     return best[1] if best else None
 
@@ -663,8 +756,14 @@ def _extract_metadata_from_raw(raw: ExtractionResult) -> BookExtractionContext:
     raw_text = f"{front_text}\n{early_text}"
     normalized = normalize_text(raw_text)
 
-    isbns = extract_isbn_list(normalized)
-    isbn = isbns[0] if isbns else None
+    isbn_entries = extract_isbn_entries(normalized)
+    isbns = [value for value, _qual in isbn_entries]
+    isbn = select_primary_isbn(isbn_entries)
+    isbn_roles = tuple(
+        (value, role)
+        for value, qual in isbn_entries
+        if (role := role_from_isbn_qualifier(qual))
+    )
 
     year = None
     year_match = COPYRIGHT_YEAR_RE.search(normalized)
@@ -673,16 +772,20 @@ def _extract_metadata_from_raw(raw: ExtractionResult) -> BookExtractionContext:
 
     triplet_title, triplet_subtitle, triplet_author = extract_title_page_triplet(raw)
     title = extract_book_title(raw_text, raw)
-    if triplet_title and triplet_subtitle:
+    if triplet_title:
         title = triplet_title
 
-    author = triplet_author or _extract_author_from_text(raw_text, normalized)
+    author = _resolve_book_author(raw, title_page_author=triplet_author)
+    if not author:
+        author = _extract_author_from_text(raw_text, normalized)
     if author and line_looks_like_subject_name_list(author):
         author = None
 
     subtitle = triplet_subtitle
     copyright_holder = extract_copyright_holder(raw_text)
-    publisher = extract_publisher_from_imprint(raw_text)
+    trade_name = extract_published_by_trade_name(raw_text)
+    publisher_parent = extract_publisher_parent_company(raw_text)
+    publisher = publisher_parent or trade_name
 
     return BookExtractionContext(
         is_book=True,
@@ -691,9 +794,14 @@ def _extract_metadata_from_raw(raw: ExtractionResult) -> BookExtractionContext:
         subtitle=subtitle,
         author=author,
         publisher=publisher,
+        publisher_imprint=trade_name,
+        publisher_trade_name=trade_name,
+        author_blurb=extract_about_the_author_blurb(raw),
+        publisher_addresses=tuple(extract_publisher_addresses(raw_text)),
         year=year,
         isbn=isbn,
         isbns=tuple(isbns),
+        isbn_roles=isbn_roles,
         copyright_holder=copyright_holder,
     )
 

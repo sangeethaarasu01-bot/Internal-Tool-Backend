@@ -103,6 +103,41 @@ def test_overlay_strips_template_publisher_links_revhistory_and_workflow_biblioi
     assert "Rowman" in pub
 
 
+def test_overlay_publisher_address_serializes_without_duplicate_xmlns() -> None:
+    from app.utils.xml_serializer import serialize_lxml_tree
+
+    root = etree.parse(str(FIXTURE)).getroot()
+    root.set(
+        "{http://www.w3.org/2000/xmlns/}xlink",
+        "http://www.w3.org/1999/xlink",
+    )
+    source = SourceIdentityRecord(
+        extraction_id="x",
+        source_pdf_sha256="sha",
+        source_filename="book.pdf",
+        title="Test Book",
+        authors=["Grant D. Moss"],
+        publisher="The Rowman & Littlefield Publishing Group, Inc.",
+        publisher_imprint="Lexington Books",
+        publication_year=2018,
+        isbn="978-1-4985-4770-3",
+        publisher_addresses=[
+            {
+                "street": "4501 Forbes Boulevard, Suite 200",
+                "city": "Lanham",
+                "state": "Maryland",
+                "post_code": "20706",
+                "country": "United States",
+                "website": "https://www.rowman.com",
+            }
+        ],
+    )
+    apply_pdf_metadata_to_docbook_book(root, source)
+    xml = serialize_lxml_tree(root, xml_declaration=True, encoding="UTF-8", pretty_print=True)
+    assert "reuse of the xmlns" not in xml
+    assert "rowman.com" in xml
+
+
 def test_overlay_sets_subtitle_and_multiple_isbns() -> None:
     root = etree.parse(str(FIXTURE)).getroot()
     source = SourceIdentityRecord(
@@ -112,10 +147,13 @@ def test_overlay_sets_subtitle_and_multiple_isbns() -> None:
         title="Political Poetry in the Wake of the Second Spanish Republic",
         subtitle="Rafael Alberti, Pablo Neruda, and Nicolás Guillén",
         authors=["Grant D. Moss"],
-        publisher="Rowman & Littlefield",
+        publisher="The Rowman & Littlefield Publishing Group, Inc.",
         publication_year=2018,
         isbn="978-1-4985-4770-3",
         isbns=["978-1-4985-4770-3", "978-1-4985-4771-0"],
+        isbn_roles=[("978-1-4985-4770-3", "hardback"), ("978-1-4985-4771-0", "electronic")],
+        publisher_imprint="Lexington Books",
+        publisher_trade_name="Lexington Books",
         copyright_holder="Lexington Books",
     )
     apply_pdf_metadata_to_docbook_book(root, source)

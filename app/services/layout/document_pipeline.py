@@ -172,9 +172,24 @@ def process_document_structure(
         book_subtitle=book_ctx.subtitle,
         book_author=book_ctx.author,
         book_publisher=book_ctx.publisher,
+        book_publisher_imprint=book_ctx.publisher_imprint,
+        book_publisher_trade_name=book_ctx.publisher_trade_name,
+        book_author_blurb=book_ctx.author_blurb,
+        book_publisher_addresses=[
+            {
+                "street": addr.street,
+                "city": addr.city,
+                "state": addr.state,
+                "post_code": addr.post_code,
+                "country": addr.country,
+                "website": addr.website,
+            }
+            for addr in book_ctx.publisher_addresses
+        ],
         book_year=book_ctx.year,
         book_isbn=book_ctx.isbn,
         book_isbns=list(book_ctx.isbns),
+        book_isbn_roles=list(book_ctx.isbn_roles),
         book_copyright_holder=book_ctx.copyright_holder,
     )
 

@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 
 from lxml import etree
 
-from app.utils.person_name import split_person_name
+from app.utils.person_name import split_docbook_western_name
 from app.utils.xml_helpers import iter_element_children, xml_local_name
 from app.utils.xml_text import set_lxml_attr, set_lxml_text
 
@@ -20,8 +20,23 @@ def snapshot_element_attributes(element: etree._Element) -> dict[str, str]:
 
 def apply_element_attributes(element: etree._Element, attributes: dict[str, str]) -> None:
     for key, value in attributes.items():
-        if value is not None:
+        if value is not None and str(value).strip():
             set_lxml_attr(element, key, value)
+
+
+def _non_generated_author_attributes(attributes: dict[str, str]) -> dict[str, str]:
+    """Drop xlink/role ids from sample templates; PDF does not supply them."""
+    filtered: dict[str, str] = {}
+    for key, value in attributes.items():
+        if not value or not str(value).strip():
+            continue
+        if key.startswith(f"{{{XLINK_NS}}}") or key.startswith("xlink:"):
+            continue
+        local = key.split("}", 1)[-1] if key.startswith("{") else key
+        if local == "role":
+            continue
+        filtered[key] = value
+    return filtered
 
 
 @dataclass
@@ -51,13 +66,21 @@ def _author_slots_from_authorgroup(authorgroup: etree._Element) -> list[_AuthorS
 
 
 def _set_personname_display_name(personname: etree._Element, display_name: str, docbook_ns: str) -> None:
-    given, surname = split_person_name(display_name.strip())
+    first_name, middle, surname = split_docbook_western_name(display_name.strip())
     for child in list(iter_element_children(personname)):
         personname.remove(child)
     personname.text = None
-    if given:
+    if "role" in personname.attrib:
+        del personname.attrib["role"]
+    if first_name or middle or surname:
+        set_lxml_attr(personname, "role", "first-last")
+    if first_name:
         first = etree.SubElement(personname, f"{{{docbook_ns}}}firstname")
-        set_lxml_text(first, given)
+        set_lxml_text(first, first_name)
+    if middle:
+        other = etree.SubElement(personname, f"{{{docbook_ns}}}othername")
+        set_lxml_attr(other, "role", "middle-initials")
+        set_lxml_text(other, middle)
     if surname:
         last = etree.SubElement(personname, f"{{{docbook_ns}}}surname")
         set_lxml_text(last, surname)
@@ -69,23 +92,17 @@ def _new_author_element(
     *,
     docbook_ns: str,
     prototype: _AuthorSlotPrototype | None,
-    inherit_external_ids: bool,
 ) -> etree._Element:
     author = etree.SubElement(authorgroup, f"{{{docbook_ns}}}author")
-    if prototype and inherit_external_ids:
-        apply_element_attributes(author, prototype.author_attributes)
-    elif prototype:
-        filtered = {
-            key: value
-            for key, value in prototype.author_attributes.items()
-            if not key.startswith(f"{{{XLINK_NS}}}")
-            and not key.startswith("xlink:")
-        }
-        apply_element_attributes(author, filtered)
+    if prototype:
+        apply_element_attributes(author, _non_generated_author_attributes(prototype.author_attributes))
 
     personname = etree.SubElement(author, f"{{{docbook_ns}}}personname")
     if prototype and prototype.personname_attributes:
-        apply_element_attributes(personname, prototype.personname_attributes)
+        apply_element_attributes(
+            personname,
+            _non_generated_author_attributes(prototype.personname_attributes),
+        )
     _set_personname_display_name(personname, display_name, docbook_ns)
     return author
 
@@ -120,11 +137,9 @@ def update_authorgroup_authors(
         if not cleaned:
             continue
         prototype = prototypes[index] if index < len(prototypes) else default_prototype
-        inherit_ids = index < len(prototypes)
         _new_author_element(
             authorgroup,
             cleaned,
             docbook_ns=docbook_ns,
             prototype=prototype,
-            inherit_external_ids=inherit_ids,
         )

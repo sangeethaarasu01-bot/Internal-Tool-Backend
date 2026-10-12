@@ -7,6 +7,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from app.services.docbook_template import parse_docbook_template_file
+from app.utils.isbn_selection import select_primary_isbn_from_lists
 
 ISBN_DIGITS_RE = re.compile(r"[^0-9Xx]")
 
@@ -20,9 +21,14 @@ class SourceIdentityRecord:
     subtitle: str | None = None
     authors: list[str] = field(default_factory=list)
     publisher: str | None = None
+    publisher_imprint: str | None = None
+    publisher_trade_name: str | None = None
+    author_blurb: str | None = None
+    publisher_addresses: list[dict[str, str | None]] = field(default_factory=list)
     publication_year: int | None = None
     isbn: str | None = None
     isbns: list[str] = field(default_factory=list)
+    isbn_roles: list[tuple[str, str]] = field(default_factory=list)
     copyright_holder: str | None = None
     doi: str | None = None
     page_count: int | None = None
@@ -114,6 +120,18 @@ def build_source_identity_from_extraction_doc(doc: dict[str, Any]) -> SourceIden
         year_int = int(year) if year is not None else None
     except (TypeError, ValueError):
         year_int = None
+    isbns = list(phase1.get("isbns") or [])
+    raw_roles = phase1.get("isbn_roles") or []
+    isbn_roles: list[tuple[str, str]] = []
+    for item in raw_roles:
+        if isinstance(item, (list, tuple)) and len(item) == 2:
+            isbn_roles.append((str(item[0]), str(item[1])))
+    qual_map = {value: role for value, role in isbn_roles}
+    primary_isbn = select_primary_isbn_from_lists(
+        isbns,
+        fallback=phase1.get("isbn"),
+        qualifiers={value: qual_map[value] for value in isbns if value in qual_map},
+    )
     return SourceIdentityRecord(
         extraction_id=extraction_id,
         source_pdf_sha256=doc.get("source_pdf_sha256"),
@@ -122,9 +140,14 @@ def build_source_identity_from_extraction_doc(doc: dict[str, Any]) -> SourceIden
         subtitle=phase1.get("subtitle"),
         authors=list(phase1.get("authors") or []),
         publisher=phase1.get("publisher"),
+        publisher_imprint=phase1.get("publisher_imprint"),
+        publisher_trade_name=phase1.get("publisher_trade_name"),
+        author_blurb=phase1.get("author_blurb"),
+        publisher_addresses=list(phase1.get("publisher_addresses") or []),
         publication_year=year_int,
-        isbn=phase1.get("isbn"),
-        isbns=list(phase1.get("isbns") or []),
+        isbn=primary_isbn,
+        isbns=isbns,
+        isbn_roles=isbn_roles,
         copyright_holder=phase1.get("copyright_holder"),
         doi=None,
         page_count=doc.get("page_count"),

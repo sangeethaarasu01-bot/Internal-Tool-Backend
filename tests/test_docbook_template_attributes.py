@@ -39,7 +39,7 @@ def _book_xml() -> etree._Element:
     )
 
 
-def test_title_sortas_preserved_when_pdf_title_applied() -> None:
+def test_title_sortas_derived_from_pdf_title_not_template() -> None:
     root = _book_xml()
     source = SourceIdentityRecord(
         extraction_id="x",
@@ -54,13 +54,15 @@ def test_title_sortas_preserved_when_pdf_title_applied() -> None:
     title = root.xpath("db:info/db:title", namespaces=NS)[0]
     assert title.get("sortas") != "Political and Spiritual"
     sortas = title.get("sortas") or ""
-    assert ":" not in sortas
     assert "Political Poetry" in sortas
-    assert title.get("{http://www.w3.org/XML/1998/namespace}id") == "title-template"
+    assert title.get("{http://www.w3.org/XML/1998/namespace}id") == "b-9781498547703-0000002"
+    assert root.get("{http://www.w3.org/XML/1998/namespace}id") == "b-9781498547703"
+    assert root.get("role") == "fullText"
+    assert root.get("version") == "5.0"
     assert "Political Poetry" in (title.text or "")
 
 
-def test_author_xlink_and_personname_role_preserved_per_slot() -> None:
+def test_author_template_xlink_and_role_not_copied_from_sample() -> None:
     root = _book_xml()
     source = SourceIdentityRecord(
         extraction_id="x",
@@ -74,9 +76,8 @@ def test_author_xlink_and_personname_role_preserved_per_slot() -> None:
     apply_pdf_metadata_to_docbook_book(root, source)
     authors = root.xpath("db:info/db:authorgroup/db:author", namespaces=NS)
     assert len(authors) == 2
-    assert authors[0].get(f"{{{XLINK_NS}}}href") == "367958"
-    assert authors[0].get(f"{{{XLINK_NS}}}role") == "biblioAuID"
-    assert authors[1].get(f"{{{XLINK_NS}}}href") == "999999"
+    assert authors[0].get(f"{{{XLINK_NS}}}href") is None
+    assert authors[0].get(f"{{{XLINK_NS}}}role") is None
     personnames = root.xpath("db:info/db:authorgroup/db:author/db:personname", namespaces=NS)
     assert all(node.get("role") == "first-last" for node in personnames)
     assert root.xpath("string(db:info/db:authorgroup/db:author[1]/db:personname/db:firstname)", namespaces=NS) == "Jane"

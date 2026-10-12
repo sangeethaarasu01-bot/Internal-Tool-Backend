@@ -101,35 +101,20 @@ def _replace_leading_digits(text: str) -> str:
 
 
 def compute_sortas_from_title(title: str) -> str | None:
-    """Build ``sortas`` from ``title`` on the same element."""
+    """``sortas`` equals the title text after dropping a leading A/An/The only."""
     cleaned = " ".join((title or "").split())
     if not cleaned:
         return None
-    cleaned = _strip_diacritics(cleaned)
-    cleaned = _LEADING_ARTICLE_RE.sub("", cleaned).strip()
-    cleaned = _replace_leading_digits(cleaned)
-    cleaned = cleaned.replace(":", " ").strip()
-    cleaned = " ".join(cleaned.split())
-    return cleaned or None
+    sortas = _LEADING_ARTICLE_RE.sub("", cleaned).strip()
+    return sortas or None
 
 
 def is_valid_sortas_for_title(title: str, sortas: str) -> bool:
-    """Reject sortas copied from another title or truncated phrases."""
-    title_norm = " ".join(_strip_diacritics(title or "").split()).casefold()
-    sortas_norm = " ".join(_strip_diacritics(sortas or "").split()).casefold()
-    if not title_norm or not sortas_norm:
+    """Reject sortas that does not match the article-stripped title."""
+    expected = compute_sortas_from_title(title)
+    if not expected or not sortas:
         return False
-    if ":" in sortas:
-        return False
-    if len(sortas_norm) < max(12, int(len(title_norm) * 0.45)):
-        return False
-    if sortas_norm not in title_norm and not title_norm.startswith(sortas_norm):
-        if not sortas_norm.replace(" ", "").startswith(title_norm[:20].replace(" ", "")):
-            # sortas should align with the same book title, not an unrelated string
-            overlap = sum(1 for word in sortas_norm.split() if word in title_norm.split())
-            if overlap < max(2, len(sortas_norm.split()) // 2):
-                return False
-    return True
+    return " ".join(sortas.split()) == " ".join(expected.split())
 
 
 def apply_sortas_to_title_element(title_element, title_text: str) -> None:

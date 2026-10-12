@@ -118,7 +118,12 @@ class DocumentStructureResult(BaseModel):
     book_subtitle: str | None = None
     book_author: str | None = None
     book_publisher: str | None = None
+    book_publisher_imprint: str | None = None
+    book_publisher_trade_name: str | None = None
+    book_author_blurb: str | None = None
+    book_publisher_addresses: list[dict[str, str | None]] = Field(default_factory=list)
     book_year: int | None = None
     book_isbn: str | None = None
     book_isbns: list[str] = Field(default_factory=list)
+    book_isbn_roles: list[tuple[str, str]] = Field(default_factory=list)
     book_copyright_holder: str | None = None
