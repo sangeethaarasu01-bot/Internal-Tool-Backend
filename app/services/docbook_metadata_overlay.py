@@ -10,6 +10,7 @@ from lxml import etree
 
 from app.services.source_identity import SourceIdentityRecord
 from app.services.template_format import DOCBOOK_NS
+from app.utils.docbook_template_attrs import update_authorgroup_authors
 from app.utils.xml_helpers import iter_element_children, xml_local_name
 
 logger = logging.getLogger(__name__)
@@ -63,25 +64,12 @@ def _clear_subtitle(info: etree._Element) -> None:
 
 
 def _replace_authorgroup(info: etree._Element, authors: list[str]) -> None:
-    for child in list(iter_element_children(info)):
-        if xml_local_name(child) == "authorgroup":
-            info.remove(child)
     if not authors:
+        for child in list(iter_element_children(info)):
+            if xml_local_name(child) == "authorgroup":
+                info.remove(child)
         return
-    authorgroup = etree.Element(f"{{{DOCBOOK_NS}}}authorgroup")
-    for name in authors:
-        author = etree.SubElement(authorgroup, f"{{{DOCBOOK_NS}}}author")
-        personname = etree.SubElement(author, f"{{{DOCBOOK_NS}}}personname")
-        parts = name.split()
-        if len(parts) >= 2:
-            first = etree.SubElement(personname, f"{{{DOCBOOK_NS}}}firstname")
-            first.text = parts[0]
-            surname = etree.SubElement(personname, f"{{{DOCBOOK_NS}}}surname")
-            surname.text = " ".join(parts[1:])
-        else:
-            surname = etree.SubElement(personname, f"{{{DOCBOOK_NS}}}surname")
-            surname.text = name
-    info.append(authorgroup)
+    update_authorgroup_authors(info, list(authors), docbook_ns=DOCBOOK_NS)
 
 
 def _looks_like_imprint_name(name: str) -> bool:
@@ -163,11 +151,6 @@ def _strip_template_marketing_from_info(info: etree._Element) -> None:
         kind = (biblioid.get("class") or "").lower()
         if kind == "other":
             info.remove(biblioid)
-    title_el = _direct_child(info, "title")
-    if title_el is not None and "sortas" in title_el.attrib:
-        del title_el.attrib["sortas"]
-
-
 def _sync_book_root_id(book: etree._Element, isbn: str | None) -> None:
     if not isbn:
         return
