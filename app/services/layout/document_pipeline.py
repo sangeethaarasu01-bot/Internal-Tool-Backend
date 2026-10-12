@@ -178,6 +178,7 @@ def process_document_structure(
         book_author_blurb=book_ctx.author_blurb,
         book_author_blurb_inline_elements=list(book_ctx.author_blurb_inline_elements),
         book_legal_notices=list(book_ctx.legal_notices),
+        book_toc_entries=list(book_ctx.toc_entries),
         book_page_folios=build_book_page_folio_map(raw) if book_ctx.is_book else {},
         book_publisher_addresses=[
             {

@@ -59,6 +59,17 @@ def _remove_running_header_elements(root: etree._Element) -> None:
                 parent.remove(para)
 
 
+def _remove_book_toc_paragraphs(root: etree._Element) -> None:
+    from app.services.layout.book_table_of_contents import is_book_toc_blob
+
+    for para in list(root.iter(_ns("para"))):
+        text = _normalize_text_key("".join(para.itertext()))
+        if text and is_book_toc_blob(text):
+            parent = para.getparent()
+            if parent is not None:
+                parent.remove(para)
+
+
 def _dedupe_repeated_siblings(parent: etree._Element) -> None:
     prev_key: str | None = None
     for child in list(iter_element_children(parent)):
@@ -271,6 +282,7 @@ def normalize_docbook_book_structure(book: etree._Element) -> None:
     """
     root_id = (book.get(XML_ID_ATTR) or "").strip() or "b-book"
     _remove_running_header_elements(book)
+    _remove_book_toc_paragraphs(book)
     _dedupe_repeated_recurse(book)
     _unwrap_nested_chapters(book)
     _convert_bibliography_chapters(book)

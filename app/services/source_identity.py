@@ -8,6 +8,7 @@ from typing import Any
 
 from app.services.docbook_template import parse_docbook_template_file
 from app.utils.isbn_selection import select_primary_isbn_from_lists
+from app.utils.xml_text import sanitize_xml_text
 
 ISBN_DIGITS_RE = re.compile(r"[^0-9Xx]")
 
@@ -26,6 +27,7 @@ class SourceIdentityRecord:
     author_blurb: str | None = None
     author_blurb_inline_elements: list[dict[str, Any]] = field(default_factory=list)
     legal_notices: list[dict[str, Any]] = field(default_factory=list)
+    toc_entries: list[dict[str, Any]] = field(default_factory=list)
     publisher_addresses: list[dict[str, str | None]] = field(default_factory=list)
     publication_year: int | None = None
     isbn: str | None = None
@@ -100,6 +102,23 @@ def normalize_title(value: str | None) -> str:
     return " ".join(lowered.split())
 
 
+def _sanitize_toc_entries(raw: Any) -> list[dict[str, str | None]]:
+    if not isinstance(raw, list):
+        return []
+    cleaned: list[dict[str, str | None]] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        title = sanitize_xml_text(str(item.get("title") or "").strip())
+        if not title:
+            continue
+        label_raw = item.get("label")
+        label = sanitize_xml_text(str(label_raw).strip()) if label_raw else None
+        page = sanitize_xml_text(str(item.get("page") or "").strip()) or None
+        cleaned.append({"label": label, "title": title, "page": page})
+    return cleaned
+
+
 def title_overlap_score(left: str | None, right: str | None) -> float:
     a = set(normalize_title(left).split())
     b = set(normalize_title(right).split())
@@ -147,6 +166,7 @@ def build_source_identity_from_extraction_doc(doc: dict[str, Any]) -> SourceIden
         author_blurb=phase1.get("author_blurb"),
         author_blurb_inline_elements=list(phase1.get("author_blurb_inline_elements") or []),
         legal_notices=list(phase1.get("legal_notices") or []),
+        toc_entries=_sanitize_toc_entries(phase1.get("toc_entries") or []),
         publisher_addresses=list(phase1.get("publisher_addresses") or []),
         publication_year=year_int,
         isbn=primary_isbn,

@@ -534,6 +534,9 @@ def build_extracted_document(
         legal_notices=list(structure.book_legal_notices)
         if structure.publication_document_type == "book"
         else [],
+        toc_entries=list(structure.book_toc_entries)
+        if structure.publication_document_type == "book"
+        else [],
         publisher_addresses=list(structure.book_publisher_addresses)
         if structure.publication_document_type == "book"
         else [],

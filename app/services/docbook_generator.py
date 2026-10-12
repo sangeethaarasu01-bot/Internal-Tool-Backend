@@ -21,6 +21,7 @@ from app.services.docbook_metadata_overlay import (
 from app.services.source_identity import SourceIdentityRecord
 from app.services.template_format import DOCBOOK_NS, classify_template_root
 from app.services.docbook_structure_fixup import normalize_docbook_book_structure
+from app.services.docbook_toc_front_matter import insert_book_toc_front_matter
 from app.services.docbook_template_sanitizer import sanitize_docbook_template_after_pdf_overlay
 from app.utils.docbook_processing_instructions import (
     restore_processing_instructions,
@@ -84,6 +85,9 @@ def generate_docbook_book_xml(
     body_merge = apply_pdf_body_to_docbook_book(root, mapping, ir=ir)
     if body_merge.warnings:
         overlay.warnings.extend(body_merge.warnings)
+
+    if source is not None and source.toc_entries:
+        insert_book_toc_front_matter(root, list(source.toc_entries))
 
     normalize_docbook_book_structure(root)
     normalize_docbook_book_xml_language(root)
