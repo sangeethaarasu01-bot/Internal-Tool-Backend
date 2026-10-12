@@ -77,7 +77,7 @@ def test_author_template_xlink_and_role_not_copied_from_sample() -> None:
     authors = root.xpath("db:info/db:authorgroup/db:author", namespaces=NS)
     assert len(authors) == 2
     assert authors[0].get(f"{{{XLINK_NS}}}href") is None
-    assert authors[0].get(f"{{{XLINK_NS}}}role") is None
+    assert authors[0].get(f"{{{XLINK_NS}}}role") == "biblioAuID"
     personnames = root.xpath("db:info/db:authorgroup/db:author/db:personname", namespaces=NS)
     assert all(node.get("role") == "first-last" for node in personnames)
     assert root.xpath("string(db:info/db:authorgroup/db:author[1]/db:personname/db:firstname)", namespaces=NS) == "Jane"

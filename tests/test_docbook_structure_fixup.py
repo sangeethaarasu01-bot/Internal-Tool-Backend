@@ -38,6 +38,27 @@ def test_dedupe_consecutive_paras_and_unnest_chapters() -> None:
     assert len(paras) == 1
     assert chapters[0].get("{http://www.w3.org/XML/1998/namespace}id") == "b-9781498547703-chapter1"
     assert chapters[1].get("{http://www.w3.org/XML/1998/namespace}id") == "b-9781498547703-chapter2"
+    assert chapters[0].get("label") is None
+    assert chapters[1].get("label") is None
+
+
+def test_main_matter_chapters_before_back_matter_and_labels() -> None:
+    xml = f"""<book xmlns="http://docbook.org/ns/docbook" xml:id="b-9781498547703">
+  <chapter><info><title>Index</title></info><para>Index body</para></chapter>
+  <chapter><info><title>Intellectuals and the Second Spanish Republic</title></info><para>Main.</para></chapter>
+  <chapter><info><title>About the Author</title></info><para>Bio.</para></chapter>
+</book>"""
+    root = _parse(xml)
+    normalize_docbook_book_structure(root)
+    parts = root.findall(f"{{{DOCBOOK_NS}}}part")
+    assert len(parts) == 1
+    assert parts[0].get("role") == "back"
+    main = root.findall(f"{{{DOCBOOK_NS}}}chapter")
+    assert len(main) == 1
+    assert main[0].find(f"{{{DOCBOOK_NS}}}info/{{{DOCBOOK_NS}}}title").text == (
+        "Intellectuals and the Second Spanish Republic"
+    )
+    assert main[0].get("label") == "1"
 
 
 def test_bibliography_section_and_global_bibliomixed_dedupe() -> None:

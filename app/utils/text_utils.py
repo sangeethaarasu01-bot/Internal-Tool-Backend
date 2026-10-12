@@ -177,7 +177,12 @@ def merge_block_texts(parts: list[str]) -> str:
             merged = re.sub(r"-\s*$", "", merged) + part
             continue
         if _should_join_wrapped_word(merged, part):
-            merged = f"{merged}{part}"
+            if re.search(r"Available$", merged, re.IGNORECASE) and re.match(
+                r"^Library\s+of\s+Congress", part, re.IGNORECASE
+            ):
+                merged = f"{merged} {part}"
+            else:
+                merged = f"{merged}{part}"
             continue
         merged = f"{merged} {part}"
     return dehyphenate_line_breaks(merged)

@@ -70,6 +70,8 @@ from app.services.layout.book_metadata import (
 from app.services.layout.book_patterns import (
     looks_like_book_chapter_reference_line,
     parse_book_section_heading,
+    parse_book_title_block_heading,
+    reorder_book_body_sections,
 )
 from app.services.layout.semantic_signals import classify_semantic_type
 from app.services.layout.table_grid_builder import (
@@ -273,6 +275,8 @@ def _paragraph_ends_sentence(text: str) -> bool:
 
 def _can_merge_paragraph(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
     if extract_leading_roman_section_heading(current.text):
+        return False
+    if current.is_bold and not prev.is_bold:
         return False
     if _paragraph_ends_sentence(prev.text):
         return False
@@ -797,6 +801,19 @@ def build_semantic_document(
 
         if sem_type == "TITLE":
             if book_mode and front.title is not None:
+                title_text = normalize_text(block.text)
+                parsed = parse_book_title_block_heading(
+                    title_text,
+                    book_title=book_ctx.title if book_ctx else None,
+                    book_subtitle=book_ctx.subtitle if book_ctx else None,
+                )
+                if parsed:
+                    flush_paragraph()
+                    flush_list()
+                    flush_reference()
+                    push_section(parsed.heading, block, parsed.level, confidence)
+                    i += 1
+                    continue
                 i += 1
                 continue
             flush_paragraph()
@@ -1344,6 +1361,9 @@ def build_semantic_document(
             candidate, blocks, confidence = recovered
             front.title = _element("TITLE", candidate, blocks, confidence)
             mapped_ids.update(front.title.source_block_ids)
+
+    if book_mode and body.sections:
+        body.sections = reorder_book_body_sections(body.sections)
 
     completeness = _semantic_completeness(raw, processed, mapped_ids, unknown, layout_objects)
     document = SemanticDocument(

@@ -90,6 +90,11 @@ def _ir_node_to_mapped(node: dict[str, Any] | None) -> MappedSemanticNode | None
     ir_keywords = node.get("keywords")
     if isinstance(ir_keywords, list) and ir_keywords:
         metadata["keywords"] = [str(item).strip() for item in ir_keywords if str(item).strip()]
+    page_numbers = node.get("page_numbers")
+    if isinstance(page_numbers, list) and page_numbers:
+        pages = [int(p) for p in page_numbers if isinstance(p, (int, float)) or str(p).isdigit()]
+        if pages:
+            metadata["page_numbers"] = sorted(set(pages))
 
     return MappedSemanticNode(
         semantic_type=semantic_type,

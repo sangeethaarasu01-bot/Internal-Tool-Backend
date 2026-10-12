@@ -227,6 +227,8 @@ class ExtractedDocument(BaseModel):
     publisher_imprint: str | None = None
     publisher_trade_name: str | None = None
     author_blurb: str | None = None
+    author_blurb_inline_elements: list[dict] = Field(default_factory=list)
+    legal_notices: list[dict] = Field(default_factory=list)
     publisher_addresses: list[dict[str, str | None]] = Field(default_factory=list)
     publication_year: int | None = None
     isbn: str | None = None

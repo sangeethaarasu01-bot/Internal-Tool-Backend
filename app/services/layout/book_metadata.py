@@ -11,8 +11,11 @@ from app.pipeline.phase1.text_fidelity import join_ordered_block_text
 from app.services.layout.semantic_patterns import normalize_text
 from app.services.layout.book_author_bio import (
     extract_about_the_author_blurb,
+    extract_about_the_author_blurb_inline_elements,
     extract_author_name_from_about_blurb,
+    serialize_author_blurb_inline_elements,
 )
+from app.services.layout.book_copyright_legal import extract_copyright_legal_notices
 from app.services.layout.book_publisher_address import (
     PublisherAddress,
     extract_publisher_addresses,
@@ -134,6 +137,8 @@ class BookExtractionContext:
     publisher_imprint: str | None = None
     publisher_trade_name: str | None = None
     author_blurb: str | None = None
+    author_blurb_inline_elements: tuple[dict, ...] = ()
+    legal_notices: tuple[dict, ...] = ()
     publisher_addresses: tuple[PublisherAddress, ...] = ()
     year: int | None = None
     isbn: str | None = None
@@ -957,6 +962,10 @@ def _extract_metadata_from_raw(raw: ExtractionResult) -> BookExtractionContext:
         publisher_imprint=trade_name,
         publisher_trade_name=trade_name,
         author_blurb=extract_about_the_author_blurb(raw),
+        author_blurb_inline_elements=tuple(
+            serialize_author_blurb_inline_elements(extract_about_the_author_blurb_inline_elements(raw))
+        ),
+        legal_notices=tuple(extract_copyright_legal_notices(raw)),
         publisher_addresses=tuple(
             extract_publisher_addresses(_publisher_imprint_pages_text(raw) or raw_text)
         ),

@@ -528,6 +528,12 @@ def build_extracted_document(
         if structure.publication_document_type == "book"
         else None,
         author_blurb=structure.book_author_blurb if structure.publication_document_type == "book" else None,
+        author_blurb_inline_elements=list(structure.book_author_blurb_inline_elements)
+        if structure.publication_document_type == "book"
+        else [],
+        legal_notices=list(structure.book_legal_notices)
+        if structure.publication_document_type == "book"
+        else [],
         publisher_addresses=list(structure.book_publisher_addresses)
         if structure.publication_document_type == "book"
         else [],

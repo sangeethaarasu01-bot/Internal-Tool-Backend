@@ -131,6 +131,68 @@ def test_overlay_author_name_from_personblurb_not_title() -> None:
     assert first == "Grant"
     assert middle == "D."
     assert surname == "Moss"
+    author = root.xpath("db:info/db:authorgroup/db:author[1]", namespaces=ns)[0]
+    assert author.get(f"{{{XLINK_NS}}}role") == "biblioAuID"
+
+
+def test_overlay_legalnotices_from_pdf() -> None:
+    ns = {"db": DOCBOOK_NS}
+    root = etree.parse(str(FIXTURE)).getroot()
+    source = SourceIdentityRecord(
+        extraction_id="x",
+        source_pdf_sha256="sha",
+        source_filename="book.pdf",
+        title="Political Poetry",
+        authors=["Grant D. Moss"],
+        publication_year=2018,
+        isbn="978-1-4985-4770-3",
+        legal_notices=[
+            {
+                "role": "CIP",
+                "text": "British Library Cataloguing in Publication Information Available",
+                "bold": False,
+            },
+            {
+                "role": "CIP",
+                "text": "Library of Congress Cataloging-in-Publication Data",
+                "bold": True,
+            },
+        ],
+    )
+    apply_pdf_metadata_to_docbook_book(root, source)
+    notices = root.xpath("db:info/db:legalnotice", namespaces=ns)
+    assert len(notices) == 2
+    bold = root.xpath(
+        "db:info/db:legalnotice[2]/db:para/db:emphasis[@role='bold']",
+        namespaces=ns,
+    )
+    assert len(bold) == 1
+
+
+def test_overlay_personblurb_emphasis_from_inline_elements() -> None:
+    ns = {"db": DOCBOOK_NS}
+    root = etree.parse(str(FIXTURE)).getroot()
+    source = SourceIdentityRecord(
+        extraction_id="x",
+        source_pdf_sha256="sha",
+        source_filename="book.pdf",
+        title="Political Poetry",
+        authors=["Grant D. Moss"],
+        author_blurb="Grant D. Moss is an Associate Professor.",
+        author_blurb_inline_elements=[
+            {"type": "text", "value": "Grant D. Moss", "bold": True},
+            {"type": "text", "value": " is an Associate Professor.", "bold": False, "italic": False},
+        ],
+        publication_year=2018,
+        isbn="978-1-4985-4770-3",
+    )
+    apply_pdf_metadata_to_docbook_book(root, source)
+    emphasis = root.xpath(
+        "db:info/db:authorgroup/db:author/db:personblurb/db:para/db:emphasis[@role='bold']",
+        namespaces=ns,
+    )
+    assert len(emphasis) == 1
+    assert (emphasis[0].text or "").startswith("Grant D. Moss")
 
 
 def test_overlay_publisher_address_serializes_without_duplicate_xmlns() -> None:
@@ -217,6 +279,10 @@ def test_overlay_publisher_street_not_truncated_after_suite() -> None:
     address_ids = [el.get(xml_id) for el in address_els]
     assert all(address_ids)
     assert address_ids[0] != address_ids[1]
+    printhistory = root.find(f".//{{{DOCBOOK_NS}}}biblioset[@role='publisher']/{{{DOCBOOK_NS}}}printhistory")
+    assert printhistory is not None
+    phrase = root.find(f".//{{{DOCBOOK_NS}}}biblioset[@role='publisher']/{{{DOCBOOK_NS}}}phrase")
+    assert phrase is not None and "subsidiary" in (phrase.text or "").lower()
 
 
 def test_overlay_sets_subtitle_and_multiple_isbns() -> None:

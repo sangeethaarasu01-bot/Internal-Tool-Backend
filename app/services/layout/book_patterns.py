@@ -48,6 +48,23 @@ BOOK_BIBLIO_AUTHOR_YEAR_RE = re.compile(
 BOOK_BIBLIO_AUTHOR_INITIAL_RE = re.compile(
     r"^[A-Z][A-Za-z'\-]+,\s+(?:[A-Z]\.?\s*){1,4}",
 )
+BOOK_NUMBERED_CHAPTER_LINE_RE = re.compile(r"^(\d{1,2})\s+(.+)$")
+BOOK_BACK_MATTER_HEADINGS = frozenset(
+    {
+        "index",
+        "about the author",
+        "about the authors",
+        "bibliography",
+        "references",
+        "works cited",
+        "colophon",
+    }
+)
+_IMPRINT_FRAGMENT_RE = re.compile(
+    r"(published by|all rights reserved|library of congress|cataloging-in-publication|"
+    r"lexington books|rowman\s*&\s*littlefield|www\.rowman)",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
@@ -95,6 +112,93 @@ def parse_book_section_heading(text: str) -> BookSectionHeading | None:
         return BookSectionHeading(heading=line, level=1)
 
     return None
+
+
+def is_book_back_matter_heading(heading: str) -> bool:
+    return normalize_text(heading).strip().lower() in BOOK_BACK_MATTER_HEADINGS
+
+
+def _is_duplicate_front_title(
+    line: str,
+    book_title: str | None,
+    book_subtitle: str | None,
+) -> bool:
+    candidate = normalize_text(line).strip().lower()
+    if not candidate:
+        return True
+    for reference in (book_title, book_subtitle):
+        if not reference:
+            continue
+        ref = normalize_text(reference).strip().lower()
+        if not ref:
+            continue
+        if candidate == ref:
+            return True
+        if len(candidate) > 20 and (candidate in ref or ref in candidate):
+            return True
+    return False
+
+
+def parse_book_title_block_heading(
+    text: str,
+    *,
+    book_title: str | None = None,
+    book_subtitle: str | None = None,
+) -> BookSectionHeading | None:
+    """
+    Map interior TITLE-classified PDF blocks to chapter / back-matter headings.
+
+    Used after book front matter is captured so chapter display titles are not dropped.
+    """
+    parsed = parse_book_section_heading(text)
+    if parsed:
+        return parsed
+
+    line = normalize_text(first_line(text))
+    if not line or len(line) > 120:
+        return None
+    if _is_duplicate_front_title(line, book_title, book_subtitle):
+        return None
+    if _IMPRINT_FRAGMENT_RE.search(line):
+        return None
+
+    match = BOOK_NUMBERED_CHAPTER_LINE_RE.match(line)
+    if match:
+        title_part = match.group(2).strip()
+        number = int(match.group(1))
+        if (
+            1 <= number <= 40
+            and 8 <= len(title_part) <= 100
+            and not title_part.endswith(".")
+        ):
+            return BookSectionHeading(
+                heading=f"Chapter {number}: {title_part}",
+                level=1,
+                chapter_number=number,
+            )
+
+    if line.endswith(".") or len(line.split()) > 14:
+        return None
+    if len(line) < 12:
+        return None
+    if is_book_back_matter_heading(line):
+        return BookSectionHeading(heading=line, level=1)
+    if ":" in line or len(line.split()) >= 3:
+        return BookSectionHeading(heading=line, level=1)
+    return None
+
+
+def reorder_book_body_sections(sections: list) -> list:
+    """Place index / about-the-author / bibliography sections after main chapters."""
+    main: list = []
+    back: list = []
+    for section in sections:
+        heading = getattr(section, "heading", None) or ""
+        if is_book_back_matter_heading(str(heading)):
+            back.append(section)
+        else:
+            main.append(section)
+    return main + back
 
 
 def looks_like_book_chapter_reference_line(text: str) -> bool:

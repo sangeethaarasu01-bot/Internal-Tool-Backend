@@ -4,10 +4,13 @@ from __future__ import annotations
 
 import re
 
-from app.models.extraction import ExtractionResult
+from app.models.extraction import ExtractionResult, TextBlock
+from app.models.ir_schema import IRInlineMathElement, IRTextElement
 from app.pipeline.phase1.text_fidelity import join_ordered_block_text
-from app.services.layout.semantic_patterns import normalize_text
+from app.services.layout.reading_order import order_document_blocks
+from app.services.layout.semantic_patterns import first_line, normalize_text
 from app.utils.book_blurb_text import clean_personblurb_text
+from app.utils.span_inline import inline_elements_from_text_block
 
 ABOUT_AUTHOR_HEADING_RE = re.compile(
     r"^\s*about\s+the\s+author(s)?\s*$",
@@ -29,6 +32,66 @@ def _back_matter_text(raw: ExtractionResult, max_pages: int = 35) -> str:
     pages = sorted(raw.pages, key=lambda p: p.page_number)
     tail = pages[-max_pages:]
     return "\n".join(join_ordered_block_text(raw, page_number=page.page_number) for page in tail)
+
+
+def _about_author_tail_blocks(raw: ExtractionResult, max_pages: int = 35) -> list[TextBlock]:
+    if not raw.pages:
+        return []
+    pages = sorted(raw.pages, key=lambda p: p.page_number)
+    tail_numbers = {page.page_number for page in pages[-max_pages:]}
+    started = False
+    collected: list[TextBlock] = []
+    for block, page_number in order_document_blocks(raw.pages):
+        if page_number not in tail_numbers:
+            continue
+        text = normalize_text(block.text or "")
+        if not text:
+            continue
+        if not started:
+            if ABOUT_AUTHOR_HEADING_RE.match(first_line(text)):
+                started = True
+                remainder = text.split("\n", 1)
+                if len(remainder) > 1 and remainder[1].strip():
+                    collected.append(block.model_copy(update={"text": remainder[1].strip()}))
+                continue
+            continue
+        if ABOUT_AUTHOR_HEADING_RE.match(first_line(text)) or SECTION_BREAK_RE.match(first_line(text)):
+            break
+        if len(first_line(text)) < 80 and first_line(text).isupper():
+            break
+        collected.append(block)
+    return collected
+
+
+def extract_about_the_author_blurb_inline_elements(
+    raw: ExtractionResult,
+) -> list[IRTextElement | IRInlineMathElement]:
+    blocks = _about_author_tail_blocks(raw)
+    if not blocks:
+        return []
+    combined: list[IRTextElement | IRInlineMathElement] = []
+    for block in blocks:
+        combined.extend(inline_elements_from_text_block(block))
+    if not combined:
+        return []
+    merged: list[IRTextElement | IRInlineMathElement] = []
+    for element in combined:
+        if not merged:
+            merged.append(element)
+            continue
+        prev = merged[-1]
+        if (
+            isinstance(prev, IRTextElement)
+            and isinstance(element, IRTextElement)
+            and prev.bold == element.bold
+            and prev.italic == element.italic
+            and prev.superscript == element.superscript
+            and prev.subscript == element.subscript
+        ):
+            merged[-1] = prev.model_copy(update={"value": prev.value + element.value})
+        else:
+            merged.append(element)
+    return merged
 
 
 def extract_about_the_author_blurb(raw: ExtractionResult) -> str | None:
@@ -67,6 +130,18 @@ def extract_about_the_author_blurb(raw: ExtractionResult) -> str | None:
     if len(text) < 40:
         return None
     return text
+
+
+def serialize_author_blurb_inline_elements(
+    elements: list[IRTextElement | IRInlineMathElement],
+) -> list[dict]:
+    payload: list[dict] = []
+    for element in elements:
+        if isinstance(element, IRInlineMathElement):
+            payload.append(element.model_dump(mode="json"))
+        else:
+            payload.append(element.model_dump(mode="json"))
+    return payload
 
 
 def extract_author_name_from_blurb_text(blurb: str) -> str | None:

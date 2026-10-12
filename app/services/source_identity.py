@@ -24,6 +24,8 @@ class SourceIdentityRecord:
     publisher_imprint: str | None = None
     publisher_trade_name: str | None = None
     author_blurb: str | None = None
+    author_blurb_inline_elements: list[dict[str, Any]] = field(default_factory=list)
+    legal_notices: list[dict[str, Any]] = field(default_factory=list)
     publisher_addresses: list[dict[str, str | None]] = field(default_factory=list)
     publication_year: int | None = None
     isbn: str | None = None
@@ -143,6 +145,8 @@ def build_source_identity_from_extraction_doc(doc: dict[str, Any]) -> SourceIden
         publisher_imprint=phase1.get("publisher_imprint"),
         publisher_trade_name=phase1.get("publisher_trade_name"),
         author_blurb=phase1.get("author_blurb"),
+        author_blurb_inline_elements=list(phase1.get("author_blurb_inline_elements") or []),
+        legal_notices=list(phase1.get("legal_notices") or []),
         publisher_addresses=list(phase1.get("publisher_addresses") or []),
         publication_year=year_int,
         isbn=primary_isbn,

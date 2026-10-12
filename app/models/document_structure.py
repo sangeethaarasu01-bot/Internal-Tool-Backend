@@ -121,6 +121,9 @@ class DocumentStructureResult(BaseModel):
     book_publisher_imprint: str | None = None
     book_publisher_trade_name: str | None = None
     book_author_blurb: str | None = None
+    book_author_blurb_inline_elements: list[dict] = Field(default_factory=list)
+    book_legal_notices: list[dict] = Field(default_factory=list)
+    book_page_folios: dict[str, str] = Field(default_factory=dict)
     book_publisher_addresses: list[dict[str, str | None]] = Field(default_factory=list)
     book_year: int | None = None
     book_isbn: str | None = None

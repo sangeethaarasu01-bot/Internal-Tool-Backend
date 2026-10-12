@@ -73,7 +73,7 @@ def test_restore_skips_mainmatter_chapter_pis() -> None:
     assert not any(c.tag is etree.ProcessingInstruction for c in chapter)
 
 
-def test_body_merge_keeps_front_part_with_page_pis(tmp_path) -> None:
+def test_body_merge_drops_template_front_matter_and_uses_pdf(tmp_path) -> None:
     template = tmp_path / "t.xml"
     template.write_text(
         f"""<book xmlns="http://docbook.org/ns/docbook">
@@ -96,10 +96,7 @@ def test_body_merge_keeps_front_part_with_page_pis(tmp_path) -> None:
         ]
     )
     apply_pdf_body_to_docbook_book(root, mapping)
-    part = root.find(f"{{{DOCBOOK_NS}}}part[@role='front']")
-    assert part is not None
-    preface = part.find(f"{{{DOCBOOK_NS}}}preface")
-    assert preface is not None
-    assert any(c.tag is etree.ProcessingInstruction for c in preface)
+    assert root.find(f"{{{DOCBOOK_NS}}}part[@role='front']") is None
     assert root.find(f"{{{DOCBOOK_NS}}}chapter") is not None
     assert "From PDF" in etree.tostring(root, encoding="unicode")
+    assert "Remove." not in etree.tostring(root, encoding="unicode")

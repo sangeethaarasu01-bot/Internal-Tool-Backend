@@ -159,6 +159,35 @@ def _convert_bibliography_chapters(book: etree._Element) -> None:
             chapter.remove(child)
 
 
+def _reorder_main_matter_before_back(book: etree._Element) -> None:
+    """Move stray back-matter chapters that appear before main narrative."""
+    mains: list[etree._Element] = []
+    backs: list[etree._Element] = []
+    other: list[etree._Element] = []
+    for child in iter_element_children(book):
+        local = xml_local_name(child)
+        if local == "info":
+            continue
+        if local == "chapter":
+            if _chapter_title(child).strip().lower() in _BACK_MATTER_TITLES:
+                backs.append(child)
+            else:
+                mains.append(child)
+        else:
+            other.append(child)
+    if not backs or not mains:
+        return
+    for child in mains + backs:
+        if child.getparent() is book:
+            book.remove(child)
+    for child in other:
+        if child.getparent() is book:
+            book.remove(child)
+    insert_at = 1 if _direct_child(book, "info") is not None else 0
+    for offset, child in enumerate(mains + other + backs):
+        book.insert(insert_at + offset, child)
+
+
 def _group_back_matter(book: etree._Element) -> None:
     back_chapters: list[etree._Element] = []
     for child in iter_element_children(book):
@@ -213,14 +242,26 @@ def _split_index_paragraphs(chapter: etree._Element) -> None:
 
 
 def _assign_chapter_ids_and_labels(book: etree._Element, root_id: str) -> None:
-    number = 0
+    chapter_index = 0
+    main_label = 0
     for element in book.iter():
         if xml_local_name(element) != "chapter":
             continue
-        number += 1
+        chapter_index += 1
         _ensure_chapter_info_title(element)
-        element.set(XML_ID_ATTR, f"{root_id}-chapter{number}")
-        element.set("label", str(number))
+        element.set(XML_ID_ATTR, f"{root_id}-chapter{chapter_index}")
+        parent = element.getparent()
+        in_back_part = (
+            parent is not None
+            and xml_local_name(parent) == "part"
+            and (parent.get("role") or "").strip() == "back"
+        )
+        title_text = _chapter_title(element).strip().lower()
+        if not in_back_part and title_text not in _BACK_MATTER_TITLES:
+            main_label += 1
+            element.set("label", str(main_label))
+        elif "label" in element.attrib:
+            del element.attrib["label"]
 
 
 def normalize_docbook_book_structure(book: etree._Element) -> None:
@@ -233,6 +274,7 @@ def normalize_docbook_book_structure(book: etree._Element) -> None:
     _dedupe_repeated_recurse(book)
     _unwrap_nested_chapters(book)
     _convert_bibliography_chapters(book)
+    _reorder_main_matter_before_back(book)
     _group_back_matter(book)
     for chapter in book.iter(_ns("chapter")):
         if _chapter_title(chapter).strip().lower() == "index":

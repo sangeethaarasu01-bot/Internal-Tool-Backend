@@ -25,18 +25,30 @@ def apply_element_attributes(element: etree._Element, attributes: dict[str, str]
 
 
 def _non_generated_author_attributes(attributes: dict[str, str]) -> dict[str, str]:
-    """Drop xlink/role ids from sample templates; PDF does not supply them."""
+    """Drop foreign template biblio IDs; keep DocBook author slot role."""
     filtered: dict[str, str] = {}
     for key, value in attributes.items():
         if not value or not str(value).strip():
             continue
-        if key.startswith(f"{{{XLINK_NS}}}") or key.startswith("xlink:"):
-            continue
         local = key.split("}", 1)[-1] if key.startswith("{") else key
-        if local == "role":
+        if local in {"href"} and (
+            key.startswith(f"{{{XLINK_NS}}}") or key.startswith("xlink:")
+        ):
+            continue
+        if key.startswith(f"{{{XLINK_NS}}}") or key.startswith("xlink:"):
+            if local == "role" and str(value).strip() == "biblioAuID":
+                filtered[key] = str(value).strip()
+            continue
+        if local == "role" and key.startswith("{") is False:
             continue
         filtered[key] = value
     return filtered
+
+
+def apply_default_author_xlink_role(author: etree._Element) -> None:
+    role_key = f"{{{XLINK_NS}}}role"
+    if not (author.get(role_key) or "").strip():
+        set_lxml_attr(author, role_key, "biblioAuID")
 
 
 @dataclass
@@ -96,6 +108,7 @@ def _new_author_element(
     author = etree.SubElement(authorgroup, f"{{{docbook_ns}}}author")
     if prototype:
         apply_element_attributes(author, _non_generated_author_attributes(prototype.author_attributes))
+    apply_default_author_xlink_role(author)
 
     personname = etree.SubElement(author, f"{{{docbook_ns}}}personname")
     if prototype and prototype.personname_attributes:

@@ -499,6 +499,17 @@ def classify_content_block(
     if not text:
         return FilterDecision("UNKNOWN_TEXT", False, None, 0.3)
 
+    if book_mode and page_number <= 15:
+        from app.services.layout.book_copyright_legal import is_book_copyright_boilerplate_line
+
+        if is_book_copyright_boilerplate_line(text):
+            return FilterDecision(
+                classification="UNKNOWN_TEXT",
+                exclude_from_content=True,
+                exclusion_reason="book_copyright_legal",
+                confidence=0.94,
+            )
+
     y0, y1 = block.bbox[1], block.bbox[3]
     near_top = _near_top(y0, page_height)
     near_bottom = _near_bottom(y0, y1, page_height)

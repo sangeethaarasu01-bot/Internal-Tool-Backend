@@ -31,7 +31,11 @@ def ir_from_extraction_result(result: dict[str, Any]) -> dict[str, Any]:
     semantic = structure.get("semantic")
     if not semantic:
         raise ExtractionWorkflowError("Extraction result has no semantic IR")
-    return {key: value for key, value in semantic.items() if key != "tagged_output"}
+    ir = {key: value for key, value in semantic.items() if key != "tagged_output"}
+    folios = structure.get("book_page_folios")
+    if isinstance(folios, dict) and folios:
+        ir["book_page_folios"] = folios
+    return ir
 
 
 def parse_template_xml(template_path: Path) -> dict[str, Any]:

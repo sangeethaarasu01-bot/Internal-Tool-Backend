@@ -86,7 +86,7 @@ def _remove_publication_identifiers(info: etree._Element) -> None:
         if biblioid.getparent() is None:
             continue
         kind = (biblioid.get("class") or "").lower()
-        if kind in {"isbn", "doi", "isbn13", "isbn10"}:
+        if kind in {"isbn", "isbn13", "isbn10"}:
             parent = biblioid.getparent()
             if parent is not None:
                 parent.remove(biblioid)
@@ -122,6 +122,7 @@ def _replace_authorgroup(
     authors: list[str],
     *,
     author_blurb: str | None = None,
+    author_blurb_inline_elements: list[dict] | None = None,
 ) -> None:
     people = [name.strip() for name in authors if name.strip()]
     people = [name for name in people if not _looks_like_imprint_name(name)]
@@ -148,6 +149,22 @@ def _replace_authorgroup(
             author_el.remove(child)
     blurb_el = etree.SubElement(author_el, f"{{{DOCBOOK_NS}}}personblurb")
     para = etree.SubElement(blurb_el, f"{{{DOCBOOK_NS}}}para")
+    inline_payload = list(author_blurb_inline_elements or [])
+    if inline_payload:
+        from app.models.ir_schema import IRInlineMathElement, IRTextElement
+        from app.utils.docbook_emphasis import append_docbook_emphasis_inline
+
+        elements: list[IRTextElement | IRInlineMathElement] = []
+        for item in inline_payload:
+            if not isinstance(item, dict):
+                continue
+            if item.get("type") == "inline_math":
+                elements.append(IRInlineMathElement.model_validate(item))
+            else:
+                elements.append(IRTextElement.model_validate(item))
+        if elements:
+            append_docbook_emphasis_inline(para, elements)
+            return
     _set_text(para, blurb)
 
 
@@ -213,6 +230,11 @@ def _append_publisher_address(
         _set_text(uri_el, website.replace("https://", "").replace("http://", ""))
 
 
+def _rowman_style_publisher_block(publisher: str | None, imprint: str | None) -> bool:
+    blob = f"{publisher or ''} {imprint or ''}".casefold()
+    return "rowman" in blob or "littlefield" in blob or "lexington" in blob
+
+
 def _replace_publisher_biblioset(
     info: etree._Element,
     publisher: str | None,
@@ -227,10 +249,18 @@ def _replace_publisher_biblioset(
     if not publisher and not imprint:
         return
     biblioset = etree.SubElement(info, f"{{{DOCBOOK_NS}}}biblioset", attrib={"role": "publisher"})
+    rowman_style = _rowman_style_publisher_block(publisher, imprint)
+    if rowman_style:
+        printhistory = etree.SubElement(biblioset, f"{{{DOCBOOK_NS}}}printhistory")
+        para = etree.SubElement(printhistory, f"{{{DOCBOOK_NS}}}para", attrib={"role": "fullOut"})
+        _set_text(para, "Published by")
     imprint_name = (imprint or "").strip()
     if imprint_name:
         misc = etree.SubElement(biblioset, f"{{{DOCBOOK_NS}}}bibliomisc", attrib={"role": "imprint"})
         _set_text(misc, imprint_name)
+    if rowman_style and publisher:
+        phrase = etree.SubElement(biblioset, f"{{{DOCBOOK_NS}}}phrase")
+        _set_text(phrase, "A wholly owned subsidiary of")
     if not publisher:
         return
     pub = etree.SubElement(biblioset, f"{{{DOCBOOK_NS}}}publisher")
@@ -304,6 +334,34 @@ def _overlay_author_names(
     return people
 
 
+def _sync_legal_notices(info: etree._Element, notices: list[dict]) -> None:
+    """Insert copyright-page legal notices from PDF extraction (replaces template stubs)."""
+    for child in list(info.findall(f"{{{DOCBOOK_NS}}}legalnotice")):
+        info.remove(child)
+    if not notices:
+        return
+    copyright_el = _direct_child(info, "copyright")
+    insert_at = list(info).index(copyright_el) + 1 if copyright_el is not None else len(info)
+    for offset, item in enumerate(notices):
+        if not isinstance(item, dict):
+            continue
+        text = sanitize_xml_text(str(item.get("text") or "")).strip()
+        if not text:
+            continue
+        notice = etree.Element(f"{{{DOCBOOK_NS}}}legalnotice")
+        role = item.get("role")
+        if isinstance(role, str) and role.strip():
+            notice.set("role", role.strip())
+        para = etree.SubElement(notice, f"{{{DOCBOOK_NS}}}para", attrib={"role": "fullOut"})
+        if bool(item.get("bold")):
+            emphasis = etree.SubElement(para, f"{{{DOCBOOK_NS}}}emphasis")
+            emphasis.set("role", "bold")
+            _set_text(emphasis, text)
+        else:
+            _set_text(para, text)
+        info.insert(insert_at + offset, notice)
+
+
 def _strip_template_marketing_from_info(info: etree._Element) -> None:
     """Remove sample-book covers, blurbs, and CIP blocks when PDF metadata replaces <info>."""
     for local_name in (
@@ -351,6 +409,21 @@ def _sync_isbns(
             value,
             log_context={"semantic_type": "metadata", "source": "-", "field": "isbn"},
         )
+
+
+def _sync_doi(info: etree._Element, doi: str | None) -> None:
+    cleaned = (doi or "").strip()
+    if not cleaned:
+        return
+    for biblioid in list(info.findall(f"{{{DOCBOOK_NS}}}biblioid")):
+        if (biblioid.get("class") or "").lower() == "doi":
+            info.remove(biblioid)
+    biblioid = etree.SubElement(info, f"{{{DOCBOOK_NS}}}biblioid", attrib={"class": "doi"})
+    set_lxml_text(
+        biblioid,
+        cleaned,
+        log_context={"semantic_type": "metadata", "source": "-", "field": "doi"},
+    )
 
 
 def apply_pdf_metadata_to_docbook_book(
@@ -410,7 +483,12 @@ def apply_pdf_metadata_to_docbook_book(
     author_blurb_raw = clean_personblurb_text(source.author_blurb or "") if source.author_blurb else None
     author_blurb = sanitize_xml_text(author_blurb_raw) if author_blurb_raw else None
     if author_people:
-        _replace_authorgroup(info, author_people, author_blurb=author_blurb)
+        _replace_authorgroup(
+            info,
+            author_people,
+            author_blurb=author_blurb,
+            author_blurb_inline_elements=list(source.author_blurb_inline_elements or []),
+        )
     else:
         _insert_missing_comment(info, "MISSING AUTHOR: please supply")
     _replace_publisher_biblioset(
@@ -422,6 +500,9 @@ def apply_pdf_metadata_to_docbook_book(
     _update_copyright(info, source)
     _update_pubdate(info, source.publication_year)
     _sync_isbns(info, isbns, isbn, role_map)
+    _sync_doi(info, source.doi)
+    _strip_template_marketing_from_info(info)
+    _sync_legal_notices(info, list(source.legal_notices or []))
     if isbn13_digits(isbn):
         assign_docbook_metadata_xml_ids(book, isbn)
     elif book.get("{http://www.w3.org/XML/1998/namespace}id"):

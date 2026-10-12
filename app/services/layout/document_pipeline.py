@@ -32,6 +32,7 @@ from app.services.layout.semantic_patterns import (
     split_section_and_body,
 )
 from app.services.layout.book_metadata import BookExtractionContext, detect_book_document
+from app.services.layout.book_page_folios import build_book_page_folio_map
 from app.services.layout.book_patterns import (
     looks_like_book_chapter_reference_line,
     parse_book_section_heading,
@@ -175,6 +176,9 @@ def process_document_structure(
         book_publisher_imprint=book_ctx.publisher_imprint,
         book_publisher_trade_name=book_ctx.publisher_trade_name,
         book_author_blurb=book_ctx.author_blurb,
+        book_author_blurb_inline_elements=list(book_ctx.author_blurb_inline_elements),
+        book_legal_notices=list(book_ctx.legal_notices),
+        book_page_folios=build_book_page_folio_map(raw) if book_ctx.is_book else {},
         book_publisher_addresses=[
             {
                 "street": addr.street,
