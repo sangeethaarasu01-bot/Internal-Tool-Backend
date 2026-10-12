@@ -155,6 +155,7 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
         mongo_result, mongo_phase1, mongo_flags = compact_extraction_result_for_mongo(
             result_payload,
             phase1_dump,
+            extraction_id=extraction_id,
         )
 
         update_fields: dict = {

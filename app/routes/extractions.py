@@ -14,6 +14,11 @@ from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Uploa
 from pymongo.errors import PyMongoError
 
 from app.database import extractions_col, mongo_user_error, utcnow
+from app.services.extraction_mongo_payload import (
+    ExtractionMongoPayloadError,
+    plan_extraction_mongo_update,
+    resolve_phase1_from_extraction_doc,
+)
 from app.models.extraction_workflow import (
     GenerateXmlRequest,
     GenerateXmlResponse,
@@ -519,15 +524,17 @@ async def semantic_map_extraction(extraction_id: str, body: SemanticMapRequest):
 
     semantic_record = mapping_result.model_dump(mode="json")
     try:
-        extractions_col().update_one(
-            {"_id": doc["_id"]},
-            {
-                "$set": {
-                    "scope": resolved_scope,
-                    "semantic_mapping": semantic_record,
-                }
-            },
+        set_fields, unset_fields, _mongo_flags = plan_extraction_mongo_update(
+            doc,
+            {"scope": resolved_scope, "semantic_mapping": semantic_record},
+            extraction_id=extraction_id,
         )
+        update_doc: dict = {"$set": set_fields}
+        if unset_fields:
+            update_doc["$unset"] = unset_fields
+        extractions_col().update_one({"_id": doc["_id"]}, update_doc)
+    except ExtractionMongoPayloadError as exc:
+        raise HTTPException(status_code=413, detail=str(exc)) from exc
     except PyMongoError as exc:
         raise HTTPException(status_code=503, detail=mongo_user_error(exc))
 
@@ -613,7 +620,7 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
 
     resolved_scope = scope_result["resolved_scope"]
     filtered_ir = scope_result["filtered_ir"]
-    phase1_doc = doc.get("phase1") or (doc.get("result") or {}).get("phase1")
+    phase1_doc = resolve_phase1_from_extraction_doc(doc)
     filtered_ir = merge_phase1_references_into_ir(filtered_ir, phase1_doc)
     structure = (doc.get("result") or {}).get("structure") or {}
     processed_blocks = structure.get("blocks")
@@ -636,19 +643,8 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     mapping_source = mapping_resolution.mapping_source
     prompt_version = mapping_resolution.prompt_version
     unmapped_count = mapping_resolution.unmapped_count
-    if mapping_resolution.semantic_record is not None:
-        try:
-            extractions_col().update_one(
-                {"_id": doc["_id"]},
-                {
-                    "$set": {
-                        "scope": resolved_scope,
-                        "semantic_mapping": mapping_resolution.semantic_record,
-                    }
-                },
-            )
-        except PyMongoError as exc:
-            raise HTTPException(status_code=503, detail=mongo_user_error(exc)) from exc
+    # Keep semantic mapping in memory for XML generation only — persisting it on every
+    # generate-xml duplicates the IR and often triggers MongoDB's 16MB document limit.
 
     mapping_body = finalize_mapping_for_xml(mapping_resolution.mapping_body, filtered_ir)
 
@@ -797,10 +793,28 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     generated_record["identity_verified"] = True
 
     try:
-        extractions_col().update_one(
-            {"_id": doc["_id"]},
-            {"$set": {"scope": resolved_scope, "generated_xml": generated_record}},
+        set_fields, unset_fields, mongo_flags = plan_extraction_mongo_update(
+            doc,
+            {"scope": resolved_scope, "generated_xml": generated_record},
+            extraction_id=extraction_id,
         )
+        if mongo_flags.get("semantic_mapping_dropped_from_mongo"):
+            warnings.append(
+                "semantic_mapping was removed from the extraction record to stay under "
+                "MongoDB's 16MB limit; mapping is rebuilt from the PDF IR on generate-xml."
+            )
+        if mongo_flags.get("semantic_mapping_externalized"):
+            warnings.append(
+                f"semantic_mapping stored on disk: {mongo_flags.get('semantic_mapping_path')}"
+            )
+        generated_record["warnings"] = warnings
+        set_fields["generated_xml"] = generated_record
+        update_doc: dict = {"$set": set_fields}
+        if unset_fields:
+            update_doc["$unset"] = unset_fields
+        extractions_col().update_one({"_id": doc["_id"]}, update_doc)
+    except ExtractionMongoPayloadError as exc:
+        raise HTTPException(status_code=413, detail=str(exc)) from exc
     except PyMongoError as exc:
         raise HTTPException(status_code=503, detail=mongo_user_error(exc))
 
