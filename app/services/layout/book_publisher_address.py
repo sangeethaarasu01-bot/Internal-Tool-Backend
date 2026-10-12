@@ -11,13 +11,21 @@ WEBSITE_RE = re.compile(
     r"\b(?:https?://)?(?:www\.)?([a-z0-9][a-z0-9\-]*(?:\.[a-z0-9\-]+)+(?:/[^\s]*)?)",
     re.IGNORECASE,
 )
+# Street = entire line before city, state, and ZIP (keep Suite/Apt/Floor/Unit segments).
 US_ADDRESS_RE = re.compile(
-    r"(?im)(\d{1,5}\s+[^,\n]+(?:,\s*[^,\n]+)?)\s*,\s*"
-    r"([A-Za-z][A-Za-z\s.'\-]+?)\s*,\s*([A-Za-z][A-Za-z\s.'\-]+?)\s+(\d{5}(?:-\d{4})?)"
+    r"(?im)(\d{1,5}\s+.+)\s*,\s*([^,\n]+)\s*,\s*"
+    r"([A-Za-z][A-Za-z\s.'\-]+?)\s+(\d{5}(?:-\d{4})?)"
 )
-UK_ADDRESS_RE = re.compile(
-    r"(?im)^\s*(\d{1,4}\s+[\w\s\.'\-]+(?:street|st\.?|road|rd\.?))\s*,\s*"
-    r"([A-Za-z][A-Za-z\s.'\-]+?)\s*,\s*([A-Za-z][A-Za-z\s.'\-]+?)\s+([A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2})\s*$"
+UK_POSTCODE_RE = r"[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}"
+UK_SLASH_ADDRESS_RE = re.compile(
+    rf"(?is)(Unit\s+.+?)\s*/\s*(London)\s+({UK_POSTCODE_RE})\s*/\s*(UK|United Kingdom)\b"
+)
+UK_LONDON_BLOCK_RE = re.compile(
+    rf"(?is)(Unit\s+[^/\n]+(?:,\s*[^/\n]+)*)\s*(?:/\s*|\n+)\s*"
+    rf"(London)\s+({UK_POSTCODE_RE})\s*(?:/\s*|\n+)?\s*(UK|United Kingdom)?"
+)
+UK_COMMA_ADDRESS_RE = re.compile(
+    rf"(?is)(Unit\s+.+?),\s*(London)\s+({UK_POSTCODE_RE}),\s*(UK|United Kingdom)\b"
 )
 
 
@@ -38,49 +46,7 @@ def _normalize_website(raw: str) -> str:
     return cleaned
 
 
-def extract_publisher_addresses(text: str) -> list[PublisherAddress]:
-    """Best-effort parse of US/UK-style publisher addresses and websites."""
-    addresses: list[PublisherAddress] = []
-    seen: set[tuple[str, ...]] = set()
-
-    for match in US_ADDRESS_RE.finditer(text or ""):
-        street = normalize_text(match.group(1)).strip()
-        city = normalize_text(match.group(2)).strip()
-        state = normalize_text(match.group(3)).strip()
-        post_code = match.group(4).strip()
-        key = (street, city, state, post_code)
-        if key in seen:
-            continue
-        seen.add(key)
-        addresses.append(
-            PublisherAddress(
-                street=street,
-                city=city,
-                state=state,
-                post_code=post_code,
-                country="United States",
-            )
-        )
-
-    for match in UK_ADDRESS_RE.finditer(text or ""):
-        street = normalize_text(match.group(1)).strip()
-        city = normalize_text(match.group(2)).strip()
-        region = normalize_text(match.group(3)).strip()
-        post_code = match.group(4).strip().upper()
-        key = (street, city, region, post_code)
-        if key in seen:
-            continue
-        seen.add(key)
-        addresses.append(
-            PublisherAddress(
-                street=street,
-                city=city,
-                state=region,
-                post_code=post_code,
-                country="United Kingdom",
-            )
-        )
-
+def _collect_websites(text: str) -> list[str]:
     websites: list[str] = []
     for match in WEBSITE_RE.finditer(text or ""):
         site = match.group(0).strip().rstrip(".,;")
@@ -88,7 +54,63 @@ def extract_publisher_addresses(text: str) -> list[PublisherAddress]:
             normalized = _normalize_website(site)
             if normalized not in websites:
                 websites.append(normalized)
+    return websites
 
+
+def extract_publisher_addresses(text: str) -> list[PublisherAddress]:
+    """Parse US and UK publisher offices; website attaches to the first address only."""
+    source = text or ""
+    found: list[tuple[int, PublisherAddress]] = []
+    seen: set[tuple[str, ...]] = set()
+
+    for match in US_ADDRESS_RE.finditer(source):
+        street = normalize_text(match.group(1)).strip()
+        city = normalize_text(match.group(2)).strip()
+        state = normalize_text(match.group(3)).strip()
+        post_code = match.group(4).strip()
+        key = ("us", street, city, state, post_code)
+        if key in seen:
+            continue
+        seen.add(key)
+        found.append(
+            (
+                match.start(),
+                PublisherAddress(
+                    street=street,
+                    city=city,
+                    state=state,
+                    post_code=post_code,
+                    country="United States",
+                ),
+            )
+        )
+
+    for pattern in (UK_COMMA_ADDRESS_RE, UK_SLASH_ADDRESS_RE, UK_LONDON_BLOCK_RE):
+        for match in pattern.finditer(source):
+            street = normalize_text(match.group(1)).strip().rstrip(".,;")
+            city = normalize_text(match.group(2)).strip()
+            post_code = match.group(3).strip().upper()
+            country_raw = (match.group(4) or "UK").strip()
+            country = "United Kingdom" if country_raw.upper() == "UK" else normalize_text(country_raw)
+            key = ("uk", street, city, post_code)
+            if key in seen:
+                continue
+            seen.add(key)
+            found.append(
+                (
+                    match.start(),
+                    PublisherAddress(
+                        street=street,
+                        city=city,
+                        post_code=post_code,
+                        country=country,
+                    ),
+                )
+            )
+
+    found.sort(key=lambda item: item[0])
+    addresses = [addr for _, addr in found]
+    websites = _collect_websites(source)
     if websites and addresses:
         first = addresses[0]
         addresses[0] = PublisherAddress(
@@ -101,5 +123,4 @@ def extract_publisher_addresses(text: str) -> list[PublisherAddress]:
         )
     elif websites:
         addresses.append(PublisherAddress(website=websites[0]))
-
     return addresses

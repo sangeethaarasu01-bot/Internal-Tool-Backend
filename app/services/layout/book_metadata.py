@@ -388,8 +388,9 @@ def _block_text_as_printed_line(block_text: str) -> str:
     return preserve_title_page_line(" ".join(parts))
 
 
-def _ordered_title_page_blocks(raw: ExtractionResult) -> list[str]:
-    blocks_out: list[str] = []
+def _ordered_title_page_paragraphs(raw: ExtractionResult) -> list[str]:
+    """Each title-page text block is one typographic paragraph."""
+    paragraphs: list[str] = []
     for page_number in _candidate_title_page_numbers(raw):
         page = next((p for p in raw.pages if p.page_number == page_number), None)
         if page is None:
@@ -398,68 +399,119 @@ def _ordered_title_page_blocks(raw: ExtractionResult) -> list[str]:
             block_line = _block_text_as_printed_line(block.text or "")
             if not block_line or _is_title_page_boilerplate_line(block_line):
                 continue
-            blocks_out.append(block_line)
-    return blocks_out
+            paragraphs.append(block_line)
+    return paragraphs
+
+
+def _paragraph_is_subtitle_candidate(paragraph: str, title: str) -> bool:
+    """Second title-page paragraph describing the work (not author/edition boilerplate)."""
+    body = EDITION_SUFFIX_RE.sub("", paragraph).strip()
+    if not body or body.casefold() == title.casefold():
+        return False
+    if _is_title_page_boilerplate_line(body):
+        return False
+    if line_looks_like_subject_name_list(body):
+        return True
+    author_only = normalize_book_author_name(body)
+    if author_only and is_plausible_book_author_name(author_only):
+        return False
+    return len(body.split()) >= 2
 
 
 def extract_title_page_triplet(
     raw: ExtractionResult,
 ) -> tuple[str | None, str | None, str | None]:
     """
-    Parse stacked title-page lines: main title, optional subject subtitle, author.
-
-    Example: book title, then poet names, then ``Grant D. Moss``.
+    Title page paragraphs: first = title, second = subtitle when present, then author.
     """
-    blocks = _ordered_title_page_blocks(raw)
-    for index, block_line in enumerate(blocks):
-        line_clean = EDITION_SUFFIX_RE.sub("", block_line).strip()
+    paragraphs = _ordered_title_page_paragraphs(raw)
+    title_index: int | None = None
+    title: str | None = None
+    for index, paragraph in enumerate(paragraphs):
+        line_clean = EDITION_SUFFIX_RE.sub("", paragraph).strip()
         if line_looks_like_subject_name_list(line_clean):
             continue
         if not is_valid_book_title(line_clean):
             continue
         title = preserve_title_page_line(line_clean)
-        subtitle: str | None = None
-        author: str | None = None
-        next_index = index + 1
-        if next_index < len(blocks) and line_looks_like_subject_name_list(blocks[next_index]):
-            subtitle = preserve_title_page_line(blocks[next_index])
-            next_index += 1
-        if next_index < len(blocks):
-            author = normalize_book_author_name(blocks[next_index])
-        if not author:
-            for scan in range(index + 1, min(index + 5, len(blocks))):
-                if line_looks_like_subject_name_list(blocks[scan]):
-                    continue
-                author = normalize_book_author_name(blocks[scan])
-                if author:
-                    break
-        if subtitle:
-            return title, subtitle, author
-        if author and not line_looks_like_subject_name_list(title):
-            return title, None, author
-        if author:
-            return None, None, author
-    return None, None, None
+        title_index = index
+        break
+    if title is None or title_index is None:
+        return None, None, None
+
+    subtitle: str | None = None
+    author: str | None = None
+    if title_index + 1 < len(paragraphs):
+        second = paragraphs[title_index + 1]
+        if _paragraph_is_subtitle_candidate(second, title):
+            subtitle = preserve_title_page_line(EDITION_SUFFIX_RE.sub("", second).strip())
+    author_start = title_index + (2 if subtitle else 1)
+    for scan in range(author_start, min(title_index + 6, len(paragraphs))):
+        candidate = normalize_book_author_name(paragraphs[scan])
+        if candidate and is_plausible_book_author_name(candidate):
+            author = candidate
+            break
+
+    return title, subtitle, author
+
+
+def _publisher_imprint_pages_text(raw: ExtractionResult, max_pages: int = 15) -> str:
+    parts: list[str] = []
+    markers = (
+        "published by",
+        "copyright",
+        "isbn",
+        "forbes",
+        "unit a",
+        "whitacre",
+        "rowman",
+        "littlefield",
+    )
+    for page in sorted(raw.pages, key=lambda p: p.page_number):
+        if page.page_number > max_pages:
+            break
+        text = join_ordered_block_text(raw, page_number=page.page_number)
+        lowered = text.lower()
+        if any(marker in lowered for marker in markers):
+            parts.append(text)
+    return "\n".join(parts)
+
+
+def _author_name_looks_like_title_fragment(name: str, title: str | None, subtitle: str | None) -> bool:
+    """Reject author candidates that are really title/subtitle wording."""
+    if line_looks_like_subject_name_list(name):
+        return True
+    lowered = name.casefold()
+    for fragment in (title, subtitle):
+        if not fragment:
+            continue
+        if lowered == fragment.casefold():
+            return True
+        words = [w for w in re.findall(r"[A-Za-z']+", name) if len(w) > 2]
+        if len(words) >= 3 and all(w.casefold() in fragment.casefold() for w in words):
+            return True
+    return False
 
 
 def _resolve_book_author(
     raw: ExtractionResult,
     *,
     title_page_author: str | None,
+    book_title: str | None = None,
+    book_subtitle: str | None = None,
 ) -> str | None:
-    """Prefer title-page author; cross-check or fill from About the Author opener."""
+    """About-the-Author opener is authoritative when a bio is present."""
     bio_name = extract_author_name_from_about_blurb(raw)
-    title_author = normalize_book_author_name(title_page_author or "") if title_page_author else None
     bio_author = normalize_book_author_name(bio_name or "") if bio_name else None
-
-    if title_author and bio_author:
-        if title_author.casefold() == bio_author.casefold():
-            return title_author
-        # Title page line is authoritative when it is a plausible person name.
-        if is_plausible_book_author_name(title_author):
-            return title_author
+    if bio_author and not _author_name_looks_like_title_fragment(bio_author, book_title, book_subtitle):
         return bio_author
-    return title_author or bio_author
+
+    title_author = normalize_book_author_name(title_page_author or "") if title_page_author else None
+    if title_author and _author_name_looks_like_title_fragment(title_author, book_title, book_subtitle):
+        title_author = None
+    if title_author and is_plausible_book_author_name(title_author):
+        return title_author
+    return bio_author
 
 
 def extract_isbn_list(text: str) -> list[str]:
@@ -774,14 +826,19 @@ def _extract_metadata_from_raw(raw: ExtractionResult) -> BookExtractionContext:
     title = extract_book_title(raw_text, raw)
     if triplet_title:
         title = triplet_title
+    subtitle = triplet_subtitle
 
-    author = _resolve_book_author(raw, title_page_author=triplet_author)
+    author = _resolve_book_author(
+        raw,
+        title_page_author=triplet_author,
+        book_title=title,
+        book_subtitle=subtitle,
+    )
     if not author:
         author = _extract_author_from_text(raw_text, normalized)
     if author and line_looks_like_subject_name_list(author):
         author = None
 
-    subtitle = triplet_subtitle
     copyright_holder = extract_copyright_holder(raw_text)
     trade_name = extract_published_by_trade_name(raw_text)
     publisher_parent = extract_publisher_parent_company(raw_text)
@@ -797,7 +854,9 @@ def _extract_metadata_from_raw(raw: ExtractionResult) -> BookExtractionContext:
         publisher_imprint=trade_name,
         publisher_trade_name=trade_name,
         author_blurb=extract_about_the_author_blurb(raw),
-        publisher_addresses=tuple(extract_publisher_addresses(raw_text)),
+        publisher_addresses=tuple(
+            extract_publisher_addresses(_publisher_imprint_pages_text(raw) or raw_text)
+        ),
         year=year,
         isbn=isbn,
         isbns=tuple(isbns),

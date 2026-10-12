@@ -8,7 +8,11 @@ from dataclasses import dataclass, field
 
 from lxml import etree
 
+from app.services.layout.book_author_bio import extract_author_name_from_blurb_text
+from app.services.layout.book_metadata import is_plausible_book_author_name
 from app.services.source_identity import SourceIdentityRecord
+from app.utils.book_blurb_text import clean_personblurb_text
+from app.utils.book_text_typography import apply_book_typography
 from app.services.template_format import DOCBOOK_NS
 
 XLINK_NS = "http://www.w3.org/1999/xlink"
@@ -43,7 +47,12 @@ class DocBookMetadataOverlayResult:
 def _set_text(element: etree._Element, text: str) -> None:
     for child in element:
         element.remove(child)
-    set_lxml_text(element, text, log_context={"semantic_type": "metadata", "source": "-", "field": "docbook"})
+    cleaned = apply_book_typography(sanitize_xml_text(text))
+    set_lxml_text(
+        element,
+        cleaned,
+        log_context={"semantic_type": "metadata", "source": "-", "field": "docbook"},
+    )
 
 
 def _remove_publication_identifiers(info: etree._Element) -> None:
@@ -99,7 +108,7 @@ def _replace_authorgroup(
                 info.remove(child)
         return
     update_authorgroup_authors(info, people, docbook_ns=DOCBOOK_NS)
-    blurb = (author_blurb or "").strip()
+    blurb = clean_personblurb_text((author_blurb or "").strip())
     if not blurb:
         return
     authorgroup = _direct_child(info, "authorgroup")
@@ -204,8 +213,11 @@ def _replace_publisher_biblioset(
     pub = etree.SubElement(biblioset, f"{{{DOCBOOK_NS}}}publisher")
     name_el = etree.SubElement(pub, f"{{{DOCBOOK_NS}}}publishername")
     _set_text(name_el, publisher.strip())
-    for address in addresses or []:
-        _append_publisher_address(pub, address)
+    for index, address in enumerate(addresses or []):
+        payload = dict(address)
+        if index > 0:
+            payload["website"] = None
+        _append_publisher_address(pub, payload)
 
 
 def _update_copyright(info: etree._Element, source: SourceIdentityRecord) -> None:
@@ -240,6 +252,33 @@ def _update_pubdate(info: etree._Element, year: int | None) -> None:
 
 def _insert_missing_comment(info: etree._Element, message: str) -> None:
     info.append(etree.Comment(f" {message} "))
+
+
+def _overlay_author_names(
+    source: SourceIdentityRecord,
+    *,
+    title: str | None,
+    subtitle: str | None,
+) -> list[str]:
+    """Personblurb opener overrides phase1 authors when present."""
+    raw_blurb = (source.author_blurb or "").strip()
+    if raw_blurb:
+        bio_name = extract_author_name_from_blurb_text(raw_blurb)
+        normalized = bio_name.strip() if bio_name else ""
+        if normalized and is_plausible_book_author_name(normalized):
+            return [normalized]
+    people = [
+        name.strip()
+        for name in (source.authors or [])
+        if name.strip() and not _looks_like_imprint_name(name.strip())
+    ]
+    if title:
+        title_cf = title.casefold()
+        people = [name for name in people if name.casefold() != title_cf]
+    if subtitle:
+        subtitle_cf = subtitle.casefold()
+        people = [name for name in people if name.casefold() != subtitle_cf]
+    return people
 
 
 def _strip_template_marketing_from_info(info: etree._Element) -> None:
@@ -340,10 +379,13 @@ def apply_pdf_metadata_to_docbook_book(
         _set_or_create_title(info, title.strip())
     else:
         _insert_missing_comment(info, "MISSING: title")
-    if title or subtitle:
+    if subtitle:
         _set_or_clear_subtitle(info, subtitle)
-    author_people = [name for name in authors if not _looks_like_imprint_name(name)]
-    author_blurb = sanitize_xml_text(source.author_blurb) if source.author_blurb else None
+    elif title:
+        _set_or_clear_subtitle(info, None)
+    author_people = _overlay_author_names(source, title=title, subtitle=subtitle)
+    author_blurb_raw = clean_personblurb_text(source.author_blurb or "") if source.author_blurb else None
+    author_blurb = sanitize_xml_text(author_blurb_raw) if author_blurb_raw else None
     if author_people:
         _replace_authorgroup(info, author_people, author_blurb=author_blurb)
     else:

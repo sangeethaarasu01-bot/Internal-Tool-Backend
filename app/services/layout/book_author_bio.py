@@ -7,6 +7,7 @@ import re
 from app.models.extraction import ExtractionResult
 from app.pipeline.phase1.text_fidelity import join_ordered_block_text
 from app.services.layout.semantic_patterns import normalize_text
+from app.utils.book_blurb_text import clean_personblurb_text
 
 ABOUT_AUTHOR_HEADING_RE = re.compile(
     r"^\s*about\s+the\s+author(s)?\s*$",
@@ -62,9 +63,24 @@ def extract_about_the_author_blurb(raw: ExtractionResult) -> str | None:
         paragraphs.append(" ".join(buffer))
 
     text = normalize_text("\n\n".join(paragraphs)).strip()
+    text = clean_personblurb_text(text)
     if len(text) < 40:
         return None
     return text
+
+
+def extract_author_name_from_blurb_text(blurb: str) -> str | None:
+    """Authoritative author name from the first sentence of a personblurb."""
+    cleaned = clean_personblurb_text(blurb.strip())
+    if not cleaned:
+        return None
+    match = BIO_OPENER_NAME_RE.match(cleaned)
+    if not match:
+        return None
+    candidate = normalize_text(match.group(1)).strip().rstrip(".,;")
+    if not candidate or len(candidate) > 80:
+        return None
+    return candidate
 
 
 def extract_author_name_from_about_blurb(raw: ExtractionResult) -> str | None:
@@ -74,12 +90,4 @@ def extract_author_name_from_about_blurb(raw: ExtractionResult) -> str | None:
     Example: ``Grant D. Moss is an Associate Professor...`` → ``Grant D. Moss``.
     """
     blurb = extract_about_the_author_blurb(raw)
-    if not blurb:
-        return None
-    match = BIO_OPENER_NAME_RE.match(blurb.strip())
-    if not match:
-        return None
-    candidate = normalize_text(match.group(1)).strip().rstrip(".,;")
-    if not candidate or len(candidate) > 80:
-        return None
-    return candidate
+    return extract_author_name_from_blurb_text(blurb or "")

@@ -103,6 +103,34 @@ def test_overlay_strips_template_publisher_links_revhistory_and_workflow_biblioi
     assert "Rowman" in pub
 
 
+def test_overlay_author_name_from_personblurb_not_title() -> None:
+    from app.services.template_format import DOCBOOK_NS
+
+    ns = {"db": DOCBOOK_NS}
+    root = etree.parse(str(FIXTURE)).getroot()
+    source = SourceIdentityRecord(
+        extraction_id="x",
+        source_pdf_sha256="sha",
+        source_filename="book.pdf",
+        title="Political Poetry in the Wake of the Second Spanish Republic",
+        subtitle="Rafael Alberti, Pablo Neruda, and Nicolás Guillén",
+        authors=["Political Poetry"],
+        author_blurb=(
+            "Grant D. Moss is an Associate Professor of Spanish at Pittsburg State University. "
+            "He researches modern Iberian poetry."
+        ),
+        publication_year=2018,
+        isbn="978-1-4985-4770-3",
+    )
+    apply_pdf_metadata_to_docbook_book(root, source)
+    first = root.xpath("string(db:info/db:authorgroup/db:author[1]/db:personname/db:firstname)", namespaces=ns)
+    middle = root.xpath("string(db:info/db:authorgroup/db:author[1]/db:personname/db:othername)", namespaces=ns)
+    surname = root.xpath("string(db:info/db:authorgroup/db:author[1]/db:personname/db:surname)", namespaces=ns)
+    assert first == "Grant"
+    assert middle == "D."
+    assert surname == "Moss"
+
+
 def test_overlay_publisher_address_serializes_without_duplicate_xmlns() -> None:
     from app.utils.xml_serializer import serialize_lxml_tree
 

@@ -182,7 +182,8 @@ def _moss_political_poetry_title_pages() -> ExtractionResult:
                     "www.rowman.com\n\n"
                     "Copyright © 2018 by Lexington Books\n"
                     "ISBN 978-1-4985-4770-3 (cloth : alk. paper)\n"
-                    "ISBN 978-1-4985-4771-0 (electronic)",
+                    "ISBN 978-1-4985-4771-0 (electronic)\n"
+                    "Unit A, Whitacre Mews, 26-34 Stannary Street / London SE11 4AB / UK",
                     [50, 80, 550, 400],
                 ),
             ],
@@ -270,7 +271,13 @@ def test_lexington_political_poetry_title_page_metadata() -> None:
     assert ctx.author == "Grant D. Moss"
     assert ctx.publisher_imprint == "Lexington Books"
     assert ctx.publisher and "Rowman" in ctx.publisher and "Littlefield" in ctx.publisher
-    assert any(addr.street and "Forbes" in addr.street for addr in ctx.publisher_addresses)
+    assert len(ctx.publisher_addresses) == 2
+    us_addr = ctx.publisher_addresses[0]
+    uk_addr = ctx.publisher_addresses[1]
+    assert us_addr.street == "4501 Forbes Boulevard, Suite 200"
+    assert uk_addr.street == "Unit A, Whitacre Mews, 26-34 Stannary Street"
+    assert uk_addr.post_code and "SE11" in uk_addr.post_code
+    assert ctx.subtitle == "Rafael Alberti, Pablo Neruda, and Nicolás Guillén"
     assert ctx.copyright_holder == "Lexington Books"
     assert ctx.year == 2018
     assert len(ctx.isbns) == 2
@@ -283,7 +290,8 @@ def test_book_metadata_detection() -> None:
     ctx = detect_book_document(raw)
     assert ctx.is_book
     assert ctx.publication_document_type == "book"
-    assert ctx.title == "Overcoming Student Apathy: Succeeding with All Learners"
+    assert ctx.title == "Overcoming Student Apathy"
+    assert ctx.subtitle == "Succeeding with All Learners"
     assert ctx.author == "Jeff C. Marshall"
     assert ctx.publisher == "Rowman & Littlefield"
     assert ctx.year == 2014
@@ -391,9 +399,13 @@ MARSHALL_PDF = ROOT / "uploads" / "9798216211488_web.pdf"
 def test_marshall_book_pdf_metadata() -> None:
     raw = extract_text_layout(str(MARSHALL_PDF), original_filename=MARSHALL_PDF.name)
     doc = build_extracted_document(raw, structure=process_document_structure(raw, include_tagged_output=False))
-    expected_title = "Overcoming Student Apathy: Succeeding with All Learners"
     assert doc.document_type == "book"
-    assert _normalize_title_for_compare(doc.title or "") == _normalize_title_for_compare(expected_title)
+    assert _normalize_title_for_compare(doc.title or "") == _normalize_title_for_compare(
+        "Overcoming Student Apathy"
+    )
+    assert _normalize_title_for_compare(doc.subtitle or "") == _normalize_title_for_compare(
+        "Succeeding with All Learners"
+    )
     assert doc.authors == ["Jeff C. Marshall"]
     assert len(doc.sections) >= 12
     assert 20 <= len(doc.references) <= 60
@@ -414,7 +426,8 @@ def test_book_structure_and_references() -> None:
 
     assert doc.publication_document_type == "book"
     assert doc.document_type == "book"
-    assert doc.title == "Overcoming Student Apathy: Succeeding with All Learners"
+    assert doc.title == "Overcoming Student Apathy"
+    assert doc.subtitle == "Succeeding with All Learners"
     assert doc.authors == ["Jeff C. Marshall"]
     assert doc.publisher == "Rowman & Littlefield"
     assert doc.publication_year == 2014
