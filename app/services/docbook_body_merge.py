@@ -116,7 +116,8 @@ def _append_single_node(
         if level <= 1 or xml_local_name(parent) == "book":
             chapter = etree.SubElement(parent, _ns("chapter"))
             if node.text and str(node.text).strip():
-                title = etree.SubElement(chapter, _ns("title"))
+                info = etree.SubElement(chapter, _ns("info"))
+                title = etree.SubElement(info, _ns("title"))
                 set_lxml_text(title, str(node.text).strip())
             if node.children:
                 return _append_mapped_nodes(chapter, list(node.children))
@@ -166,10 +167,15 @@ def _append_references(book: etree._Element, mapping: SemanticMappingBody) -> No
     if not refs:
         return
     chapter = etree.SubElement(book, _ns("chapter"))
-    chapter.set("role", "bibliography")
-    title = etree.SubElement(chapter, _ns("title"))
+    info = etree.SubElement(chapter, _ns("info"))
+    title = etree.SubElement(info, _ns("title"))
     set_lxml_text(title, "References")
-    bibliolist = etree.SubElement(chapter, _ns("bibliolist"))
+    section = etree.SubElement(chapter, _ns("section"))
+    section.set("role", "bibliography")
+    sec_info = etree.SubElement(section, _ns("info"))
+    sec_title = etree.SubElement(sec_info, _ns("title"))
+    set_lxml_text(sec_title, "References")
+    bibliolist = etree.SubElement(section, _ns("bibliolist"))
     for ref in refs:
         if isinstance(ref, dict):
             ref = MappedSemanticNode.model_validate(ref)

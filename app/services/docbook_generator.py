@@ -17,6 +17,7 @@ from app.services.docbook_metadata_overlay import (
 )
 from app.services.source_identity import SourceIdentityRecord
 from app.services.template_format import DOCBOOK_NS, classify_template_root
+from app.services.docbook_structure_fixup import normalize_docbook_book_structure
 from app.utils.docbook_xml_ids import normalize_docbook_book_xml_language
 from app.utils.xml_serializer import serialize_lxml_tree
 
@@ -71,6 +72,7 @@ def generate_docbook_book_xml(
     if body_merge.warnings:
         overlay.warnings.extend(body_merge.warnings)
 
+    normalize_docbook_book_structure(root)
     normalize_docbook_book_xml_language(root)
 
     xml = serialize_lxml_tree(
