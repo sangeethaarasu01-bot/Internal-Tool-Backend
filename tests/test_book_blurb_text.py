@@ -33,6 +33,19 @@ def test_typography_curly_double_quotes() -> None:
     assert "\u201c" in result and "\u201d" in result
 
 
+def test_typography_preserves_suite_number_on_street_line() -> None:
+    from app.utils.book_text_typography import apply_book_typography
+
+    street = "4501 Forbes Boulevard, Suite 200"
+    assert apply_book_typography(street) == street
+
+
+def test_typography_entity_apostrophe_to_curly() -> None:
+    from app.utils.book_text_typography import apply_book_typography
+
+    assert "\u2019" in apply_book_typography("Master&#x27;s degree")
+
+
 def test_author_name_from_blurb_opener() -> None:
     blurb = "Grant D. Moss is an Associate Professor of Spanish at Pittsburg State University."
     assert extract_author_name_from_blurb_text(blurb) == "Grant D. Moss"

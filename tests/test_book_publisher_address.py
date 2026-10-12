@@ -16,7 +16,9 @@ def test_us_and_uk_comma_separated_addresses() -> None:
     assert addresses[0].post_code == "20706"
     assert addresses[1].street == "Unit A, Whitacre Mews, 26-34 Stannary Street"
     assert addresses[1].city == "London"
+    assert addresses[1].country == "UK"
     assert "SE11" in (addresses[1].post_code or "")
+    assert addresses[0].country is None
 
 
 def test_us_and_uk_addresses_website_on_first_only() -> None:

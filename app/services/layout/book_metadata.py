@@ -388,8 +388,16 @@ def _block_text_as_printed_line(block_text: str) -> str:
     return preserve_title_page_line(" ".join(parts))
 
 
+def read_title_page_paragraphs(raw: ExtractionResult) -> list[str]:
+    """
+    Read the complete title page (all non-boilerplate blocks, top to bottom) before
+    splitting title, subtitle, and author.
+    """
+    return _ordered_title_page_paragraphs(raw)
+
+
 def _ordered_title_page_paragraphs(raw: ExtractionResult) -> list[str]:
-    """Each title-page text block is one typographic paragraph."""
+    """Each title-page text block is one typographic paragraph (line)."""
     paragraphs: list[str] = []
     for page_number in _candidate_title_page_numbers(raw):
         page = next((p for p in raw.pages if p.page_number == page_number), None)
@@ -424,7 +432,7 @@ def extract_title_page_triplet(
     """
     Title page paragraphs: first = title, second = subtitle when present, then author.
     """
-    paragraphs = _ordered_title_page_paragraphs(raw)
+    paragraphs = read_title_page_paragraphs(raw)
     title_index: int | None = None
     title: str | None = None
     for index, paragraph in enumerate(paragraphs):

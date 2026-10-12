@@ -12,7 +12,7 @@ from app.services.layout.book_author_bio import extract_author_name_from_blurb_t
 from app.services.layout.book_metadata import is_plausible_book_author_name
 from app.services.source_identity import SourceIdentityRecord
 from app.utils.book_blurb_text import clean_personblurb_text
-from app.utils.book_text_typography import apply_book_typography
+from app.utils.book_text_typography import prepare_book_text_for_xml
 from app.services.template_format import DOCBOOK_NS
 
 XLINK_NS = "http://www.w3.org/1999/xlink"
@@ -47,10 +47,21 @@ class DocBookMetadataOverlayResult:
 def _set_text(element: etree._Element, text: str) -> None:
     for child in element:
         element.remove(child)
-    cleaned = apply_book_typography(sanitize_xml_text(text))
+    cleaned = prepare_book_text_for_xml(text)
     set_lxml_text(
         element,
         cleaned,
+        log_context={"semantic_type": "metadata", "source": "-", "field": "docbook"},
+    )
+
+
+def _set_literal_text(element: etree._Element, text: str) -> None:
+    """Postal fields: preserve numbers (e.g. Suite 200); no paragraph footer cleanup."""
+    for child in element:
+        element.remove(child)
+    set_lxml_text(
+        element,
+        sanitize_xml_text(text),
         log_context={"semantic_type": "metadata", "source": "-", "field": "docbook"},
     )
 
@@ -170,19 +181,19 @@ def _append_publisher_address(
     address_el = etree.SubElement(publisher_el, f"{{{DOCBOOK_NS}}}address")
     if street:
         street_el = etree.SubElement(address_el, f"{{{DOCBOOK_NS}}}street")
-        _set_text(street_el, street)
+        _set_literal_text(street_el, street)
     if city:
         city_el = etree.SubElement(address_el, f"{{{DOCBOOK_NS}}}city")
-        _set_text(city_el, city)
+        _set_literal_text(city_el, city)
     if state:
         state_el = etree.SubElement(address_el, f"{{{DOCBOOK_NS}}}state")
-        _set_text(state_el, state)
+        _set_literal_text(state_el, state)
     if post_code:
         post_el = etree.SubElement(address_el, f"{{{DOCBOOK_NS}}}post-code")
-        _set_text(post_el, post_code)
+        _set_literal_text(post_el, post_code)
     if country:
         country_el = etree.SubElement(address_el, f"{{{DOCBOOK_NS}}}country")
-        _set_text(country_el, country)
+        _set_literal_text(country_el, country)
     if website:
         link_el = etree.SubElement(address_el, f"{{{DOCBOOK_NS}}}link")
         link_el.set(f"{{{XLINK_NS}}}href", website)

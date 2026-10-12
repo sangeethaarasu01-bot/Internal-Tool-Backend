@@ -11,6 +11,8 @@ from app.services.docbook_template import extract_docbook_book_metadata
 from app.services.source_identity import SourceIdentityRecord
 from app.services.template_format import DOCBOOK_NS
 
+XLINK_NS = "http://www.w3.org/1999/xlink"
+
 ROOT = Path(__file__).resolve().parent.parent
 FIXTURE = ROOT / "tests" / "fixtures" / "minimal_docbook_book.xml"
 
@@ -164,6 +166,51 @@ def test_overlay_publisher_address_serializes_without_duplicate_xmlns() -> None:
     xml = serialize_lxml_tree(root, xml_declaration=True, encoding="UTF-8", pretty_print=True)
     assert "reuse of the xmlns" not in xml
     assert "rowman.com" in xml
+    assert "Suite 200" in xml
+    assert "Suite." not in xml or "Suite 200" in xml
+
+
+def test_overlay_publisher_street_not_truncated_after_suite() -> None:
+    root = etree.parse(str(FIXTURE)).getroot()
+    source = SourceIdentityRecord(
+        extraction_id="x",
+        source_pdf_sha256="sha",
+        source_filename="political.pdf",
+        title="Political Poetry in the Wake of the Second Spanish Republic",
+        subtitle="Rafael Alberti, Pablo Neruda, and Nicolás Guillén",
+        authors=["Grant D. Moss"],
+        publisher="The Rowman & Littlefield Publishing Group, Inc.",
+        publisher_imprint="Lexington Books",
+        publication_year=2018,
+        isbn="978-1-4985-4770-3",
+        publisher_addresses=[
+            {
+                "street": "4501 Forbes Boulevard, Suite 200",
+                "city": "Lanham",
+                "state": "Maryland",
+                "post_code": "20706",
+                "country": "United States",
+                "website": "https://www.rowman.com",
+            },
+            {
+                "street": "Unit A, Whitacre Mews, 26-34 Stannary Street",
+                "city": "London",
+                "post_code": "SE11 4AB",
+                "country": "United Kingdom",
+            },
+        ],
+    )
+    apply_pdf_metadata_to_docbook_book(root, source)
+    streets = [
+        el.text
+        for el in root.iter(f"{{{DOCBOOK_NS}}}street")
+        if el.text
+    ]
+    assert streets[0] == "4501 Forbes Boulevard, Suite 200"
+    assert streets[1] == "Unit A, Whitacre Mews, 26-34 Stannary Street"
+    links = root.findall(f".//{{{DOCBOOK_NS}}}address/{{{DOCBOOK_NS}}}link")
+    assert len(links) == 1
+    assert links[0].get(f"{{{XLINK_NS}}}href") == "https://www.rowman.com"
 
 
 def test_overlay_sets_subtitle_and_multiple_isbns() -> None:

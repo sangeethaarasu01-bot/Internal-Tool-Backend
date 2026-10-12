@@ -12,6 +12,7 @@ from app.services.xml_generator import generate_jats_xml
 from app.utils.xml_serializer import (
     XmlSerializationError,
     apply_final_xml_serialization_to_extraction_result,
+    escape_for_docbook_xml_serialization,
     escape_for_xml_serialization,
     serialize_lxml_tree,
     serialize_xml_text_nodes_with_hex_quotes,
@@ -19,6 +20,26 @@ from app.utils.xml_serializer import (
 
 ROOT = Path(__file__).resolve().parent.parent
 DTD_PATH = ROOT / "tests" / "fixtures" / "periodicals.dtd"
+
+
+def test_docbook_escape_uses_curly_apostrophe_entity_not_x27() -> None:
+    from app.utils.book_text_typography import prepare_book_text_for_xml
+
+    text = prepare_book_text_for_xml("Master's and Bachelor's")
+    assert "\u2019" in text
+    serialized = escape_for_docbook_xml_serialization(text)
+    assert "&#x2019;" in serialized
+    assert "&#x27;" not in serialized
+
+
+def test_docbook_serialize_para_apostrophe() -> None:
+    from app.utils.book_text_typography import prepare_book_text_for_xml
+
+    para = etree.Element("para")
+    para.text = prepare_book_text_for_xml("Bachelor's degree")
+    xml = serialize_lxml_tree(para, xml_declaration=False, pretty_print=False, text_escape_mode="docbook")
+    assert "&#x2019;" in xml
+    assert "&#x27;" not in xml
 
 
 def test_escape_single_quotes_phrase() -> None:
@@ -274,7 +295,7 @@ def test_pdf_ligatures_expand_to_ascii_not_hex_entities() -> None:
     assert escape_for_xml_serialization("dif\ufb01culty") == "difficulty"
     assert escape_for_xml_serialization("speci\ufb01c") == "specific"
     assert escape_for_xml_serialization("de\ufb01ning") == "defining"
-    assert escape_for_xml_serialization("af\ufb00licting") == "afflicting"
+    assert escape_for_xml_serialization("a\ufb00licting") == "afflicting"
     assert "&#xFB" not in escape_for_xml_serialization("dif\ufb01culty and speci\ufb01c")
 
 

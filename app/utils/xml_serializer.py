@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Callable
 from typing import Literal
 
 from lxml import etree
@@ -11,6 +12,7 @@ from app.utils.xml_helpers import format_ieee_empty_element_tags
 from app.utils.xml_text import (
     ieee_hex_entity_for_char,
     normalize_for_xml_serialization,
+    normalize_typographic_ligatures,
     should_encode_as_hex_entity,
 )
 
@@ -50,12 +52,21 @@ class XmlSerializationError(ValueError):
     """Raised when the lxml tree contains a node that cannot be serialized."""
 
 
+TextEscapeMode = Literal["ieee", "docbook"]
+
+
 class _NsContext:
     """Namespace bindings used while serializing a document tree."""
 
-    def __init__(self, root: etree._Element) -> None:
+    def __init__(
+        self,
+        root: etree._Element,
+        *,
+        escape_text: Callable[[str | None], str] | None = None,
+    ) -> None:
         self.root_nsmap: dict[str | None, str] = dict(root.nsmap or {})
         self.root_extras: dict[str | None, str] = _required_root_namespace_declarations(root)
+        self.escape_text = escape_text or escape_for_xml_serialization
 
     def effective_root_nsmap(self) -> dict[str | None, str]:
         merged = dict(self.root_nsmap)
@@ -127,6 +138,40 @@ def escape_for_xml_serialization(value: str | None) -> str:
         return ""
     normalized = normalize_for_xml_serialization(value)
     return "".join(_escape_xml_char(char) for char in normalized)
+
+
+def _escape_docbook_char(char: str) -> str:
+    """DocBook book text: curly apostrophe/quotes as hex entities, never ``&#x27;``."""
+    if char == "&":
+        return "&amp;"
+    if char == "<":
+        return "&lt;"
+    if char == ">":
+        return "&gt;"
+    if char in {"'", "\u2019"}:
+        return "&#x2019;"
+    if char == "\u201c":
+        return "&#x201C;"
+    if char == "\u201d":
+        return "&#x201D;"
+    if char == '"':
+        return "&#x201D;"
+    entity = ieee_hex_entity_for_char(char)
+    if entity:
+        return entity
+    if should_encode_as_hex_entity(char):
+        return _format_hex_char_entity(ord(char))
+    return char
+
+
+def escape_for_docbook_xml_serialization(value: str | None) -> str:
+    """Serialize DocBook paragraph text without downgrading curly punctuation to ``&#x27;``."""
+    if not value:
+        return ""
+    cleaned = normalize_typographic_ligatures(value)
+    cleaned = cleaned.replace("\u00a0", " ")
+    cleaned = cleaned.replace("\u00ad", "")
+    return "".join(_escape_docbook_char(char) for char in cleaned)
 
 
 def _node_kind(node: etree._Element) -> NodeKind:
@@ -248,7 +293,7 @@ def _format_attributes(elem: etree._Element, ctx: _NsContext) -> str:
     parts = _namespace_declarations(elem, ctx)
     for name, value in elem.attrib.items():
         attr_name = _format_name(name, elem, ctx)
-        parts.append(f'{attr_name}="{escape_for_xml_serialization(value)}"')
+        parts.append(f'{attr_name}="{ctx.escape_text(value)}"')
     if not parts:
         return ""
     return " " + " ".join(parts)
@@ -275,6 +320,7 @@ def _append_node_tail(
     node: etree._Element,
     lines: list[str],
     indent: str,
+    ctx: _NsContext,
     *,
     pretty_print: bool,
 ) -> None:
@@ -282,7 +328,7 @@ def _append_node_tail(
         return
     if pretty_print and _is_insignificant_whitespace(node.tail):
         return
-    lines.append(f"{indent}{escape_for_xml_serialization(node.tail)}")
+    lines.append(f"{indent}{ctx.escape_text(node.tail)}")
 
 
 def _serialize_tree_node(
@@ -329,7 +375,7 @@ def _serialize_inline_children(elem: etree._Element, parts: list[str], ctx: _NsC
         else:
             raise _unsupported_node_error(child, elem)
         if child.tail and not _is_insignificant_whitespace(child.tail):
-            parts.append(escape_for_xml_serialization(child.tail))
+            parts.append(ctx.escape_text(child.tail))
 
 
 def _serialize_inline(elem: etree._Element, depth: int, ctx: _NsContext) -> str:
@@ -341,7 +387,7 @@ def _serialize_inline(elem: etree._Element, depth: int, ctx: _NsContext) -> str:
     attrs = _format_attributes(elem, ctx)
     parts = [f"{indent}<{tag}{attrs}>"]
     if elem.text:
-        parts.append(escape_for_xml_serialization(elem.text))
+        parts.append(ctx.escape_text(elem.text))
     _serialize_inline_children(elem, parts, ctx)
     parts.append(f"</{tag}>")
     return "".join(parts)
@@ -355,7 +401,7 @@ def _serialize_inline_content(elem: etree._Element, ctx: _NsContext) -> str:
     attrs = _format_attributes(elem, ctx)
     parts = [f"<{tag}{attrs}>"]
     if elem.text:
-        parts.append(escape_for_xml_serialization(elem.text))
+        parts.append(ctx.escape_text(elem.text))
     _serialize_inline_children(elem, parts, ctx)
     parts.append(f"</{tag}>")
     return "".join(parts)
@@ -382,16 +428,16 @@ def _serialize_element(
     attrs = _format_attributes(elem, ctx)
 
     if not children:
-        text = escape_for_xml_serialization(elem.text or "")
+        text = ctx.escape_text(elem.text or "")
         lines.append(f"{indent}<{tag}{attrs}>{text}</{tag}>")
         return
 
     lines.append(f"{indent}<{tag}{attrs}>")
     if elem.text and not (pretty_print and _is_insignificant_whitespace(elem.text)):
-        lines.append(f"{child_indent}{escape_for_xml_serialization(elem.text)}")
+        lines.append(f"{child_indent}{ctx.escape_text(elem.text)}")
     for child in children:
         _serialize_tree_node(child, lines, depth + 1, pretty_print, ctx, parent=elem)
-        _append_node_tail(child, lines, child_indent, pretty_print=pretty_print)
+        _append_node_tail(child, lines, child_indent, ctx, pretty_print=pretty_print)
     lines.append(f"{indent}</{tag}>")
 
 
@@ -402,12 +448,18 @@ def serialize_lxml_tree(
     encoding: str = "UTF-8",
     pretty_print: bool = True,
     doctype: str | None = None,
+    text_escape_mode: TextEscapeMode = "ieee",
 ) -> str:
     """Serialize an lxml element tree with hex quote entities in text and attributes."""
     if not isinstance(element.tag, str):
         raise _unsupported_node_error(element)
 
-    ctx = _NsContext(element)
+    escape_fn = (
+        escape_for_docbook_xml_serialization
+        if text_escape_mode == "docbook"
+        else escape_for_xml_serialization
+    )
+    ctx = _NsContext(element, escape_text=escape_fn)
     lines: list[str] = []
     if xml_declaration:
         lines.append(f'<?xml version="1.0" encoding="{encoding}"?>')

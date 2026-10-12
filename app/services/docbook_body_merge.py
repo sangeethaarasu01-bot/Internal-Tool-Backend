@@ -83,10 +83,10 @@ def _append_paragraph(parent: etree._Element, node: MappedSemanticNode) -> None:
         return
     if is_book_running_header_text(text):
         return
-    from app.utils.book_text_typography import apply_book_typography
+    from app.utils.book_text_typography import prepare_book_text_for_xml
 
     para = etree.SubElement(parent, _ns("para"))
-    set_lxml_text(para, apply_book_typography(text))
+    set_lxml_text(para, prepare_book_text_for_xml(text))
 
 
 def _append_display_math(parent: etree._Element, node: MappedSemanticNode) -> None:

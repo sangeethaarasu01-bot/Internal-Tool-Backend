@@ -46,6 +46,26 @@ def _normalize_website(raw: str) -> str:
     return cleaned
 
 
+def _country_near_address(source: str, start: int, end: int) -> str | None:
+    """Return a country only when explicitly named on the same line as the address."""
+    line_start = source.rfind("\n", 0, start) + 1
+    line_end = source.find("\n", end)
+    if line_end == -1:
+        line_end = len(source)
+    window = source[line_start:line_end]
+    for pattern, label in (
+        (r"\bUnited States of America\b", "United States of America"),
+        (r"\bUnited States\b", "United States"),
+        (r"\bUSA\b", "USA"),
+        (r"\bUnited Kingdom\b", "United Kingdom"),
+        (r"\bUK\b", "UK"),
+    ):
+        match = re.search(pattern, window, re.IGNORECASE)
+        if match:
+            return label
+    return None
+
+
 def _collect_websites(text: str) -> list[str]:
     websites: list[str] = []
     for match in WEBSITE_RE.finditer(text or ""):
@@ -80,7 +100,7 @@ def extract_publisher_addresses(text: str) -> list[PublisherAddress]:
                     city=city,
                     state=state,
                     post_code=post_code,
-                    country="United States",
+                    country=_country_near_address(source, match.start(), match.end()),
                 ),
             )
         )
@@ -90,8 +110,11 @@ def extract_publisher_addresses(text: str) -> list[PublisherAddress]:
             street = normalize_text(match.group(1)).strip().rstrip(".,;")
             city = normalize_text(match.group(2)).strip()
             post_code = match.group(3).strip().upper()
-            country_raw = (match.group(4) or "UK").strip()
-            country = "United Kingdom" if country_raw.upper() == "UK" else normalize_text(country_raw)
+            country_raw = (match.group(4) or "").strip()
+            country = (
+                _country_near_address(source, match.start(), match.end())
+                or (normalize_text(country_raw) if country_raw else None)
+            )
             key = ("uk", street, city, post_code)
             if key in seen:
                 continue

@@ -277,6 +277,8 @@ def test_lexington_political_poetry_title_page_metadata() -> None:
     assert us_addr.street == "4501 Forbes Boulevard, Suite 200"
     assert uk_addr.street == "Unit A, Whitacre Mews, 26-34 Stannary Street"
     assert uk_addr.post_code and "SE11" in uk_addr.post_code
+    assert uk_addr.country == "UK"
+    assert us_addr.country is None
     assert ctx.subtitle == "Rafael Alberti, Pablo Neruda, and Nicolás Guillén"
     assert ctx.copyright_holder == "Lexington Books"
     assert ctx.year == 2018

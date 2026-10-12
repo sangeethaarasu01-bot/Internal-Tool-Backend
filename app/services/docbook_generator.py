@@ -76,5 +76,6 @@ def generate_docbook_book_xml(
         encoding="UTF-8",
         pretty_print=True,
         doctype=tree.docinfo.doctype if tree.docinfo.doctype else None,
+        text_escape_mode="docbook",
     )
     return xml, DocBookGenerationResult(metadata=overlay, body=body_merge)
