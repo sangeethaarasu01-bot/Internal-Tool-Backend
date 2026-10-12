@@ -12,6 +12,7 @@ from app.services.layout.book_author_bio import extract_author_name_from_blurb_t
 from app.services.layout.book_metadata import is_plausible_book_author_name
 from app.services.source_identity import SourceIdentityRecord
 from app.utils.book_blurb_text import clean_personblurb_text
+from app.utils.book_title_dedup import collapse_repeated_title_phrase
 from app.utils.book_text_typography import prepare_book_text_for_xml
 from app.services.template_format import DOCBOOK_NS
 
@@ -19,7 +20,7 @@ XLINK_NS = "http://www.w3.org/1999/xlink"
 etree.register_namespace("xlink", XLINK_NS)
 from app.utils.docbook_sortas import apply_sortas_to_title_element
 from app.utils.docbook_template_attrs import update_authorgroup_authors
-from app.utils.docbook_xml_ids import assign_docbook_metadata_xml_ids
+from app.utils.docbook_xml_ids import assign_docbook_metadata_xml_ids, normalize_docbook_book_xml_language
 from app.utils.isbn_selection import (
     isbn13_digits,
     normalize_isbn_biblioid_role,
@@ -85,7 +86,7 @@ def _set_or_create_title(info: etree._Element, title: str) -> None:
     if title_el is None:
         title_el = etree.Element(f"{{{DOCBOOK_NS}}}title")
         info.insert(0, title_el)
-    stripped = title.strip()
+    stripped = collapse_repeated_title_phrase(title.strip())
     _set_text(title_el, stripped)
     apply_sortas_to_title_element(title_el, stripped)
 
@@ -426,6 +427,8 @@ def apply_pdf_metadata_to_docbook_book(
         result.warnings.append(
             "ISBN from the PDF is not a valid ISBN-13; book xml:id was omitted."
         )
+
+    normalize_docbook_book_xml_language(book)
 
     result.applied = True
     logger.info(

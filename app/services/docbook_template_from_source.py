@@ -7,6 +7,7 @@ from typing import Any
 from lxml import etree
 
 from app.services.template_format import DOCBOOK_NS
+from app.utils.docbook_xml_ids import apply_docbook_book_root_attributes
 from app.utils.xml_serializer import serialize_lxml_tree
 
 
@@ -25,9 +26,8 @@ def build_docbook_template_xml_from_phase1(phase1: dict[str, Any]) -> str:
     book = etree.Element(
         f"{{{DOCBOOK_NS}}}book",
         nsmap={None: DOCBOOK_NS},
-        version="5.0",
-        xml_lang="en",
     )
+    apply_docbook_book_root_attributes(book)
     info = etree.SubElement(book, f"{{{DOCBOOK_NS}}}info")
     if title:
         title_el = etree.SubElement(info, f"{{{DOCBOOK_NS}}}title")

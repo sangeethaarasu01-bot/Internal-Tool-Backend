@@ -258,8 +258,11 @@ def is_plausible_book_author_name(name: str) -> bool:
 
 def preserve_title_page_line(value: str) -> str:
     """Normalize whitespace only; do not insert colons or re-title-case."""
+    from app.utils.book_title_dedup import collapse_repeated_title_phrase
+
     cleaned = normalize_text(value).strip().strip(".,;")
-    return re.sub(r"\s+", " ", cleaned).strip()
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return collapse_repeated_title_phrase(cleaned)
 
 
 def normalize_book_title(value: str) -> str:
@@ -396,23 +399,46 @@ def read_title_page_paragraphs(raw: ExtractionResult) -> list[str]:
     return _ordered_title_page_paragraphs(raw)
 
 
-def _ordered_title_page_paragraphs(raw: ExtractionResult) -> list[str]:
-    """Each title-page text block is one typographic paragraph (line)."""
-    paragraphs: list[str] = []
+def _strip_stray_title_colon_artifact(line: str) -> str:
+    """Trailing colons on the title line are PDF artifacts, not title/subtitle separators."""
+    cleaned = preserve_title_page_line(line)
+    return re.sub(r"\s*:\s*$", "", cleaned).strip()
+
+
+def _block_to_visual_lines(block_text: str) -> list[str]:
+    """
+    One PDF block → one title-page line, except when the block clearly stacks
+    title + subtitle + author on separate physical lines (3+).
+    """
+    physical = [line.strip() for line in block_text.splitlines() if line.strip()]
+    if not physical:
+        return []
+    if len(physical) >= 3:
+        return [preserve_title_page_line(part) for part in physical]
+    joined = preserve_title_page_line(" ".join(physical))
+    return [joined] if joined else []
+
+
+def _title_page_visual_lines(raw: ExtractionResult) -> list[str]:
+    """Ordered title-page lines (top to bottom), one visual line per block when possible."""
+    lines: list[str] = []
     for page_number in _candidate_title_page_numbers(raw):
         page = next((p for p in raw.pages if p.page_number == page_number), None)
         if page is None:
             continue
         for block in sorted(page.blocks, key=lambda b: b.bbox[1]):
-            block_line = _block_text_as_printed_line(block.text or "")
-            if not block_line or _is_title_page_boilerplate_line(block_line):
-                continue
-            paragraphs.append(block_line)
-    return paragraphs
+            for line in _block_to_visual_lines(block.text or ""):
+                if line and not _is_title_page_boilerplate_line(line):
+                    lines.append(line)
+    return lines
+
+
+def _ordered_title_page_paragraphs(raw: ExtractionResult) -> list[str]:
+    return _title_page_visual_lines(raw)
 
 
 def _paragraph_is_subtitle_candidate(paragraph: str, title: str) -> bool:
-    """Second title-page paragraph describing the work (not author/edition boilerplate)."""
+    """Subtitle lines list subjects (e.g. poets); title continuations are not subtitles."""
     body = EDITION_SUFFIX_RE.sub("", paragraph).strip()
     if not body or body.casefold() == title.casefold():
         return False
@@ -420,28 +446,65 @@ def _paragraph_is_subtitle_candidate(paragraph: str, title: str) -> bool:
         return False
     if line_looks_like_subject_name_list(body):
         return True
+    if EDITION_SUFFIX_RE.search(paragraph):
+        return True
     author_only = normalize_book_author_name(body)
     if author_only and is_plausible_book_author_name(author_only):
         return False
-    return len(body.split()) >= 2
+    if is_valid_book_title(body) and body.casefold() != title.casefold():
+        return True
+    return False
 
 
-def extract_title_page_triplet(
-    raw: ExtractionResult,
+def _merge_wrapped_title_page_lines(lines: list[str]) -> list[str]:
+    """
+    Join consecutive PDF blocks that continue the same title line.
+
+    Stops at a subject-name subtitle or an edition line; lines after that are kept separate.
+    """
+    if not lines:
+        return []
+    merged: list[str] = []
+    buffer: list[str] = []
+    past_subtitle = False
+
+    def flush_buffer() -> None:
+        nonlocal buffer
+        if buffer:
+            merged.append(preserve_title_page_line(" ".join(buffer)))
+            buffer = []
+
+    for line in lines:
+        if past_subtitle:
+            merged.append(line)
+            continue
+        if line_looks_like_subject_name_list(line):
+            flush_buffer()
+            merged.append(line)
+            past_subtitle = True
+            continue
+        if buffer and EDITION_SUFFIX_RE.search(line):
+            flush_buffer()
+            merged.append(preserve_title_page_line(EDITION_SUFFIX_RE.sub("", line).strip()))
+            past_subtitle = True
+            continue
+        buffer.append(line)
+    flush_buffer()
+    return merged
+
+
+def _extract_title_page_triplet_heuristic(
+    lines: list[str],
 ) -> tuple[str | None, str | None, str | None]:
-    """
-    Title page paragraphs: first = title, second = subtitle when present, then author.
-    """
-    paragraphs = read_title_page_paragraphs(raw)
     title_index: int | None = None
     title: str | None = None
-    for index, paragraph in enumerate(paragraphs):
+    for index, paragraph in enumerate(lines):
         line_clean = EDITION_SUFFIX_RE.sub("", paragraph).strip()
         if line_looks_like_subject_name_list(line_clean):
             continue
         if not is_valid_book_title(line_clean):
             continue
-        title = preserve_title_page_line(line_clean)
+        title = _strip_stray_title_colon_artifact(line_clean)
         title_index = index
         break
     if title is None or title_index is None:
@@ -449,13 +512,13 @@ def extract_title_page_triplet(
 
     subtitle: str | None = None
     author: str | None = None
-    if title_index + 1 < len(paragraphs):
-        second = paragraphs[title_index + 1]
+    if title_index + 1 < len(lines):
+        second = lines[title_index + 1]
         if _paragraph_is_subtitle_candidate(second, title):
             subtitle = preserve_title_page_line(EDITION_SUFFIX_RE.sub("", second).strip())
     author_start = title_index + (2 if subtitle else 1)
-    for scan in range(author_start, min(title_index + 6, len(paragraphs))):
-        candidate = normalize_book_author_name(paragraphs[scan])
+    for scan in range(author_start, min(title_index + 6, len(lines))):
+        candidate = normalize_book_author_name(lines[scan])
         if candidate and is_plausible_book_author_name(candidate):
             author = candidate
             break
@@ -463,26 +526,58 @@ def extract_title_page_triplet(
     return title, subtitle, author
 
 
-def _publisher_imprint_pages_text(raw: ExtractionResult, max_pages: int = 15) -> str:
-    parts: list[str] = []
-    markers = (
-        "published by",
-        "copyright",
-        "isbn",
-        "forbes",
-        "unit a",
-        "whitacre",
-        "rowman",
-        "littlefield",
+def extract_title_page_triplet(
+    raw: ExtractionResult,
+) -> tuple[str | None, str | None, str | None]:
+    """Title page: merge wrapped title blocks, then title / subject subtitle / author."""
+    lines = _merge_wrapped_title_page_lines(_title_page_visual_lines(raw))
+    return _extract_title_page_triplet_heuristic(lines)
+
+
+def _text_looks_like_publisher_imprint_page(text: str) -> bool:
+    """Copyright/imprint pages: legal notices and/or postal publisher addresses."""
+    lowered = (text or "").lower()
+    legal_hits = sum(
+        1
+        for marker in (
+            "copyright",
+            "isbn",
+            "published by",
+            "all rights reserved",
+            "library of congress",
+        )
+        if marker in lowered
     )
+    if legal_hits >= 2:
+        return True
+    has_us_postal = bool(
+        re.search(r"\b\d{1,5}\s+\S", text)
+        and re.search(r"\b\d{5}(?:-\d{4})?\b", text)
+        and re.search(
+            r"\b(?:suite|boulevard|street|avenue|road|lane|drive|unit|floor|apt)\b",
+            lowered,
+        )
+    )
+    has_uk_postal = bool(
+        re.search(r"\bunit\s+", lowered)
+        and re.search(r"[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}", text, re.IGNORECASE)
+    )
+    return has_us_postal or has_uk_postal
+
+
+def _publisher_imprint_pages_text(raw: ExtractionResult, max_pages: int = 25) -> str:
+    """Full text of early copyright/imprint pages (line breaks preserved per page)."""
+    parts: list[str] = []
     for page in sorted(raw.pages, key=lambda p: p.page_number):
         if page.page_number > max_pages:
             break
+        if _page_is_copyright_imprint_page(page):
+            parts.append(join_ordered_block_text(raw, page_number=page.page_number))
+            continue
         text = join_ordered_block_text(raw, page_number=page.page_number)
-        lowered = text.lower()
-        if any(marker in lowered for marker in markers):
+        if _text_looks_like_publisher_imprint_page(text):
             parts.append(text)
-    return "\n".join(parts)
+    return "\n\n".join(parts)
 
 
 def _author_name_looks_like_title_fragment(name: str, title: str | None, subtitle: str | None) -> bool:

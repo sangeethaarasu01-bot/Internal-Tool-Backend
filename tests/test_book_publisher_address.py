@@ -37,6 +37,45 @@ def test_us_and_uk_addresses_website_on_first_only() -> None:
     assert "SE11" in (addresses[1].post_code or "")
 
 
+def test_multiline_us_block_with_website_line() -> None:
+    text = (
+        "Published by Lexington Books\n"
+        "4501 Forbes Boulevard, Suite 200\n"
+        "Lanham, Maryland 20706\n"
+        "www.rowman.com\n\n"
+        "Unit A, Whitacre Mews, 26-34 Stannary Street\n"
+        "London SE11 4AB\n"
+        "United Kingdom"
+    )
+    addresses = extract_publisher_addresses(text)
+    assert len(addresses) == 2
+    assert addresses[0].street == "4501 Forbes Boulevard, Suite 200"
+    assert addresses[0].city == "Lanham"
+    assert addresses[0].state == "Maryland"
+    assert addresses[0].post_code == "20706"
+    assert addresses[0].website and "rowman.com" in addresses[0].website
+    assert addresses[1].country == "United Kingdom"
+    assert addresses[1].website is None
+
+
+def test_moss_blank_line_separates_us_and_uk_addresses() -> None:
+    text = (
+        "Published by Lexington Books\n"
+        "4501 Forbes Boulevard, Suite 200, Lanham, Maryland 20706\n"
+        "www.rowman.com\n\n"
+        "Unit A, Whitacre Mews, 26-34 Stannary Street\n"
+        "London SE11 4AB\n"
+        "United Kingdom"
+    )
+    addresses = extract_publisher_addresses(text)
+    assert len(addresses) == 2
+    assert addresses[0].street == "4501 Forbes Boulevard, Suite 200"
+    assert addresses[1].street == "Unit A, Whitacre Mews, 26-34 Stannary Street"
+    assert addresses[1].city == "London"
+    assert addresses[1].country == "United Kingdom"
+    assert addresses[1].state is None
+
+
 def test_us_street_includes_suite_apt_and_floor() -> None:
     text = "100 Broadway, Apt 4B, Floor 3, New York, New York 10001"
     addresses = extract_publisher_addresses(text)

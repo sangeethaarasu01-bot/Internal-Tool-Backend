@@ -180,10 +180,12 @@ def _moss_political_poetry_title_pages() -> ExtractionResult:
                     "An imprint of The Rowman & Littlefield Publishing Group, Inc.\n"
                     "4501 Forbes Boulevard, Suite 200, Lanham, Maryland 20706\n"
                     "www.rowman.com\n\n"
+                    "Unit A, Whitacre Mews, 26-34 Stannary Street\n"
+                    "London SE11 4AB\n"
+                    "United Kingdom\n\n"
                     "Copyright © 2018 by Lexington Books\n"
                     "ISBN 978-1-4985-4770-3 (cloth : alk. paper)\n"
-                    "ISBN 978-1-4985-4771-0 (electronic)\n"
-                    "Unit A, Whitacre Mews, 26-34 Stannary Street / London SE11 4AB / UK",
+                    "ISBN 978-1-4985-4771-0 (electronic)",
                     [50, 80, 550, 400],
                 ),
             ],
@@ -198,6 +200,95 @@ def _moss_political_poetry_title_pages() -> ExtractionResult:
             total_chars=sum(p.text_char_count for p in pages),
         ),
     )
+
+
+def test_title_page_wrapped_title_blocks_merge_before_subtitle() -> None:
+    raw = ExtractionResult(
+        document=DocumentInfo(filename="wrap.pdf", page_count=1, requires_ocr=False),
+        pages=[
+            _page(
+                1,
+                [
+                    _block("t1", "Political Poetry in", [50, 200, 520, 230], size=22.0),
+                    _block("t2", "the Wake of the Second", [50, 235, 520, 260], size=22.0),
+                    _block("t3", "Spanish Republic", [50, 265, 520, 290], size=22.0),
+                    _block(
+                        "s",
+                        "Rafael Alberti, Pablo Neruda, and Nicolás Guillén",
+                        [50, 300, 520, 330],
+                    ),
+                    _block("a", "Grant D. Moss", [50, 340, 400, 365]),
+                ],
+            ),
+        ],
+        stats=ExtractionStats(total_blocks=5, total_lines=5, total_chars=200),
+    )
+    from app.services.layout.book_metadata import extract_title_page_triplet
+
+    title, subtitle, author = extract_title_page_triplet(raw)
+    assert title == "Political Poetry in the Wake of the Second Spanish Republic"
+    assert subtitle == "Rafael Alberti, Pablo Neruda, and Nicolás Guillén"
+    assert author == "Grant D. Moss"
+
+
+def test_title_page_strict_three_lines_stray_colon_on_title() -> None:
+    raw = ExtractionResult(
+        document=DocumentInfo(filename="colon.pdf", page_count=1, requires_ocr=False),
+        pages=[
+            _page(
+                1,
+                [
+                    _block(
+                        "t",
+                        "Political Poetry in the Wake of the Second Spanish Republic:",
+                        [50, 200, 520, 240],
+                        size=22.0,
+                    ),
+                    _block(
+                        "s",
+                        "Rafael Alberti, Pablo Neruda, and Nicolás Guillén",
+                        [50, 260, 520, 290],
+                    ),
+                    _block("a", "Grant D. Moss", [50, 320, 400, 345]),
+                ],
+            ),
+        ],
+        stats=ExtractionStats(total_blocks=3, total_lines=3, total_chars=120),
+    )
+    from app.services.layout.book_metadata import extract_title_page_triplet
+
+    title, subtitle, author = extract_title_page_triplet(raw)
+    assert title == "Political Poetry in the Wake of the Second Spanish Republic"
+    assert subtitle == "Rafael Alberti, Pablo Neruda, and Nicolás Guillén"
+    assert author == "Grant D. Moss"
+
+
+def test_title_page_three_lines_in_one_block() -> None:
+    raw = ExtractionResult(
+        document=DocumentInfo(filename="one_block.pdf", page_count=1, requires_ocr=False),
+        pages=[
+            _page(
+                1,
+                [
+                    _block(
+                        "p1",
+                        "Political Poetry in the Wake of the Second Spanish Republic\n"
+                        "Rafael Alberti, Pablo Neruda, and Nicolás Guillén\n"
+                        "Grant D. Moss",
+                        [50, 200, 520, 360],
+                        size=22.0,
+                    ),
+                ],
+            ),
+        ],
+        stats=ExtractionStats(total_blocks=1, total_lines=3, total_chars=120),
+    )
+    from app.services.layout.book_metadata import extract_title_page_triplet
+
+    title, subtitle, author = extract_title_page_triplet(raw)
+    assert title == "Political Poetry in the Wake of the Second Spanish Republic"
+    assert subtitle == "Rafael Alberti, Pablo Neruda, and Nicolás Guillén"
+    assert author == "Grant D. Moss"
 
 
 def test_title_page_on_page_four_after_copyright() -> None:
@@ -277,7 +368,8 @@ def test_lexington_political_poetry_title_page_metadata() -> None:
     assert us_addr.street == "4501 Forbes Boulevard, Suite 200"
     assert uk_addr.street == "Unit A, Whitacre Mews, 26-34 Stannary Street"
     assert uk_addr.post_code and "SE11" in uk_addr.post_code
-    assert uk_addr.country == "UK"
+    assert uk_addr.country == "United Kingdom"
+    assert us_addr.website and "rowman.com" in us_addr.website
     assert us_addr.country is None
     assert ctx.subtitle == "Rafael Alberti, Pablo Neruda, and Nicolás Guillén"
     assert ctx.copyright_holder == "Lexington Books"

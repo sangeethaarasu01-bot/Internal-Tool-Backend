@@ -102,11 +102,13 @@ def _replace_leading_digits(text: str) -> str:
 
 def compute_sortas_from_title(title: str) -> str | None:
     """``sortas`` equals the title text after dropping a leading A/An/The only."""
-    cleaned = " ".join((title or "").split())
+    from app.utils.book_title_dedup import collapse_repeated_title_phrase
+
+    cleaned = collapse_repeated_title_phrase(" ".join((title or "").split()))
     if not cleaned:
         return None
     sortas = _LEADING_ARTICLE_RE.sub("", cleaned).strip()
-    return sortas or None
+    return collapse_repeated_title_phrase(sortas) or None
 
 
 def is_valid_sortas_for_title(title: str, sortas: str) -> bool:

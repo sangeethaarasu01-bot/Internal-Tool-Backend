@@ -9,6 +9,7 @@ from app.utils.xml_helpers import iter_element_children, xml_local_name
 
 XML_ID_ATTR = "{http://www.w3.org/XML/1998/namespace}id"
 XML_LANG_ATTR = "{http://www.w3.org/XML/1998/namespace}lang"
+_INVALID_XML_LANG_ATTR = "xml_lang"
 
 # Container elements under <info> that may receive generated xml:id (not leaves).
 _INFO_ID_CONTAINERS = frozenset(
@@ -53,9 +54,24 @@ def _assign_info_child_ids(info: etree._Element, root_id: str) -> None:
     walk(info)
 
 
+def normalize_docbook_book_xml_language(book: etree._Element, lang: str = "en") -> None:
+    """
+    Ensure ``xml:lang`` appears once on ``<book>`` only (Clark notation in the DOM).
+
+    Removes invalid ``xml_lang`` keys and ``xml:lang`` on descendants.
+    """
+    language = (lang or "en").strip() or "en"
+    for element in book.iter():
+        if _INVALID_XML_LANG_ATTR in element.attrib:
+            del element.attrib[_INVALID_XML_LANG_ATTR]
+        if element is not book and XML_LANG_ATTR in element.attrib:
+            del element.attrib[XML_LANG_ATTR]
+    book.set(XML_LANG_ATTR, language)
+
+
 def apply_docbook_book_root_attributes(book: etree._Element) -> None:
     book.set("version", "5.0")
-    book.set(XML_LANG_ATTR, "en")
+    normalize_docbook_book_xml_language(book)
     if not (book.get("role") or "").strip():
         book.set("role", "fullText")
 

@@ -211,6 +211,12 @@ def test_overlay_publisher_street_not_truncated_after_suite() -> None:
     links = root.findall(f".//{{{DOCBOOK_NS}}}address/{{{DOCBOOK_NS}}}link")
     assert len(links) == 1
     assert links[0].get(f"{{{XLINK_NS}}}href") == "https://www.rowman.com"
+    address_els = root.findall(f".//{{{DOCBOOK_NS}}}publisher/{{{DOCBOOK_NS}}}address")
+    assert len(address_els) == 2
+    xml_id = "{http://www.w3.org/XML/1998/namespace}id"
+    address_ids = [el.get(xml_id) for el in address_els]
+    assert all(address_ids)
+    assert address_ids[0] != address_ids[1]
 
 
 def test_overlay_sets_subtitle_and_multiple_isbns() -> None:
