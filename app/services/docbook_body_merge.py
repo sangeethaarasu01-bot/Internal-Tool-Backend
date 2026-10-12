@@ -65,11 +65,23 @@ def _heading_level(node: MappedSemanticNode) -> int:
     return 1
 
 
+def _preserve_template_front_matter(child: etree._Element) -> bool:
+    """Keep template front matter (and its processing instructions) when merging PDF body."""
+    name = xml_local_name(child)
+    if name == "colophon":
+        return True
+    if name == "part" and (child.get("role") or "").strip() == "front":
+        return True
+    return False
+
+
 def _strip_book_narrative(root: etree._Element) -> int:
     removed = 0
     for child in list(iter_element_children(root)):
         name = xml_local_name(child)
         if name == "info":
+            continue
+        if _preserve_template_front_matter(child):
             continue
         if name in _BODY_LOCAL_NAMES or name == "part":
             root.remove(child)

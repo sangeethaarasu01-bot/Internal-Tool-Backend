@@ -27,6 +27,9 @@ from app.utils.isbn_selection import (
     select_primary_isbn_from_lists,
 )
 from app.utils.xml_helpers import iter_element_children, xml_local_name
+from app.utils.docbook_processing_instructions import (
+    set_element_text_preserving_processing_instructions,
+)
 from app.utils.xml_text import sanitize_xml_text, set_lxml_text
 
 logger = logging.getLogger(__name__)
@@ -46,9 +49,17 @@ class DocBookMetadataOverlayResult:
 
 
 def _set_text(element: etree._Element, text: str) -> None:
+    cleaned = prepare_book_text_for_xml(text)
+    has_pi = any(child.tag is etree.ProcessingInstruction for child in element)
+    if has_pi:
+        set_element_text_preserving_processing_instructions(
+            element,
+            cleaned,
+            sanitize=lambda value: prepare_book_text_for_xml(value or ""),
+        )
+        return
     for child in element:
         element.remove(child)
-    cleaned = prepare_book_text_for_xml(text)
     set_lxml_text(
         element,
         cleaned,
@@ -411,7 +422,6 @@ def apply_pdf_metadata_to_docbook_book(
     _update_copyright(info, source)
     _update_pubdate(info, source.publication_year)
     _sync_isbns(info, isbns, isbn, role_map)
-    _strip_template_marketing_from_info(info)
     if isbn13_digits(isbn):
         assign_docbook_metadata_xml_ids(book, isbn)
     elif book.get("{http://www.w3.org/XML/1998/namespace}id"):

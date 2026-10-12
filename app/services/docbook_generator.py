@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 from app.models.semantic_mapping import SemanticMappingBody
 from app.services.docbook_body_merge import (
@@ -18,6 +21,10 @@ from app.services.docbook_metadata_overlay import (
 from app.services.source_identity import SourceIdentityRecord
 from app.services.template_format import DOCBOOK_NS, classify_template_root
 from app.services.docbook_structure_fixup import normalize_docbook_book_structure
+from app.utils.docbook_processing_instructions import (
+    restore_processing_instructions,
+    snapshot_processing_instructions,
+)
 from app.utils.docbook_xml_ids import normalize_docbook_book_xml_language
 from app.utils.xml_serializer import serialize_lxml_tree
 
@@ -64,6 +71,8 @@ def generate_docbook_book_xml(
             f"DocBook book root must use namespace {DOCBOOK_NS!r}."
         )
 
+    pi_snapshot = snapshot_processing_instructions(root)
+
     overlay = DocBookMetadataOverlayResult()
     if source is not None:
         overlay = apply_pdf_metadata_to_docbook_book(root, source)
@@ -74,6 +83,9 @@ def generate_docbook_book_xml(
 
     normalize_docbook_book_structure(root)
     normalize_docbook_book_xml_language(root)
+    restored = restore_processing_instructions(root, pi_snapshot)
+    if restored:
+        logger.info("docbook restored %s template processing instructions", restored)
 
     xml = serialize_lxml_tree(
         root,
