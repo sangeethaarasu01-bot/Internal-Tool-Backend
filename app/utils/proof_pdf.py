@@ -106,6 +106,45 @@ def detect_author_query_cover_pages(
     return cover
 
 
+def article_lead_text_from_phase1(
+    phase1: dict | None,
+    *,
+    max_pages: int = 5,
+) -> str:
+    """Concatenate early PDF pages, skipping IEEE author-query cover pages."""
+    if not phase1:
+        return ""
+    pages = phase1.get("pages") or []
+    chunks: list[str] = []
+    for page in pages[:max_pages]:
+        if not isinstance(page, dict):
+            continue
+        text = str(page.get("raw_page_text") or page.get("normalized_text") or "")
+        if not text.strip():
+            continue
+        if is_author_queries_page_text(text):
+            continue
+        chunks.append(text)
+    if chunks:
+        return "\n".join(chunks)
+    return ""
+
+
+def is_plausible_journal_title_line(line: str) -> bool:
+    """Reject proof-instruction lines misread as journal titles."""
+    candidate = (line or "").strip()
+    if len(candidate) < 8:
+        return False
+    if is_author_queries_heading(candidate) or is_proof_cover_fragment(candidate):
+        return False
+    if is_author_queries_page_text(candidate):
+        return False
+    lowered = candidate.lower()
+    if lowered in {"abstract", "index terms", "keywords"}:
+        return False
+    return True
+
+
 def apply_author_query_cover_exclusions(
     raw: ExtractionResult,
     processed: list[ProcessedBlock],

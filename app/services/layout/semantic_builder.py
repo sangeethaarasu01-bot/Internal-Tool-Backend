@@ -1304,6 +1304,13 @@ def build_semantic_document(
         is_proof_cover_fragment,
     )
 
+    if front.journal_header:
+        journal_header_text = front.journal_header.text or ""
+        if is_author_queries_heading(journal_header_text) or is_proof_cover_fragment(
+            journal_header_text
+        ):
+            front.journal_header = None
+
     title_text = (front.title.text or "") if front.title else ""
     if front.title and (is_author_queries_heading(title_text) or is_proof_cover_fragment(title_text)):
         front.title = None

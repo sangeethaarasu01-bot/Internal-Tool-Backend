@@ -28,6 +28,14 @@ DATE_HISTORY_RE = re.compile(
 )
 VOLUME_LINE_RE = re.compile(r"VOLUME\s+(\d+)\s*,\s*(\d{4})", re.I)
 ARTICLE_NUM_RE = re.compile(r"(\d{7})")
+_MANUSCRIPT_ID_RE = re.compile(
+    r"\b([A-Z]{2,10}-\d{4}(?:-\d{2,6}){1,2})\b",
+    re.I,
+)
+_MANUSCRIPT_LABEL_RE = re.compile(
+    r"manuscript\s+(?:id|no\.?|number)\s*[:#]?\s*([A-Z]{2,10}-\d{4}(?:-\d{2,6}){1,2})",
+    re.I,
+)
 NUMBERED_AFF_RE = re.compile(r"(?<!\d)(\d)(?=[A-Za-z])")
 NUMBERED_EQUATION_RE = re.compile(r"(?<![\d.])\((\d{1,3})\)(?![\d])")
 
@@ -64,10 +72,15 @@ def _header_text(phase1: dict[str, Any] | None) -> str:
     return ""
 
 
-def _phase1_lead_text(phase1: dict[str, Any] | None, max_pages: int = 3) -> str:
-    """First pages of PDF text for journal / DOI / manuscript detection."""
+def _phase1_lead_text(phase1: dict[str, Any] | None, max_pages: int = 5) -> str:
+    """Article front pages for journal / DOI / manuscript detection (skips proof covers)."""
+    from app.utils.proof_pdf import article_lead_text_from_phase1, is_author_queries_page_text
+
+    lead = article_lead_text_from_phase1(phase1, max_pages=max_pages)
+    if lead.strip():
+        return lead
     header = _header_text(phase1)
-    if header.strip():
+    if header.strip() and not is_author_queries_page_text(header):
         return header
     pages = (phase1 or {}).get("pages") or []
     chunks: list[str] = []
@@ -124,15 +137,23 @@ def _infer_manuscript_id(
     source_filename: str | None,
     article_number: str | None,
     journal: IeeeJournalMeta | None = None,
+    publication_year: int | None = None,
 ) -> str | None:
-    ms = re.search(r"\b([A-Z]{2,10}-\d{4}-\d{2}-\d{3,6})\b", header[:6000])
+    region = header[:12000]
+    labeled = _MANUSCRIPT_LABEL_RE.search(region)
+    if labeled:
+        return labeled.group(1).upper()
+    ms = _MANUSCRIPT_ID_RE.search(region)
     if ms:
-        return ms.group(1)
+        return ms.group(1).upper()
     if journal and article_number:
-        year = None
+        year = publication_year
         vol = VOLUME_LINE_RE.search(header)
-        if vol:
-            year = vol.group(2)
+        if year is None and vol:
+            try:
+                year = int(vol.group(2))
+            except (TypeError, ValueError):
+                year = None
         if year:
             return f"{journal.acronym}-{year}-{article_number}"
     return None
@@ -278,7 +299,10 @@ def build_jats_metadata_overlay(
         effective_filename,
         article_number,
         journal=journal,
+        publication_year=publication_year,
     )
+    if not manuscript_id:
+        resolution.warnings.append("manuscript_id_unavailable: not found in source PDF header")
 
     fig_count = stats.get("figure_count") or stats.get("figures_extracted")
     if fig_count is None:
@@ -375,6 +399,12 @@ def _split_numbered_affiliations(text: str) -> list[str]:
         if cleaned:
             entries.append(cleaned)
     return entries or [normalized]
+
+
+def _remove_empty_article_id(article_meta: etree._Element, pub_type: str) -> None:
+    for node in list(article_meta.findall("article-id")):
+        if node.get("pub-id-type") == pub_type and not (node.text or "").strip():
+            article_meta.remove(node)
 
 
 def _set_article_id(article_meta: etree._Element, pub_type: str, value: str) -> None:
@@ -558,8 +588,7 @@ def apply_jats_metadata_overlay(
     if article_meta is None:
         return overlay
 
-    header = _header_text(phase1)
-    history = _parse_history(header)
+    history = _parse_history(_phase1_lead_text(phase1))
 
     template_journal = read_template_journal_meta(article)
     resolution = JournalResolutionResult(
@@ -599,6 +628,9 @@ def apply_jats_metadata_overlay(
     if overlay.manuscript_id:
         _set_article_id(article_meta, "manuscript", overlay.manuscript_id)
         applied.append("manuscript")
+    else:
+        _remove_empty_article_id(article_meta, "manuscript")
+        applied.append("manuscript-cleared")
 
     if overlay.publication_year:
         pub_date = article_meta.find("pub-date")

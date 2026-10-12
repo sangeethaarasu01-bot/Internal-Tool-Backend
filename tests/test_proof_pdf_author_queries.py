@@ -3,9 +3,11 @@
 from app.models.document_structure import ProcessedBlock
 from app.utils.proof_pdf import (
     apply_author_query_cover_exclusions,
+    article_lead_text_from_phase1,
     detect_author_query_cover_pages,
     is_author_queries_page_text,
     is_plausible_author_name,
+    is_plausible_journal_title_line,
 )
 
 SAMPLE_AQ_PAGE = """
@@ -83,3 +85,20 @@ def test_plausible_author_filters_aq_fragments() -> None:
     assert not is_plausible_author_name("please answer the following queries")
     assert not is_plausible_author_name("AQ: 1 Author")
     assert not is_plausible_author_name("Annotate the PDF")
+
+
+def test_plausible_journal_title_rejects_author_queries() -> None:
+    assert not is_plausible_journal_title_line("AUTHOR QUERIES")
+    assert is_plausible_journal_title_line("IEEE TRANSACTIONS ON INFORMATION THEORY")
+
+
+def test_article_lead_skips_cover_page() -> None:
+    phase1 = {
+        "pages": [
+            {"raw_page_text": SAMPLE_AQ_PAGE},
+            {"raw_page_text": "IEEE TRANSACTIONS ON INFORMATION THEORY\n10.1109/TIT.2026.1\n"},
+        ]
+    }
+    lead = article_lead_text_from_phase1(phase1)
+    assert "AUTHOR QUERIES" not in lead
+    assert "INFORMATION THEORY" in lead

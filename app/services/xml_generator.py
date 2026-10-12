@@ -31,8 +31,10 @@ from app.utils.reference_assembler import (
 )
 from app.services.template_format import UnsupportedTemplateRootError, require_jats_article_template
 from app.services.author_deduplication import author_dedup_key, clean_author_display_name
+from app.utils.person_name import split_person_name
 from app.utils.template_skeleton import is_boilerplate_text
 from app.utils.template_skeleton import strip_template_for_semantic_mapping
+from app.utils.xml_helpers import xml_local_name
 from app.utils.xml_helpers import xml_local_name
 from app.utils.reference_citation_builder import populate_structured_mixed_citation
 from app.utils.xml_serializer import serialize_lxml_tree
@@ -935,6 +937,46 @@ def _apply_front_matter(article: etree._Element, front: dict[str, Any]) -> None:
             _append_author_contrib(contrib_group, author_data, index, name_override=name_text)
 
 
+def _set_person_name_on_element(
+    parent: etree._Element,
+    given: str,
+    surname: str,
+) -> None:
+    ctx = {"semantic_type": "author", "source": "-", "field": "name"}
+    given_el = next(
+        (child for child in parent if xml_local_name(child) == "given-names"),
+        None,
+    )
+    surname_el = next(
+        (child for child in parent if xml_local_name(child) == "surname"),
+        None,
+    )
+    if surname and surname_el is None:
+        surname_el = etree.SubElement(parent, "surname")
+    if surname and surname_el is not None:
+        set_lxml_text(surname_el, surname, log_context={**ctx, "field": "surname"})
+    if given and given_el is None:
+        given_el = etree.SubElement(parent, "given-names")
+    if given and given_el is not None:
+        set_lxml_text(given_el, given, log_context={**ctx, "field": "given-names"})
+
+
+def _populate_contrib_person_names(contrib: etree._Element, given: str, surname: str) -> None:
+    targets: list[etree._Element] = []
+    for element in contrib.iter():
+        if not isinstance(element.tag, str):
+            continue
+        local = xml_local_name(element)
+        if local in {"name", "string-name"}:
+            targets.append(element)
+    if not targets:
+        name_alt = etree.SubElement(contrib, "name-alternatives")
+        name = etree.SubElement(name_alt, "name")
+        targets = [name]
+    for target in targets:
+        _set_person_name_on_element(target, given, surname)
+
+
 def _append_author_contrib(
     contrib_group: etree._Element,
     author_data: MappedSemanticNode | dict[str, Any],
@@ -947,33 +989,13 @@ def _append_author_contrib(
     )
     if not name_text:
         return
-    parts = name_text.split()
+    given, surname = split_person_name(name_text)
     contrib = etree.SubElement(
         contrib_group,
         "contrib",
         attrib={"contrib-type": "author", "id": f"contrib{index}"},
     )
-    string_name = etree.SubElement(contrib, "string-name")
-    if len(parts) >= 2:
-        given = etree.SubElement(string_name, "given-names")
-        set_lxml_text(
-            given,
-            parts[0],
-            log_context={"semantic_type": "author", "source": "-", "field": "given-names"},
-        )
-        surname = etree.SubElement(string_name, "surname")
-        set_lxml_text(
-            surname,
-            " ".join(parts[1:]),
-            log_context={"semantic_type": "author", "source": "-", "field": "surname"},
-        )
-    else:
-        surname = etree.SubElement(string_name, "surname")
-        set_lxml_text(
-            surname,
-            name_text,
-            log_context={"semantic_type": "author", "source": "-", "field": "surname"},
-        )
+    _populate_contrib_person_names(contrib, given, surname)
 
 
 def _normalize_person_name_elements(article: etree._Element) -> None:
@@ -982,7 +1004,7 @@ def _normalize_person_name_elements(article: etree._Element) -> None:
     if front is None:
         return
     for element in front.iter():
-        if element.tag not in _PERSON_NAME_TAGS:
+        if xml_local_name(element) not in _PERSON_NAME_TAGS:
             continue
         if element.text is None:
             continue

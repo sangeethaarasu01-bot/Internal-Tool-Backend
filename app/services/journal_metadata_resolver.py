@@ -89,11 +89,17 @@ def collect_journal_evidence(
     ir_header: str | None = None
     front = (ir or {}).get("front") or {}
     journal = front.get("journal_header")
+    from app.utils.proof_pdf import is_author_queries_heading, is_plausible_journal_title_line
+
     if isinstance(journal, dict):
         ir_header = (journal.get("text") or "").strip()
         for item in journal.get("elements") or []:
             ir_header += str(item.get("value") or "")
         ir_header = ir_header.strip() or None
+        if ir_header and (
+            is_author_queries_heading(ir_header) or not is_plausible_journal_title_line(ir_header)
+        ):
+            ir_header = None
         if ir_header and not title:
             mapped = lookup_ieee_journal(journal_title=ir_header)
             if mapped:
@@ -113,7 +119,7 @@ def collect_journal_evidence(
                 break
             if DOI_RE.search(candidate) or ISSN_RE.search(candidate):
                 continue
-            if len(candidate) >= 8:
+            if is_plausible_journal_title_line(candidate):
                 title = candidate
                 break
 

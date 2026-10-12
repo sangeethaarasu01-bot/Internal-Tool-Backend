@@ -104,6 +104,23 @@ _JOURNALS: tuple[IeeeJournalMeta, ...] = (
             r"\bieee\s+trans(?:actions)?\.?\s+on\s+consumer\b",
         ),
     ),
+    _record(
+        title="IEEE Transactions on Information Theory",
+        ieee_id="0047800",
+        acronym="TIT",
+        coden="IETTAW",
+        issn_print="0018-9448",
+        issn_online="1557-9654",
+        filename_prefixes=("tit",),
+        title_aliases=(
+            "ieee transactions on information theory",
+            "ieee trans. information theory",
+            "ieee trans information theory",
+        ),
+        header_patterns=(
+            r"\bieee\s+transactions\s+on\s+information\s+theory\b",
+        ),
+    ),
 )
 
 IEEE_JOURNALS_BY_KEY: dict[str, IeeeJournalMeta] = {}
