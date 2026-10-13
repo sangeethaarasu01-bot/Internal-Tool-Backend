@@ -4,8 +4,10 @@ from app.services.layout.book_copyright_legal import (
     extract_copyright_legal_notices,
     fix_glued_copyright_lines,
     is_book_copyright_boilerplate_line,
+    is_book_imprint_block_text,
+    split_imprint_glued_text,
 )
-from app.utils.book_text_typography import apply_book_typography
+from app.utils.book_text_typography import apply_book_typography, repair_pdf_stuck_word_boundaries
 from app.utils.text_utils import merge_block_texts
 
 
@@ -32,6 +34,32 @@ def test_merge_block_texts_does_not_join_available_to_library() -> None:
 
 def test_typography_splits_stuck_camelcase() -> None:
     assert "Available Library" in apply_book_typography("Information AvailableLibrary of Congress")
+
+
+MOSS_IMPRINT_GLUED = (
+    "LEXINGTON BOOKSLanham • Boulder • New York • London Published by Lexington Books "
+    "An imprint of The Rowman & Littlefield Publishing Group, Inc.4501 Forbes Boulevard, "
+    "Suite 200, Lanham, Maryland 20706www.rowman.com Unit A, Whitacre Mews, "
+    "26-34 Stannary Street, London SE11 4AB"
+)
+
+
+def test_repair_lexington_imprint_glue() -> None:
+    fixed = repair_pdf_stuck_word_boundaries(MOSS_IMPRINT_GLUED)
+    assert "BOOKS Lanham" in fixed
+    assert "Inc. 4501" in fixed
+    assert "20706 www" in fixed.lower() or "20706 www." in fixed.lower()
+
+
+def test_split_imprint_into_ordered_lines() -> None:
+    lines = split_imprint_glued_text(MOSS_IMPRINT_GLUED)
+    assert lines[0].startswith("LEXINGTON BOOKS")
+    assert any(line.startswith("Published by") for line in lines)
+    assert any("Unit A" in line for line in lines)
+
+
+def test_imprint_block_detection() -> None:
+    assert is_book_imprint_block_text(MOSS_IMPRINT_GLUED)
 
 
 def test_boilerplate_line_detection() -> None:

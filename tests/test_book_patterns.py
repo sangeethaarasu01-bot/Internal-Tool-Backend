@@ -4,9 +4,18 @@ from types import SimpleNamespace
 
 from app.services.layout.book_patterns import (
     is_book_back_matter_heading,
+    parse_book_section_heading,
     parse_book_title_block_heading,
     reorder_book_body_sections,
 )
+
+
+def test_parse_book_section_heading_rejects_prologue_chapter_overview() -> None:
+    overview = (
+        "Chapter 3 analyzes Pablo Neruda as what I have deemed an epic revolutionary poet."
+    )
+    assert parse_book_section_heading(overview) is None
+    assert parse_book_section_heading("Chapter 2 Rafael Alberti: Between Aesthetics and Politics") is not None
 
 
 def test_parse_book_title_block_heading_numbered_and_chapter_titles() -> None:

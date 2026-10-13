@@ -25,6 +25,16 @@ def test_dehyphenate_line_breaks_joins_split_words() -> None:
 def test_dehyphenate_line_breaks_preserves_intentional_hyphens() -> None:
     assert dehyphenate_line_breaks("t-Distributed stochastic") == "t-Distributed stochastic"
     assert dehyphenate_line_breaks("self-aware poets") == "self-aware poets"
+    assert dehyphenate_line_breaks("high-quality poetry") == "high-quality poetry"
+    assert dehyphenate_line_breaks("anti-fascism and anti-imperialism") == (
+        "anti-fascism and anti-imperialism"
+    )
+
+
+def test_dehyphenate_capitalized_line_breaks() -> None:
+    assert dehyphenate_line_breaks("their Com-munist Party") == "their Communist Party"
+    assert dehyphenate_line_breaks("the Span-ish Republic") == "the Spanish Republic"
+    assert dehyphenate_line_breaks("Sec-ond, this book") == "Second, this book"
 
 
 def test_merge_block_texts_joins_drop_cap_and_word() -> None:
