@@ -10,8 +10,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api import clients, convert, jobs, refine, schema, stream, upload
 from app.routes import extractions
 from app.config import settings
+from app.database import ensure_indexes
 from app.db import create_db_and_tables
 from app.events import EVENTS, EVENT_TIMESTAMPS
+from app.services.data_retention import run_retention_if_enabled
 from app.utils.logger import logger
 
 
@@ -25,13 +27,33 @@ async def _cleanup_old_events() -> None:
                 EVENT_TIMESTAMPS.pop(jid, None)
 
 
+async def _periodic_data_retention() -> None:
+    interval_sec = max(3600, settings.DATA_RETENTION_INTERVAL_HOURS * 3600)
+    while True:
+        await asyncio.sleep(interval_sec)
+        try:
+            run_retention_if_enabled()
+        except Exception:
+            logger.exception("Scheduled data retention purge failed")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_db_and_tables()
     settings.ensure_data_dirs()
+    try:
+        ensure_indexes()
+    except Exception:
+        logger.warning("MongoDB index setup skipped or failed", exc_info=True)
+    try:
+        run_retention_if_enabled()
+    except Exception:
+        logger.exception("Startup data retention purge failed")
     logger.info("IEEE XML Converter API started")
     task = asyncio.create_task(_cleanup_old_events())
+    retention_task = asyncio.create_task(_periodic_data_retention())
     yield
+    retention_task.cancel()
     task.cancel()
 
 

@@ -70,6 +70,44 @@ def _remove_book_toc_paragraphs(root: etree._Element) -> None:
                 parent.remove(para)
 
 
+def _normalize_para_plain_text(elem: etree._Element) -> str:
+    return _normalize_text_key("".join(elem.itertext()))
+
+
+def _dedupe_overlapping_paras(parent: etree._Element) -> None:
+    """Remove ``<para>`` nodes subsumed by or equal to a sibling (PDF overlap artifacts)."""
+    paras = [child for child in iter_element_children(parent) if xml_local_name(child) == "para"]
+    if len(paras) < 2:
+        return
+    texts = [_normalize_para_plain_text(p) for p in paras]
+    remove: set[etree._Element] = set()
+    for i, ti in enumerate(texts):
+        if not ti or paras[i] in remove:
+            continue
+        for j, tj in enumerate(texts):
+            if i == j or not tj or paras[j] in remove:
+                continue
+            if ti == tj:
+                if j > i:
+                    remove.add(paras[j])
+                continue
+            from app.utils.book_paragraph_dedup import _is_subsumed_paragraph_text
+
+            if _is_subsumed_paragraph_text(ti, tj):
+                remove.add(paras[i])
+                break
+            if _is_subsumed_paragraph_text(tj, ti):
+                remove.add(paras[j])
+    for elem in remove:
+        parent.remove(elem)
+
+
+def _dedupe_overlapping_paras_recurse(root: etree._Element) -> None:
+    _dedupe_overlapping_paras(root)
+    for child in iter_element_children(root):
+        _dedupe_overlapping_paras_recurse(child)
+
+
 def _dedupe_repeated_siblings(parent: etree._Element) -> None:
     prev_key: str | None = None
     for child in list(iter_element_children(parent)):
@@ -284,6 +322,7 @@ def normalize_docbook_book_structure(book: etree._Element) -> None:
     _remove_running_header_elements(book)
     _remove_book_toc_paragraphs(book)
     _dedupe_repeated_recurse(book)
+    _dedupe_overlapping_paras_recurse(book)
     _unwrap_nested_chapters(book)
     _convert_bibliography_chapters(book)
     _reorder_main_matter_before_back(book)

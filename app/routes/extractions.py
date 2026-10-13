@@ -10,7 +10,7 @@ from datetime import datetime
 import aiofiles
 from bson import ObjectId
 from bson.errors import InvalidId
-from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Query, UploadFile
 from pymongo.errors import PyMongoError
 
 from app.database import extractions_col, mongo_user_error, utcnow
@@ -30,6 +30,10 @@ from app.models.extraction_workflow import (
 )
 from app.models.semantic_mapping import SemanticMapRequest, SemanticMapResponse
 from app.services.extraction_processor import process_extraction
+from app.services.data_retention import purge_expired_data
+from app.services.job_preflight import run_pdf_preflight
+from app.services.text_extractor import PdfValidationError
+from app.services.xml_validation_report import validate_generated_xml
 from app.services.extraction_workflow import (
     ExtractionWorkflowError,
     apply_scope_to_extraction,
@@ -111,6 +115,10 @@ def _serialize(doc: dict, include_result: bool = False) -> dict:
         "completed_at": doc.get("completed_at"),
         "scope": doc.get("scope", "full"),
         "template_id": template.get("template_id"),
+        "job_intake": doc.get("job_intake"),
+        "preflight": doc.get("preflight"),
+        "pdf_classification": doc.get("pdf_classification"),
+        "validation_report": doc.get("validation_report"),
     }
     if include_result:
         payload["result"] = doc.get("result")
@@ -133,6 +141,10 @@ async def start_extraction(
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     skip_tables_figures: bool = Form(False),
+    client_name: str = Form(""),
+    project_name: str = Form(""),
+    jats_profile: str = Form(""),
+    sla_hours: int | None = Form(None),
 ):
     """Save the PDF for extraction only. Does not create a conversions record."""
     filename = file.filename or "document.pdf"
@@ -158,7 +170,29 @@ async def start_extraction(
     async with aiofiles.open(file_path, "wb") as out_file:
         await out_file.write(content)
 
+    try:
+        preflight = run_pdf_preflight(file_path, file_size_bytes=file_size)
+    except PdfValidationError as exc:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if not preflight.passed:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        raise HTTPException(
+            status_code=400,
+            detail={"message": "PDF preflight failed", "issues": preflight.issues},
+        )
+
     source_pdf_sha256 = sha256_file(file_path)
+
+    job_intake: dict = {
+        "client_name": (client_name or "").strip() or None,
+        "project_name": (project_name or "").strip() or None,
+        "jats_profile": (jats_profile or "").strip() or "ieee_jats",
+        "sla_hours": sla_hours,
+    }
+    job_intake = {k: v for k, v in job_intake.items() if v is not None}
 
     doc = {
         "filename": safe_name,
@@ -179,6 +213,9 @@ async def start_extraction(
         "scope": "full",
         "template": None,
         "skip_tables_figures": skip_tables_figures,
+        "job_intake": job_intake or None,
+        "preflight": preflight.to_dict(),
+        "workflow_stage": "preflight_passed",
     }
     try:
         inserted = extractions_col().insert_one(doc)
@@ -195,7 +232,25 @@ async def start_extraction(
         "filename": filename,
         "source_pdf_sha256": source_pdf_sha256,
         "message": "Extraction started",
+        "preflight": preflight.to_dict(),
+        "job_intake": job_intake or None,
     }
+
+
+@router.post("/maintenance/purge-expired")
+async def purge_expired_extractions(
+    retention_days: int | None = Query(None, ge=1, le=365),
+):
+    """
+    Delete extractions/conversions older than retention (default ``DATA_RETENTION_DAYS``).
+
+    Removes MongoDB rows and on-disk PDFs, templates, book exports, and artifacts.
+    """
+    try:
+        stats = purge_expired_data(retention_days=retention_days)
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+    return stats.to_dict()
 
 
 def _clear_template_storage(extraction_id: str) -> None:
@@ -790,10 +845,18 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     generated_record["output_filename"] = output_filename
     generated_record["identity_verified"] = True
 
+    dtd_path = settings.JATS_DTD_PATH if resolved_output_format == OUTPUT_IEEE_JATS else None
+    validation_report = validate_generated_xml(xml_content, dtd_path=dtd_path).to_dict()
+
     try:
         set_fields, unset_fields, mongo_flags = plan_extraction_mongo_update(
             doc,
-            {"scope": resolved_scope, "generated_xml": generated_record},
+            {
+                "scope": resolved_scope,
+                "generated_xml": generated_record,
+                "validation_report": validation_report,
+                "workflow_stage": "xml_generated",
+            },
             extraction_id=extraction_id,
         )
         if mongo_flags.get("semantic_mapping_dropped_from_mongo"):

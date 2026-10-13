@@ -1211,3 +1211,28 @@ ValueError: Validation failed: ['Broken xref: rid=ref20 has no matching id', 'Br
 2026-10-13 09:26:06.094 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
 2026-10-13 09:26:15.842 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
 2026-10-13 09:36:16.590 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-13 10:00:21.478 | INFO     | app.main:lifespan:32 - IEEE XML Converter API started
+2026-10-13 10:10:28.442 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 10:10:37.239 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 10:10:46.388 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 10:10:53.601 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 10:11:00.170 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 10:11:05.075 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 10:13:52.521 | INFO     | app.api.upload:upload_files:48 - Upload job 880a2254-2805-4d7a-acc4-96df7065ed3f: saved PDF sample.pdf (0 bytes)
+2026-10-13 10:13:52.552 | INFO     | app.api.upload:upload_files:84 - Upload job 880a2254-2805-4d7a-acc4-96df7065ed3f ready in 0.03s
+2026-10-13 10:13:55.251 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:197 - Layout PDF extract: title=Deep Learning for Breast Cancer Diagnosis Using Mammography authors=20 sections=7 paras=14
+2026-10-13 10:14:31.085 | INFO     | app.llm.client:complete:97 - LLM complete provider=gemini model=gemini-2.5-flash tokens_in=6 tokens_out=3 cost=$0.0000 duration=0.00s
+2026-10-13 10:14:31.632 | INFO     | app.agent.layout_paper_adapter:extract_paper_via_layout:197 - Layout PDF extract: title=Deep Learning for Breast Cancer Diagnosis Using Mammography authors=20 sections=7 paras=14
+2026-10-13 10:14:31.700 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-13 10:14:31.702 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-13 10:14:51.351 | INFO     | app.llm.client:complete:97 - LLM complete provider=anthropic model=mock tokens_in=391 tokens_out=64 cost=$0.0000 duration=0.56s
+2026-10-13 10:14:51.353 | INFO     | app.llm.client:complete:97 - LLM complete provider=anthropic model=mock tokens_in=385 tokens_out=64 cost=$0.0000 duration=0.00s
+2026-10-13 10:14:51.355 | INFO     | app.llm.client:complete:97 - LLM complete provider=anthropic model=mock tokens_in=387 tokens_out=64 cost=$0.0000 duration=0.00s
+2026-10-13 10:14:52.410 | INFO     | app.llm.client:complete:97 - LLM complete provider=anthropic model=gemini-2.5-flash tokens_in=835 tokens_out=90 cost=$0.0000 duration=0.00s
+2026-10-13 10:14:56.264 | INFO     | app.agent.xml_generator:_generate_from_template_dom:577 - PDF extraction unreliable for this file; output keeps template front/body/back text and structure (IEEE proof + vendor XML workflow).
+2026-10-13 10:34:20.752 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 10:34:31.423 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 11:08:33.083 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 11:08:37.074 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 12:04:19.349 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started
+2026-10-13 12:04:32.572 | INFO     | app.main:lifespan:52 - IEEE XML Converter API started

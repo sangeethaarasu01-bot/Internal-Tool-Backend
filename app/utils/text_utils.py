@@ -248,15 +248,64 @@ def _should_join_wrapped_word(previous: str, current: str) -> bool:
     return False
 
 
+_BOOK_CHAPTER_BODY_PARAGRAPH_SPLITS = (
+    r"(?<=\)\.)\s+(?=There are )",
+    r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=There are similarities)",
+    r"(?<=\bthat)\s+(?=One of the best )",
+    r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=The climate that fostered)",
+)
+
+
+_BOOK_ACK_PARAGRAPH_SPLITS = (
+    r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=If I missed thanking anyone)",
+    r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=I also wish to acknowledge)",
+    r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=Finally,\s+I thank)",
+    r"(?<=follows:)\s*(?=Gajjala,\s+R)",
+    r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=Gajjala,\s+R\.?,)",
+)
+
+
+def _split_book_text_by_patterns(text: str, patterns: tuple[str, ...]) -> list[str]:
+    parts = [text.strip()]
+    for pattern in patterns:
+        next_parts: list[str] = []
+        for part in parts:
+            if not part:
+                continue
+            chunks = re.split(pattern, part)
+            if len(chunks) > 1:
+                next_parts.extend(normalize_text(chunk) for chunk in chunks if normalize_text(chunk))
+            else:
+                next_parts.append(part)
+        parts = next_parts
+    return [normalize_text(p) for p in parts if normalize_text(p)]
+
+
 def split_book_visual_paragraphs(text: str) -> list[str]:
     """Split imprint/body text on blank lines or block boundaries (PDF reading order)."""
     if not text or not text.strip():
         return []
     stripped = text.strip()
+    ack_like = (
+        "thank" in stripped.lower()
+        and (
+            "coauthor" in stripped.lower()
+            or "acknowledg" in stripped.lower()
+            or "if i missed thanking anyone" in stripped.lower()
+        )
+    )
+    if ack_like:
+        ack_parts = _split_book_text_by_patterns(stripped, _BOOK_ACK_PARAGRAPH_SPLITS)
+        if len(ack_parts) > 1:
+            return ack_parts
+    if not ack_like:
+        chapter_parts = _split_book_text_by_patterns(stripped, _BOOK_CHAPTER_BODY_PARAGRAPH_SPLITS)
+        if len(chapter_parts) > 1:
+            return chapter_parts
     # Only split on clear blank-line paragraph breaks (not "Chapter N …" overview sentences).
     for pattern in (
         r"\n\s*\n+",
-        r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=(?:The|This|It|In|A|An|First,|Second,|Third,|A brief)\b)",
+        r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=(?:The|This|It|In|A|An|First,|Second,|Third,|Finally,|A brief)\b)",
     ):
         parts = re.split(pattern, stripped)
         if len(parts) > 1:

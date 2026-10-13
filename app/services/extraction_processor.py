@@ -15,6 +15,7 @@ from app.config import settings
 from app.database import extractions_col
 from app.pipeline.debug_artifacts import write_phase1_debug_bundle
 from app.pipeline.phase1.build_document import build_extracted_document
+from app.pipeline.phase1.pdf_kind import classify_pdf_document_kind, quality_warnings
 from app.pipeline.phase1.extraction_build_options import ExtractionBuildOptions
 from app.services.layout.document_pipeline import build_full_extraction_result
 from app.services.extraction_mongo_payload import (
@@ -74,6 +75,11 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
             progress=25,
         )
         raw = extract_text_layout(file_path, original_filename=original_filename)
+        pdf_kind = classify_pdf_document_kind(raw)
+        pdf_classification = {
+            "document_kind": pdf_kind,
+            "warnings": quality_warnings(raw, pdf_kind),
+        }
 
         _set_progress(
             col,
@@ -175,6 +181,8 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
             "current_step": "Extraction complete",
             "progress": 100,
             "step4_partial": build_options.partial_step4,
+            "pdf_classification": pdf_classification,
+            "workflow_stage": "extraction_complete",
         }
         storage_flags = dict(mongo_flags or {})
         if storage_flags:

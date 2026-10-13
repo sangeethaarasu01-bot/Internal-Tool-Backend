@@ -190,6 +190,81 @@ def _paragraph_text_and_drop_cap(blocks: list[ProcessedBlock]) -> tuple[str, str
     return text, drop_cap_letter
 
 
+def _merged_text_block_ranges(
+    blocks: list[ProcessedBlock],
+) -> tuple[str, list[tuple[int, int, int]]]:
+    """Merged paragraph text with (char_start, char_end, page) per block."""
+    merged = ""
+    ranges: list[tuple[int, int, int]] = []
+    for block in blocks:
+        part = normalize_text(block.text or "")
+        if not part:
+            continue
+        start = len(merged)
+        merged = merge_block_texts([merged, part]) if merged else part
+        ranges.append((start, len(merged), block.page_number))
+    return merged, ranges
+
+
+def _page_spans_for_merged_slice(
+    merged: str,
+    ranges: list[tuple[int, int, int]],
+    start: int,
+    end: int,
+) -> list[dict[str, int | str]]:
+    """Map a character slice of ``merged`` to per-page text fragments."""
+    if start >= end:
+        return []
+    spans: list[dict[str, int | str]] = []
+    current_page: int | None = None
+    buffer: list[str] = []
+    for rs, re, page in ranges:
+        if re <= start or rs >= end:
+            continue
+        ov_start = max(start, rs)
+        ov_end = min(end, re)
+        piece = merged[ov_start:ov_end]
+        if not piece:
+            continue
+        if current_page is None:
+            current_page = page
+        if page != current_page:
+            if buffer:
+                spans.append({"page": current_page, "text": "".join(buffer).strip()})
+            buffer = [piece]
+            current_page = page
+        else:
+            buffer.append(piece)
+    if buffer and current_page is not None:
+        spans.append({"page": current_page, "text": "".join(buffer).strip()})
+    return [s for s in spans if str(s.get("text") or "").strip()]
+
+
+def _page_spans_for_text_segments(
+    blocks: list[ProcessedBlock],
+    segments: list[str],
+) -> list[list[dict[str, int | str]]]:
+    merged, ranges = _merged_text_block_ranges(blocks)
+    result: list[list[dict[str, int | str]]] = []
+    pos = 0
+    for segment in segments:
+        seg = normalize_text(segment)
+        if not seg:
+            result.append([])
+            continue
+        idx = merged.find(seg, pos)
+        if idx < 0:
+            idx = merged.find(seg)
+        if idx < 0:
+            result.append(_book_page_spans_for_blocks(blocks))
+            pos = len(merged)
+            continue
+        end = idx + len(seg)
+        result.append(_page_spans_for_merged_slice(merged, ranges, idx, end))
+        pos = end
+    return result
+
+
 def _book_page_spans_for_blocks(blocks: list[ProcessedBlock]) -> list[dict[str, int | str]]:
     """Text fragments per PDF page (for ``<?page?>`` inside one ``<para>``)."""
     if not blocks:
@@ -239,8 +314,11 @@ def _book_paragraph_segments(
             spans = _book_page_spans_for_blocks(group)
             segments.append((group, merged, spans))
             continue
-        for part in visual_parts:
-            segments.append((group, part, [{"page": group[0].page_number, "text": part}]))
+        span_sets = _page_spans_for_text_segments(group, visual_parts)
+        for part, spans in zip(visual_parts, span_sets, strict=False):
+            if not spans:
+                spans = [{"page": group[0].page_number, "text": part}]
+            segments.append((group, part, spans))
     return segments
 
 
@@ -344,14 +422,44 @@ def _book_same_page_vertical_gap(prev: ProcessedBlock, current: ProcessedBlock) 
     return max(0.0, current.bbox[1] - prev.bbox[3])
 
 
+def _book_starts_new_paragraph_opener(text: str) -> bool:
+    normalized = normalize_text(text)
+    if not normalized:
+        return False
+    return bool(
+        re.match(
+            r"(There are|The |In the |One of the |This |A |An |However,|Thus,|Therefore,|Finally,)",
+            normalized,
+        )
+    )
+
+
 def _book_is_paragraph_break(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
     """Layout-only paragraph boundary (same page); do not split on every sentence end."""
     if prev.page_number != current.page_number:
         return False
-    if _book_same_page_vertical_gap(prev, current) >= _book_paragraph_gap_threshold(prev):
+    gap = _book_same_page_vertical_gap(prev, current)
+    threshold = _book_paragraph_gap_threshold(prev)
+    if gap >= threshold:
         return True
     indent = current.bbox[0] - prev.bbox[0]
-    return indent >= 8.0
+    if indent >= 8.0:
+        return True
+    cur = normalize_text(current.text or "")
+    prev_norm = normalize_text(prev.text or "")
+    if re.search(r"\bthat\s*$", prev_norm, re.I) and cur.startswith("One of "):
+        return True
+    if re.match(r"^[A-Z][a-z]+,\s+[A-Z]\.", cur) and (
+        not re.match(r"^[A-Z][a-z]+,\s+[A-Z]\.", prev_norm)
+        or re.search(r"\(\d{4}\)", prev_norm)
+    ):
+        return True
+    if _paragraph_ends_sentence(prev.text) and cur and cur[0].isupper():
+        if _book_starts_new_paragraph_opener(cur):
+            return True
+        if gap >= threshold * 0.72:
+            return True
+    return False
 
 
 def _can_merge_paragraph(

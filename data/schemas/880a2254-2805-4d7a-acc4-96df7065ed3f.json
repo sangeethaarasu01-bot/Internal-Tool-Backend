@@ -1,0 +1,3043 @@
+{
+  "root_tag": "article",
+  "namespaces": {
+    "mml": "http://www.w3.org/1998/Math/MathML",
+    "xlink": "http://www.w3.org/1999/xlink"
+  },
+  "doctype": null,
+  "elements": [
+    {
+      "xpath": "article",
+      "tag": "article",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "article-type": "research-article"
+      },
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front",
+          "tag": "front",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/journal-meta",
+              "tag": "journal-meta",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/journal-meta/journal-title-group",
+                  "tag": "journal-title-group",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/front/journal-meta/journal-title-group/journal-title",
+                      "tag": "journal-title",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "IEEE Access",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/journal-meta/issn",
+                  "tag": "issn",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "pub-type": "epub"
+                  },
+                  "sample": "2169-3536",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta",
+              "tag": "article-meta",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/article-meta/article-id",
+                  "tag": "article-id",
+                  "semantic": "unknown",
+                  "cardinality": "repeating",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "pub-id-type": "manuscript"
+                  },
+                  "sample": "3639184",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/article-id",
+                  "tag": "article-id",
+                  "semantic": "unknown",
+                  "cardinality": "repeating",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "pub-id-type": "doi"
+                  },
+                  "sample": "10.1109/ACCESS.2024.3639184",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/title-group",
+                  "tag": "title-group",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/front/article-meta/title-group/article-title",
+                      "tag": "article-title",
+                      "semantic": "paper_title",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "Sample Article Title",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/contrib-group",
+                  "tag": "contrib-group",
+                  "semantic": "author_name",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/front/article-meta/contrib-group/contrib",
+                      "tag": "contrib",
+                      "semantic": "author_name",
+                      "cardinality": "repeating",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {
+                        "contrib-type": "author"
+                      },
+                      "sample": "",
+                      "children": [
+                        {
+                          "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+                          "tag": "string-name",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "John A. Smith",
+                          "children": [],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/front/article-meta/contrib-group/contrib/email",
+                          "tag": "email",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "john@example.edu",
+                          "children": [],
+                          "notes": ""
+                        }
+                      ],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/front/article-meta/contrib-group/contrib",
+                      "tag": "contrib",
+                      "semantic": "author_name",
+                      "cardinality": "repeating",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {
+                        "contrib-type": "author"
+                      },
+                      "sample": "",
+                      "children": [
+                        {
+                          "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+                          "tag": "string-name",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "Maria B. Lee",
+                          "children": [],
+                          "notes": ""
+                        }
+                      ],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/abstract",
+                  "tag": "abstract",
+                  "semantic": "abstract",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/front/article-meta/abstract/p",
+                      "tag": "p",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "Sample abstract paragraph.",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/kwd-group",
+                  "tag": "kwd-group",
+                  "semantic": "keyword",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/front/article-meta/kwd-group/kwd",
+                      "tag": "kwd",
+                      "semantic": "keyword",
+                      "cardinality": "repeating",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "keyword one",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/front/article-meta/kwd-group/kwd",
+                      "tag": "kwd",
+                      "semantic": "keyword",
+                      "cardinality": "repeating",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "keyword two",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/counts",
+                  "tag": "counts",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/front/article-meta/counts/fig-count",
+                      "tag": "fig-count",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {
+                        "count": "2"
+                      },
+                      "sample": "",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/front/article-meta/counts/table-count",
+                      "tag": "table-count",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {
+                        "count": "1"
+                      },
+                      "sample": "",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/front/article-meta/counts/equation-count",
+                      "tag": "equation-count",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {
+                        "count": "3"
+                      },
+                      "sample": "",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/front/article-meta/counts/ref-count",
+                      "tag": "ref-count",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {
+                        "count": "10"
+                      },
+                      "sample": "",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/front/article-meta/counts/page-count",
+                      "tag": "page-count",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {
+                        "count": "12"
+                      },
+                      "sample": "",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/body",
+          "tag": "body",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/body/sec",
+              "tag": "sec",
+              "semantic": "unknown",
+              "cardinality": "repeating",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "id": "sec1"
+              },
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/body/sec/label",
+                  "tag": "label",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "I.",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/body/sec/title",
+                  "tag": "title",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "INTRODUCTION",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/body/sec/p",
+                  "tag": "p",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "Introduction paragraph.",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/body/sec",
+              "tag": "sec",
+              "semantic": "unknown",
+              "cardinality": "repeating",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "id": "sec2"
+              },
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/body/sec/label",
+                  "tag": "label",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "II.",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/body/sec/title",
+                  "tag": "title",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "RELATED WORK",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/body/sec/p",
+                  "tag": "p",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "Related work paragraph.",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back",
+          "tag": "back",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/back/ref-list",
+              "tag": "ref-list",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/back/ref-list/ref",
+                  "tag": "ref",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "id": "ref1"
+                  },
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/back/ref-list/ref/label",
+                      "tag": "label",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "[1]",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation",
+                      "tag": "mixed-citation",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {
+                        "publication-type": "journal"
+                      },
+                      "sample": "",
+                      "children": [
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/string-name",
+                          "tag": "string-name",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "",
+                          "children": [
+                            {
+                              "xpath": "article/back/ref-list/ref/mixed-citation/string-name/surname",
+                              "tag": "surname",
+                              "semantic": "unknown",
+                              "cardinality": "single",
+                              "data_type": "string",
+                              "required": false,
+                              "attributes": {},
+                              "sample": "Author",
+                              "children": [],
+                              "notes": ""
+                            },
+                            {
+                              "xpath": "article/back/ref-list/ref/mixed-citation/string-name/given-names",
+                              "tag": "given-names",
+                              "semantic": "unknown",
+                              "cardinality": "single",
+                              "data_type": "string",
+                              "required": false,
+                              "attributes": {},
+                              "sample": "A.",
+                              "children": [],
+                              "notes": ""
+                            }
+                          ],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/article-title",
+                          "tag": "article-title",
+                          "semantic": "paper_title",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "Sample",
+                          "children": [],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/source",
+                          "tag": "source",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "IEEE Trans.",
+                          "children": [],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/volume",
+                          "tag": "volume",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "1",
+                          "children": [],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/issue",
+                          "tag": "issue",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "1",
+                          "children": [],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/fpage",
+                          "tag": "fpage",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "1",
+                          "children": [],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/lpage",
+                          "tag": "lpage",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "10",
+                          "children": [],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/year",
+                          "tag": "year",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "2020",
+                          "children": [],
+                          "notes": ""
+                        }
+                      ],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front",
+      "tag": "front",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/journal-meta",
+          "tag": "journal-meta",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/journal-meta/journal-title-group",
+              "tag": "journal-title-group",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/journal-meta/journal-title-group/journal-title",
+                  "tag": "journal-title",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "IEEE Access",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/journal-meta/issn",
+              "tag": "issn",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "pub-type": "epub"
+              },
+              "sample": "2169-3536",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta",
+          "tag": "article-meta",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/article-meta/article-id",
+              "tag": "article-id",
+              "semantic": "unknown",
+              "cardinality": "repeating",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "pub-id-type": "manuscript"
+              },
+              "sample": "3639184",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/article-id",
+              "tag": "article-id",
+              "semantic": "unknown",
+              "cardinality": "repeating",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "pub-id-type": "doi"
+              },
+              "sample": "10.1109/ACCESS.2024.3639184",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/title-group",
+              "tag": "title-group",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/article-meta/title-group/article-title",
+                  "tag": "article-title",
+                  "semantic": "paper_title",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "Sample Article Title",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/contrib-group",
+              "tag": "contrib-group",
+              "semantic": "author_name",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/article-meta/contrib-group/contrib",
+                  "tag": "contrib",
+                  "semantic": "author_name",
+                  "cardinality": "repeating",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "contrib-type": "author"
+                  },
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+                      "tag": "string-name",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "John A. Smith",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/front/article-meta/contrib-group/contrib/email",
+                      "tag": "email",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "john@example.edu",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/contrib-group/contrib",
+                  "tag": "contrib",
+                  "semantic": "author_name",
+                  "cardinality": "repeating",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "contrib-type": "author"
+                  },
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+                      "tag": "string-name",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "Maria B. Lee",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/abstract",
+              "tag": "abstract",
+              "semantic": "abstract",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/article-meta/abstract/p",
+                  "tag": "p",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "Sample abstract paragraph.",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/kwd-group",
+              "tag": "kwd-group",
+              "semantic": "keyword",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/article-meta/kwd-group/kwd",
+                  "tag": "kwd",
+                  "semantic": "keyword",
+                  "cardinality": "repeating",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "keyword one",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/kwd-group/kwd",
+                  "tag": "kwd",
+                  "semantic": "keyword",
+                  "cardinality": "repeating",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "keyword two",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/counts",
+              "tag": "counts",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/article-meta/counts/fig-count",
+                  "tag": "fig-count",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "count": "2"
+                  },
+                  "sample": "",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/counts/table-count",
+                  "tag": "table-count",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "count": "1"
+                  },
+                  "sample": "",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/counts/equation-count",
+                  "tag": "equation-count",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "count": "3"
+                  },
+                  "sample": "",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/counts/ref-count",
+                  "tag": "ref-count",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "count": "10"
+                  },
+                  "sample": "",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/counts/page-count",
+                  "tag": "page-count",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "count": "12"
+                  },
+                  "sample": "",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/journal-meta",
+      "tag": "journal-meta",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/journal-meta/journal-title-group",
+          "tag": "journal-title-group",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/journal-meta/journal-title-group/journal-title",
+              "tag": "journal-title",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "IEEE Access",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/journal-meta/issn",
+          "tag": "issn",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "pub-type": "epub"
+          },
+          "sample": "2169-3536",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/journal-meta/journal-title-group",
+      "tag": "journal-title-group",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/journal-meta/journal-title-group/journal-title",
+          "tag": "journal-title",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "IEEE Access",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/journal-meta/journal-title-group/journal-title",
+      "tag": "journal-title",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "IEEE Access",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/journal-meta/issn",
+      "tag": "issn",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "pub-type": "epub"
+      },
+      "sample": "2169-3536",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta",
+      "tag": "article-meta",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/article-meta/article-id",
+          "tag": "article-id",
+          "semantic": "unknown",
+          "cardinality": "repeating",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "pub-id-type": "manuscript"
+          },
+          "sample": "3639184",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/article-id",
+          "tag": "article-id",
+          "semantic": "unknown",
+          "cardinality": "repeating",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "pub-id-type": "doi"
+          },
+          "sample": "10.1109/ACCESS.2024.3639184",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/title-group",
+          "tag": "title-group",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/article-meta/title-group/article-title",
+              "tag": "article-title",
+              "semantic": "paper_title",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "Sample Article Title",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/contrib-group",
+          "tag": "contrib-group",
+          "semantic": "author_name",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/article-meta/contrib-group/contrib",
+              "tag": "contrib",
+              "semantic": "author_name",
+              "cardinality": "repeating",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "contrib-type": "author"
+              },
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+                  "tag": "string-name",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "John A. Smith",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/front/article-meta/contrib-group/contrib/email",
+                  "tag": "email",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "john@example.edu",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/contrib-group/contrib",
+              "tag": "contrib",
+              "semantic": "author_name",
+              "cardinality": "repeating",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "contrib-type": "author"
+              },
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+                  "tag": "string-name",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "Maria B. Lee",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/abstract",
+          "tag": "abstract",
+          "semantic": "abstract",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/article-meta/abstract/p",
+              "tag": "p",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "Sample abstract paragraph.",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/kwd-group",
+          "tag": "kwd-group",
+          "semantic": "keyword",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/article-meta/kwd-group/kwd",
+              "tag": "kwd",
+              "semantic": "keyword",
+              "cardinality": "repeating",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "keyword one",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/kwd-group/kwd",
+              "tag": "kwd",
+              "semantic": "keyword",
+              "cardinality": "repeating",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "keyword two",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/counts",
+          "tag": "counts",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/article-meta/counts/fig-count",
+              "tag": "fig-count",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "count": "2"
+              },
+              "sample": "",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/counts/table-count",
+              "tag": "table-count",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "count": "1"
+              },
+              "sample": "",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/counts/equation-count",
+              "tag": "equation-count",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "count": "3"
+              },
+              "sample": "",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/counts/ref-count",
+              "tag": "ref-count",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "count": "10"
+              },
+              "sample": "",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/counts/page-count",
+              "tag": "page-count",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "count": "12"
+              },
+              "sample": "",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/article-id",
+      "tag": "article-id",
+      "semantic": "unknown",
+      "cardinality": "repeating",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "pub-id-type": "manuscript"
+      },
+      "sample": "3639184",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/article-id",
+      "tag": "article-id",
+      "semantic": "unknown",
+      "cardinality": "repeating",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "pub-id-type": "doi"
+      },
+      "sample": "10.1109/ACCESS.2024.3639184",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/title-group",
+      "tag": "title-group",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/article-meta/title-group/article-title",
+          "tag": "article-title",
+          "semantic": "paper_title",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "Sample Article Title",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/title-group/article-title",
+      "tag": "article-title",
+      "semantic": "paper_title",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "Sample Article Title",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/contrib-group",
+      "tag": "contrib-group",
+      "semantic": "author_name",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/article-meta/contrib-group/contrib",
+          "tag": "contrib",
+          "semantic": "author_name",
+          "cardinality": "repeating",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "contrib-type": "author"
+          },
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+              "tag": "string-name",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "John A. Smith",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/front/article-meta/contrib-group/contrib/email",
+              "tag": "email",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "john@example.edu",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/contrib-group/contrib",
+          "tag": "contrib",
+          "semantic": "author_name",
+          "cardinality": "repeating",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "contrib-type": "author"
+          },
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+              "tag": "string-name",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "Maria B. Lee",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/contrib-group/contrib",
+      "tag": "contrib",
+      "semantic": "author_name",
+      "cardinality": "repeating",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "contrib-type": "author"
+      },
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+          "tag": "string-name",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "John A. Smith",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/contrib-group/contrib/email",
+          "tag": "email",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "john@example.edu",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+      "tag": "string-name",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "John A. Smith",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/contrib-group/contrib/email",
+      "tag": "email",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "john@example.edu",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/contrib-group/contrib",
+      "tag": "contrib",
+      "semantic": "author_name",
+      "cardinality": "repeating",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "contrib-type": "author"
+      },
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+          "tag": "string-name",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "Maria B. Lee",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/contrib-group/contrib/string-name",
+      "tag": "string-name",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "Maria B. Lee",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/abstract",
+      "tag": "abstract",
+      "semantic": "abstract",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/article-meta/abstract/p",
+          "tag": "p",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "Sample abstract paragraph.",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/abstract/p",
+      "tag": "p",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "Sample abstract paragraph.",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/kwd-group",
+      "tag": "kwd-group",
+      "semantic": "keyword",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/article-meta/kwd-group/kwd",
+          "tag": "kwd",
+          "semantic": "keyword",
+          "cardinality": "repeating",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "keyword one",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/kwd-group/kwd",
+          "tag": "kwd",
+          "semantic": "keyword",
+          "cardinality": "repeating",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "keyword two",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/kwd-group/kwd",
+      "tag": "kwd",
+      "semantic": "keyword",
+      "cardinality": "repeating",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "keyword one",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/kwd-group/kwd",
+      "tag": "kwd",
+      "semantic": "keyword",
+      "cardinality": "repeating",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "keyword two",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/counts",
+      "tag": "counts",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/front/article-meta/counts/fig-count",
+          "tag": "fig-count",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "count": "2"
+          },
+          "sample": "",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/counts/table-count",
+          "tag": "table-count",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "count": "1"
+          },
+          "sample": "",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/counts/equation-count",
+          "tag": "equation-count",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "count": "3"
+          },
+          "sample": "",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/counts/ref-count",
+          "tag": "ref-count",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "count": "10"
+          },
+          "sample": "",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/front/article-meta/counts/page-count",
+          "tag": "page-count",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "count": "12"
+          },
+          "sample": "",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/counts/fig-count",
+      "tag": "fig-count",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "count": "2"
+      },
+      "sample": "",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/counts/table-count",
+      "tag": "table-count",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "count": "1"
+      },
+      "sample": "",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/counts/equation-count",
+      "tag": "equation-count",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "count": "3"
+      },
+      "sample": "",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/counts/ref-count",
+      "tag": "ref-count",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "count": "10"
+      },
+      "sample": "",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/front/article-meta/counts/page-count",
+      "tag": "page-count",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "count": "12"
+      },
+      "sample": "",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body",
+      "tag": "body",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/body/sec",
+          "tag": "sec",
+          "semantic": "unknown",
+          "cardinality": "repeating",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "id": "sec1"
+          },
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/body/sec/label",
+              "tag": "label",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "I.",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/body/sec/title",
+              "tag": "title",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "INTRODUCTION",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/body/sec/p",
+              "tag": "p",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "Introduction paragraph.",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/body/sec",
+          "tag": "sec",
+          "semantic": "unknown",
+          "cardinality": "repeating",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "id": "sec2"
+          },
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/body/sec/label",
+              "tag": "label",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "II.",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/body/sec/title",
+              "tag": "title",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "RELATED WORK",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/body/sec/p",
+              "tag": "p",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "Related work paragraph.",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body/sec",
+      "tag": "sec",
+      "semantic": "unknown",
+      "cardinality": "repeating",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "id": "sec1"
+      },
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/body/sec/label",
+          "tag": "label",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "I.",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/body/sec/title",
+          "tag": "title",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "INTRODUCTION",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/body/sec/p",
+          "tag": "p",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "Introduction paragraph.",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body/sec/label",
+      "tag": "label",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "I.",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body/sec/title",
+      "tag": "title",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "INTRODUCTION",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body/sec/p",
+      "tag": "p",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "Introduction paragraph.",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body/sec",
+      "tag": "sec",
+      "semantic": "unknown",
+      "cardinality": "repeating",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "id": "sec2"
+      },
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/body/sec/label",
+          "tag": "label",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "II.",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/body/sec/title",
+          "tag": "title",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "RELATED WORK",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/body/sec/p",
+          "tag": "p",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "Related work paragraph.",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body/sec/label",
+      "tag": "label",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "II.",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body/sec/title",
+      "tag": "title",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "RELATED WORK",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/body/sec/p",
+      "tag": "p",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "Related work paragraph.",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back",
+      "tag": "back",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/back/ref-list",
+          "tag": "ref-list",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/back/ref-list/ref",
+              "tag": "ref",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "id": "ref1"
+              },
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/back/ref-list/ref/label",
+                  "tag": "label",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "[1]",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation",
+                  "tag": "mixed-citation",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {
+                    "publication-type": "journal"
+                  },
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/string-name",
+                      "tag": "string-name",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "",
+                      "children": [
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/string-name/surname",
+                          "tag": "surname",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "Author",
+                          "children": [],
+                          "notes": ""
+                        },
+                        {
+                          "xpath": "article/back/ref-list/ref/mixed-citation/string-name/given-names",
+                          "tag": "given-names",
+                          "semantic": "unknown",
+                          "cardinality": "single",
+                          "data_type": "string",
+                          "required": false,
+                          "attributes": {},
+                          "sample": "A.",
+                          "children": [],
+                          "notes": ""
+                        }
+                      ],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/article-title",
+                      "tag": "article-title",
+                      "semantic": "paper_title",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "Sample",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/source",
+                      "tag": "source",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "IEEE Trans.",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/volume",
+                      "tag": "volume",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "1",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/issue",
+                      "tag": "issue",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "1",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/fpage",
+                      "tag": "fpage",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "1",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/lpage",
+                      "tag": "lpage",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "10",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/year",
+                      "tag": "year",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "2020",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list",
+      "tag": "ref-list",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/back/ref-list/ref",
+          "tag": "ref",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "id": "ref1"
+          },
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/back/ref-list/ref/label",
+              "tag": "label",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "[1]",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation",
+              "tag": "mixed-citation",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {
+                "publication-type": "journal"
+              },
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/string-name",
+                  "tag": "string-name",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "",
+                  "children": [
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/string-name/surname",
+                      "tag": "surname",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "Author",
+                      "children": [],
+                      "notes": ""
+                    },
+                    {
+                      "xpath": "article/back/ref-list/ref/mixed-citation/string-name/given-names",
+                      "tag": "given-names",
+                      "semantic": "unknown",
+                      "cardinality": "single",
+                      "data_type": "string",
+                      "required": false,
+                      "attributes": {},
+                      "sample": "A.",
+                      "children": [],
+                      "notes": ""
+                    }
+                  ],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/article-title",
+                  "tag": "article-title",
+                  "semantic": "paper_title",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "Sample",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/source",
+                  "tag": "source",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "IEEE Trans.",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/volume",
+                  "tag": "volume",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "1",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/issue",
+                  "tag": "issue",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "1",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/fpage",
+                  "tag": "fpage",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "1",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/lpage",
+                  "tag": "lpage",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "10",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/year",
+                  "tag": "year",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "2020",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref",
+      "tag": "ref",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "id": "ref1"
+      },
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/back/ref-list/ref/label",
+          "tag": "label",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "[1]",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation",
+          "tag": "mixed-citation",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {
+            "publication-type": "journal"
+          },
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/string-name",
+              "tag": "string-name",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "",
+              "children": [
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/string-name/surname",
+                  "tag": "surname",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "Author",
+                  "children": [],
+                  "notes": ""
+                },
+                {
+                  "xpath": "article/back/ref-list/ref/mixed-citation/string-name/given-names",
+                  "tag": "given-names",
+                  "semantic": "unknown",
+                  "cardinality": "single",
+                  "data_type": "string",
+                  "required": false,
+                  "attributes": {},
+                  "sample": "A.",
+                  "children": [],
+                  "notes": ""
+                }
+              ],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/article-title",
+              "tag": "article-title",
+              "semantic": "paper_title",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "Sample",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/source",
+              "tag": "source",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "IEEE Trans.",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/volume",
+              "tag": "volume",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "1",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/issue",
+              "tag": "issue",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "1",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/fpage",
+              "tag": "fpage",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "1",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/lpage",
+              "tag": "lpage",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "10",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/year",
+              "tag": "year",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "2020",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/label",
+      "tag": "label",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "[1]",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation",
+      "tag": "mixed-citation",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {
+        "publication-type": "journal"
+      },
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/string-name",
+          "tag": "string-name",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "",
+          "children": [
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/string-name/surname",
+              "tag": "surname",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "Author",
+              "children": [],
+              "notes": ""
+            },
+            {
+              "xpath": "article/back/ref-list/ref/mixed-citation/string-name/given-names",
+              "tag": "given-names",
+              "semantic": "unknown",
+              "cardinality": "single",
+              "data_type": "string",
+              "required": false,
+              "attributes": {},
+              "sample": "A.",
+              "children": [],
+              "notes": ""
+            }
+          ],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/article-title",
+          "tag": "article-title",
+          "semantic": "paper_title",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "Sample",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/source",
+          "tag": "source",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "IEEE Trans.",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/volume",
+          "tag": "volume",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "1",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/issue",
+          "tag": "issue",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "1",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/fpage",
+          "tag": "fpage",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "1",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/lpage",
+          "tag": "lpage",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "10",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/year",
+          "tag": "year",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "2020",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/string-name",
+      "tag": "string-name",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "",
+      "children": [
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/string-name/surname",
+          "tag": "surname",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "Author",
+          "children": [],
+          "notes": ""
+        },
+        {
+          "xpath": "article/back/ref-list/ref/mixed-citation/string-name/given-names",
+          "tag": "given-names",
+          "semantic": "unknown",
+          "cardinality": "single",
+          "data_type": "string",
+          "required": false,
+          "attributes": {},
+          "sample": "A.",
+          "children": [],
+          "notes": ""
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/string-name/surname",
+      "tag": "surname",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "Author",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/string-name/given-names",
+      "tag": "given-names",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "A.",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/article-title",
+      "tag": "article-title",
+      "semantic": "paper_title",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "Sample",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/source",
+      "tag": "source",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "IEEE Trans.",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/volume",
+      "tag": "volume",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "1",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/issue",
+      "tag": "issue",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "1",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/fpage",
+      "tag": "fpage",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "1",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/lpage",
+      "tag": "lpage",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "10",
+      "children": [],
+      "notes": ""
+    },
+    {
+      "xpath": "article/back/ref-list/ref/mixed-citation/year",
+      "tag": "year",
+      "semantic": "unknown",
+      "cardinality": "single",
+      "data_type": "string",
+      "required": false,
+      "attributes": {},
+      "sample": "2020",
+      "children": [],
+      "notes": ""
+    }
+  ],
+  "template_hash": "9f506210bbb286f15789dc911c3a4df7c4906def1f9ae64f092879d0c3619730",
+  "analyzed_at": "2026-09-22T06:56:59.791192",
+  "llm_model": "m",
+  "llm_cost_usd": 0.0
+}

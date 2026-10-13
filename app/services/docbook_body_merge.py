@@ -265,6 +265,8 @@ def _append_single_node(
         return section
 
     if st == "paragraph":
+        if node.children:
+            return _append_mapped_nodes(parent, list(node.children), page_state=page_state)
         _append_paragraph(parent, node, page_state=page_state)
         return parent
     if st == "display_math":

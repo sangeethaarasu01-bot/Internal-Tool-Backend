@@ -10,6 +10,7 @@ from typing import Any
 
 from app.models.semantic_mapping import MappedInlineElement, MappedSemanticNode, SemanticMappingBody
 from app.services.author_deduplication import deduplicate_mapped_authors
+from app.utils.book_paragraph_dedup import dedupe_ir_section
 
 _IR_TYPE_TO_SEMANTIC = {
     "title": "metadata",
@@ -115,11 +116,13 @@ def _ir_node_to_mapped(node: dict[str, Any] | None) -> MappedSemanticNode | None
 
 
 def _section_to_mapped(section: dict[str, Any]) -> MappedSemanticNode:
+    section = dedupe_ir_section(section)
     heading_el = section.get("heading_element") or {}
+    raw_items = list(section.get("content") or [])
+    if not raw_items and section.get("paragraphs"):
+        raw_items = list(section.get("paragraphs") or [])
     content_nodes = [
-        mapped
-        for item in (section.get("content") or [])
-        if (mapped := _ir_node_to_mapped(item)) is not None
+        mapped for item in raw_items if (mapped := _ir_node_to_mapped(item)) is not None
     ]
     for subsection in section.get("subsections") or []:
         content_nodes.append(_section_to_mapped(subsection))
@@ -146,6 +149,10 @@ def ir_to_semantic_mapping(
     from app.services.front_matter_consolidation import repair_ir_front_matter
 
     repair_ir_front_matter(ir, processed_blocks=processed_blocks)
+    from app.utils.book_paragraph_dedup import dedupe_ir_body
+
+    body_raw = dedupe_ir_body(ir.get("body") or {})
+    ir = {**ir, "body": body_raw}
     front_raw = ir.get("front") or {}
     front: dict[str, Any] = {}
 
@@ -179,7 +186,6 @@ def ir_to_semantic_mapping(
         front["affiliations"] = affiliations
 
     body: list[MappedSemanticNode] = []
-    body_raw = ir.get("body") or {}
     for section in body_raw.get("sections") or []:
         body.append(_section_to_mapped(section))
     for loose in body_raw.get("loose_paragraphs") or []:

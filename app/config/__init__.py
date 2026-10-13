@@ -65,6 +65,21 @@ class Settings(BaseSettings):
     EXTRACTION_TABLE_PAGE_WORKERS: int = int(os.getenv("EXTRACTION_TABLE_PAGE_WORKERS", "4"))
     # MongoDB BSON document limit is 16 MiB; cap stored subdocuments below that.
     MONGODB_MAX_PAYLOAD_BYTES: int = int(os.getenv("MONGODB_MAX_PAYLOAD_BYTES", str(14 * 1024 * 1024)))
+    # Ephemeral deployments: purge MongoDB rows and on-disk artifacts (no Redis/backup queue).
+    DATA_RETENTION_ENABLED: bool = os.getenv("DATA_RETENTION_ENABLED", "true").lower() in (
+        "1",
+        "true",
+        "yes",
+    )
+    DATA_RETENTION_DAYS: int = int(os.getenv("DATA_RETENTION_DAYS", "2"))
+    DATA_RETENTION_INTERVAL_HOURS: int = int(os.getenv("DATA_RETENTION_INTERVAL_HOURS", "12"))
+    # Optional DTD for JATS V2 validation (IEEE/client profile path).
+    JATS_DTD_PATH: Path = Path(
+        os.getenv(
+            "JATS_DTD_PATH",
+            str(Path(__file__).resolve().parent.parent.parent / "tests" / "fixtures" / "periodicals.dtd"),
+        )
+    )
 
     @property
     def uploads_dir(self) -> Path:
