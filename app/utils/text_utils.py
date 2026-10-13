@@ -7,6 +7,37 @@ import re
 _LINE_BREAK_HYPHEN_RE = re.compile(r"(\w)-\s+([a-z]\w*)")
 # PDF line breaks sometimes glue the suffix with no space: ``com-mitment``.
 _TIGHT_LINE_BREAK_HYPHEN_RE = re.compile(r"\b([a-z]{2,})-([a-z]{2,})\b")
+_CAPITALIZED_LINE_HYPHEN_RE = re.compile(r"\b([A-Z][a-z]{1,})-([a-z]{2,})\b")
+_HYPHEN_JOIN_STOPWORDS = frozenset(
+    {"a", "an", "as", "at", "by", "in", "of", "or", "the", "to", "and"}
+)
+_KEEP_INTENTIONAL_HYPHEN_TAIL = frozenset(
+    {
+        "quality",
+        "grade",
+        "known",
+        "level",
+        "term",
+        "style",
+        "fashioned",
+        "wide",
+        "based",
+        "minded",
+        "fascism",
+        "imperialism",
+        "war",
+        "operative",
+        "capitalist",
+        "European",
+        "american",
+        "Semitic",
+        "language",
+        "garde",
+        "century",
+        "marked",
+        "scale",
+    }
+)
 _COMPOUND_HYPHEN_PREFIXES = frozenset(
     {
         "all",
@@ -52,15 +83,30 @@ def normalize_text(text: str) -> str:
     return " ".join((text or "").replace("\n", " ").split()).strip()
 
 
+def _should_keep_intentional_hyphen(left: str, right: str) -> bool:
+    left_l = left.lower()
+    right_l = right.lower()
+    if left_l in _COMPOUND_HYPHEN_PREFIXES:
+        return True
+    if left_l in _HYPHEN_JOIN_STOPWORDS or right_l in _HYPHEN_JOIN_STOPWORDS:
+        return True
+    if right_l in _KEEP_INTENTIONAL_HYPHEN_TAIL:
+        return True
+    if len(left_l) >= 4 and len(right_l) >= 4:
+        return True
+    return False
+
+
 def dehyphenate_line_breaks(text: str) -> str:
     """Join words broken across PDF lines (``instrumen- tal`` → ``instrumental``)."""
     if not text:
         return ""
     cleaned = _LINE_BREAK_HYPHEN_RE.sub(r"\1\2", text)
+    cleaned = _CAPITALIZED_LINE_HYPHEN_RE.sub(r"\1\2", cleaned)
 
     def _join_tight(match: re.Match[str]) -> str:
         left, right = match.group(1), match.group(2)
-        if left in _COMPOUND_HYPHEN_PREFIXES:
+        if _should_keep_intentional_hyphen(left, right):
             return match.group(0)
         return f"{left}{right}"
 
@@ -200,6 +246,22 @@ def _should_join_wrapped_word(previous: str, current: str) -> bool:
             if pl <= 3 and cl >= 4:
                 return True
     return False
+
+
+def split_book_visual_paragraphs(text: str) -> list[str]:
+    """Split imprint/body text on blank lines or block boundaries (PDF reading order)."""
+    if not text or not text.strip():
+        return []
+    stripped = text.strip()
+    # Only split on clear blank-line paragraph breaks (not "Chapter N …" overview sentences).
+    for pattern in (
+        r"\n\s*\n+",
+        r"(?<=[.!?])(?:[\"'\u201d\u2019])?\s+(?=(?:The|This|It|In|A|An|First,|Second,|Third,|A brief)\b)",
+    ):
+        parts = re.split(pattern, stripped)
+        if len(parts) > 1:
+            return [normalize_text(part) for part in parts if normalize_text(part)]
+    return [normalize_text(text)]
 
 
 def merge_block_texts(parts: list[str]) -> str:

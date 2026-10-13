@@ -169,6 +169,7 @@ def build_ir_node(
     rows: list[list[str]] | None = None,
     unknown_reason: str | None = None,
     detection_reason: str | None = None,
+    page_spans: list[dict[str, int | str]] | None = None,
 ) -> IRNode:
     """Build an ``IRNode`` from a legacy semantic classification label and text.
 
@@ -205,6 +206,7 @@ def build_ir_node(
             level=level,
             unknown_reason=unknown_reason,
             detection_reason=detection_reason,
+            page_spans=list(page_spans or []),
         )
 
     if inline_elements is not None:
@@ -229,6 +231,7 @@ def build_ir_node(
         rows=rows,
         unknown_reason=unknown_reason,
         detection_reason=detection_reason,
+        page_spans=list(page_spans or []),
     )
 
 

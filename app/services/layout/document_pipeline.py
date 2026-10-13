@@ -38,6 +38,7 @@ from app.services.layout.book_patterns import (
     parse_book_section_heading,
 )
 from app.services.layout.text_filter import (
+    FilterDecision,
     build_page_number_candidates,
     build_running_footer_candidates,
     build_running_header_candidates,
@@ -99,6 +100,23 @@ def process_document_structure(
             running_footers,
             book_mode=book_ctx.is_book,
         )
+
+        if book_ctx.is_book and not decision.exclude_from_content:
+            from app.services.layout.book_metadata import (
+                _page_is_copyright_imprint_page,
+                _text_looks_like_publisher_imprint_page,
+            )
+
+            page_blob = " ".join((b.text or "") for b in page.blocks if (b.text or "").strip())
+            if _page_is_copyright_imprint_page(page) or _text_looks_like_publisher_imprint_page(
+                page_blob
+            ):
+                decision = FilterDecision(
+                    classification="UNKNOWN_TEXT",
+                    exclude_from_content=True,
+                    exclusion_reason="book_imprint_page",
+                    confidence=0.97,
+                )
 
         if decision.classification in {"BODY_TEXT", "UNKNOWN_TEXT"} and len(text) > 20:
             decision.classification = "PARAGRAPH"

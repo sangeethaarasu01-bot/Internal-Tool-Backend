@@ -26,6 +26,11 @@ BOOK_CHAPTER_NUMERIC_RE = re.compile(
     r"^(?:CHAPTER|Chapter)\s+(\d+)\s*[:\-.]?\s*(.+)$",
     re.IGNORECASE,
 )
+# Prologue/overview: "Chapter 3 analyzes …" is body text, not a new <chapter> heading.
+_NARRATIVE_CHAPTER_OVERVIEW_RE = re.compile(
+    r"^(?:analyzes|focuses|details|begins|studies|looks|examines|discusses|turns|then)\b",
+    re.IGNORECASE,
+)
 BOOK_INTERMISSION_RE = re.compile(
     r"^(?:INTERMISSION|Intermission)\s+(\d+)\s*[:\-.]?\s*(.+)$",
     re.IGNORECASE,
@@ -84,6 +89,10 @@ def parse_book_section_heading(text: str) -> BookSectionHeading | None:
     if match:
         number = int(match.group(1))
         title = match.group(2).strip()
+        if _NARRATIVE_CHAPTER_OVERVIEW_RE.match(title):
+            return None
+        if len(title) > 100 and re.search(r"\b(?:as what|during the|after the|the text)\b", title, re.I):
+            return None
         return BookSectionHeading(
             heading=f"Chapter {number}: {title}",
             level=1,

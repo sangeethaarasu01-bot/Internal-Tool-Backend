@@ -96,6 +96,14 @@ def _node_page_number(node: MappedSemanticNode) -> int | None:
         return None
 
 
+def _folio_label(page: int, page_state: _PagePiState | None) -> str | None:
+    if page_state is None:
+        return None
+    from app.services.layout.book_page_folios import folio_label_for_pdf_page
+
+    return folio_label_for_pdf_page(page_state.folio_map, page) or str(page)
+
+
 def _maybe_append_page_pi(
     parent: etree._Element,
     page: int | None,
@@ -103,14 +111,28 @@ def _maybe_append_page_pi(
 ) -> None:
     if page_state is None or page is None:
         return
-    from app.services.layout.book_page_folios import folio_label_for_pdf_page
-
-    label = folio_label_for_pdf_page(page_state.folio_map, page) or str(page)
-    if page_state.last_folio_label == label:
+    label = _folio_label(page, page_state)
+    if not label or page_state.last_folio_label == label:
         return
     page_state.last_page = page
     page_state.last_folio_label = label
     parent.append(etree.ProcessingInstruction("page", f'value="{label}"'))
+
+
+def _append_page_pi_inside_para(
+    para: etree._Element,
+    page: int,
+    page_state: _PagePiState | None,
+) -> etree._Element:
+    label = _folio_label(page, page_state)
+    if not label:
+        label = str(page)
+    if page_state is not None:
+        page_state.last_page = page
+        page_state.last_folio_label = label
+    pi = etree.ProcessingInstruction("page", f'value="{label}"')
+    para.append(pi)
+    return pi
 
 
 def _min_pdf_page(node: MappedSemanticNode) -> int:
@@ -150,6 +172,43 @@ def _append_paragraph(
     if is_book_running_header_text(text):
         return
     from app.utils.book_text_typography import prepare_book_text_for_xml
+
+    meta = node.metadata or {}
+    raw_spans = meta.get("page_spans")
+    spans: list[dict[str, object]] = []
+    if isinstance(raw_spans, list):
+        for item in raw_spans:
+            if isinstance(item, dict) and item.get("text"):
+                spans.append(item)
+
+    if len(spans) > 1:
+        _maybe_append_page_pi(parent, _node_page_number(node), page_state)
+        para = etree.SubElement(parent, _ns("para"))
+        first = True
+        for span in spans:
+            try:
+                page_num = int(span.get("page"))
+            except (TypeError, ValueError):
+                page_num = 0
+            chunk = prepare_book_text_for_xml(str(span.get("text") or ""))
+            if not chunk:
+                continue
+            if first:
+                set_lxml_text(para, chunk)
+                first = False
+                continue
+            if not list(para):
+                if para.text and not str(para.text).endswith((" ", "-", "\u2014")):
+                    para.text = f"{para.text} "
+            else:
+                prev_pi = list(para)[-1]
+                if prev_pi.tag is etree.ProcessingInstruction:
+                    tail = (prev_pi.tail or "").strip()
+                    prev_pi.tail = f"{tail} " if tail else " "
+            pi = _append_page_pi_inside_para(para, page_num, page_state)
+            body = chunk.strip()
+            pi.tail = f" {body}" if body else ""
+        return
 
     _maybe_append_page_pi(parent, _node_page_number(node), page_state)
     para = etree.SubElement(parent, _ns("para"))

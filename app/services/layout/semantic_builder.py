@@ -78,7 +78,11 @@ from app.services.layout.table_grid_builder import (
     collect_table_blocks_after_caption,
     reconstruct_table_grid_from_blocks,
 )
-from app.utils.text_utils import infer_drop_cap_letter, merge_block_texts
+from app.utils.text_utils import (
+    infer_drop_cap_letter,
+    merge_block_texts,
+    split_book_visual_paragraphs,
+)
 
 LIST_NEST_INDENT = 24.0
 
@@ -124,6 +128,7 @@ def _element(
     detection_reason: str | None = None,
     rows: list[list[str]] | None = None,
     drop_cap_letter: str | None = None,
+    page_spans: list[dict[str, int | str]] | None = None,
 ) -> IRNode:
     pages = sorted({b.page_number for b in blocks})
     bbox = union_bbox(blocks) if blocks else None
@@ -165,6 +170,7 @@ def _element(
         list_marker=list_marker,
         detection_reason=resolved_detection_reason,
         rows=rows,
+        page_spans=page_spans,
     )
 
 
@@ -182,6 +188,60 @@ def _paragraph_text_and_drop_cap(blocks: list[ProcessedBlock]) -> tuple[str, str
         if drop_cap_letter and not text.startswith(drop_cap_letter):
             text = f"{drop_cap_letter}{text}"
     return text, drop_cap_letter
+
+
+def _book_page_spans_for_blocks(blocks: list[ProcessedBlock]) -> list[dict[str, int | str]]:
+    """Text fragments per PDF page (for ``<?page?>`` inside one ``<para>``)."""
+    if not blocks:
+        return []
+    spans: list[dict[str, int | str]] = []
+    current_page: int | None = None
+    chunk_parts: list[str] = []
+    for block in blocks:
+        page = block.page_number
+        piece = (block.text or "").strip()
+        if not piece:
+            continue
+        if current_page is None:
+            current_page = page
+        if page != current_page and chunk_parts:
+            spans.append({"page": current_page, "text": merge_block_texts(chunk_parts)})
+            chunk_parts = []
+            current_page = page
+        chunk_parts.append(piece)
+    if chunk_parts and current_page is not None:
+        spans.append({"page": current_page, "text": merge_block_texts(chunk_parts)})
+    return spans
+
+
+def _book_paragraph_segments(
+    blocks: list[ProcessedBlock],
+) -> list[tuple[list[ProcessedBlock], str, list[dict[str, int | str]]]]:
+    """Return (source blocks, flat text, page spans) for each body paragraph."""
+    if not blocks:
+        return []
+    block_groups: list[list[ProcessedBlock]] = []
+    current: list[ProcessedBlock] = []
+    for block in blocks:
+        if current and _book_is_paragraph_break(current[-1], block):
+            block_groups.append(current)
+            current = [block]
+        else:
+            current.append(block)
+    if current:
+        block_groups.append(current)
+
+    segments: list[tuple[list[ProcessedBlock], str, list[dict[str, int | str]]]] = []
+    for group in block_groups:
+        merged = _merge_text(group)
+        visual_parts = split_book_visual_paragraphs(merged)
+        if len(visual_parts) <= 1:
+            spans = _book_page_spans_for_blocks(group)
+            segments.append((group, merged, spans))
+            continue
+        for part in visual_parts:
+            segments.append((group, part, [{"page": group[0].page_number, "text": part}]))
+    return segments
 
 
 def _build_list_item_element(
@@ -273,12 +333,40 @@ def _paragraph_ends_sentence(text: str) -> bool:
     return bool(re.search(r"(?:[.!?]|\[\d+\])\s*$", normalized))
 
 
-def _can_merge_paragraph(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
+def _book_paragraph_gap_threshold(prev: ProcessedBlock) -> float:
+    line_height = max(10.0, prev.bbox[3] - prev.bbox[1])
+    return max(14.0, line_height * 1.08)
+
+
+def _book_same_page_vertical_gap(prev: ProcessedBlock, current: ProcessedBlock) -> float:
+    if prev.page_number != current.page_number:
+        return 0.0
+    return max(0.0, current.bbox[1] - prev.bbox[3])
+
+
+def _book_is_paragraph_break(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
+    """Layout-only paragraph boundary (same page); do not split on every sentence end."""
+    if prev.page_number != current.page_number:
+        return False
+    if _book_same_page_vertical_gap(prev, current) >= _book_paragraph_gap_threshold(prev):
+        return True
+    indent = current.bbox[0] - prev.bbox[0]
+    return indent >= 8.0
+
+
+def _can_merge_paragraph(
+    prev: ProcessedBlock,
+    current: ProcessedBlock,
+    *,
+    book_mode: bool = False,
+) -> bool:
     if extract_leading_roman_section_heading(current.text):
         return False
     if current.is_bold and not prev.is_bold:
         return False
-    if _paragraph_ends_sentence(prev.text):
+    if not book_mode and _paragraph_ends_sentence(prev.text):
+        return False
+    if book_mode and _book_is_paragraph_break(prev, current):
         return False
     if prev.page_number != current.page_number and prev.page_number + 1 != current.page_number:
         return False
@@ -291,8 +379,9 @@ def _can_merge_paragraph(prev: ProcessedBlock, current: ProcessedBlock) -> bool:
         return False
     gap = current.bbox[1] - prev.bbox[3]
     if prev.page_number != current.page_number:
-        gap = 0
-    if not cross_column and gap > 28:
+        gap = 0 if not book_mode else max(0.0, gap)
+    gap_limit = _book_paragraph_gap_threshold(prev) if book_mode else 28.0
+    if not cross_column and gap > gap_limit:
         return False
     prev_size = prev.dominant_font_size or 10
     cur_size = current.dominant_font_size or 10
@@ -708,22 +797,36 @@ def build_semantic_document(
         nonlocal paragraph_group
         if not paragraph_group:
             return
-        paragraph_text, drop_cap_letter = _paragraph_text_and_drop_cap(paragraph_group)
-        element = _element(
-            "PARAGRAPH",
-            paragraph_text,
-            paragraph_group,
-            0.82,
-            drop_cap_letter=drop_cap_letter,
-        )
         container = current_container()
-        if isinstance(container, SemanticSection):
-            container.paragraphs.append(element)
-            container.content.append(element)
-            container.content_source_block_ids.extend(element.source_block_ids)
+        drop_cap_letter: str | None = None
+        if book_mode:
+            book_segments = _book_paragraph_segments(paragraph_group)
         else:
-            body.loose_paragraphs.append(element)
-        mapped_ids.update(element.source_block_ids)
+            paragraph_text, drop_cap_letter = _paragraph_text_and_drop_cap(paragraph_group)
+            book_segments = [(paragraph_group, paragraph_text, [])]
+        for index, (seg_blocks, paragraph_text, page_spans) in enumerate(book_segments):
+            cap = None
+            if index == 0:
+                cap = drop_cap_letter or infer_drop_cap_letter(paragraph_text)
+                if not cap and seg_blocks:
+                    first = normalize_text(seg_blocks[0].text)
+                    if len(first) == 1 and re.fullmatch(r"[A-Z]", first):
+                        cap = first
+            element = _element(
+                "PARAGRAPH",
+                paragraph_text,
+                seg_blocks,
+                0.82,
+                drop_cap_letter=cap,
+                page_spans=page_spans or None,
+            )
+            if isinstance(container, SemanticSection):
+                container.paragraphs.append(element)
+                container.content.append(element)
+                container.content_source_block_ids.extend(element.source_block_ids)
+            else:
+                body.loose_paragraphs.append(element)
+            mapped_ids.update(element.source_block_ids)
         paragraph_group = []
 
     def flush_list() -> None:
@@ -1225,7 +1328,9 @@ def build_semantic_document(
                 mapped_ids.update(element.source_block_ids)
                 i += 1
                 continue
-            if paragraph_group and _can_merge_paragraph(paragraph_group[-1], block):
+            if paragraph_group and _can_merge_paragraph(
+                paragraph_group[-1], block, book_mode=book_mode
+            ):
                 paragraph_group.append(block)
             else:
                 flush_paragraph()
@@ -1285,7 +1390,9 @@ def build_semantic_document(
     if recovery_blocks and current_section is not None:
         recovery_group: list[ProcessedBlock] = []
         for block in recovery_blocks:
-            if recovery_group and not _can_merge_paragraph(recovery_group[-1], block):
+            if recovery_group and not _can_merge_paragraph(
+                recovery_group[-1], block, book_mode=book_mode
+            ):
                 paragraph_group = recovery_group
                 flush_paragraph()
                 recovery_group = [block]

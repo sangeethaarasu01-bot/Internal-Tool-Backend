@@ -509,7 +509,16 @@ def classify_content_block(
                 exclusion_reason="book_copyright_legal",
                 confidence=0.94,
             )
+        from app.services.layout.book_copyright_legal import is_book_imprint_block_text
         from app.services.layout.book_table_of_contents import is_book_toc_blob
+
+        if is_book_imprint_block_text(text):
+            return FilterDecision(
+                classification="UNKNOWN_TEXT",
+                exclude_from_content=True,
+                exclusion_reason="book_imprint_page",
+                confidence=0.96,
+            )
 
         if is_book_toc_blob(text):
             return FilterDecision(

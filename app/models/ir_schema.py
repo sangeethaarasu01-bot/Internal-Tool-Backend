@@ -87,6 +87,7 @@ class IRNode(BaseModel):
     rows: list[list[str]] | None = None
     unknown_reason: str | None = None
     detection_reason: str | None = None
+    page_spans: list[dict[str, int | str]] = Field(default_factory=list)
 
     @computed_field  # type: ignore[prop-decorator]
     @property
