@@ -110,6 +110,49 @@ def _externalize_phase1(
     return stub, {"phase1_externalized": True, "phase1_storage_path": path}
 
 
+def _mongo_update_command_size(set_fields: dict[str, Any], unset: dict[str, str]) -> int:
+    """BSON size of the update command MongoDB receives (also capped at 16 MiB)."""
+    cmd: dict[str, Any] = {"$set": set_fields}
+    if unset:
+        cmd["$unset"] = unset
+    return bson_encoded_size(cmd)
+
+
+def _externalize_structure(
+    extraction_id: str,
+    structure: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    path = _persist_extraction_artifact(extraction_id, "structure.json", structure)
+    folios = structure.get("book_page_folios")
+    stats = structure.get("structure_stats")
+    stub: dict[str, Any] = {
+        "externalized": True,
+        "storage_path": path,
+    }
+    if isinstance(stats, dict):
+        stub["structure_stats"] = stats
+    if isinstance(folios, dict) and bson_encoded_size(folios) < 256 * 1024:
+        stub["book_page_folios"] = folios
+    return stub, {"structure_externalized": True, "structure_storage_path": path}
+
+
+def resolve_extraction_result_from_doc(doc: dict[str, Any]) -> dict[str, Any]:
+    """Hydrate ``result`` including structure/phase1 loaded from disk when externalized."""
+    result = copy.deepcopy(doc.get("result") or {})
+    structure = result.get("structure")
+    if isinstance(structure, dict) and structure.get("externalized"):
+        path = (structure.get("storage_path") or "").strip()
+        if path and Path(path).is_file():
+            loaded = load_extraction_artifact_file(path)
+            if isinstance(loaded, dict):
+                result["structure"] = loaded
+    if not result.get("phase1"):
+        phase1 = resolve_phase1_from_extraction_doc(doc)
+        if phase1:
+            result["phase1"] = phase1
+    return result
+
+
 def _slim_result_structure(result: dict[str, Any]) -> bool:
     """Drop bulky structure fields when semantic IR is stored separately."""
     structure = result.get("structure")
@@ -122,6 +165,20 @@ def _slim_result_structure(result: dict[str, Any]) -> bool:
     if isinstance(completeness, dict) and completeness.pop("excluded_blocks", None) is not None:
         changed = True
     return changed
+
+
+def apply_warnings_to_planned_generated_xml(
+    set_fields: dict[str, Any],
+    warnings: list[str],
+) -> None:
+    """Attach warnings to the planned (possibly slim) ``generated_xml`` subdocument."""
+    gen = set_fields.get("generated_xml")
+    if not isinstance(gen, dict):
+        return
+    merged = list(gen.get("warnings") or [])
+    merged.extend(warnings)
+    gen["warnings"] = merged
+    set_fields["generated_xml"] = gen
 
 
 def _minimal_generated_xml_stub(
@@ -193,10 +250,23 @@ def plan_extraction_mongo_update(
     unset: dict[str, str] = {}
     limit = _document_bson_limit()
 
+    if isinstance(set_copy.get("result"), dict) and isinstance(set_copy.get("phase1"), dict):
+        compact_result, compact_phase1, compact_flags = compact_extraction_result_for_mongo(
+            set_copy["result"],
+            set_copy["phase1"],
+            extraction_id=ext_id,
+        )
+        set_copy["result"] = compact_result
+        set_copy["phase1"] = compact_phase1
+        flags.update(compact_flags)
+
     def size() -> int:
         return bson_encoded_size(
             _projected_extraction_document(existing_doc, set_copy, list(unset.keys()))
         )
+
+    def command_size() -> int:
+        return _mongo_update_command_size(set_copy, unset)
 
     if isinstance(existing_doc.get("result"), dict):
         if existing_doc["result"].get("phase1") and existing_doc.get("phase1"):
@@ -260,7 +330,14 @@ def plan_extraction_mongo_update(
         )
         flags["generated_xml_minimal_stub"] = True
 
-    if size() > limit:
+    if (size() > limit or command_size() > limit) and isinstance(set_copy.get("result"), dict):
+        structure = set_copy["result"].get("structure")
+        if isinstance(structure, dict) and not structure.get("externalized"):
+            stub, ext = _externalize_structure(ext_id, structure)
+            set_copy["result"] = {**set_copy["result"], "structure": stub}
+            flags.update(ext)
+
+    if size() > limit or command_size() > limit:
         raise ExtractionMongoPayloadError(
             "MongoDB could not save this update: the extraction document would exceed "
             "Atlas's 16MB per-document limit. Start a new extraction for this PDF "
@@ -331,7 +408,16 @@ def compact_extraction_result_for_mongo(
         phase1_copy = stub
         flags.update(ext)
 
-    if bson_encoded_size({"result": result_copy, "phase1": phase1_copy}) > limit:
+    probe_size = bson_encoded_size({"result": result_copy, "phase1": phase1_copy})
+    if extraction_id and probe_size > limit:
+        structure = result_copy.get("structure")
+        if isinstance(structure, dict) and not structure.get("externalized"):
+            stub, ext = _externalize_structure(extraction_id, structure)
+            result_copy["structure"] = stub
+            flags.update(ext)
+            probe_size = bson_encoded_size({"result": result_copy, "phase1": phase1_copy})
+
+    if probe_size > limit:
         flags["phase1_storage_warning"] = (
             "Extraction metadata still exceeds MongoDB size after compaction; "
             "see phase1_debug_paths on disk."

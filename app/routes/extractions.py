@@ -16,7 +16,9 @@ from pymongo.errors import PyMongoError
 from app.database import extractions_col, mongo_user_error, utcnow
 from app.services.extraction_mongo_payload import (
     ExtractionMongoPayloadError,
+    apply_warnings_to_planned_generated_xml,
     plan_extraction_mongo_update,
+    resolve_extraction_result_from_doc,
     resolve_phase1_from_extraction_doc,
 )
 from app.models.extraction_workflow import (
@@ -243,7 +245,7 @@ async def create_template_from_source(extraction_id: str):
         raise HTTPException(status_code=404, detail="Extraction not found")
     _require_completed_extraction(doc)
 
-    phase1 = doc.get("phase1") or (doc.get("result") or {}).get("phase1")
+    phase1 = resolve_phase1_from_extraction_doc(doc)
     if not phase1:
         raise HTTPException(status_code=409, detail="Phase 1 metadata not available yet.")
 
@@ -320,12 +322,7 @@ async def get_extraction_text(extraction_id: str):
     if not doc:
         raise HTTPException(status_code=404, detail="Extraction not found")
     _require_completed_extraction(doc)
-    result = dict(doc.get("result") or {})
-    # Large extractions store phase1 at document root (result.phase1 may be omitted for BSON size).
-    phase1 = doc.get("phase1") or result.get("phase1")
-    if phase1 and not result.get("phase1"):
-        result["phase1"] = phase1
-    return result
+    return resolve_extraction_result_from_doc(doc)
 
 
 @router.get("/{extraction_id}/phase1")
@@ -335,7 +332,7 @@ async def get_extraction_phase1(extraction_id: str):
     if not doc:
         raise HTTPException(status_code=404, detail="Extraction not found")
     _require_completed_extraction(doc)
-    phase1 = doc.get("phase1") or (doc.get("result") or {}).get("phase1")
+    phase1 = resolve_phase1_from_extraction_doc(doc)
     if not phase1:
         raise HTTPException(status_code=404, detail="Phase 1 document not available for this extraction")
     debug_paths = doc.get("phase1_debug_paths")
@@ -449,7 +446,7 @@ async def apply_extraction_scope(extraction_id: str, body: ScopeRequest):
     try:
         scope_result = apply_scope_to_extraction(
             scope=body.scope,
-            result=doc["result"],
+            result=resolve_extraction_result_from_doc(doc),
             template_schema=(doc.get("template") or {}).get("template_schema"),
         )
     except InvalidScopeError as exc:
@@ -498,7 +495,7 @@ async def semantic_map_extraction(extraction_id: str, body: SemanticMapRequest):
     try:
         scope_result = apply_scope_to_extraction(
             scope=body.scope,
-            result=doc["result"],
+            result=resolve_extraction_result_from_doc(doc),
             template_schema=template_schema,
         )
     except InvalidScopeError as exc:
@@ -610,7 +607,7 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     try:
         scope_result = apply_scope_to_extraction(
             scope=body.scope,
-            result=doc["result"],
+            result=resolve_extraction_result_from_doc(doc),
             template_schema=template_schema,
         )
     except InvalidScopeError as exc:
@@ -622,7 +619,8 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
     filtered_ir = scope_result["filtered_ir"]
     phase1_doc = resolve_phase1_from_extraction_doc(doc)
     filtered_ir = merge_phase1_references_into_ir(filtered_ir, phase1_doc)
-    structure = (doc.get("result") or {}).get("structure") or {}
+    resolved_result = resolve_extraction_result_from_doc(doc)
+    structure = resolved_result.get("structure") or {}
     processed_blocks = structure.get("blocks")
     try:
         mapping_resolution = resolve_semantic_mapping_for_generate_xml(
@@ -807,8 +805,7 @@ async def _generate_extraction_xml_impl(extraction_id: str, body: GenerateXmlReq
             warnings.append(
                 f"semantic_mapping stored on disk: {mongo_flags.get('semantic_mapping_path')}"
             )
-        generated_record["warnings"] = warnings
-        set_fields["generated_xml"] = generated_record
+        apply_warnings_to_planned_generated_xml(set_fields, warnings)
         update_doc: dict = {"$set": set_fields}
         if unset_fields:
             update_doc["$unset"] = unset_fields

@@ -17,7 +17,11 @@ from app.pipeline.debug_artifacts import write_phase1_debug_bundle
 from app.pipeline.phase1.build_document import build_extracted_document
 from app.pipeline.phase1.extraction_build_options import ExtractionBuildOptions
 from app.services.layout.document_pipeline import build_full_extraction_result
-from app.services.extraction_mongo_payload import compact_extraction_result_for_mongo
+from app.services.extraction_mongo_payload import (
+    ExtractionMongoPayloadError,
+    compact_extraction_result_for_mongo,
+    plan_extraction_mongo_update,
+)
 from app.services.source_identity import build_source_identity_from_extraction_doc
 from app.services.text_extractor import PdfValidationError, extract_text_layout
 
@@ -172,8 +176,9 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
             "progress": 100,
             "step4_partial": build_options.partial_step4,
         }
-        if mongo_flags:
-            update_fields["phase1_storage_flags"] = mongo_flags
+        storage_flags = dict(mongo_flags or {})
+        if storage_flags:
+            update_fields["phase1_storage_flags"] = storage_flags
 
         preview_doc = {
             "_id": str(oid),
@@ -186,7 +191,22 @@ def process_extraction(extraction_id: str, file_path: str, original_filename: st
             preview_doc
         ).to_dict()
 
-        col.update_one({"_id": oid}, {"$set": update_fields})
+        try:
+            set_fields, unset_fields, plan_flags = plan_extraction_mongo_update(
+                doc_meta,
+                update_fields,
+                extraction_id=extraction_id,
+            )
+            storage_flags.update(plan_flags)
+            if storage_flags:
+                set_fields["phase1_storage_flags"] = storage_flags
+            update_doc: dict = {"$set": set_fields}
+            if unset_fields:
+                update_doc["$unset"] = unset_fields
+            col.update_one({"_id": oid}, update_doc)
+        except ExtractionMongoPayloadError as exc:
+            _fail(oid, str(exc))
+            return
         logger.info("Extraction %s completed (%s pages)", extraction_id, full.document.page_count)
     except PdfValidationError as exc:
         logger.warning("Extraction %s invalid PDF: %s", extraction_id, exc)
